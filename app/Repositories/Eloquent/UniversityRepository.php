@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class UniversityRepository implements UniversityRepositoryInterface
 {
@@ -85,9 +84,19 @@ class UniversityRepository implements UniversityRepositoryInterface
     {
         return DB::transaction(function () use ($data, $request) {
             /*
-             * Generate unique slug.
+             * Normalize repeatable inputs before saving.
              */
-            $data['slug'] = $this->generateUniqueSlug($data['name']);
+            if (array_key_exists('campus_facilities', $data)) {
+                $data['campus_facilities'] = $this->normalizeFacilities($data['campus_facilities']);
+            }
+
+            /*
+             * Generate unique slug from the university name.
+             */
+            $data['slug'] = University::generateUniqueSlug([
+                $data['name'] ?? null,
+                $data['short_name'] ?? null,
+            ]);
 
             /*
              * Upload logo.
@@ -114,11 +123,21 @@ class UniversityRepository implements UniversityRepositoryInterface
     {
         return DB::transaction(function () use ($university, $data, $request) {
             /*
-             * Regenerate slug only when
-             * university name changes.
+             * Normalize repeatable inputs before saving.
              */
-            if (isset($data['name']) && $university->name !== $data['name']) {
-                $data['slug'] = $this->generateUniqueSlug($data['name'], $university->id);
+            if (array_key_exists('campus_facilities', $data)) {
+                $data['campus_facilities'] = $this->normalizeFacilities($data['campus_facilities']);
+            }
+
+            /*
+             * Regenerate slug when the name changes or when the
+             * stored slug is missing for older records.
+             */
+            if (array_key_exists('name', $data) || blank($university->slug)) {
+                $data['slug'] = University::generateUniqueSlug([
+                    $data['name'] ?? $university->name,
+                    $data['short_name'] ?? $university->short_name,
+                ], $university->id);
             }
 
             /*
@@ -183,42 +202,13 @@ class UniversityRepository implements UniversityRepositoryInterface
     }
 
     /**
-     * Generate a unique university slug.
+     * Normalize campus facilities by removing empty values.
      */
-    private function generateUniqueSlug(string $name, ?string $ignoreId = null): string
+    private function normalizeFacilities(array $facilities): array
     {
-        $slug = Str::slug($name);
-
-        $query = University::query()->where('slug', $slug);
-
-        if ($ignoreId !== null) {
-            $query->where('id', '!=', $ignoreId);
-        }
-
-        /*
-         * If exact slug doesn't exist,
-         * use the original slug.
-         */
-        if (!$query->exists()) {
-            return $slug;
-        }
-
-        /*
-         * Find next available slug.
-         */
-        $counter = 2;
-
-        do {
-            $newSlug = "{$slug}-{$counter}";
-
-            $exists = University::query()
-                ->where('slug', $newSlug)
-                ->when($ignoreId !== null, fn($q) => $q->where('id', '!=', $ignoreId))
-                ->exists();
-
-            $counter++;
-        } while ($exists);
-
-        return $newSlug;
+        return array_values(array_filter(
+            $facilities,
+            fn ($facility) => filled(is_string($facility) ? trim($facility) : $facility)
+        ));
     }
 }

@@ -54,12 +54,21 @@
     } else {
         $facilities = [''];
     }
+
+    $citiesForJs = $cities
+        ->map(fn ($city) => [
+            'id' => (string) $city->id,
+            'name' => $city->name,
+            'country_id' => (string) $city->country_id,
+        ])
+        ->values();
 @endphp
 
 
 <div x-data="universityForm({
     countryId: @js($countryId),
     cityId: @js($cityId),
+    cities: @js($citiesForJs),
     facilities: @js($facilities),
     isFeatured: @js((bool) $isFeatured),
     isActive: @js((bool) $isActive),
@@ -209,18 +218,14 @@
                                 City
                             </label>
 
-                            <select name="city_id" id="city_id" x-model="cityId"
+                            <select name="city_id" id="city_id" x-model="cityId" :disabled="!countryId"
                                 class="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
 
-                                <option value="">
-                                    Select City
-                                </option>
+                                <option value="" x-text="countryId ? 'Select City' : 'Select Country First'"></option>
 
-                                @foreach ($cities as $city)
-                                    <option value="{{ $city->id }}" @selected((string) $cityId === (string) $city->id)>
-                                        {{ $city->name }}
-                                    </option>
-                                @endforeach
+                                <template x-for="city in filteredCities" :key="city.id">
+                                    <option :value="city.id" x-text="city.name"></option>
+                                </template>
 
                             </select>
 
@@ -642,6 +647,8 @@
 
                 cityId: config.cityId ?? '',
 
+                cities: Array.isArray(config.cities) ? config.cities : [],
+
                 facilities: Array.isArray(config.facilities) &&
                     config.facilities.length ?
                     config.facilities :
@@ -654,6 +661,45 @@
                 formMode: config.formMode ?? 'create',
 
                 submitting: false,
+
+
+                /*
+                |----------------------------------------------------------------------
+                | City filtering
+                |----------------------------------------------------------------------
+                */
+
+                get filteredCities() {
+                    if (!this.countryId) {
+                        return [];
+                    }
+
+                    return this.cities.filter((city) => {
+                        return String(city.country_id) === String(this.countryId);
+                    });
+                },
+
+                init() {
+                    this.syncCitySelection();
+
+                    this.$watch('countryId', () => {
+                        this.syncCitySelection();
+                    });
+                },
+
+                syncCitySelection() {
+                    if (!this.cityId) {
+                        return;
+                    }
+
+                    const matched = this.filteredCities.some((city) => {
+                        return String(city.id) === String(this.cityId);
+                    });
+
+                    if (!matched) {
+                        this.cityId = '';
+                    }
+                },
 
 
                 /*

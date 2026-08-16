@@ -3,13 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreUniversityRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return auth()->user()->can('university.create');
+        return (bool) ($this->user()?->can('university.create') ?? false);
     }
 
     public function rules(): array
@@ -22,8 +21,6 @@ class StoreUniversityRequest extends FormRequest
 
             // Basic information
             'name' => ['required', 'string', 'max:255'],
-
-            'slug' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('universities', 'slug')],
 
             'short_name' => ['nullable', 'string', 'max:255'],
 

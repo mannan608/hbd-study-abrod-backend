@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class University extends Model
 {
@@ -44,6 +45,78 @@ class University extends Model
         'national_ranking' => 'integer',
         'sort_order' => 'integer',
     ];
+
+    /**
+     * Keep slug generation as a model-level safety net so
+     * direct model writes still behave correctly.
+     */
+    protected static function booted(): void
+    {
+        static::saving(function (self $university): void {
+            if (
+                ! $university->slug
+                || $university->isDirty('name')
+                || $university->isDirty('short_name')
+            ) {
+                $university->slug = static::generateUniqueSlug(
+                    [$university->name, $university->short_name],
+                    $university->exists ? $university->getKey() : null
+                );
+            }
+        });
+    }
+
+    /**
+     * Generate a unique slug from the given values.
+     */
+    public static function generateUniqueSlug(array $sources, ?int $ignoreId = null): string
+    {
+        $baseSlug = 'university';
+
+        foreach ($sources as $source) {
+            $slug = Str::slug((string) $source);
+
+            if ($slug !== '') {
+                $baseSlug = $slug;
+                break;
+            }
+        }
+
+        return static::makeUniqueSlug($baseSlug, $ignoreId);
+    }
+
+    /**
+     * Resolve a unique slug for the given base value.
+     */
+    protected static function makeUniqueSlug(string $baseSlug, ?int $ignoreId = null): string
+    {
+        $slug = $baseSlug !== '' ? $baseSlug : 'university';
+
+        $query = static::query()->where('slug', $slug);
+
+        if ($ignoreId !== null) {
+            $query->whereKeyNot($ignoreId);
+        }
+
+        if (! $query->exists()) {
+            return $slug;
+        }
+
+        $counter = 2;
+
+        do {
+            $nextSlug = "{$slug}-{$counter}";
+
+            $exists = static::query()
+                ->where('slug', $nextSlug)
+                ->when($ignoreId !== null, fn ($query) => $query->whereKeyNot($ignoreId))
+                ->exists();
+
+            $counter++;
+        } while ($exists);
+
+        return $nextSlug;
+    }
 
     /**
      * University belongs to a country.

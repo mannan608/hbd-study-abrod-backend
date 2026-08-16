@@ -3,19 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateUniversityRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return auth()->user()->can('university.edit');
+        return (bool) ($this->user()?->can('university.edit') ?? false);
     }
 
- public function rules(): array
+    public function rules(): array
     {
-        $university = $this->route('university');
-
         return [
             // Location
             'country_id' => ['sometimes', 'nullable', 'integer', 'exists:countries,id'],
@@ -24,8 +21,6 @@ class UpdateUniversityRequest extends FormRequest
 
             // Basic information
             'name' => ['sometimes', 'required', 'string', 'max:255'],
-
-            'slug' => ['sometimes', 'required', 'string', 'max:255', 'alpha_dash', Rule::unique('universities', 'slug')->ignore($university)],
 
             'short_name' => ['sometimes', 'nullable', 'string', 'max:255'],
 
