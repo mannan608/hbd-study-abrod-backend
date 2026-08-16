@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\University;
 use App\Repositories\Interfaces\UniversityRepositoryInterface;
+use App\Traits\HandlesFiles;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -11,12 +12,33 @@ use Illuminate\Support\Facades\Storage;
 
 class UniversityRepository implements UniversityRepositoryInterface
 {
+
+use HandlesFiles;
     /**
      * Get paginated universities.
      */
     public function paginate(array $filters = [], int $perPage = 20): LengthAwarePaginator
     {
-        $query = University::query()->with(['country', 'city']);
+        $query = University::query()
+           ->select([
+            'id',
+            'name',
+            'slug',
+            'short_name',
+            'logo',
+            'banner',
+            'email',
+            'phone',
+            'website',
+            'state',
+            'address',
+            'global_ranking',
+            'national_ranking',
+            'accreditation',
+            'description',
+            'overview',
+            'campus_facilities',
+        ]);
 
         /*
          * Search
@@ -80,126 +102,144 @@ class UniversityRepository implements UniversityRepositoryInterface
     /**
      * Create university.
      */
-    public function create(array $data, ?Request $request = null): University
-    {
-        return DB::transaction(function () use ($data, $request) {
-            /*
-             * Normalize repeatable inputs before saving.
-             */
-            if (array_key_exists('campus_facilities', $data)) {
-                $data['campus_facilities'] = $this->normalizeFacilities($data['campus_facilities']);
-            }
+   public function create(
+    array $data,
+    ?Request $request = null
+): University {
+    return DB::transaction(function () use ($data, $request) {
 
-            /*
-             * Generate unique slug from the university name.
-             */
-            $data['slug'] = University::generateUniqueSlug([
-                $data['name'] ?? null,
-                $data['short_name'] ?? null,
-            ]);
+        /*
+         * Normalize repeatable inputs.
+         */
+        if (array_key_exists('campus_facilities', $data)) {
+            $data['campus_facilities'] =
+                $this->normalizeFacilities(
+                    $data['campus_facilities']
+                );
+        }
 
-            /*
-             * Upload logo.
-             */
-            if ($request?->hasFile('logo')) {
-                $data['logo'] = $request->file('logo')->store('universities/logos', 'public');
-            }
+        /*
+         * Generate unique slug.
+         */
+        $data['slug'] = University::generateUniqueSlug([
+            $data['name'] ?? null,
+            $data['short_name'] ?? null,
+        ]);
 
-            /*
-             * Upload banner.
-             */
-            if ($request?->hasFile('banner')) {
-                $data['banner'] = $request->file('banner')->store('universities/banners', 'public');
-            }
+        /*
+         * Upload logo.
+         */
+        if ($request?->hasFile('logo')) {
+            $data['logo'] = $this->uploadFile(
+                $request->file('logo'),
+                'universities/logos'
+            );
+        }
 
-            return University::create($data);
-        });
-    }
+        /*
+         * Upload banner.
+         */
+        if ($request?->hasFile('banner')) {
+            $data['banner'] = $this->uploadFile(
+                $request->file('banner'),
+                'universities/banners'
+            );
+        }
+
+        return University::create($data);
+    });
+}
 
     /**
      * Update university.
      */
-    public function update(University $university, array $data, ?Request $request = null): University
-    {
-        return DB::transaction(function () use ($university, $data, $request) {
-            /*
-             * Normalize repeatable inputs before saving.
-             */
-            if (array_key_exists('campus_facilities', $data)) {
-                $data['campus_facilities'] = $this->normalizeFacilities($data['campus_facilities']);
-            }
+ public function update(
+    University $university,
+    array $data,
+    ?Request $request = null
+): University {
+    return DB::transaction(function () use (
+        $university,
+        $data,
+        $request
+    ) {
 
-            /*
-             * Regenerate slug when the name changes or when the
-             * stored slug is missing for older records.
-             */
-            if (array_key_exists('name', $data) || blank($university->slug)) {
-                $data['slug'] = University::generateUniqueSlug([
+        /*
+         * Normalize repeatable inputs.
+         */
+        if (array_key_exists('campus_facilities', $data)) {
+            $data['campus_facilities'] =
+                $this->normalizeFacilities(
+                    $data['campus_facilities']
+                );
+        }
+
+        /*
+         * Regenerate slug when name changes
+         * or slug is missing.
+         */
+        if (
+            array_key_exists('name', $data) ||
+            blank($university->slug)
+        ) {
+            $data['slug'] = University::generateUniqueSlug(
+                [
                     $data['name'] ?? $university->name,
                     $data['short_name'] ?? $university->short_name,
-                ], $university->id);
-            }
+                ],
+                $university->id
+            );
+        }
 
-            /*
-             * Upload new logo.
-             */
-            if ($request?->hasFile('logo')) {
-                if ($university->logo) {
-                    Storage::disk('public')->delete($university->logo);
-                }
+        /*
+         * Replace logo.
+         */
+        if ($request?->hasFile('logo')) {
+            $data['logo'] = $this->replaceFile(
+                $request->file('logo'),
+                $university->logo,
+                'universities/logos'
+            );
+        }
 
-                $data['logo'] = $request->file('logo')->store('universities/logos', 'public');
-            }
+        /*
+         * Replace banner.
+         */
+        if ($request?->hasFile('banner')) {
+            $data['banner'] = $this->replaceFile(
+                $request->file('banner'),
+                $university->banner,
+                'universities/banners'
+            );
+        }
 
-            /*
-             * Upload new banner.
-             */
-            if ($request?->hasFile('banner')) {
-                if ($university->banner) {
-                    Storage::disk('public')->delete($university->banner);
-                }
+        /*
+         * Only update validated fields.
+         */
+        $university->fill($data);
+        $university->save();
 
-                $data['banner'] = $request->file('banner')->store('universities/banners', 'public');
-            }
-
-            /*
-             * Only update validated fields.
-             */
-            $university->fill($data);
-            $university->save();
-
-            return $university->fresh(['country', 'city']);
-        });
-    }
+        return $university->fresh([
+            'country',
+            'city',
+        ]);
+    });
+}
 
     /**
      * Delete university.
      */
-    public function delete(University $university): bool
-    {
-        return DB::transaction(function () use ($university) {
-            /*
-             * Delete logo.
-             */
-            if ($university->logo) {
-                Storage::disk('public')->delete($university->logo);
-            }
+public function delete(
+    University $university
+): bool {
+    return DB::transaction(function () use ($university) {
 
-            /*
-             * Delete banner.
-             */
-            if ($university->banner) {
-                Storage::disk('public')->delete($university->banner);
-            }
+        $this->deleteFile($university->logo);
+        $this->deleteFile($university->banner);
 
-            /*
-             * University deletion will also
-             * cascade related records according
-             * to your database foreign keys.
-             */
-            return $university->delete();
-        });
-    }
+        return $university->delete();
+    });
+}
 
     /**
      * Normalize campus facilities by removing empty values.

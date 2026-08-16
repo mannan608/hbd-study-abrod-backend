@@ -15,9 +15,9 @@ class StoreUniversityRequest extends FormRequest
     {
         return [
             // Location
-            'country_id' => ['nullable', 'integer', 'exists:countries,id'],
+            'country_id' => ['nullable', 'uuid', 'exists:countries,id'],
 
-            'city_id' => ['nullable', 'integer', 'exists:cities,id'],
+            'city_id' => ['nullable', 'uuid', 'exists:cities,id'],
 
             // Basic information
             'name' => ['required', 'string', 'max:255'],

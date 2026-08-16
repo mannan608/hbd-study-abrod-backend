@@ -14,7 +14,7 @@
             'short_name' => $university->short_name,
             'status' => $university->status,
             'city' => $university->city,
-            'country' => $university->country,
+            'address' => $university->address,
             'logo' => $university->logo
                 ? asset($university->logo)
                 : null,
@@ -85,7 +85,7 @@
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Logo</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Short Name</th>
-                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider text-right">Action</th>
                         </tr>
@@ -114,7 +114,7 @@
                                 <td class="px-5 py-4 text-sm text-gray-700 dark:text-gray-300" x-text="row.name"></td>
                                 <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.short_name"></td>
                                 <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400">
-                                    <span x-text="row.city"></span>, <span x-text="row.country"></span>
+                                    <span x-text="row.address"></span>
                                 </td>
                                 <td class="px-5 py-4 text-sm">
                                     <span :class="row.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'" class="px-2 py-0.5 rounded text-xs font-medium capitalize" x-text="row.status"></span>

@@ -15,9 +15,9 @@ class UpdateUniversityRequest extends FormRequest
     {
         return [
             // Location
-            'country_id' => ['sometimes', 'nullable', 'integer', 'exists:countries,id'],
+            'country_id' => ['sometimes', 'nullable', 'uuid', 'exists:countries,id'],
 
-            'city_id' => ['sometimes', 'nullable', 'integer', 'exists:cities,id'],
+            'city_id' => ['sometimes', 'nullable', 'uuid', 'exists:cities,id'],
 
             // Basic information
             'name' => ['sometimes', 'required', 'string', 'max:255'],

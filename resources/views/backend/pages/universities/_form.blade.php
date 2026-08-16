@@ -56,11 +56,13 @@
     }
 
     $citiesForJs = $cities
-        ->map(fn ($city) => [
-            'id' => (string) $city->id,
-            'name' => $city->name,
-            'country_id' => (string) $city->country_id,
-        ])
+        ->map(
+            fn($city) => [
+                'id' => (string) $city->id,
+                'name' => $city->name,
+                'country_id' => (string) $city->country_id,
+            ],
+        )
         ->values();
 @endphp
 
@@ -221,7 +223,8 @@
                             <select name="city_id" id="city_id" x-model="cityId" :disabled="!countryId"
                                 class="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
 
-                                <option value="" x-text="countryId ? 'Select City' : 'Select Country First'"></option>
+                                <option value="" x-text="countryId ? 'Select City' : 'Select Country First'">
+                                </option>
 
                                 <template x-for="city in filteredCities" :key="city.id">
                                     <option :value="city.id" x-text="city.name"></option>
@@ -410,6 +413,8 @@
 
 
                     <div class="p-5">
+                        {{-- KEEP YOUR EXISTING DROPZONE COMPONENT --}}
+                        <x-form.dropzone name="logo" label="{{ $isEdit ? 'Upload New Logo' : 'Upload Logo' }}" />
 
                         @if ($isEdit && $university->logo)
                             <div class="mb-4">
@@ -418,17 +423,11 @@
                                     Current Logo
                                 </p>
 
-                                <img src="{{ Storage::url($university->logo) }}" alt="{{ $university->name }}"
+                                <img src="{{ asset($university->logo) }}" alt="{{ $university->name }}"
                                     class="h-24 w-24 rounded-xl border border-gray-200 object-contain dark:border-gray-700">
 
                             </div>
                         @endif
-
-
-                        {{-- KEEP YOUR EXISTING DROPZONE COMPONENT --}}
-                        <x-form.dropzone name="logo" label="{{ $isEdit ? 'Upload New Logo' : 'Upload Logo' }}" />
-
-
                         @error('logo')
                             <p class="mt-2 text-xs text-red-500">
                                 {{ $message }}
@@ -460,7 +459,9 @@
 
 
                     <div class="p-5">
-
+                        {{-- KEEP YOUR EXISTING DROPZONE COMPONENT --}}
+                        <x-form.dropzone name="banner"
+                            label="{{ $isEdit ? 'Upload New Banner' : 'Upload Banner' }}" />
                         @if ($isEdit && $university->banner)
                             <div class="mb-4">
 
@@ -468,18 +469,11 @@
                                     Current Banner
                                 </p>
 
-                                <img src="{{ Storage::url($university->banner) }}" alt="{{ $university->name }}"
+                                <img src="{{ asset($university->banner) }}" alt="{{ $university->name }}"
                                     class="h-32 w-full rounded-xl border border-gray-200 object-cover dark:border-gray-700">
 
                             </div>
                         @endif
-
-
-                        {{-- KEEP YOUR EXISTING DROPZONE COMPONENT --}}
-                        <x-form.dropzone name="banner"
-                            label="{{ $isEdit ? 'Upload New Banner' : 'Upload Banner' }}" />
-
-
                         @error('banner')
                             <p class="mt-2 text-xs text-red-500">
                                 {{ $message }}
@@ -608,7 +602,7 @@
 
                     <button type="submit" :disabled="submitting"
                         class="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-500 disabled:cursor-not-allowed disabled:opacity-70">
-                    
+
                         <span
                             x-text="submitting
                                 ? (formMode === 'edit'
@@ -651,8 +645,7 @@
 
                 facilities: Array.isArray(config.facilities) &&
                     config.facilities.length ?
-                    config.facilities :
-                    [''],
+                    config.facilities : [''],
 
                 isFeatured: Boolean(config.isFeatured),
 

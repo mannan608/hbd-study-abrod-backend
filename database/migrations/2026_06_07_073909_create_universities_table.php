@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
 
             // Location
-            $table->foreignId('country_id')
+            $table->foreignUuid('country_id')
                 ->nullable()
                 ->constrained('countries')
                 ->nullOnDelete();
 
-            $table->foreignId('city_id')
+            $table->foreignUuid('city_id')
                 ->nullable()
                 ->constrained('cities')
                 ->nullOnDelete();
