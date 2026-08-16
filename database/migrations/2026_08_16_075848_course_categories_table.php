@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('course_categories', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+
+            // Parent category
+            // NULL = top-level category
+            $table->foreignUuid('parent_id')
+                ->nullable()
+                ->constrained('course_categories')
+                ->nullOnDelete();
+
+            $table->string('name', 150);
+            $table->string('slug', 180)->unique();
+            $table->string('icon', 100)->nullable();
+
+            $table->boolean('is_active')
+                ->default(true);
+
+            $table->timestamps();
+
+            $table->index(['parent_id', 'is_active']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('course_categories');
+    }
+};

@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Country extends Model
+{
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'code',
+        'phone_code',
+        'flag_url',
+        'currency_code',
+        'visa_requirements',
+        'is_popular',
+        'is_active',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_popular' => 'boolean',
+            'is_active' => 'boolean',
+        ];
+    }
+
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class);
+    }
+}
