@@ -86,20 +86,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function ($user, string $ability): ?bool {
             return $user->hasRole(config('rbac.super_admin_role')) ? true : null;
         });
-
-        View::composer('frontend.layouts.navbar', function ($view) {
-
-            $courses = Cache::remember(
-                'navbar_courses',
-                now()->addDay(),
-                function () {
-                    return Course::select('id', 'name', 'slug')
-                        ->orderBy('name')
-                        ->get();
-                }
-            );
-
-            $view->with('courses', $courses);
-        });
+      
     }
 }

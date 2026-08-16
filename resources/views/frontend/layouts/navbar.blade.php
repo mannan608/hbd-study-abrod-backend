@@ -41,44 +41,8 @@
                         after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
 
                         Home
-                    </a>
+                    </a>                  
 
-                    <a href="#" id="dropdownHoverButton" data-dropdown-toggle="dropdownHover"
-                        data-dropdown-trigger="hover"
-                        class="flex items-center relative font-normal transition-all duration-300
-                            {{ request()->routeIs('') ? 'text-brand-600 font-normal after:w-full' : 'text-white hover:text-brand-600 after:w-0 hover:after:w-full' }}
-                            after:absolute after:left-0 after:-bottom-1.5
-                            after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300"
-                        type="button">
-                        Our Courses
-                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 9-7 7-7-7" />
-                        </svg>
-                    </a>
-
-                    <!-- Dropdown menu -->
-                    <div id="dropdownHover" class="z-10 hidden top-full left-0 bg-white rounded-md shadow-lg max-w-150">
-                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
-
-                            @forelse($courses as $course)
-                                <li>
-                                    <a href="{{ route('single-course', $course->slug) }}"
-                                        class="inline-flex items-center w-full p-2 hover:bg-gray-100 hover:text-heading rounded">
-
-                                        {{ $course->name }}
-                                    </a>
-                                </li>
-                            @empty
-                                <li>
-                                    <span class="block p-2 text-gray-500">
-                                        No courses found
-                                    </span>
-                                </li>
-                            @endforelse
-                        </ul>
-                    </div>
 
 
                     {{-- About --}}

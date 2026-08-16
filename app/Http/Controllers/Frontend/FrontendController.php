@@ -10,10 +10,7 @@ class FrontendController extends Controller
 
     public function homePage()
     {
-         $courses = Course::query()->select('id', 'name', 'slug', 'thumbnail', 'code', 'cricos')->get();
-        return view('frontend.pages.home', [
-            'title' => 'HBD Services',
-        ],compact('courses'));
+        return view('frontend.pages.home');
     }
 
     public function aboutPage()

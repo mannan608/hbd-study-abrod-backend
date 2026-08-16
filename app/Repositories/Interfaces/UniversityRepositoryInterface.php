@@ -4,18 +4,32 @@ namespace App\Repositories\Interfaces;
 
 use App\Models\University;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface UniversityRepositoryInterface
 {
-    public function paginate(int $perPage = 15);
+    /**
+     * Get paginated universities.
+     */
+    public function paginate(array $filters = [], int $perPage = 20): LengthAwarePaginator;
 
-    public function findById(int $id): University;
+    /**
+     * Find university by UUID.
+     */
+    public function findById(string $id): University;
 
-    public function create(array $data, Request $request): University;
+    /**
+     * Create university.
+     */
+    public function create(array $data, ?Request $request = null): University;
 
-    public function update(University $university,array $data,Request $request): University;
+    /**
+     * Update university.
+     */
+    public function update(University $university, array $data, ?Request $request = null): University;
 
-    public function delete(
-        University $university
-    ): bool;
+    /**
+     * Delete university.
+     */
+    public function delete(University $university): bool;
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUniversityRequest extends FormRequest
 {
@@ -14,18 +15,60 @@ class StoreUniversityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
-            'short_name' => 'nullable|max:100',
-            'email' => 'nullable|email',
-            'phone' => 'nullable|max:50',
-            'website' => 'nullable|url',
-            'description' => 'nullable',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-            'country' => 'nullable|max:100',
-            'state' => 'nullable|max:100',
-            'city' => 'nullable|max:100',
-            'address' => 'nullable',
+            // Location
+            'country_id' => ['nullable', 'integer', 'exists:countries,id'],
+
+            'city_id' => ['nullable', 'integer', 'exists:cities,id'],
+
+            // Basic information
+            'name' => ['required', 'string', 'max:255'],
+
+            'slug' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('universities', 'slug')],
+
+            'short_name' => ['nullable', 'string', 'max:255'],
+
+            // Media
+            'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+
+            'banner' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+
+            // Contact
+            'email' => ['nullable', 'email', 'max:255'],
+
+            'phone' => ['nullable', 'string', 'max:50'],
+
+            'website' => ['nullable', 'url', 'max:255'],
+
+            // Address
+            'state' => ['nullable', 'string', 'max:255'],
+
+            'address' => ['nullable', 'string'],
+
+            // Rankings
+            'global_ranking' => ['nullable', 'integer', 'min:1'],
+
+            'national_ranking' => ['nullable', 'integer', 'min:1'],
+
+            // Accreditation
+            'accreditation' => ['nullable', 'string', 'max:255'],
+
+            // Description
+            'description' => ['nullable', 'string'],
+
+            'overview' => ['nullable', 'string'],
+
+            // Facilities
+            'campus_facilities' => ['nullable', 'array'],
+
+            'campus_facilities.*' => ['nullable', 'string', 'max:255'],
+
+            // Status
+            'is_featured' => ['required', 'boolean'],
+
+            'is_active' => ['required', 'boolean'],
+
+            // Ordering
+            'sort_order' => ['required', 'integer', 'min:0'],
         ];
     }
 }

@@ -5,145 +5,220 @@ namespace App\Repositories\Eloquent;
 use App\Models\University;
 use App\Repositories\Interfaces\UniversityRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UniversityRepository implements UniversityRepositoryInterface
 {
-    public function paginate(int $perPage = 15)
+    /**
+     * Get paginated universities.
+     */
+    public function paginate(array $filters = [], int $perPage = 20): LengthAwarePaginator
     {
-        return University::latest()
-            ->paginate($perPage);
+        $query = University::query()->with(['country', 'city']);
+
+        /*
+         * Search
+         */
+        if (!empty($filters['search'])) {
+            $search = trim($filters['search']);
+
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('short_name', 'LIKE', "%{$search}%")
+                    ->orWhere('slug', 'LIKE', "%{$search}%");
+            });
+        }
+
+        /*
+         * Country filter
+         */
+        if (array_key_exists('country_id', $filters) && $filters['country_id'] !== null && $filters['country_id'] !== '') {
+            $query->where('country_id', $filters['country_id']);
+        }
+
+        /*
+         * City filter
+         */
+        if (array_key_exists('city_id', $filters) && $filters['city_id'] !== null && $filters['city_id'] !== '') {
+            $query->where('city_id', $filters['city_id']);
+        }
+
+        /*
+         * Active filter
+         */
+        if (array_key_exists('is_active', $filters) && $filters['is_active'] !== null && $filters['is_active'] !== '') {
+            $query->where('is_active', (bool) $filters['is_active']);
+        }
+
+        /*
+         * Featured filter
+         */
+        if (array_key_exists('is_featured', $filters) && $filters['is_featured'] !== null && $filters['is_featured'] !== '') {
+            $query->where('is_featured', (bool) $filters['is_featured']);
+        }
+
+        /*
+         * Sorting
+         */
+        $query->orderBy('sort_order')->latest('created_at');
+
+        return $query->paginate($perPage)->withQueryString();
     }
 
-    public function findById(int $id): University
+    /**
+     * Find university by ID.
+     *
+     * UUID is used instead of integer.
+     */
+    public function findById(string $id): University
     {
         return University::findOrFail($id);
     }
 
-    public function create(
-        array $data,
-        Request $request
-    ): University {
-
+    /**
+     * Create university.
+     */
+    public function create(array $data, ?Request $request = null): University
+    {
         return DB::transaction(function () use ($data, $request) {
+            /*
+             * Generate unique slug.
+             */
+            $data['slug'] = $this->generateUniqueSlug($data['name']);
 
-            $data['slug'] = $this->generateUniqueSlug(
-                $data['name']
-            );
-
-            if ($request->hasFile('logo')) {
-                $data['logo'] = $this->uploadFile(
-                    $request->file('logo'),
-                    'uploads/universities/logos'
-                );
+            /*
+             * Upload logo.
+             */
+            if ($request?->hasFile('logo')) {
+                $data['logo'] = $request->file('logo')->store('universities/logos', 'public');
             }
 
-            if ($request->hasFile('banner')) {
-                $data['banner'] = $this->uploadFile(
-                    $request->file('banner'),
-                    'uploads/universities/banners'
-                );
+            /*
+             * Upload banner.
+             */
+            if ($request?->hasFile('banner')) {
+                $data['banner'] = $request->file('banner')->store('universities/banners', 'public');
             }
 
             return University::create($data);
         });
     }
 
-    public function update(
-        University $university,
-        array $data,
-        Request $request
-    ): University {
-
-        return DB::transaction(function () use (
-            $university,
-            $data,
-            $request
-        ) {
-
-            if (
-                isset($data['name']) &&
-                $university->name !== $data['name']
-            ) {
-                $data['slug'] = $this->generateUniqueSlug(
-                    $data['name'],
-                    $university->id
-                );
+    /**
+     * Update university.
+     */
+    public function update(University $university, array $data, ?Request $request = null): University
+    {
+        return DB::transaction(function () use ($university, $data, $request) {
+            /*
+             * Regenerate slug only when
+             * university name changes.
+             */
+            if (isset($data['name']) && $university->name !== $data['name']) {
+                $data['slug'] = $this->generateUniqueSlug($data['name'], $university->id);
             }
 
-            if ($request->hasFile('logo')) {
-                $data['logo'] = $this->uploadFile(
-                    $request->file('logo'),
-                    'uploads/universities/logos'
-                );
+            /*
+             * Upload new logo.
+             */
+            if ($request?->hasFile('logo')) {
+                if ($university->logo) {
+                    Storage::disk('public')->delete($university->logo);
+                }
+
+                $data['logo'] = $request->file('logo')->store('universities/logos', 'public');
             }
 
-            if ($request->hasFile('banner')) {
-                $data['banner'] = $this->uploadFile(
-                    $request->file('banner'),
-                    'uploads/universities/banners'
-                );
+            /*
+             * Upload new banner.
+             */
+            if ($request?->hasFile('banner')) {
+                if ($university->banner) {
+                    Storage::disk('public')->delete($university->banner);
+                }
+
+                $data['banner'] = $request->file('banner')->store('universities/banners', 'public');
             }
 
-            $university->update($data);
+            /*
+             * Only update validated fields.
+             */
+            $university->fill($data);
+            $university->save();
 
-            return $university->fresh();
+            return $university->fresh(['country', 'city']);
         });
     }
 
-    public function delete(
-        University $university
-    ): bool {
-        return $university->delete();
+    /**
+     * Delete university.
+     */
+    public function delete(University $university): bool
+    {
+        return DB::transaction(function () use ($university) {
+            /*
+             * Delete logo.
+             */
+            if ($university->logo) {
+                Storage::disk('public')->delete($university->logo);
+            }
+
+            /*
+             * Delete banner.
+             */
+            if ($university->banner) {
+                Storage::disk('public')->delete($university->banner);
+            }
+
+            /*
+             * University deletion will also
+             * cascade related records according
+             * to your database foreign keys.
+             */
+            return $university->delete();
+        });
     }
 
-    private function generateUniqueSlug(
-        string $name,
-        ?int $ignoreId = null
-    ): string {
-
+    /**
+     * Generate a unique university slug.
+     */
+    private function generateUniqueSlug(string $name, ?string $ignoreId = null): string
+    {
         $slug = Str::slug($name);
 
-        $query = University::where(
-            'slug',
-            'LIKE',
-            "{$slug}%"
-        );
+        $query = University::query()->where('slug', $slug);
 
-        if ($ignoreId) {
+        if ($ignoreId !== null) {
             $query->where('id', '!=', $ignoreId);
         }
 
-        $count = $query->count();
-
-        return $count
-            ? "{$slug}-" . ($count + 1)
-            : $slug;
-    }
-
-    private function uploadFile(
-        $file,
-        string $path
-    ): string {
-
-        $destinationPath = public_path($path);
-
-        if (! file_exists($destinationPath)) {
-            mkdir($destinationPath, 0775, true);
+        /*
+         * If exact slug doesn't exist,
+         * use the original slug.
+         */
+        if (!$query->exists()) {
+            return $slug;
         }
 
-        $fileName = time()
-            . '_'
-            . uniqid()
-            . '.'
-            . $file->getClientOriginalExtension();
+        /*
+         * Find next available slug.
+         */
+        $counter = 2;
 
-        $file->move(
-            $destinationPath,
-            $fileName
-        );
+        do {
+            $newSlug = "{$slug}-{$counter}";
 
-        return $path . '/' . $fileName;
+            $exists = University::query()
+                ->where('slug', $newSlug)
+                ->when($ignoreId !== null, fn($q) => $q->where('id', '!=', $ignoreId))
+                ->exists();
+
+            $counter++;
+        } while ($exists);
+
+        return $newSlug;
     }
 }

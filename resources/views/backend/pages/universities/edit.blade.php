@@ -107,6 +107,7 @@
                         </div>
 
                         <div class="p-5">
+                             <x-form.dropzone name="logo" label="Upload New Logo" />
 
                             @if ($university->logo)
                                 <div class="mb-4">
@@ -115,7 +116,7 @@
                                 </div>
                             @endif
 
-                            <x-form.dropzone name="logo" label="Upload New Logo" />
+                           
 
                         </div>
 
