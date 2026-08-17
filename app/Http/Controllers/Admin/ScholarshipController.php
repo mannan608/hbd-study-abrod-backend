@@ -63,6 +63,8 @@ class ScholarshipController extends Controller
             'deadline' => ['nullable', 'date'],
 
             'is_active' => ['nullable', 'boolean'],
+        ], [
+            'university_id.uuid' => 'The university id field must be a valid UUID.',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
@@ -111,6 +113,8 @@ class ScholarshipController extends Controller
             'deadline' => ['nullable', 'date'],
 
             'is_active' => ['nullable', 'boolean'],
+        ], [
+            'university_id.uuid' => 'The university id field must be a valid UUID.',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
