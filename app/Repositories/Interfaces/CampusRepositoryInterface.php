@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Models\Campus;
+use App\Models\UniversityCampus;
 
 interface CampusRepositoryInterface
 {
@@ -10,11 +10,13 @@ interface CampusRepositoryInterface
 
     public function universities();
 
-    public function findById(int $id): Campus;
+    public function findById(string $id): UniversityCampus;
 
-    public function create(array $data): Campus;
+    public function create(array $data): UniversityCampus;
 
-    public function update(Campus $campus, array $data): Campus;
+    public function update(UniversityCampus $campus, array $data): UniversityCampus;
 
-    public function delete(Campus $campus): bool;
+    public function delete(UniversityCampus $campus): bool;
+
+    public function citiesByUniversity(string $universityId);
 }

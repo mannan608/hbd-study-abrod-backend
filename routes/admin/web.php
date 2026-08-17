@@ -55,6 +55,7 @@ Route::prefix('{role}')
         Route::resource('users', UserController::class);
         Route::resource('universities', UniversityController::class);
         Route::resource('campuses', CampusController::class);
+        Route::get(    'campuses/cities',[CampusController::class, 'cities'])->name('campuses.cities');
         Route::resource('providers', CourseProviderController::class);
         Route::resource('courses', CourseController::class);
         Route::resource('contacts', ContactController::class);

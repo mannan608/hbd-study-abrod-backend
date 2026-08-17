@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Campus;
+use App\Models\City;
 use App\Models\University;
+use App\Models\UniversityCampus;
 use App\Repositories\Interfaces\CampusRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -12,7 +13,7 @@ class CampusRepository implements CampusRepositoryInterface
 {
     public function paginate(int $perPage = 15)
     {
-        return Campus::with('university')
+        return UniversityCampus::with(['university', 'city'])
             ->latest()
             ->paginate($perPage);
     }
@@ -24,70 +25,71 @@ class CampusRepository implements CampusRepositoryInterface
             ->get(['id', 'name']);
     }
 
-    public function findById(int $id): Campus
+    public function findById(string $id): UniversityCampus
     {
-        return Campus::with('university')
-            ->findOrFail($id);
+        return UniversityCampus::with(['university', 'city'])->findOrFail($id);
     }
 
-    public function create(array $data): Campus
+    public function create(array $data): UniversityCampus
     {
         return DB::transaction(function () use ($data) {
+            $data['slug'] = $this->generateUniqueSlug($data['name']);
 
-            $data['slug'] = $this->generateUniqueSlug(
-                $data['name']
-            );
-
-            return Campus::create($data);
+            return UniversityCampus::create($data);
         });
     }
 
-    public function update(
-        Campus $campus,
-        array $data
-    ): Campus {
+    public function update(UniversityCampus $campus, array $data): UniversityCampus
+    {
         return DB::transaction(function () use ($campus, $data) {
-
-            if (
-                isset($data['name']) &&
-                $campus->name !== $data['name']
-            ) {
-                $data['slug'] = $this->generateUniqueSlug(
-                    $data['name'],
-                    $campus->id
-                );
+            if (isset($data['name']) && $campus->name !== $data['name']) {
+                $data['slug'] = $this->generateUniqueSlug($data['name'], $campus->id);
             }
 
             $campus->update($data);
 
-            return $campus->fresh();
+            return $campus->fresh(['university', 'city']);
         });
     }
 
-    public function delete(Campus $campus): bool
+    public function delete(UniversityCampus $campus): bool
     {
         return DB::transaction(function () use ($campus) {
             return $campus->delete();
         });
     }
 
-    private function generateUniqueSlug(
-        string $name,
-        ?int $ignoreId = null
-    ): string {
-        $slug = Str::slug($name);
+    private function generateUniqueSlug(string $name, ?string $ignoreId = null): string
+    {
+        $baseSlug = Str::slug($name);
 
-        $query = Campus::query()
-            ->where('slug', 'LIKE', "{$slug}%");
-
-        if ($ignoreId) {
-            $query->where('id', '!=', $ignoreId);
+        if ($baseSlug === '') {
+            $baseSlug = 'campus';
         }
 
-        $count = $query->count();
+        $slug = $baseSlug;
+        $counter = 2;
 
-        return $count
-            ? "{$slug}-" . ($count + 1)
-            : $slug;
+        while (UniversityCampus::query()->where('slug', $slug)->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))->exists()) {
+            $slug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
+
+        return $slug;
     }
+
+    public function citiesByUniversity(string $universityId)
+{
+    $university = University::query()
+        ->select('id', 'country_id')
+        ->findOrFail($universityId);
+
+    return City::query()
+        ->where('country_id', $university->country_id)
+        ->orderBy('name')
+        ->get([
+            'id',
+            'name',
+        ]);
+}
 }

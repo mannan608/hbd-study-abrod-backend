@@ -39,7 +39,7 @@ class UniversityController extends Controller
     //     ]);
     // }
 
-    public function index(Request $request)
+    public function index(Request $request):View
     {
         abort_unless(
             $request->user()->can('university.list'),
@@ -59,7 +59,7 @@ class UniversityController extends Controller
             20
         );
 
-        return $universities;
+        // return $universities;
 
         return view(
             'backend.pages.universities.index',
