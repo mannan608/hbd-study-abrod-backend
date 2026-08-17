@@ -14,11 +14,11 @@ class UpdateCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'university_id' => ['nullable', 'uuid', 'exists:universities,id'],
+            'university_id' => ['nullable', 'integer', 'exists:universities,id'],
 
             'campus_id' => ['nullable', 'uuid', 'exists:university_campuses,id'],
 
-            'category_id' => ['nullable', 'uuid', 'exists:course_categories,id'],
+            'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
             'title' => ['required', 'string', 'max:255'],
 
@@ -38,7 +38,9 @@ class UpdateCourseRequest extends FormRequest
 
             'gpa_requirement' => ['nullable', 'numeric', 'min:0', 'max:10'],
 
-            'entry_requirements' => ['nullable', 'string'],
+            'entry_requirements' => ['nullable', 'array'],
+
+            'entry_requirements.*' => ['nullable', 'string', 'max:1000'],
 
             'overview' => ['nullable', 'string'],
 
@@ -50,8 +52,31 @@ class UpdateCourseRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $entryRequirements = $this->input('entry_requirements', []);
+
+        if (is_string($entryRequirements)) {
+            $decoded = json_decode($entryRequirements, true);
+
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $entryRequirements = $decoded;
+            } else {
+                $entryRequirements = preg_split('/\r\n|\r|\n/', $entryRequirements) ?: [];
+            }
+        }
+
+        if (! is_array($entryRequirements)) {
+            $entryRequirements = [];
+        }
+
+        $entryRequirements = array_values(array_filter(array_map(
+            static fn ($requirement) => is_string($requirement) ? trim($requirement) : '',
+            $entryRequirements
+        ), static fn ($requirement) => $requirement !== ''));
+
         $this->merge([
             'currency' => strtoupper($this->currency ?: 'USD'),
+
+            'entry_requirements' => $entryRequirements,
 
             'is_featured' => $this->boolean('is_featured'),
 
@@ -61,11 +86,11 @@ class UpdateCourseRequest extends FormRequest
 
     public function messages(): array
     {
-        return new StoreCourseRequest()->messages();
+        return (new StoreCourseRequest())->messages();
     }
 
     public function attributes(): array
     {
-        return new StoreCourseRequest()->attributes();
+        return (new StoreCourseRequest())->attributes();
     }
 }

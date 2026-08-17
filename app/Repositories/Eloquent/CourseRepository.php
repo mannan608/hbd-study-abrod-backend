@@ -17,8 +17,8 @@ class CourseRepository implements CourseRepositoryInterface
 
     public function paginate(int $perPage = 15)
     {
-        return Course::query()
-            ->with(['university', 'campus', 'category'])
+        return Course::select('id', 'title', 'slug', 'university_id', 'campus_id', 'category_id','degree_level', 'duration_months', 'tuition_fee', 'is_active')
+            ->with(['university:id,name', 'campus:id,name', 'category:id,name'])
             ->latest()
             ->paginate($perPage);
     }

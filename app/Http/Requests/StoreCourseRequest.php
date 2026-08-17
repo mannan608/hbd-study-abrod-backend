@@ -15,11 +15,11 @@ class StoreCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'university_id' => ['nullable', 'uuid', 'exists:universities,id'],
+            'university_id' => ['nullable', 'integer', 'exists:universities,id'],
 
             'campus_id' => ['nullable', 'uuid', 'exists:university_campuses,id'],
 
-            'category_id' => ['nullable', 'uuid', 'exists:course_categories,id'],
+            'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
             'title' => ['required', 'string', 'max:255'],
 
@@ -39,7 +39,9 @@ class StoreCourseRequest extends FormRequest
 
             'gpa_requirement' => ['nullable', 'numeric', 'min:0', 'max:10'],
 
-            'entry_requirements' => ['nullable', 'string'],
+            'entry_requirements' => ['nullable', 'array'],
+
+            'entry_requirements.*' => ['nullable', 'string', 'max:1000'],
 
             'overview' => ['nullable', 'string'],
 
@@ -51,8 +53,31 @@ class StoreCourseRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $entryRequirements = $this->input('entry_requirements', []);
+
+        if (is_string($entryRequirements)) {
+            $decoded = json_decode($entryRequirements, true);
+
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $entryRequirements = $decoded;
+            } else {
+                $entryRequirements = preg_split('/\r\n|\r|\n/', $entryRequirements) ?: [];
+            }
+        }
+
+        if (! is_array($entryRequirements)) {
+            $entryRequirements = [];
+        }
+
+        $entryRequirements = array_values(array_filter(array_map(
+            static fn ($requirement) => is_string($requirement) ? trim($requirement) : '',
+            $entryRequirements
+        ), static fn ($requirement) => $requirement !== ''));
+
         $this->merge([
             'currency' => strtoupper($this->currency ?: 'USD'),
+
+            'entry_requirements' => $entryRequirements,
 
             'is_featured' => $this->boolean('is_featured'),
 
@@ -64,12 +89,14 @@ class StoreCourseRequest extends FormRequest
     {
         return [
             'university_id.uuid' => 'Selected university is invalid.',
+            'university_id.integer' => 'Selected university is invalid.',
             'university_id.exists' => 'Selected university does not exist.',
 
             'campus_id.uuid' => 'Selected campus is invalid.',
             'campus_id.exists' => 'Selected campus does not exist.',
 
             'category_id.uuid' => 'Selected category is invalid.',
+            'category_id.integer' => 'Selected category is invalid.',
             'category_id.exists' => 'Selected category does not exist.',
 
             'title.required' => 'Course title is required.',
@@ -106,6 +133,9 @@ class StoreCourseRequest extends FormRequest
             'pte_overall.max' => 'PTE score cannot exceed 90.',
 
             'gpa_requirement.numeric' => 'GPA requirement must be a valid number.',
+
+            'entry_requirements.array' => 'Entry requirements must be provided as a list.',
+            'entry_requirements.*.string' => 'Each entry requirement must be a text value.',
         ];
     }
 

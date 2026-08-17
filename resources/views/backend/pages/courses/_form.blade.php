@@ -1,18 +1,33 @@
 @php
     $isEdit = isset($course) && $course;
 
-    $entryRequirements = old(
-        'entry_requirements',
-        $course?->entry_requirements
-            ? json_encode($course->entry_requirements, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-            : '',
-    );
+    $entryRequirements = old('entry_requirements', $course?->entry_requirements ?? []);
+
+    if (is_string($entryRequirements)) {
+        $decodedRequirements = json_decode($entryRequirements, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decodedRequirements)) {
+            $entryRequirements = $decodedRequirements;
+        } else {
+            $entryRequirements = preg_split('/\r\n|\r|\n/', $entryRequirements) ?: [];
+        }
+    }
+
+    if (! is_array($entryRequirements)) {
+        $entryRequirements = [];
+    }
+
+    $entryRequirements = array_values(array_filter(array_map(
+        static fn ($requirement) => is_string($requirement) ? trim($requirement) : '',
+        $entryRequirements
+    ), static fn ($requirement) => $requirement !== ''));
 @endphp
 
 <div x-data="{
     universityId: @js(old('university_id', $course?->university_id)),
     campusId: @js(old('campus_id', $course?->campus_id)),
     campuses: @js($campuses),
+    entryRequirements: @js($entryRequirements),
 
     get filteredCampuses() {
         if (!this.universityId) {
@@ -66,7 +81,7 @@
                                 </option>
 
                                 @foreach ($universities as $university)
-                                    <option value="{{ $university->id }}">
+                                    <option value="{{ $university->id }}" @selected(old('university_id', $course?->university_id) == $university->id)>
                                         {{ $university->name }}
                                     </option>
                                 @endforeach
@@ -204,8 +219,47 @@
                         placeholder="Enter course overview..." :value="old('overview', $course?->overview)" />
 
                     {{-- Entry Requirements --}}
-                    <x-form.textarea-input name="entry_requirements" label="Entry Requirements" rows="8"
-                        placeholder="Enter entry requirements..." :value="$entryRequirements" />
+                    <div class="border-t border-gray-100 pt-5 dark:border-gray-800">
+                        <div class="mb-4 flex items-center justify-between gap-4">
+                            <div>
+                                <h3 class="text-base font-semibold text-gray-800 dark:text-white">
+                                    Entry Requirements
+                                </h3>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                    Add one requirement per row. These will be stored as a list.
+                                </p>
+                            </div>
+
+                            <button type="button"
+                                class="rounded-lg border border-brand-500 px-3 py-2 text-sm font-semibold text-brand-600 hover:bg-brand-50 dark:border-brand-400 dark:text-brand-300 dark:hover:bg-brand-500/10"
+                                @click="entryRequirements.push('')">
+                                Add Requirement
+                            </button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <template x-for="(requirement, index) in entryRequirements" :key="index">
+                                <div class="flex gap-3">
+                                    <input type="text" name="entry_requirements[]" x-model="entryRequirements[index]"
+                                        placeholder="e.g. Minimum 60% in previous qualification"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+
+                                    <button type="button"
+                                        class="inline-flex py-2.5  items-center rounded-lg border border-gray-300 px-3 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                                        @click="entryRequirements.splice(index, 1)"
+                                        x-show="entryRequirements.length > 1 || entryRequirements[index]">
+                                        Remove
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+
+                        <template x-if="entryRequirements.length === 0">
+                            <div class="rounded-lg border border-dashed border-gray-300 p-4 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
+                                No entry requirements added yet.
+                            </div>
+                        </template>
+                    </div>
 
                 </div>
 

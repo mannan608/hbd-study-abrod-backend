@@ -9,14 +9,16 @@
     $tableRowData = $collection->map(function ($course) {
         return [
             'id' => $course->id,
-            'name' => $course->name,
+            'name' => $course->title,
             'slug' => $course->slug,
-            'code' => $course->code,
-            'status' => $course->status,
-            'cricos' => $course->cricos,
-            'thumbnail' => $course->thumbnail
-                ? asset($course->thumbnail)
-                : null,
+            'category' => $course->category->name ?? null,
+            'university' => $course->university->name ?? null,
+            'campus' => $course->campus->name ?? null,
+            'degree' => $course->degree_level,
+            'duration' => $course->duration_months,
+            'tuition' => $course->tuition_fee,
+            'status' => $course->is_active ? 'active' : 'inactive',
+            
         ];
     })->values();
 
@@ -82,10 +84,14 @@
                     <thead class="bg-gray-50 dark:bg-white/2 border-b border-gray-100 dark:border-white/5">
                         <tr>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Id</th>
-                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
-                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Cricos</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                            
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">University</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Campus</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Degree</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Tuition</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider text-right">Action</th>
                         </tr>
@@ -98,24 +104,19 @@
                                 </td>
                             </tr>
                         </template>
-                        <template x-for="row in tableRowData" :key="row.id">
+                        <template x-for="(row, index) in tableRowData" :key="row.id">
                             <tr class="hover:bg-gray-50/50 dark:hover:bg-white/1 transition-colors">
                                 <td class="px-5 py-4">
-                                    <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded text-xs font-mono" x-text="row.id"></span>
-                                </td>
-                                <td class="px-5 py-4">
-                                    <template x-if="row.thumbnail">
-                                        <img :src="row.thumbnail" class="w-10 h-10 rounded border border-gray-200 object-contain" alt="thumbnail" loading="lazy">
-                                    </template>
-                                    <template x-if="!row.thumbnail">
-                                        <span class="text-xs text-gray-400 italic">None</span>
-                                    </template>
+                                    <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded text-xs font-mono" x-text="index + 1"></span>
                                 </td>
                                 <td class="px-5 py-4 text-sm text-gray-700 dark:text-gray-300" x-text="row.name"></td>
-                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.code"></td>
-                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400">
-                                    <span x-text="row.cricos"></span>
-                                </td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.category"></td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.university"></td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.campus"></td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.degree"></td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.duration"></td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.tuition"></td>
+
                                 <td class="px-5 py-4 text-sm">
                                     <span :class="row.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'" class="px-2 py-0.5 rounded text-xs font-medium capitalize" x-text="row.status"></span>
                                 </td>
