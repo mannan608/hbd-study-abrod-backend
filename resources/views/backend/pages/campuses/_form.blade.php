@@ -60,13 +60,7 @@
                         <select id="city_id" name="city_id" x-model="cityId" :disabled="!universityId || loading"
                             class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm focus:border-brand-500 focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
                             <option value="">
-                                <span x-show="loading">
-                                    Loading cities...
-                                </span>
-
-                                <span x-show="!loading">
-                                    <span x-text="universityId ? 'Select City' : 'Select University First'"></span>
-                                </span>
+                                Select City
                             </option>
 
                             <template x-for="city in cities" :key="city.id">
