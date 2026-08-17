@@ -112,6 +112,15 @@ class RolePermissionSeeder extends Seeder
             'course-intakes.status.change',
             'course-intakes.manage',
 
+            // Scholarship permissions
+            'scholarships.list',
+            'scholarships.create',
+            'scholarships.view',
+            'scholarships.edit',
+            'scholarships.delete',
+            'scholarships.status.change',
+            'scholarships.manage',
+
             //contact
             'contact.list',
             'contact.view',

@@ -93,6 +93,11 @@ class MenuHelper
                         'route' => 'role.course-intakes.index',
                         'permission' => 'course-intakes.list',
                     ],
+                     [
+                        'name' => 'Scholarships',
+                        'route' => 'role.scholarships.index',
+                        'permission' => 'scholarships.list',
+                    ],
                 ],
             ],
             // [

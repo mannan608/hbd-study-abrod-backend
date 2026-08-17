@@ -1,18 +1,12 @@
 @php
     $isEdit = isset($intake) && $intake;
 
-    $applicationDeadline = old(
-        'application_deadline',
-        $intake?->application_deadline?->format('Y-m-d')
-    );
+    $applicationDeadline = old('application_deadline', $intake?->application_deadline?->format('Y-m-d'));
 
-    $startDate = old(
-        'start_date',
-        $intake?->start_date?->format('Y-m-d')
-    );
+    $startDate = old('start_date', $intake?->start_date?->format('Y-m-d'));
 @endphp
 
-<div x-data="{ }">
+<div x-data="{}">
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
 
         {{-- LEFT --}}
@@ -103,19 +97,11 @@
                             @enderror
                         </div>
 
-                        <x-form.input-text
-                            name="application_deadline"
-                            label="Application Deadline"
-                            type="datetime-local"
-                            value="{{ $applicationDeadline }}"
-                        />
+                        <x-form.input-text name="application_deadline" label="Application Deadline"
+                            type="datetime-local" value="{{ $applicationDeadline }}" />
 
-                        <x-form.input-text
-                            name="start_date"
-                            label="Start Date"
-                            type="datetime-local"
-                            value="{{ $startDate }}"
-                        />
+                        <x-form.input-text name="start_date" label="Start Date" type="datetime-local"
+                            value="{{ $startDate }}" />
 
                         <div>
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
