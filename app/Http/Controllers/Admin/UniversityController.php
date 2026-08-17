@@ -101,7 +101,7 @@ class UniversityController extends Controller
 
             'cities' => City::query()
                 ->orderBy('name')
-                ->get(['id', 'name']),
+                ->get(['id', 'name', 'country_id']),
 
             'title' => 'Create University',
         ]);
@@ -143,7 +143,7 @@ class UniversityController extends Controller
 
             'cities' => City::query()
                 ->orderBy('name')
-                ->get(['id', 'name']),
+                ->get(['id', 'name', 'country_id']),
 
             'title' => 'Edit University',
         ]);

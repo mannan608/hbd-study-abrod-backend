@@ -26,7 +26,7 @@ class UpdateCampusRequest extends FormRequest
 
             'phone' => ['nullable', 'string', 'max:50'],
 
-            'city_id' => ['nullable', 'integer', 'exists:cities,id'],
+            'city_id' => ['nullable', 'uuid', 'exists:cities,id'],
 
             'address' => ['nullable', 'string'],
 

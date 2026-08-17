@@ -13,7 +13,9 @@ class CampusRepository implements CampusRepositoryInterface
 {
     public function paginate(int $perPage = 15)
     {
-        return UniversityCampus::with(['university', 'city'])
+        return UniversityCampus::select('id', 'university_id',
+                'city_id','name', 'slug','email', 'phone','address', 'is_main_campus', 'is_active')
+        ->with(['university:id,name', 'city:id,name'])
             ->latest()
             ->paginate($perPage);
     }

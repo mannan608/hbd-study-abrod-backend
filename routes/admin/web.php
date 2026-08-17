@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CampusController;
+use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -54,9 +55,11 @@ Route::prefix('{role}')
 
         Route::resource('users', UserController::class);
         Route::resource('universities', UniversityController::class);
+        Route::get('campuses/cities', [CampusController::class, 'cities'])
+            ->name('campuses.cities');
         Route::resource('campuses', CampusController::class);
-        Route::get(    'campuses/cities',[CampusController::class, 'cities'])->name('campuses.cities');
         Route::resource('providers', CourseProviderController::class);
+         Route::resource('course-categories', CourseCategoryController::class);
         Route::resource('courses', CourseController::class);
         Route::resource('contacts', ContactController::class);
         Route::resource('subscribers', SubscriberController::class);

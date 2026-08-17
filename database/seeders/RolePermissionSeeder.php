@@ -84,6 +84,16 @@ class RolePermissionSeeder extends Seeder
             'provider.edit',
             'provider.delete',
 
+         // course-categories
+            'course-categories.list',
+            'course-categories.index',
+            'course-categories.create',
+            'course-categories.show',
+            'course-categories.edit',
+            'course-categories.delete',
+            'course-categories.status.change',
+            'course-categories.manage',
+
             // Course permissions
             'course.list',
             'course.create',

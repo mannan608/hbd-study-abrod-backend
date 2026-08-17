@@ -18,10 +18,11 @@ class CampusController extends Controller
     public function index(Request $request): View
     {
         $request->user()->can('campus.list') || abort(403);
+        $campuses = $this->campuses->paginate();
+        // return $campuses;
 
         return view('backend.pages.campuses.index', [
-            'campuses' => $this->campuses->paginate(),
-            'universities' => $this->campuses->universities(),
+            'campuses' => $campuses,
             'title' => 'Campuses',
         ]);
     }
@@ -95,9 +96,9 @@ class CampusController extends Controller
 
     public function cities(Request $request, string $role)
     {
-        abort_unless($request->user()->can('campus.create') || $request->user()->can('campus.edit'),403);
+        abort_unless($request->user()->can('campus.create') || $request->user()->can('campus.edit'), 403);
 
-        $request->validate(['university_id' => ['required','exists:universities,id',],]);
+        $request->validate(['university_id' => ['required', 'exists:universities,id',],]);
 
         return response()->json(
             $this->campuses->citiesByUniversity(
