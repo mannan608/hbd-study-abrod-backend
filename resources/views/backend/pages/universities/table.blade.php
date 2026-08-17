@@ -14,7 +14,8 @@
             'short_name' => $university->short_name,
             'status' => $university->status,
             'city' => $university->city,
-            'address' => $university->address,
+            'campuses' => $university->campuses_count,
+            'courses' => $university->courses_count,
             'logo' => $university->logo
                 ? asset($university->logo)
                 : null,
@@ -85,7 +86,8 @@
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Logo</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Short Name</th>
-                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                            <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Campus</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                             <th class="px-5 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider text-right">Action</th>
                         </tr>
@@ -113,9 +115,8 @@
                                 </td>
                                 <td class="px-5 py-4 text-sm text-gray-700 dark:text-gray-300" x-text="row.name"></td>
                                 <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.short_name"></td>
-                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400">
-                                    <span x-text="row.address"></span>
-                                </td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.courses"></td>
+                                <td class="px-5 py-4 text-sm text-gray-500 dark:text-gray-400" x-text="row.campuses"></td>
                                 <td class="px-5 py-4 text-sm">
                                     <span :class="row.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'" class="px-2 py-0.5 rounded text-xs font-medium capitalize" x-text="row.status"></span>
                                 </td>

@@ -29,9 +29,10 @@ class CourseIntakeController extends Controller
      */
     public function create(): View
     {
-        $courses = Course::query()->orderBy('title')->get();
-
-        // dd($courses);
+        $courses = Course::query()
+            ->select('id', 'title')
+            ->orderBy('title')
+            ->get();
 
         return view('backend.pages.course-intakes.create', [
             'intake' => null,
@@ -45,16 +46,11 @@ class CourseIntakeController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'course_id' => ['required', 'integer', 'exists:courses,id'],
-
+            'course_id' => ['required', 'uuid', 'exists:courses,id'],
             'intake_month' => ['required', 'string', 'max:20'],
-
             'intake_year' => ['required', 'integer', 'min:2000', 'max:2100'],
-
             'application_deadline' => ['required', 'date'],
-
             'start_date' => ['nullable', 'date', 'after_or_equal:application_deadline'],
-
             'status' => ['required', Rule::in(['open', 'closed', 'upcoming'])],
         ]);
 
@@ -71,7 +67,8 @@ class CourseIntakeController extends Controller
 
         CourseIntake::create($validated);
 
-        return redirect()->route('backend.pages.course-intakes.index')->with('success', 'Course intake created successfully.');
+        return redirect(role_route('role.course-intakes.index'))
+            ->with('success', 'Course intake created successfully.');
     }
 
     /**
@@ -79,7 +76,10 @@ class CourseIntakeController extends Controller
      */
     public function edit(CourseIntake $courseIntake): View
     {
-        $courses = Course::query()->orderBy('name')->get();
+        $courses = Course::query()
+            ->select('id', 'title')
+            ->orderBy('title')
+            ->get();
 
         return view('backend.pages.course-intakes.edit', [
             'intake' => $courseIntake,
@@ -93,16 +93,11 @@ class CourseIntakeController extends Controller
     public function update(Request $request, CourseIntake $courseIntake): RedirectResponse
     {
         $validated = $request->validate([
-            'course_id' => ['required', 'integer', 'exists:courses,id'],
-
+            'course_id' => ['required', 'uuid', 'exists:courses,id'],
             'intake_month' => ['required', 'string', 'max:20'],
-
             'intake_year' => ['required', 'integer', 'min:2000', 'max:2100'],
-
             'application_deadline' => ['required', 'date'],
-
             'start_date' => ['nullable', 'date', 'after_or_equal:application_deadline'],
-
             'status' => ['required', Rule::in(['open', 'closed', 'upcoming'])],
         ]);
 
@@ -119,7 +114,8 @@ class CourseIntakeController extends Controller
 
         $courseIntake->update($validated);
 
-        return redirect()->route('backend.pages.course-intakes.index')->with('success', 'Course intake updated successfully.');
+        return redirect(role_route('role.course-intakes.index'))
+            ->with('success', 'Course intake updated successfully.');
     }
 
     /**
@@ -129,6 +125,7 @@ class CourseIntakeController extends Controller
     {
         $courseIntake->delete();
 
-        return redirect()->route('backend.pages.course-intakes.index')->with('success', 'Course intake deleted successfully.');
+        return redirect(role_route('role.course-intakes.index'))
+            ->with('success', 'Course intake deleted successfully.');
     }
 }

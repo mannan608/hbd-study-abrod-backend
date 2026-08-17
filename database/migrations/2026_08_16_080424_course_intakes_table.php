@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
 
             // Course
-            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
+            $table->foreignUuid('course_id')->constrained('courses')->cascadeOnDelete();
 
             // Intake
             $table->string('intake_month', 20);

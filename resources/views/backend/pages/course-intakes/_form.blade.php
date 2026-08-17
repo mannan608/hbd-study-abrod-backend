@@ -1,18 +1,25 @@
 @php
-    $isEdit = isset($course) && $course;
+    $isEdit = isset($intake) && $intake;
+
+    $applicationDeadline = old(
+        'application_deadline',
+        $intake?->application_deadline?->format('Y-m-d')
+    );
+
+    $startDate = old(
+        'start_date',
+        $intake?->start_date?->format('Y-m-d')
+    );
 @endphp
 
-<div x-data="{
-
-}">
+<div x-data="{ }">
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
 
         {{-- LEFT --}}
         <div class="space-y-6 lg:col-span-8">
 
-            {{--  Course Intake --}}
+            {{-- Course Intake --}}
             <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-
                 <div class="border-b border-gray-100 p-5 dark:border-gray-800">
                     <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
                         Course Intake
@@ -20,8 +27,6 @@
                 </div>
 
                 <div class="space-y-5 p-5">
-
-
                     <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                         <div>
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -35,8 +40,8 @@
                                 </option>
 
                                 @foreach ($courses as $course)
-                                    <option value="{{ $course->id }}" @selected(old('course_id', $course?->course_id) == $course->id)>
-                                        {{ $course->name }}
+                                    <option value="{{ $course->id }}" @selected(old('course_id', $intake?->course_id) == $course->id)>
+                                        {{ $course->title }}
                                     </option>
                                 @endforeach
                             </select>
@@ -47,6 +52,7 @@
                                 </p>
                             @enderror
                         </div>
+
                         <div>
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Intake Month
@@ -84,27 +90,36 @@
                                 </option>
 
                                 @foreach (['2026', '2027', '2028', '2029'] as $year)
-                                    <option value="{{ $year }}" @selected(old('intake_year', $intake?->intake_year) === $year)>
+                                    <option value="{{ $year }}" @selected(old('intake_year', $intake?->intake_year) == $year)>
                                         {{ $year }}
                                     </option>
                                 @endforeach
                             </select>
 
-                            @error('intake_month')
+                            @error('intake_year')
                                 <p class="mt-1 text-sm text-red-500">
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
-                         <x-form.input-text name="start_date" label="Application Date" type="datetime-local"
-                                value="{{ old('start_date') }}" />
-                            <x-form.input-text name="application_deadline" label="Application Deadline" type="datetime-local"
-                                value="{{ old('application_deadline') }}" />
+                        <x-form.input-text
+                            name="application_deadline"
+                            label="Application Deadline"
+                            type="datetime-local"
+                            value="{{ $applicationDeadline }}"
+                        />
 
-                                <div>
+                        <x-form.input-text
+                            name="start_date"
+                            label="Start Date"
+                            type="datetime-local"
+                            value="{{ $startDate }}"
+                        />
+
+                        <div>
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                               Status
+                                Status
                             </label>
 
                             <select name="status"
@@ -113,9 +128,9 @@
                                     Select Status
                                 </option>
 
-                                @foreach (['Open', 'Close', 'Upcoming'] as $status)
+                                @foreach (['open', 'closed', 'upcoming'] as $status)
                                     <option value="{{ $status }}" @selected(old('status', $intake?->status) === $status)>
-                                        {{ $status }}
+                                        {{ ucfirst($status) }}
                                     </option>
                                 @endforeach
                             </select>
@@ -126,30 +141,21 @@
                                 </p>
                             @enderror
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         {{-- RIGHT --}}
         <div class="space-y-6 lg:col-span-4">
-
-            {{-- Submit --}}
             <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
                 <div class="flex justify-end p-5">
-
                     <button type="submit"
                         class="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-500">
                         {{ $isEdit ? 'Update' : 'Create' }}
                     </button>
-
                 </div>
             </div>
-
         </div>
 
     </div>
