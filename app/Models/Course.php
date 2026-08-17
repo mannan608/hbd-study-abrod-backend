@@ -36,6 +36,8 @@ class Course extends Model
             'duration_months' => 'integer',
             'tuition_fee' => 'decimal:2',
             'ielts_overall' => 'decimal:1',
+            'toefl_overall' => 'integer',
+            'pte_overall' => 'integer',
             'gpa_requirement' => 'decimal:2',
             'entry_requirements' => 'array',
             'is_featured' => 'boolean',
@@ -48,6 +50,14 @@ class Course extends Model
         return $this->belongsTo(University::class);
     }
 
+    public function campus(): BelongsTo
+    {
+        return $this->belongsTo(
+            UniversityCampus::class,
+            'campus_id'
+        );
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(
@@ -55,11 +65,4 @@ class Course extends Model
             'category_id'
         );
     }
-    public function campus(): BelongsTo
-{
-    return $this->belongsTo(
-        UniversityCampus::class,
-        'campus_id'
-    );
-}
 }

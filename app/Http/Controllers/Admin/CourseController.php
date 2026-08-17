@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
+use App\Models\CourseCategory;
+use App\Models\University;
+use App\Models\UniversityCampus;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,10 +17,7 @@ use Illuminate\View\View;
 
 class CourseController extends Controller
 {
-    public function __construct(
-        private readonly CourseRepositoryInterface $courses
-    ) {}
-
+    public function __construct(private readonly CourseRepositoryInterface $courses) {}
 
     public function index(Request $request): View
     {
@@ -35,20 +35,31 @@ class CourseController extends Controller
 
         return view('backend.pages.courses.create', [
             'course' => null,
+            'universities' => University::query()
+                ->orderBy('name')
+                ->get(['id', 'name']),
+
+            'campuses' => UniversityCampus::query()
+                ->orderBy('name')
+                ->get(['id', 'name', 'university_id']),
+
+            'categories' => CourseCategory::query()
+                ->orderBy('name')
+                ->get(['id', 'name']),
+
             'title' => 'Create Course',
         ]);
     }
 
     public function store(StoreCourseRequest $request): RedirectResponse
     {
-        $this->courses->create(
-            $request->validated(),
-            $request
-        );
+        $this->courses->create($request->validated(), $request);
+
         Cache::forget('navbar_courses');
+
         return redirect()
             ->route('role.courses.index', [
-                'role' => $request->route('role')
+                'role' => $request->route('role'),
             ])
             ->with('success', 'Course created successfully.');
     }
@@ -56,6 +67,8 @@ class CourseController extends Controller
     public function show(Request $request, Course $course): View
     {
         $request->user()->can('course.view') || abort(403);
+
+        $course->load(['university', 'campus', 'category']);
 
         return view('backend.pages.courses.show', [
             'course' => $course,
@@ -69,22 +82,32 @@ class CourseController extends Controller
 
         return view('backend.pages.courses.edit', [
             'course' => $course,
+
+            'universities' => University::query()
+                ->orderBy('name')
+                ->get(['id', 'name']),
+
+            'campuses' => UniversityCampus::query()
+                ->orderBy('name')
+                ->get(['id', 'name', 'university_id']),
+
+            'categories' => CourseCategory::query()
+                ->orderBy('name')
+                ->get(['id', 'name']),
+
             'title' => 'Edit Course',
         ]);
     }
 
     public function update(UpdateCourseRequest $request, string $role, Course $course): RedirectResponse
     {
-        $this->courses->update(
-            $course,
-            $request->validated(),
-            $request
-        );
+        $this->courses->update($course, $request->validated(), $request);
+
         Cache::forget('navbar_courses');
 
         return redirect()
             ->route('role.courses.index', [
-                'role' => $request->route('role')
+                'role' => $request->route('role'),
             ])
             ->with('success', 'Course updated successfully.');
     }
@@ -94,11 +117,12 @@ class CourseController extends Controller
         $request->user()->can('course.delete') || abort(403);
 
         $this->courses->delete($course);
+
         Cache::forget('navbar_courses');
 
         return redirect()
             ->route('role.courses.index', [
-                'role' => $role
+                'role' => $role,
             ])
             ->with('success', 'Course deleted successfully.');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCourseRequest extends FormRequest
 {
@@ -14,129 +15,119 @@ class StoreCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
+            'university_id' => ['nullable', 'uuid', 'exists:universities,id'],
 
-            'code' => [
-                'nullable',
-                'string',
-                'max:100',
-            ],
+            'campus_id' => ['nullable', 'uuid', 'exists:university_campuses,id'],
 
-            'cricos' => [
-                'nullable',
-                'string',
-                'max:100',
-            ],
+            'category_id' => ['nullable', 'uuid', 'exists:course_categories,id'],
 
-            'price' => [
-                'nullable',
-                'numeric',
-                'min:0',
-                'max:99999999.99',
-            ],
+            'title' => ['required', 'string', 'max:255'],
 
-            'discount_percentage' => [
-                'nullable',
-                'integer',
-                'between:0,100',
-            ],
+            'degree_level' => ['required', 'string', 'max:50'],
 
-            'status' => [
-                'nullable',
-                'in:active,inactive',
-            ],
+            'duration_months' => ['required', 'integer', 'min:1', 'max:1200'],
 
-            'thumbnail' => [
-                'nullable',
-                'image',
-                'mimes:jpg,jpeg,png,webp',
-                'max:5120', // 5MB
-            ],
+            'tuition_fee' => ['required', 'numeric', 'min:0', 'max:9999999999.99'],
 
-            'course_material' => [
-                'nullable',
-                'file',
-                'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar',
-                'max:51200', // 50MB
-            ],
+            'currency' => ['required', 'string', 'size:3'],
 
-            'overview' => [
-                'nullable',
-                'string',
-            ],
+            'ielts_overall' => ['nullable', 'numeric', 'min:0', 'max:9.0'],
 
-            'entry_requirements' => [
-                'nullable',
-                'string',
-            ],
+            'toefl_overall' => ['nullable', 'integer', 'min:0', 'max:120'],
 
-            'description' => [
-                'nullable',
-                'string',
-            ],
+            'pte_overall' => ['nullable', 'integer', 'min:0', 'max:90'],
 
-            'category_id' => [
-                'nullable',
-            ],
+            'gpa_requirement' => ['nullable', 'numeric', 'min:0', 'max:10'],
+
+            'entry_requirements' => ['nullable', 'string'],
+
+            'overview' => ['nullable', 'string'],
+
+            'is_featured' => ['nullable', 'boolean'],
+
+            'is_active' => ['nullable', 'boolean'],
         ];
     }
 
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'price' => $this->price ?: 0,
-            'discount_percentage' => $this->discount_percentage ?: 0,
-            'status' => $this->status ?: 'active',
+            'currency' => strtoupper($this->currency ?: 'USD'),
+
+            'is_featured' => $this->boolean('is_featured'),
+
+            'is_active' => $this->has('is_active') ? $this->boolean('is_active') : true,
         ]);
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Course name is required.',
-            'name.max' => 'Course name cannot exceed 255 characters.',
+            'university_id.uuid' => 'Selected university is invalid.',
+            'university_id.exists' => 'Selected university does not exist.',
 
-            'slug.required' => 'Slug is required.',
-            'slug.unique' => 'This slug already exists.',
-            'slug.alpha_dash' => 'Slug may only contain letters, numbers, dashes and underscores.',
+            'campus_id.uuid' => 'Selected campus is invalid.',
+            'campus_id.exists' => 'Selected campus does not exist.',
 
-            'price.numeric' => 'Price must be a valid number.',
-            'price.min' => 'Price cannot be negative.',
+            'category_id.uuid' => 'Selected category is invalid.',
+            'category_id.exists' => 'Selected category does not exist.',
 
-            'discount_percentage.integer' => 'Discount must be a whole number.',
-            'discount_percentage.between' => 'Discount must be between 0 and 100.',
+            'title.required' => 'Course title is required.',
+            'title.max' => 'Course title cannot exceed 255 characters.',
 
-            'thumbnail.image' => 'Thumbnail must be an image.',
-            'thumbnail.mimes' => 'Thumbnail must be JPG, JPEG, PNG or WEBP.',
-            'thumbnail.max' => 'Thumbnail size cannot exceed 5MB.',
+            'degree_level.required' => 'Degree level is required.',
 
-            'course_material.file' => 'Course material must be a valid file.',
-            'course_material.mimes' => 'Allowed files: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, ZIP, RAR.',
-            'course_material.max' => 'Course material size cannot exceed 50MB.',
+            'duration_months.required' => 'Course duration is required.',
 
-            'category_id.exists' => 'Selected category is invalid.',
+            'duration_months.integer' => 'Course duration must be a whole number.',
+
+            'duration_months.min' => 'Course duration must be at least 1 month.',
+
+            'tuition_fee.required' => 'Tuition fee is required.',
+
+            'tuition_fee.numeric' => 'Tuition fee must be a valid number.',
+
+            'tuition_fee.min' => 'Tuition fee cannot be negative.',
+
+            'currency.required' => 'Currency is required.',
+
+            'currency.size' => 'Currency must contain exactly 3 characters.',
+
+            'ielts_overall.numeric' => 'IELTS score must be a valid number.',
+
+            'ielts_overall.max' => 'IELTS score cannot exceed 9.',
+
+            'toefl_overall.integer' => 'TOEFL score must be a whole number.',
+
+            'toefl_overall.max' => 'TOEFL score cannot exceed 120.',
+
+            'pte_overall.integer' => 'PTE score must be a whole number.',
+
+            'pte_overall.max' => 'PTE score cannot exceed 90.',
+
+            'gpa_requirement.numeric' => 'GPA requirement must be a valid number.',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'name' => 'course name',
-            'code' => 'course code',
-            'cricos' => 'CRICOS code',
-            'slug' => 'slug',
-            'price' => 'price',
-            'discount_percentage' => 'discount percentage',
-            'thumbnail' => 'thumbnail',
-            'course_material' => 'course material',
+            'university_id' => 'university',
+            'campus_id' => 'campus',
             'category_id' => 'category',
-            'overview' => 'overview',
+            'title' => 'course title',
+            'degree_level' => 'degree level',
+            'duration_months' => 'duration',
+            'tuition_fee' => 'tuition fee',
+            'currency' => 'currency',
+            'ielts_overall' => 'IELTS overall',
+            'toefl_overall' => 'TOEFL overall',
+            'pte_overall' => 'PTE overall',
+            'gpa_requirement' => 'GPA requirement',
             'entry_requirements' => 'entry requirements',
-            'description' => 'description',
+            'overview' => 'overview',
+            'is_featured' => 'featured',
+            'is_active' => 'status',
         ];
     }
 }

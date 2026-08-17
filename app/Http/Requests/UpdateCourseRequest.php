@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateCourseRequest extends FormRequest
 {
@@ -14,95 +13,59 @@ class UpdateCourseRequest extends FormRequest
 
     public function rules(): array
     {
-        $courseId = $this->route('course')?->id ?? $this->route('course');
-
         return [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
+            'university_id' => ['nullable', 'uuid', 'exists:universities,id'],
 
-            'code' => [
-                'nullable',
-                'string',
-                'max:100',
-            ],
+            'campus_id' => ['nullable', 'uuid', 'exists:university_campuses,id'],
 
-            'cricos' => [
-                'nullable',
-                'string',
-                'max:100',
-            ],
+            'category_id' => ['nullable', 'uuid', 'exists:course_categories,id'],
 
-            'price' => [
-                'nullable',
-                'numeric',
-                'min:0',
-                'max:99999999.99',
-            ],
+            'title' => ['required', 'string', 'max:255'],
 
-            'discount_percentage' => [
-                'nullable',
-                'integer',
-                'between:0,100',
-            ],
+            'degree_level' => ['required', 'string', 'max:50'],
 
-            'status' => [
-                'nullable',
-                'in:active,inactive',
-            ],
+            'duration_months' => ['required', 'integer', 'min:1', 'max:1200'],
 
-            'thumbnail' => [
-                'nullable',
-                'image',
-                'mimes:jpg,jpeg,png,webp',
-                'max:5120',
-            ],
+            'tuition_fee' => ['required', 'numeric', 'min:0', 'max:9999999999.99'],
 
-            'course_material' => [
-                'nullable',
-                'file',
-                'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar',
-                'max:51200',
-            ],
+            'currency' => ['required', 'string', 'size:3'],
 
-            'overview' => [
-                'nullable',
-                'string',
-            ],
+            'ielts_overall' => ['nullable', 'numeric', 'min:0', 'max:9.0'],
 
-            'entry_requirements' => [
-                'nullable',
-                'string',
-            ],
+            'toefl_overall' => ['nullable', 'integer', 'min:0', 'max:120'],
 
-            'description' => [
-                'nullable',
-                'string',
-            ],
+            'pte_overall' => ['nullable', 'integer', 'min:0', 'max:90'],
 
-            'category_id' => [
-                'nullable',
-            ],
+            'gpa_requirement' => ['nullable', 'numeric', 'min:0', 'max:10'],
+
+            'entry_requirements' => ['nullable', 'string'],
+
+            'overview' => ['nullable', 'string'],
+
+            'is_featured' => ['nullable', 'boolean'],
+
+            'is_active' => ['nullable', 'boolean'],
         ];
     }
 
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'price' => $this->price ?: 0,
-            'discount_percentage' => $this->discount_percentage ?: 0,
+            'currency' => strtoupper($this->currency ?: 'USD'),
+
+            'is_featured' => $this->boolean('is_featured'),
+
+            'is_active' => $this->has('is_active') ? $this->boolean('is_active') : true,
         ]);
     }
 
     public function messages(): array
     {
-        return (new StoreCourseRequest())->messages();
+        return new StoreCourseRequest()->messages();
     }
 
     public function attributes(): array
     {
-        return (new StoreCourseRequest())->attributes();
+        return new StoreCourseRequest()->attributes();
     }
 }
