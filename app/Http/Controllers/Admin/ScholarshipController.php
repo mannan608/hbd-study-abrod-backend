@@ -17,9 +17,12 @@ class ScholarshipController extends Controller
     {
         // request()->user()->can('scholarship.view') || abort(403);
 
-        $scholarships = Scholarship::with(['university', 'course'])
+        $scholarships = Scholarship::select('id', 'university_id', 'course_id', 'title', 'amount_description', 'coverage_type', 'eligibility_criteria', 'deadline', 'is_active')
+        ->with(['university:id,name', 'course:id,title'])
             ->latest()
             ->paginate(15);
+
+        // return    $scholarships;
 
         return view('backend.pages.scholarships.index', [
             'scholarships' => $scholarships,
@@ -48,7 +51,7 @@ class ScholarshipController extends Controller
         // $request->user()->can('scholarship.create') || abort(403);
 
         $validated = $request->validate([
-            'university_id' => ['required', 'uuid', 'exists:universities,id'],
+            'university_id' => ['required', 'integer', 'exists:universities,id'],
 
             'course_id' => ['nullable', 'uuid', 'exists:courses,id'],
 
@@ -64,7 +67,7 @@ class ScholarshipController extends Controller
 
             'is_active' => ['nullable', 'boolean'],
         ], [
-            'university_id.uuid' => 'The university id field must be a valid UUID.',
+            'university_id.integer' => 'The university id field must be a valid integer.',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
@@ -98,7 +101,7 @@ class ScholarshipController extends Controller
         // $request->user()->can('scholarship.edit') || abort(403);
 
         $validated = $request->validate([
-            'university_id' => ['required', 'uuid', 'exists:universities,id'],
+            'university_id' => ['required', 'integer', 'exists:universities,id'],
 
             'course_id' => ['nullable', 'uuid', 'exists:courses,id'],
 
@@ -114,7 +117,7 @@ class ScholarshipController extends Controller
 
             'is_active' => ['nullable', 'boolean'],
         ], [
-            'university_id.uuid' => 'The university id field must be a valid UUID.',
+            'university_id.integer' => 'The university id field must be a valid integer.',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');

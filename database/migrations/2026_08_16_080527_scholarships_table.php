@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             // University
-            $table->foreignUuid('university_id')
+            $table->foreignId('university_id')
                 ->constrained('universities')
                 ->cascadeOnDelete();
 
