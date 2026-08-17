@@ -102,6 +102,16 @@ class RolePermissionSeeder extends Seeder
             'course.delete',
             'course.status.change',
 
+            // Course Intake permissions
+            'course-intakes.list',
+            'course-intakes.index',
+            'course-intakes.create',
+            'course-intakes.show',
+            'course-intakes.edit',
+            'course-intakes.delete',
+            'course-intakes.status.change',
+            'course-intakes.manage',
+
             //contact
             'contact.list',
             'contact.view',

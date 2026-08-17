@@ -88,6 +88,11 @@ class MenuHelper
                         'route' => 'role.courses.index',
                         'permission' => 'course.list',
                     ],
+                     [
+                        'name' => 'Course Intakes',
+                        'route' => 'role.course-intakes.index',
+                        'permission' => 'course-intakes.list',
+                    ],
                 ],
             ],
             // [

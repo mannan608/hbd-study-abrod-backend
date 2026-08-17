@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CourseIntake extends Model
 {
-    use HasUuids;
-
     protected $fillable = [
         'course_id',
         'intake_month',
