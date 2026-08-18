@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreScholarshipRequest;
+use App\Http\Requests\UpdateScholarshipRequest;
 use App\Models\Course;
 use App\Models\Scholarship;
 use App\Models\University;
@@ -13,9 +15,9 @@ class ScholarshipController extends Controller
     /**
      * Display scholarships.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // request()->user()->can('scholarship.view') || abort(403);
+        $request()->user()->can('scholarship.view') || abort(403);
 
         $scholarships = Scholarship::select('id', 'university_id', 'course_id', 'title', 'amount_description', 'coverage_type', 'eligibility_criteria', 'deadline', 'is_active')
         ->with(['university:id,name', 'course:id,title'])
@@ -32,9 +34,9 @@ class ScholarshipController extends Controller
     /**
      * Show create form.
      */
-    public function create()
+    public function create(Request $request)
     {
-        // request()->user()->can('scholarship.create') || abort(403);
+        $request()->user()->can('scholarship.create') || abort(403);
 
         return view('backend.pages.scholarships.create', [
             'scholarship' => null,
@@ -46,43 +48,25 @@ class ScholarshipController extends Controller
     /**
      * Store scholarship.
      */
-    public function store(Request $request)
-    {
-        // $request->user()->can('scholarship.create') || abort(403);
+  public function store(StoreScholarshipRequest $request)
+{
+    $data = $request->validated();
 
-        $validated = $request->validate([
-            'university_id' => ['required', 'integer', 'exists:universities,id'],
+    $data['is_active'] = $request->boolean('is_active');
 
-            'course_id' => ['nullable', 'uuid', 'exists:courses,id'],
+    Scholarship::create($data);
 
-            'title' => ['required', 'string', 'max:255'],
-
-            'amount_description' => ['nullable', 'string', 'max:255'],
-
-            'coverage_type' => ['nullable', 'string', 'max:50'],
-
-            'eligibility_criteria' => ['nullable', 'string'],
-
-            'deadline' => ['nullable', 'date'],
-
-            'is_active' => ['nullable', 'boolean'],
-        ], [
-            'university_id.integer' => 'The university id field must be a valid integer.',
-        ]);
-
-        $validated['is_active'] = $request->boolean('is_active');
-
-        Scholarship::create($validated);
-
-        return redirect()->route('backend.pages.scholarships.index')->with('success', 'Scholarship created successfully.');
-    }
+    return redirect()
+        ->route('backend.pages.scholarships.index')
+        ->with('success', 'Scholarship created successfully.');
+}
 
     /**
      * Show edit form.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
-        // request()->user()->can('scholarship.edit') || abort(403);
+        $request()->user()->can('scholarship.edit') || abort(403);
 
         $scholarship = Scholarship::with(['university', 'course'])->findOrFail($id);
 
@@ -96,45 +80,23 @@ class ScholarshipController extends Controller
     /**
      * Update scholarship.
      */
-    public function update(Request $request, string $id)
-    {
-        // $request->user()->can('scholarship.edit') || abort(403);
+    public function update(UpdateScholarshipRequest $request, string $id)
+{
+    $scholarship = Scholarship::findOrFail($id);
 
-        $validated = $request->validate([
-            'university_id' => ['required', 'integer', 'exists:universities,id'],
+    $scholarship->update($request->validated());
 
-            'course_id' => ['nullable', 'uuid', 'exists:courses,id'],
-
-            'title' => ['required', 'string', 'max:255'],
-
-            'amount_description' => ['nullable', 'string', 'max:255'],
-
-            'coverage_type' => ['nullable', 'string', 'max:50'],
-
-            'eligibility_criteria' => ['nullable', 'string'],
-
-            'deadline' => ['nullable', 'date'],
-
-            'is_active' => ['nullable', 'boolean'],
-        ], [
-            'university_id.integer' => 'The university id field must be a valid integer.',
-        ]);
-
-        $validated['is_active'] = $request->boolean('is_active');
-
-        $scholarship = Scholarship::findOrFail($id);
-
-        $scholarship->update($validated);
-
-        return redirect()->route('backend.pages.scholarships.index')->with('success', 'Scholarship updated successfully.');
-    }
+    return redirect()
+        ->route('backend.pages.scholarships.index')
+        ->with('success', 'Scholarship updated successfully.');
+}
 
     /**
      * Delete scholarship.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request)
     {
-        request()->user()->can('scholarship.delete') || abort(403);
+        $request()->user()->can('scholarship.delete') || abort(403);
 
         $scholarship = Scholarship::findOrFail($id);
 
