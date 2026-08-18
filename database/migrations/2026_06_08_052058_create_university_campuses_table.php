@@ -25,6 +25,9 @@ return new class extends Migration
                 ->constrained('cities')
                 ->nullOnDelete();
 
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
+
             // Basic information
             $table->string('name');
             $table->string('slug');

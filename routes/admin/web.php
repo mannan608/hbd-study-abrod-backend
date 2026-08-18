@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ScholarshipController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CounsellorController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
@@ -69,5 +70,6 @@ Route::prefix('{role}')
         Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::resource('course-intakes', CourseIntakeController::class);
         Route::resource('scholarships', ScholarshipController::class);
+        Route::resource('counsellors', CounsellorController::class);
 
     });

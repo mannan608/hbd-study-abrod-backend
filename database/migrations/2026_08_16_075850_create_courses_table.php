@@ -19,11 +19,12 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('universities')
                 ->cascadeOnDelete();
-                    // Campus
-    $table->foreignUuid('campus_id')
-        ->nullable()
-        ->constrained('university_campuses')
-        ->nullOnDelete();
+
+            // Campus
+            $table->foreignUuid('campus_id')
+                ->nullable()
+                ->constrained('university_campuses')
+                ->nullOnDelete();
 
             // Course category
             $table->foreignUuid('category_id')
@@ -45,16 +46,24 @@ return new class extends Migration
             $table->decimal('tuition_fee', 12, 2);
             $table->char('currency', 3)->default('USD');
 
+            // Application & scholarship
+            $table->boolean('is_scholarship_available')
+                ->default(false);
+
+            $table->decimal('application_fee', 10, 2)
+                ->default(0);
+
             // English language requirements
             $table->decimal('ielts_overall', 3, 1)->nullable();
             $table->unsignedInteger('toefl_overall')->nullable();
             $table->unsignedInteger('pte_overall')->nullable();
 
+            // Flexible English requirement text
+            // Example: IELTS 6.5 / PTE 58
+            $table->string('english_requirement_text', 255)->nullable();
+
             // Academic requirement
             $table->decimal('gpa_requirement', 3, 2)->nullable();
-
-            // Flexible entry requirements
-            $table->json('entry_requirements')->nullable();
 
             // Course overview
             $table->text('overview')->nullable();
