@@ -235,7 +235,7 @@
                                 <div class="flex justify-end gap-2">
 
                                     {{-- Edit --}}
-                                    {{-- @can('scholarship.edit') --}}
+                                    @can('scholarships.edit')
                                         <a :href="baseUrl + '/' + row.id + '/edit'"
                                             class="rounded-lg p-2 text-gray-500 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-500/10"
                                             title="Edit">
@@ -246,11 +246,11 @@
                                             </svg>
 
                                         </a>
-                                    {{-- @endcan --}}
+                                    @endcan
 
 
                                     {{-- Delete --}}
-                                    {{-- @can('scholarship.delete') --}}
+                                    @can('scholarships.delete')
                                         <button type="button" @click="openDeleteModal(row)"
                                             class="rounded-lg p-2 text-gray-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-500/10"
                                             title="Delete">
@@ -261,7 +261,7 @@
                                             </svg>
 
                                         </button>
-                                    {{-- @endcan --}}
+                                    @endcan
 
                                 </div>
 

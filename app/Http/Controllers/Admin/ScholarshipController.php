@@ -47,7 +47,7 @@ class ScholarshipController extends Controller
     /**
      * Store scholarship.
      */
-    public function store(string $role ,StoreScholarshipRequest $request): RedirectResponse
+    public function store(StoreScholarshipRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -56,53 +56,47 @@ class ScholarshipController extends Controller
         Scholarship::create($data);
 
         return redirect()
-            ->route('role.scholarships.index')
+            ->to(role_route('role.scholarships.index'))
             ->with('success', 'Scholarship created successfully.');
     }
 
     /**
      * Show edit form.
      */
-    public function edit(string $id, Request $request)
+    public function edit(Request $request, string $role, Scholarship $scholarship)
     {
         $request->user()->can('scholarships.edit') || abort(403);
 
-        $scholarship = Scholarship::with(['university', 'course'])->findOrFail($id);
-
         return view('backend.pages.scholarships.edit', [
-            'scholarship' => $scholarship,
+            'scholarship' => $scholarship->load(['university', 'course']),
             'universities' => University::query()->orderBy('name')->get(),
-            'courses' => Course::query()->orderBy('name')->get(),
+            'courses' => Course::query()->orderBy('title')->get(),
         ]);
     }
 
     /**
      * Update scholarship.
      */
-    public function update(string $role,UpdateScholarshipRequest $request, string $id): RedirectResponse
+    public function update(string $role, UpdateScholarshipRequest $request, Scholarship $scholarship): RedirectResponse
     {
-        $scholarship = Scholarship::findOrFail($id);
-
         $scholarship->update($request->validated());
 
         return redirect()
-            ->route('role.scholarships.index')
+            ->to(role_route('role.scholarships.index'))
             ->with('success', 'Scholarship updated successfully.');
     }
 
     /**
      * Delete scholarship.
      */
-    public function destroy(string $role,string $id, Request $request): RedirectResponse
+    public function destroy(Request $request, string $role, Scholarship $scholarship): RedirectResponse
     {
         $request->user()->can('scholarships.delete') || abort(403);
-
-        $scholarship = Scholarship::findOrFail($id);
 
         $scholarship->delete();
 
         return redirect()
-            ->route('role.scholarships.index')
+            ->to(role_route('role.scholarships.index'))
             ->with('success', 'Scholarship deleted successfully.');
     }
 }
