@@ -8,58 +8,84 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Event extends Model
 {
-   protected $fillable = [
-
+    protected $fillable = [
+        // Basic information
         'title',
         'slug',
+        'event_type',
         'short_description',
         'description',
+
+        // Media
         'banner',
+        'gallery_images',
 
+        // Location
+        'location_name',
+        'address',
+
+        // Schedule
+        'start_datetime',
+        'end_datetime',
         'schedules',
-        'organizer',
 
+        // Online event
+        'is_online',
+        'meeting_link',
+
+        // Registration
+        'max_seats',
+        'registration_deadline',
         'registration_link',
+
+        // Organizer / contact
+        'organizer',
         'contact_email',
         'contact_phone',
 
+        // Event content
         'providers',
-        'gallery_images',
         'tags',
         'benefits',
         'services_offered',
         'faqs',
+
+        // Google Maps
         'google_map_link',
 
+        // Status
         'status',
         'is_featured',
-        'views',
+        'is_active',
     ];
 
-protected $casts = [
+    protected $casts = [
+        // JSON fields
+        'schedules' => 'array',
+        'providers' => 'array',
+        'gallery_images' => 'array',
+        'tags' => 'array',
+        'benefits' => 'array',
+        'services_offered' => 'array',
+        'faqs' => 'array',
 
-    'schedules' => 'array',
+        // Boolean fields
+        'is_online' => 'boolean',
+        'is_featured' => 'boolean',
+        'is_active' => 'boolean',
 
-    'providers' => 'array',
+        // Date/time fields
+        'start_datetime' => 'datetime',
+        'end_datetime' => 'datetime',
+        'registration_deadline' => 'datetime',
 
-    'gallery_images' => 'array',
+        // Integer
+        'max_seats' => 'integer',
+    ];
 
-    'tags' => 'array',
-
-    'benefits' => 'array',
-
-    'services_offered' => 'array',
-
-    'faqs' => 'array',
-
-    'is_featured' => 'boolean',
-];
-
-    public function seoMeta(): MorphOne
-    {
-        return $this->morphOne(SeoMeta::class, 'seoable');
-    }
-
+    /**
+     * Use slug for route model binding.
+     */
     public function getRouteKeyName(): string
     {
         return 'slug';
