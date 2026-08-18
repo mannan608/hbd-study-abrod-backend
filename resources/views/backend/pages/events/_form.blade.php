@@ -8,6 +8,24 @@
         : role_route('role.events.store');
 
     $fmtDate = fn ($v) => $v ? \Carbon\Carbon::parse($v)->format('Y-m-d\TH:i') : '';
+    $asString = fn ($v) => is_null($v) ? '' : (string) $v;
+
+    $normalizeTags = function ($value) {
+        if (is_string($value)) {
+            $value = preg_split('/\s*,\s*/', trim($value), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        }
+
+        if (!is_array($value)) {
+            return [''];
+        }
+
+        $value = array_values(array_filter(array_map(
+            static fn ($tag) => is_string($tag) ? trim($tag) : '',
+            $value
+        )));
+
+        return $value ?: [''];
+    };
 
     // Repeater data normalized for Alpine: old() on error -> model data -> one blank row
     $schedules = collect(old('schedules', $event->schedules ?? []))
@@ -33,6 +51,7 @@
 
     $benefits = collect(old('benefits', $event->benefits ?? []))->values()->all() ?: [''];
     $services = collect(old('services_offered', $event->services_offered ?? []))->values()->all() ?: [''];
+    $tags = $normalizeTags(old('tags', $event->tags ?? []));
 @endphp
 
   <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
@@ -46,10 +65,10 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <x-form.input-text name="title" label="Event Title" placeholder="Enter event title"
-                        :value="old('title', $event->title ?? '')" />
+                        :value="$asString(old('title', $event->title ?? ''))" />
 
                     <x-form.input-text name="slug" label="Slug" placeholder="auto-generated-if-empty"
-                        :value="old('slug', $event->slug ?? '')" />
+                        :value="$asString(old('slug', $event->slug ?? ''))" />
 
                     <x-form.select-input name="event_type" label="Event Type"
                         :value="old('event_type', $event->event_type ?? 'webinar')"
@@ -62,7 +81,7 @@
 
                     <x-form.input-text name="registration_link" label="Registration Link"
                         placeholder="https://hbdservices.com/event/"
-                        :value="old('registration_link', $event->registration_link ?? '')" />
+                        :value="$asString(old('registration_link', $event->registration_link ?? ''))" />
                 </div>
 
                 <div class="mt-5">
@@ -99,22 +118,22 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <x-form.input-text name="start_datetime" label="Start Date & Time" type="datetime-local"
-                        :value="old('start_datetime', $fmtDate($event->start_datetime ?? null))" />
+                        :value="$asString(old('start_datetime', $fmtDate($event->start_datetime ?? null)))" />
 
                     <x-form.input-text name="end_datetime" label="End Date & Time" type="datetime-local"
-                        :value="old('end_datetime', $fmtDate($event->end_datetime ?? null))" />
+                        :value="$asString(old('end_datetime', $fmtDate($event->end_datetime ?? null)))" />
 
                     <x-form.input-text name="location_name" label="Location Name" placeholder="Convention Center"
-                        :value="old('location_name', $event->location_name ?? '')" />
+                        :value="$asString(old('location_name', $event->location_name ?? ''))" />
 
                     <x-form.input-text name="address" label="Address" placeholder="Full address"
-                        :value="old('address', $event->address ?? '')" />
+                        :value="$asString(old('address', $event->address ?? ''))" />
 
                     <x-form.input-text name="max_seats" label="Max Seats" type="number" placeholder="100"
-                        :value="old('max_seats', $event->max_seats ?? '')" />
+                        :value="$asString(old('max_seats', $event->max_seats ?? ''))" />
 
                     <x-form.input-text name="registration_deadline" label="Registration Deadline" type="datetime-local"
-                        :value="old('registration_deadline', $fmtDate($event->registration_deadline ?? null))" />
+                        :value="$asString(old('registration_deadline', $fmtDate($event->registration_deadline ?? null)))" />
                 </div>
 
                 <div class="mt-5 flex items-center gap-3">
@@ -129,7 +148,7 @@
                 <div class="mt-5" x-show="isOnline" x-cloak>
                     <x-form.input-text name="meeting_link" label="Meeting Link (for online events)"
                         placeholder="https://zoom.us/j/..."
-                        :value="old('meeting_link', $event->meeting_link ?? '')" />
+                        :value="$asString(old('meeting_link', $event->meeting_link ?? ''))" />
                 </div>
             </div>
 
@@ -248,18 +267,54 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <x-form.input-text name="organizer" label="Organizer" placeholder="Organizer name"
-                        :value="old('organizer', $event->organizer ?? '')" />
+                        :value="$asString(old('organizer', $event->organizer ?? ''))" />
                     <x-form.input-text name="contact_email" label="Contact Email" placeholder="contact@gmail.com"
-                        :value="old('contact_email', $event->contact_email ?? '')" />
+                        :value="$asString(old('contact_email', $event->contact_email ?? ''))" />
                     <x-form.input-text name="contact_phone" label="Contact Phone" placeholder="Contact number"
-                        :value="old('contact_phone', $event->contact_phone ?? '')" />
+                        :value="$asString(old('contact_phone', $event->contact_phone ?? ''))" />
                     <x-form.input-text name="google_map_link" label="Google Map Link" placeholder="Google map link"
-                        :value="old('google_map_link', $event->google_map_link ?? '')" />
+                        :value="$asString(old('google_map_link', $event->google_map_link ?? ''))" />
                 </div>
 
                 <div class="mt-5">
-                    <x-form.input-text name="tags" label="Tags" placeholder="Laravel, AI, Event"
-                        :value="old('tags', is_array($event->tags ?? null) ? implode(', ', $event->tags) : ($event->tags ?? ''))" />
+                    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="mb-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Tags</h4>
+                        <div
+                            x-data="{
+                                items: {{ Illuminate\Support\Js::from($tags) }},
+                                add() { this.items.push('') },
+                                remove(i) { if (this.items.length > 1) this.items.splice(i, 1) }
+                            }"
+                        >
+                            <template x-for="(item, index) in items" :key="index">
+                                <div class="mb-3 flex items-center gap-3">
+                                    <input
+                                        type="text"
+                                        :name="`tags[${index}]`"
+                                        x-model="items[index]"
+                                        placeholder="Laravel, AI, Event"
+                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
+                                    >
+                                    <button
+                                        type="button"
+                                        x-show="items.length > 1"
+                                        @click="remove(index)"
+                                        class="rounded-lg bg-red-500 px-3 py-2 text-sm text-white"
+                                    >
+                                        Remove
+                                    </button>
+                                    <button
+                                        type="button"
+                                        x-show="index === items.length - 1"
+                                        @click="add()"
+                                        class="rounded-lg bg-brand-600 px-3 py-2 text-sm text-white"
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
                 </div>
             </div>
 

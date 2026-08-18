@@ -27,9 +27,12 @@ class EventController extends Controller
     /**
      * Events List
      */
-    public function index()
+    public function index(Request $request)
     {
+         $request->user()->can('event.manage') || abort(403);
         $events = $this->eventRepository->paginate(15);
+
+        // return $events;
 
         return view('backend.pages.events.index', compact('events'));
     }
@@ -39,7 +42,7 @@ class EventController extends Controller
      */
     public function create(Request $request)
     {
-         $request->user()->can('counsellors.create') || abort(403);
+        $request->user()->can('event.manage') || abort(403);
 
         return view('backend.pages.events.create', [
             'event' => null,
@@ -93,6 +96,13 @@ class EventController extends Controller
             $data['providers'] = $this->processProviderUploads($request, $data['providers'] ?? []);
 
             /*
+             * Tags
+             */
+            if (array_key_exists('tags', $data)) {
+                $data['tags'] = $this->normalizeTags($data['tags']);
+            }
+
+            /*
              * Store Event
              */
             $event = $this->eventRepository->create($data);
@@ -132,7 +142,7 @@ class EventController extends Controller
      */
     public function edit(string $role, Event $event, Request $request)
     {
-        $request->user()->can('counsellors.create') || abort(403);
+        $request->user()->can('event.edit') || abort(403);
         return view('backend.pages.events.edit', [
             'event' => $event,
         ]);
@@ -247,6 +257,13 @@ class EventController extends Controller
                  * Delete provider logos that are no longer used.
                  */
                 $this->deleteRemovedProviderLogos($oldProviders, $providers);
+            }
+
+            /*
+             * Tags
+             */
+            if (array_key_exists('tags', $data)) {
+                $data['tags'] = $this->normalizeTags($data['tags']);
             }
 
             /*
@@ -471,5 +488,24 @@ class EventController extends Controller
                 $this->deleteFile($provider['logo']);
             }
         }
+    }
+
+    /**
+     * Normalize tags from either a comma-separated string or an array.
+     */
+    private function normalizeTags(mixed $tags): array
+    {
+        if (is_string($tags)) {
+            $tags = preg_split('/\s*,\s*/', trim($tags), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        }
+
+        if (!is_array($tags)) {
+            return [];
+        }
+
+        return array_values(array_filter(
+            array_map(static fn ($tag) => is_string($tag) ? trim($tag) : $tag, $tags),
+            static fn ($tag) => $tag !== null && $tag !== ''
+        ));
     }
 }

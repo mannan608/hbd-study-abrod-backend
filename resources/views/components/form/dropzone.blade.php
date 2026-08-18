@@ -1,4 +1,4 @@
-@props(['name', 'label' => null, 'value' => null, 'placeholder' => null])
+@props(['name', 'label' => null, 'value' => null, 'placeholder' => null, 'multiple' => false])
 
 <div 
     x-data="{
@@ -14,7 +14,7 @@
             const validFiles = selectedFiles.filter(file => validTypes.includes(file.type));
 
             if (validFiles.length > 0) {
-                this.files = [validFiles[0]];
+                this.files = validFiles;
             } else {
                 this.files = [];
                 this.$refs.fileInput.value = '';
@@ -43,6 +43,7 @@
                 x-ref="fileInput"
                 type="file" 
                 name="{{ $name }}"
+                @if($multiple) multiple @endif
                 @change="handleFiles(Array.from($event.target.files))"
                 accept="image/png,image/jpeg,image/webp,image/svg+xml"
                 class="hidden"
