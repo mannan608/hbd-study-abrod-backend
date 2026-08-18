@@ -135,17 +135,18 @@ class CounsellorController extends Controller
         }
     }
 
-    public function show(Counsellor $counsellor)
+    public function show(string $role, string $counsellor)
     {
-        $counsellor->load(['user', 'country', 'city']);
+        $counsellor = $this->resolveCounsellor($counsellor);
 
         return view('backend.pages.counsellors.show', compact('counsellor'));
     }
 
-    public function edit(Counsellor $counsellor, Request $request)
+    public function edit(string $role, string $counsellor, Request $request)
     {
         $request->user()->can('counsellors.edit') || abort(403);
 
+        $counsellor = $this->resolveCounsellor($counsellor);
         $countries = Country::all();
         $cities = City::all();
 
@@ -157,8 +158,9 @@ class CounsellorController extends Controller
         ]);
     }
 
-    public function update(UpdateCounsellorRequest $request, Counsellor $counsellor)
+    public function update(string $role, UpdateCounsellorRequest $request, string $counsellor)
     {
+        $counsellor = $this->resolveCounsellor($counsellor);
         $validated = $request->validated();
 
         DB::beginTransaction();
@@ -211,9 +213,10 @@ class CounsellorController extends Controller
         }
     }
 
-    public function destroy(Counsellor $counsellor, Request $request)
+    public function destroy(string $role, string $counsellor, Request $request)
     {
         $request->user()->can('counsellors.delete') || abort(403);
+        $counsellor = $this->resolveCounsellor($counsellor);
         // Delete photo
         if ($counsellor->photo_url) {
             Storage::disk('public')->delete($counsellor->photo_url);
@@ -223,5 +226,14 @@ class CounsellorController extends Controller
 
         return redirect()->route('backend.pages.counsellors.index')
             ->with('success', 'Counsellor deleted successfully.');
+    }
+
+    private function resolveCounsellor(Counsellor|string $counsellor): Counsellor
+    {
+        if ($counsellor instanceof Counsellor) {
+            return $counsellor->loadMissing(['user', 'country', 'city']);
+        }
+
+        return Counsellor::with(['user', 'country', 'city'])->findOrFail($counsellor);
     }
 }

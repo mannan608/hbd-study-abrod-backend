@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Counsellor;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,7 @@ class UpdateCounsellorRequest extends FormRequest
 
     public function rules(): array
     {
-        $counsellor = $this->route('counsellor');
+        $counsellor = $this->resolveCounsellor();
         $counsellorId = $counsellor?->id;
         $userId = $counsellor?->user_id;
 
@@ -70,5 +71,20 @@ class UpdateCounsellorRequest extends FormRequest
         ), static fn ($item) => filled($item)));
 
         return $nullable && empty($value) ? null : $value;
+    }
+
+    protected function resolveCounsellor(): ?Counsellor
+    {
+        $counsellor = $this->route('counsellor');
+
+        if ($counsellor instanceof Counsellor) {
+            return $counsellor;
+        }
+
+        if (is_string($counsellor) || is_int($counsellor)) {
+            return Counsellor::query()->find($counsellor);
+        }
+
+        return null;
     }
 }
