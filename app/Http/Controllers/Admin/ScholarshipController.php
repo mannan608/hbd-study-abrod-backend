@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateScholarshipRequest;
 use App\Models\Course;
 use App\Models\Scholarship;
 use App\Models\University;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ScholarshipController extends Controller
@@ -17,14 +18,12 @@ class ScholarshipController extends Controller
      */
     public function index(Request $request)
     {
-        $request()->user()->can('scholarship.view') || abort(403);
+        $request->user()->can('scholarships.list') || abort(403);
 
         $scholarships = Scholarship::select('id', 'university_id', 'course_id', 'title', 'amount_description', 'coverage_type', 'eligibility_criteria', 'deadline', 'is_active')
-        ->with(['university:id,name', 'course:id,title'])
+            ->with(['university:id,name', 'course:id,title'])
             ->latest()
             ->paginate(15);
-
-        // return    $scholarships;
 
         return view('backend.pages.scholarships.index', [
             'scholarships' => $scholarships,
@@ -36,7 +35,7 @@ class ScholarshipController extends Controller
      */
     public function create(Request $request)
     {
-        $request()->user()->can('scholarship.create') || abort(403);
+        $request->user()->can('scholarships.create') || abort(403);
 
         return view('backend.pages.scholarships.create', [
             'scholarship' => null,
@@ -48,25 +47,25 @@ class ScholarshipController extends Controller
     /**
      * Store scholarship.
      */
-  public function store(StoreScholarshipRequest $request)
-{
-    $data = $request->validated();
+    public function store(string $role ,StoreScholarshipRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
 
-    $data['is_active'] = $request->boolean('is_active');
+        $data['is_active'] = $request->boolean('is_active');
 
-    Scholarship::create($data);
+        Scholarship::create($data);
 
-    return redirect()
-        ->route('backend.pages.scholarships.index')
-        ->with('success', 'Scholarship created successfully.');
-}
+        return redirect()
+            ->route('role.scholarships.index')
+            ->with('success', 'Scholarship created successfully.');
+    }
 
     /**
      * Show edit form.
      */
     public function edit(string $id, Request $request)
     {
-        $request()->user()->can('scholarship.edit') || abort(403);
+        $request->user()->can('scholarships.edit') || abort(403);
 
         $scholarship = Scholarship::with(['university', 'course'])->findOrFail($id);
 
@@ -80,28 +79,30 @@ class ScholarshipController extends Controller
     /**
      * Update scholarship.
      */
-    public function update(UpdateScholarshipRequest $request, string $id)
-{
-    $scholarship = Scholarship::findOrFail($id);
+    public function update(string $role,UpdateScholarshipRequest $request, string $id): RedirectResponse
+    {
+        $scholarship = Scholarship::findOrFail($id);
 
-    $scholarship->update($request->validated());
+        $scholarship->update($request->validated());
 
-    return redirect()
-        ->route('backend.pages.scholarships.index')
-        ->with('success', 'Scholarship updated successfully.');
-}
+        return redirect()
+            ->route('role.scholarships.index')
+            ->with('success', 'Scholarship updated successfully.');
+    }
 
     /**
      * Delete scholarship.
      */
-    public function destroy(string $id, Request $request)
+    public function destroy(string $role,string $id, Request $request): RedirectResponse
     {
-        $request()->user()->can('scholarship.delete') || abort(403);
+        $request->user()->can('scholarships.delete') || abort(403);
 
         $scholarship = Scholarship::findOrFail($id);
 
         $scholarship->delete();
 
-        return redirect()->route('backend.pages.scholarships.index')->with('success', 'Scholarship deleted successfully.');
+        return redirect()
+            ->route('role.scholarships.index')
+            ->with('success', 'Scholarship deleted successfully.');
     }
 }

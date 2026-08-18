@@ -15,8 +15,10 @@ class CourseIntakeController extends Controller
     /**
      * Display a listing of course intakes.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
+        $request->user()->can('course-intakes.list') || abort(403);
+
         $intakes = CourseIntake::with('course')->latest()->paginate(15);
 
         return view('backend.pages.course-intakes.index', [
@@ -27,8 +29,10 @@ class CourseIntakeController extends Controller
     /**
      * Show the form for creating a new intake.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
+        $request->user()->can('course-intakes.create') || abort(403);
+
         $courses = Course::query()
             ->select('id', 'title')
             ->orderBy('title')
@@ -45,6 +49,8 @@ class CourseIntakeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->user()->can('course-intakes.create') || abort(403);
+
         $validated = $request->validate([
             'course_id' => ['required', 'uuid', 'exists:courses,id'],
             'intake_month' => ['required', 'string', 'max:20'],
@@ -74,8 +80,10 @@ class CourseIntakeController extends Controller
     /**
      * Show the form for editing the specified intake.
      */
-    public function edit(CourseIntake $courseIntake): View
+    public function edit(Request $request, CourseIntake $courseIntake): View
     {
+        $request->user()->can('course-intakes.edit') || abort(403);
+
         $courses = Course::query()
             ->select('id', 'title')
             ->orderBy('title')
@@ -92,6 +100,8 @@ class CourseIntakeController extends Controller
      */
     public function update(Request $request, CourseIntake $courseIntake): RedirectResponse
     {
+        $request->user()->can('course-intakes.edit') || abort(403);
+
         $validated = $request->validate([
             'course_id' => ['required', 'uuid', 'exists:courses,id'],
             'intake_month' => ['required', 'string', 'max:20'],
@@ -121,8 +131,10 @@ class CourseIntakeController extends Controller
     /**
      * Remove the specified intake.
      */
-    public function destroy(CourseIntake $courseIntake): RedirectResponse
+    public function destroy(Request $request, CourseIntake $courseIntake): RedirectResponse
     {
+        $request->user()->can('course-intakes.delete') || abort(403);
+
         $courseIntake->delete();
 
         return redirect(role_route('role.course-intakes.index'))

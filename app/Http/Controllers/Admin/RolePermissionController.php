@@ -22,7 +22,8 @@ class RolePermissionController extends Controller
     public function index(Request $request): View
     {
         $request->user()->can('role.list') || abort(403);
-
+//         $data=$this->permissions->allGroupedByFeature();
+// return $data;
         return view('backend.pages.roles-permissions.index', [
             'roles' => $this->roles->paginate(),
             'permissions' => $this->permissions->allGroupedByFeature(),

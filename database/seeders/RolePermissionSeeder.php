@@ -166,7 +166,7 @@ class RolePermissionSeeder extends Seeder
         $adminRole->syncPermissions($permissions);
         $superAdmin->syncPermissions($permissions);
         $defaultRole->syncPermissions(['dashboard.view']);
-        $studentRole->syncPermissions(['']);
+        $studentRole->syncPermissions([]);
 
         app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
