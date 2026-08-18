@@ -131,13 +131,13 @@ class RolePermissionSeeder extends Seeder
             'subscriber.view',
             'subscriber.delete',
 
-            //counselors
-            'counselors.list',
-            'counselors.view',
-            'counselors.create',
-            'counselors.edit',
-            'counselors.delete',
-            
+            //counsellors
+            'counsellors.list',
+            'counsellors.view',
+            'counsellors.create',
+            'counsellors.edit',
+            'counsellors.delete',
+
         ];
 
         foreach ($permissions as $permission) {

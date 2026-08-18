@@ -12,21 +12,7 @@ class StoreCounsellorRequest extends FormRequest
        return auth()->user()->can('counsellors.create');
     }
 
-    protected function prepareForValidation(): void
-    {
-        // Convert comma-separated strings to arrays
-        if (is_string($this->languages)) {
-            $this->merge([
-                'languages' => array_values(array_filter(array_map('trim', explode(',', $this->languages)))),
-            ]);
-        }
 
-        if (is_string($this->expertise)) {
-            $this->merge([
-                'expertise' => array_values(array_filter(array_map('trim', explode(',', $this->expertise)))),
-            ]);
-        }
-    }
 
     public function rules(): array
     {
@@ -77,5 +63,20 @@ class StoreCounsellorRequest extends FormRequest
 
             'sort_order' => ['nullable', 'integer'],
         ];
+    }
+        protected function prepareForValidation(): void
+    {
+        // Convert comma-separated strings to arrays
+        if (is_string($this->languages)) {
+            $this->merge([
+                'languages' => array_values(array_filter(array_map('trim', explode(',', $this->languages)))),
+            ]);
+        }
+
+        if (is_string($this->expertise)) {
+            $this->merge([
+                'expertise' => array_values(array_filter(array_map('trim', explode(',', $this->expertise)))),
+            ]);
+        }
     }
 }

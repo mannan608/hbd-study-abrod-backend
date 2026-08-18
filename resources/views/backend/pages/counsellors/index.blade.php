@@ -27,7 +27,7 @@
                 + Add Counsellor
             </a>
         </div>
-       {{-- @include('backend.pages.counsellors.table', ['items' => $counsellors]) --}}
+       @include('backend.pages.counsellors.table', ['items' => $counsellors])
     </div>
 @endsection
 

@@ -59,8 +59,8 @@ class MenuHelper
                 'subItems' => [
                     [
                         'name' => 'Counsellors',
-                        'route' => 'role.counselors.index',
-                        'permission' => 'counselors.list',
+                        'route' => 'role.counsellors.index',
+                        'permission' => 'counsellors.list',
                     ],                   
                     [
                         'name' => 'Provider',
