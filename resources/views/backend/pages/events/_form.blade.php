@@ -4,7 +4,7 @@
     $isEdit = $event && $event->exists;
 
     $formAction = $isEdit
-        ? role_route('role.events.update', $event)
+        ? role_route('role.events.update', ['event' => $event])
         : role_route('role.events.store');
 
     $fmtDate = fn ($v) => $v ? \Carbon\Carbon::parse($v)->format('Y-m-d\TH:i') : '';
