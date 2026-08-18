@@ -9,20 +9,20 @@ class StoreCounsellorRequest extends FormRequest
 {
     public function authorize(): bool
     {
-       return auth()->user()->can('counsellors.create');
+        return auth()->user()->can('counsellors.create');
     }
-
-
 
     public function rules(): array
     {
         return [
             // User account
-            'name' => ['required_if:create_user,true', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
 
-            'email' => ['required_if:create_user,true', 'email', 'max:255', Rule::unique('users', 'email')],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
 
-            'password' => ['required_if:create_user,true', 'string', 'min:8'],
+            'phone' => ['nullable', 'string', 'max:20'],
+
+            'password' => ['required', 'string', 'min:8'],
 
             'create_user' => ['boolean'],
 
@@ -45,13 +45,13 @@ class StoreCounsellorRequest extends FormRequest
 
             'country_id' => ['nullable', 'exists:countries,id'],
 
-            'languages' => ['required', 'array'],
+            'languages' => ['required', 'array', 'min:1'],
 
-            'languages.*' => ['string'],
+            'languages.*' => ['required', 'string', 'max:255'],
 
             'expertise' => ['nullable', 'array'],
 
-            'expertise.*' => ['string'],
+            'expertise.*' => ['nullable', 'string', 'max:255'],
 
             'experience_years' => ['nullable', 'integer', 'min:0'],
 
@@ -64,19 +64,33 @@ class StoreCounsellorRequest extends FormRequest
             'sort_order' => ['nullable', 'integer'],
         ];
     }
-        protected function prepareForValidation(): void
+
+    protected function prepareForValidation(): void
     {
-        // Convert comma-separated strings to arrays
-        if (is_string($this->languages)) {
-            $this->merge([
-                'languages' => array_values(array_filter(array_map('trim', explode(',', $this->languages)))),
-            ]);
+        $this->merge([
+            'languages' => $this->normalizeArrayField($this->input('languages')),
+            'expertise' => $this->normalizeArrayField($this->input('expertise'), true),
+        ]);
+    }
+
+    /**
+     * Normalize string/array input into a trimmed array.
+     */
+    protected function normalizeArrayField(mixed $value, bool $nullable = false): ?array
+    {
+        if (is_string($value)) {
+            $value = explode(',', $value);
         }
 
-        if (is_string($this->expertise)) {
-            $this->merge([
-                'expertise' => array_values(array_filter(array_map('trim', explode(',', $this->expertise)))),
-            ]);
+        if (! is_array($value)) {
+            return $nullable ? null : [];
         }
+
+        $value = array_values(array_filter(array_map(
+            static fn ($item) => is_string($item) ? trim($item) : $item,
+            $value
+        ), static fn ($item) => filled($item)));
+
+        return $nullable && empty($value) ? null : $value;
     }
 }

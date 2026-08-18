@@ -4,16 +4,25 @@
     $selectedCountryId = old('country_id', $counsellor?->country_id);
     $selectedCityId = old('city_id', $counsellor?->city_id);
 
-    // Counsellor JSON fields
-    $languages = old(
-        'languages',
-        is_array($counsellor?->languages) ? implode(', ', $counsellor->languages) : $counsellor?->languages,
-    );
+    $normalizeArrayInput = function ($value) {
+        if (is_string($value)) {
+            $value = explode(',', $value);
+        }
 
-    $expertise = old(
-        'expertise',
-        is_array($counsellor?->expertise) ? implode(', ', $counsellor->expertise) : $counsellor?->expertise,
-    );
+        if (! is_array($value)) {
+            return [''];
+        }
+
+        $value = array_values(array_filter(array_map(
+            static fn ($item) => is_string($item) ? trim($item) : $item,
+            $value
+        ), static fn ($item) => filled($item)));
+
+        return $value ?: [''];
+    };
+
+    $languages = $normalizeArrayInput(old('languages', $counsellor?->languages ?? []));
+    $expertise = $normalizeArrayInput(old('expertise', $counsellor?->expertise ?? []));
 @endphp
 
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-12" x-data="{
@@ -69,13 +78,13 @@
                 {{-- Name / Email --}}
                 <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
 
-                    <x-form.input-text name="name" label="Full Name" value="{{ old('name', $counsellor?->name) }}"
+                    <x-form.input-text name="name" label="Full Name" value="{{ old('name', $counsellor?->user?->name) }}"
                         placeholder="Enter Your Name..." />
 
                     <x-form.input-text name="email" label="Email Address"
-                        value="{{ old('email', $counsellor?->email) }}" placeholder="Enter Your Email..." />
+                        value="{{ old('email', $counsellor?->user?->email) }}" placeholder="Enter Your Email..." />
 
-                    <x-form.input-text name="phone" label="Phone" value="{{ old('phone', $counsellor?->phone) }}"
+                    <x-form.input-text name="phone" label="Phone" value="{{ old('phone', $counsellor?->user?->phone) }}"
                         placeholder="Enter Your Phone..." />
 
                     <x-form.input-text name="password" label="Password" type="password"
@@ -105,11 +114,117 @@
                 {{-- Languages / Expertise --}}
                 <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
 
-                    <x-form.input-text name="languages" label="Languages" value="{{ $languages }}"
-                        placeholder="English, Bengali, Hindi" />
+                    <div x-data="{
+                        items: @js($languages),
+                        add() {
+                            this.items.push('');
+                        },
+                        remove(index) {
+                            if (this.items.length === 1) {
+                                this.items = [''];
+                                return;
+                            }
 
-                    <x-form.input-text name="expertise" label="Expertise" value="{{ $expertise }}"
-                        placeholder="SOP Writing, GTE, Visa Guidance" />
+                            this.items.splice(index, 1);
+                        }
+                    }">
+                        <div class="mb-2 flex items-center justify-between gap-3">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Languages
+                            </label>
+
+                            <button type="button" @click="add()"
+                                class="text-xs font-medium text-brand-600 hover:text-brand-700">
+                                + Add Language
+                            </button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <template x-for="(item, index) in items" :key="index">
+                                <div class="flex items-center gap-3">
+                                    <input
+                                        type="text"
+                                        name="languages[]"
+                                        x-model="items[index]"
+                                        placeholder="English"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
+                                    >
+
+                                    <button
+                                        type="button"
+                                        @click="remove(index)"
+                                        class="inline-flex h-11 items-center justify-center rounded-lg border border-gray-300 px-3 text-sm text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                                        title="Remove language"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+
+                        @error('languages')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                        @error('languages.*')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div x-data="{
+                        items: @js($expertise),
+                        add() {
+                            this.items.push('');
+                        },
+                        remove(index) {
+                            if (this.items.length === 1) {
+                                this.items = [''];
+                                return;
+                            }
+
+                            this.items.splice(index, 1);
+                        }
+                    }">
+                        <div class="mb-2 flex items-center justify-between gap-3">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Expertise
+                            </label>
+
+                            <button type="button" @click="add()"
+                                class="text-xs font-medium text-brand-600 hover:text-brand-700">
+                                + Add Expertise
+                            </button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <template x-for="(item, index) in items" :key="index">
+                                <div class="flex items-center gap-3">
+                                    <input
+                                        type="text"
+                                        name="expertise[]"
+                                        x-model="items[index]"
+                                        placeholder="SOP Writing"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
+                                    >
+
+                                    <button
+                                        type="button"
+                                        @click="remove(index)"
+                                        class="inline-flex h-11 items-center justify-center rounded-lg border border-gray-300 px-3 text-sm text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                                        title="Remove expertise"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+
+                        @error('expertise')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                        @error('expertise.*')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                 </div>
 
@@ -183,14 +298,14 @@
 
                     <x-form.dropzone name="photo" label="{{ $isEdit ? 'Upload New Photo' : 'Upload Photo' }}" />
 
-                    @if ($isEdit && $counsellor->photo)
+                    @if ($isEdit && $counsellor->photo_url)
                         <div class="mt-4">
 
                             <p class="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">
                                 Current Photo
                             </p>
 
-                            <img src="{{ asset($counsellor->photo) }}" alt="{{ $counsellor->name ?? 'Counsellor' }}"
+                            <img src="{{ asset('storage/' . $counsellor->photo_url) }}" alt="{{ $counsellor->user?->name ?? 'Counsellor' }}"
                                 class="h-24 w-24 rounded-xl border border-gray-200 object-cover dark:border-gray-700">
 
                         </div>

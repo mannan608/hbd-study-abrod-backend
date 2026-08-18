@@ -5,28 +5,29 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCounsellorRequest;
 use App\Http\Requests\UpdateCounsellorRequest;
-use App\Models\Counsellor;
-use App\Models\User;
-use App\Models\Country;
 use App\Models\City;
+use App\Models\Counsellor;
+use App\Models\Country;
+use App\Models\User;
 use App\Traits\HandlesFiles;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class CounsellorController extends Controller
 {
     use HandlesFiles;
+
     public function index(Request $request)
     {
         $request->user()->can('counsellors.list') || abort(403);
 
         $counsellors = Counsellor::with(['user', 'country', 'city'])
-            ->when($request->search, fn($q) => $q->where('slug', 'like', "%{$request->search}%"))
+            ->when($request->search, fn ($q) => $q->where('slug', 'like', "%{$request->search}%"))
             ->latest()
             ->paginate(10);
 
@@ -48,7 +49,6 @@ class CounsellorController extends Controller
         ]);
     }
 
-
     public function store(StoreCounsellorRequest $request): RedirectResponse
     {
         $validated = $request->validated();
@@ -62,11 +62,11 @@ class CounsellorController extends Controller
             |--------------------------------------------------------------------------
             */
             $user = User::create([
-                'name'     => $validated['name'],
-                'email'    => $validated['email'],
-                'phone'    => $validated['phone'] ?? null,
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'] ?? null,
                 'password' => Hash::make($validated['password']),
-                'status'   => 'active',
+                'status' => 'active',
             ]);
 
             /*
@@ -96,28 +96,28 @@ class CounsellorController extends Controller
             |--------------------------------------------------------------------------
             */
             Counsellor::create([
-                'user_id'          => $user->id,
-                'slug'             => $slug,
-                'photo_url'        => $photoUrl,
+                'user_id' => $user->id,
+                'slug' => $slug,
+                'photo_url' => $photoUrl,
 
-                'designation'      => $validated['designation'] ?? null,
-                'bio'              => $validated['bio'] ?? null,
-                'education'        => $validated['education'] ?? null,
-                'institution'      => $validated['institution'] ?? null,
+                'designation' => $validated['designation'] ?? null,
+                'bio' => $validated['bio'] ?? null,
+                'education' => $validated['education'] ?? null,
+                'institution' => $validated['institution'] ?? null,
 
-                'city_id'          => $validated['city_id'] ?? null,
-                'country_id'       => $validated['country_id'] ?? null,
+                'city_id' => $validated['city_id'] ?? null,
+                'country_id' => $validated['country_id'] ?? null,
 
-                'languages'        => $validated['languages'] ?? null,
-                'expertise'        => $validated['expertise'] ?? null,
+                'languages' => $validated['languages'] ?? null,
+                'expertise' => $validated['expertise'] ?? null,
 
                 'experience_years' => $validated['experience_years'] ?? 0,
 
-                'is_featured'      => $request->boolean('is_featured'),
-                'is_verified'      => $request->boolean('is_verified'),
-                'is_active'       => $request->boolean('is_active'),
+                'is_featured' => $request->boolean('is_featured'),
+                'is_verified' => $request->boolean('is_verified'),
+                'is_active' => $request->boolean('is_active'),
 
-                'sort_order'       => $validated['sort_order'] ?? 0,
+                'sort_order' => $validated['sort_order'] ?? 0,
             ]);
 
             DB::commit();
@@ -131,13 +131,14 @@ class CounsellorController extends Controller
 
             return back()
                 ->withInput()
-                ->with('error', 'Error creating counsellor: ' . $e->getMessage());
+                ->with('error', 'Error creating counsellor: '.$e->getMessage());
         }
     }
 
     public function show(Counsellor $counsellor)
     {
         $counsellor->load(['user', 'country', 'city']);
+
         return view('backend.pages.counsellors.show', compact('counsellor'));
     }
 
@@ -148,7 +149,12 @@ class CounsellorController extends Controller
         $countries = Country::all();
         $cities = City::all();
 
-        return view('backend.pages.counsellors.edit', compact('counsellor', 'users', 'countries', 'cities'));
+        return view('backend.pages.counsellors.edit', [
+            'counsellor' => $counsellor,
+            'countries' => $countries,
+            'cities' => $cities,
+            'title' => 'Edit Counsellor',
+        ]);
     }
 
     public function update(UpdateCounsellorRequest $request, Counsellor $counsellor)
@@ -157,6 +163,20 @@ class CounsellorController extends Controller
 
         DB::beginTransaction();
         try {
+            $userData = [
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'] ?? null,
+            ];
+
+            if (! empty($validated['password'])) {
+                $userData['password'] = Hash::make($validated['password']);
+            }
+
+            if ($counsellor->user) {
+                $counsellor->user->update($userData);
+            }
+
             // Handle Photo Upload
             if ($request->hasFile('photo')) {
                 // Delete old photo
@@ -165,6 +185,13 @@ class CounsellorController extends Controller
                 }
                 $validated['photo_url'] = $request->file('photo')->store('counsellors', 'public');
             }
+
+            unset(
+                $validated['name'],
+                $validated['email'],
+                $validated['phone'],
+                $validated['password']
+            );
 
             // Convert booleans properly
             $validated['is_featured'] = $request->boolean('is_featured');
@@ -179,7 +206,8 @@ class CounsellorController extends Controller
                 ->with('success', 'Counsellor updated successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withInput()->with('error', 'Error updating counsellor: ' . $e->getMessage());
+
+            return back()->withInput()->with('error', 'Error updating counsellor: '.$e->getMessage());
         }
     }
 
