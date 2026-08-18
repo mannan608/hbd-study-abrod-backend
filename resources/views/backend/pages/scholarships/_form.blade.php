@@ -3,6 +3,7 @@
 
     $universityId = old('university_id', $scholarship?->university_id);
     $courseId = old('course_id', $scholarship?->course_id);
+    $coverageType = old('coverage_type', $scholarship?->coverage_type);
 @endphp
 
 <div x-data="{
@@ -129,7 +130,7 @@
                         <x-form.input-text name="title" label="Scholarship Title"
                             value="{{ old('title', $scholarship?->title) }}" placeholder="Enter Scholarship Title..." />
 
-                       
+
 
                         {{-- Coverage Type --}}
                         <x-form.select-input name="coverage_type" label="Coverage Type" :options="[
@@ -137,8 +138,8 @@
                             'half_free' => 'Half Free',
                             'one_time' => 'One Time',
                         ]"
-                            value="old('coverage_type', $scholarship?->coverage_type)" />
-                         {{-- Amount Description --}}
+                            :value="old('coverage_type', $scholarship?->coverage_type)" />
+                        {{-- Amount Description --}}
                         <x-form.textarea-input name="amount_description" label="Amount Description"
                             value="{{ old('amount_description', $scholarship?->amount_description) }}"
                             placeholder="Enter Amount Description..." />
