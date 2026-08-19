@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 
 class EventRegistration extends Model
 {
+    protected $table = 'event_registrations';
+
     protected $fillable = [
         'event_id',
         'full_name',
@@ -20,10 +22,16 @@ class EventRegistration extends Model
         'source',
     ];
 
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected static function booted()
     {
         static::creating(function ($registration) {
-            $registration->id ??= (string) Str::uuid();
+            if (empty($registration->id)) {
+                $registration->id = (string) Str::uuid();
+            }
         });
     }
 

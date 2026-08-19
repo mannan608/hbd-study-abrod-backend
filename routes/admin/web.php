@@ -74,6 +74,7 @@ Route::prefix('{role}')
         Route::resource('counsellors', CounsellorController::class);
 
         Route::get('event-leads', [LeadsController::class, 'eventLeads'])->name('event-leads.index');
+        Route::get('event-leads/{eventLead}', [LeadsController::class, 'show'])->name('event-leads.show');
         Route::delete('/event-leads/{eventLead}', [LeadsController::class, 'destroy'])->name('event-leads.destroy');
 
        

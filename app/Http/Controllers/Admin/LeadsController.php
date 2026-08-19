@@ -12,11 +12,16 @@ class LeadsController extends Controller
     /**
      * Display event leads.
      */
-    public function eventLeads(): View
+    public function eventLeads()
     {
-        $eventLeads = EventRegistration::with('event')
+
+        $eventLeads = EventRegistration::query()
+        ->select('id', 'full_name', 'email', 'phone','whatsapp', 'event_id','interested_course','source' )
+            ->with(['event:id,title'])
             ->latest()
             ->paginate(20);
+
+            // return   $eventLeads;
 
         return view('backend.pages.event-leads.index', compact('eventLeads'));
     }

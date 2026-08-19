@@ -15,7 +15,6 @@
                 'phone' => $lead->phone,
                 'whatsapp' => $lead->whatsapp,
                 'interested_course' => $lead->interested_course,
-                'status' => $lead->status,
                 'source' => $lead->source,
             ];
         })
@@ -191,14 +190,6 @@
                                 text-xs font-medium
                                 text-gray-500
                                 uppercase tracking-wider">
-                            Status
-                        </th>
-
-                        <th
-                            class="px-5 py-4
-                                text-xs font-medium
-                                text-gray-500
-                                uppercase tracking-wider">
                             Source
                         </th>
 
@@ -241,7 +232,7 @@
 
 
                     {{-- Lead Rows --}}
-                    <template x-for="row in tableRowData" :key="row.id">
+                    <template x-for="( row, index) in tableRowData" :key="row.id">
 
                         <tr
                             class="hover:bg-gray-50/50
@@ -260,7 +251,7 @@
                                         rounded
                                         text-xs
                                         font-mono"
-                                    x-text="row.id"></span>
+                                    x-text="index + 1"></span>
 
                             </td>
 
@@ -292,6 +283,12 @@
                                     text-gray-700
                                     dark:text-gray-300">
                                 <div class="font-medium" x-text="row.full_name"></div>
+                                <div class="text-xs
+                                        text-gray-400
+                                        mt-1"
+                                    x-show="row.email">
+                                    <span x-text="row.email"></span>
+                                </div>
 
                             </td>
 
@@ -332,31 +329,7 @@
                                     text-gray-500
                                     dark:text-gray-400">
                                 <span x-text="row.interested_course || 'N/A'"></span>
-                            </td>
-
-
-                            {{-- Status --}}
-                            <td class="px-5 py-4 text-sm">
-
-                                <span
-                                    :class="row.status === 'registered' ?
-                                        'bg-blue-100 text-blue-700' :
-                                        row.status === 'confirmed' ?
-                                        'bg-green-100 text-green-700' :
-                                        row.status === 'attended' ?
-                                        'bg-purple-100 text-purple-700' :
-                                        row.status === 'cancelled' ?
-                                        'bg-red-100 text-red-700' :
-                                        'bg-gray-100 text-gray-700'"
-                                    class="px-2 py-0.5
-                                        rounded
-                                        text-xs
-                                        font-medium
-                                        capitalize"
-                                    x-text="row.status"></span>
-
-                            </td>
-
+                            </td>                        
 
                             {{-- Source --}}
                             <td class="px-5 py-4 text-sm">
