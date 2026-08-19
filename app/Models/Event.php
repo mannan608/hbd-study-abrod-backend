@@ -93,4 +93,13 @@ class Event extends Model
     {
         return 'slug';
     }
+    public function getRegistrationUrlAttribute(): string
+{
+    return route('events.register', $this->id);
+}
+
+    public function registrations()
+{
+    return $this->hasMany(EventRegistration::class);
+}
 }
