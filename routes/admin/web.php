@@ -73,7 +73,8 @@ Route::prefix('{role}')
         Route::resource('scholarships', ScholarshipController::class);
         Route::resource('counsellors', CounsellorController::class);
 
-        Route::get('event-leads', [LeadsController::class, 'eventLeads'])->name('event-leads');
+        Route::get('event-leads', [LeadsController::class, 'eventLeads'])->name('event-leads.index');
+        Route::delete('/event-leads/{eventLead}', [LeadsController::class, 'destroy'])->name('event-leads.destroy');
 
        
     });
