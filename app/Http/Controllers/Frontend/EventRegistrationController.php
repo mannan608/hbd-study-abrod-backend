@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\EventRegistration;
 use Illuminate\Http\Request;
 
 class EventRegistrationController extends Controller
 {
-    public function create(Event $event)
+  public function create(Event $event)
     {
         abort_unless($event->is_active, 404);
 
-        return view('frontend.events.registration', [
+        return view('frontend.pages.events.registration', [
             'event' => $event,
         ]);
     }
@@ -38,7 +39,6 @@ class EventRegistrationController extends Controller
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? null,
             'whatsapp' => $validated['whatsapp'] ?? null,
-            'nationality' => $validated['nationality'] ?? null,
             'interested_course' => $validated['interested_course'] ?? null,
             'message' => $validated['message'] ?? null,
 

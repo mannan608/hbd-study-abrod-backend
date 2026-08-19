@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\EventRegistrationController;
 use App\SEO\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,11 @@ Route::post('register', [AuthController::class, 'register'])->name('register.sub
 Route::get('/signup', function () {
     return view('backend.pages.auth.signup');
 })->name('signup');
+
+
+ Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');
+
+        Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('events.register.store');
 
 
 Route::prefix('student')

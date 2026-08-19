@@ -10,6 +10,9 @@ class Event extends Model
     protected $fillable = [
         'title',
         'event_type',
+        
+        'registration_link',
+
         'short_description',
         'description',
 
@@ -28,7 +31,6 @@ class Event extends Model
 
         'max_seats',
         'registration_deadline',
-        'registration_link',
 
         'organizer',
         'contact_email',
@@ -77,9 +79,9 @@ class Event extends Model
 
                 while (
                     static::query()
-                        ->where('slug', $slug)
-                        ->whereKeyNot($event->getKey())
-                        ->exists()
+                    ->where('slug', $slug)
+                    ->whereKeyNot($event->getKey())
+                    ->exists()
                 ) {
                     $slug = "{$baseSlug}-" . ++$counter;
                 }
@@ -89,17 +91,16 @@ class Event extends Model
         });
     }
 
+    public function registrations()
+    {
+        return $this->hasMany(EventRegistration::class);
+    }
+    public function getRegistrationUrlAttribute(): string
+    {
+        return route('events.register', $this->id);
+    }
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
-    public function getRegistrationUrlAttribute(): string
-{
-    return route('events.register', $this->id);
-}
-
-    public function registrations()
-{
-    return $this->hasMany(EventRegistration::class);
-}
 }

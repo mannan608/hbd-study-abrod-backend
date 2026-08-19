@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CounsellorController;
-use App\Http\Controllers\Admin\EventRegistrationController;
+use App\Http\Controllers\Admin\LeadsController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
@@ -73,7 +73,7 @@ Route::prefix('{role}')
         Route::resource('scholarships', ScholarshipController::class);
         Route::resource('counsellors', CounsellorController::class);
 
-        Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');
+        Route::get('event-leads', [LeadsController::class, 'eventLeads'])->name('event-leads');
 
-        Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('events.register.store');
+       
     });

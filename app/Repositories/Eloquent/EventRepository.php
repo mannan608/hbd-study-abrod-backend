@@ -19,12 +19,20 @@ class EventRepository implements EventRepositoryInterface
 
     public function create(array $data): Event
     {
-        return Event::create($data);
+        $event = Event::create($data);
+
+        $event->registration_link = route('events.register', $event);
+        $event->save();
+
+        return $event->refresh();
     }
 
     public function update(Event $event, array $data): Event
     {
         $event->update($data);
+
+        $event->registration_link = route('events.register', $event);
+        $event->save();
 
         return $event->refresh();
     }

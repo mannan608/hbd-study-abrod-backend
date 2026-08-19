@@ -53,6 +53,12 @@ class RolePermissionSeeder extends Seeder
             'event.delete',
             'event.manage',
 
+            //event-leads
+            'event-leads.list',
+            'event-leads.view',
+            'event-leads.delete',
+            'event-leads.manage',
+
             // SEO permissions
             'seo.list',
             'seo.view',

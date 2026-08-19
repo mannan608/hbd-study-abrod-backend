@@ -113,12 +113,8 @@ class MenuHelper
                         'name' => 'Events',
                         'route' => 'role.events.index',
                         'permission' => 'event.list',
-                    ],                   
-                    [
-                        'name' => 'Event Registrations',
-                        'route' => 'role.providers.index',
-                        'permission' => 'provider.list',
-                    ],
+                    ],                
+                   
                      [
                         'name' => 'Career Pathways',
                         'route' => 'role.providers.index',
@@ -147,6 +143,11 @@ class MenuHelper
                 'name' => 'Leads',
                 'icon' => 'chat',
                 'subItems' => [
+                     [
+                        'name' => 'Event Leads',
+                        'route' => 'role.event-leads.index',
+                        'permission' => 'event-leads.list',
+                    ],
                     [
                         'name' => 'Contact Enquiries',
                         'route' => 'role.contacts.index',
