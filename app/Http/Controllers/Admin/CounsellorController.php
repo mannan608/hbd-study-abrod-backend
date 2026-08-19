@@ -121,10 +121,11 @@ class CounsellorController extends Controller
             ]);
 
             DB::commit();
-
-            return redirect()
-                ->route('backend.pages.counsellors.index')
-                ->with('success', 'Counsellor created successfully.');
+             return redirect()
+            ->route('role.counsellors.index', [
+                'role' => $request->route('role'),
+            ])
+            ->with('success', 'Counsellor created successfully.');
         } catch (\Throwable $e) {
 
             DB::rollBack();
@@ -180,13 +181,14 @@ class CounsellorController extends Controller
             }
 
             // Handle Photo Upload
-            if ($request->hasFile('photo')) {
-                // Delete old photo
-                if ($counsellor->photo_url) {
-                    Storage::disk('public')->delete($counsellor->photo_url);
-                }
-                $validated['photo_url'] = $request->file('photo')->store('counsellors', 'public');
-            }
+          if ($request->hasFile('photo')) {
+
+    $validated['photo_url'] = $this->replaceFile(
+        $request->file('photo'),
+        $counsellor->photo_url,
+        'counsellors'
+    );
+}
 
             unset(
                 $validated['name'],
@@ -204,8 +206,12 @@ class CounsellorController extends Controller
 
             DB::commit();
 
-            return redirect()->route('backend.pages.counsellors.index')
-                ->with('success', 'Counsellor updated successfully.');
+   
+              return redirect()
+            ->route('role.counsellors.index', [
+                'role' => $request->route('role'),
+            ])
+            ->with('success', 'Counsellor updated successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -213,20 +219,25 @@ class CounsellorController extends Controller
         }
     }
 
-    public function destroy(string $role, string $counsellor, Request $request)
-    {
-        $request->user()->can('counsellors.delete') || abort(403);
-        $counsellor = $this->resolveCounsellor($counsellor);
-        // Delete photo
-        if ($counsellor->photo_url) {
-            Storage::disk('public')->delete($counsellor->photo_url);
-        }
+public function destroy(string $role, string $counsellor, Request $request)
+{
+    $request->user()->can('counsellors.delete') || abort(403);
 
-        $counsellor->delete();
+    $counsellor = $this->resolveCounsellor($counsellor);
 
-        return redirect()->route('backend.pages.counsellors.index')
-            ->with('success', 'Counsellor deleted successfully.');
+    // Delete photo
+    if ($counsellor->photo_url) {
+        $this->deleteFile($counsellor->photo_url);
     }
+
+    $counsellor->delete();
+
+    return redirect()
+        ->route('role.counsellors.index', [
+            'role' => $request->route('role'),
+        ])
+        ->with('success', 'Counsellor deleted successfully.');
+}
 
     private function resolveCounsellor(Counsellor|string $counsellor): Counsellor
     {

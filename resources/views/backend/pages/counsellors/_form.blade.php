@@ -305,7 +305,7 @@
                                 Current Photo
                             </p>
 
-                            <img src="{{ asset('storage/' . $counsellor->photo_url) }}" alt="{{ $counsellor->user?->name ?? 'Counsellor' }}"
+                            <img src="{{ asset($counsellor->photo_url) }}" alt="{{ $counsellor->user?->name ?? 'Counsellor' }}"
                                 class="h-24 w-24 rounded-xl border border-gray-200 object-cover dark:border-gray-700">
 
                         </div>

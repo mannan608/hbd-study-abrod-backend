@@ -2,19 +2,17 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Models\Event;
+
 interface EventRepositoryInterface
 {
     public function all();
 
-    public function paginate($limit = 10);
+    public function paginate(int $limit = 10);
 
-    public function findById($id);
+    public function create(array $data): Event;
 
-    public function findBySlug($slug);
+    public function update(Event $event, array $data): Event;
 
-    public function create(array $data);
-
-    public function update($id, array $data);
-
-    public function delete($id);
+    public function delete(Event $event): bool;
 }

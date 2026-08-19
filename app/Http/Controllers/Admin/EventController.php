@@ -8,106 +8,74 @@ use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Repositories\Interfaces\EventRepositoryInterface;
 use App\Traits\HandlesFiles;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     use HandlesFiles;
 
-    protected EventRepositoryInterface $eventRepository;
+    public function __construct(private readonly EventRepositoryInterface $eventRepository) {}
 
-    public function __construct(EventRepositoryInterface $eventRepository)
-    {
-        $this->eventRepository = $eventRepository;
-    }
-
-    /**
-     * Events List
-     */
     public function index(Request $request)
     {
-         $request->user()->can('event.manage') || abort(403);
-        $events = $this->eventRepository->paginate(15);
+        abort_unless($request->user()->can('event.manage'), 403);
 
-        // return $events;
+        $events = $this->eventRepository->paginate(15);
 
         return view('backend.pages.events.index', compact('events'));
     }
 
-    /**
-     * Create Page
-     */
     public function create(Request $request)
     {
-        $request->user()->can('event.manage') || abort(403);
+        abort_unless($request->user()->can('event.manage'), 403);
 
-        return view('backend.pages.events.create', [
-            'event' => null,
-        ]);
+        return view('backend.pages.events.create');
     }
 
-    /**
-     * Store Event
-     */
     public function store(StoreEventRequest $request)
     {
         $data = $request->validated();
 
-        DB::beginTransaction();
-
         try {
-            /*
-             * Generate slug only if one was not supplied.
-             */
-            if (empty($data['slug'])) {
-                $data['slug'] = $this->generateUniqueSlug($data['title']);
-            } else {
-                $data['slug'] = $this->generateUniqueSlug($data['slug']);
-            }
-
-            /*
-             * Banner
-             */
-            if ($request->hasFile('banner')) {
-                $data['banner'] = $this->uploadFile($request->file('banner'), 'events');
-            }
-
-            /*
-             * Gallery
-             */
-            if ($request->hasFile('gallery_images')) {
-                $galleryImages = [];
-
-                foreach ($request->file('gallery_images') as $file) {
-                    if ($file instanceof UploadedFile) {
-                        $galleryImages[] = $this->uploadFile($file, 'events/gallery');
-                    }
+            DB::transaction(function () use ($request, &$data) {
+                if ($request->hasFile('banner')) {
+                    $data['banner'] = $this->uploadFile($request->file('banner'), 'events');
                 }
 
-                $data['gallery_images'] = $galleryImages;
-            }
+                if ($request->hasFile('gallery_images')) {
+                    $data['gallery_images'] = collect($request->file('gallery_images'))->filter(fn($file) => $file instanceof UploadedFile)->map(fn($file) => $this->uploadFile($file, 'events/gallery'))->values()->all();
+                }
 
-            /*
-             * Providers
-             */
-            $data['providers'] = $this->processProviderUploads($request, $data['providers'] ?? []);
+                if (isset($data['providers'])) {
+                    foreach ($data['providers'] as $key => &$provider) {
+                        $file = $request->file("providers.{$key}.logo");
 
-            /*
-             * Tags
-             */
-            if (array_key_exists('tags', $data)) {
-                $data['tags'] = $this->normalizeTags($data['tags']);
-            }
+                        if ($file instanceof UploadedFile) {
+                            $provider['logo'] = $this->uploadFile($file, 'events/providers');
+                        }
 
-            /*
-             * Store Event
-             */
-            $event = $this->eventRepository->create($data);
+                        unset($provider['logo_file'], $provider['existing_logo']);
+                    }
 
-            DB::commit();
+                    unset($provider);
+
+                    $data['providers'] = array_values($data['providers']);
+                }
+
+                if (isset($data['tags'])) {
+                    $data['tags'] = is_string($data['tags'])
+                        ? collect(explode(',', $data['tags']))
+                            ->map(fn($tag) => trim($tag))
+                            ->filter()
+                            ->values()
+                            ->all()
+                        : array_values(array_filter($data['tags']));
+                }
+
+                $this->eventRepository->create($data);
+            });
 
             return redirect()
                 ->route('role.events.index', [
@@ -115,20 +83,24 @@ class EventController extends Controller
                 ])
                 ->with('success', 'Event created successfully.');
         } catch (\Throwable $e) {
-            DB::rollBack();
+            if (!empty($data['banner'])) {
+                $this->deleteFile($data['banner']);
+            }
 
-            /*
-             * Delete uploaded files if database operation fails.
-             */
-            $this->cleanupEventFiles($data);
+            foreach ($data['gallery_images'] ?? [] as $path) {
+                $this->deleteFile($path);
+            }
+
+            foreach ($data['providers'] ?? [] as $provider) {
+                if (!empty($provider['logo'])) {
+                    $this->deleteFile($provider['logo']);
+                }
+            }
 
             return back()->withInput()->with('error', $e->getMessage());
         }
     }
 
-    /**
-     * Show Event
-     */
     public function show(string $role, Event $event)
     {
         return redirect()->route('role.events.edit', [
@@ -137,146 +109,127 @@ class EventController extends Controller
         ]);
     }
 
-    /**
-     * Edit Event
-     */
-    public function edit(string $role, Event $event, Request $request)
+    public function edit(Request $request, string $role, Event $event)
     {
-        $request->user()->can('event.edit') || abort(403);
-        return view('backend.pages.events.edit', [
-            'event' => $event,
-        ]);
+        abort_unless($request->user()->can('event.edit'), 403);
+
+        return view('backend.pages.events.edit', compact('event'));
     }
 
-    /**
-     * Update Event
-     *
-     * TRUE PARTIAL UPDATE:
-     * Only fields actually present in the request
-     * will be updated.
-     */
     public function update(UpdateEventRequest $request, string $role, Event $event)
     {
         $data = $request->validated();
 
-        /*
-         * Keep old values before modification.
-         */
         $oldBanner = $event->banner;
         $oldGallery = $event->gallery_images ?? [];
         $oldProviders = $event->providers ?? [];
 
-        DB::beginTransaction();
+        $newFiles = [];
 
         try {
-            /*
-             * ---------------------------------------------------------
-             * SLUG
-             * ---------------------------------------------------------
-             *
-             * If title is being changed and slug was not explicitly
-             * supplied, generate a new slug from the new title.
-             *
-             * If slug is explicitly supplied, use that slug.
-             *
-             * If neither is supplied, leave the existing slug unchanged.
-             */
+            DB::transaction(function () use ($request, &$data, &$newFiles, $event, $oldProviders) {
+                /*
+                 * Banner
+                 */
+                if ($request->hasFile('banner')) {
+                    $data['banner'] = $this->uploadFile($request->file('banner'), 'events');
 
-            if ($request->has('slug')) {
-                if ($data['slug'] !== null && $data['slug'] !== '') {
-                    $data['slug'] = $this->generateUniqueSlug($data['slug'], $event->id);
+                    $newFiles[] = $data['banner'];
                 }
-            } elseif ($request->has('title')) {
-                $data['slug'] = $this->generateUniqueSlug($data['title'], $event->id);
-            }
+
+                /*
+                 * Gallery
+                 */
+                if ($request->has('gallery_images')) {
+                    $gallery = [];
+
+                    foreach ($request->file('gallery_images', []) as $file) {
+                        if ($file instanceof UploadedFile) {
+                            $path = $this->uploadFile($file, 'events/gallery');
+
+                            $gallery[] = $path;
+                            $newFiles[] = $path;
+                        }
+                    }
+
+                    $data['gallery_images'] = $gallery;
+                }
+
+                /*
+                 * Providers
+                 */
+                if ($request->has('providers')) {
+                    foreach ($data['providers'] ?? [] as $key => &$provider) {
+                        $existingLogo = $provider['existing_logo'] ?? ($provider['logo'] ?? null);
+
+                        $file = $request->file("providers.{$key}.logo");
+
+                        if ($file instanceof UploadedFile) {
+                            $provider['logo'] = $this->uploadFile($file, 'events/providers');
+
+                            $newFiles[] = $provider['logo'];
+                        } elseif ($existingLogo) {
+                            $provider['logo'] = $existingLogo;
+                        } else {
+                            unset($provider['logo']);
+                        }
+
+                        unset($provider['logo_file'], $provider['existing_logo']);
+                    }
+
+                    unset($provider);
+
+                    $data['providers'] = array_values($data['providers']);
+                }
+
+                /*
+                 * Tags
+                 */
+                if (isset($data['tags'])) {
+                    $data['tags'] = is_string($data['tags'])
+                        ? collect(explode(',', $data['tags']))
+                            ->map(fn($tag) => trim($tag))
+                            ->filter()
+                            ->values()
+                            ->all()
+                        : array_values(array_filter($data['tags']));
+                }
+
+                /*
+                 * Event update.
+                 * Slug automatically handled by Event model.
+                 */
+                $this->eventRepository->update($event, $data);
+            });
 
             /*
-             * ---------------------------------------------------------
-             * BANNER
-             * ---------------------------------------------------------
-             *
-             * If no banner is sent:
-             *      old banner remains untouched.
-             *
-             * If a new banner is sent:
-             *      upload new banner
-             *      delete old banner
+             * Delete old banner
              */
-            if ($request->hasFile('banner')) {
-                $data['banner'] = $this->uploadFile($request->file('banner'), 'events');
-
+            if (isset($data['banner']) && $data['banner'] !== $oldBanner) {
                 $this->deleteFile($oldBanner);
             }
 
             /*
-             * ---------------------------------------------------------
-             * GALLERY
-             * ---------------------------------------------------------
-             *
-             * If gallery_images is missing:
-             *      old gallery remains untouched.
-             *
-             * If gallery_images is present:
-             *      it becomes the new gallery.
-             *
-             * This means sending an empty gallery can intentionally
-             * clear all gallery images.
+             * Delete removed gallery files
              */
-            if ($request->has('gallery_images')) {
-                $newGallery = [];
-
-                if ($request->hasFile('gallery_images')) {
-                    foreach ($request->file('gallery_images') as $file) {
-                        if ($file instanceof UploadedFile) {
-                            $newGallery[] = $this->uploadFile($file, 'events/gallery');
-                        }
-                    }
+            if (array_key_exists('gallery_images', $data)) {
+                foreach (array_diff($oldGallery, $data['gallery_images']) as $path) {
+                    $this->deleteFile($path);
                 }
-
-                $data['gallery_images'] = $newGallery;
-
-                /*
-                 * Delete old gallery files that are no longer used.
-                 */
-                $this->deleteRemovedFiles($oldGallery, $newGallery);
             }
 
             /*
-             * ---------------------------------------------------------
-             * PROVIDERS
-             * ---------------------------------------------------------
+             * Delete removed provider logos
              */
-            if ($request->has('providers')) {
-                $providers = $data['providers'] ?? [];
+            if (array_key_exists('providers', $data)) {
+                $oldLogos = collect($oldProviders)->pluck('logo')->filter();
 
-                $providers = $this->processProviderUploads($request, $providers, $oldProviders);
+                $newLogos = collect($data['providers'])->pluck('logo')->filter();
 
-                $data['providers'] = $providers;
-
-                /*
-                 * Delete provider logos that are no longer used.
-                 */
-                $this->deleteRemovedProviderLogos($oldProviders, $providers);
+                foreach ($oldLogos->diff($newLogos) as $path) {
+                    $this->deleteFile($path);
+                }
             }
-
-            /*
-             * Tags
-             */
-            if (array_key_exists('tags', $data)) {
-                $data['tags'] = $this->normalizeTags($data['tags']);
-            }
-
-            /*
-             * ---------------------------------------------------------
-             * UPDATE
-             * ---------------------------------------------------------
-             *
-             * $data contains ONLY validated fields supplied by
-             * the request.
-             */
-            $event->update($data);
-
-            DB::commit();
 
             return redirect()
                 ->route('role.events.index', [
@@ -284,55 +237,32 @@ class EventController extends Controller
                 ])
                 ->with('success', 'Event updated successfully.');
         } catch (\Throwable $e) {
-            DB::rollBack();
-
-            /*
-             * If a new banner was uploaded but update failed,
-             * remove the newly uploaded banner.
-             */
-            if (isset($data['banner']) && $data['banner'] !== $oldBanner) {
-                $this->deleteFile($data['banner']);
+            foreach ($newFiles as $path) {
+                $this->deleteFile($path);
             }
 
             return back()->withInput()->with('error', $e->getMessage());
         }
     }
 
-    /**
-     * Delete Event
-     */
     public function destroy(string $role, Event $event)
     {
-        DB::beginTransaction();
-
         try {
-            /*
-             * Delete banner.
-             */
-            $this->deleteFile($event->banner);
+            DB::transaction(function () use ($event) {
+                $this->deleteFile($event->banner);
 
-            /*
-             * Delete gallery images.
-             */
-            foreach ($event->gallery_images ?? [] as $path) {
-                $this->deleteFile($path);
-            }
-
-            /*
-             * Delete provider logos.
-             */
-            foreach ($event->providers ?? [] as $provider) {
-                if (!empty($provider['logo'])) {
-                    $this->deleteFile($provider['logo']);
+                foreach ($event->gallery_images ?? [] as $path) {
+                    $this->deleteFile($path);
                 }
-            }
 
-            /*
-             * Delete event.
-             */
-            $event->delete();
+                foreach ($event->providers ?? [] as $provider) {
+                    if (!empty($provider['logo'])) {
+                        $this->deleteFile($provider['logo']);
+                    }
+                }
 
-            DB::commit();
+                $this->eventRepository->delete($event);
+            });
 
             return redirect()
                 ->route('role.events.index', [
@@ -340,172 +270,7 @@ class EventController extends Controller
                 ])
                 ->with('success', 'Event deleted successfully.');
         } catch (\Throwable $e) {
-            DB::rollBack();
-
             return back()->with('error', $e->getMessage());
         }
-    }
-
-    /**
-     * Process provider logo uploads.
-     */
-    private function processProviderUploads($request, array $providers, array $oldProviders = []): array
-    {
-        foreach ($providers as $key => &$provider) {
-            /*
-             * Existing logo submitted from edit form.
-             */
-            $existingLogo = $provider['existing_logo'] ?? ($provider['logo'] ?? null);
-
-            /*
-             * New uploaded provider logo.
-             *
-             * Supports:
-             * providers[index][logo]
-             * providers[index][logo_file]
-             */
-            $newLogo = $request->file("providers.{$key}.logo");
-
-            if (!$newLogo) {
-                $newLogo = $request->file("providers.{$key}.logo_file");
-            }
-
-            if ($newLogo instanceof UploadedFile) {
-                $provider['logo'] = $this->uploadFile($newLogo, 'events/providers');
-            } elseif ($existingLogo) {
-                $provider['logo'] = $existingLogo;
-            } else {
-                /*
-                 * No logo supplied.
-                 */
-                unset($provider['logo']);
-            }
-
-            /*
-             * Never save temporary UploadedFile objects or
-             * existing_logo helper values into JSON.
-             */
-            unset($provider['logo_file']);
-            unset($provider['existing_logo']);
-        }
-
-        unset($provider);
-
-        return array_values($providers);
-    }
-
-    /**
-     * Delete gallery files that are no longer used.
-     */
-    private function deleteRemovedFiles(array $oldFiles, array $newFiles): void
-    {
-        $removedFiles = array_diff($oldFiles, $newFiles);
-
-        foreach ($removedFiles as $path) {
-            $this->deleteFile($path);
-        }
-    }
-
-    /**
-     * Delete provider logos that are no longer used.
-     */
-    private function deleteRemovedProviderLogos(array $oldProviders, array $newProviders): void
-    {
-        $oldLogos = [];
-
-        foreach ($oldProviders as $provider) {
-            if (!empty($provider['logo'])) {
-                $oldLogos[] = $provider['logo'];
-            }
-        }
-
-        $newLogos = [];
-
-        foreach ($newProviders as $provider) {
-            if (!empty($provider['logo'])) {
-                $newLogos[] = $provider['logo'];
-            }
-        }
-
-        $removedLogos = array_diff($oldLogos, $newLogos);
-
-        foreach ($removedLogos as $path) {
-            $this->deleteFile($path);
-        }
-    }
-
-    /**
-     * Generate unique event slug.
-     */
-    private function generateUniqueSlug(string $value, ?int $ignoreId = null): string
-    {
-        $slug = Str::slug($value);
-
-        if ($slug === '') {
-            $slug = 'event';
-        }
-
-        $originalSlug = $slug;
-        $counter = 1;
-
-        while (
-            Event::where('slug', $slug)
-                ->when($ignoreId !== null, fn($query) => $query->where('id', '!=', $ignoreId))
-                ->exists()
-        ) {
-            $counter++;
-
-            $slug = $originalSlug . '-' . $counter;
-        }
-
-        return $slug;
-    }
-
-    /**
-     * Cleanup uploaded files when store fails.
-     */
-    private function cleanupEventFiles(array $data): void
-    {
-        /*
-         * Banner.
-         */
-        if (!empty($data['banner'])) {
-            $this->deleteFile($data['banner']);
-        }
-
-        /*
-         * Gallery.
-         */
-        foreach ($data['gallery_images'] ?? [] as $path) {
-            $this->deleteFile($path);
-        }
-
-        /*
-         * Providers.
-         */
-        foreach ($data['providers'] ?? [] as $provider) {
-            if (!empty($provider['logo'])) {
-                $this->deleteFile($provider['logo']);
-            }
-        }
-    }
-
-    /**
-     * Normalize tags from either a comma-separated string or an array.
-     */
-    private function normalizeTags(mixed $tags): array
-    {
-        if (is_string($tags)) {
-            $tags = preg_split('/\s*,\s*/', trim($tags), -1, PREG_SPLIT_NO_EMPTY) ?: [];
-        }
-
-        if (!is_array($tags)) {
-            return [];
-        }
-
-        return array_values(array_filter(
-            array_map(static fn ($tag) => is_string($tag) ? trim($tag) : $tag, $tags),
-            static fn ($tag) => $tag !== null && $tag !== ''
-        ));
     }
 }

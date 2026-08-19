@@ -41,7 +41,7 @@
             return [
                 'name'     => $p['name'] ?? '',
                 'logo'     => $logo,
-                'logo_url' => $logo ? asset('storage/' . $logo) : null,
+                'logo_url' => $logo ? asset($logo) : null,
             ];
         })->values()->all() ?: [['name' => '', 'logo' => '', 'logo_url' => null]];
 
@@ -101,7 +101,7 @@
 
                     @if($isEdit && $event->banner)
                         <div class="mb-3">
-                            <img src="{{ asset('storage/' . $event->banner) }}" alt="Banner"
+                            <img src="{{ asset($event->banner) }}" alt="Banner"
                                 class="h-32 rounded-lg object-cover border border-gray-200 dark:border-gray-700">
                             <p class="mt-1 text-xs text-gray-500">Current banner — upload a new file to replace it.</p>
                         </div>
@@ -247,7 +247,7 @@
                     <div class="grid grid-cols-3 md:grid-cols-4 gap-3 mb-4">
                         @foreach($event->gallery_images as $image)
                             <div class="relative">
-                                <img src="{{ asset('storage/' . $image) }}"
+                                <img src="{{ asset($image) }}"
                                     class="h-24 w-full rounded-lg object-cover border border-gray-200 dark:border-gray-700">
                                 <label class="absolute inset-x-0 bottom-0 flex items-center justify-center gap-1 bg-black/60 text-white text-xs py-1 rounded-b-lg">
                                     <input type="checkbox" name="remove_gallery_images[]" value="{{ $image }}"> Remove

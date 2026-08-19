@@ -11,7 +11,9 @@
             'designation' => $counsellor->designation ?? 'N/A',
             'country' => $counsellor->country?->name ?? 'N/A',
             'is_active' => $counsellor->is_active,
-            'photo_url' => $counsellor->photo_url ? \Illuminate\Support\Facades\Storage::url($counsellor->photo_url) : null,
+            'photo_url' => $counsellor->photo_url
+    ? asset($counsellor->photo_url)
+    : null,
         ];
     })->values();
      $role = request()->route('role');

@@ -30,11 +30,11 @@ class MenuHelper
                         'route' => 'role.blogs.index',
                         'permission' => 'blog.list',
                     ],
-                    [
-                        'name' => 'Events',
-                        'route' => 'role.events.index',
-                        'permission' => 'event.list',
-                    ],
+                    // [
+                    //     'name' => 'Events',
+                    //     'route' => 'role.events.index',
+                    //     'permission' => 'event.list',
+                    // ],
                 ],
             ],
             [
@@ -111,8 +111,8 @@ class MenuHelper
                 'subItems' => [
                     [
                         'name' => 'Events',
-                        'route' => 'role.universities.index',
-                        'permission' => 'university.list',
+                        'route' => 'role.events.index',
+                        'permission' => 'event.list',
                     ],                   
                     [
                         'name' => 'Event Registrations',

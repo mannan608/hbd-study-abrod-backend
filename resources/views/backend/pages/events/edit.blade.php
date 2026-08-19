@@ -2,7 +2,7 @@
 
 @section('content')
     <form
-        action="{{ role_route('role.events.update', ['event' => $event->id]) }}"
+        action="{{ role_route('role.events.update', ['event' => $event]) }}"
         method="POST"
         enctype="multipart/form-data"
     >
