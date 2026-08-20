@@ -89,4 +89,26 @@ class User extends Authenticatable
 {
     return $this->hasOne(Counsellor::class);
 }
+
+public static function createCounsellor(array $data): self
+{
+    $defaultRole = Role::where('name', 'default')
+        ->where('guard_name', config('rbac.default_guard', 'web'))
+        ->first();
+
+    if (! $defaultRole) {
+        throw new \RuntimeException('Default role not found.');
+    }
+
+    $user = self::create([
+        ...$data,
+        'primary_role_id' => $defaultRole->id,
+    ]);
+
+    // Assign default role to Spatie roles
+    $user->syncRoles([$defaultRole]);
+
+    return $user->load('roles', 'primaryRole');
+}
+
 }

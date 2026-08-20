@@ -77,5 +77,7 @@ Route::prefix('{role}')
         Route::get('event-leads/{eventLead}', [LeadsController::class, 'show'])->name('event-leads.show');
         Route::delete('/event-leads/{eventLead}', [LeadsController::class, 'destroy'])->name('event-leads.destroy');
 
-       
+        Route::get('/account-settings', [CounsellorController::class, 'accountSetting'])->name('account.settings');
+
+        Route::put('/account-settings', [CounsellorController::class, 'updateAccountSetting'])->name('account.settings.update');
     });

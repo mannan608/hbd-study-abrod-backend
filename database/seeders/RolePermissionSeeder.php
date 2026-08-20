@@ -177,10 +177,17 @@ class RolePermissionSeeder extends Seeder
             'guard_name' => config('rbac.default_guard', 'web'),
         ]);
 
+            // counsellor  role 5
+         $counsellorRole = Role::firstOrCreate([
+            'name' => 'counsellor',
+            'guard_name' => config('rbac.default_guard', 'web'),
+        ]);
+
         $adminRole->syncPermissions($permissions);
         $superAdmin->syncPermissions($permissions);
         $defaultRole->syncPermissions(['dashboard.view']);
         $studentRole->syncPermissions([]);
+        $counsellorRole->syncPermissions([]);
 
         app(PermissionRegistrar::class)->forgetCachedPermissions();
     }

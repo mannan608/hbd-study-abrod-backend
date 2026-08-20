@@ -20,7 +20,6 @@ return new class extends Migration {
 
             // Personal information
             $table->string('slug', 180)->unique();
-            $table->string('photo_url')->nullable();
 
             // Professional information
             $table->string('designation', 150)->nullable();

@@ -89,6 +89,7 @@
 
                     <x-form.input-text name="password" label="Password" type="password"
                         placeholder="{{ $isEdit ? 'Leave blank to keep current password' : 'Enter Your Password...' }}" />
+                        
 
                 </div>
 
@@ -291,33 +292,7 @@
                     </div>
 
                 </div>
-
-
-                {{-- Photo --}}
-                <div class="p-5">
-
-                    <x-form.dropzone name="photo" label="{{ $isEdit ? 'Upload New Photo' : 'Upload Photo' }}" />
-
-                    @if ($isEdit && $counsellor->photo_url)
-                        <div class="mt-4">
-
-                            <p class="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">
-                                Current Photo
-                            </p>
-
-                            <img src="{{ asset($counsellor->photo_url) }}" alt="{{ $counsellor->user?->name ?? 'Counsellor' }}"
-                                class="h-24 w-24 rounded-xl border border-gray-200 object-cover dark:border-gray-700">
-
-                        </div>
-                    @endif
-
-                    @error('photo')
-                        <p class="mt-2 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-
-                </div>
+                
 
             </div>
         </div>

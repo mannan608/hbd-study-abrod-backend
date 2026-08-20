@@ -12,7 +12,7 @@ class Counsellor extends Model
     use HasUuids;
 
     protected $fillable = [
-        'user_id', 'slug', 'photo_url', 'designation', 'bio', 'education', 
+        'user_id', 'slug', 'designation', 'bio', 'education', 
         'institution', 'city_id', 'country_id', 'languages', 'expertise', 
         'experience_years', 'is_featured', 'is_verified', 'is_active', 'sort_order'
     ];
