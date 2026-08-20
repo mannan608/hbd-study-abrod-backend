@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/front-end-custom.css') }}">
      @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Theme Store -->
     <script>
@@ -95,7 +94,7 @@
     @include('frontend.layouts.navbar')
 
     <main class="grow">
-       <div class="pt-22 md:pt-24 pb-12">
+       <div class="pt-18 md:pt-20 pb-12">
          @yield('content')
        </div>
     </main>

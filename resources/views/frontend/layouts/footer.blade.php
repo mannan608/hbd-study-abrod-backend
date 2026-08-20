@@ -1,172 +1,64 @@
-<footer class="w-full border-t bg-slate-50 border-slate-200 dark:bg-gray-900/95 dark:border-gray-800">
-
-    <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12 sm:py-16">
-
-        {{-- Column 1 --}}
-        <div class="space-y-5 text-center sm:text-left">
-
-            <div class="flex sm:justify-start items-center justify-center">
-                <a href="/">
-                    <img src="{{ asset('logo.webp') }}" alt="logo" class="w-34 h-auto">
-                </a>
-            </div>
-
-            <ul class="text-slate-500 text-sm space-y-2">
-
-                <li class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                    <span class="font-semibold text-slate-700">Call:</span>
-                    02 9037 6310
-                </li>
-
-                <li class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                    <span class="font-semibold text-slate-700">Mail:</span>
-                    info@hbdservices.edu.au
-                </li>
-
-                <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                    <span class="font-semibold text-slate-700">Address:</span>
-                    235 Church St, Parramatta,NSW, Australia 2150
-                </li>
-
-            </ul>
-
-
-            <div class="flex gap-3 sm:justify-start items-center justify-center">
-
-                <!-- Facebook -->
-                <a href="#"
-                    class="w-9 h-9 bg-gray-50 backdrop-blur-sm rounded-xl flex items-center justify-center border border-gray-500 hover:border-gray-500 transition-all hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-5 h-5">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg>
-                </a>
-
-                <!-- Instagram -->
-                <a href="#"
-                    class="w-9 h-9 bg-gray-50 backdrop-blur-sm rounded-xl flex items-center justify-center border border-gray-500 hover:border-gray-500 transition-all hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-5 h-5">
-                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                    </svg>
-                </a>
-
-                <!-- TikTok -->
-                <a href="#"
-                    class="w-9 h-9 bg-gray-50 backdrop-blur-sm rounded-xl flex items-center justify-center border border-gray-500 hover:border-gray-500 transition-all hover:scale-110">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-5 h-5">
-
-                        <path d="M9 12a4 4 0 1 0 4 4V4c.5 2 2 4 5 4" />
-                    </svg>
-                </a>
-
-                <!-- YouTube -->
-                <a href="#"
-                    class="w-9 h-9 bg-gray-50 backdrop-blur-sm rounded-xl flex items-center justify-center border border-gray-500 hover:border-gray-500 transition-all hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-5 h-5">
-                        <path
-                            d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17">
-                        </path>
-                        <path d="m10 15 5-3-5-3z"></path>
-                    </svg>
-                </a>
-
-                <!-- Google -->
-                <a href="#"
-                    class="w-9 h-9 bg-gray-50 backdrop-blur-sm rounded-xl flex items-center justify-center border border-gray-500 hover:border-gray-500 transition-all hover:scale-110">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-4.5 h-4.5">
-
-                        <path d="M21 12.5a9 9 0 1 1-2.64-6.36" />
-                        <path d="M21 12h-9" />
-                    </svg>
-                </a>
-
-            </div>
-
+ <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 pt-8 md:pt-16 pb-8 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+        <div class="col-span-2">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-40 p-1.5">
+                    <a href="/">
+                        <img src="{{ asset('logo.png') }}" alt="logo" class="w-auto h-auto">
+                    </a>
+                </div>
+          </div>
+          <p class="text-[15px] text-slate-400 max-w-sm leading-relaxed mb-6">
+            Connecting international students with premier educational institutions across Australia.
+          </p>
+          <div class="flex space-x-3">
+            <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-brand-600 hover:text-white transition"><i class="fa-brands fa-facebook-f text-base"></i></a>
+            <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-brand-600 hover:text-white transition"><i class="fa-brands fa-twitter text-base"></i></a>
+            <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-brand-600 hover:text-white transition"><i class="fa-brands fa-instagram text-base"></i></a>
+            <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-brand-600 hover:text-white transition"><i class="fa-brands fa-linkedin-in text-base"></i></a>
+          </div>
         </div>
 
-
-        {{-- Column 2 --}}
-        <div class="space-y-5 text-center flex flex-col items-center">
-
-            <h4 class="font-bold uppercase tracking-widest text-xs text-slate-900">
-                Quick Links
-            </h4>
-            <ul class="space-y-2 text-sm">
-
-                <li><a class="text-slate-500 hover:text-slate-900" href="{{ route('about') }}"> About us</a></li>
-                <li><a class="text-slate-500 hover:text-slate-900" href="{{ route('courses') }}">Our Courses</a></li>
-                <li><a class="text-slate-500 hover:text-slate-900" href="{{ route('contact') }}">Contact Us</a></li>
-
-            </ul>
+        <div>
+          <h4 class="text-white text-base font-bold uppercase tracking-wider mb-4">Courses</h4>
+          <ul class="space-y-2 text-[15px]">
+            <li><a href="#" class="hover:text-brand-400 transition">Information Technology</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Business & Management</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Nursing & Healthcare</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Engineering & Construction</a></li>
+          </ul>
         </div>
 
-        {{-- Column 3 --}}
-        <div class="space-y-5 text-center flex flex-col items-center">
-            <h4 class="font-bold uppercase tracking-widest text-xs text-slate-900">
-                Useful Links
-            </h4>
-            <ul class="space-y-2 text-sm">
-
-                <li><a class="text-slate-500 hover:text-slate-900" href="#"> Our Agents</a></li>
-                <li><a class="text-slate-500 hover:text-slate-900" href="{{ route('student-information') }}">Student Information</a></li>
-            </ul>
+        <div>
+          <h4 class="text-white text-base font-bold uppercase tracking-wider mb-4">Universities</h4>
+          <ul class="space-y-2 text-[15px]">
+            <li><a href="#" class="hover:text-brand-400 transition">Group of Eight (Go8)</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Regional Universities</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Scholarships 2024</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Campus Locations</a></li>
+          </ul>
         </div>
 
-        {{-- Column 4 --}}
-        <div class="space-y-5 text-center sm:flex sm:flex-col sm:items-end sm:text-end">
-
-            <h4 class="font-bold uppercase tracking-widest text-xs text-slate-900">
-                Accreditation
-            </h4>
-            <ul class="space-y-2 text-sm text-slate-500">
-
-                <li class="mb-3">
-                    <div class="flex flex-wrap justify-center items-center gap-4  transition-all duration-500">
-                        <img class="h-10 object-contain"
-                            data-alt="sleek corporate mark for a global vocational training federation"
-                            src="{{ asset('patner_2.png') }}" alt="patner">
-                    </div>
-                </li>
-                <li><strong>RTO No. 45116</strong></li>
-                <li>ABN: 65 610 630 254</li>
-
-            </ul>
-
+        <div>
+          <h4 class="text-white text-base font-bold uppercase tracking-wider mb-4">Resources</h4>
+          <ul class="space-y-2 text-[15px]">
+            <li><a href="#" class="hover:text-brand-400 transition">Australian Visa Guide</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">PR Pathway Courses</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Cost of Living Calculator</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Student Accommodation</a></li>
+          </ul>
         </div>
+      </div>
 
+      <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-[15px] text-slate-500 gap-4">
+        <p class="text-center text-sm md:text-[15px]">© 2024 HBD Services. All rights reserved. Registered CRICOS Advisory Partner.</p>
+        <div class="flex space-x-6">
+          <a href="#" class="hover:text-slate-300">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-300">Terms of Service</a>
+          <a href="#" class="hover:text-slate-300">Contact Us</a>
+        </div>
+      </div>
     </div>
-
-
-    {{-- Bottom Bar --}}
-    <div class="border-t border-slate-200 py-6 dark:border-gray-800">
-
-        <div
-            class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-
-            <p class="text-slate-500 text-xs sm:text-sm">
-                Copyright © 2026 HBD Services. All rights reserved.
-            </p>
-
-            <span class="text-slate-400 text-xs sm:text-sm">
-                CRICOS Provider Code: 04000A | RTO Number : 45822 | ABN: 33 644 086 895
-            </span>
-
-        </div>
-
-    </div>
-
-</footer>
+  </footer>

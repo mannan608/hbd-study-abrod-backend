@@ -1,151 +1,165 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    {{-- background-image: linear-gradient(45deg, #182f59, #00c8f3); --}}
-    <section class="bg-secondary-500 -mt-22 pt-22 ">
-        <x-frontend.hero />
-    </section>
-    <section class="bg-white dark:bg-gray-900 py-8 md:py-12 lg:py-14">
-        <x-frontend.about />
-    </section>
-    
+    <section class="relative isolate  w-full min-h-[84vh] flex items-center justify-center overflow-hidden">
+        <img src="{{ asset('frontend-img/hero-campus.jpg') }}"
+            alt="International students walking through an Australian university campus" width="1920" height="1080"
+            class="absolute inset-0 size-full object-cover">
+        <div class="absolute inset-0 surface-hero"></div>
+        <div class="relative max-w-7xl mx-auto px-5 lg:px-8 py-24 text-center text-white sm:py-32">
+            <div
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1068b2]/10 backdrop-blur-sm rounded-full border border-purple-200/50 mb-8 animate-in fade-in slide-in-from-bottom-3 duration-700">
+                <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 text-white animate-pulse">
+                        <path
+                            d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z">
+                        </path>
+                        <path d="M20 3v4"></path>
+                        <path d="M22 5h-4"></path>
+                        <path d="M4 17v2"></path>
+                        <path d="M5 18H3"></path>
+                    </svg>
+                    <div class="absolute inset-0 w-4 h-4 bg-[#1068b2] blur-md animate-pulse"></div>
+                </div><span class="text-sm font-semibold bg-[#1068b2] bg-clip-text text-white">Global Education
+                    Platform</span>
 
-    <section class="relative text-white mt-6 md:mt-10 lg:mt-16"
-        style="
-        background-image: url('{{ asset('penta-img/educator-img12.jpg') }}');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    ">
-
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/75"></div>
-        <!-- Content -->
-        <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                <!-- Left Content -->
-                <div class="flex-1 py-12 lg:py-16">
-                    <div class="w-14 h-1.5 bg-brand-500 rounded-full mb-5"></div>
-                    <h1
-                        class="font-bold leading-tight tracking-tight
-                    text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-                        Limitless Learning,
-                        <br class="hidden sm:block">
-                        Limitless Possibilities!
-                    </h1>
-
-                    <p class="mt-3 lg:mt-4 text-gray-200
-                    text-sm sm:text-base leading-relaxed">
-                        HBD Services has educational programs that develop you for
-                        the real workforce. Our activities are designed to ensure that
-                        you can effectively transfer your skills and knowledge into
-                        workplace practice.
-                    </p>
-
-                    <!-- Features -->
-                    <div class="mt-3 lg:mt-4 space-y-2">
-
-                        <div class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#08C994" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
-                            <p class="text-sm sm:text-base text-gray-100">
-                                Engaging and Modern classroom environment
-                            </p>
-                        </div>
-                        <div class="flex items-start gap-2">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#08C994" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
-                            <p class="text-sm sm:text-base text-gray-100">
-                                Supportive community environment
-                            </p>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#08C994" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
-                            <p class="text-sm sm:text-base text-gray-100">
-                                Diverse backgrounds and inclusive culture
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- CTA -->
-                    <div class="mt-10">
-                        <a href="#"
-                            class="inline-flex items-center justify-center
-                        bg-brand-600 text-white
-                        px-5 py-3 lg:px-6 lg:py-3
-                        rounded-lg
-                        hover:bg-brand-500
-                        transition duration-300">
-
-                            JOIN US NOW
-                        </a>
-                    </div>
+            </div>
+            <h1 class="text-4xl font-bold leading-tight sm:text-7xl uppercase">Your Future in <br> Australia Starts Here.
+            </h1>
+            <p class="mx-auto mt-5 max-w-2xl text-base opacity-85 sm:text-lg">
+                Compare tuition, English scores, intakes and scholarships across 620+ institutions — then talk to a verified
+                counsellor for free.</p>
+            <div class="mx-auto mt-9 flex max-w-2xl flex-col gap-2 rounded-2xl bg-white p-2 shadow-lift sm:flex-row">
+                <div class="relative flex-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search absolute left-3 top-1/2 size-6 -translate-y-1/2 text-neutral-500"
+                        aria-hidden="true">
+                        <path d="m21 21-4.34-4.34"></path>
+                        <circle cx="11" cy="11" r="8"></circle>
+                    </svg>
+                    <input
+                        class="flex w-full rounded-md bg-transparent px-3 py-1 text-base text-neutral-800 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 h-12 border-0 pl-12  shadow-none focus-visible:ring-0 placeholder:text-neutral-400"
+                        placeholder="Search courses, e.g. Master of IT in Melbourne" value="">
                 </div>
-
-                <!-- Right Fixed Width -->
-                <div class="w-full hidden md:block lg:w-151 -my-8 lg:shrink-0">
-
-                    <div class="bg-white rounded-[300px]  overflow-hidden ">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div
-                                class="aspect-square overflow-hidden flex items-center text-black py-6 pr-4 pl-16 font-medium text-right ">
-                                <h6 class="text-base md:text-lg">We aspire to set the standard as a leading training
-                                    provider.</h6>
-                            </div>
-                            <div class="aspect-square overflow-hidden ">
-                                <img src="{{ asset('penta-img/educator-img27.jpg') }}" alt=""
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div class="aspect-square overflow-hidden ">
-                                <img src="{{ asset('penta-img/educator-img28.jpg') }}" alt=""
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div
-                                class="aspect-square overflow-hidden flex items-center text-black py-6 pr-16 pl-4 font-medium">
-                                <h6 class="text-base md:text-lg">Our mission is to make high-quality education accessible
-                                    for all students.</h6>
-                            </div>
-
-                        </div>
+                <button
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-base cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-brand-500/20 text-brand-500 shadow font-bold rounded-md px-6 h-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                        fill="none">
+                        <g clip-path="url(#clip0_3_35)">
+                            <g clip-path="url(#clip1_3_35)">
+                                <path
+                                    d="M13.3338 1.33407V4.00063M14.6672 2.66735H12.0004M7.34461 1.87701C7.37318 1.72408 7.45434 1.58596 7.57403 1.48657C7.69372 1.38717 7.84441 1.33276 8 1.33276C8.15559 1.33276 8.30628 1.38717 8.42597 1.48657C8.54566 1.58596 8.62682 1.72408 8.65539 1.87701L9.35611 5.58219C9.40588 5.84561 9.53391 6.08792 9.72349 6.27748C9.91308 6.46704 10.1554 6.59506 10.4189 6.64482L14.1245 7.34546C14.2774 7.37402 14.4156 7.45517 14.515 7.57485C14.6144 7.69452 14.6688 7.84519 14.6688 8.00076C14.6688 8.15633 14.6144 8.307 14.515 8.42668C14.4156 8.54636 14.2774 8.62751 14.1245 8.65607L10.4189 9.35671C10.1554 9.40647 9.91308 9.53449 9.72349 9.72405C9.53391 9.91361 9.40588 10.1559 9.35611 10.4193L8.65539 14.1245C8.62682 14.2774 8.54566 14.4156 8.42597 14.515C8.30628 14.6144 8.15559 14.6688 8 14.6688C7.84441 14.6688 7.69372 14.6144 7.57403 14.515C7.45434 14.4156 7.37318 14.2774 7.34461 14.1245L6.64389 10.4193C6.59412 10.1559 6.46609 9.91361 6.27651 9.72405C6.08692 9.53449 5.84459 9.40647 5.58114 9.35671L1.87551 8.65607C1.72256 8.62751 1.58443 8.54636 1.48502 8.42668C1.38561 8.307 1.3312 8.15633 1.3312 8.00076C1.3312 7.84519 1.38561 7.69452 1.48502 7.57485C1.58443 7.45517 1.72256 7.37402 1.87551 7.34546L5.58114 6.64482C5.84459 6.59506 6.08692 6.46704 6.27651 6.27748C6.46609 6.08792 6.59412 5.84561 6.64389 5.58219L7.34461 1.87701ZM3.99971 13.3336C3.99971 14.0699 3.40271 14.6669 2.66627 14.6669C1.92983 14.6669 1.33283 14.0699 1.33283 13.3336C1.33283 12.5972 1.92983 12.0003 2.66627 12.0003C3.40271 12.0003 3.99971 12.5972 3.99971 13.3336Z"
+                                    stroke="#1968b2" stroke-width="2" stroke-linecap="round" />
+                            </g>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_3_35">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                            <clipPath id="clip1_3_35">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <span>AI Assist</span>
+                </button>
+            </div>
+            {{-- <div class="mt-4 flex flex-wrap justify-center gap-2 text-sm">
+                <a href="#"
+                    class="rounded-full border border-white px-3 py-1">Nursing</a>
+                    <a
+                    href="#"
+                    class="rounded-full border border-white px-3 py-1">Master
+                    of IT</a>
+                    <a href=""
+                    class="rounded-full border border-white px-3 py-1">MBA</a><a
+                    href=""
+                    class="rounded-full border border-white px-3 py-1">Cyber
+                    Security</a><a href=""
+                    class="rounded-full border border-white px-3 py-1">Foundation</a>
+            </div> --}}
+        </div>
+    </section>
+    {{-- <section>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="surface-stats text-white rounded-2xl py-10 px-20 -mt-20">
+                <div class="flex justify-between items-center">
+                    <div class="flex justify-center items-center text-2xl md:font-3xl lg:text-4xl flex-col font-bold">
+                        <span> 10,000+</span>
+                        <span> Courses</span>
+                    </div>
+                    <span class="h-full">|</span>
+                    <div class="flex justify-center items-center text-2xl md:font-3xl lg:text-4xl flex-col font-bold">
+                        <span>3,000+ </span>
+                        <span>Institutions</span>
+                    </div>
+                    <span class="h-full">|</span>
+                    <div class="flex justify-center items-center text-2xl md:font-3xl lg:text-4xl flex-col font-bold">
+                        <span>1,000+ </span>
+                        <span> Verified Experts</span>
                     </div>
                 </div>
             </div>
         </div>
+    </section> --}}
 
-    </section>
+    <section class="relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <section class=" pt-10 md:pt-16 lg:pt-22 pb-10 lg:pb-16 bg-white">
-        <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-            <div class="flex flex-col items-center justify-center">
-                <div class="h-1.5 w-14 bg-brand-500 rounded-full mb-3"></div>
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Let's Know More About
-                    HBD Services</h1>
+        <div
+            class="surface-stats rounded-3xl -mt-20 relative overflow-hidden  shadow-2xl">
+
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center">
+                <div class="flex flex-col items-center justify-center px-6 py-8 sm:py-10">
+                    <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                        10,000+
+                    </span>
+                    <span class="mt-2 text-sm sm:text-base lg:text-lg font-medium text-white/80">
+                        Courses
+                    </span>
+                </div>
+                <div class="hidden md:flex justify-center h-20">
+                    <div class="w-px h-full bg-white/20"></div>
+                </div>
+                <div class="flex flex-col items-center justify-center px-6 py-8 sm:py-10">
+                    <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                        3,000+
+                    </span>
+                    <span class="mt-2 text-sm sm:text-base lg:text-lg font-medium text-white/80">
+                        Institutions
+                    </span>
+                </div>
+                <div class="hidden md:flex justify-center h-20">
+                    <div class="w-px h-full bg-white/20"></div>
+                </div>
+                <div class="flex flex-col items-center justify-center px-6 py-8 sm:py-10">
+                    <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                        1,000+
+                    </span>
+                    <span class="mt-2 text-sm sm:text-base lg:text-lg font-medium text-white/80">
+                        Verified Experts
+                    </span>
+                </div>
+
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6 md:mt-10">
 
-                <div class="bg-white block  p-6 border rounded-2xl shadow-xs">
-                    <h5 class="mb-3 text-base md:text-lg lg:text-xl font-semibold tracking-tight text-heading leading-8">
-                        Unlocking the Doors to Success at HBD Services</h5>
-                    <p class="text-body text-sm md:text-base">Section 1: A World of Opportunities Welcome to HBD Services.</p>
-                </div>
-                <div class="bg-white block  p-6 border rounded-2xl shadow-xs">
-                    <h5 class="mb-3 text-base md:text-lg lg:text-xl font-semibold tracking-tight text-heading leading-8">
-                        5 Reasons to Choose HBD Services for an Exciting Career in Business
-                    </h5>
-                    <p class="text-body text-sm md:text-base">SIntroduction Welcome to HBD Services, the leading
-                        institution for aspiring.</p>
-                </div>
-                <div class="bg-white block  p-6 border rounded-2xl shadow-xs">
-                    <h5 class="mb-3 text-base md:text-lg lg:text-xl font-semibold tracking-tight text-heading leading-8">
-                        Unlocking Your Potential at HBD Services</h5>
-                    <p class="text-body text-sm md:text-base">Discovering Your True Potential At HBD Services, we
-                        believe that.</p>
-                </div>
+        </div>
 
-            </div>
-        </div>
-    </section>
-    <section class="">
-        <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-            <x-frontend.cta />
-        </div>
-    </section>
+    </div>
+</section>
 @endsection
+
+<style>
+    .surface-hero {
+        background: linear-gradient(120deg, oklch(24% .045 248 / .94) 0%, oklch(30% .07 225 / .82) 55%, oklch(40% .1 60 / .55) 100%);
+    }
+    .surface-stats{
+       background: linear-gradient(120deg, oklch(24% .045 248 / .94) 0%, oklch(30% .07 225 / .82) 55%, oklch(40% .1 60 / .55) 100%);
+    }
+
+    .shadow-lift {
+        box-shadow: 0 2px 6px oklch(24% .045 248 / .08), 0 24px 48px -20px oklch(24% .045 248 / .28);
+    }
+</style>
