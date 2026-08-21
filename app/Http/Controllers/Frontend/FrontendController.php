@@ -10,7 +10,7 @@ class FrontendController extends Controller
 
     public function homePage()
     {
-        return view('frontend.pages.home');
+        return view('frontend.pages.home.home');
     }
 
     public function aboutPage()

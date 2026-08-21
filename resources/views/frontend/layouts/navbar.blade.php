@@ -80,7 +80,7 @@
                 <div class="flex items-center gap-4 lg:gap-6">
                     <!-- Right Side -->
                     <a href="{{ route('register') }}"
-                        class="hidden md:flex text-sm   bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
+                        class="hidden md:flex text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
                         Sign Up Free
                     </a>
 
@@ -119,7 +119,7 @@
                 <div class="flex items-end justify-end">
                     @guest
                         <a href="{{ route('register') }}"
-                            class="text-sm   bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
+                            class="text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
                             Sign Up Free
                         </a>
                     @endguest
