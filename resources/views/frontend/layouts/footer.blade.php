@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
         <div class="col-span-2">
-          <div class="flex items-center space-x-2 mb-4">
+          <div class="flex items-center space-x-2 mb-4 -mt-5">
             <div class="w-40 p-1.5">
                     <a href="/">
                         <img src="{{ asset('logo.png') }}" alt="logo" class="w-auto h-auto">
