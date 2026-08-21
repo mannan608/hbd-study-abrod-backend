@@ -1,4 +1,4 @@
-<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+<a href="#" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
     <!-- Top Section: Logo & Main Header Info -->
     <div class="flex items-start gap-4">
         <!-- Logo Badge -->
@@ -10,13 +10,15 @@
         <!-- Content Area -->
         <div class="flex-1 space-y-1.5">
             <!-- Tags Row -->
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="rounded-full bg-cyan-50 px-3 py-0.5 text-xs font-medium text-cyan-800">
+            <div class="flex items-center justify-between gap-2">
+                <div class="flex gap-2 items-center">
+                    <span class="rounded-full bg-cyan-50 px-3 py-0.5 text-xs font-medium text-cyan-800">
                     Postgraduate
                 </span>
                 <span class="text-xs text-slate-500">
                     Code MC-IT
                 </span>
+                </div>
                 <span
                     class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-3 py-1 text-xs font-medium text-white shadow-sm">
                     <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -103,7 +105,7 @@
     </div>
 
     <!-- Actions Footer -->
-    <div class="mt-6 flex flex-wrap items-center gap-3">
+    {{-- <div class="mt-6 flex flex-wrap items-center gap-3">
         <button
             class="rounded-xl bg-[#005f73] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#004d5d]">
             View course
@@ -112,5 +114,5 @@
             class="rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50">
             Add to wishlist
         </button>
-    </div>
-</div>
+    </div> --}}
+</a>

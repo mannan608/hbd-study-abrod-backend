@@ -33,7 +33,7 @@
             </div>
             <div class="flex items-center justify-center mt-12">
                 <button
-                    class="rounded-full bg-[#005f73] px-5 py-4 text-base font-semibold text-white transition-colors hover:bg-[#004d5d]">Explore
+                    class="rounded-full bg-brand-500 px-5 py-4 text-base font-semibold text-white transition-colors hover:bg-brand-600">Explore
                     all Courses</button>
             </div>
         </div>

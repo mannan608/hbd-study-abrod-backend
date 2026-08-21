@@ -63,19 +63,5 @@
                     <span>AI Assist</span>
                 </button>
             </div>
-            {{-- <div class="mt-4 flex flex-wrap justify-center gap-2 text-sm">
-                <a href="#"
-                    class="rounded-full border border-white px-3 py-1">Nursing</a>
-                    <a
-                    href="#"
-                    class="rounded-full border border-white px-3 py-1">Master
-                    of IT</a>
-                    <a href=""
-                    class="rounded-full border border-white px-3 py-1">MBA</a><a
-                    href=""
-                    class="rounded-full border border-white px-3 py-1">Cyber
-                    Security</a><a href=""
-                    class="rounded-full border border-white px-3 py-1">Foundation</a>
-            </div> --}}
         </div>
     </section>

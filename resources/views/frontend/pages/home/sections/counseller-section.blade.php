@@ -1,4 +1,4 @@
-<section class="mt-22 mb-12">
+<section class="mt-12 pb-16 bg-brand-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header class="mx-auto max-w-2xl px-4 py-12 text-center font-sans">
             <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#1068b2]/10 rounded-full mb-6"><svg
@@ -22,15 +22,13 @@
                 Connect with certified, empathetic professionals dedicated to mapping your precise academic outcome.
             </p>
         </header>
-        <div class="">
+        <div class="">             
             <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                 @include('frontend.pages.components.counsellers.counseller-card')
                 @include('frontend.pages.components.counsellers.counseller-card')
                 @include('frontend.pages.components.counsellers.counseller-card')
             </div>
-            <div class="flex items-center justify-center mt-12">
-                <button class="rounded-full bg-[#005f73] px-5 py-4 text-base font-semibold text-white transition-colors hover:bg-[#004d5d]">Explore all Counsellors</button>
-            </div>
+           
         </div>
     </div>
 </section>
