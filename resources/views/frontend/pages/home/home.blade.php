@@ -4,47 +4,7 @@
 @section('content')
     @include('frontend.pages.home.sections.hero')
 
-    <section class="relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="surface-stats rounded-3xl -mt-20 relative overflow-hidden  shadow-2xl">
-                <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center">
-                    <div class="flex flex-col items-center justify-center px-6 py-8 sm:py-10">
-                        <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-                            10,000+
-                        </span>
-                        <span class="mt-2 text-sm sm:text-base lg:text-lg font-medium text-white/80">
-                            Courses
-                        </span>
-                    </div>
-                    <div class="hidden md:flex justify-center h-20">
-                        <div class="w-px h-full bg-white/20"></div>
-                    </div>
-                    <div class="flex flex-col items-center justify-center px-6 py-8 sm:py-10">
-                        <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-                            3,000+
-                        </span>
-                        <span class="mt-2 text-sm sm:text-base lg:text-lg font-medium text-white/80">
-                            Institutions
-                        </span>
-                    </div>
-                    <div class="hidden md:flex justify-center h-20">
-                        <div class="w-px h-full bg-white/20"></div>
-                    </div>
-                    <div class="flex flex-col items-center justify-center px-6 py-8 sm:py-10">
-                        <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-                            1,000+
-                        </span>
-                        <span class="mt-2 text-sm sm:text-base lg:text-lg font-medium text-white/80">
-                            Verified Experts
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </section>
+    @include('frontend.pages.home.sections.stats')   
 
     @include('frontend.pages.home.sections.course-section')
   
@@ -165,5 +125,104 @@
   .animate-marquee {
     animation: marquee 50s linear infinite !important;
   }
+}
+
+
+
+
+@keyframes hero-zoom {
+    from {
+        transform: scale(1.05);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-down {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hero-glow {
+    0%,
+    100% {
+        opacity: .35;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: .8;
+        transform: scale(1.25);
+    }
+}
+
+.hero-bg-animate {
+    animation: hero-zoom 2s ease-out forwards;
+}
+
+.fade-up {
+    opacity: 0;
+    animation: fade-up .8s ease-out forwards;
+}
+
+.fade-down {
+    opacity: 0;
+    animation: fade-down .7s ease-out forwards;
+}
+
+.hero-glow {
+    animation: hero-glow 2.5s ease-in-out infinite;
+}
+
+.delay-100 {
+    animation-delay: 100ms;
+}
+
+.delay-200 {
+    animation-delay: 200ms;
+}
+
+.delay-300 {
+    animation-delay: 300ms;
+}
+
+.delay-400 {
+    animation-delay: 400ms;
+}
+
+.delay-500 {
+    animation-delay: 500ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg-animate,
+    .fade-up,
+    .fade-down,
+    .hero-glow {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
 }
 </style>

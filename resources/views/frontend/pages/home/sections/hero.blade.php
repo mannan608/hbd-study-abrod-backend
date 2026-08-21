@@ -1,11 +1,11 @@
 <section class="relative isolate  w-full min-h-[84vh] flex items-center justify-center overflow-hidden">
         <img src="{{ asset('frontend-img/hero-campus.jpg') }}"
             alt="International students walking through an Australian university campus" width="1920" height="1080"
-            class="absolute inset-0 size-full object-cover">
+            class="absolute inset-0 size-full object-cover scale-105 hero-bg-animate">
         <div class="absolute inset-0 surface-hero"></div>
         <div class="relative max-w-7xl mx-auto px-5 lg:px-8 py-24 text-center text-white sm:py-32">
             <div
-                class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1068b2]/10 backdrop-blur-sm rounded-full border border-purple-200/50 mb-8 animate-in fade-in slide-in-from-bottom-3 duration-700">
+                class="fade-down inline-flex items-center gap-2 px-5 py-2.5 bg-[#1068b2]/10 backdrop-blur-sm rounded-full border border-purple-200/50 mb-8 animate-in fade-in slide-in-from-bottom-3 duration-700">
                 <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 text-white animate-pulse">
@@ -22,12 +22,12 @@
                     Platform</span>
 
             </div>
-            <h1 class="text-4xl font-bold leading-tight sm:text-7xl uppercase">Your Future in <br> Australia Starts Here.
+            <h1 class="text-4xl font-bold leading-tight sm:text-7xl uppercase fade-up delay-100">Your Future in <br> Australia Starts Here.
             </h1>
-            <p class="mx-auto mt-5 max-w-2xl text-base opacity-85 sm:text-lg">
+            <p class="mx-auto mt-5 max-w-2xl text-base opacity-85 sm:text-lg fade-up delay-200">
                 Compare tuition, English scores, intakes and scholarships across 620+ institutions — then talk to a verified
                 counsellor for free.</p>
-            <div class="mx-auto mt-9 flex max-w-2xl flex-col gap-2 rounded-2xl bg-white p-2 shadow-lift sm:flex-row">
+            <div class="mx-auto mt-9 flex max-w-2xl flex-col gap-2 rounded-2xl bg-white p-2 shadow-lift sm:flex-row fade-up delay-300">
                 <div class="relative flex-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
