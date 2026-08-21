@@ -27,23 +27,23 @@
             <p class="mx-auto mt-5 max-w-2xl text-base opacity-85 sm:text-lg fade-up delay-200">
                 Compare tuition, English scores, intakes and scholarships across 620+ institutions — then talk to a verified
                 counsellor for free.</p>
-            <div class="mx-auto mt-9 flex max-w-2xl flex-col gap-2 rounded-2xl bg-white p-2 shadow-lift sm:flex-row fade-up delay-300">
+            <div class="mx-auto mt-9 flex max-w-2xl flex-col gap-2 rounded-2xl bg-white p-2 shadow-lift sm:flex-row fade-up delay-300 transition-all duration-500 ease-out hover:shadow-xl hover:scale-[1.01] focus-within:ring-2 focus-within:ring-brand-300 focus-within:shadow-xl">
                 <div class="relative flex-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-search absolute left-3 top-1/2 size-6 -translate-y-1/2 text-neutral-500"
+                        class="lucide lucide-search absolute left-3 top-1/2 size-6 -translate-y-1/2 text-neutral-500 transition-colors duration-300 group-focus-within:text-brand-500"
                         aria-hidden="true">
                         <path d="m21 21-4.34-4.34"></path>
                         <circle cx="11" cy="11" r="8"></circle>
                     </svg>
                     <input
-                        class="flex w-full rounded-md bg-transparent px-3 py-1 text-base text-neutral-800 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 h-12 border-0 pl-12  shadow-none focus-visible:ring-0 placeholder:text-neutral-400 placeholder:text-[15px]"
+                        class="flex w-full rounded-md bg-transparent px-3 py-1 text-base text-neutral-800 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 h-12 border-0 pl-12  shadow-none focus-visible:ring-0 placeholder:text-neutral-400 placeholder:text-[15px] transition-all duration-300"
                         placeholder="Search courses, e.g. Master of IT in Melbourne" value="">
                 </div>
                 <button
-                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-base cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-brand-500/20 text-brand-500 shadow font-bold rounded-md px-6 h-12">
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-base cursor-pointer transition-all duration-500 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-brand-500/20 text-brand-500 shadow font-bold rounded-md px-6 h-12 hover:bg-brand-500 hover:text-white hover:shadow-lg hover:scale-105 active:scale-95">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                        fill="none">
+                        fill="none" class="transition-transform duration-500 ease-out group-hover:rotate-12">
                         <g clip-path="url(#clip0_3_35)">
                             <g clip-path="url(#clip1_3_35)">
                                 <path

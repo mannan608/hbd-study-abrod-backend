@@ -15,18 +15,20 @@
     ];
 @endphp
 
-<section class="py-20  overflow-hidden">
+<section class="py-20 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div class="text-center">
+        <div
+            class="text-center reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
             {{-- <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 rounded-full mb-4">
                 <span class="text-2xl text-brand-600"> 🤝 </span>
                 <span class="text-sm font-semibold text-brand-600 uppercase tracking-wider"> Global Network </span>
             </div> --}}
-             <div
-                class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-100 backdrop-blur-sm rounded-full border border-purple-200/50 mb-8 animate-in fade-in slide-in-from-bottom-3 duration-700">
+            <div
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-100 backdrop-blur-sm rounded-full border border-purple-200/50 mb-8 transition-all duration-700 delay-100">
                 <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 text-brand-600 animate-pulse">
+                        stroke-linejoin="round"
+                        class="lucide lucide-sparkles w-4 h-4 text-brand-600 animate-pulse transition-transform duration-500">
                         <path
                             d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z">
                         </path>
@@ -36,12 +38,16 @@
                         <path d="M5 18H3"></path>
                     </svg>
                     <div class="absolute inset-0 w-4 h-4 bg-[#1068b2] blur-md animate-pulse"></div>
-                </div><span class="text-sm font-semibold  bg-clip-text text-brand-600">Global Network</span>
+                </div><span class="text-sm font-semibold bg-clip-text text-brand-600">Global Network</span>
 
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2"> Trusted By <span class="text-[#1068b2]"> 2,000+
-                    Universities </span> </h2>
-            <p class="text-gray-600"> Partnering with the world's leading educational institutions </p>
+            <h2
+                class="text-3xl md:text-4xl font-bold text-gray-900 mb-2 transition-all duration-700 delay-200">
+                Trusted By <span class="text-[#1068b2]"> 2,000+
+                    Universities </span>
+            </h2>
+            <p class="text-gray-600 transition-all duration-700 delay-300"> Partnering with the world's leading
+                educational institutions </p>
         </div>
     </div>
     <div class="relative space-y-5">
