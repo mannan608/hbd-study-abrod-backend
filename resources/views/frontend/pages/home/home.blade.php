@@ -15,7 +15,7 @@
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 relative overflow-hidden rounded-3xl bg-[#155b9d] shadow-xl reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
 
             <!-- Background Image -->
-            <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=1600&auto=format&fit=crop"
+            <img src="{{ asset('frontend-img/home-aus-cta.avif') }}"
                 alt="Australia Landmarks"
                 class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105" />
 
