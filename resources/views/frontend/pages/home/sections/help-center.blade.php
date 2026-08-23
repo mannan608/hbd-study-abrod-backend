@@ -23,7 +23,8 @@
                 </h1>
 
                 <!-- Subheading Description -->
-                <p class="mx-auto mt-4 max-w-2xl text-base text-brand-600 sm:text-lg transition-all duration-700 delay-300">
+                <p
+                    class="mx-auto mt-4 max-w-2xl text-base text-brand-600 sm:text-lg transition-all duration-700 delay-300">
                     Everything you need to discover the right course, university and
                     career path — all in one place.
                 </p>
@@ -75,7 +76,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <!-- Card 1 -->
-                <div class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
+                <div
+                    class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
                     <span class="text-xs font-semibold text-[#8cb7e3] uppercase tracking-wider block mb-2">Step 1</span>
                     <h3 class="text-base font-bold text-white mb-2">
                         Find Matching Courses
@@ -86,7 +88,8 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
+                <div
+                    class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
                     <span class="text-xs font-semibold text-[#8cb7e3] uppercase tracking-wider block mb-2">Step 2</span>
                     <h3 class="text-base font-bold text-white mb-2">
                         Compare Universities
@@ -97,7 +100,8 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
+                <div
+                    class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
                     <span class="text-xs font-semibold text-[#8cb7e3] uppercase tracking-wider block mb-2">Step 3</span>
                     <h3 class="text-base font-bold text-white mb-2">
                         Get Expert Counselling
@@ -108,7 +112,8 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
+                <div
+                    class="bg-brand-700 border border-[#114b82] p-6 rounded-xl hover:border-brand-700 transition-colors">
                     <span class="text-xs font-semibold text-[#8cb7e3] uppercase tracking-wider block mb-2">Step 4</span>
                     <h3 class="text-base font-bold text-white mb-2">
                         Track Deadlines
@@ -119,15 +124,18 @@
                 </div>
 
             </div>
-              <!-- Video Section -->
-            <div class="mt-10 sm:mt-12 lg:mt-14">
-                <div class="group relative overflow-hidden rounded-3xl bg-slate-900 shadow-2xl ring-1 ring-black/5">
+            <!-- Video Section -->
+            <div class="mt-8 sm:mt-10 lg:mt-12">
+                <div
+                    class="group relative overflow-hidden rounded-2xl  shadow-2xl sm:rounded-3xl">
 
-                    <!-- Video -->
-                    <video class="aspect-video w-full object-cover" controls playsinline preload="metadata"
-                        poster="/images/focus-img/focus-img-7.png">
-                        <source src="/assets/videos/home-video.mp4" type="video/mp4">
-                    </video>
+                    <div class="relative aspect-video w-full overflow-hidden">
+                        <iframe class="absolute inset-0 h-full w-full" src="https://www.youtube.com/embed/gbJBcB1Dwos"
+                            title="HBD Services" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
 
                 </div>
             </div>

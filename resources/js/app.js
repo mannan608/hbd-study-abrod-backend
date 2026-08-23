@@ -44,4 +44,35 @@ document.addEventListener('DOMContentLoaded', function () {
             clickable: true,
         },
     });
+
+        const testimonialSwiper = new Swiper('.testimonialSwiper', {
+        modules: [Autoplay, Pagination], // Required for autoplay and pagination to work
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 24,
+        speed: 600,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 24,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+            },
+            1024: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+            },
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+
 });

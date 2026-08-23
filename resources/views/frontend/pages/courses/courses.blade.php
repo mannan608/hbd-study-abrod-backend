@@ -2,63 +2,90 @@
 
 @section('content')
     {{-- Hero Section --}}
-    <section class="relative py-8 md:py-0 min-h-80 md:min-h-90 lg:min-h-110 flex items-center overflow-hidden -mt-4">
+    <section class="relative py-8 md:py-0 min-h-60 md:min-h-70 lg:min-h-80 flex items-center overflow-hidden -mt-4">
 
         <div class="absolute inset-0 z-0">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQoY05k-jNBUO0YmxAqoLM5DGm_5330TYZTmlU5wZAkAbZJzZTBJuR8jez1K2SkYI1nH1IH9BSzC87aMBdA1eWSnwXJ8jyvpwgQ2-iyucX3phY7sQMmLA98O57-3JaWaqb0wvkYAv5sy0pwY7ssk-alxoxK7qBlP9VZuDKcxGmeTuAuVOQTUXJOmiqEJoS7bk5GATbF7uAg7y3hvRgSiRkbcK6ll9T1VpwNMrVaEpkgfMbvRb5YDMuc2K52GzVeFS3YJ8VKfagpA"
-                alt="Training" class="w-full h-full object-cover">
+            <img src="{{ asset('frontend-img/course-page-header.jpg') }}" alt="Training" class="w-full h-full object-cover">
 
-            <div class="absolute inset-0 bg-linear-to-r  bg-secondary-500/75 to-transparent"></div>
+            <div class="absolute inset-0 bg-linear-to-r  bg-black/70 to-transparent"></div>
         </div>
-
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
-            <div class="max-w-2xl">
+            <div class="max-w-2xl mx-auto">
 
-                <h1 class="text-white font-bold text-2xl sm:text-3xl lg:text-4xl leading-tight mb-4 sm:mb-6">
-                    Empowering the Next Generation of Professionals
+                <h1 class="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl uppercase text-center">
+                    Explore Thousands of Courses Across Australia
                 </h1>
 
-                <p class="text-slate-200 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
-                    At HBD Services, we bridge the gap between academic knowledge
-                    and industry demands. Our mission is to provide world-class
-                    vocational education that transforms careers and fuels
-                    professional growth.
-                </p>
-
             </div>
+            <div class="max-w-2xl mx-auto">
+                <!-- Search Box -->
+                <form action="" method="GET"
+                    class="mt-5 flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-2 shadow-lg sm:mt-6 sm:flex-row">
 
-        </div>
+                    <!-- Input -->
+                    <div class="relative min-w-0 flex-1">
 
-    </section>
-    <section class=" py-8 md:py-12 lg:py-14 bg-white">
-        <div class="max-w-7xl mx-auto px-5 lg:px-8">
-            <div class="">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="h-1.5 w-14 bg-brand-500 rounded-full mb-3"></div>
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Our Courses</h1>
-                    <p class="text-sm lg:text-base text-gray-600 text-center mt-3">We offer a range of industry-relevant
-                        courses which includes Advanced Diploma of Information Technology, Advanced Diploma of Leadership
-                        and Management, Diploma of Information Technology, Diploma of Leadership and Management, and
-                        Graduate Diploma of Management(Learning).</p>
-                </div>
-                <div class=" mt-8 md:mt-12">
-                    <x-frontend.courses :courses="$courses" />
-                </div>
+                        <!-- Search Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 sm:h-5 sm:w-5"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" aria-hidden="true">
+
+                            <path d="m21 21-4.34-4.34"></path>
+                            <circle cx="11" cy="11" r="8"></circle>
+                        </svg>
+
+                        <input type="search" name="search" value="{{ request('search') }}"
+                            placeholder="Keyword: course, code, city or university"
+                            class="h-11 w-full rounded-xl border-0 bg-transparent px-3 pl-10 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-0 sm:text-base">
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-2">
+
+                        <!-- AI Assist -->
+                        <button type="button"
+                            class="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-slate-700 shadow-sm transition-all duration-200 hover:border-[#1068b2]/30 hover:bg-slate-50 hover:text-[#1068b2] active:scale-[0.98] sm:flex-none">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+                                <path
+                                    d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+
+                                <path d="M20 2v4"></path>
+                                <path d="M22 4h-4"></path>
+                                <circle cx="4" cy="20" r="2"></circle>
+                            </svg>
+
+                            <span>AI assist</span>
+                        </button>
+
+                        <!-- Search -->
+                        <button type="submit"
+                            class="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-[#1068b2] px-5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#0d5796] active:scale-[0.98] sm:flex-none">
+
+                            Search
+                        </button>
+
+                    </div>
+                </form>
             </div>
+        </div>
 
-        </div>
     </section>
-    
-    <section class=" py-8 md:py-12 lg:py-14 bg-white ">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <x-frontend.consultation-form />
-        </div>
-    </section>
-    <section class="pt-8 md:pt-12 lg:pt-14">
-        <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-            <x-frontend.cta />
+
+    <section class="mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex gap-10">
+                @include('frontend.pages.courses.aside')
+                 <div class="">
+                courses/provider list
+            </div>
+            </div>
+           
         </div>
     </section>
 @endsection

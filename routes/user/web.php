@@ -5,6 +5,7 @@ use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\CourseController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\EventRegistrationController;
@@ -21,7 +22,7 @@ Route::get('/signup', function () {
 Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
 Route::get('/', [FrontendController::class, 'homePage'])->name('home');
-Route::get('/courses', [FrontendController::class, 'courses'])->name('courses');
+Route::get('/courses', [CourseController::class, 'courses'])->name('courses');
 Route::get('/counsellors', [FrontendController::class, 'courses'])->name('counsellors');
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/destinations', [EventController::class, 'index'])->name('destinations');

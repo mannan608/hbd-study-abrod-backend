@@ -56,10 +56,12 @@
     </section>
     @include('frontend.pages.home.sections.expo-event')
     @include('frontend.pages.home.sections.counseller-section')
-    @include('frontend.pages.home.sections.university-partners')
+     @include('frontend.pages.about.about-section')
     @include('frontend.pages.home.sections.help-center')
-    @include('frontend.pages.about.about-section')
+  
     @include('frontend.pages.components.testimonial.testimonial')
+     @include('frontend.pages.home.sections.university-partners')
+     @include('frontend.pages.home.sections.cta-section')
 
     <script>
         (function() {
