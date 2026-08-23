@@ -24,7 +24,7 @@
                 Connect with certified, empathetic professionals dedicated to mapping your precise academic outcome.
             </p>
         </header>
-        <div class="">
+        <div class="h-80">
              @include('frontend.pages.components.counsellers.counseller-card')
         </div>
     </div>

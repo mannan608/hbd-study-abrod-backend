@@ -297,5 +297,5 @@
      </div>
 
      <!-- Pagination Dots -->
-     <div class="swiper-pagination mt-4"></div>
+     {{-- <div class="swiper-pagination mt-4"></div> --}}
  </div>
