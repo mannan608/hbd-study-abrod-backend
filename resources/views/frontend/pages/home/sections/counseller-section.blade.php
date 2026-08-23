@@ -20,7 +20,7 @@
             </h1>
 
             <!-- Subheading Description -->
-            <p class="mx-auto mt-4 max-w-2xl text-base text-slate-600 sm:text-lg transition-all duration-700 delay-300">
+            <p class="mx-auto mt-4 max-w-2xl text-base text-neutral-600 sm:text-lg transition-all duration-700 delay-300">
                 Connect with certified, empathetic professionals dedicated to mapping your precise academic outcome.
             </p>
         </header>

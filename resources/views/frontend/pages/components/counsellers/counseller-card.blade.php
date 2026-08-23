@@ -13,9 +13,9 @@
         </div>
 
         <div class="mt-4 flex flex-wrap gap-2">
-          <span class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">VISA</span>
-          <span class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SOP</span>
-          <span class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SCHOLARSHIPS</span>
+          <span class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">VISA</span>
+          <span class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SOP</span>
+          <span class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SCHOLARSHIPS</span>
         </div>
 
         <div class="mt-4 flex items-center gap-1.5 text-sm text-slate-500">
@@ -70,11 +70,11 @@
 
                      <div class="mt-4 flex flex-wrap gap-2">
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">VISA</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">VISA</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SOP</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SOP</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SCHOLARSHIPS</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SCHOLARSHIPS</span>
                      </div>
 
                      <div class="mt-4 flex items-center gap-1.5 text-sm text-slate-500">
@@ -131,11 +131,11 @@
 
                      <div class="mt-4 flex flex-wrap gap-2">
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">VISA</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">VISA</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SOP</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SOP</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SCHOLARSHIPS</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SCHOLARSHIPS</span>
                      </div>
 
                      <div class="mt-4 flex items-center gap-1.5 text-sm text-slate-500">
@@ -192,11 +192,11 @@
 
                      <div class="mt-4 flex flex-wrap gap-2">
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">VISA</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">VISA</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SOP</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SOP</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SCHOLARSHIPS</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SCHOLARSHIPS</span>
                      </div>
 
                      <div class="mt-4 flex items-center gap-1.5 text-sm text-slate-500">
@@ -253,11 +253,11 @@
 
                      <div class="mt-4 flex flex-wrap gap-2">
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">VISA</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">VISA</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SOP</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SOP</span>
                          <span
-                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-600">SCHOLARSHIPS</span>
+                             class="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-medium tracking-wide text-neutral-600">SCHOLARSHIPS</span>
                      </div>
 
                      <div class="mt-4 flex items-center gap-1.5 text-sm text-slate-500">

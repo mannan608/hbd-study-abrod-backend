@@ -68,17 +68,17 @@
     <div class="grid grid-cols-3 gap-y-5 gap-x-4">
         <!-- Row 1 -->
         <div class="transition-all duration-300 group-hover:-translate-y-0.5">
-            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-slate-600">Annual fee</p>
+            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-neutral-600">Annual fee</p>
             <p class="text-base font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-700">A$48,000
             </p>
         </div>
         <div class="transition-all duration-300 group-hover:-translate-y-0.5 delay-75">
-            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-slate-600">Total fee</p>
+            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-neutral-600">Total fee</p>
             <p class="text-base font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-700">A$96,000
             </p>
         </div>
         <div class="transition-all duration-300 group-hover:-translate-y-0.5 delay-100">
-            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-slate-600">Duration</p>
+            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-neutral-600">Duration</p>
             <p class="inline-flex items-center gap-1.5 text-base font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-700">
                 <svg class="h-4 w-4 text-slate-700 transition-transform duration-500 group-hover:scale-110" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -91,13 +91,13 @@
 
         <!-- Row 2 -->
         <div class="transition-all duration-300 group-hover:-translate-y-0.5 delay-150">
-            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-slate-600">English score
+            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-neutral-600">English score
             </p>
             <p class="text-base font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-700">IELTS 6.5
                 · PTE 58</p>
         </div>
         <div class="transition-all duration-300 group-hover:-translate-y-0.5 delay-200">
-            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-slate-600">Next intake</p>
+            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-neutral-600">Next intake</p>
             <p class="inline-flex items-center gap-1.5 text-base font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-700">
                 <svg class="h-4 w-4 text-slate-700 transition-transform duration-500 group-hover:scale-110" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -108,7 +108,7 @@
             </p>
         </div>
         <div class="transition-all duration-300 group-hover:-translate-y-0.5 delay-300">
-            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-slate-600">Application fee
+            <p class="text-xs text-slate-500 transition-colors duration-300 group-hover:text-neutral-600">Application fee
             </p>
             <p class="text-base font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-700">A$100</p>
         </div>
