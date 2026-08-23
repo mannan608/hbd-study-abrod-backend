@@ -25,21 +25,7 @@
             </p>
         </header>
         <div class="">
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                <div
-                    class="reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-100 group hover:-translate-y-1 transition-transform duration-300">
-                    @include('frontend.pages.components.counsellers.counseller-card')
-                </div>
-                <div
-                    class="reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-200 group hover:-translate-y-1 transition-transform duration-300">
-                    @include('frontend.pages.components.counsellers.counseller-card')
-                </div>
-                <div
-                    class="reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-300 group hover:-translate-y-1 transition-transform duration-300">
-                    @include('frontend.pages.components.counsellers.counseller-card')
-                </div>
-            </div>
-
+             @include('frontend.pages.components.counsellers.counseller-card')
         </div>
     </div>
 </section>
