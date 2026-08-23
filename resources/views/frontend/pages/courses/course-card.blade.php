@@ -1,5 +1,5 @@
-<a href="#"
-    class="group block h-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-[#1068b2]/30 hover:shadow-xl active:translate-y-0 active:shadow-md sm:p-5 lg:p-6">
+<a href="{{ route('course-details', $course->slug) }}"
+    class="group block h-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-brand-500/30 hover:shadow-xl active:translate-y-0 active:shadow-md sm:p-5 lg:p-6">
 
     <!-- Header -->
     <div class="flex items-start gap-3 sm:gap-4">
@@ -39,7 +39,7 @@
 
             <!-- Title -->
             <h2
-                class="text-lg font-bold leading-snug tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-[#1068b2] sm:text-xl">
+                class="text-lg font-bold leading-snug tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-brand-500 sm:text-xl">
                 Master of Information Technology
             </h2>
 
@@ -80,7 +80,7 @@
 
     <!-- Divider -->
     <div
-        class="my-4 border-t border-slate-100 transition-colors duration-500 group-hover:border-[#1068b2]/20 sm:my-5">
+        class="my-4 border-t border-slate-100 transition-colors duration-500 group-hover:border-brand-500/20 sm:my-5">
     </div>
 
     <!-- Details -->
@@ -93,7 +93,7 @@
             </p>
 
             <p
-                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-[#1068b2] sm:text-base">
+                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-500 sm:text-base">
                 A$48,000
             </p>
         </div>
@@ -105,7 +105,7 @@
             </p>
 
             <p
-                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-[#1068b2] sm:text-base">
+                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-500 sm:text-base">
                 A$96,000
             </p>
         </div>
@@ -117,7 +117,7 @@
             </p>
 
             <p
-                class="mt-0.5 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-[#1068b2] sm:text-base">
+                class="mt-0.5 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-500 sm:text-base">
 
                 <svg class="h-4 w-4 shrink-0 text-slate-700 transition-transform duration-500 group-hover:scale-110"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -136,7 +136,7 @@
             </p>
 
             <p
-                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-[#1068b2] sm:text-base">
+                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-500 sm:text-base">
                 IELTS 6.5 · PTE 58
             </p>
         </div>
@@ -148,7 +148,7 @@
             </p>
 
             <p
-                class="mt-0.5 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-[#1068b2] sm:text-base">
+                class="mt-0.5 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-500 sm:text-base">
 
                 <svg class="h-4 w-4 shrink-0 text-slate-700 transition-transform duration-500 group-hover:scale-110"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -167,7 +167,7 @@
             </p>
 
             <p
-                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-[#1068b2] sm:text-base">
+                class="mt-0.5 text-sm font-semibold text-slate-900 transition-colors duration-300 group-hover:text-brand-500 sm:text-base">
                 A$100
             </p>
         </div>

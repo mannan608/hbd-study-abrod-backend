@@ -5,6 +5,7 @@ use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\CounsellorController;
 use App\Http\Controllers\Frontend\CourseController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -23,7 +24,7 @@ Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
 Route::get('/', [FrontendController::class, 'homePage'])->name('home');
 Route::get('/courses', [CourseController::class, 'courses'])->name('courses');
-Route::get('/counsellors', [FrontendController::class, 'courses'])->name('counsellors');
+Route::get('/counsellors', [CounsellorController::class, 'counsellors'])->name('counsellors');
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/destinations', [EventController::class, 'index'])->name('destinations');
 Route::get('/how-we-works', [EventController::class, 'index'])->name('how-we-works');
@@ -36,6 +37,9 @@ Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contac
 
 Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');
 Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('events.register.store');
+
+
+Route::get('/courses/{slug}', [CourseController::class, 'coursesDetails'])->name('course-details');
 
 
 // Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');

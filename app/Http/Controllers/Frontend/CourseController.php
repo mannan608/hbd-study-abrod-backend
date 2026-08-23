@@ -13,5 +13,10 @@ class CourseController extends Controller
         return view('frontend.pages.courses.courses', ['title' => 'Courses']);
     }
 
+     public function coursesDetails(Course $course)
+    {
+        return view('frontend.pages.courses.course-details', compact('course'));
+    }
+
   
 }

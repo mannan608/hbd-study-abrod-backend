@@ -7,6 +7,7 @@
     @include('frontend.pages.home.sections.stats')
 
     @include('frontend.pages.home.sections.course-section')
+    @include('frontend.pages.home.sections.emerging-career')
 
     @include('frontend.pages.home.sections.how-it-work')
 

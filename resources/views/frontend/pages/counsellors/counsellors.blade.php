@@ -38,8 +38,8 @@
                         </svg>
 
                         <input type="search" name="search" value="{{ request('search') }}"
-                            placeholder="Keyword: course, code, city or university"
-                            class="h-11 w-full rounded-xl border-0 placeholder:text-[15px] bg-transparent px-3 pl-10 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-0 sm:text-base">
+                            placeholder="Keyword: Name, Expart, location or university"
+                            class="h-11 w-full rounded-xl placeholder:text-[15px] border-0 bg-transparent px-3 pl-10 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-0 sm:text-base">
                     </div>
 
                     <!-- Actions -->
@@ -77,67 +77,55 @@
 
     </section>
 
+
     <section class="mt-8">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col lg:flex-row gap-8">
-      
-      <!-- Aside Filter Sidebar -->
-      @include('frontend.pages.courses.aside')
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
 
-      <!-- Listing Content Area -->
-      <div class="flex-1 space-y-5">
+                <!-- Listing Content Area -->
+                <div class="flex-1 space-y-5">
 
-        <!-- Top Navigation & Utility Controls -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-white p-3 shadow-xs">
-          
-          <!-- Category Tabs -->
-          <nav class="flex rounded-xl bg-neutral-100 p-1">
-            <button class="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-xs font-bold text-neutral-900 shadow-xs transition">
-              <span>Courses</span>
-              <span class="rounded-full bg-neutral-100 px-2 py-0.5 text-[10px] font-bold text-[#005f6b]">10</span>
-            </button>
-            <button class="flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition">
-              <span>Providers</span>
-              <span class="rounded-full bg-neutral-200/60 px-2 py-0.5 text-[10px] font-medium text-neutral-600">6</span>
-            </button>
-          </nav>
+                    <!-- Top Navigation & Utility Controls -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-end justify-end gap-4 rounded-2xl bg-white p-3 shadow-xs">
+                        <div class="flex items-center gap-2 ">
+                            <span class="text-sm font-medium text-neutral-400">Sort:</span>
+                            <select
+                                class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-bold text-neutral-800 focus:ring-0 cursor-pointer">
+                                <option value="relevance">Branch</option>
+                                <option value="fee_asc">Location:Dhanmondi</option>
+                                <option value="fee_asc">Location:Bangla Motor</option>
+                                <option value="fee_asc">Location:Gulshan</option>
+                                <option value="fee_asc">Location:Banani</option>
+                            </select>
+                        </div>
+                        <!-- Sort By Select -->
+                        <div class="flex items-center gap-2 ">
+                            <span class="text-sm font-medium text-neutral-400">Sort:</span>
+                            <select
+                                class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-bold text-neutral-800 focus:ring-0 cursor-pointer">
+                                <option value="relevance">Expertise</option>
+                                <option value="fee_asc">Agriculture & Environmental</option>
+                                <option value="fee_desc">Architecture and Building</option>
+                                <option value="duration">Creative Arts</option>
+                                <option value="duration">Education</option>
+                                <option value="duration">Engineering and Related Technologies</option>
+                                <option value="duration">Food, Hospitality and Personal</option>
+                            </select>
+                        </div>
 
-          <!-- Sorting & View Controls -->
-          <div class="flex items-center gap-3">
-            
-            <!-- Map Toggle Button -->
-            <button class="flex items-center gap-1.5 rounded-xl border border-neutral-200 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 hover:border-neutral-300 transition">
-              <svg class="h-4 w-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
-              </svg>
-              <span>View Map</span>
-            </button>
+                    </div>
 
-            <!-- Sort By Select -->
-            <div class="flex items-center gap-2 border-l border-neutral-200 pl-3">
-              <span class="text-xs font-medium text-neutral-400">Sort:</span>
-              <select class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-xs font-bold text-neutral-800 focus:ring-0 cursor-pointer">
-                <option value="relevance">Relevance</option>
-                <option value="fee_asc">Fee: Low to High</option>
-                <option value="fee_desc">Fee: High to Low</option>
-                <option value="duration">Duration</option>
-              </select>
+                    <!-- Course Cards Stream Placeholder -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @for ($i = 0; $i < 3; $i++)
+                            @include('frontend.pages.counsellors.counseller-card')
+                        @endfor
+                    </div>
+
+                </div>
+
             </div>
-
-          </div>
-
         </div>
-
-        <!-- Course Cards Stream Placeholder -->
-        <div class="space-y-4">
-          @for ($i = 0; $i < 3; $i++)
-            @include('frontend.pages.courses.course-card')
-          @endfor
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
+    </section>
 @endsection
