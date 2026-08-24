@@ -3,10 +3,10 @@
 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
     @foreach ($courses as $course)
         <div
-            class="group bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-transparent hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-2">
+            class="group bg-white rounded-3xl overflow-hidden border border-neutral-100 hover:border-transparent hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-2">
 
             {{-- Image --}}
-            <div class="relative h-56 overflow-hidden bg-gray-100">
+            <div class="relative h-56 overflow-hidden bg-neutral-100">
 
                 <img src="{{ asset($course->thumbnail) }}" alt="{{ $course['name'] }}"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -18,7 +18,7 @@
 
             {{-- Content --}}
             <div class="p-6">
-                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2 line-clamp-2 text-center">
+                <h3 class="text-base md:text-lg font-bold text-neutral-900 mb-2 line-clamp-2 text-center">
                     {{ $course['name'] }}
                 </h3>
                 <div class="flex items-center justify-between mt-4 gap-6">

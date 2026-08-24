@@ -61,14 +61,49 @@
     <section class="py-8 md:py-12">
         <div class="max-w-7xl mx-auto px-5 md:px-8">
 
+            <!-- Top Navigation & Utility Controls -->
+            <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-white p-3 shadow-xs mb-10">
+                <div class="flex items-center gap-4">
+                    <x-form.radio id="ongoing-events" name="event" label="Ongoing Events" value="ongoing" />
+
+                    <x-form.radio id="upcoming-events" name="event" label="Upcoming Events" value="upcoming" />
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 ">
+                        <span class="text-sm font-medium text-neutral-400">Sort:</span>
+                        <select name="category"
+                            class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-semibold text-neutral-800 focus:ring-0 cursor-pointer">
+                            <option value="">Category</option>
+
+                            <option value="education">Education</option>
+                            <option value="visa">Visa</option>
+                            <option value="insurance">Insurance</option>
+                            <option value="professional-year">Professional Year</option>
+                        </select>
+                    </div>
+                    <!-- Sort By Select -->
+                    <div class="flex items-center gap-2 ">
+                        <span class="text-sm font-medium text-neutral-400">Sort:</span>
+                        <select
+                            class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-semibold text-neutral-800 focus:ring-0 cursor-pointer">
+                            <option value="relevance">HBD Services</option>
+                            <option value="duration">Providers</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
             {{-- event Grid --}}
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 @for ($i = 0; $i < 2; $i++)
-                  <a href="#" class="flex shrink-0 items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
-     
-                    @include('frontend.pages.events.event-card')
-                </a>
+                    <a href="{{ route('event-details') }}"
+                        class="flex shrink-0 items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
+
+                        @include('frontend.pages.events.event-card')
+                    </a>
                 @endfor
 
             </div>

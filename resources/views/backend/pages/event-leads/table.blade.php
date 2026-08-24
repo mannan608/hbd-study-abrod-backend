@@ -60,26 +60,26 @@
     {{-- Delete Modal --}}
     <div x-show="showDeleteModal" x-cloak class="fixed inset-0 z-[99999]">
 
-        <div class="absolute inset-0 bg-gray-900/50" @click="closeDeleteModal()"></div>
+        <div class="absolute inset-0 bg-neutral-900/50" @click="closeDeleteModal()"></div>
 
         <div class="absolute inset-0 flex items-center justify-center p-4">
 
             <div
                 class="w-full max-w-md
                     rounded-xl
-                    bg-white dark:bg-gray-900
-                    border border-gray-200 dark:border-gray-800
+                    bg-white dark:bg-neutral-900
+                    border border-neutral-200 dark:border-neutral-800
                     shadow-xl">
 
                 <div class="p-5">
 
                     <div class="text-base font-semibold
-                            text-gray-800 dark:text-white/90">
+                            text-neutral-800 dark:text-white/90">
                         Delete Lead?
                     </div>
 
                     <div class="mt-1 text-sm
-                            text-gray-600 dark:text-gray-400">
+                            text-neutral-600 dark:text-neutral-400">
                         This will permanently delete lead:
 
                         <span class="font-mono" x-text="rowToDelete ? rowToDelete.full_name : ''"></span>
@@ -90,11 +90,11 @@
                         <button type="button" @click="closeDeleteModal()"
                             class="inline-flex items-center justify-center
                                 rounded-lg
-                                border border-gray-300 dark:border-gray-700
+                                border border-neutral-300 dark:border-neutral-700
                                 px-4 py-2
                                 text-sm font-medium
-                                text-gray-700 dark:text-gray-200
-                                hover:bg-gray-50 dark:hover:bg-gray-800">
+                                text-neutral-700 dark:text-neutral-200
+                                hover:bg-neutral-50 dark:hover:bg-neutral-800">
                             Cancel
                         </button>
 
@@ -124,7 +124,7 @@
     <div
         class="overflow-hidden
             rounded-xl
-            border border-gray-100 dark:border-white/[0.05]
+            border border-neutral-100 dark:border-white/[0.05]
             bg-white">
 
         <div class="max-w-full overflow-x-auto">
@@ -132,15 +132,15 @@
             <table class="w-full text-left border-collapse">
 
                 <thead
-                    class="bg-gray-50 dark:bg-white/[0.02]
-                        border-b border-gray-100 dark:border-white/[0.05]">
+                    class="bg-neutral-50 dark:bg-white/[0.02]
+                        border-b border-neutral-100 dark:border-white/[0.05]">
 
                     <tr>
 
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider">
                             Id
                         </th>
@@ -148,7 +148,7 @@
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider">
                             Event
                         </th>
@@ -156,7 +156,7 @@
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider">
                             Name
                         </th>
@@ -164,7 +164,7 @@
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider">
                             Phone
                         </th>
@@ -172,7 +172,7 @@
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider">
                             Mail
                         </th>
@@ -180,7 +180,7 @@
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider">
                             Course
                         </th>
@@ -188,7 +188,7 @@
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider">
                             Source
                         </th>
@@ -196,7 +196,7 @@
                         <th
                             class="px-5 py-4
                                 text-xs font-medium
-                                text-gray-500
+                                text-neutral-500
                                 uppercase tracking-wider
                                 text-right">
                             Action
@@ -209,7 +209,7 @@
 
                 <tbody
                     class="divide-y
-                        divide-gray-100
+                        divide-neutral-100
                         dark:divide-white/[0.05]">
 
                     {{-- Empty State --}}
@@ -221,8 +221,8 @@
                                 class="px-5 py-10
                                     text-center
                                     text-sm
-                                    text-gray-500
-                                    dark:text-gray-400">
+                                    text-neutral-500
+                                    dark:text-neutral-400">
                                 No event lead records found.
                             </td>
 
@@ -235,7 +235,7 @@
                     <template x-for="( row, index) in tableRowData" :key="row.id">
 
                         <tr
-                            class="hover:bg-gray-50/50
+                            class="hover:bg-neutral-50/50
                                 dark:hover:bg-white/[0.01]
                                 transition-colors">
 
@@ -244,10 +244,10 @@
 
                                 <span
                                     class="px-2 py-1
-                                        bg-gray-100
-                                        dark:bg-gray-800
-                                        text-gray-600
-                                        dark:text-gray-400
+                                        bg-neutral-100
+                                        dark:bg-neutral-800
+                                        text-neutral-600
+                                        dark:text-neutral-400
                                         rounded
                                         text-xs
                                         font-mono"
@@ -261,13 +261,13 @@
 
                                 <div class="text-sm
                                         font-medium
-                                        text-gray-700
-                                        dark:text-gray-300"
+                                        text-neutral-700
+                                        dark:text-neutral-300"
                                     x-text="row.event_title"></div>
 
                                 <div
                                     class="text-xs
-                                        text-gray-400
+                                        text-neutral-400
                                         mt-1">
                                     ID:
                                     <span x-text="row.event_id"></span>
@@ -280,11 +280,11 @@
                             <td
                                 class="px-5 py-4
                                     text-sm
-                                    text-gray-700
-                                    dark:text-gray-300">
+                                    text-neutral-700
+                                    dark:text-neutral-300">
                                 <div class="font-medium" x-text="row.full_name"></div>
                                 <div class="text-xs
-                                        text-gray-400
+                                        text-neutral-400
                                         mt-1"
                                     x-show="row.email">
                                     <span x-text="row.email"></span>
@@ -297,12 +297,12 @@
                             <td
                                 class="px-5 py-4
                                     text-sm
-                                    text-gray-500
-                                    dark:text-gray-400">
+                                    text-neutral-500
+                                    dark:text-neutral-400">
                                 <div x-text="row.phone || 'N/A'"></div>
 
                                 <div class="text-xs
-                                        text-gray-400
+                                        text-neutral-400
                                         mt-1"
                                     x-show="row.whatsapp">
                                     WhatsApp:
@@ -316,8 +316,8 @@
                             <td
                                 class="px-5 py-4
                                     text-sm
-                                    text-gray-500
-                                    dark:text-gray-400">
+                                    text-neutral-500
+                                    dark:text-neutral-400">
                                 <span x-text="row.email"></span>
                             </td>
 
@@ -326,8 +326,8 @@
                             <td
                                 class="px-5 py-4
                                     text-sm
-                                    text-gray-500
-                                    dark:text-gray-400">
+                                    text-neutral-500
+                                    dark:text-neutral-400">
                                 <span x-text="row.interested_course || 'N/A'"></span>
                             </td>                        
 
@@ -336,8 +336,8 @@
 
                                 <span
                                     class="px-2 py-0.5
-                                        bg-gray-100
-                                        text-gray-700
+                                        bg-neutral-100
+                                        text-neutral-700
                                         rounded
                                         text-xs
                                         font-medium
@@ -355,7 +355,7 @@
                                     {{-- View --}}
                                     <a :href="leadBaseUrl + '/' + row.id" title="View Lead"
                                         class="p-2
-                                            text-gray-500
+                                            text-neutral-500
                                             hover:text-blue-600
                                             hover:bg-blue-50
                                             dark:hover:bg-blue-500/10
@@ -377,7 +377,7 @@
                                     {{-- Delete --}}
                                     <button type="button" title="Delete Lead" @click="openDeleteModal(row)"
                                         class="p-2
-                                            text-gray-500
+                                            text-neutral-500
                                             hover:text-red-600
                                             hover:bg-red-50
                                             dark:hover:bg-red-500/10
@@ -413,7 +413,7 @@
             <div
                 class="px-5 py-4
                     border-t
-                    border-gray-100
+                    border-neutral-100
                     dark:border-white/[0.05]">
                 {{ $eventLeads->links() }}
             </div>

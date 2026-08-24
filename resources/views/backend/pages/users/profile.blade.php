@@ -9,7 +9,7 @@
             </div>
         @endif
 
-        <div class="bg-white rounded-2xl shadow-sm border dark:bg-gray-900">
+        <div class="bg-white rounded-2xl shadow-sm border dark:bg-neutral-900">
 
             <div class="p-6 border-b">
                 <h2 class="text-xl font-semibold">
@@ -31,7 +31,7 @@
                             Profile Photo
                         </label>
                         <div class="flex flex-col items-center justify-center">
-                            <label class="relative group cursor-pointer border border-gray-400 rounded-full">
+                            <label class="relative group cursor-pointer border border-neutral-400 rounded-full">
                                 <!-- Current Profile Picture -->
                                 <img id="avatarPreview"
                                     src="{{ $user->avatar ? asset($user->avatar) : asset('images/user/owner.png') }}"
@@ -95,7 +95,7 @@
                                 </label>
 
                                 <input type="email" value="{{ $user->email }}" readonly
-                                    class="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed">
+                                    class="w-full border rounded-xl px-4 py-3 bg-neutral-100 cursor-not-allowed">
                             </div>
 
                         </div>

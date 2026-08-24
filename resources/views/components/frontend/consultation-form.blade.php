@@ -1,11 +1,11 @@
 
 <div id="consultation-form">
      <div class="md:mb-4 mb-3 lg:mb-6">
-     <h1 class="text-center text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">Book a Free Consultation
+     <h1 class="text-center text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900">Book a Free Consultation
      </h1>
  </div>
  <form action="{{ route('contact.store') }}" method="POST"
-     class="border border-gray-200 p-6 w-full lg:max-w-3xl mx-auto rounded-lg">
+     class="border border-neutral-200 p-6 w-full lg:max-w-3xl mx-auto rounded-lg">
      @csrf
      <div class="flex flex-col gap-4">
      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -64,11 +64,11 @@
                     </svg>
                 </div>
 
-                <h3 class="text-xl font-bold text-gray-900 mb-2">
+                <h3 class="text-xl font-bold text-neutral-900 mb-2">
                     Success!
                 </h3>
 
-                <p class="text-gray-600 mb-6">
+                <p class="text-neutral-600 mb-6">
                     {{ session('success') }}
                 </p>
 

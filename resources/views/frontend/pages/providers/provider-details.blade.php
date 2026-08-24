@@ -35,17 +35,17 @@
             <div class="lg:col-span-2 space-y-12">
 
                 <!-- Overview Section -->
-                <section class="bg-white rounded-3xl p-8 border border-gray-100 ">
+                <section class="bg-white rounded-3xl p-8 border border-neutral-100 ">
                     <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">Overview</h2>
-                        <div class="flex items-center space-x-4 text-xs font-semibold text-gray-500">
+                        <h2 class="text-2xl font-bold text-neutral-900">Overview</h2>
+                        <div class="flex items-center space-x-4 text-xs font-semibold text-neutral-500">
                             <span class="flex items-center"><i class="fa-regular fa-clock mr-1 text-brand-500"></i> 50 hrs
                                 ago</span>
                             <span class="flex items-center"><i class="fa-regular fa-eye mr-1 text-brand-500"></i> 1 Spa
                                 Publication • release</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 leading-relaxed text-base">
+                    <p class="text-neutral-600 leading-relaxed text-base">
                         Marmora municipal Adelaide was status-free tertiary institution, its status a primary blueprinting
                         educational hub for arts, music, visual and cultural studies intelligence campus. Underway with
                         Australian Council of States, it was securely community awareness framework and standard core
@@ -58,32 +58,32 @@
                 <!-- Quick Pathway Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div
-                        class="bg-white p-6 rounded-2xl border border-gray-100  hover:border-brand-300 transition group">
+                        class="bg-white p-6 rounded-2xl border border-neutral-100  hover:border-brand-300 transition group">
                         <div
                             class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4 group-hover:bg-brand-600 group-hover:text-white transition">
                             <i class="fa-solid fa-graduation-cap"></i>
                         </div>
-                        <h3 class="font-semibold text-gray-900 mb-1">Direct Career Pathways</h3>
-                        <p class="text-sm text-gray-500">Structured action frameworks tailored for community consultants.
+                        <h3 class="font-semibold text-neutral-900 mb-1">Direct Career Pathways</h3>
+                        <p class="text-sm text-neutral-500">Structured action frameworks tailored for community consultants.
                         </p>
                     </div>
                     <div
-                        class="bg-white p-6 rounded-2xl border border-gray-100  hover:border-brand-300 transition group">
+                        class="bg-white p-6 rounded-2xl border border-neutral-100  hover:border-brand-300 transition group">
                         <div
                             class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4 group-hover:bg-brand-600 group-hover:text-white transition">
                             <i class="fa-solid fa-award"></i>
                         </div>
-                        <h3 class="font-semibold text-gray-900 mb-1">Hands-on Training</h3>
-                        <p class="text-sm text-gray-500">Connected with academia tasks, real case practices.</p>
+                        <h3 class="font-semibold text-neutral-900 mb-1">Hands-on Training</h3>
+                        <p class="text-sm text-neutral-500">Connected with academia tasks, real case practices.</p>
                     </div>
                     <div
-                        class="bg-white p-6 rounded-2xl border border-gray-100  hover:border-brand-300 transition group">
+                        class="bg-white p-6 rounded-2xl border border-neutral-100  hover:border-brand-300 transition group">
                         <div
                             class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4 group-hover:bg-brand-600 group-hover:text-white transition">
                             <i class="fa-solid fa-briefcase"></i>
                         </div>
-                        <h3 class="font-semibold text-gray-900 mb-1">Industry Alignment</h3>
-                        <p class="text-sm text-gray-500">Streamlined course mapping to support student identity development.
+                        <h3 class="font-semibold text-neutral-900 mb-1">Industry Alignment</h3>
+                        <p class="text-sm text-neutral-500">Streamlined course mapping to support student identity development.
                         </p>
                     </div>
                 </div>
@@ -147,13 +147,13 @@
         </div>
 
         <!-- Tabs & Detailed Categories Content -->
-        <div class="bg-white rounded-3xl p-8 border border-gray-100  space-y-10 mt-12">
+        <div class="bg-white rounded-3xl p-8 border border-neutral-100  space-y-10 mt-12">
             <!-- Nav Tabs -->
-            <div class="flex border-b border-gray-100 space-x-8 text-base font-semibold">
+            <div class="flex border-b border-neutral-100 space-x-8 text-base font-semibold">
                 <button class="pb-3 border-b-2 border-brand-600 text-brand-600">Facilities</button>
-                <button class="pb-3 text-gray-400 hover:text-gray-600 transition">Scholarships</button>
-                <button class="pb-3 text-gray-400 hover:text-gray-600 transition">Accommodation</button>
-                <button class="pb-3 text-gray-400 hover:text-gray-600 transition">Locations</button>
+                <button class="pb-3 text-neutral-400 hover:text-neutral-600 transition">Scholarships</button>
+                <button class="pb-3 text-neutral-400 hover:text-neutral-600 transition">Accommodation</button>
+                <button class="pb-3 text-neutral-400 hover:text-neutral-600 transition">Locations</button>
             </div>
 
             <!-- Facilities Item -->
@@ -171,58 +171,58 @@
                 </div>
                 <div class="space-y-3">
                     <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-gray-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
+                        <span class="flex items-center text-neutral-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
                             Campus audio and visual requirements studio</span>
                     </div>
                     <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-gray-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
+                        <span class="flex items-center text-neutral-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
                             Central cafeteria facilities</span>
                     </div>
                     <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-gray-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
+                        <span class="flex items-center text-neutral-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
                             Advanced mechanics research laboratory units</span>
                     </div>
                     <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-gray-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
+                        <span class="flex items-center text-neutral-700"><i class="fa-solid fa-check text-brand-500 mr-3"></i>
                             International standard student study cubicles</span>
                     </div>
                 </div>
             </div>
 
             <!-- Airport Pickup Item -->
-            <div class="pt-6 border-t border-gray-100">
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Airport Pickup</h3>
-                <p class="text-sm text-gray-600 leading-relaxed">
+            <div class="pt-6 border-t border-neutral-100">
+                <h3 class="text-lg font-bold text-neutral-900 mb-2">Airport Pickup</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed">
                     Students can book airport pickup service from Australia borders or regional areas back to Adelaide's
-                    buildings via booking made on the StudyNet account to join regular weekly arrival points at the
+                    buildings via booking made on the HBD Services account to join regular weekly arrival points at the
                     Accommodation Center.
                 </p>
             </div>
 
             <!-- Scholarships Item -->
-            <div class="pt-6 border-t border-gray-100 space-y-6">
+            <div class="pt-6 border-t border-neutral-100 space-y-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-lg font-bold text-gray-900">Scholarships</h3>
-                        <p class="text-sm text-gray-600 mt-1">Adelaide University provides scholarships for both domestic
+                        <h3 class="text-lg font-bold text-neutral-900">Scholarships</h3>
+                        <p class="text-sm text-neutral-600 mt-1">Adelaide University provides scholarships for both domestic
                             and international students via the Student Accommodation Center.</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 space-y-2">
-                        <h4 class="font-bold text-gray-900 text-base flex items-center"><i
+                    <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-2">
+                        <h4 class="font-bold text-neutral-900 text-base flex items-center"><i
                                 class="fa-solid fa-award text-brand-500 mr-2"></i> International Bursary</h4>
-                        <p class="text-sm text-gray-500 leading-relaxed">International student discount is available for
+                        <p class="text-sm text-neutral-500 leading-relaxed">International student discount is available for
                             Global Foundation and Diploma students. Managed by Student Leadership.</p>
                     </div>
-                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 space-y-2">
-                        <h4 class="font-bold text-gray-900 text-base flex items-center"><i
+                    <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-2">
+                        <h4 class="font-bold text-neutral-900 text-base flex items-center"><i
                                 class="fa-solid fa-award text-brand-500 mr-2"></i> Research Grant</h4>
-                        <p class="text-sm text-gray-500 leading-relaxed">Research funding up to 50% for community foundation
+                        <p class="text-sm text-neutral-500 leading-relaxed">Research funding up to 50% for community foundation
                             programs. Sponsored by regional partner programs.</p>
                         <button class="mt-2 text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center">Apply
                             for scholarship <i class="fa-solid fa-arrow-right ml-1"></i></button>
@@ -231,28 +231,28 @@
             </div>
 
             <!-- Accommodation Item -->
-            <div class="pt-6 border-t border-gray-100 space-y-4">
-                <h3 class="text-lg font-bold text-gray-900">Accommodation</h3>
-                <p class="text-sm text-gray-600 leading-relaxed">
+            <div class="pt-6 border-t border-neutral-100 space-y-4">
+                <h3 class="text-lg font-bold text-neutral-900">Accommodation</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed">
                     Purpose-built, all-inclusive style living. Living in student accommodation with excellent security is
                     this type of housing is prepared specially for students to make living easier and more comfortable
                     wherever necessary, full of focus systems. We recommend student accommodation for the first year of
                     study, giving you time to settle in your studies, plus establish student networks.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                    <div class="p-4 rounded-xl border border-gray-100 bg-white ">
-                        <h5 class="font-bold text-sm text-gray-900 mb-1">University-managed student accommodation</h5>
-                        <p class="text-sm text-gray-500">Shared accommodation provided by Adelaide University to offer
+                    <div class="p-4 rounded-xl border border-neutral-100 bg-white ">
+                        <h5 class="font-bold text-sm text-neutral-900 mb-1">University-managed student accommodation</h5>
+                        <p class="text-sm text-neutral-500">Shared accommodation provided by Adelaide University to offer
                             secure community habits.</p>
                     </div>
-                    <div class="p-4 rounded-xl border border-gray-100 bg-white ">
-                        <h5 class="font-bold text-sm text-gray-900 mb-1">Preferred partner providers</h5>
-                        <p class="text-sm text-gray-500">Secure accommodation surrounding the campus designed to foster
+                    <div class="p-4 rounded-xl border border-neutral-100 bg-white ">
+                        <h5 class="font-bold text-sm text-neutral-900 mb-1">Preferred partner providers</h5>
+                        <p class="text-sm text-neutral-500">Secure accommodation surrounding the campus designed to foster
                             student engagement.</p>
                     </div>
-                    <div class="p-4 rounded-xl border border-gray-100 bg-white ">
-                        <h5 class="font-bold text-sm text-gray-900 mb-1">Residential colleges</h5>
-                        <p class="text-sm text-gray-500">Traditional colleges providing structured support and community.
+                    <div class="p-4 rounded-xl border border-neutral-100 bg-white ">
+                        <h5 class="font-bold text-sm text-neutral-900 mb-1">Residential colleges</h5>
+                        <p class="text-sm text-neutral-500">Traditional colleges providing structured support and community.
                         </p>
                     </div>
                 </div>

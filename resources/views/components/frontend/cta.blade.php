@@ -21,8 +21,8 @@
                         bg-white
                         border border-white/20
                         rounded-lg
-                        text-gray-900
-                        placeholder:text-gray-500
+                        text-neutral-900
+                        placeholder:text-neutral-500
                         focus:outline-none
                         focus:ring-2
                         focus:ring-brand-500">
@@ -62,11 +62,11 @@
                     </svg>
                 </div>
 
-                <h3 class="text-xl font-bold text-gray-900 mb-2">
+                <h3 class="text-xl font-bold text-neutral-900 mb-2">
                     Success!
                 </h3>
 
-                <p class="text-gray-600 mb-6">
+                <p class="text-neutral-600 mb-6">
                     {{ session('success') }}
                 </p>
 

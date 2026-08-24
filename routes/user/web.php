@@ -25,7 +25,6 @@ Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
 //static pages
 Route::get('/', [FrontendController::class, 'homePage'])->name('home');
-Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/destinations', [EventController::class, 'index'])->name('destinations');
 Route::get('/how-we-works', [EventController::class, 'index'])->name('how-we-works');
 Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
@@ -43,6 +42,9 @@ Route::get('/provider-details', [ProviderController::class, 'providerDetails'])-
 
 Route::get('/counsellors', [CounsellorController::class, 'counsellors'])->name('counsellors');
 Route::get('/counsellor-details', [CounsellorController::class, 'counsellorDetails'])->name('counsellor-details');
+
+Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/event-details', [EventController::class, 'eventDetails'])->name('event-details');
 
 
 

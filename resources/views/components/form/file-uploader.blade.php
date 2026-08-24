@@ -13,7 +13,7 @@
     })"
     class="relative"
 >
-    <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+    <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400">
         {{ $label }}
     </label>
 
@@ -47,7 +47,7 @@
 
                 <template x-if="file.type!=='image'">
                     <div class="h-16 w-16 flex flex-col items-center justify-center">
-                        <svg class="w-10 h-10 text-gray-500"
+                        <svg class="w-10 h-10 text-neutral-500"
                              fill="none"
                              stroke="currentColor"
                              viewBox="0 0 24 24">

@@ -47,7 +47,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div class="flex flex-col  mb-3 md:mb-4 lg:mb-6">
                 <div class="h-1.5 w-14 bg-brand-500 rounded-full mb-3"></div>
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Contact Details</h1>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 tracking-tight">Contact Details</h1>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-[65%_35%] gap-6 md:gap-0">
                 <div class="content pr-0 md:pr-8 lg:pr-10">
@@ -61,7 +61,7 @@
 
                     <div class="flex flex-col mb-4 md:mb-6 lg:mb-8 mt-4 md:mt-6 lg:mt-8">
                         <div class="h-1.5 w-14 bg-brand-500 rounded-full mb-1 "></div>
-                        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">
+                        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-900 tracking-tight">
                             Student
                             Information Forms</h1>
                         <p class="text-neutral-500 text-sm mt-2">You can download our student information forms here</p>
@@ -111,10 +111,10 @@
                     </div>
 
                 </div>
-                <div class="border border-gray-200 p-6 w-full rounded-lg bg-white max-w-150 mx-auto" id="get-in-touch-form">
+                <div class="border border-neutral-200 p-6 w-full rounded-lg bg-white max-w-150 mx-auto" id="get-in-touch-form">
                 
                     <div class="md:mb-4 mb-3 lg:mb-6">
-                        <h1 class="text-center text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">Any Questions? Ask
+                        <h1 class="text-center text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900">Any Questions? Ask
                             Us!!</h1>
                     </div>
                     <x-frontend.get-in-touch />
@@ -128,48 +128,48 @@
         <div class="max-w-7xl mx-auto px-5 md:px-8">
             <!-- Heading -->
             <div class="text-center mb-10 sm:mb-14">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900">
                     General Contact Information
                 </h2>
             </div>
             <!-- Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
                 <!-- Address -->
-                <div class="bg-gray-50 rounded-2xl p-6 sm:p-8 shadow-sm border">
+                <div class="bg-neutral-50 rounded-2xl p-6 sm:p-8 shadow-sm border">
                     <div class="mb-5">
-                        <svg class="w-8 h-8 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg class="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                             <path d="M12 21s8-4.5 8-10.5S15.314 3 12 3 4 6.5 4 10.5 12 21 12 21z" />
                         </svg>
                     </div>
-                    <p class="text-gray-700 text-sm sm:text-base leading-7">
+                    <p class="text-neutral-700 text-sm sm:text-base leading-7">
                         Level 3, 235 Church St, PARRAMATTA,NSW, Australia 2150
                     </p>
 
                 </div>
 
                 <!-- Phone -->
-                <div class="bg-gray-50 rounded-2xl p-6 sm:p-8 shadow-sm border">
+                <div class="bg-neutral-50 rounded-2xl p-6 sm:p-8 shadow-sm border">
 
                     <div class="mb-5">
-                        <svg class="w-8 h-8 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg class="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                         </svg>
                     </div>
-                    <a href="tel:6190376310" class="text-gray-700 text-sm sm:text-base hover:text-brand-600 transition">
+                    <a href="tel:6190376310" class="text-neutral-700 text-sm sm:text-base hover:text-brand-600 transition">
                         Head-Office : +61 (02) 9037 6310
                     </a> <br>
                     <a href="tel:61410219553"
-                        class="text-gray-700 text-sm sm:text-base hover:text-brand-600 transition mt-2">
+                        class="text-neutral-700 text-sm sm:text-base hover:text-brand-600 transition mt-2">
                         Head-Office : +61410 219 553
                     </a>
 
                 </div>
                 <!-- Office Time -->
-                <div class="bg-gray-50 rounded-2xl p-6 sm:p-8 shadow-sm border">
+                <div class="bg-neutral-50 rounded-2xl p-6 sm:p-8 shadow-sm border">
 
                     <div class="mb-5">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -178,7 +178,7 @@
                                 d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25H4.5a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5H4.5A2.25 2.25 0 0 0 2.25 6.75m19.5 0v.243a2.25 2.25 0 0 1-.876 1.782l-7.5 5.625a2.25 2.25 0 0 1-2.748 0l-7.5-5.625A2.25 2.25 0 0 1 2.25 6.993V6.75" />
                         </svg>
                     </div>
-                    <p class="text-gray-700 text-sm sm:text-base leading-7">
+                    <p class="text-neutral-700 text-sm sm:text-base leading-7">
                         info@hbdservices.edu.au
                     </p>
                 </div>
@@ -193,7 +193,7 @@
         <div class="max-w-7xl mx-auto px-5 md:px-8">
             <!-- Heading -->
             <div class="text-center mb-8 sm:mb-12">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900">
                     Other Campus Contacts
                 </h2>
             </div>

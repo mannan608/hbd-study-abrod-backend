@@ -116,7 +116,7 @@
             <!-- Sort By Select -->
             <div class="flex items-center gap-2 border-l border-neutral-200 pl-3">
               <span class="text-xs font-medium text-neutral-400">Sort:</span>
-              <select class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-xs font-bold text-neutral-800 focus:ring-0 cursor-pointer">
+              <select class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-xs font-semibold text-neutral-800 focus:ring-0 cursor-pointer">
                 <option value="relevance">Relevance</option>
                 <option value="fee_asc">Fee: Low to High</option>
                 <option value="fee_desc">Fee: High to Low</option>

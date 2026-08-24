@@ -1,28 +1,28 @@
 @extends('backend.layouts.fullscreen-layout')
 
 @section('content')
-    <div class="relative z-1 bg-neutral-100 p-6 sm:p-0 dark:bg-gray-900">
-        <div class="relative h-screen w-full p-0 dark:bg-gray-900">
+    <div class="relative z-1 bg-neutral-100 p-6 sm:p-0 dark:bg-neutral-900">
+        <div class="relative h-screen w-full p-0 dark:bg-neutral-900">
             <!-- Form -->
             <div class="flex w-full h-full items-center justify-center">
 
                 <div
-                    class="mx-auto flex w-full max-w-xl p-4 md:p-6  flex-col justify-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl">
+                    class="mx-auto flex w-full max-w-xl p-4 md:p-6  flex-col justify-center bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl">
                     <div class="mb-4">
-                        <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90">
+                        <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-neutral-800 dark:text-white/90">
                             Sign Up
                         </h1>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400">
                             Enter your information to sign up!
                         </p>
                     </div>
                     <div>
                         <div class="relative">
                             <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-t border-gray-200 dark:border-gray-800"></div>
+                                <div class="w-full border-t border-neutral-200 dark:border-neutral-800"></div>
                             </div>
                             <div class="relative flex justify-center text-sm">
-                                <span class="bg-white p-2 text-gray-400 sm:px-5 sm:py-2 dark:bg-gray-900">Or</span>
+                                <span class="bg-white p-2 text-neutral-400 sm:px-5 sm:py-2 dark:bg-neutral-900">Or</span>
                             </div>
                         </div>
                         <form action="{{ route('register.submit') }}" method="POST">
@@ -39,60 +39,60 @@
                                     @enderror
                                 </fieldset>
                                 <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
                                         for="name">Name</label>
                                     <input id="name" name="name" required
-                                        class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                        class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                     @error('name')
                                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
                                         for="email">Email</label>
                                     <input id="email" type="email" name="email" required
-                                        class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                        class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                     @error('email')
                                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
                                         for="phone">Phone
                                         No</label>
                                     <input id="phone" type="tel" name="phone" required
-                                        class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                        class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                     @error('phone')
                                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
                                         for="password">Password</label>
                                     <input id="password" type="password" name="password"
-                                        class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                        class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                     @error('password')
                                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
                                         for="password_confirmation">Confirm Password</label>
                                     <input id="password_confirmation" type="password" name="password_confirmation"
-                                        class="h-11 w-full rounded-lg border border-gray-300 px-4 text-sm text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                        class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                 </div>
                                 <!-- Checkbox -->
                                 <div>
                                     <div x-data="{ checkboxToggle: false }">
                                         <label for="checkboxLabelOne"
-                                            class="flex cursor-pointer items-start text-sm font-normal text-gray-700 select-none dark:text-gray-400">
+                                            class="flex cursor-pointer items-start text-sm font-normal text-neutral-700 select-none dark:text-neutral-400">
                                             <div class="relative">
                                                 <input type="checkbox" id="checkboxLabelOne" class="sr-only"
                                                     @change="checkboxToggle = !checkboxToggle" />
                                                 <div :class="checkboxToggle ? 'border-brand-500 bg-brand-500' :
-                                                    'bg-transparent border-gray-300 dark:border-gray-700'"
+                                                    'bg-transparent border-neutral-300 dark:border-neutral-700'"
                                                     class="mr-3 flex h-5 w-5 items-center justify-center rounded-md border-[1.25px]">
                                                     <span :class="checkboxToggle ? '' : 'opacity-0'">
                                                         <svg width="14" height="14" viewBox="0 0 14 14"
@@ -104,13 +104,13 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <p class="inline-block font-normal text-gray-500 dark:text-gray-400">
+                                            <p class="inline-block font-normal text-neutral-500 dark:text-neutral-400">
                                                 By creating an account means you agree to the
-                                                <span class="text-gray-800 dark:text-white/90">
+                                                <span class="text-neutral-800 dark:text-white/90">
                                                     Terms and Conditions,
                                                 </span>
                                                 and our
-                                                <span class="text-gray-800 dark:text-white">
+                                                <span class="text-neutral-800 dark:text-white">
                                                     Privacy Policy
                                                 </span>
                                             </p>
@@ -127,7 +127,7 @@
                             </div>
                         </form>
                         <div class="mt-5">
-                            <p class="text-center text-sm font-normal text-gray-700 sm:text-start dark:text-gray-400">
+                            <p class="text-center text-sm font-normal text-neutral-700 sm:text-start dark:text-neutral-400">
                                 Already have an account?
                                 <a href="{{ route('login') }}"
                                     class="text-brand-500 hover:text-brand-600 dark:text-brand-400">Sign

@@ -11,12 +11,12 @@
          STEP 1 : PERSONAL DETAILS
     ========================================================== -->
 
-    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-5">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-100 shadow-sm space-y-5">
 
         <!-- Header -->
         <div class="flex items-center justify-between">
 
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center">
+            <h3 class="text-base sm:text-lg font-bold text-neutral-900 flex items-center">
 
                 <span
                     class="w-7 h-7 rounded-full bg-brand-100 text-brand-700 text-xs font-bold flex items-center justify-center mr-2.5">
@@ -27,7 +27,7 @@
 
             </h3>
 
-            <span class="text-xs text-gray-400 font-medium">
+            <span class="text-xs text-neutral-400 font-medium">
                 Step 1 of 2
             </span>
 
@@ -66,12 +66,12 @@
          STEP 2 : DATE & TIME
     ========================================================== -->
 
-    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-6">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-100 shadow-sm space-y-6">
 
         <!-- Header -->
         <div class="flex items-center justify-between">
 
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center">
+            <h3 class="text-base sm:text-lg font-bold text-neutral-900 flex items-center">
 
                 <span
                     class="w-7 h-7 rounded-full bg-brand-100 text-brand-700 text-xs font-bold flex items-center justify-center mr-2.5">
@@ -82,7 +82,7 @@
 
             </h3>
 
-            <span class="text-xs text-gray-400 font-medium">
+            <span class="text-xs text-neutral-400 font-medium">
                 Step 2 of 2
             </span>
 
@@ -103,7 +103,7 @@
 
             <div class="md:col-span-7">
 
-                <div class="bg-gray-50/70 p-4 sm:p-5 rounded-2xl border border-gray-100">
+                <div class="bg-neutral-50/70 p-4 sm:p-5 rounded-2xl border border-neutral-100">
 
 
                     <!-- =================================================
@@ -120,14 +120,14 @@
                                 h-9
                                 rounded-xl
                                 bg-white
-                                text-gray-600
+                                text-neutral-600
                                 flex
                                 items-center
                                 justify-center
                                 border
-                                border-gray-200
+                                border-neutral-200
                                 transition
-                                hover:bg-gray-100
+                                hover:bg-neutral-100
                                 disabled:opacity-30
                                 disabled:cursor-not-allowed
                             ">
@@ -141,9 +141,9 @@
                         <!-- Month + Year -->
                         <div class="text-center">
 
-                            <h4 class="font-bold text-sm sm:text-base text-gray-900" x-text="monthName"></h4>
+                            <h4 class="font-bold text-sm sm:text-base text-neutral-900" x-text="monthName"></h4>
 
-                            <p class="text-[11px] text-gray-400 mt-0.5" x-text="currentYear"></p>
+                            <p class="text-[11px] text-neutral-400 mt-0.5" x-text="currentYear"></p>
 
                         </div>
 
@@ -156,14 +156,14 @@
                                 h-9
                                 rounded-xl
                                 bg-white
-                                text-gray-600
+                                text-neutral-600
                                 flex
                                 items-center
                                 justify-center
                                 border
-                                border-gray-200
+                                border-neutral-200
                                 transition
-                                hover:bg-gray-100
+                                hover:bg-neutral-100
                             ">
 
                             <i class="fa-solid fa-chevron-right text-xs"></i>
@@ -186,7 +186,7 @@
                             text-[10px]
                             sm:text-xs
                             font-semibold
-                            text-gray-400
+                            text-neutral-400
                             mb-2
                         ">
 
@@ -231,19 +231,19 @@
                                     /*
                                      * Previous / next month dates
                                      */
-                                    'text-gray-300 bg-transparent cursor-not-allowed': day.outsideMonth,
+                                    'text-neutral-300 bg-transparent cursor-not-allowed': day.outsideMonth,
                                 
                                 
                                     /*
                                      * Past current-month date
                                      */
-                                    'text-gray-300 bg-gray-100/50 cursor-not-allowed': day.past && !day.outsideMonth,
+                                    'text-neutral-300 bg-neutral-100/50 cursor-not-allowed': day.past && !day.outsideMonth,
                                 
                                 
                                     /*
                                      * Normal future date
                                      */
-                                    'bg-white text-gray-700 hover:bg-brand-50 hover:text-brand-600':
+                                    'bg-white text-neutral-700 hover:bg-brand-50 hover:text-brand-600':
                                         !day.disabled &&
                                         !day.selected &&
                                         !day.today,
@@ -306,7 +306,7 @@
                     <!-- Header -->
                     <div class="mb-4">
 
-                        <span class="text-xs font-semibold text-gray-500 block mb-1">
+                        <span class="text-xs font-semibold text-neutral-500 block mb-1">
                             Available Slots
                         </span>
 
@@ -315,7 +315,7 @@
 
                             <i class="fa-regular fa-calendar text-brand-600 text-sm"></i>
 
-                            <p class="text-sm font-bold text-gray-900" x-text="formattedSelectedDate"></p>
+                            <p class="text-sm font-bold text-neutral-900" x-text="formattedSelectedDate"></p>
 
                         </div>
 
@@ -333,7 +333,7 @@
                             rounded-2xl
                             border
                             border-dashed
-                            border-gray-200
+                            border-neutral-200
                             p-8
                             text-center
                         ">
@@ -345,7 +345,7 @@
                                     w-12
                                     h-12
                                     rounded-2xl
-                                    bg-gray-100
+                                    bg-neutral-100
                                     flex
                                     items-center
                                     justify-center
@@ -353,15 +353,15 @@
                                     mb-3
                                 ">
 
-                                <i class="fa-regular fa-calendar text-gray-400"></i>
+                                <i class="fa-regular fa-calendar text-neutral-400"></i>
 
                             </div>
 
-                            <p class="text-sm font-semibold text-gray-700">
+                            <p class="text-sm font-semibold text-neutral-700">
                                 Select a date
                             </p>
 
-                            <p class="text-xs text-gray-400 mt-1">
+                            <p class="text-xs text-neutral-400 mt-1">
                                 Choose a date from the calendar
                             </p>
 
@@ -402,7 +402,7 @@
                                     /*
                                      * Available
                                      */
-                                    'bg-white border-gray-200 text-gray-700 hover:border-brand-500 hover:text-brand-600 hover:bg-brand-50': selectedTime !==
+                                    'bg-white border-neutral-200 text-neutral-700 hover:border-brand-500 hover:text-brand-600 hover:bg-brand-50': selectedTime !==
                                         slot.value &&
                                         !slot.disabled,
                                 
@@ -410,7 +410,7 @@
                                     /*
                                      * Disabled
                                      */
-                                    'bg-gray-50 border-gray-100 text-gray-300 cursor-not-allowed': slot.disabled
+                                    'bg-neutral-50 border-neutral-100 text-neutral-300 cursor-not-allowed': slot.disabled
                                 
                                 }">
 
@@ -475,7 +475,7 @@
             p-5
             sm:p-6
             border
-            border-gray-100
+            border-neutral-100
             shadow-sm
         ">
 
@@ -495,7 +495,7 @@
                 <span
                     class="
                         text-xs
-                        text-gray-400
+                        text-neutral-400
                         block
                         font-medium
                         mb-1
@@ -505,11 +505,11 @@
 
 
                 <!-- Selected -->
-                <p x-show="selectedDate && selectedTime" class="text-sm font-bold text-gray-900">
+                <p x-show="selectedDate && selectedTime" class="text-sm font-bold text-neutral-900">
 
                     <span x-text="formattedSelectedDate"></span>
 
-                    <span class="text-gray-300 mx-1">
+                    <span class="text-neutral-300 mx-1">
                         •
                     </span>
 
@@ -519,7 +519,7 @@
 
 
                 <!-- Not selected -->
-                <p x-show="!selectedDate || !selectedTime" class="text-sm font-medium text-gray-400">
+                <p x-show="!selectedDate || !selectedTime" class="text-sm font-medium text-neutral-400">
                     Select a date and time to continue
                 </p>
 

@@ -9,7 +9,7 @@
 <div x-data="{ checkboxToggle: @js($checked || old($name)) }">
     <label
         for="{{ $id }}"
-        class="flex cursor-pointer items-start text-sm font-normal text-gray-700 select-none dark:text-gray-400"
+        class="flex cursor-pointer items-start text-sm font-normal text-neutral-700 select-none dark:text-neutral-400"
     >
         <div class="relative">
             <input
@@ -26,7 +26,7 @@
             <div
                 :class="checkboxToggle
                     ? 'border-brand-500 bg-brand-500'
-                    : 'bg-transparent border-gray-300 dark:border-gray-700'"
+                    : 'bg-transparent border-neutral-300 dark:border-neutral-700'"
                 class="mr-3 flex h-5 w-5 items-center justify-center rounded-md border-[1.25px]"
             >
                 <span :class="checkboxToggle ? '' : 'opacity-0'">
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <p class="inline-block font-normal text-gray-500 dark:text-gray-400">
+        <p class="inline-block font-normal text-neutral-500 dark:text-neutral-400">
             {{ $label }}
         </p>
     </label>

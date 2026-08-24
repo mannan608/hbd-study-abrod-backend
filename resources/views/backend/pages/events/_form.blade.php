@@ -61,12 +61,12 @@
 
     // ---------- Shared design tokens ----------
     $inputCls =
-        'w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition duration-150 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 dark:focus:border-brand-500';
-    $labelCls = 'mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300';
+        'w-full rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition duration-150 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:placeholder-neutral-500 dark:focus:border-brand-500';
+    $labelCls = 'mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300';
     $iconBtnDanger =
-        'inline-flex h-9 w-9 items-center justify-center rounded-lg text-gray-400 transition hover:bg-red-50 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500/30 dark:hover:bg-red-500/10 dark:hover:text-red-400';
+        'inline-flex h-9 w-9 items-center justify-center rounded-lg text-neutral-400 transition hover:bg-red-50 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500/30 dark:hover:bg-red-500/10 dark:hover:text-red-400';
     $addBtnCls =
-        'flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-gray-300 px-4 py-3 text-sm font-medium text-gray-500 transition duration-150 hover:border-brand-400 hover:bg-brand-50/50 hover:text-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:text-gray-400 dark:hover:border-brand-500/50 dark:hover:bg-brand-500/5 dark:hover:text-brand-400';
+        'flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-neutral-300 px-4 py-3 text-sm font-medium text-neutral-500 transition duration-150 hover:border-brand-400 hover:bg-brand-50/50 hover:text-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-brand-500/50 dark:hover:bg-brand-500/5 dark:hover:text-brand-400';
 @endphp
 
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
@@ -76,8 +76,8 @@
 
         {{-- Basic Information --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
@@ -86,8 +86,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Basic Information</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Core details that define your event and
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Basic Information</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Core details that define your event and
                         how it appears to visitors.</p>
                 </div>
             </div>
@@ -132,15 +132,15 @@
                         placeholder="Detailed description shown on the event page" :value="old('description', $event->description ?? '')" />
                 </div>
 
-                <div class="mt-6 border-t border-gray-100 pt-6 dark:border-gray-800">
+                <div class="mt-6 border-t border-neutral-100 pt-6 dark:border-neutral-800">
                     <label class="{{ $labelCls }}">Banner Image</label>
 
                     @if ($isEdit && $event->banner)
                         <div class="mb-4 inline-block">
-                            <div class="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700">
+                            <div class="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
                                 <img src="{{ asset($event->banner) }}" alt="Current banner" class="h-32 object-cover">
                             </div>
-                            <p class="mt-1.5 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+                            <p class="mt-1.5 flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400">
                                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -158,9 +158,9 @@
 
         {{-- Date & Location --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
             x-data="{ isOnline: {{ old('is_online', $event->is_online ?? false) ? 'true' : 'false' }} }">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
@@ -169,8 +169,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Date & Location</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">When and where the event takes place.</p>
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Date & Location</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">When and where the event takes place.</p>
                 </div>
             </div>
 
@@ -197,16 +197,16 @@
                 </div>
 
                 <div
-                    class="mt-6 flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50/60 px-4 py-3.5 dark:border-gray-700 dark:bg-white/[0.02]">
+                    class="mt-6 flex items-center justify-between rounded-xl border border-neutral-200 bg-neutral-50/60 px-4 py-3.5 dark:border-neutral-700 dark:bg-white/[0.02]">
                     <div class="flex items-center gap-3">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                        <svg class="h-5 w-5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m-8.716 6.747A9.004 9.004 0 0112 3m0 18a9.004 9.004 0 01-8.716-6.747M3.284 14.253A8.967 8.967 0 003 12m18 0a8.967 8.967 0 00-.284 2.253M3.284 9.747A8.967 8.967 0 013 12" />
                         </svg>
                         <div>
-                            <p class="text-sm font-medium text-gray-700 dark:text-gray-200">Online event</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Enable if this event happens virtually
+                            <p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Online event</p>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">Enable if this event happens virtually
                             </p>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                         <input type="checkbox" name="is_online" value="1" x-model="isOnline"
                             class="peer sr-only">
                         <span
-                            class="h-6 w-11 rounded-full bg-gray-300 transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform after:duration-200 peer-checked:bg-brand-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/20 dark:bg-gray-600"></span>
+                            class="h-6 w-11 rounded-full bg-neutral-300 transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform after:duration-200 peer-checked:bg-brand-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/20 dark:bg-neutral-600"></span>
                     </label>
                 </div>
 
@@ -230,13 +230,13 @@
 
         {{-- Event Schedules --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
             x-data="{
                 items: {{ Illuminate\Support\Js::from($schedules) }},
                 add() { this.items.push({ location: '', start_date: '', end_date: '' }) },
                 remove(i) { if (this.items.length > 1) this.items.splice(i, 1) }
             }">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -246,22 +246,22 @@
                     </svg>
                 </div>
                 <div class="flex-1">
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Event Schedules</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Add one or more sessions with their own
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Event Schedules</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Add one or more sessions with their own
                         dates and venues.</p>
                 </div>
                 <span
-                    class="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                    class="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300"
                     x-text="items.length + (items.length === 1 ? ' session' : ' sessions')"></span>
             </div>
 
             <div class="space-y-4 p-6">
                 <template x-for="(item, index) in items" :key="index">
                     <div
-                        class="rounded-xl border border-gray-200 bg-gray-50/50 p-5 transition dark:border-gray-700 dark:bg-white/[0.02]">
+                        class="rounded-xl border border-neutral-200 bg-neutral-50/50 p-5 transition dark:border-neutral-700 dark:bg-white/[0.02]">
                         <div class="mb-4 flex items-center justify-between">
                             <span
-                                class="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-200">
                                 <span
                                     class="flex h-6 w-6 items-center justify-center rounded-md bg-brand-600 text-xs font-bold text-white"
                                     x-text="index + 1"></span>
@@ -307,13 +307,13 @@
 
         {{-- Providers / Sponsors --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
             x-data="{
                 items: {{ Illuminate\Support\Js::from($providers) }},
                 add() { this.items.push({ name: '', logo: '', logo_url: null }) },
                 remove(i) { if (this.items.length > 1) this.items.splice(i, 1) }
             }">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -323,8 +323,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Providers / Sponsors</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Organizations supporting or running this
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Providers / Sponsors</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Organizations supporting or running this
                         event.</p>
                 </div>
             </div>
@@ -332,10 +332,10 @@
             <div class="space-y-4 p-6">
                 <template x-for="(item, index) in items" :key="index">
                     <div
-                        class="rounded-xl border border-gray-200 bg-gray-50/50 p-5 transition dark:border-gray-700 dark:bg-white/[0.02]">
+                        class="rounded-xl border border-neutral-200 bg-neutral-50/50 p-5 transition dark:border-neutral-700 dark:bg-white/[0.02]">
                         <div class="mb-4 flex items-center justify-between">
                             <span
-                                class="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-200">
                                 <span
                                     class="flex h-6 w-6 items-center justify-center rounded-md bg-brand-600 text-xs font-bold text-white"
                                     x-text="index + 1"></span>
@@ -361,9 +361,9 @@
 
                                 <template x-if="item.logo_url">
                                     <div
-                                        class="mb-2 flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-gray-700 dark:bg-gray-900">
+                                        class="mb-2 flex items-center gap-3 rounded-lg border border-neutral-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-900">
                                         <img :src="item.logo_url" alt="Logo" class="h-9 rounded object-contain">
-                                        <span class="text-xs text-gray-500 dark:text-gray-400">Current logo — choose a
+                                        <span class="text-xs text-neutral-500 dark:text-neutral-400">Current logo — choose a
                                             file to replace</span>
                                         <input type="hidden" :name="`providers[${index}][existing_logo]`"
                                             :value="item.logo">
@@ -371,7 +371,7 @@
                                 </template>
 
                                 <input type="file" :name="`providers[${index}][logo]`"
-                                    class="h-11 w-full overflow-hidden rounded-xl border border-gray-300 bg-transparent text-sm text-gray-500 transition file:mr-4 file:cursor-pointer file:border-0 file:border-r file:border-gray-200 file:bg-gray-50 file:py-3 file:pl-4 file:pr-4 file:text-sm file:font-medium file:text-gray-700 hover:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:file:border-gray-700 dark:file:bg-white/[0.03] dark:file:text-gray-300" />
+                                    class="h-11 w-full overflow-hidden rounded-xl border border-neutral-300 bg-transparent text-sm text-neutral-500 transition file:mr-4 file:cursor-pointer file:border-0 file:border-r file:border-neutral-200 file:bg-neutral-50 file:py-3 file:pl-4 file:pr-4 file:text-sm file:font-medium file:text-neutral-700 hover:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:file:border-neutral-700 dark:file:bg-white/[0.03] dark:file:text-neutral-300" />
                             </div>
                         </div>
                     </div>
@@ -388,8 +388,8 @@
 
         {{-- Gallery --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -399,8 +399,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Gallery Images</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Photos that showcase the event
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Gallery Images</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Photos that showcase the event
                         atmosphere.</p>
                 </div>
             </div>
@@ -410,7 +410,7 @@
                     <div class="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
                         @foreach ($event->gallery_images as $image)
                             <div
-                                class="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700">
+                                class="group relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
                                 <img src="{{ asset($image) }}"
                                     class="h-24 w-full object-cover transition duration-200 group-hover:scale-105">
                                 <label
@@ -432,8 +432,8 @@
 
         {{-- Extra Info --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -443,8 +443,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Additional Details</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Contact info, map link, and tags for
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Additional Details</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Contact info, map link, and tags for
                         discoverability.</p>
                 </div>
             </div>
@@ -461,15 +461,15 @@
                         placeholder="https://maps.google.com/..." :value="$asString(old('google_map_link', $event->google_map_link ?? ''))" />
                 </div>
 
-                <div class="mt-6 rounded-xl border border-gray-200 bg-gray-50/50 p-5 dark:border-gray-700 dark:bg-white/[0.02]"
+                <div class="mt-6 rounded-xl border border-neutral-200 bg-neutral-50/50 p-5 dark:border-neutral-700 dark:bg-white/[0.02]"
                     x-data="{
                         items: {{ Illuminate\Support\Js::from($tags) }},
                         add() { this.items.push('') },
                         remove(i) { if (this.items.length > 1) this.items.splice(i, 1) }
                     }">
                     <div class="mb-4 flex items-center justify-between">
-                        <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-200">Tags</h4>
-                        <span class="text-xs text-gray-400">Help people find this event</span>
+                        <h4 class="text-sm font-semibold text-neutral-700 dark:text-neutral-200">Tags</h4>
+                        <span class="text-xs text-neutral-400">Help people find this event</span>
                     </div>
 
                     <div class="space-y-3">
@@ -477,7 +477,7 @@
                             <div class="flex items-center gap-2">
                                 <div class="relative flex-1">
                                     <span
-                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
+                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400">
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -512,13 +512,13 @@
 
         {{-- Benefits --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
             x-data="{
                 items: {{ Illuminate\Support\Js::from($benefits) }},
                 add() { this.items.push('') },
                 remove(i) { if (this.items.length > 1) this.items.splice(i, 1) }
             }">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -528,8 +528,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Benefits</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">What attendees will gain from this
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Benefits</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">What attendees will gain from this
                         event.</p>
                 </div>
             </div>
@@ -573,13 +573,13 @@
 
         {{-- Services Offered --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
             x-data="{
                 items: {{ Illuminate\Support\Js::from($services) }},
                 add() { this.items.push('') },
                 remove(i) { if (this.items.length > 1) this.items.splice(i, 1) }
             }">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -589,8 +589,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">Services Offered</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Services provided during or after the
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Services Offered</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Services provided during or after the
                         event.</p>
                 </div>
             </div>
@@ -623,13 +623,13 @@
 
         {{-- FAQs --}}
         <section
-            class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
             x-data="{
                 items: {{ Illuminate\Support\Js::from($faqs) }},
                 add() { this.items.push({ question: '', answer: '' }) },
                 remove(i) { if (this.items.length > 1) this.items.splice(i, 1) }
             }">
-            <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+            <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                 <div
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -639,8 +639,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">FAQs</h3>
-                    <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Answer common questions to reduce
+                    <h3 class="text-base font-semibold text-neutral-900 dark:text-white">FAQs</h3>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Answer common questions to reduce
                         attendee friction.</p>
                 </div>
             </div>
@@ -648,10 +648,10 @@
             <div class="space-y-4 p-6">
                 <template x-for="(item, index) in items" :key="index">
                     <div
-                        class="rounded-xl border border-gray-200 bg-gray-50/50 p-5 transition dark:border-gray-700 dark:bg-white/[0.02]">
+                        class="rounded-xl border border-neutral-200 bg-neutral-50/50 p-5 transition dark:border-neutral-700 dark:bg-white/[0.02]">
                         <div class="mb-4 flex items-center justify-between">
                             <span
-                                class="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-200">
                                 <span
                                     class="flex h-6 w-6 items-center justify-center rounded-md bg-brand-600 text-xs font-bold text-white"
                                     x-text="index + 1"></span>
@@ -698,8 +698,8 @@
 
             {{-- Publishing --}}
             <section
-                class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
-                <div class="flex items-start gap-4 border-b border-gray-100 px-6 py-5 dark:border-gray-800">
+                class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+                <div class="flex items-start gap-4 border-b border-neutral-100 px-6 py-5 dark:border-neutral-800">
                     <div
                         class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
@@ -709,8 +709,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">Publishing</h3>
-                        <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">Control visibility and status.</p>
+                        <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Publishing</h3>
+                        <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Control visibility and status.</p>
                     </div>
                 </div>
 
@@ -722,13 +722,13 @@
                         'cancelled' => 'Cancelled',
                     ]" />
 
-                    <div class="h-px bg-gray-100 dark:bg-gray-800"></div>
+                    <div class="h-px bg-neutral-100 dark:bg-neutral-800"></div>
 
                     {{-- Featured toggle --}}
                     <div class="flex items-center justify-between gap-4">
                         <div>
-                            <p class="text-sm font-medium text-gray-700 dark:text-gray-200">Featured event</p>
-                            <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">Highlight on homepage & listings
+                            <p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Featured event</p>
+                            <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">Highlight on homepage & listings
                             </p>
                         </div>
                         <input type="hidden" name="is_featured" value="0">
@@ -736,22 +736,22 @@
                             <input type="checkbox" name="is_featured" value="1" @checked(old('is_featured', $event->is_featured ?? false))
                                 class="peer sr-only">
                             <span
-                                class="h-6 w-11 rounded-full bg-gray-300 transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform after:duration-200 peer-checked:bg-brand-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/20 dark:bg-gray-600"></span>
+                                class="h-6 w-11 rounded-full bg-neutral-300 transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform after:duration-200 peer-checked:bg-brand-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/20 dark:bg-neutral-600"></span>
                         </label>
                     </div>
 
                     {{-- Active toggle --}}
                     <div class="flex items-center justify-between gap-4">
                         <div>
-                            <p class="text-sm font-medium text-gray-700 dark:text-gray-200">Active</p>
-                            <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">Visible on the public site</p>
+                            <p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Active</p>
+                            <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">Visible on the public site</p>
                         </div>
                         <input type="hidden" name="is_active" value="0">
                         <label class="relative inline-flex shrink-0 cursor-pointer items-center">
                             <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $event->is_active ?? true))
                                 class="peer sr-only">
                             <span
-                                class="h-6 w-11 rounded-full bg-gray-300 transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform after:duration-200 peer-checked:bg-brand-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/20 dark:bg-gray-600"></span>
+                                class="h-6 w-11 rounded-full bg-neutral-300 transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform after:duration-200 peer-checked:bg-brand-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/20 dark:bg-neutral-600"></span>
                         </label>
                     </div>
                 </div>

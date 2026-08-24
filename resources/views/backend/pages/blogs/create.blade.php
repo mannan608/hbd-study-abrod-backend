@@ -8,11 +8,11 @@
             <div class="lg:col-span-8 space-y-6">
 
                 {{-- Blog Content --}}
-                <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             Blog Content
                         </h2>
 
@@ -48,11 +48,11 @@
                 <div class="sticky top-6 space-y-6">
 
                     {{-- Publish --}}
-                    <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                    <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                        <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                        <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                                 Publish
                             </h2>
 
@@ -70,7 +70,7 @@
                             {{-- Featured --}}
                             <div>
 
-                                <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
 
                                     Featured Blog
 
@@ -80,9 +80,9 @@
 
                                     <input type="checkbox" name="is_featured" value="1"
                                         {{ old('is_featured', false) ? 'checked' : '' }}
-                                        class="h-5 w-5 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+                                        class="h-5 w-5 rounded border-neutral-300 text-brand-600 focus:ring-brand-500">
 
-                                    <span class="text-sm text-gray-600 dark:text-gray-400">
+                                    <span class="text-sm text-neutral-600 dark:text-neutral-400">
                                         Mark as featured
                                     </span>
 
@@ -103,11 +103,11 @@
                     </div>
 
                     {{-- Featured Image --}}
-                    <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                    <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                        <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                        <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                                 Featured Image
                             </h2>
 
@@ -123,11 +123,11 @@
                     </div>
 
                     {{-- SEO --}}
-                    <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                    <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                        <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                        <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                                 SEO Settings
                             </h2>
 
@@ -198,17 +198,17 @@
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-neutral-300
                 bg-transparent
                 px-4
                 py-2.5
                 text-sm
-                text-gray-800
-                placeholder:text-gray-400
+                text-neutral-800
+                placeholder:text-neutral-400
                 focus:ring-3
                 focus:outline-hidden
-                dark:border-gray-700
-                dark:bg-gray-900
+                dark:border-neutral-700
+                dark:bg-neutral-900
                 dark:text-white/90
                 dark:placeholder:text-white/30"
                     ></textarea>

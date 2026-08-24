@@ -91,7 +91,7 @@
                         <div class="flex items-center gap-2 ">
                             <span class="text-sm font-medium text-neutral-400">Sort:</span>
                             <select
-                                class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-bold text-neutral-800 focus:ring-0 cursor-pointer">
+                                class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-semibold text-neutral-800 focus:ring-0 cursor-pointer">
                                 <option value="relevance">Branch</option>
                                 <option value="fee_asc">Location:Dhanmondi</option>
                                 <option value="fee_asc">Location:Bangla Motor</option>
@@ -103,7 +103,7 @@
                         <div class="flex items-center gap-2 ">
                             <span class="text-sm font-medium text-neutral-400">Sort:</span>
                             <select
-                                class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-bold text-neutral-800 focus:ring-0 cursor-pointer">
+                                class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-semibold text-neutral-800 focus:ring-0 cursor-pointer">
                                 <option value="relevance">Expertise</option>
                                 <option value="fee_asc">Agriculture & Environmental</option>
                                 <option value="fee_desc">Architecture and Building</option>

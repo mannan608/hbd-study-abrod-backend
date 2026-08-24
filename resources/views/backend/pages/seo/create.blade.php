@@ -4,8 +4,8 @@
     <div class="">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <div>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">SEO Management</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Manage Meta tags, Open Graph, and Schema for all routes.
+                <h3 class="text-lg font-semibold text-neutral-800 dark:text-white/90">SEO Management</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Manage Meta tags, Open Graph, and Schema for all routes.
                 </p>
             </div>
         </div>
@@ -46,7 +46,7 @@
 
                             <div class="">
                                 <label for="og_image"
-                                    class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Open Graph
+                                    class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Open Graph
                                     Image</label>
                                 <x-form.dropzone name="og_image" label="Open Graph Image" value=""
                                     placeholder="Upload Open Graph image..." />
@@ -60,7 +60,7 @@
                                 placeholder="Enter Twitter description..." />
                             <div class="">
                                 <label for="twitter_image"
-                                    class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Twitter
+                                    class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Twitter
                                     Image</label>
                                 <x-form.dropzone name="twitter_image" label="Twitter Image" value=""
                                     placeholder="Upload Twitter image..." />
@@ -73,7 +73,7 @@
                         <div>
                             <div id="header-scripts-wrapper">
                                 <label for=""
-                                    class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Header
+                                    class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Header
                                     Scripts</label>
                                 <div class="script-row space-y-3 mb-4">
 
@@ -102,7 +102,7 @@
                         <div>
                             <div id="footer-scripts-wrapper">
                                 <label for=""
-                                    class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Footer
+                                    class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Footer
                                     Scripts</label>
 
                                 <div class="script-row space-y-3 mb-4">
@@ -184,17 +184,17 @@
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-neutral-300
                 bg-transparent
                 px-4
                 py-2.5
                 text-sm
-                text-gray-800
-                placeholder:text-gray-400
+                text-neutral-800
+                placeholder:text-neutral-400
                 focus:ring-3
                 focus:outline-hidden
-                dark:border-gray-700
-                dark:bg-gray-900
+                dark:border-neutral-700
+                dark:bg-neutral-900
                 dark:text-white/90
                 dark:placeholder:text-white/30"
                     ></textarea>

@@ -1,4 +1,4 @@
-    <header class="fixed top-0 left-0 w-full z-50 border-0 md:border-b bg-white backdrop-blur-md dark:bg-gray-900/95">
+    <header class="fixed top-0 left-0 w-full z-50 border-0 md:border-b bg-white backdrop-blur-md dark:bg-neutral-900/95">
 
         <nav class="max-w-7xl mx-auto px-5 lg:px-8">
 

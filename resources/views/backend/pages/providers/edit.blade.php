@@ -10,11 +10,11 @@
             <div class="lg:col-span-8 space-y-6">
 
                 {{-- University Information --}}
-                <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             University Information
                         </h2>
 
@@ -56,11 +56,11 @@
                 </div>
 
                 {{-- Location --}}
-                <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             Location
                         </h2>
 
@@ -96,11 +96,11 @@
 
                 <div class=" space-y-6">
                     {{-- Logo --}}
-                    <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                    <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                        <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                        <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                                 University Logo
                             </h2>
 
@@ -111,7 +111,7 @@
                             @if ($university->logo)
                                 <div class="mb-4">
                                     <img src="{{ asset($university->logo) }}"
-                                        class="w-20 h-20 object-contain rounded border border-gray-200" alt="logo">
+                                        class="w-20 h-20 object-contain rounded border border-neutral-200" alt="logo">
                                 </div>
                             @endif
 
@@ -122,11 +122,11 @@
                     </div>
 
                     {{-- Banner --}}
-                    <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                    <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                        <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                        <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                                 University Banner
                             </h2>
 
@@ -137,7 +137,7 @@
                             @if ($university->banner)
                                 <div class="mb-4">
                                     <img src="{{ asset($university->banner) }}"
-                                        class="w-full h-32 object-cover rounded border border-gray-200" alt="banner">
+                                        class="w-full h-32 object-cover rounded border border-neutral-200" alt="banner">
                                 </div>
                             @endif
 

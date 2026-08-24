@@ -25,15 +25,15 @@
                             {{-- Blog Content --}}
                             <div class="p-5">
 
-                                <p class="text-sm text-gray-500 mb-2">
+                                <p class="text-sm text-neutral-500 mb-2">
                                     By {{ $blog->author?->name ?? 'Admin' }}
                                 </p>
 
-                                <h2 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-1">
+                                <h2 class="text-xl font-semibold text-neutral-900 mb-3 line-clamp-1">
                                     {{ $blog->title }}
                                 </h2>
 
-                                <p class="text-gray-600 mb-4 text-sm md:text-base line-clamp-3">
+                                <p class="text-neutral-600 mb-4 text-sm md:text-base line-clamp-3">
                                     {{ Str::limit($blog->short_description, 120) }}
                                 </p>
 
@@ -43,7 +43,7 @@
 
                 @empty
                     <div class="col-span-full text-center py-10">
-                        <p class="text-gray-500">No blogs found.</p>
+                        <p class="text-neutral-500">No blogs found.</p>
                     </div>
                 @endforelse
 

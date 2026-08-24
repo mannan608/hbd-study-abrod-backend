@@ -40,7 +40,7 @@
             />
             <div :class="selected 
                 ? 'border-brand-500 bg-brand-500' 
-                : 'bg-transparent border-gray-300 dark:border-gray-700'"
+                : 'bg-transparent border-neutral-300 dark:border-neutral-700'"
                 class="flex h-5 w-5 items-center justify-center rounded-full border-[1.25px] transition-colors duration-200 hover:border-brand-500 dark:hover:border-brand-500">
                 
                 <span class="h-2 w-2 rounded-full transition-colors duration-200"
@@ -49,7 +49,7 @@
             </div>
         </div>
         
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-400">
+        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-400">
             {{ $label }}
         </span>
     </label>
@@ -103,7 +103,7 @@
             
             <div :class="selected 
                 ? 'border-brand-500 bg-brand-500' 
-                : 'bg-transparent border-gray-300 dark:border-gray-700'"
+                : 'bg-transparent border-neutral-300 dark:border-neutral-700'"
                 class="flex h-5 w-5 items-center justify-center rounded-full border-[1.25px] transition-colors duration-200 hover:border-brand-500 dark:hover:border-brand-500">
                 
                 <span class="h-2 w-2 rounded-full transition-colors duration-200"
@@ -112,7 +112,7 @@
             </div>
         </div>
         
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-400">
+        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-400">
             {{ $label }}
             @if($required)
                 <span class="text-red-500">*</span>

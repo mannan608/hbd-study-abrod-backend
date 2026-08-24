@@ -1,8 +1,8 @@
 @extends('backend.layouts.fullscreen-layout')
 
 @section('content')
-    <div class="relative z-1 bg-neutral-100 p-6 sm:p-0 dark:bg-gray-900">
-        <div class="relative h-screen w-full p-0 dark:bg-gray-900">
+    <div class="relative z-1 bg-neutral-100 p-6 sm:p-0 dark:bg-neutral-900">
+        <div class="relative h-screen w-full p-0 dark:bg-neutral-900">
 
             @if (session('message'))
                 <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-transition
@@ -16,13 +16,13 @@
             <!-- Form -->
             <div class="flex w-full h-full items-center justify-center ">
                 <div
-                    class="mx-auto my-auto border w-full max-w-md border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 px-5 py-5 sm:px-6 lg:px-8 h-fit rounded-2xl">
+                    class="mx-auto my-auto border w-full max-w-md border-neutral-100 bg-white dark:border-neutral-700 dark:bg-neutral-800 px-5 py-5 sm:px-6 lg:px-8 h-fit rounded-2xl">
                     <div>
                         <div class="mb-5 sm:mb-8">
-                            <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90">
+                            <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-neutral-800 dark:text-white/90">
                                 Sign In
                             </h1>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">
                                 Enter your email and password to sign in!
                             </p>
                         </div>
@@ -40,24 +40,24 @@
 
                                     <!-- Email -->
                                     <div>
-                                        <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                                        <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400">
                                             Email<span class="text-error-500">*</span>
                                         </label>
                                         <input type="email" id="email" name="email" value="{{ old('email') }}"
                                             placeholder="admin@gmail.com" required autofocus
-                                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30" />
                                     </div>
                                     <!-- Password -->
                                     <div>
-                                        <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                                        <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400">
                                             Password<span class="text-error-500">*</span>
                                         </label>
                                         <div x-data="{ showPassword: false }" class="relative">
                                             <input :type="showPassword ? 'text' : 'password'" name="password"
                                                 placeholder="Enter your password" required
-                                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-neutral-300 bg-transparent py-2.5 pr-11 pl-4 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30" />
                                             <span @click="showPassword = !showPassword"
-                                                class="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer text-gray-500 dark:text-gray-400">
+                                                class="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer text-neutral-500 dark:text-neutral-400">
                                                 <svg x-show="!showPassword" class="fill-current" width="20"
                                                     height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -79,13 +79,13 @@
                                     <div class="flex items-center justify-between">
                                         <div x-data="{ checkboxToggle: false }">
                                             <label for="checkboxLabelOne"
-                                                class="flex cursor-pointer items-center text-sm font-normal text-gray-700 select-none dark:text-gray-400">
+                                                class="flex cursor-pointer items-center text-sm font-normal text-neutral-700 select-none dark:text-neutral-400">
                                                 <div class="relative">
                                                     <input type="checkbox" id="checkboxLabelOne" name="remember"
                                                         value="1" class="sr-only"
                                                         @change="checkboxToggle = !checkboxToggle" />
                                                     <div :class="checkboxToggle ? 'border-brand-500 bg-brand-500' :
-                                                        'bg-transparent border-gray-300 dark:border-gray-700'"
+                                                        'bg-transparent border-neutral-300 dark:border-neutral-700'"
                                                         class="mr-3 flex h-5 w-5 items-center justify-center rounded-md border-[1.25px]">
                                                         <span :class="checkboxToggle ? '' : 'opacity-0'">
                                                             <svg width="14" height="14" viewBox="0 0 14 14"

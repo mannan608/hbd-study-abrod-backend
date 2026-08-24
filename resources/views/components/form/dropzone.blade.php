@@ -25,7 +25,7 @@
             this.$refs.fileInput.value = '';
         }
     }"
-    class="transition border border-gray-300 border-dashed cursor-pointer dark:hover:border-brand-500 dark:border-gray-700 rounded-xl hover:border-brand-500"
+    class="transition border border-neutral-300 border-dashed cursor-pointer dark:hover:border-brand-500 dark:border-neutral-700 rounded-xl hover:border-brand-500"
 >
         <div 
             @drop.prevent="handleDrop($event)"
@@ -33,9 +33,9 @@
             @dragleave.prevent="isDragging = false"
             @click="$refs.fileInput.click()"
             :class="isDragging 
-                ? 'border-brand-500 bg-gray-100 dark:bg-gray-800' 
-                : 'border-gray-300 bg-gray-50 dark:border-gray-700 dark:bg-gray-900'"
-            class="dropzone rounded-xl border-dashed border-gray-300 p-7 lg:p-10 transition-colors cursor-pointer"
+                ? 'border-brand-500 bg-neutral-100 dark:bg-neutral-800' 
+                : 'border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900'"
+            class="dropzone rounded-xl border-dashed border-neutral-300 p-7 lg:p-10 transition-colors cursor-pointer"
             id="demo-upload"
         >
             <!-- Hidden File Input -->
@@ -53,7 +53,7 @@
             <div class="flex flex-col items-center m-0">
                 <!-- Icon Container -->
                 <div class="mb-[22px] flex justify-center">
-                    <div class="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                    <div class="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-neutral-200 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-400">
                         <svg
                             class="fill-current"
                             width="29"
@@ -71,12 +71,12 @@
                 </div>
 
                 <!-- Text Content -->
-                <h4 class="mb-3 font-semibold text-gray-800 text-theme-xl dark:text-white/90">
+                <h4 class="mb-3 font-semibold text-neutral-800 text-theme-xl dark:text-white/90">
                     <span x-show="!isDragging">Drag & Drop Files Here</span>
                     <span x-show="isDragging" x-cloak>Drop Files Here</span>
                 </h4>
 
-                <span class="text-center mb-5 block w-full max-w-[290px] text-sm text-gray-700 dark:text-gray-400">
+                <span class="text-center mb-5 block w-full max-w-[290px] text-sm text-neutral-700 dark:text-neutral-400">
                     Drag and drop your PNG, JPG, WebP, SVG images here or browse
                 </span>
 
@@ -87,16 +87,16 @@
         </div>
 
         <!-- File Preview List (Optional) -->
-        <div x-show="files.length > 0" class="mt-4 p-4 border-t border-gray-200 dark:border-gray-700" x-cloak>
-            <h5 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Uploaded Files:</h5>
+        <div x-show="files.length > 0" class="mt-4 p-4 border-t border-neutral-200 dark:border-neutral-700" x-cloak>
+            <h5 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">Uploaded Files:</h5>
             <ul class="space-y-2">
                 <template x-for="(file, index) in files" :key="index">
-                    <li class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <li class="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
                         <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                            <span class="text-sm text-gray-700 dark:text-gray-300" x-text="file.name"></span>
+                            <span class="text-sm text-neutral-700 dark:text-neutral-300" x-text="file.name"></span>
                         </div>
                         <button 
                             @click.stop="removeFile()"

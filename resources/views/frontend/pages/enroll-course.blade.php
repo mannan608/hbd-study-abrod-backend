@@ -3,10 +3,10 @@
 @section('content')
     <section class=" py-8 md:py-12 lg:py-14 bg-white ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="border border-gray-200 p-6 w-full rounded-lg bg-white max-w-170 mx-auto">
+            <div class="border border-neutral-200 p-6 w-full rounded-lg bg-white max-w-170 mx-auto">
 
                 <div class="md:mb-4 mb-3 lg:mb-6">
-                    <h1 class="text-center text-base md:text-lg lg:text-xl font-bold text-gray-900">{{ $course->name }}</h1>
+                    <h1 class="text-center text-base md:text-lg lg:text-xl font-bold text-neutral-900">{{ $course->name }}</h1>
                 </div>
                 <form  action="{{ route('course.enroll', $course->slug) }}" method="POST">
                     @csrf
@@ -48,13 +48,13 @@
                     </svg>
                 </div>
 
-                <h3 class="text-xl font-bold text-gray-900 mb-2">
+                <h3 class="text-xl font-bold text-neutral-900 mb-2">
                     Success!
                 </h3>
 
-                <p class="text-gray-600 mb-6 text-base font-medium">You have successfully applied for {{$course->name}}</p>
+                <p class="text-neutral-600 mb-6 text-base font-medium">You have successfully applied for {{$course->name}}</p>
 
-                <p class="text-gray-600 mb-6 text-sm">
+                <p class="text-neutral-600 mb-6 text-sm">
                     {{ session('success') }}
                 </p>
 

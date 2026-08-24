@@ -3,8 +3,8 @@
 @section('content')
     <div class="space-y-6">
         <div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Edit User</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Leave password blank to keep the current password.</p>
+            <h3 class="text-lg font-semibold text-neutral-800 dark:text-white/90">Edit User</h3>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">Leave password blank to keep the current password.</p>
         </div>
 
         <form method="POST" action="{{ role_route('role.users.update', ['user' => $user]) }}" class="space-y-6">

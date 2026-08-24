@@ -75,11 +75,11 @@
     {{-- Page Header --}}
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <h1 class="text-xl font-semibold text-gray-800 dark:text-white">
+                <h1 class="text-xl font-semibold text-neutral-800 dark:text-white">
                     Account Settings
                 </h1>
 
-                <p class="text-sm text-gray-500 dark:text-gray-400">
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">
                     Manage your counsellor profile and account information.
                 </p>
             </div>
@@ -94,14 +94,14 @@
             {{-- ========================================================= --}}
             {{-- Personal Information --}}
             {{-- ========================================================= --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         Personal Information
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                         Update your basic account information.
                     </p>
                 </div>
@@ -127,14 +127,14 @@
             {{-- ========================================================= --}}
             {{-- Change Password --}}
             {{-- ========================================================= --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         Change Password
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                         Leave these fields empty if you don't want to change your password.
                     </p>
                 </div>
@@ -154,14 +154,14 @@
             {{-- ========================================================= --}}
             {{-- Counsellor Information --}}
             {{-- ========================================================= --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         Counsellor Information
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                         Update your professional profile information.
                     </p>
                 </div>
@@ -211,7 +211,7 @@
 
                             <div class="mb-2 flex items-center justify-between gap-3">
 
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                     Languages
                                 </label>
 
@@ -230,10 +230,10 @@
 
                                         <input type="text" name="languages[]" x-model="items[index]"
                                             placeholder="English"
-                                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+                                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30">
 
                                         <button type="button" @click="remove(index)"
-                                            class="inline-flex h-11 items-center justify-center rounded-lg border border-gray-300 px-3 text-sm text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
+                                            class="inline-flex h-11 items-center justify-center rounded-lg border border-neutral-300 px-3 text-sm text-neutral-600 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800">
                                             Remove
                                         </button>
 
@@ -278,7 +278,7 @@
 
                             <div class="mb-2 flex items-center justify-between gap-3">
 
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                     Expertise
                                 </label>
 
@@ -297,10 +297,10 @@
 
                                         <input type="text" name="expertise[]" x-model="items[index]"
                                             placeholder="SOP Writing"
-                                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+                                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30">
 
                                         <button type="button" @click="remove(index)"
-                                            class="inline-flex h-11 items-center justify-center rounded-lg border border-gray-300 px-3 text-sm text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
+                                            class="inline-flex h-11 items-center justify-center rounded-lg border border-neutral-300 px-3 text-sm text-neutral-600 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800">
                                             Remove
                                         </button>
 
@@ -336,12 +336,12 @@
                         <div>
 
                             <label for="country_id"
-                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Country
                             </label>
 
                             <select id="country_id" name="country_id" x-model="countryId" @change="countryChanged()"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
 
                                 <option value="">
                                     Select Country
@@ -367,12 +367,12 @@
                         {{-- City --}}
                         <div>
 
-                            <label for="city_id" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label for="city_id" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 City
                             </label>
 
                             <select id="city_id" name="city_id" x-model="cityId" :disabled="!countryId"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 disabled:cursor-not-allowed disabled:bg-gray-100 focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-100 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
 
                                 <option value="">
                                     Select City

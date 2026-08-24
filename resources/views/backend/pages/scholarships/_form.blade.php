@@ -48,11 +48,11 @@
         <div class="space-y-6 lg:col-span-8">
 
             {{-- Scholarship --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
                 {{-- Header --}}
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         Scholarship
                     </h2>
                 </div>
@@ -65,13 +65,13 @@
                         {{-- University --}}
                         <div>
                             <label for="university_id"
-                                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 University
                             </label>
 
                             <select id="university_id" name="university_id" x-model="universityId"
                                 @change="universityChanged()"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 text-sm text-gray-800 focus:border-brand-500 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                 <option value="">
                                     Select University
                                 </option>
@@ -93,12 +93,12 @@
                         {{-- Course --}}
                         <div>
                             <label for="course_id"
-                                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Course
                             </label>
 
                             <select id="course_id" name="course_id" x-model="courseId" :disabled="!universityId"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 text-sm text-gray-800 focus:border-brand-500 focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-70 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:disabled:bg-gray-800">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-neutral-100 disabled:opacity-70 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:disabled:bg-neutral-800">
                                 <option value="">
                                     Select Course
                                 </option>
@@ -109,13 +109,13 @@
                             </select>
 
                             {{-- No University Selected --}}
-                            <p x-show="!universityId" class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            <p x-show="!universityId" class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
                                 Please select a university first.
                             </p>
 
                             {{-- No Course --}}
                             <p x-show="universityId && filteredCourses.length === 0"
-                                class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
                                 No courses available for this university.
                             </p>
 
@@ -169,9 +169,9 @@
                     <input type="hidden" name="is_active" value="0">
 
                     <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $scholarship?->is_active ?? true))
-                        class="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+                        class="h-4 w-4 rounded border-neutral-300 text-brand-600 focus:ring-brand-500">
 
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                         Active
                     </span>
                 </label>
@@ -185,7 +185,7 @@
 
 
             {{-- Submit --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
                 <div class="flex justify-end p-5">
 
                     <button type="submit"

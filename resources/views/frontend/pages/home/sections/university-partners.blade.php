@@ -42,20 +42,20 @@
 
             </div>
             <h2
-                class="text-3xl md:text-4xl font-bold text-gray-900 mb-2 transition-all duration-700 delay-200">
+                class="text-3xl md:text-4xl font-bold text-neutral-900 mb-2 transition-all duration-700 delay-200">
                 Trusted By <span class="text-brand-500"> 2,000+
                     Universities </span>
             </h2>
-            <p class="text-gray-600 transition-all duration-700 delay-300"> Partnering with the world's leading
+            <p class="text-neutral-600 transition-all duration-700 delay-300"> Partnering with the world's leading
                 educational institutions </p>
         </div>
     </div>
     <div class="relative space-y-5">
         <div
-            class="absolute left-0 top-0 bottom-0 w-20 sm:w-32 lg:w-40 bg-gradient-to-r from-gray-50 to-transparent z-20 pointer-events-none">
+            class="absolute left-0 top-0 bottom-0 w-20 sm:w-32 lg:w-40 bg-gradient-to-r from-neutral-50 to-transparent z-20 pointer-events-none">
         </div>
         <div
-            class="absolute right-0 top-0 bottom-0 w-20 sm:w-32 lg:w-40 bg-gradient-to-l from-gray-50 to-transparent z-20 pointer-events-none">
+            class="absolute right-0 top-0 bottom-0 w-20 sm:w-32 lg:w-40 bg-gradient-to-l from-neutral-50 to-transparent z-20 pointer-events-none">
         </div>
         <div class="w-full overflow-hidden">
             <div
@@ -63,7 +63,7 @@
                 <div class="flex shrink-0 gap-5 pr-5">
                     @foreach ($universities as $university)
                         <div
-                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
+                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-neutral-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
                             <div class=" shrink-0 flex items-center justify-center">
                                 <img src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
                                     class="max-w-full max-h-9.5 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110">
@@ -75,7 +75,7 @@
                 <div class="flex shrink-0 gap-5 pr-5" aria-hidden="true">
                     @foreach ($universities as $university)
                         <div
-                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
+                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-neutral-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
                             <div class=" shrink-0 flex items-center justify-center"> <img
                                     src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
                                     class="max-w-full max-h-9.5 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110">
@@ -92,7 +92,7 @@
                 <div class="flex shrink-0 gap-5 pr-5">
                     @foreach ($universities as $university)
                         <div
-                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
+                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-neutral-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
                             <div class=" shrink-0 flex items-center justify-center">
                                 <img src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
                                     class="max-w-full max-h-9.5 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110">
@@ -104,7 +104,7 @@
                 <div class="flex shrink-0 gap-5 pr-5" aria-hidden="true">
                     @foreach ($universities as $university)
                         <div
-                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
+                            class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-neutral-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
                             <div class=" shrink-0 flex items-center justify-center"> <img
                                     src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
                                     class="max-w-full max-h-9.5 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110">

@@ -37,7 +37,7 @@
     @if($label)
         <label
             for="{{ $id }}"
-            class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+            class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400"
         >
             {{ $label }}
         </label>
@@ -52,11 +52,11 @@
             placeholder="{{ $placeholder ?? strtoupper($dateFormat) }}"
             autocomplete="off"
             {{ $attributes->merge([
-                'class' => 'h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 shadow-theme-xs focus:border-brand-300 focus:ring-1 focus:ring-brand-500/20 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800'
+                'class' => 'h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 pr-11 text-sm text-neutral-800 placeholder:text-neutral-400 shadow-theme-xs focus:border-brand-300 focus:ring-1 focus:ring-brand-500/20 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800'
             ]) }}
         />
 
-        <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+        <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-neutral-400">
             <svg xmlns="http://www.w3.org/2000/svg"
                 width="20"
                 height="20"

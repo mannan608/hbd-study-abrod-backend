@@ -1,5 +1,5 @@
 <div class="mb-4">
-    <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+    <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400">
         Add Your Content
     </label>
     <textarea id="editor" name="content">{{ old('content', $blog?->content ?? '') }}</textarea>

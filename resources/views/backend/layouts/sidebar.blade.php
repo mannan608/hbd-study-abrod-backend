@@ -5,7 +5,7 @@
 @endphp
 
 <aside id="sidebar"
-    class="fixed flex flex-col mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-gray-200"
+    class="fixed flex flex-col mt-0 top-0 px-5 left-0 bg-white dark:bg-neutral-900 dark:border-neutral-800 text-neutral-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-neutral-200"
     x-data="{
         openSubmenus: {},
         init() {
@@ -93,7 +93,7 @@
                 @foreach ($menuGroups as $groupIndex => $menuGroup)
                     <div>
                         <!-- Menu Group Title -->
-                        <h2 class="mb-4 text-xs uppercase flex leading-[20px] text-gray-400"
+                        <h2 class="mb-4 text-xs uppercase flex leading-[20px] text-neutral-400"
                             :class="(!$store.sidebar.isExpanded && !$store.sidebar.isHovered && !$store.sidebar.isMobileOpen) ?
                             'lg:justify-center' : 'justify-start'">
                             <template
@@ -235,4 +235,4 @@
 
 <!-- Mobile Overlay -->
 <div x-show="$store.sidebar.isMobileOpen" @click="$store.sidebar.setMobileOpen(false)"
-    class="fixed z-50 h-screen w-full bg-gray-900/50"></div>
+    class="fixed z-50 h-screen w-full bg-neutral-900/50"></div>

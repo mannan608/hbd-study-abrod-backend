@@ -89,15 +89,15 @@
             {{-- =====================================================
                 UNIVERSITY INFORMATION
             ====================================================== --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         University Information
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                         Enter the basic information of the university.
                     </p>
 
@@ -159,15 +159,15 @@
             {{-- =====================================================
                 LOCATION
             ====================================================== --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         Location
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                         Select the university location.
                     </p>
 
@@ -184,12 +184,12 @@
                         <div>
 
                             <label for="country_id"
-                                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Country
                             </label>
 
                             <select name="country_id" id="country_id" x-model="countryId"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
 
                                 <option value="">
                                     Select Country
@@ -216,12 +216,12 @@
                         <div>
 
                             <label for="city_id"
-                                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 City
                             </label>
 
                             <select name="city_id" id="city_id" x-model="cityId" :disabled="!countryId"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
 
                                 <option value="" x-text="countryId ? 'Select City' : 'Select Country First'">
                                 </option>
@@ -261,15 +261,15 @@
             {{-- =====================================================
                 RANKING
             ====================================================== --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         University Ranking
                     </h2>
 
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                         Enter the university rankings.
                     </p>
 
@@ -293,19 +293,19 @@
             {{-- =====================================================
                 CAMPUS FACILITIES
             ====================================================== --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
                     <div class="flex items-center justify-between">
 
                         <div>
 
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                                 Campus Facilities
                             </h2>
 
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                                 Add facilities available at the university.
                             </p>
 
@@ -330,7 +330,7 @@
 
                                 <input type="text" name="campus_facilities[]" x-model="facilities[index]"
                                     :placeholder="'Facility ' + (index + 1) + ' e.g. Central Library'"
-                                    class="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                                    class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
 
 
                                 <button type="button" x-show="facilities.length > 1" @click="removeFacility(index)"
@@ -397,15 +397,15 @@
                 {{-- =================================================
                     LOGO
                 ================================================== --}}
-                <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             University Logo
                         </h2>
 
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                             {{ $isEdit ? 'Upload a new logo to replace the current logo.' : 'Upload university logo.' }}
                         </p>
 
@@ -419,12 +419,12 @@
                         @if ($isEdit && $university->logo)
                             <div class="mb-4">
 
-                                <p class="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">
+                                <p class="mb-2 text-xs font-medium text-neutral-500 dark:text-neutral-400">
                                     Current Logo
                                 </p>
 
                                 <img src="{{ asset($university->logo) }}" alt="{{ $university->name }}"
-                                    class="h-24 w-24 rounded-xl border border-gray-200 object-contain dark:border-gray-700">
+                                    class="h-24 w-24 rounded-xl border border-neutral-200 object-contain dark:border-neutral-700">
 
                             </div>
                         @endif
@@ -443,15 +443,15 @@
                 {{-- =================================================
                     BANNER
                 ================================================== --}}
-                <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             University Banner
                         </h2>
 
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                             {{ $isEdit ? 'Upload a new banner to replace the current banner.' : 'Upload university banner.' }}
                         </p>
 
@@ -465,12 +465,12 @@
                         @if ($isEdit && $university->banner)
                             <div class="mb-4">
 
-                                <p class="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">
+                                <p class="mb-2 text-xs font-medium text-neutral-500 dark:text-neutral-400">
                                     Current Banner
                                 </p>
 
                                 <img src="{{ asset($university->banner) }}" alt="{{ $university->name }}"
-                                    class="h-32 w-full rounded-xl border border-gray-200 object-cover dark:border-gray-700">
+                                    class="h-32 w-full rounded-xl border border-neutral-200 object-cover dark:border-neutral-700">
 
                             </div>
                         @endif
@@ -489,11 +489,11 @@
                 {{-- =================================================
                     STATUS
                 ================================================== --}}
-                <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <div class="border-b border-gray-100 p-5 dark:border-gray-800">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             Status & Ordering
                         </h2>
 
@@ -508,11 +508,11 @@
 
                             <div>
 
-                                <label for="is_featured" class="text-sm font-medium text-gray-800 dark:text-white">
+                                <label for="is_featured" class="text-sm font-medium text-neutral-800 dark:text-white">
                                     Featured University
                                 </label>
 
-                                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">
                                     Show this university as featured.
                                 </p>
 
@@ -527,15 +527,15 @@
                                     x-model="isFeatured" class="peer sr-only">
 
                                 <div
-                                    class="h-6 w-11 rounded-full bg-gray-200
+                                    class="h-6 w-11 rounded-full bg-neutral-200
                                     after:absolute after:left-[2px] after:top-[2px]
                                     after:h-5 after:w-5 after:rounded-full
-                                    after:border after:border-gray-300 after:bg-white
+                                    after:border after:border-neutral-300 after:bg-white
                                     after:transition-all
                                     peer-checked:bg-brand-600
                                     peer-checked:after:translate-x-full
                                     peer-checked:after:border-white
-                                    dark:bg-gray-700">
+                                    dark:bg-neutral-700">
                                 </div>
 
                             </label>
@@ -549,11 +549,11 @@
 
                             <div>
 
-                                <label for="is_active" class="text-sm font-medium text-gray-800 dark:text-white">
+                                <label for="is_active" class="text-sm font-medium text-neutral-800 dark:text-white">
                                     Active
                                 </label>
 
-                                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">
                                     Enable this university.
                                 </p>
 
@@ -568,15 +568,15 @@
                                     x-model="isActive" class="peer sr-only">
 
                                 <div
-                                    class="h-6 w-11 rounded-full bg-gray-200
+                                    class="h-6 w-11 rounded-full bg-neutral-200
                                     after:absolute after:left-[2px] after:top-[2px]
                                     after:h-5 after:w-5 after:rounded-full
-                                    after:border after:border-gray-300 after:bg-white
+                                    after:border after:border-neutral-300 after:bg-white
                                     after:transition-all
                                     peer-checked:bg-brand-600
                                     peer-checked:after:translate-x-full
                                     peer-checked:after:border-white
-                                    dark:bg-gray-700">
+                                    dark:bg-neutral-700">
                                 </div>
 
                             </label>

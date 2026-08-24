@@ -13,9 +13,9 @@
         <div class="space-y-6 lg:col-span-8">
 
             {{-- Course Intake --}}
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-                <div class="border-b border-gray-100 p-5 dark:border-gray-800">
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                         Course Intake
                     </h2>
                 </div>
@@ -23,12 +23,12 @@
                 <div class="space-y-5 p-5">
                     <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                         <div>
-                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Course
                             </label>
 
                             <select name="course_id"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 text-sm text-gray-800 focus:border-brand-500 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                 <option value="">
                                     Select Course
                                 </option>
@@ -48,12 +48,12 @@
                         </div>
 
                         <div>
-                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Intake Month
                             </label>
 
                             <select name="intake_month"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 text-sm text-gray-800 focus:border-brand-500 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                 <option value="">
                                     Select Month
                                 </option>
@@ -73,12 +73,12 @@
                         </div>
 
                         <div>
-                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Intake Year
                             </label>
 
                             <select name="intake_year"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 text-sm text-gray-800 focus:border-brand-500 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                 <option value="">
                                     Select Year
                                 </option>
@@ -104,12 +104,12 @@
                             value="{{ $startDate }}" />
 
                         <div>
-                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Status
                             </label>
 
                             <select name="status"
-                                class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 text-sm text-gray-800 focus:border-brand-500 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                 <option value="">
                                     Select Status
                                 </option>
@@ -134,7 +134,7 @@
 
         {{-- RIGHT --}}
         <div class="space-y-6 lg:col-span-4">
-            <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
                 <div class="flex justify-end p-5">
                     <button type="submit"
                         class="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-500">

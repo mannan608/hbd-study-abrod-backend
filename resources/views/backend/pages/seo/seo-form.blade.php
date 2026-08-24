@@ -25,7 +25,7 @@
  @endphp
 
  <div class="space-y-3">
-     <div class="rounded-xl border border-gray-200 dark:border-gray-800 p-5 bg-white dark:bg-gray-900 px-5 py-4 mb-4">
+     <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900 px-5 py-4 mb-4">
          <h3 class="text-lg font-semibold dark:text-white">
              Basic SEO
          </h3>
@@ -42,7 +42,7 @@
      </div>
 
 
-     <div class="rounded-xl border border-gray-200 dark:border-gray-800 p-5 bg-white dark:bg-gray-900 px-5 py-4 mb-4">
+     <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900 px-5 py-4 mb-4">
          <h3 class="text-lg font-semibold dark:text-white">
              Advance SEO
          </h3>
@@ -61,7 +61,7 @@
                  placeholder="Enter Open Graph description..." />
 
              <div class="">
-                 <label for="og_image" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Open
+                 <label for="og_image" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Open
                      Graph
                      Image</label>
                  <x-form.dropzone name="og_image" label="Open Graph Image" value=""
@@ -76,7 +76,7 @@
                  placeholder="Enter Twitter description..." />
              <div class="">
                  <label for="twitter_image"
-                     class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Twitter
+                     class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Twitter
                      Image</label>
                  <x-form.dropzone name="twitter_image" label="Twitter Image" value=""
                      placeholder="Upload Twitter image..." />
@@ -84,7 +84,7 @@
          </div>
      </div>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 p-5 bg-white dark:bg-gray-900 px-5 py-4 mb-4">
+<div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900 px-5 py-4 mb-4">
          <h3 class="text-lg font-semibold dark:text-white">
              Script and Schema
          </h3>
@@ -92,12 +92,12 @@
                {{-- Header Scripts --}}
      <div>
          <div id="header-scripts-wrapper">
-             <label for="" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Header
+             <label for="" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Header
                  Scripts</label>
              @foreach ($headerScripts as $script)
                  <div class="script-row space-y-3 mb-4">
                      <textarea name="header_scripts[]" rows="4" placeholder="Enter header scripts..."
-                         class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">{{ $script }}</textarea>
+                         class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30">{{ $script }}</textarea>
 
                      <div class="flex justify-end gap-3">
                          <button type="button"
@@ -118,13 +118,13 @@
      {{-- Footer Scripts --}}
      <div>
          <div id="footer-scripts-wrapper">
-             <label for="" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-400">Footer
+             <label for="" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-400">Footer
                  Scripts</label>
 
              @foreach ($footerScripts as $script)
                  <div class="script-row space-y-3 mb-4">
                      <textarea name="footer_scripts[]" rows="4" placeholder="Enter footer scripts..."
-                         class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">{{ $script }}</textarea>
+                         class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30">{{ $script }}</textarea>
 
                      <div class="flex justify-end gap-3">
                          <button type="button"
@@ -187,17 +187,17 @@
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-neutral-300
                 bg-transparent
                 px-4
                 py-2.5
                 text-sm
-                text-gray-800
-                placeholder:text-gray-400
+                text-neutral-800
+                placeholder:text-neutral-400
                 focus:ring-3
                 focus:outline-hidden
-                dark:border-gray-700
-                dark:bg-gray-900
+                dark:border-neutral-700
+                dark:bg-neutral-900
                 dark:text-white/90
                 dark:placeholder:text-white/30"
                     ></textarea>

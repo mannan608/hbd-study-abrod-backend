@@ -1,8 +1,8 @@
  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div class="flex flex-col items-center justify-center">
                 <div class="h-1.5 w-14 bg-brand-500 rounded-full mb-3"></div>
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Why Us?</h1>
-                <p class="text-sm lg:text-base text-gray-600 text-center mt-3">At HBD Services Australia, we are
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 tracking-tight">Why Us?</h1>
+                <p class="text-sm lg:text-base text-neutral-600 text-center mt-3">At HBD Services Australia, we are
                     committed to delivering exceptional quality in every aspect of our education. Our rigorous academic
                     standards, experienced faculty, <a href="https://www.skwatches.com/" class="text-brand-500"
                         target="_blank">rolex replica</a> watches offer exceptional craftsmanship at a fraction of the price

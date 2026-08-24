@@ -29,7 +29,7 @@
                     <div class="p-4 md:p-6 lg:p-8">
 
                         {{-- Meta Info --}}
-                        <div class="flex flex-wrap items-center gap-2 md:gap-4 text-xs sm:text-sm text-gray-500 mb-5">
+                        <div class="flex flex-wrap items-center gap-2 md:gap-4 text-xs sm:text-sm text-neutral-500 mb-5">
                             <span>
                                 By {{ $blog->author?->name ?? 'Admin' }}
                             </span>
@@ -44,12 +44,12 @@
                         </div>
 
                         {{-- Title --}}
-                        <h1 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
+                        <h1 class="text-2xl md:text-4xl font-bold text-neutral-900 leading-tight mb-4">
                             {{ $blog->title }}
                         </h1>
 
                         {{-- Short Description --}}
-                        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
                             {{ $blog->short_description }}
                         </p>
 
@@ -72,7 +72,7 @@
                     {{-- Latest Blogs --}}
                     <div class="bg-white border rounded-2xl shadow-sm p-5">
 
-                        <h3 class="text-xl font-bold text-gray-900 mb-5 border-b pb-3">
+                        <h3 class="text-xl font-bold text-neutral-900 mb-5 border-b pb-3">
                             Latest Posts
                         </h3>
 
@@ -99,11 +99,11 @@
 
                                     <div>
 
-                                        <h4 class="font-semibold text-gray-800 group-hover:text-blue-600 transition line-clamp-2">
+                                        <h4 class="font-semibold text-neutral-800 group-hover:text-blue-600 transition line-clamp-2">
                                             {{ $item->title }}
                                         </h4>
 
-                                        <p class="text-sm text-gray-500 mt-2">
+                                        <p class="text-sm text-neutral-500 mt-2">
                                             {{ $item->created_at->format('d M, Y') }}
                                         </p>
 
@@ -113,7 +113,7 @@
 
                             @empty
 
-                                <p class="text-gray-500">
+                                <p class="text-neutral-500">
                                     No recent blogs found.
                                 </p>
 

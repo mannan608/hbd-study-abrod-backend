@@ -8,10 +8,10 @@
 
             <div class="lg:col-span-8 space-y-6">
 
-                <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <div class="border-b border-gray-100 p-5 dark:border-gray-800">
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             Course Category Information
                         </h2>
                     </div>

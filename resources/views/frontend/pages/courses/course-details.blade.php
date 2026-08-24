@@ -184,7 +184,7 @@
             </div>
 
             <!-- Section: Academic Requirements & Outcomes -->
-            <div class="bg-white rounded-3xl p-8 border border-gray-100  space-y-10 mt-12">
+            <div class="bg-white rounded-3xl p-8 border border-neutral-100  space-y-10 mt-12">
 
                 <!-- Entry Requirements -->
                 <div>
