@@ -15,8 +15,8 @@ class FrontendController extends Controller
 
     public function aboutPage()
     {
-         $courses = Course::query()->select('id', 'name', 'slug', 'thumbnail', 'code', 'cricos')->get();
-        return view('frontend.pages.about', ['title' => 'About Us'],compact('courses'));
+        
+        return view('frontend.pages.about');
     }
 
     public function contactPage()
