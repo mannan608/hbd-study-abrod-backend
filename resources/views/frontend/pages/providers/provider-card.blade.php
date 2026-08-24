@@ -1,4 +1,4 @@
-<a href="{{ route('course-details') }}"
+<a href="{{ route('provider-details') }}"
     class="group block h-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-brand-500/30 hover:shadow-xl active:translate-y-0 active:shadow-md sm:p-5 lg:p-6">
 
     <!-- Header -->

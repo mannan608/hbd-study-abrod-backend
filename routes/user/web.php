@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CounsellorController;
 use App\Http\Controllers\Frontend\CourseController;
+use App\Http\Controllers\Frontend\ProviderController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\EventRegistrationController;
@@ -39,7 +40,11 @@ Route::get('/events/{event}/register', [EventRegistrationController::class, 'cre
 Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('events.register.store');
 
 
-Route::get('/courses/{slug}', [CourseController::class, 'coursesDetails'])->name('course-details');
+Route::get('/course-details', [CourseController::class, 'coursesDetails'])->name('course-details');
+
+Route::get('/providers', [ProviderController::class, 'providers'])->name('providers');
+Route::get('/provider-details', [ProviderController::class, 'providerDetails'])->name('provider-details');
+
 
 
 // Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
