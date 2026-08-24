@@ -13,5 +13,10 @@ class CounsellorController extends Controller
         return view('frontend.pages.counsellors.counsellors');
     }
 
+     public function counsellorDetails()
+    {
+        return view('frontend.pages.counsellors.counsellor-details');
+    }
+
   
 }

@@ -30,19 +30,19 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div
                     class="reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-100 hover:-translate-y-1 transition-transform duration-300">
-                    @include('frontend.pages.components.course.course-card')
+                    @include('frontend.pages.courses.course-card')
                 </div>
                 <div
                     class="reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-200 hover:-translate-y-1 transition-transform duration-300">
-                    @include('frontend.pages.components.course.course-card')
+                    @include('frontend.pages.courses.course-card')
                 </div>
                 <div
                     class="reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-300 hover:-translate-y-1 transition-transform duration-300">
-                    @include('frontend.pages.components.course.course-card')
+                    @include('frontend.pages.courses.course-card')
                 </div>
                 <div
                     class="reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-400 hover:-translate-y-1 transition-transform duration-300">
-                    @include('frontend.pages.components.course.course-card')
+                    @include('frontend.pages.courses.course-card')
                 </div>
 
             </div>

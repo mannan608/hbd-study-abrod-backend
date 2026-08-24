@@ -23,27 +23,26 @@ Route::get('/signup', function () {
 
 Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
+//static pages
 Route::get('/', [FrontendController::class, 'homePage'])->name('home');
-Route::get('/courses', [CourseController::class, 'courses'])->name('courses');
-Route::get('/counsellors', [CounsellorController::class, 'counsellors'])->name('counsellors');
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/destinations', [EventController::class, 'index'])->name('destinations');
 Route::get('/how-we-works', [EventController::class, 'index'])->name('how-we-works');
-
-
-// quick links
 Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
 Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contact');
 
-
+//dynami pages
 Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');
 Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('events.register.store');
 
-
+Route::get('/courses', [CourseController::class, 'courses'])->name('courses');
 Route::get('/course-details', [CourseController::class, 'coursesDetails'])->name('course-details');
 
 Route::get('/providers', [ProviderController::class, 'providers'])->name('providers');
 Route::get('/provider-details', [ProviderController::class, 'providerDetails'])->name('provider-details');
+
+Route::get('/counsellors', [CounsellorController::class, 'counsellors'])->name('counsellors');
+Route::get('/counsellor-details', [CounsellorController::class, 'counsellorDetails'])->name('counsellor-details');
 
 
 

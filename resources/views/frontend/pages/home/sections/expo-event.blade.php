@@ -36,16 +36,12 @@
 
 
             <div class="animate-marquee flex w-max gap-6 py-4">
-                @include('frontend.pages.components.event.event-card')
-                @include('frontend.pages.components.event.event-card')
-                @include('frontend.pages.components.event.event-card')
-                @include('frontend.pages.components.event.event-card')
-
-
-                @include('frontend.pages.components.event.event-card')
-                @include('frontend.pages.components.event.event-card')
-                @include('frontend.pages.components.event.event-card')
-                @include('frontend.pages.components.event.event-card')
+               @for ($i = 0; $i < 10; $i++)
+               <a href="#" class="flex w-113.5  shrink-0 items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
+     
+                    @include('frontend.pages.events.event-card')
+                </a>
+                @endfor
             </div>
 
         </div>

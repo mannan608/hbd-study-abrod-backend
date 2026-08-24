@@ -1,6 +1,5 @@
   <!-- CARD 1: EDUCATION -->
-    <a href="#" class="flex w-113.5  shrink-0 items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
-      <!-- Date Badge -->
+   <!-- Date Badge -->
       <div class="flex h-20 w-20 shrink-0 flex-col items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
         <span class="text-2xl font-black leading-none">15</span>
         <span class="mt-1 text-sm font-bold uppercase tracking-wider text-emerald-600">Oct</span>
@@ -61,4 +60,3 @@
           </div>
         </div>
       </div>
-    </a>
