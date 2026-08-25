@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('event_registrations', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->uuid('event_id');
+             $table->foreignId('event_id');
 
             $table->string('full_name', 150);
             $table->string('email', 191);
