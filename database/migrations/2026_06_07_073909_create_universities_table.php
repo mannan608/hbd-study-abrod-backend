@@ -15,15 +15,8 @@ return new class extends Migration
             $table->id();
 
             // Location
-            $table->foreignUuid('country_id')
-                ->nullable()
-                ->constrained('countries')
-                ->nullOnDelete();
-
-            $table->foreignUuid('city_id')
-                ->nullable()
-                ->constrained('cities')
-                ->nullOnDelete();
+            $table->uuid('country_id')->nullable();
+            $table->uuid('city_id')->nullable();
 
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
