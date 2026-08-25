@@ -22,22 +22,24 @@
         </div>
 
         <div>
-          <h4 class="text-white text-base font-bold uppercase tracking-wider mb-4">Courses</h4>
+          <h4 class="text-white text-base font-bold uppercase tracking-wider mb-4">About us</h4>
           <ul class="space-y-2 text-[15px]">
-            <li><a href="#" class="hover:text-brand-400 transition">Information Technology</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Business & Management</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Nursing & Healthcare</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Engineering & Construction</a></li>
+            <li><a href="{{ route('about') }}" class="hover:text-brand-400 transition">About HBD Services</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Book Your Appointment</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">IELTS/PTE Registration</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Claims</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Referral Program</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-white text-base font-bold uppercase tracking-wider mb-4">Universities</h4>
+          <h4 class="text-white text-base font-bold uppercase tracking-wider mb-4">Quick Links</h4>
           <ul class="space-y-2 text-[15px]">
-            <li><a href="#" class="hover:text-brand-400 transition">Group of Eight (Go8)</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Regional Universities</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Scholarships 2024</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Campus Locations</a></li>
+            <li><a href="{{ route('courses') }}" class="hover:text-brand-400 transition">Courses</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Scholarships</a></li>
+            <li><a href="{{ route('providers') }}" class="hover:text-brand-400 transition">Universities</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Counsellors</a></li>
+            <li><a href="{{ route('events')}}" class="hover:text-brand-400 transition">Events</a></li>
           </ul>
         </div>
 
@@ -48,6 +50,8 @@
             <li><a href="#" class="hover:text-brand-400 transition">PR Pathway Courses</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">Cost of Living Calculator</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">Student Accommodation</a></li>
+            <li><a href="#" class="hover:text-brand-400 transition">Careers</a></li>
+
           </ul>
         </div>
       </div>

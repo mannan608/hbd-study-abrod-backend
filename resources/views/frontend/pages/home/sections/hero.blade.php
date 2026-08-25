@@ -1,4 +1,4 @@
-<section class="relative isolate  w-full min-h-[84vh] flex items-center justify-center overflow-hidden">
+<section class="relative isolate  w-full min-h-[84vh] flex items-center justify-center overflow-hidden rounded-bl-[40px] rounded-br-[40px]">
         <img src="{{ asset('frontend-img/hero-campus.jpg') }}"
             alt="International students walking through an Australian university campus" width="1920" height="1080"
             class="absolute inset-0 size-full object-cover scale-105 hero-bg-animate">
