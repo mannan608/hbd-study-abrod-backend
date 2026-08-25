@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('scholarships', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            // University
-            $table->foreignId('university_id')
+         $table->foreignUuid('university_id')
+                ->nullable()
                 ->constrained('universities')
                 ->cascadeOnDelete();
 
