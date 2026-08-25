@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('universities', function (Blueprint $table) {
-            $table->id();
+           $table->uuid('id')->primary();
 
             // Location
-            $table->uuid('country_id')->nullable();
-            $table->uuid('city_id')->nullable();
+       $table->uuid('country_id')->nullable();
+$table->uuid('city_id')->nullable();
 
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             // University
-           $table->foreignId('university_id')
-    ->constrained('universities')
-    ->cascadeOnDelete();
+            $table->foreignUuid('university_id')
+                ->constrained('universities')
+                ->cascadeOnDelete();
 
             // Campus
             // NULL = contact is for the entire university
