@@ -20,10 +20,8 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             // Location
-            $table->foreignUuid('city_id')
-                ->nullable()
-                ->constrained('cities')
-                ->nullOnDelete();
+                      $table->uuid('city_id')->nullable();
+
 
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
