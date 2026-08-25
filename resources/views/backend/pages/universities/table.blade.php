@@ -88,7 +88,7 @@
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Short Name</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Course</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Campus</th>
-                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
+                            {{-- <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th> --}}
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-right">Action</th>
                         </tr>
                     </thead>
@@ -100,10 +100,10 @@
                                 </td>
                             </tr>
                         </template>
-                        <template x-for="row in tableRowData" :key="row.id">
+                        <template x-for="(row, index) in tableRowData" :key="row.id">
                             <tr class="hover:bg-neutral-50/50 dark:hover:bg-white/[0.01] transition-colors">
                                 <td class="px-5 py-4">
-                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded text-xs font-mono" x-text="row.id"></span>
+                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded text-xs font-mono" x-text="index+1"></span>
                                 </td>
                                 <td class="px-5 py-4">
                                     <template x-if="row.logo">
@@ -117,9 +117,7 @@
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400" x-text="row.short_name"></td>
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400" x-text="row.courses"></td>
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400" x-text="row.campuses"></td>
-                                <td class="px-5 py-4 text-sm">
-                                    <span :class="row.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'" class="px-2 py-0.5 rounded text-xs font-medium capitalize" x-text="row.status"></span>
-                                </td>
+                               
                                 <td class="px-5 py-4 text-right">
                                     <div class="flex justify-end gap-2">
                                         <a :href="universityBaseUrl + '/' + row.id + '/edit'" class="p-2 text-neutral-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all">

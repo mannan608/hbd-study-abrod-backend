@@ -1,12 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    <div x-data="universityForm()" class="w-full">
-
-         <form
+    <form
         action="{{ role_route('role.universities.store') }}"
         method="POST"
         enctype="multipart/form-data"
+        class="w-full"
     >
         @csrf
 
@@ -16,6 +15,4 @@
         ])
 
     </form>
-
-    </div>
 @endsection

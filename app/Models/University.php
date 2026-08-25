@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
 
 class University extends Model
 {
-    use HasFactory;
+    use HasFactory,HasUuids;
+
 
     protected $table = 'universities';
 
@@ -20,6 +23,7 @@ class University extends Model
         'name',
         'slug',
         'short_name',
+        'tag',
         'logo',
         'banner',
         'email',
@@ -70,54 +74,64 @@ class University extends Model
     /**
      * Generate a unique slug from the given values.
      */
-    public static function generateUniqueSlug(array $sources, ?int $ignoreId = null): string
-    {
-        $baseSlug = 'university';
+/**
+ * Generate a unique slug from the given values.
+ */
+public static function generateUniqueSlug(
+    array $sources,
+    ?string $ignoreId = null
+): string {
+    $baseSlug = 'university';
 
-        foreach ($sources as $source) {
-            $slug = Str::slug((string) $source);
+    foreach ($sources as $source) {
+        $slug = Str::slug((string) $source);
 
-            if ($slug !== '') {
-                $baseSlug = $slug;
-                break;
-            }
+        if ($slug !== '') {
+            $baseSlug = $slug;
+            break;
         }
-
-        return static::makeUniqueSlug($baseSlug, $ignoreId);
     }
 
-    /**
-     * Resolve a unique slug for the given base value.
-     */
-    protected static function makeUniqueSlug(string $baseSlug, ?int $ignoreId = null): string
-    {
-        $slug = $baseSlug !== '' ? $baseSlug : 'university';
+    return static::makeUniqueSlug($baseSlug, $ignoreId);
+}
 
-        $query = static::query()->where('slug', $slug);
+/**
+ * Resolve a unique slug for the given base value.
+ */
+protected static function makeUniqueSlug(
+    string $baseSlug,
+    ?string $ignoreId = null
+): string {
+    $slug = $baseSlug !== '' ? $baseSlug : 'university';
 
-        if ($ignoreId !== null) {
-            $query->whereKeyNot($ignoreId);
-        }
+    $query = static::query()->where('slug', $slug);
 
-        if (! $query->exists()) {
-            return $slug;
-        }
-
-        $counter = 2;
-
-        do {
-            $nextSlug = "{$slug}-{$counter}";
-
-            $exists = static::query()
-                ->where('slug', $nextSlug)
-                ->when($ignoreId !== null, fn ($query) => $query->whereKeyNot($ignoreId))
-                ->exists();
-
-            $counter++;
-        } while ($exists);
-
-        return $nextSlug;
+    if ($ignoreId !== null) {
+        $query->whereKeyNot($ignoreId);
     }
+
+    if (! $query->exists()) {
+        return $slug;
+    }
+
+    $counter = 2;
+
+    do {
+        $nextSlug = "{$slug}-{$counter}";
+
+        $exists = static::query()
+            ->where('slug', $nextSlug)
+            ->when(
+                $ignoreId !== null,
+                fn ($query) => $query->whereKeyNot($ignoreId)
+            )
+            ->exists();
+
+        $counter++;
+    } while ($exists);
+
+    return $nextSlug;
+}
 
     /**
      * University belongs to a country.

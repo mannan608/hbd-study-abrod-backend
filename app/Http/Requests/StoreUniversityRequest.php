@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUniversityRequest extends FormRequest
 {
@@ -21,6 +22,7 @@ class StoreUniversityRequest extends FormRequest
 
             // Basic information
             'name' => ['required', 'string', 'max:255'],
+            'tag' => ['required', Rule::in(['public', 'private'])],
 
             'short_name' => ['nullable', 'string', 'max:255'],
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUniversityRequest extends FormRequest
 {
@@ -23,6 +24,8 @@ class UpdateUniversityRequest extends FormRequest
             'name' => ['sometimes', 'required', 'string', 'max:255'],
 
             'short_name' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'tag' => ['required', Rule::in(['public', 'private'])],
+
 
             // Media
             'logo' => ['sometimes', 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],

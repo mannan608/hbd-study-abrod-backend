@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('universities', function (Blueprint $table) {
-           $table->uuid('id')->primary();
+            $table->uuid('id')->primary();
 
             // Location
-       $table->uuid('country_id')->nullable();
-$table->uuid('city_id')->nullable();
+            $table->uuid('country_id')->nullable();
+            $table->uuid('city_id')->nullable();
 
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
@@ -25,6 +25,9 @@ $table->uuid('city_id')->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('short_name')->nullable();
+            $table->enum('tag', ['public', 'private'])
+                ->default('public')
+                ->index();
 
             // Media
             $table->string('logo')->nullable();

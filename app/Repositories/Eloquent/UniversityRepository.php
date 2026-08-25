@@ -69,6 +69,9 @@ use HandlesFiles;
         if (array_key_exists('city_id', $filters) && $filters['city_id'] !== null && $filters['city_id'] !== '') {
             $query->where('city_id', $filters['city_id']);
         }
+         if (!empty($filters['tag'])) {
+            $query->where('tag', $filters['tag']);
+        }
 
         /*
          * Active filter

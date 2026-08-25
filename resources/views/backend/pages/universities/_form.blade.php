@@ -276,13 +276,19 @@
                 </div>
 
 
-                <div class="grid grid-cols-1 gap-5 p-5 md:grid-cols-2">
+                <div class="grid grid-cols-1 gap-5 p-5 md:grid-cols-3">
 
                     <x-form.input-text name="global_ranking" label="Global Ranking" type="number"
                         value="{{ $globalRanking }}" placeholder="e.g. 3" />
 
                     <x-form.input-text name="national_ranking" label="National Ranking" type="number"
                         value="{{ $nationalRanking }}" placeholder="e.g. 3" />
+
+                    <x-form.select-input name="tag" label="University Type" :options="[
+                        'public' => 'Public',
+                        'private' => 'Private',
+                    ]" />
+
 
                 </div>
 
@@ -330,7 +336,7 @@
 
                                 <input type="text" name="campus_facilities[]" x-model="facilities[index]"
                                     :placeholder="'Facility ' + (index + 1) + ' e.g. Central Library'"
-                                    class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
+                                    class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholde">
 
 
                                 <button type="button" x-show="facilities.length > 1" @click="removeFacility(index)"
@@ -397,7 +403,8 @@
                 {{-- =================================================
                     LOGO
                 ================================================== --}}
-                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+                <div
+                    class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
                     <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
@@ -443,7 +450,8 @@
                 {{-- =================================================
                     BANNER
                 ================================================== --}}
-                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+                <div
+                    class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
                     <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
@@ -489,7 +497,8 @@
                 {{-- =================================================
                     STATUS
                 ================================================== --}}
-                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+                <div
+                    class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
                     <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
 
