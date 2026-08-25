@@ -27,10 +27,7 @@ return new class extends Migration
                 ->nullOnDelete();
 
             // Course category
-            $table->foreignUuid('category_id')
-                ->nullable()
-                ->constrained('course_categories')
-                ->nullOnDelete();
+          $table->foreignId('category_id')->nullable();
 
             // Basic information
             $table->string('title');
