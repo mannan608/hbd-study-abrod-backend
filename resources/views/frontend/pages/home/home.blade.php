@@ -11,7 +11,7 @@
 
     @include('frontend.pages.home.sections.how-it-work')
 
-    <section class="bg-brand-50 py-12">
+    <section class="bg-brand-50 py-8 md:py-12 lg:py-16">
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 relative overflow-hidden rounded-3xl bg-[#155b9d] shadow-xl reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
 
@@ -43,7 +43,7 @@
                 </h2>
 
                 <!-- CTA Button -->
-                <a href="#"
+                <a href="{{ route('achieve') }}"
                     class="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-[#155b9d] shadow-md transition-all duration-500 ease-out hover:bg-slate-100 hover:text-[#1968b2] hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#155b9d] delay-300">
                     <span>See what you can achieve</span>
                     <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
@@ -64,49 +64,5 @@
      @include('frontend.pages.home.sections.university-partners')
      @include('frontend.pages.home.sections.cta-section')
 
-    <script>
-        (function() {
-            const html = document.documentElement;
-            html.classList.add('scroll-smooth');
 
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReducedMotion) return;
-
-            document.addEventListener('DOMContentLoaded', function() {
-                const revealEls = document.querySelectorAll('.reveal-on-scroll');
-                if (!revealEls.length) return;
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.remove('opacity-0', 'translate-y-10',
-                                'translate-x-10', '-translate-x-10', 'scale-95');
-                            entry.target.classList.add('opacity-100', 'translate-y-0',
-                                'translate-x-0', 'scale-100');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    threshold: 0.12,
-                    rootMargin: '0px 0px -60px 0px'
-                });
-
-                revealEls.forEach((el) => observer.observe(el));
-            });
-
-            window.addEventListener('pageshow', function(event) {
-                if (event.persisted) {
-                    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-                        const rect = el.getBoundingClientRect();
-                        if (rect.top < window.innerHeight * 0.9) {
-                            el.classList.remove('opacity-0', 'translate-y-10', 'translate-x-10',
-                                '-translate-x-10', 'scale-95');
-                            el.classList.add('opacity-100', 'translate-y-0', 'translate-x-0',
-                                'scale-100');
-                        }
-                    });
-                }
-            });
-        })();
-    </script>
 @endsection

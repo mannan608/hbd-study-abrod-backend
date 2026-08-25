@@ -16,13 +16,10 @@
 @endphp
 
 <section class="py-20 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div
-            class="text-center reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-            {{-- <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-100 rounded-full mb-4">
-                <span class="text-2xl text-brand-600"> 🤝 </span>
-                <span class="text-sm font-semibold text-brand-600 uppercase tracking-wider"> Global Network </span>
-            </div> --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 md:mb-5 lg:mb-6">
+        <header
+            class="mx-auto max-w-2xl px-4 lg:py-8 text-center reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
+          
             <div
                 class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-100 backdrop-blur-sm rounded-full border border-purple-200/50 mb-8 transition-all duration-700 delay-100">
                 <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -38,17 +35,23 @@
                         <path d="M5 18H3"></path>
                     </svg>
                     <div class="absolute inset-0 w-4 h-4 bg-brand-500 blur-md animate-pulse"></div>
-                </div><span class="text-sm font-semibold bg-clip-text text-brand-600">Global Network</span>
+                </div><span class="text-sm font-semibold bg-clip-text text-brand-600 uppercase">Global Network</span>
 
             </div>
-            <h2
-                class="text-3xl md:text-4xl font-bold text-neutral-900 mb-2 transition-all duration-700 delay-200">
+
+            <!-- Main Heading -->
+            <h1
+                class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900 md:text-4xl lg:text-5xl uppercase transition-all duration-700 delay-200">
                 Trusted By <span class="text-brand-500"> 2,000+
                     Universities </span>
-            </h2>
-            <p class="text-neutral-600 transition-all duration-700 delay-300"> Partnering with the world's leading
-                educational institutions </p>
-        </div>
+            </h1>
+
+            <!-- Subheading Description -->
+            <p
+                class="mx-auto mt-4 max-w-2xl text-base text-neutral-600 sm:text-lg transition-all duration-700 delay-300">
+                Partnering with the world's leading educational institutions
+            </p>
+        </header>
     </div>
     <div class="relative space-y-5">
         <div

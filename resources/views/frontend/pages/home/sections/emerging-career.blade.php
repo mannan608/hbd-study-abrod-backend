@@ -12,7 +12,7 @@
                            d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
                        </path>
                    </svg>
-                   <span class="text-sm font-semibold text-brand-500"> Future Proof Your Studies</span>
+                   <span class="text-sm font-semibold text-brand-500 uppercase"> Future Proof Your Studies</span>
                </div>
 
                <!-- Main Heading -->
@@ -59,7 +59,7 @@
                        <p class="mt-2 text-xs leading-relaxed text-slate-300/90 font-normal">
                            Rapidly growing demand in tech, banking, and government. Average salary $110K AUD.
                        </p>
-                       <a href="#"
+                       <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
                            <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"
@@ -99,7 +99,7 @@
                        <p class="mt-2 text-xs leading-relaxed text-slate-300/90 font-normal">
                            Critical skills shortage nationally. Opportunities in enterprise cloud defense networks.
                        </p>
-                       <a href="#"
+                       <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
                            <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"
@@ -139,7 +139,7 @@
                        <p class="mt-2 text-xs leading-relaxed text-slate-300/90 font-normal">
                            Post-graduate pathways to immediate local employment and state nomination PR options.
                        </p>
-                       <a href="#"
+                       <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
                            <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"
@@ -179,7 +179,7 @@
                        <p class="mt-2 text-xs leading-relaxed text-slate-300/90 font-normal">
                            Specialized engineering streams focusing on predictive architectures and smart systems.
                        </p>
-                       <a href="#"
+                       <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
                            <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"

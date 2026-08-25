@@ -1,6 +1,6 @@
     <section class="bg-brand-100 text-white  ">
         {{-- bg-brand-100 text-white py-6 px-8 md:px-12 lg:py-10 lg:px-16 rounded-4xl --}}
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 ">
+        <div class="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8 ">
             <!-- Header -->
             <header
                 class="mx-auto max-w-2xl px-4 py-12 text-center font-sans reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
@@ -125,7 +125,7 @@
 
             </div>
             <!-- Video Section -->
-            <div class="mt-8 sm:mt-10 lg:mt-12">
+            <div class="my-8 sm:my-12 lg:my-16 ">
                 <div
                     class="group relative overflow-hidden rounded-2xl  shadow-2xl sm:rounded-3xl">
 

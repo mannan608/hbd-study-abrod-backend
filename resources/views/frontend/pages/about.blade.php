@@ -159,7 +159,7 @@
                                 d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
                             </path>
                         </svg>
-                        <span class="text-sm font-semibold text-brand-500">Why Choose Us</span>
+                        <span class="text-sm font-semibold text-brand-500 uppercase">Why Choose Us</span>
                     </div>
 
                     <!-- Main Heading -->
@@ -284,7 +284,7 @@
                                 d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
                             </path>
                         </svg>
-                        <span class="text-sm font-semibold text-brand-500"> Our commitment</span>
+                        <span class="text-sm font-semibold text-brand-500 uppercase"> Our commitment</span>
                     </div>
 
                     <!-- Main Heading -->
@@ -423,7 +423,7 @@
                                 d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
                             </path>
                         </svg>
-                        <span class="text-sm font-semibold text-brand-500">Excellence & Milestones</span>
+                        <span class="text-sm font-semibold text-brand-500 uppercase">Excellence & Milestones</span>
                     </div>
 
                     <!-- Main Heading -->
@@ -555,6 +555,10 @@
             </div>
                </div>
         </section>
+
+        @include('frontend.pages.components.testimonial.testimonial')
+           @include('frontend.pages.home.sections.university-partners')
+     @include('frontend.pages.home.sections.cta-section')
 
 
 @endsection

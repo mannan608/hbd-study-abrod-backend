@@ -11,7 +11,7 @@
                         d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
                     </path>
                 </svg>
-                <span class="text-sm font-semibold text-brand-500">Trusted Program</span>
+                <span class="text-sm font-semibold text-brand-500 uppercase">Trusted Program</span>
             </div>
 
             <!-- Main Heading -->
@@ -51,10 +51,10 @@
                     50,000+ courses indexed across 620 institutions, updated weekly.
                 </p>
 
-                <button type="button"
+                <a href="{{ route('courses') }}"
                     class="inline-flex items-center gap-2 px-4 py-2 md:px-7.5 md:py-3.5 rounded bg-brand-500 text-white text-[15px] font-semibold cursor-pointer whitespace-nowrap hover:bg-brand-600 transition-colors">
                     Browse all courses →
-                </button>
+            </a>
             </div>
         </div>
     </div>

@@ -62,3 +62,49 @@
       </div>
     </div>
   </footer>
+
+      <script>
+        (function() {
+            const html = document.documentElement;
+            html.classList.add('scroll-smooth');
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) return;
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const revealEls = document.querySelectorAll('.reveal-on-scroll');
+                if (!revealEls.length) return;
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('opacity-0', 'translate-y-10',
+                                'translate-x-10', '-translate-x-10', 'scale-95');
+                            entry.target.classList.add('opacity-100', 'translate-y-0',
+                                'translate-x-0', 'scale-100');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.12,
+                    rootMargin: '0px 0px -60px 0px'
+                });
+
+                revealEls.forEach((el) => observer.observe(el));
+            });
+
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+                        const rect = el.getBoundingClientRect();
+                        if (rect.top < window.innerHeight * 0.9) {
+                            el.classList.remove('opacity-0', 'translate-y-10', 'translate-x-10',
+                                '-translate-x-10', 'scale-95');
+                            el.classList.add('opacity-100', 'translate-y-0', 'translate-x-0',
+                                'scale-100');
+                        }
+                    });
+                }
+            });
+        })();
+    </script>

@@ -1,4 +1,4 @@
-<section class="mt-12 pb-16 bg-brand-50">
+<section class="mt-12 lg:mt-16 py-8 lg:py-12 bg-brand-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header
             class="mx-auto max-w-2xl px-4 py-12 text-center font-sans reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">

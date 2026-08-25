@@ -32,5 +32,8 @@ class FrontendController extends Controller
       public function login()
     {
         return view('frontend.pages.login', ['title' => 'Login']);
-    }   
+    }
+    public function achieve(){
+        return view('frontend.pages.achieve.achieve');
+    }
 }

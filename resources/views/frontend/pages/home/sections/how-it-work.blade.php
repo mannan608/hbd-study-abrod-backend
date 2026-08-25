@@ -1,7 +1,7 @@
 <section class="bg-white pt-6 pb-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header
-            class="mx-auto max-w-2xl px-4 py-12 text-center font-sans reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
+            class="mx-auto max-w-2xl px-4 py-12 text-center font-sans reveal-on-scroll opacity-0 tranneutral-y-10 transition-all duration-1000 ease-out">
             <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100"><svg
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -15,7 +15,7 @@
 
             <!-- Main Heading -->
             <h1
-                class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl lg:text-5xl uppercase transition-all duration-700 delay-200">
+                class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900 md:text-4xl lg:text-5xl uppercase transition-all duration-700 delay-200">
                 Your Journey to Australia Made Easy
             </h1>
 
@@ -28,7 +28,7 @@
 
             <!-- Step 01: Discover -->
             <div
-                class="relative flex flex-col justify-between rounded-3xl bg-slate-50/70 p-8 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-100 group hover:-translate-y-2 hover:shadow-xl transition duration-500">
+                class="relative flex flex-col justify-between rounded-3xl border border-neutral-300 bg-neutral-50/70 p-8 reveal-on-scroll opacity-0 tranneutral-y-10 transition-all duration-700 ease-out delay-100 group hover:-tranneutral-y-2 hover:shadow-xl transition duration-500">
                 <div>
                     <!-- Top Row: Icon & Number -->
                     <div class="flex items-center justify-between">
@@ -46,11 +46,11 @@
                     </div>
 
                     <!-- Title -->
-                    <h3 class="mt-8 text-xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-brand-600">
+                    <h3 class="mt-8 text-xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-brand-600">
                         Discover</h3>
 
                     <!-- Description -->
-                    <p class="mt-3 text-sm leading-relaxed text-slate-500 transition-colors duration-300">
+                    <p class="mt-3 text-sm leading-relaxed text-neutral-500 transition-colors duration-300">
                         Browse through 50,000+ courses and map your preferences based on fees, location, and global
                         rankings.
                     </p>
@@ -59,7 +59,7 @@
 
             <!-- Step 02: Connect -->
             <div
-                class="relative flex flex-col justify-between rounded-3xl bg-slate-50/70 p-8 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-200 group hover:-translate-y-2 hover:shadow-xl transition duration-500">
+                class="relative flex flex-col justify-between rounded-3xl border border-neutral-300 bg-neutral-50/70 p-8 reveal-on-scroll opacity-0 tranneutral-y-10 transition-all duration-700 ease-out delay-200 group hover:-tranneutral-y-2 hover:shadow-xl transition duration-500">
                 <div>
                     <!-- Top Row: Icon & Number -->
                     <div class="flex items-center justify-between">
@@ -77,11 +77,11 @@
                     </div>
 
                     <!-- Title -->
-                    <h3 class="mt-8 text-xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-brand-600">
+                    <h3 class="mt-8 text-xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-brand-600">
                         Connect</h3>
 
                     <!-- Description -->
-                    <p class="mt-3 text-sm leading-relaxed text-slate-500 transition-colors duration-300">
+                    <p class="mt-3 text-sm leading-relaxed text-neutral-500 transition-colors duration-300">
                         Instantly match with verified expert counsellors to guide your SOP, visa processes, and
                         university selection.
                     </p>
@@ -90,7 +90,7 @@
 
             <!-- Step 03: Apply -->
             <div
-                class="relative flex flex-col justify-between rounded-3xl bg-slate-50/70 p-8 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-300 group hover:-translate-y-2 hover:shadow-xl transition duration-500">
+                class="relative flex flex-col justify-between rounded-3xl border border-neutral-300 bg-neutral-50/70 p-8 reveal-on-scroll opacity-0 tranneutral-y-10 transition-all duration-700 ease-out delay-300 group hover:-tranneutral-y-2 hover:shadow-xl transition duration-500">
                 <div>
                     <!-- Top Row: Icon & Number -->
                     <div class="flex items-center justify-between">
@@ -108,11 +108,11 @@
                     </div>
 
                     <!-- Title -->
-                    <h3 class="mt-8 text-xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-brand-600">
+                    <h3 class="mt-8 text-xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-brand-600">
                         Apply</h3>
 
                     <!-- Description -->
-                    <p class="mt-3 text-sm leading-relaxed text-slate-500 transition-colors duration-300">
+                    <p class="mt-3 text-sm leading-relaxed text-neutral-500 transition-colors duration-300">
                         Submit your student applications and document portfolios seamlessly via our secure tech
                         platform.
                     </p>

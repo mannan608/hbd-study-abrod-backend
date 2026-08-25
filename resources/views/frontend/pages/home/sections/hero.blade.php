@@ -18,7 +18,7 @@
                         <path d="M5 18H3"></path>
                     </svg>
                     <div class="absolute inset-0 w-4 h-4 bg-brand-500 blur-md animate-pulse"></div>
-                </div><span class="text-sm font-semibold bg-brand-500 bg-clip-text text-white">Global Education
+                </div><span class="text-sm font-semibold bg-brand-500 bg-clip-text text-white uppercase">Global Education
                     Platform</span>
 
             </div>

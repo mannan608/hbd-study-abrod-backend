@@ -7,10 +7,38 @@
             <!-- Left Side: Overview & Features -->
             <div class="lg:col-span-2 space-y-8">
                 <div class="">
-                    <div class="w-full aspect-video overflow-hidden rounded-2xl">
+                    {{-- <div class="w-full aspect-video overflow-hidden rounded-2xl">
                         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
                             alt="Study Abroad Expo 2026" class="w-full h-full object-cover rounded-2xl">
-                    </div>
+                    </div> --}}
+<div class="group relative w-full aspect-video overflow-hidden rounded-2xl">
+
+    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
+        alt="Study Abroad Expo 2026"
+        class="w-full h-full object-cover rounded-2xl transition duration-500 group-hover:scale-105">
+
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+
+   <div class="absolute bottom-4 left-4 right-4">
+    <div class="flex items-end justify-end gap-3">
+
+        <!-- Register -->
+        <a href="#"
+            class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-brand-500 shadow-lg transition hover:bg-brand-500 hover:text-white">
+            Click to Register
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M5 12h14m-6-6 6 6-6 6" />
+            </svg>
+        </a>
+
+    </div>
+</div>
+
+</div>
+                    
                     <div class="relative overflow-hidden mb-8 mt-4">
                         <h1
                             class="text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold tracking-tight mb-3 leading-tight line-clamp-1">
@@ -129,10 +157,10 @@
                 <div class="bg-white p-6 rounded-2xl border border-neutral-200/80  space-y-6">
                     <div>
                         <div class="flex items-center justify-between border-b border-neutral-100 pb-3 mb-4">
-                            <span class="text-xs font-bold uppercase tracking-wider text-neutral-400">Physical
+                            <span class="text-sm font-bold uppercase tracking-wider text-brand-500">Physical
                                 Session</span>
                             <span
-                                class="bg-neutral-100 text-neutral-600 text-xs px-2.5 py-1 rounded-md font-medium">Surabaya</span>
+                                class="bg-success-100 text-success-600 text-xs px-2.5 py-1 rounded-md font-medium">Ongoing</span>
                         </div>
 
                         <div class="space-y-3 text-sm">
@@ -165,7 +193,7 @@
 
                     <!-- Virtual Room Section -->
                     <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-3">Registration
+                        <span class="text-sm font-bold uppercase tracking-wider text-brand-500 block mb-3">Registration
                             Link</span>
                         <div class="bg-neutral-50 border border-neutral-200 rounded-lg p-3 mb-3">
                             <p class="text-xs text-neutral-500 truncate">https://events/{name}/register</p>
@@ -196,7 +224,7 @@
 
                 <!-- Contact Support Card -->
                 <div class="bg-white p-6 rounded-2xl border border-neutral-200/80 ">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-4">Contact Person Details
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-500 mb-4">Contact Person Details
                     </h3>
 
                     <div class="space-y-4 text-sm">

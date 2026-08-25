@@ -29,6 +29,7 @@ Route::get('/destinations', [EventController::class, 'index'])->name('destinatio
 Route::get('/how-we-works', [EventController::class, 'index'])->name('how-we-works');
 Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
 Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contact');
+Route::get('/can-achieve', [FrontendController::class, 'achieve'])->name('achieve');
 
 //dynami pages
 Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');
