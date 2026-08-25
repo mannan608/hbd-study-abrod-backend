@@ -1,10 +1,17 @@
 @extends('backend.layouts.fullscreen-layout')
 
 @section('content')
-    <div class="min-h-screen bg-neutral-100 dark:bg-neutral-900">
+    <div
+        class="relative min-h-screen overflow-y-auto bg-neutral-100 bg-cover bg-center dark:bg-neutral-950"
+        style="background-image: url('{{ asset('frontend-img/reg-bg.webp') }}');"
+    >
 
-        <!-- Main -->
-        <div class="flex min-h-screen w-full items-center justify-center px-3 py-4 sm:px-6 sm:py-6">
+        <!-- Background Overlay -->
+        <div class="absolute inset-0 z-0 bg-black/78  dark:bg-neutral-950/80"></div>
+
+        <!-- Main Content -->
+        <div class="relative z-10 flex min-h-screen w-full items-center justify-center px-3 py-4 sm:px-6 sm:py-6">
+
 
             <!-- Form Card -->
             <div
@@ -195,7 +202,7 @@
         </div>
 
     </div>
-    @push('scripts')
+    {{-- @push('scripts')
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    @endpush
+    @endpush --}}
 @endsection
