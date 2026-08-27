@@ -9,6 +9,7 @@
         return [
             'id' => $event->id,
             'title' => $event->title,
+            'registration_link' => $event->registration_link,
             'slug' => $event->slug,
             'status' => $event->status,
             'is_featured' => (bool) $event->is_featured,
@@ -19,6 +20,7 @@
 @endphp
 
 <div x-data="{
+copied: null,
     tableRowData: {{ \Illuminate\Support\Js::from($tableRowData) }},
     eventBaseUrl: {{ \Illuminate\Support\Js::from(url('/admin/events')) }},
     showDeleteModal: false,
@@ -86,6 +88,7 @@
                     <tr>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Id</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Title</th>
+                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Registration Link</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Featured</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Banner</th>
@@ -109,6 +112,68 @@
                                     x-text="row.id"></span>
                             </td>
                             <td class="px-5 py-4 text-sm text-neutral-700 dark:text-neutral-300" x-text="row.title"></td>
+                            {{-- <td class="px-5 py-4 text-sm text-neutral-700 dark:text-neutral-300" x-text="row.registration_link"></td> --}}
+                            <td class="px-5 py-4 text-sm text-neutral-700 dark:text-neutral-300">
+    <div class="flex items-center gap-2">
+        <span
+            class="max-w-[200px] truncate"
+            x-text="row.registration_link"
+        ></span>
+
+        <button
+            type="button"
+            @click="
+                navigator.clipboard.writeText(row.registration_link);
+                copied = row.id;
+                setTimeout(() => copied = null, 1500);
+            "
+            class="inline-flex shrink-0 items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium transition"
+            :class="copied === row.id
+                ? 'bg-emerald-50 text-emerald-600'
+                : 'bg-neutral-100 text-neutral-600 hover:bg-brand-50 hover:text-brand-600'"
+        >
+            <template x-if="copied !== row.id">
+                <span class="inline-flex items-center gap-1.5">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2"
+                        />
+                        <rect
+                            width="10"
+                            height="10"
+                            x="10"
+                            y="10"
+                            rx="2"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        />
+                    </svg>
+
+                    Copy
+                </span>
+            </template>
+
+            <template x-if="copied === row.id">
+                <span class="inline-flex items-center gap-1.5 text-emerald-600">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                        />
+                    </svg>
+
+                    Copied!
+                </span>
+            </template>
+        </button>
+    </div>
+</td>
+                            
                             <td class="px-5 py-4">
                                 <span :class="statusBadgeClass(row.status)"
                                     class="px-2.5 py-0.5 rounded-full text-xs font-medium" x-text="row.status"></span>

@@ -87,7 +87,8 @@
                 </div>
                 <div>
                     <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Basic Information</h3>
-                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Core details that define your event and
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Core details that define your event
+                        and
                         how it appears to visitors.</p>
                 </div>
             </div>
@@ -106,17 +107,27 @@
                         'workshop' => 'Workshop',
                         'conference' => 'Conference',
                     ]" />
-
                     @if ($event?->exists)
-                        <div>
-                            <label>Registration URL</label>
+                        <div x-data="{ copied: false }" class="space-y-2">
+                            <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                                Registration URL
+                            </label>
 
-                            <input type="text" value="{{ $event->registration_url }}" readonly>
+                            <div class="flex items-center gap-2">
+                                <input type="text" value="{{ $event->registration_url }}" readonly
+                                    class="h-11 min-w-0 flex-1 rounded-lg border border-neutral-300 bg-neutral-50 px-3 text-sm text-neutral-600 outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
 
-                            <button type="button"
-                                onclick="navigator.clipboard.writeText('{{ $event->registration_url }}')">
-                                Copy
-                            </button>
+                                <button type="button"
+                                    @click="
+                    navigator.clipboard.writeText(@js($event->registration_url));
+                    copied = true;
+                    setTimeout(() => copied = false, 1500);
+                "
+                                    class="inline-flex h-11 shrink-0 items-center rounded-lg bg-brand-600 px-4 text-sm font-medium text-white transition hover:bg-brand-700">
+                                    <span x-show="!copied">Copy</span>
+                                    <span x-show="copied" x-cloak>Copied!</span>
+                                </button>
+                            </div>
                         </div>
                     @endif
 
@@ -170,7 +181,8 @@
                 </div>
                 <div>
                     <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Date & Location</h3>
-                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">When and where the event takes place.</p>
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">When and where the event takes
+                        place.</p>
                 </div>
             </div>
 
@@ -206,7 +218,8 @@
                         </svg>
                         <div>
                             <p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Online event</p>
-                            <p class="text-xs text-neutral-500 dark:text-neutral-400">Enable if this event happens virtually
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">Enable if this event happens
+                                virtually
                             </p>
                         </div>
                     </div>
@@ -247,7 +260,8 @@
                 </div>
                 <div class="flex-1">
                     <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Event Schedules</h3>
-                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Add one or more sessions with their own
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Add one or more sessions with
+                        their own
                         dates and venues.</p>
                 </div>
                 <span
@@ -324,7 +338,8 @@
                 </div>
                 <div>
                     <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Providers / Sponsors</h3>
-                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Organizations supporting or running this
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Organizations supporting or
+                        running this
                         event.</p>
                 </div>
             </div>
@@ -363,7 +378,8 @@
                                     <div
                                         class="mb-2 flex items-center gap-3 rounded-lg border border-neutral-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-900">
                                         <img :src="item.logo_url" alt="Logo" class="h-9 rounded object-contain">
-                                        <span class="text-xs text-neutral-500 dark:text-neutral-400">Current logo — choose a
+                                        <span class="text-xs text-neutral-500 dark:text-neutral-400">Current logo —
+                                            choose a
                                             file to replace</span>
                                         <input type="hidden" :name="`providers[${index}][existing_logo]`"
                                             :value="item.logo">
@@ -444,7 +460,8 @@
                 </div>
                 <div>
                     <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Additional Details</h3>
-                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Contact info, map link, and tags for
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Contact info, map link, and tags
+                        for
                         discoverability.</p>
                 </div>
             </div>
@@ -485,7 +502,7 @@
                                         </svg>
                                     </span>
                                     <input type="text" :name="`tags[${index}]`" x-model="items[index]"
-                                        placeholder="Laravel, AI, Event" class="{{ $inputCls }} pl-10">
+                                        placeholder="Event tag" class="{{ $inputCls }} pl-10">
                                 </div>
                                 <button type="button" x-show="items.length > 1" @click="remove(index)"
                                     class="{{ $iconBtnDanger }}" title="Remove tag">
@@ -590,7 +607,8 @@
                 </div>
                 <div>
                     <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Services Offered</h3>
-                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Services provided during or after the
+                    <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Services provided during or after
+                        the
                         event.</p>
                 </div>
             </div>
@@ -710,7 +728,8 @@
                     </div>
                     <div>
                         <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Publishing</h3>
-                        <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Control visibility and status.</p>
+                        <p class="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">Control visibility and status.
+                        </p>
                     </div>
                 </div>
 
@@ -728,7 +747,8 @@
                     <div class="flex items-center justify-between gap-4">
                         <div>
                             <p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Featured event</p>
-                            <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">Highlight on homepage & listings
+                            <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">Highlight on homepage &
+                                listings
                             </p>
                         </div>
                         <input type="hidden" name="is_featured" value="0">
@@ -744,7 +764,8 @@
                     <div class="flex items-center justify-between gap-4">
                         <div>
                             <p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Active</p>
-                            <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">Visible on the public site</p>
+                            <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">Visible on the public site
+                            </p>
                         </div>
                         <input type="hidden" name="is_active" value="0">
                         <label class="relative inline-flex shrink-0 cursor-pointer items-center">

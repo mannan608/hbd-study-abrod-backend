@@ -12,6 +12,7 @@ class LocationSeeder extends Seeder
     public function run(): void
     {
         $locations = [
+
             'AU' => [
                 'name' => 'Australia',
                 'phone_code' => '+61',
@@ -26,23 +27,6 @@ class LocationSeeder extends Seeder
                     'Canberra',
                     'Gold Coast',
                     'Newcastle',
-                ],
-            ],
-
-            'CA' => [
-                'name' => 'Canada',
-                'phone_code' => '+1',
-                'currency_code' => 'CAD',
-                'is_popular' => true,
-                'cities' => [
-                    'Toronto',
-                    'Vancouver',
-                    'Montreal',
-                    'Calgary',
-                    'Ottawa',
-                    'Edmonton',
-                    'Winnipeg',
-                    'Halifax',
                 ],
             ],
 
@@ -83,6 +67,23 @@ class LocationSeeder extends Seeder
                 ],
             ],
 
+            'CA' => [
+                'name' => 'Canada',
+                'phone_code' => '+1',
+                'currency_code' => 'CAD',
+                'is_popular' => true,
+                'cities' => [
+                    'Toronto',
+                    'Vancouver',
+                    'Montreal',
+                    'Calgary',
+                    'Ottawa',
+                    'Edmonton',
+                    'Winnipeg',
+                    'Halifax',
+                ],
+            ],
+
             'NZ' => [
                 'name' => 'New Zealand',
                 'phone_code' => '+64',
@@ -95,50 +96,6 @@ class LocationSeeder extends Seeder
                     'Hamilton',
                     'Dunedin',
                     'Palmerston North',
-                ],
-            ],
-
-            'IE' => [
-                'name' => 'Ireland',
-                'phone_code' => '+353',
-                'currency_code' => 'EUR',
-                'is_popular' => true,
-                'cities' => [
-                    'Dublin',
-                    'Cork',
-                    'Limerick',
-                    'Galway',
-                    'Waterford',
-                ],
-            ],
-
-            'DE' => [
-                'name' => 'Germany',
-                'phone_code' => '+49',
-                'currency_code' => 'EUR',
-                'is_popular' => false,
-                'cities' => [
-                    'Berlin',
-                    'Munich',
-                    'Frankfurt',
-                    'Hamburg',
-                    'Cologne',
-                    'Stuttgart',
-                ],
-            ],
-
-            'FR' => [
-                'name' => 'France',
-                'phone_code' => '+33',
-                'currency_code' => 'EUR',
-                'is_popular' => false,
-                'cities' => [
-                    'Paris',
-                    'Lyon',
-                    'Marseille',
-                    'Toulouse',
-                    'Bordeaux',
-                    'Lille',
                 ],
             ],
 
@@ -156,25 +113,11 @@ class LocationSeeder extends Seeder
                     'Kota Kinabalu',
                 ],
             ],
-
-            'AE' => [
-                'name' => 'United Arab Emirates',
-                'phone_code' => '+971',
-                'currency_code' => 'AED',
-                'is_popular' => true,
-                'cities' => [
-                    'Dubai',
-                    'Abu Dhabi',
-                    'Sharjah',
-                    'Ajman',
-                    'Al Ain',
-                ],
-            ],
         ];
 
         foreach ($locations as $code => $data) {
 
-            // Create/update country
+            // Create or update country
             $country = Country::updateOrCreate(
                 [
                     'code' => $code,
@@ -189,7 +132,7 @@ class LocationSeeder extends Seeder
                 ]
             );
 
-            // Create/update cities
+            // Create or update cities
             foreach ($data['cities'] as $cityName) {
                 City::updateOrCreate(
                     [

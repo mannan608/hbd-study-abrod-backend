@@ -24,6 +24,8 @@ class EventController extends Controller
 
         $events = $this->eventRepository->paginate(15);
 
+        // return $events;
+
         return view('backend.pages.events.index', compact('events'));
     }
 

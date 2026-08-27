@@ -13,6 +13,8 @@ class EventRegistrationController extends Controller
     {
         abort_unless($event->is_active, 404);
 
+        // return $event;
+
         return view('frontend.pages.events.registration', [
             'event' => $event,
         ]);
