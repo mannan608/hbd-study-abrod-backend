@@ -16,7 +16,7 @@ class FrontendController extends Controller
     public function aboutPage()
     {
         
-        return view('frontend.pages.about');
+        return view('frontend.pages.about.about');
     }
 
     public function contactPage()
@@ -35,5 +35,12 @@ class FrontendController extends Controller
     }
     public function achieve(){
         return view('frontend.pages.achieve.achieve');
+    }
+
+    public function destinations(){
+        return view('frontend.pages.destinations.index');
+    }
+     public function howWeWork(){
+        return view('frontend.pages.how-we-works.index');
     }
 }

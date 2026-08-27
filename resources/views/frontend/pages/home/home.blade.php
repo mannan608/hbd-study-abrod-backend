@@ -5,6 +5,7 @@
     @include('frontend.pages.home.sections.hero')
 
     @include('frontend.pages.home.sections.stats')
+    @include('frontend.pages.home.sections.destination')
 
     @include('frontend.pages.home.sections.course-section')
     @include('frontend.pages.home.sections.emerging-career')
