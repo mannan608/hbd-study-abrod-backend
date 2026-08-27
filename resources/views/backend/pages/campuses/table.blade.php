@@ -14,8 +14,8 @@
             'email' => $campus->email,
             'phone' => $campus->phone,
             'address' => $campus->address,
-            'city' => $campus->city->name,
-            'status' => $campus->status,
+            'city' => $campus->city?->name ?? '',
+             'status' => $campus->is_active ? 'active' : 'inactive',
             
         ];
     })->values();
@@ -97,10 +97,10 @@
                                 </td>
                             </tr>
                         </template>
-                        <template x-for="row in tableRowData" :key="row.id">
+                        <template x-for="(row, index) in tableRowData" :key="row.id">
                             <tr class="hover:bg-neutral-50/50 dark:hover:bg-white/[0.01] transition-colors">
                                 <td class="px-5 py-4">
-                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded text-xs font-mono" x-text="row.id"></span>
+                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded text-xs font-mono" x-text="index+1"></span>
                                 </td>
                                
                                 <td class="px-5 py-4 text-sm text-neutral-700 dark:text-neutral-300" x-text="row.name"></td>

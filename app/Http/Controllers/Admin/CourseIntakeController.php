@@ -21,6 +21,8 @@ class CourseIntakeController extends Controller
 
         $intakes = CourseIntake::with('course')->latest()->paginate(15);
 
+        // return $intakes;
+
         return view('backend.pages.course-intakes.index', [
             'intakes' => $intakes,
         ]);
@@ -80,62 +82,81 @@ class CourseIntakeController extends Controller
     /**
      * Show the form for editing the specified intake.
      */
-    public function edit(Request $request, CourseIntake $courseIntake): View
-    {
-        $request->user()->can('course-intakes.edit') || abort(403);
+  public function edit(Request $request, CourseIntake $course_intake)
+{
 
-        $courses = Course::query()
-            ->select('id', 'title')
-            ->orderBy('title')
-            ->get();
+    $request->user()->can('course-intakes.edit') || abort(403);
 
-        return view('backend.pages.course-intakes.edit', [
-            'intake' => $courseIntake,
-            'courses' => $courses,
-        ]);
-    }
+    // $courseIntake = CourseIntake::findOrFail($course_intake);
+
+    $courses = Course::query()
+        ->select('id', 'title')
+        ->orderBy('title')
+        ->get();
+
+// return $course_intake;
+
+
+    return view('backend.pages.course-intakes.edit', [
+        'intake' => $course_intake,
+        'courses' => $courses,
+    ]);
+}
 
     /**
      * Update the specified intake.
      */
-    public function update(Request $request, CourseIntake $courseIntake): RedirectResponse
-    {
-        $request->user()->can('course-intakes.edit') || abort(403);
+ public function update(Request $request, CourseIntake $course_intake): RedirectResponse
+{
+    $request->user()->can('course-intakes.edit') || abort(403);
 
-        $validated = $request->validate([
-            'course_id' => ['required', 'uuid', 'exists:courses,id'],
-            'intake_month' => ['required', 'string', 'max:20'],
-            'intake_year' => ['required', 'integer', 'min:2000', 'max:2100'],
-            'application_deadline' => ['required', 'date'],
-            'start_date' => ['nullable', 'date', 'after_or_equal:application_deadline'],
-            'status' => ['required', Rule::in(['open', 'closed', 'upcoming'])],
-        ]);
+    $courseIntake = CourseIntake::findOrFail($course_intake);
 
-        // Prevent duplicate intake except current record
-        $exists = CourseIntake::query()->where('course_id', $validated['course_id'])->where('intake_month', $validated['intake_month'])->where('intake_year', $validated['intake_year'])->where('id', '!=', $courseIntake->id)->exists();
+    $validated = $request->validate([
+        'course_id' => ['required', 'uuid', 'exists:courses,id'],
+        'intake_month' => ['required', 'string', 'max:20'],
+        'intake_year' => ['required', 'integer', 'min:2000', 'max:2100'],
+        'application_deadline' => ['required', 'date'],
+        'start_date' => [
+            'nullable',
+            'date',
+            'after_or_equal:application_deadline',
+        ],
+        'status' => [
+            'required',
+            Rule::in(['open', 'closed', 'upcoming']),
+        ],
+    ]);
 
-        if ($exists) {
-            return back()
-                ->withInput()
-                ->withErrors([
-                    'intake_month' => 'This intake already exists for the selected course.',
-                ]);
-        }
+    $exists = CourseIntake::query()
+        ->where('course_id', $validated['course_id'])
+        ->where('intake_month', $validated['intake_month'])
+        ->where('intake_year', $validated['intake_year'])
+        ->where('id', '!=', $courseIntake->id)
+        ->exists();
 
-        $courseIntake->update($validated);
-
-        return redirect(role_route('role.course-intakes.index'))
-            ->with('success', 'Course intake updated successfully.');
+    if ($exists) {
+        return back()
+            ->withInput()
+            ->withErrors([
+                'intake_month' => 'This intake already exists for the selected course.',
+            ]);
     }
+
+    $courseIntake->update($validated);
+
+    return redirect(role_route('role.course-intakes.index'))
+        ->with('success', 'Course intake updated successfully.');
+}
 
     /**
      * Remove the specified intake.
      */
-    public function destroy(Request $request, CourseIntake $courseIntake): RedirectResponse
+    public function destroy(Request $request, CourseIntake $course_intake): RedirectResponse
     {
         $request->user()->can('course-intakes.delete') || abort(403);
 
-        $courseIntake->delete();
+        $course_intake->delete();
 
         return redirect(role_route('role.course-intakes.index'))
             ->with('success', 'Course intake deleted successfully.');

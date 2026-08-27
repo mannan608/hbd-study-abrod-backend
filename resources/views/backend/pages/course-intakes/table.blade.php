@@ -11,7 +11,8 @@
                 'intake_year' => $intake->intake_year,
                 'application_deadline' => optional($intake->application_deadline)->format('Y-m-d'),
                 'start_date' => optional($intake->start_date)->format('Y-m-d'),
-                'status' => $intake->status,
+                             'status' => $intake->is_active ? 'active' : 'inactive',
+
             ];
         })
         ->values();

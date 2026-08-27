@@ -15,7 +15,7 @@ class StoreCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'university_id' => ['nullable', 'integer', 'exists:universities,id'],
+            'university_id' => ['nullable', 'uuid', 'exists:universities,id'],
 
             'campus_id' => ['nullable', 'uuid', 'exists:university_campuses,id'],
 

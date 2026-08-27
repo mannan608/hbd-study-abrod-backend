@@ -65,6 +65,8 @@ return new class extends Migration
             // Course overview
             $table->text('overview')->nullable();
 
+            $table->json('entry_requirements')->nullable();
+
             // Status
             $table->boolean('is_featured')
                 ->default(false);
