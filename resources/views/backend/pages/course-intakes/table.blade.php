@@ -11,7 +11,7 @@
                 'intake_year' => $intake->intake_year,
                 'application_deadline' => optional($intake->application_deadline)->format('Y-m-d'),
                 'start_date' => optional($intake->start_date)->format('Y-m-d'),
-                             'status' => $intake->is_active ? 'active' : 'inactive',
+                 
 
             ];
         })
@@ -86,7 +86,6 @@
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase">Intake</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase">Deadline</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase">Start Date</th>
-                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase">Status</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase text-right">Action</th>
                     </tr>
                 </thead>
@@ -108,7 +107,7 @@
                                 x-text="`${row.intake_month} ${row.intake_year}`"></td>
                             <td class="px-5 py-4 text-sm text-neutral-700" x-text="row.application_deadline"></td>
                             <td class="px-5 py-4 text-sm text-neutral-700" x-text="row.start_date || 'N/A'"></td>
-                            <td class="px-5 py-4 text-sm text-neutral-700 capitalize" x-text="row.status"></td>
+                            
                             <td class="px-5 py-4">
                                 <div class="flex justify-end gap-2">
                                     @can('course-intakes.edit')

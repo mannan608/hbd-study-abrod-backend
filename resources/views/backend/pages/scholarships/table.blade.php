@@ -163,7 +163,7 @@
 
 
                     {{-- Rows --}}
-                    <template x-for="row in tableRowData" :key="row.id">
+                    <template x-for="(row,index) in tableRowData" :key="row.id">
 
                         <tr class="transition-colors hover:bg-neutral-50 dark:hover:bg-white/[0.02]">
 
@@ -171,7 +171,7 @@
                             <td class="px-5 py-4">
 
                                 <span class="rounded bg-neutral-100 px-2 py-1 font-mono text-xs dark:bg-neutral-800"
-                                    x-text="row.id"></span>
+                                    x-text="index+1"></span>
 
                             </td>
 

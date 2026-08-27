@@ -57,7 +57,7 @@
 
         </div>
         <!-- Highlights -->
-        <div class="mt-5 grid grid-cols-2 gap-3">
+        <div class="mt-5 grid grid-cols-1 gap-3 xsm:grid-cols-2">
             <div class="rounded-xl border border-neutral-100 bg-neutral-50 px-3.5 py-3">
                 <div class="flex items-center gap-2">
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-brand-500 shadow-sm">
@@ -190,7 +190,7 @@
 
         </div>
         <!-- Highlights -->
-        <div class="mt-5 grid grid-cols-2 gap-3">
+        <div class="mt-5 grid grid-cols-1 gap-3 xsm:grid-cols-2">
             <div class="rounded-xl border border-neutral-100 bg-neutral-50 px-3.5 py-3">
                 <div class="flex items-center gap-2">
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-brand-500 shadow-sm">
@@ -325,7 +325,7 @@
 
         </div>
         <!-- Highlights -->
-        <div class="mt-5 grid grid-cols-2 gap-3">
+        <div class="mt-5 grid grid-cols-1 gap-3 xsm:grid-cols-2">
             <div class="rounded-xl border border-neutral-100 bg-neutral-50 px-3.5 py-3">
                 <div class="flex items-center gap-2">
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-brand-500 shadow-sm">
@@ -458,7 +458,7 @@
 
         </div>
         <!-- Highlights -->
-        <div class="mt-5 grid grid-cols-2 gap-3">
+        <div class="mt-5 grid grid-cols-1 gap-3 xsm:grid-cols-2">
             <div class="rounded-xl border border-neutral-100 bg-neutral-50 px-3.5 py-3">
                 <div class="flex items-center gap-2">
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-brand-500 shadow-sm">
@@ -590,7 +590,7 @@
 
         </div>
         <!-- Highlights -->
-        <div class="mt-5 grid grid-cols-2 gap-3">
+        <div class="mt-5 grid grid-cols-1 gap-3 xsm:grid-cols-2">
             <div class="rounded-xl border border-neutral-100 bg-neutral-50 px-3.5 py-3">
                 <div class="flex items-center gap-2">
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-brand-500 shadow-sm">
@@ -722,7 +722,7 @@
 
         </div>
         <!-- Highlights -->
-        <div class="mt-5 grid grid-cols-2 gap-3">
+        <div class="mt-5 grid grid-cols-1 gap-3 xsm:grid-cols-2">
             <div class="rounded-xl border border-neutral-100 bg-neutral-50 px-3.5 py-3">
                 <div class="flex items-center gap-2">
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-brand-500 shadow-sm">

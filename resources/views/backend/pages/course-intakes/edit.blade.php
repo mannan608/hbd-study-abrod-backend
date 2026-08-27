@@ -18,7 +18,7 @@
         </a>
     </div>
 
-    <form action="{{ role_route('role.course-intakes.update', ['course_intake' => $intake]) }}"
+    <form action="{{ role_route('role.course-intakes.update', ['course_intake' => $intake->id]) }}"
           method="POST">
 
         @csrf

@@ -14,7 +14,7 @@ class UpdateScholarshipRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'university_id' => ['required', 'integer', 'exists:universities,id'],
+            'university_id' => ['required', 'uuid', 'exists:universities,id'],
 
             'course_id' => ['nullable', 'uuid', 'exists:courses,id'],
 

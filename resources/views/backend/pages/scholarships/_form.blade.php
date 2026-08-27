@@ -138,7 +138,7 @@
                             'half_free' => 'Half Free',
                             'one_time' => 'One Time',
                         ]"
-                            :value="old('coverage_type', $scholarship?->coverage_type)" />
+                            :value="old('coverage_type', $scholarship?->coverage_type ?? '')" />
                         {{-- Amount Description --}}
                         <x-form.textarea-input name="amount_description" label="Amount Description"
                             value="{{ old('amount_description', $scholarship?->amount_description) }}"

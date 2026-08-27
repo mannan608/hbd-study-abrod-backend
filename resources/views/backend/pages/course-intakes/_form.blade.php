@@ -1,9 +1,15 @@
 @php
     $isEdit = isset($intake) && $intake;
 
-    $applicationDeadline = old('application_deadline', $intake?->application_deadline?->format('Y-m-d'));
+    $applicationDeadline = old(
+        'application_deadline',
+        $intake?->application_deadline?->format('Y-m-d\TH:i')
+    );
 
-    $startDate = old('start_date', $intake?->start_date?->format('Y-m-d'));
+    $startDate = old(
+        'start_date',
+        $intake?->start_date?->format('Y-m-d\TH:i')
+    );
 @endphp
 
 <div x-data="{}">

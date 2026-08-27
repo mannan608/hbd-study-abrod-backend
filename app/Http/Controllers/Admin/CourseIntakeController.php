@@ -82,23 +82,23 @@ class CourseIntakeController extends Controller
     /**
      * Show the form for editing the specified intake.
      */
-  public function edit(Request $request, CourseIntake $course_intake)
+ public function edit(Request $request, string $role, $course_intake): View
 {
-
     $request->user()->can('course-intakes.edit') || abort(403);
 
-    // $courseIntake = CourseIntake::findOrFail($course_intake);
+    $courseIntake = CourseIntake::where('id', $course_intake)->first();
+
+    if (!$courseIntake) {
+        abort(404, 'Course Intake not found: ' . $course_intake);
+    }
 
     $courses = Course::query()
         ->select('id', 'title')
         ->orderBy('title')
         ->get();
 
-// return $course_intake;
-
-
     return view('backend.pages.course-intakes.edit', [
-        'intake' => $course_intake,
+        'intake' => $courseIntake,
         'courses' => $courses,
     ]);
 }
@@ -106,7 +106,7 @@ class CourseIntakeController extends Controller
     /**
      * Update the specified intake.
      */
- public function update(Request $request, CourseIntake $course_intake): RedirectResponse
+ public function update(Request $request, string $role, $course_intake): RedirectResponse
 {
     $request->user()->can('course-intakes.edit') || abort(403);
 
@@ -148,11 +148,10 @@ class CourseIntakeController extends Controller
     return redirect(role_route('role.course-intakes.index'))
         ->with('success', 'Course intake updated successfully.');
 }
-
     /**
      * Remove the specified intake.
      */
-    public function destroy(Request $request, CourseIntake $course_intake): RedirectResponse
+    public function destroy(Request $request, string $role, CourseIntake $course_intake): RedirectResponse
     {
         $request->user()->can('course-intakes.delete') || abort(403);
 

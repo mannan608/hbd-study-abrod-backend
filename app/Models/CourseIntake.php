@@ -21,8 +21,8 @@ class CourseIntake extends Model
     {
         return [
             'intake_year' => 'integer',
-            'application_deadline' => 'date',
-            'start_date' => 'date',
+            'application_deadline' => 'datetime',
+        'start_date' => 'datetime',
         ];
     }
 
