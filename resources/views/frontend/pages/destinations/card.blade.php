@@ -1,4 +1,4 @@
-<a href="#"
+<a href="{{ route('destination-details') }}"
     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
 
     <!-- Image -->
@@ -131,7 +131,7 @@
 
 <!-- United Kingdom -->
 
-<a href="#"
+<a href="{{ route('destination-details') }}"
     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
 
     <!-- Image -->
@@ -266,7 +266,7 @@
 
 
 <!-- United States -->
-<a href="#"
+<a href="{{ route('destination-details') }}"
     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
 
     <!-- Image -->
@@ -399,7 +399,7 @@
 
 
 <!-- Canada -->
-<a href="#"
+<a href="{{ route('destination-details') }}"
     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
 
     <!-- Image -->
@@ -531,7 +531,7 @@
 </a>
 
 <!-- New Zealand -->
-<a href="#"
+<a href="{{ route('destination-details') }}"
     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
 
     <!-- Image -->
@@ -663,7 +663,7 @@
 </a>
 
 <!-- Malaysia -->
-<a href="#"
+<a href="{{ route('destination-details') }}"
     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
 
     <!-- Image -->

@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CounsellorController;
 use App\Http\Controllers\Frontend\CourseController;
+use App\Http\Controllers\Frontend\DestinationController;
 use App\Http\Controllers\Frontend\ProviderController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -25,7 +26,8 @@ Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
 //static pages
 Route::get('/', [FrontendController::class, 'homePage'])->name('home');
-Route::get('/destinations', [FrontendController::class, 'destinations'])->name('destinations');
+Route::get('/destinations', [DestinationController::class, 'destinations'])->name('destinations');
+Route::get('/destination/details', [DestinationController::class, 'destinationDetails'])->name('destination-details');
 Route::get('/how-we-works', [FrontendController::class, 'howWeWork'])->name('how-we-works');
 Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
 Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contact');

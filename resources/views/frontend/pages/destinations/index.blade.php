@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-Destinations
+@include('frontend.pages.home.sections.destination')
 @endsection
