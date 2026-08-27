@@ -6,19 +6,39 @@
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(124,58,237,0.15),transparent_50%)]"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
         <!-- Content Left -->
         <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-300 border border-brand-500/20 backdrop-blur-md">
-            <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+          
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-300 border border-brand-500/20 backdrop-blur-md
+                       opacity-0 translate-x-[-40px] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                       data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0"
+                data-animate>
+            <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+            </svg>
             Premier UK Education Consultancy
           </span>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight
+                     opacity-0 translate-x-[-50px] transition-all duration-800 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)]
+                     data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0"
+              data-animate>
             Study at <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-300">World-Class</span> UK Universities
           </h1>
-          <p class="text-slate-300 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0">
+
+          <p class="text-slate-300 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0
+                    opacity-0 translate-x-[-40px] transition-all duration-800 delay-200 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0"
+             data-animate>
             Build your global future with expert guidance, guaranteed scholarship application support, and 99.2% visa approval success rate.
           </p>
-          <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
+
+          <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-2
+                      opacity-0 translate-y-8 transition-all duration-700 delay-300 ease-[cubic-bezier(0.22,1,0.36,1)]
+                      data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
+               data-animate>
             <a href="#consultation" class="px-8 py-4 bg-gradient-to-r from-brand-600 to-brand-600 hover:from-brand-500 hover:to-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all hover:-translate-y-0.5">
               Book Free Consultation
             </a>
@@ -26,8 +46,12 @@
               Explore Universities
             </a>
           </div>
+
           <!-- Features Badges -->
-          <div class="pt-6 border-t border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm text-slate-300">
+          <div class="pt-6 border-t border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm text-slate-300
+                      opacity-0 translate-y-6 transition-all duration-700 delay-400 ease-[cubic-bezier(0.22,1,0.36,1)]
+                      data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
+               data-animate>
             <div class="flex items-center gap-2 justify-center lg:justify-start">
               <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               <span>130+ Partner Universities</span>
@@ -42,8 +66,12 @@
             </div>
           </div>
         </div>
+
         <!-- Lead Form Floating Right -->
-        <div id="consultation" class="lg:col-span-5">
+        <div id="consultation" class="lg:col-span-5
+                    opacity-0 translate-x-[60px] scale-95 transition-all duration-900 delay-200 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0 data-[animate=true]:scale-100"
+             data-animate>
           <div class="bg-white/95 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-slate-100 text-slate-900">
             <h3 class="text-2xl font-bold text-slate-900 mb-2">Refine Your Future</h3>
             <p class="text-sm text-slate-600 mb-6">Fill in details for immediate application assistance.</p>
@@ -82,29 +110,45 @@
   <!-- ================= WHY STUDY IN THE UK ================= -->
   <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16
+                  opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                  data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
+           data-animate>
         <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Key Advantages</h2>
         <p class="text-3xl font-bold text-slate-900 sm:text-4xl">Why Choose the UK for Higher Education?</p>
       </div>
+
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Card 1 -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:-translate-y-1 transition-all group
+                    opacity-0 translate-x-[-40px] scale-95 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0 data-[animate=true]:scale-100"
+             data-animate data-delay="0">
           <div class="w-14 h-14 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
           </div>
           <h3 class="text-xl font-bold text-slate-900 mb-3">Academic Excellence</h3>
           <p class="text-slate-600 leading-relaxed text-sm">Home to world-leading universities recognized globally for rigorous academic standards and cutting-edge research.</p>
         </div>
+
         <!-- Card 2 -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:-translate-y-1 transition-all group
+                    opacity-0 translate-y-10 scale-95 transition-all duration-700 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <div class="w-14 h-14 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
           <h3 class="text-xl font-bold text-slate-900 mb-3">Shorter Degrees</h3>
           <p class="text-slate-600 leading-relaxed text-sm">Save time and tuition fees with 3-year Undergraduate programs and intensive 1-year Master’s degrees.</p>
         </div>
+
         <!-- Card 3 -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:-translate-y-1 transition-all group">
+        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:-translate-y-1 transition-all group
+                    opacity-0 translate-x-[40px] scale-95 transition-all duration-700 delay-200 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0 data-[animate=true]:scale-100"
+             data-animate>
           <div class="w-14 h-14 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
           </div>
@@ -115,18 +159,24 @@
     </div>
   </section>
 
-  <!-- ================= POPULAR UNIVERSITIES & COURSES ================= -->
+  <!-- ================= POPULAR UNIVERSITIES ================= -->
   <section id="universities" class="py-20 bg-slate-50 border-t border-b border-slate-200/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16
+                  opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                  data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
+           data-animate>
         <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Partner Institutions</h2>
         <p class="text-3xl font-bold text-slate-900 sm:text-4xl">Popular Universities in the UK</p>
       </div>
 
-      <!-- University Cards Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Uni Item -->
-        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between
+                    opacity-0 translate-y-12 scale-95 transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <div>
             <div class="h-10 w-10 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center font-bold text-lg mb-4">U</div>
             <h4 class="font-bold text-slate-900 text-lg">University of Greenwich</h4>
@@ -134,8 +184,11 @@
           </div>
           <a href="#" class="mt-4 inline-flex items-center text-xs font-semibold text-brand-600 hover:text-brand-800">Learn More &rarr;</a>
         </div>
-        <!-- Uni Item -->
-        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between
+                    opacity-0 translate-y-12 scale-95 transition-all duration-600 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <div>
             <div class="h-10 w-10 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center font-bold text-lg mb-4">U</div>
             <h4 class="font-bold text-slate-900 text-lg">Ulster University</h4>
@@ -143,8 +196,11 @@
           </div>
           <a href="#" class="mt-4 inline-flex items-center text-xs font-semibold text-brand-600 hover:text-brand-800">Learn More &rarr;</a>
         </div>
-        <!-- Uni Item -->
-        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between
+                    opacity-0 translate-y-12 scale-95 transition-all duration-600 delay-200 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <div>
             <div class="h-10 w-10 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center font-bold text-lg mb-4">C</div>
             <h4 class="font-bold text-slate-900 text-lg">Coventry University</h4>
@@ -152,8 +208,11 @@
           </div>
           <a href="#" class="mt-4 inline-flex items-center text-xs font-semibold text-brand-600 hover:text-brand-800">Learn More &rarr;</a>
         </div>
-        <!-- Uni Item -->
-        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between
+                    opacity-0 translate-y-12 scale-95 transition-all duration-600 delay-300 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <div>
             <div class="h-10 w-10 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center font-bold text-lg mb-4">B</div>
             <h4 class="font-bold text-slate-900 text-lg">BPP University</h4>
@@ -165,12 +224,15 @@
     </div>
   </section>
 
-  <!-- ================= REQUIREMENTS & COSTS COMPARISON ================= -->
+  <!-- ================= REQUIREMENTS & COSTS ================= -->
   <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12">
+        
         <!-- Entry Requirements -->
-        <div>
+        <div class="opacity-0 translate-x-[-50px] transition-all duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0"
+             data-animate>
           <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
             <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             Entry Requirements
@@ -195,8 +257,10 @@
           </div>
         </div>
 
-        <!-- Cost of Studying Table -->
-        <div>
+        <!-- Cost of Studying -->
+        <div class="opacity-0 translate-x-[50px] transition-all duration-800 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0"
+             data-animate>
           <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
             <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             Estimated Cost of Studying
@@ -239,46 +303,68 @@
   </section>
 
   <!-- ================= PROCESS STEPS ================= -->
-  <section class="py-20  text-neutral-900">
+  <section class="py-20 text-neutral-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16
+                  opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                  data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
+           data-animate>
         <h2 class="text-xs font-bold uppercase tracking-widest text-brand-400 mb-2">Simple Process</h2>
         <p class="text-3xl font-bold sm:text-4xl">6 Steps to Study in the UK</p>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-6 gap-6 relative">
         <!-- Step 1 -->
-        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center">
+        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center
+                    opacity-0 translate-y-10 scale-90 transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-sm">01</span>
           <h4 class="font-bold text-sm mb-2">Free Counselling</h4>
           <p class="text-xs text-neutral-400">Course & university selection assistance.</p>
         </div>
-        <!-- Step 2 -->
-        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center">
+
+        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center
+                    opacity-0 translate-y-10 scale-90 transition-all duration-600 delay-75 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-sm">02</span>
           <h4 class="font-bold text-sm mb-2">Application</h4>
           <p class="text-xs text-neutral-400">Submitting documents & application fees.</p>
         </div>
-        <!-- Step 3 -->
-        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center">
+
+        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center
+                    opacity-0 translate-y-10 scale-90 transition-all duration-600 delay-150 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-sm">03</span>
           <h4 class="font-bold text-sm mb-2">Offer Letter</h4>
           <p class="text-xs text-neutral-400">Receive conditional or unconditional offer.</p>
         </div>
-        <!-- Step 4 -->
-        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center">
+
+        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center
+                    opacity-0 translate-y-10 scale-90 transition-all duration-600 delay-200 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-sm">04</span>
           <h4 class="font-bold text-sm mb-2">Deposit & CAS</h4>
           <p class="text-xs text-neutral-400">Pay deposit and secure your CAS statement.</p>
         </div>
-        <!-- Step 5 -->
-        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center">
+
+        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center
+                    opacity-0 translate-y-10 scale-90 transition-all duration-600 delay-300 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-sm">05</span>
           <h4 class="font-bold text-sm mb-2">Visa Guidance</h4>
           <p class="text-xs text-neutral-400">Complete Student Visa application support.</p>
         </div>
-        <!-- Step 6 -->
-        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center">
+
+        <div class="bg-white p-6 rounded-xl border border-neutral-300 relative text-center
+                    opacity-0 translate-y-10 scale-90 transition-all duration-600 delay-400 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 data-[animate=true]:scale-100"
+             data-animate>
           <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-sm">06</span>
           <h4 class="font-bold text-sm mb-2">Fly to UK</h4>
           <p class="text-xs text-neutral-400">Pre-departure briefing & accommodation setup.</p>
@@ -286,4 +372,34 @@
       </div>
     </div>
   </section>
+
+  {{-- ================= SCROLL ANIMATION SCRIPT ================= --}}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Respect reduced motion preference
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('[data-animate]').forEach(el => {
+          el.setAttribute('data-animate', 'true');
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.setAttribute('data-animate', 'true');
+            // Optional: unobserve after animation (for performance)
+            // observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('[data-animate]').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
 @endsection
