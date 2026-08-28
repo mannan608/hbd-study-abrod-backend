@@ -1,21 +1,10 @@
 @extends('frontend.layouts.app')
 
-@section('content')
+@section('content') 
 
-<section class="relative overflow-hidden bg-neutral-25 text-neutral-800">
-
-    {{-- Subtle brand background glow --}}
-    <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        <div class="absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-brand-100/50 blur-3xl"></div>
-        <div class="absolute right-0 top-1/3 h-72 w-72 rounded-full bg-brand-50 blur-3xl"></div>
-    </div>
-
-    <div class="relative mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-
-        {{-- =========================================================
-             HEADER
-        ========================================================== --}}
-        <header class="mx-auto max-w-4xl pb-10 text-center lg:pb-14">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        
+         <header class="mx-auto max-w-4xl pb-8 text-center lg:pb-10">
 
             <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 text-xs font-semibold text-brand-700 shadow-sm">
                 <span class="relative flex h-2 w-2">
@@ -25,17 +14,17 @@
                 Legal Governance & Transparency
             </div>
 
-            <h1 class="text-4xl font-bold tracking-[-0.035em] text-neutral-950 sm:text-5xl lg:text-6xl">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-[-0.035em] text-neutral-950 md:text-4xl lg:text-5xl uppercase">
                 Privacy Policy
             </h1>
 
-            <p class="mx-auto mt-5 max-w-3xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8">
+            <p class="mx-auto mt-5 max-w-2xl text-sm text-neutral-500 sm:text-base">
                 This document outlines how HBD Services collects, uses, and safeguards
                 your personal data when utilizing our educational consultancy and
                 recruitment services.
             </p>
 
-            <div class="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-neutral-500">
+            <div class="mt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-neutral-500">
                 <span class="inline-flex items-center gap-1.5">
                     <svg class="h-4 w-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
@@ -53,21 +42,11 @@
 
         </header>
 
-
-        {{-- =========================================================
-             MAIN CONTENT
-        ========================================================== --}}
-        <div class="mt-12 grid grid-cols-1 items-start gap-8 lg:mt-16 lg:grid-cols-12 lg:gap-12">
-
-
-            {{-- =====================================================
-                 SIDEBAR
-            ====================================================== --}}
-            <aside class="self-start lg:col-span-4">
-
-                <div class="sticky top-24 z-20 space-y-4">
-
-                    {{-- Company Card --}}
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+            
+            <aside class="lg:col-span-4 space-y-6">
+                <div class=" space-y-5 sticky top-24">
+                     {{-- Company Card --}}
                     <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_8px_30px_rgb(16,24,40,0.04)]">
 
                         {{-- Card Header --}}
@@ -122,8 +101,8 @@
                                 </span>
 
                                 <address class="not-italic text-sm leading-6 text-neutral-600">
-                                    Suite 127, Level 8<br>
-                                    267–277 Castlereagh Street<br>
+                                    Suite 127, Level 8,
+                                    267–277 Castlereagh Street,
                                     Sydney NSW 2000, Australia
                                 </address>
                             </div>
@@ -214,16 +193,10 @@
                         </div>
 
                     </div>
-
                 </div>
-
             </aside>
 
-
-            {{-- =====================================================
-                 ARTICLE
-            ====================================================== --}}
-            <article class="lg:col-span-8">
+           <article class="lg:col-span-8">
 
                 <div class="rounded-2xl border border-neutral-200 bg-white px-5 py-8 shadow-[0_8px_30px_rgb(16,24,40,0.03)] sm:px-8 sm:py-10 lg:px-10">
 
@@ -1031,9 +1004,7 @@
                                             </h3>
 
                                             <p class="mt-2 text-sm leading-6 text-neutral-600">
-                                                Suite 127, Level 8<br>
-                                                267–277 Castlereagh Street<br>
-                                                Sydney NSW 2000
+                                                Suite 127, Level 8, 267–277 Castlereagh Street, Sydney NSW 2000
                                             </p>
 
                                             <p class="mt-3 text-sm">
@@ -1097,11 +1068,7 @@
                 </div>
 
             </article>
-
         </div>
-
-    </div>
-
-</section>
+    </main>
 
 @endsection
