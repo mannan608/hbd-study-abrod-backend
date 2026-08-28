@@ -254,7 +254,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('events.register.store', $event) }}" method="POST" class="space-y-6">
+                        <form action="{{ route('events.register.store', $event) }}" method="POST" class="space-y-4">
                             @csrf
 
                             {{-- Full Name --}}

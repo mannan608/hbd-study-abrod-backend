@@ -67,13 +67,13 @@
                         Destinations
                     </a>
                     {{-- How it works --}}
-                    <a href="{{ route('how-we-works') }}"
+                    {{-- <a href="{{ route('how-we-works') }}"
                         class="relative font-medium transition-all duration-300
                             {{ request()->routeIs('how-we-works') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
                             after:absolute after:left-0 after:-bottom-1.5
                             after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
                         How we works
-                    </a>
+                    </a> --}}
 
                 </div>
 
@@ -114,7 +114,7 @@
                 <a href="{{ route('counsellors') }}" class="{{ request()->routeIs('counsellors') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Counsellors</a>
                 <a href="{{ route('events') }}" class="{{ request()->routeIs('events') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Events</a>
                 <a href="{{ route('destinations') }}" class="{{ request()->routeIs('destinations') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Destinations</a>
-                <a href="{{ route('how-we-works') }}" class="{{ request()->routeIs('how-we-works') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">How we works</a>
+                {{-- <a href="{{ route('how-we-works') }}" class="{{ request()->routeIs('how-we-works') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">How we works</a> --}}
 
                 <div class="flex items-end justify-end">
                     @guest

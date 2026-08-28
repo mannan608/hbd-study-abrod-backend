@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\ProviderController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\EventRegistrationController;
+use App\Http\Controllers\Frontend\ServicesController;
 use App\SEO\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,9 @@ Route::get('/counsellor-details', [CounsellorController::class, 'counsellorDetai
 
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/event-details', [EventController::class, 'eventDetails'])->name('event-details');
+
+Route::get('/services', [ServicesController::class, 'index'])->name('services');
+
 
 
 
