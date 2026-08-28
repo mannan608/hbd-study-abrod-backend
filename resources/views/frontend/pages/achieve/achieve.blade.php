@@ -268,8 +268,8 @@
       </div>
     </section>
   </main>
-  @include('frontend.pages.home.sections.help-center')
-  @include('frontend.pages.components.testimonial.testimonial')
-      @include('frontend.pages.home.sections.university-partners')
-     @include('frontend.pages.home.sections.cta-section')
+  @include('frontend.pages.common-section.help-center')
+  @include('frontend.pages.common-section.testimonial')
+      @include('frontend.pages.common-section.university-partners')
+     @include('frontend.pages.common-section.cta-section')
 @endsection

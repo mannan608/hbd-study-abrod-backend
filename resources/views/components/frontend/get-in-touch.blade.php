@@ -1,17 +1,20 @@
 
-<form id="get-in-touch-form" action="{{ route('contact.store') }}" method="POST">
+<form id="get-in-touch-form" action="" method="POST">
         @csrf
-        <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <x-form.input-text name="name" label="Full Name" value="" placeholder="Enter Full Name..." />
             <x-form.input-text name="email" label="Email" type="email" value=""
                 placeholder="Enter Email..." />
-            <x-form.input-text name="phone" label="Phone" value="" placeholder="Enter Phone No..." />
-            <x-form.textarea-input name="message" label="Note" rows="3" placeholder="Write your note..." />
+            
         </div>
+       <div class="space-y-4 mt-4">
+         <x-form.input-text name="phone" label="Phone" value="" placeholder="Enter Phone No..." />
+            <x-form.textarea-input name="message" label="Note" rows="3" placeholder="Write your note..." />
+       </div>
 
         <div class="flex justify-end mt-4 md:mt-6">
             <button type="submit"
-                class=" text-sm   bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-normal hover:bg-brand-600 transition">
+                class=" text-base   bg-brand-600 text-white px-4 py-2.5 lg:px-6 lg:py-3 rounded-lg font-normal hover:bg-brand-600 transition">
                 Submit Message
             </button>
         </div>

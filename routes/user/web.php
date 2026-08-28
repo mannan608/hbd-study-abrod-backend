@@ -33,6 +33,8 @@ Route::get('/how-we-works', [FrontendController::class, 'howWeWork'])->name('how
 Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
 Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contact');
 Route::get('/can-achieve', [FrontendController::class, 'achieve'])->name('achieve');
+Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms-conditions', [FrontendController::class, 'termsConditions'])->name('terms-conditions');
 
 //dynami pages
 Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');

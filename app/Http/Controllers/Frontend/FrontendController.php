@@ -43,4 +43,10 @@ class FrontendController extends Controller
      public function howWeWork(){
         return view('frontend.pages.how-we-works.index');
     }
+    public function privacyPolicy(){
+        return view('frontend.pages.privacy-policy');
+    }
+    public function termsConditions(){
+        return view('frontend.pages.terms-conditions');
+    }
 }
