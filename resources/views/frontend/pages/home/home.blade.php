@@ -5,7 +5,7 @@
     @include('frontend.pages.home.sections.hero')
 
     {{-- @include('frontend.pages.home.sections.stats') --}}
-    @include('frontend.pages.home.sections.destination')
+    @include('frontend.pages.common-section.destination')
 
      <section class="mt-8 md:mt-12 lg:mt-16 py-8 lg:py-12 bg-brand-50">
            @include('frontend.pages.common-section.service-section')

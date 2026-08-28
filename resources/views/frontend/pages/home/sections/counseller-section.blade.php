@@ -2,8 +2,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header
             class="mx-auto max-w-2xl px-4 py-12 text-center font-sans reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-zap w-4 h-4 text-brand-500 transition-transform duration-500 group-hover:scale-110">
                     <path
@@ -20,32 +21,33 @@
             </h1>
 
             <!-- Subheading Description -->
-            <p class="mx-auto mt-4 max-w-2xl text-base text-neutral-600 sm:text-lg transition-all duration-700 delay-300">
+            <p
+                class="mx-auto mt-4 max-w-2xl text-base text-neutral-600 sm:text-lg transition-all duration-700 delay-300">
                 Connect with certified, empathetic professionals dedicated to mapping your precise academic outcome.
             </p>
         </header>
         <div class="h-80">
             <div class="swiper myCounsellerSwiper w-full overflow-hidden py-4">
-     <div class="swiper-wrapper">
-        
-         <div class="swiper-slide h-auto">
-             @include('frontend.pages.counsellors.counseller-card')
-         </div>
-         <div class="swiper-slide h-auto">
-             @include('frontend.pages.counsellors.counseller-card')
-         </div>
-         <div class="swiper-slide h-auto">
-             @include('frontend.pages.counsellors.counseller-card')
-         </div>
-         <div class="swiper-slide h-auto">
-             @include('frontend.pages.counsellors.counseller-card')
-         </div>        
+                <div class="swiper-wrapper">
 
-     </div>
+                    <div class="swiper-slide h-auto">
+                        @include('frontend.pages.counsellors.counseller-card')
+                    </div>
+                    <div class="swiper-slide h-auto">
+                        @include('frontend.pages.counsellors.counseller-card')
+                    </div>
+                    <div class="swiper-slide h-auto">
+                        @include('frontend.pages.counsellors.counseller-card')
+                    </div>
+                    <div class="swiper-slide h-auto">
+                        @include('frontend.pages.counsellors.counseller-card')
+                    </div>
 
-     <!-- Pagination Dots -->
-     {{-- <div class="swiper-pagination mt-4"></div> --}}
- </div>
+                </div>
+
+                <!-- Pagination Dots -->
+                {{-- <div class="swiper-pagination mt-4"></div> --}}
+            </div>
         </div>
     </div>
 </section>
