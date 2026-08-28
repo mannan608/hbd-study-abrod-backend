@@ -8,7 +8,7 @@
     @include('frontend.pages.home.sections.destination')
 
      <section class="mt-8 md:mt-12 lg:mt-16 py-8 lg:py-12 bg-brand-50">
-           @include('frontend.pages.home.sections.service-section')
+           @include('frontend.pages.common-section.service-section')
      </section>
 
 
@@ -67,15 +67,15 @@
 
     @include('frontend.pages.home.sections.counseller-section')
 
-     @include('frontend.pages.about.about-section')
+     @include('frontend.pages.common-section.about-section')
 
-    @include('frontend.pages.home.sections.help-center')
+    @include('frontend.pages.common-section.help-center')
   
-    @include('frontend.pages.components.testimonial.testimonial')
+    @include('frontend.pages.common-section.testimonial')
 
-     @include('frontend.pages.home.sections.university-partners')
+     @include('frontend.pages.common-section.university-partners')
 
-     @include('frontend.pages.home.sections.cta-section')
+     @include('frontend.pages.common-section.cta-section')
 
 
 @endsection

@@ -421,7 +421,7 @@
                 </div>
 
 
-               @include('frontend.pages.components.masonary-grid')
+               @include('frontend.pages.common-section.masonary-grid')
 
             </div>
 
