@@ -128,29 +128,22 @@
 </style>
 
 
-<section
-    class="relative isolate flex min-h-[84vh] w-full items-center justify-center overflow-hidden">
+<section class="relative isolate flex min-h-[84vh] w-full items-center justify-center overflow-hidden">
 
 
     <!-- =====================================================
          BACKGROUND IMAGE SLIDER
     ====================================================== -->
 
-    <div
-        id="heroSlider1"
-        class="hero-slider">
+    <div id="heroSlider1" class="hero-slider">
 
 
         <!-- Slide 1 -->
         <div class="hero-slide active">
 
-            <img
-                src="{{ asset('frontend-img/hero/hero-campus.jpg') }}"
-                alt="International students walking through an Australian university campus"
-                width="1920"
-                height="1080"
-                fetchpriority="high"
-                class="size-full object-cover">
+            <img src="{{ asset('frontend-img/hero/hero-campus.jpg') }}"
+                alt="International students walking through an Australian university campus" width="1920" height="1080"
+                fetchpriority="high" class="size-full object-cover">
 
         </div>
 
@@ -158,12 +151,8 @@
         <!-- Slide 2 -->
         <div class="hero-slide">
 
-            <img
-                src="{{ asset('frontend-img/hero/hero-1.jpg') }}"
-                alt="Australian university campus"
-                width="1920"
-                height="1080"
-                class="size-full object-cover">
+            <img src="{{ asset('frontend-img/hero/hero-1.jpg') }}" alt="Australian university campus" width="1920"
+                height="1080" class="size-full object-cover">
 
         </div>
 
@@ -171,12 +160,8 @@
         <!-- Slide 3 -->
         <div class="hero-slide">
 
-            <img
-                src="{{ asset('frontend-img/hero/hero-2.jpg') }}"
-                alt="Students studying at an Australian university"
-                width="1920"
-                height="1080"
-                class="size-full object-cover">
+            <img src="{{ asset('frontend-img/hero/hero-2.jpg') }}" alt="Students studying at an Australian university"
+                width="1920" height="1080" class="size-full object-cover">
 
         </div>
 
@@ -184,12 +169,8 @@
         <!-- Slide 4 -->
         <div class="hero-slide">
 
-            <img
-                src="{{ asset('frontend-img/hero/hero-3.jpg') }}"
-                alt="Australian city and university"
-                width="1920"
-                height="1080"
-                class="size-full object-cover">
+            <img src="{{ asset('frontend-img/hero/hero-3.jpg') }}" alt="Australian city and university" width="1920"
+                height="1080" class="size-full object-cover">
 
         </div>
 
@@ -197,12 +178,8 @@
         <!-- Slide 5 -->
         <div class="hero-slide">
 
-            <img
-                src="{{ asset('frontend-img/hero/hero-4.jpg') }}"
-                alt="International students in Australia"
-                width="1920"
-                height="1080"
-                class="size-full object-cover">
+            <img src="{{ asset('frontend-img/hero/hero-4.jpg') }}" alt="International students in Australia"
+                width="1920" height="1080" class="size-full object-cover">
 
         </div>
 
@@ -213,8 +190,7 @@
          YOUR EXISTING SURFACE OVERLAY
     ====================================================== -->
 
-    <div
-        class="absolute inset-0 z-[2] surface-hero">
+    <div class="absolute inset-0 z-[2] surface-hero">
     </div>
 
 
@@ -223,8 +199,7 @@
          Keeps text readable while preserving the image
     ====================================================== -->
 
-    <div
-        class="absolute inset-0 z-[3] bg-black/10">
+    <div class="absolute inset-0 z-[3] bg-black/10">
     </div>
 
 
@@ -232,8 +207,7 @@
          BOTTOM GRADIENT
     ====================================================== -->
 
-    <div
-        class="absolute inset-x-0 bottom-0 z-[4] h-1/2 bg-gradient-to-t from-black/30 via-transparent to-transparent">
+    <div class="absolute inset-x-0 bottom-0 z-[4] h-1/2 bg-gradient-to-t from-black/30 via-transparent to-transparent">
     </div>
 
 
@@ -241,9 +215,7 @@
          CONTENT
     ====================================================== -->
 
-    <div
-        id="heroContent1"
-        class="relative z-10 mx-auto max-w-7xl px-5 py-24 text-center text-white sm:py-32 lg:px-8">
+    <div id="heroContent1" class="relative z-10 mx-auto max-w-7xl px-5 py-24 text-center text-white sm:py-32 lg:px-8">
 
 
         <!-- =================================================
@@ -257,16 +229,8 @@
             <!-- Sparkle -->
             <div class="relative">
 
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="h-4 w-4 animate-pulse text-white">
 
                     <path
@@ -283,15 +247,13 @@
                 </svg>
 
 
-                <div
-                    class="absolute inset-0 h-4 w-4 animate-pulse bg-brand-500 blur-md">
+                <div class="absolute inset-0 h-4 w-4 animate-pulse bg-brand-500 blur-md">
                 </div>
 
             </div>
 
 
-            <span
-                class="text-sm font-semibold uppercase tracking-wide text-white">
+            <span class="text-sm font-semibold uppercase tracking-wide text-white">
 
                 Global Education Platform
 
@@ -339,37 +301,23 @@
 
 
             <!-- Search input -->
-            <div
-                class="relative flex-1">
+            <div class="relative flex-1">
 
 
                 <!-- Search icon -->
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="absolute left-3 top-1/2 size-6 -translate-y-1/2 text-neutral-500">
 
                     <path d="m21 21-4.34-4.34"></path>
 
-                    <circle
-                        cx="11"
-                        cy="11"
-                        r="8">
+                    <circle cx="11" cy="11" r="8">
                     </circle>
 
                 </svg>
 
 
-                <input
-                    type="text"
-                    placeholder="Search courses, e.g. Master of IT in Melbourne"
+                <input type="text" placeholder="Search courses, e.g. Master of IT in Melbourne"
                     class="h-12 w-full rounded-md border-0 bg-transparent px-3 py-1 pl-12 text-base text-neutral-800 shadow-none outline-none placeholder:text-neutral-400 focus:ring-0">
 
             </div>
@@ -379,26 +327,18 @@
                  AI ASSIST BUTTON
             ================================================== -->
 
-            <button
-                type="button"
+            <button type="button"
                 class="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md bg-brand-500/20 px-6 text-base font-bold text-brand-500 shadow transition-all duration-500 ease-out hover:scale-105 hover:bg-brand-500 hover:text-white hover:shadow-lg active:scale-95">
 
 
                 <!-- AI Icon -->
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"
                     class="transition-transform duration-500 ease-out group-hover:rotate-12">
 
 
                     <path
                         d="M13.3338 1.33407V4.00063M14.6672 2.66735H12.0004M7.34461 1.87701C7.37318 1.72408 7.45434 1.58596 7.57403 1.48657C7.69372 1.38717 7.84441 1.33276 8 1.33276C8.15559 1.33276 8.30628 1.38717 8.42597 1.48657C8.54566 1.58596 8.62682 1.72408 8.65539 1.87701L9.35611 5.58219C9.40588 5.84561 9.53391 6.08792 9.72349 6.27748C9.91308 6.46704 10.1554 6.59506 10.4189 6.64482L14.1245 7.34546C14.2774 7.37402 14.4156 7.45517 14.515 7.57485C14.6144 7.69452 14.6688 7.84519 14.6688 8.00076C14.6688 8.15633 14.6144 8.307 14.515 8.42668C14.4156 8.54636 14.2774 8.62751 14.1245 8.65607L10.4189 9.35671C10.1554 9.40647 9.91308 9.53449 9.72349 9.72405C9.53391 9.91361 9.40588 10.1559 9.35611 10.4193L8.65539 14.1245C8.62682 14.2774 8.54566 14.4156 8.42597 14.515C8.30628 14.6144 8.15559 14.6688 8 14.6688C7.84441 14.6688 7.69372 14.6144 7.57403 14.515C7.45434 14.4156 7.37318 14.2774 7.34461 14.1245L6.64389 10.4193C6.59412 10.1559 6.46692 9.91361 6.27651 9.72405C6.08692 9.53449 5.84459 9.40647 5.58114 9.35671L1.87551 8.65607C1.72256 8.62751 1.58443 8.54636 1.48502 8.42668C1.38561 8.307 1.3312 8.15633 1.3312 8.00076C1.3312 7.84519 1.38561 7.69452 1.48502 7.57485C1.58443 7.45517 1.72256 7.37402 1.87551 7.34546L5.58114 6.64482C5.84459 6.59506 6.08692 6.46704 6.27651 6.27748C6.46692 6.08792 6.59412 5.84561 6.64389 5.58219L7.34461 1.87701Z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round" />
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
 
                 </svg>
 
@@ -418,48 +358,26 @@
          SLIDER INDICATORS
     ====================================================== -->
 
-    <div
-        id="heroSliderDots1"
-        class="absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
+    <div id="heroSliderDots1" class="absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
 
 
-        <button
-            type="button"
-            data-slide="0"
-            aria-label="Show slide 1"
-            class="hero-slider-dot active">
+        <button type="button" data-slide="0" aria-label="Show slide 1" class="hero-slider-dot active">
         </button>
 
 
-        <button
-            type="button"
-            data-slide="1"
-            aria-label="Show slide 2"
-            class="hero-slider-dot">
+        <button type="button" data-slide="1" aria-label="Show slide 2" class="hero-slider-dot">
         </button>
 
 
-        <button
-            type="button"
-            data-slide="2"
-            aria-label="Show slide 3"
-            class="hero-slider-dot">
+        <button type="button" data-slide="2" aria-label="Show slide 3" class="hero-slider-dot">
         </button>
 
 
-        <button
-            type="button"
-            data-slide="3"
-            aria-label="Show slide 4"
-            class="hero-slider-dot">
+        <button type="button" data-slide="3" aria-label="Show slide 4" class="hero-slider-dot">
         </button>
 
 
-        <button
-            type="button"
-            data-slide="4"
-            aria-label="Show slide 5"
-            class="hero-slider-dot">
+        <button type="button" data-slide="4" aria-label="Show slide 5" class="hero-slider-dot">
         </button>
 
     </div>
@@ -468,7 +386,7 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
 
         const slider = document.getElementById('heroSlider1');
         const dotsContainer = document.getElementById('heroSliderDots1');
@@ -479,9 +397,9 @@
         }
 
         const slides = slider.querySelectorAll('.hero-slide');
-        const dots = dotsContainer
-            ? dotsContainer.querySelectorAll('.hero-slider-dot')
-            : [];
+        const dots = dotsContainer ?
+            dotsContainer.querySelectorAll('.hero-slider-dot') :
+            [];
 
         let currentSlide = 0;
         let sliderInterval = null;
@@ -493,7 +411,7 @@
            CONTENT LOAD ANIMATION
         ====================================================== */
 
-        setTimeout(function () {
+        setTimeout(function() {
 
             if (content) {
                 content.classList.add('hero-content-loaded');
@@ -513,7 +431,7 @@
             }
 
 
-            slides.forEach(function (slide, i) {
+            slides.forEach(function(slide, i) {
 
                 slide.classList.toggle(
                     'active',
@@ -523,7 +441,7 @@
             });
 
 
-            dots.forEach(function (dot, i) {
+            dots.forEach(function(dot, i) {
 
                 dot.classList.toggle(
                     'active',
@@ -589,9 +507,9 @@
            DOT CLICK
         ====================================================== */
 
-        dots.forEach(function (dot) {
+        dots.forEach(function(dot) {
 
-            dot.addEventListener('click', function () {
+            dot.addEventListener('click', function() {
 
                 const index =
                     parseInt(

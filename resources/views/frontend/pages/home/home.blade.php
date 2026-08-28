@@ -12,7 +12,7 @@
      </section>
 
 
-    @include('frontend.pages.home.sections.course-section')
+    {{-- @include('frontend.pages.home.sections.course-section') --}}
 
     @include('frontend.pages.home.sections.emerging-career')
 

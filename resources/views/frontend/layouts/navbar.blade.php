@@ -31,15 +31,23 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-4 md:gap-6 lg:gap-8 text-sm font-medium uppercase">
+                    {{-- Services --}}
+                    <a href="{{ route('services') }}"
+                        class="relative font-medium transition-all duration-300
+                            {{ request()->routeIs('services') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
+                            after:absolute after:left-0 after:-bottom-1.5
+                            after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
+                        Services
+                    </a>
 
                     {{-- Courses --}}
-                    <a href="{{ route('courses') }}"
+                    {{-- <a href="{{ route('courses') }}"
                         class="relative font-medium transition-all duration-300
                         {{ request()->routeIs('courses') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
                         after:absolute after:left-0 after:-bottom-1.5
                         after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
                         Courses
-                    </a>
+                    </a> --}}
 
                     {{-- Counsellors --}}
                     <a href="{{ route('counsellors') }}"
@@ -66,14 +74,7 @@
                             after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
                         Destinations
                     </a>
-                    {{-- Services --}}
-                    <a href="{{ route('services') }}"
-                        class="relative font-medium transition-all duration-300
-                            {{ request()->routeIs('services') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
-                            after:absolute after:left-0 after:-bottom-1.5
-                            after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
-                        Services
-                    </a>
+                    
 
                 </div>
 
@@ -110,11 +111,12 @@
         <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-200 shadow-lg">
 
             <div class="flex flex-col px-6 py-5 space-y-3 text-base font-medium">
-                <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Courses</a>
+                <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Services</a>
+                {{-- <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Courses</a> --}}
                 <a href="{{ route('counsellors') }}" class="{{ request()->routeIs('counsellors') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Counsellors</a>
                 <a href="{{ route('events') }}" class="{{ request()->routeIs('events') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Events</a>
                 <a href="{{ route('destinations') }}" class="{{ request()->routeIs('destinations') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Destinations</a>
-                <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Services</a>
+               
 
                 <div class="flex items-end justify-end">
                     @guest

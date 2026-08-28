@@ -1,56 +1,131 @@
-<section class="relative min-h-[85vh] w-full overflow-hidden bg-slate-950 text-slate-100 flex items-center py-16 lg:py-0">
-  <div class="absolute inset-0 z-0 overflow-hidden opacity-30">
-    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1920&auto=format&fit=crop" 
-         alt="Campus Life" 
-         class="h-full w-full object-cover animate-ken-burns" />
-    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
-  </div>
 
-  <div class="container relative z-10 mx-auto px-6 lg:px-12">
-    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-      
-      <div class="lg:col-span-7 space-y-8">
-        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-400 backdrop-blur-md">
-          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
-          Direct Australian Admissions 2026
-        </div>
+<section
+    x-data="{
+        active: 0,
+        slides: [
+            {
+                eyebrow: '01 — EXPLORE',
+                title: 'A world of<br>possibilities.',
+                subtitle: 'Discover destinations and universities that match the future you want to build.',
+                image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1400&q=85'
+            },
+            {
+                eyebrow: '02 — DISCOVER',
+                title: 'Find where<br>you belong.',
+                subtitle: 'Choose from thousands of programs and discover an education experience made for you.',
+                image: 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=1400&q=85'
+            },
+            {
+                eyebrow: '03 — BEGIN',
+                title: 'Your journey<br>starts now.',
+                subtitle: 'From application to arrival, get the guidance you need at every important step.',
+                image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=85'
+            }
+        ]
+    }"
+    x-init="setInterval(() => active = (active + 1) % slides.length, 6500)"
+    class="bg-[#f7f7f5]"
+>
+    <div class="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10 lg:py-20">
 
-        <h1 class="text-4xl font-extrabold tracking-tight sm:text-6xl xl:text-7xl text-white leading-none">
-          Shape Your Legacy in <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Australia.</span>
-        </h1>
+        <div class="grid min-h-[600px] overflow-hidden rounded-[2rem] bg-slate-950 lg:grid-cols-2">
 
-        <p class="max-w-xl text-lg text-slate-300 leading-relaxed">
-          Access verified tuition fees, IELTS requirements, and full scholarship opportunities across 620+ top-tier universities.
-        </p>
+            <!-- Content -->
+            <div class="flex items-center px-7 py-14 sm:px-12 lg:px-16">
 
-        <div class="flex flex-col sm:flex-row gap-2 p-2 bg-slate-900/90 border border-slate-800 rounded-2xl backdrop-blur-xl shadow-2xl max-w-xl">
-          <div class="relative flex-1">
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            <input type="text" placeholder="Search course, university, or city..." class="w-full pl-12 pr-4 py-3.5 bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none" />
-          </div>
-          <button class="px-6 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm rounded-xl transition-all duration-300 shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2">
-            <span>Explore Now</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-        </div>
-      </div>
+                <div class="w-full">
 
-      <div class="lg:col-span-5 relative">
-        <div class="relative rounded-3xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-2xl shadow-2xl space-y-6">
-          <div class="flex items-center gap-4">
-            <div class="h-12 w-12 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-xl">40+</div>
-            <div>
-              <h3 class="text-white font-semibold">Group of Eight Unis</h3>
-              <p class="text-xs text-slate-400">Direct partnership guaranteed</p>
+                    <div class="relative min-h-[380px]">
+
+                        <template x-for="(slide, index) in slides" :key="index">
+                            <div
+                                x-show="active === index"
+                                x-transition:enter="transition duration-800 ease-out"
+                                x-transition:enter-start="opacity-0 translate-x-6"
+                                x-transition:enter-end="opacity-100 translate-x-0"
+                                x-transition:leave="transition duration-500 absolute inset-0"
+                                x-transition:leave-start="opacity-100"
+                                x-transition:leave-end="opacity-0 -translate-x-6"
+                                class="absolute inset-0 flex flex-col justify-center"
+                            >
+
+                                <p
+                                    x-text="slide.eyebrow"
+                                    class="mb-6 text-xs font-medium tracking-[0.25em] text-white/40"
+                                ></p>
+
+                                <h1
+                                    x-html="slide.title"
+                                    class="text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl"
+                                ></h1>
+
+                                <p
+                                    x-text="slide.subtitle"
+                                    class="mt-7 max-w-md text-base leading-7 text-white/60 sm:text-lg"
+                                ></p>
+
+                                <a
+                                    href="#"
+                                    class="mt-9 inline-flex w-fit items-center gap-3 border-b border-white/30 pb-2 text-sm font-medium text-white transition hover:border-white"
+                                >
+                                    Discover more
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14m-5-5 5 5-5 5"/>
+                                    </svg>
+                                </a>
+
+                            </div>
+                        </template>
+
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex items-center justify-between border-t border-white/10 pt-6">
+
+                        <div class="flex gap-2">
+                            <template x-for="(slide, index) in slides" :key="index">
+                                <button
+                                    @click="active = index"
+                                    class="h-1 rounded-full transition-all duration-500"
+                                    :class="active === index ? 'w-10 bg-white' : 'w-4 bg-white/20'"
+                                ></button>
+                            </template>
+                        </div>
+
+                        <div class="text-xs tracking-wider text-white/30">
+                            <span x-text="'0' + (active + 1)"></span>
+                            <span class="mx-1">/</span>
+                            <span>03</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-          </div>
-          <div class="space-y-3 pt-4 border-t border-slate-800">
-            <div class="flex justify-between text-sm"><span class="text-slate-400">Avg. Processing Time</span><span class="text-emerald-400 font-medium">48 Hours</span></div>
-            <div class="flex justify-between text-sm"><span class="text-slate-400">Visa Acceptance Rate</span><span class="text-emerald-400 font-medium">98.4%</span></div>
-          </div>
-        </div>
-      </div>
 
+            <!-- Image -->
+            <div class="relative min-h-[400px] overflow-hidden">
+
+                <template x-for="(slide, index) in slides" :key="index">
+                    <img
+                        x-show="active === index"
+                        x-transition:enter="transition duration-1000 ease-out"
+                        x-transition:enter-start="opacity-0 scale-105"
+                        x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition duration-700 absolute inset-0"
+                        x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0 scale-105"
+                        :src="slide.image"
+                        alt=""
+                        class="absolute inset-0 h-full w-full object-cover"
+                    >
+                </template>
+
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent"></div>
+
+            </div>
+
+        </div>
     </div>
-  </div>
 </section>

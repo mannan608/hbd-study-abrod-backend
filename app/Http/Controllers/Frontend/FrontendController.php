@@ -21,17 +21,17 @@ class FrontendController extends Controller
 
     public function contactPage()
     {
-        return view('frontend.pages.contact', ['title' => 'Contact Us']);
+        return view('frontend.pages.contact');
     }
    
     public function registration()
     {
-        return view('frontend.pages.register', ['title' => 'Register']);
+        return view('frontend.pages.register');
     }
 
       public function login()
     {
-        return view('frontend.pages.login', ['title' => 'Login']);
+        return view('frontend.pages.login');
     }
     public function achieve(){
         return view('frontend.pages.achieve.achieve');
