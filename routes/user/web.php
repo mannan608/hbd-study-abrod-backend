@@ -35,6 +35,8 @@ Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contac
 Route::get('/can-achieve', [FrontendController::class, 'achieve'])->name('achieve');
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-conditions', [FrontendController::class, 'termsConditions'])->name('terms-conditions');
+Route::get('/owner', [FrontendController::class, 'owner'])->name('owner');
+
 
 //dynami pages
 Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');

@@ -291,7 +291,6 @@
 
     <!-- 6. Awards & Recognitions Timeline -->
     <section class="my-16 md:my-20 lg:my-24">
-
         <div
             class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 bg-white p-8 lg:p-12 rounded-3xl border border-slate-100  space-y-10">
 
@@ -437,7 +436,7 @@
             </div>
         </div>
     </section>
-
+    @include('frontend.pages.common-section.ceo')
     @include('frontend.pages.common-section.testimonial')
     @include('frontend.pages.common-section.university-partners')
     @include('frontend.pages.common-section.cta-section')

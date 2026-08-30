@@ -49,4 +49,8 @@ class FrontendController extends Controller
     public function termsConditions(){
         return view('frontend.pages.terms-conditions');
     }
+
+    public function owner(){
+        return view('frontend.pages.teams.owner');
+    }
 }
