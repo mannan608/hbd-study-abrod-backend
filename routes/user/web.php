@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 //Routes
 Route::get('register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('register', [AuthController::class, 'register'])->name('register.submit');
+Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::get('/signup', function () {
     return view('backend.pages.auth.signup');
 })->name('signup');
@@ -35,7 +35,7 @@ Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contac
 Route::get('/can-achieve', [FrontendController::class, 'achieve'])->name('achieve');
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-conditions', [FrontendController::class, 'termsConditions'])->name('terms-conditions');
-Route::get('/owner', [FrontendController::class, 'owner'])->name('owner');
+Route::get('/ceo', [FrontendController::class, 'owner'])->name('owner');
 
 
 //dynami pages

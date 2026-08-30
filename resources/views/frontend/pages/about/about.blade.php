@@ -289,6 +289,10 @@
         </div>
     </section>
 
+
+    @include('frontend.pages.common-section.ceo')
+
+
     <!-- 6. Awards & Recognitions Timeline -->
     <section class="my-16 md:my-20 lg:my-24">
         <div
@@ -436,7 +440,6 @@
             </div>
         </div>
     </section>
-    @include('frontend.pages.common-section.ceo')
     @include('frontend.pages.common-section.testimonial')
     @include('frontend.pages.common-section.university-partners')
     @include('frontend.pages.common-section.cta-section')

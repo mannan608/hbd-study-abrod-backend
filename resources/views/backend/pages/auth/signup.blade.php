@@ -75,7 +75,7 @@
                     <div class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800"></div>
                 </div>
 
-                <form action="{{ route('register.submit') }}" method="POST">
+                <form action="{{ route('register') }}" method="POST">
                     @csrf
 
                     <div class="space-y-4">
