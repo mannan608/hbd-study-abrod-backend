@@ -62,11 +62,11 @@ class MenuHelper
                         'route' => 'role.counsellors.index',
                         'permission' => 'counsellors.list',
                     ],                   
-                    [
-                        'name' => 'Provider',
-                        'route' => 'role.providers.index',
-                        'permission' => 'provider.list',
-                    ],
+                    // [
+                    //     'name' => 'Provider',
+                    //     'route' => 'role.providers.index',
+                    //     'permission' => 'provider.list',
+                    // ],
                 ],
             ],
             [
@@ -128,8 +128,8 @@ class MenuHelper
                 'subItems' => [
                     [
                         'name' => 'AI Chat Sessions',
-                        'route' => 'role.universities.index',
-                        'permission' => 'university.list',
+                        'route' => '',
+                        'permission' => '',
                     ],                   
                     [
                         'name' => 'AI Usage Logs',
@@ -166,8 +166,8 @@ class MenuHelper
                 'subItems' => [
                     [
                         'name' => 'General',
-                        'route' => 'role.contacts.index',
-                        'permission' => 'contact.list',
+                        'route' => '',
+                        'permission' => '',
                     ],
                 ],
             ],

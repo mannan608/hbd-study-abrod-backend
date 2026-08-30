@@ -10,8 +10,8 @@
 <div class="grid gap-5 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900 md:grid-cols-2">
     <div>
         <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300" for="name">Name</label>
-        <input id="name" name="name" value="{{ old('name', $user?->name) }}" required
-            class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
+        <input id="name" name="name" value="{{ old('name', $user?->name) }}" required placeholder="Enter Full Name"
+            class="h-11 placeholder:text-neutral-400 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
         @error('name')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -19,8 +19,8 @@
 
     <div>
         <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300" for="email">Email</label>
-        <input id="email" type="email" name="email" value="{{ old('email', $user?->email) }}" required
-            class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
+        <input id="email" type="email" name="email" value="{{ old('email', $user?->email) }}" required placeholder="Enter Email"
+            class="h-11 placeholder:text-neutral-400 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
         @error('email')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -28,8 +28,8 @@
 
     <div>
         <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300" for="password">Password</label>
-        <input id="password" type="password" name="password" @if (! $user) required @endif
-            class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
+        <input id="password" type="password" name="password" @if (! $user) required placeholder="Enter Password" @endif
+            class="h-11 placeholder:text-neutral-400 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
         @error('password')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -37,8 +37,8 @@
 
     <div>
         <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300" for="password_confirmation">Confirm Password</label>
-        <input id="password_confirmation" type="password" name="password_confirmation" @if (! $user) required @endif
-            class="h-11 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
+        <input id="password_confirmation" type="password" name="password_confirmation" @if (! $user) required placeholder="Confirm Password" @endif
+            class="h-11 placeholder:text-neutral-400 w-full rounded-lg border border-neutral-300 px-4 text-sm text-neutral-800 focus:border-brand-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
     </div>
 
     <div>

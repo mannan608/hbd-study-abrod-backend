@@ -16,16 +16,13 @@ class ContactController extends Controller
         $request->user()->can('contact.list') || abort(403);
 
         $contacts = Contacts::query()
-            ->with([
-                'course:id,name'
-            ])
             ->select([
                 'id',
                 'name',
                 'email',
                 'phone',
                 'message',
-                'course_id'
+                'form_type',
             ])
             ->latest()
             ->get();
@@ -44,7 +41,7 @@ class ContactController extends Controller
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'string', 'max:50'],
             'message' => ['required', 'string'],
-            'course_id' => ['nullable', 'exists:courses,id'],
+            'form_type' => ['required', 'string'],
         ]);
 
         Contacts::create($data);

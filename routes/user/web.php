@@ -54,7 +54,7 @@ Route::get('/event-details', [EventController::class, 'eventDetails'])->name('ev
 
 Route::get('/services', [ServicesController::class, 'index'])->name('services');
 
-
+Route::post('/inquiry-us', [ContactController::class, 'store'])->name('contact.store');
 
 
 // Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');

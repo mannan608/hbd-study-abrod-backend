@@ -18,8 +18,8 @@
 
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <div>
-                <h3 class="text-lg font-semibold text-neutral-800 dark:text-white/90">Category Management</h3>
-                <p class="text-sm text-neutral-500 dark:text-neutral-400">Manage your Category.</p>
+                <h3 class="text-lg font-semibold text-neutral-800 dark:text-white/90">Course Category Management</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Manage your course category.</p>
             </div>
             <a href="{{ role_route('role.course-categories.create') }}"
                 class="px-4 py-2 bg-brand-600 text-white rounded-lg text-sm font-medium hover:bg-brand-600 transition-colors">

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->text('message');
-            $table->string('course_id')->nullable();
+            $table->string('form_type')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

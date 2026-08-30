@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                             <!-- ================================================= CTA ================================================== -->
-                            <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-5"> <a href="#partner"
+                            <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-5"> <a href="{{ route('contact') }}"
                                     class=" inline-flex items-center justify-center bg-brand-500 hover:bg-brand-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-brand-500/20 transition-all duration-200 hover:-translate-y-0.5 ">
                                     Connect With Us <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">

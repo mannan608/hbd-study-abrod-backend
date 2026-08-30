@@ -12,7 +12,7 @@
             'name' => $contact->name,
             'email' => $contact->email,
             'phone' => $contact->phone,
-            'course' => $contact->course->name ?? null,
+            'form_type' => $contact->form_type,
             'message' => $contact->message,
         ];
     })->values();
@@ -81,7 +81,7 @@
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Name</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Email</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Phone</th>
-                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Course</th>
+                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Type</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Message</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-right">Action</th>
                         </tr>
@@ -104,7 +104,7 @@
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400" x-text="row.phone"></td>
 
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400">
-                                    <span x-text="row.course"></span>
+                                    <span x-text="row.form_type"></span>
                                 </td>
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400" x-text="row.message"></td>
                                
