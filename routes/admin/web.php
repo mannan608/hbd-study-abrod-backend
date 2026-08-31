@@ -83,7 +83,13 @@ Route::prefix('{role}')
         Route::put('/account-settings', [CounsellorController::class, 'updateAccountSetting'])->name('account.settings.update');
 
         //booking session
-        Route::get('booking-sessions', [CounsellorBookingController::class, 'index'])->name('booking-sessions.index');
-        Route::get('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'show'])->name('booking-sessions.show');
-        Route::delete('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'destroy'])->name('booking-sessions.destroy');
+        Route::get('booking-sessions', [CounsellorBookingController::class, 'index'])
+            ->name('booking-sessions.index');
+        Route::get('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'show'])
+            ->name('booking-sessions.show');
+        Route::delete('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'destroy'])
+            ->name('booking-sessions.destroy');
+
+        Route::put('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'update'])
+            ->name('booking-sessions.update');
     });

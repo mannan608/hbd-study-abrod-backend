@@ -155,7 +155,7 @@ class MenuHelper
                     ],
                     [
                         'name' => 'Counsellor Bookings',
-                        'route' => 'role.counsellor-bookings.index',
+                        'route' => 'role.booking-sessions.index',
                         'permission' => 'bookings.list',
                     ],
                 ],

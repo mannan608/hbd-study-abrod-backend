@@ -147,6 +147,7 @@ class RolePermissionSeeder extends Seeder
             // bookings 
             'bookings.list',
             'bookings.view',
+            'bookings.update',                        
             'bookings.delete',
             'bookings.manage',
 
