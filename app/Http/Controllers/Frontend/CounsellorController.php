@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Counsellor;
-use App\Models\Course;
+use App\Models\CounsellorBooking;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CounsellorController extends Controller
 {
 
-    public function counsellors()
+    public function index()
     {
         $counsellors = Counsellor::query()
             ->with('user')
@@ -25,7 +26,7 @@ class CounsellorController extends Controller
         );
     }
 
-     public function counsellorDetails(Counsellor $counsellor)
+     public function show(Counsellor $counsellor)
     {      
         $counsellor->load('user');
             //    return $counsellor;
@@ -58,17 +59,16 @@ class CounsellorController extends Controller
 
         // Create booking here
 
-        // Example:
-        // CounsellorBooking::create([
-        //     'counsellor_id' => $counsellor->id,
-        //     'name' => $validated['name'],
-        //     'email' => $validated['mail'],
-        //     'phone' => $validated['phone'],
-        //     'service' => $validated['service'],
-        //     'appointment_date' => $validated['appointment_date'],
-        //     'appointment_time' => $validated['appointment_time'],
-        //     'status' => 'pending',
-        // ]);
+        CounsellorBooking::create([
+            'counsellor_id' => $counsellor->id,
+            'name' => $validated['name'],
+            'email' => $validated['mail'],
+            'phone' => $validated['phone'],
+            'service' => $validated['service'],
+            'appointment_date' => $validated['appointment_date'],
+            'appointment_time' => $validated['appointment_time'],
+            'status' => 'pending',
+        ]);
 
         return redirect()
             ->route('counsellor.details', $counsellor)

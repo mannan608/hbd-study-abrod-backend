@@ -1,4 +1,4 @@
-@foreach ($counsellors as $counsellor)
+
     <a href="{{ route('counsellor.details', $counsellor) }}"
         class="flex flex-col justify-between rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
         <div>
@@ -58,4 +58,4 @@
                     <path d="M16 2v4M8 2v4M3 10h18" />
                 </svg> </span> </div>
     </a>
-@endforeach
+

@@ -50,8 +50,8 @@ Route::get('/provider-details', [ProviderController::class, 'providerDetails'])-
 
 
 // counsellors
-Route::get('/counsellors', [CounsellorController::class, 'counsellors'])->name('counsellors');
-Route::get('/counsellors/{counsellor}', [CounsellorController::class, 'counsellorDetails'])
+Route::get('/counsellors', [CounsellorController::class, 'index'])->name('counsellors');
+Route::get('/counsellors/{counsellor}', [CounsellorController::class, 'show'])
     ->name('counsellor.details');
 
 Route::get('/counsellors/{counsellor}/booking', [CounsellorController::class, 'bookingCounsellor'])
