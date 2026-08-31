@@ -29,19 +29,19 @@
         <div class="h-80">
             <div class="swiper myCounsellerSwiper w-full overflow-hidden py-4">
                 <div class="swiper-wrapper">
-
-                    <div class="swiper-slide h-auto">
-                        @include('frontend.pages.counsellors.counseller-card')
-                    </div>
-                    <div class="swiper-slide h-auto">
-                        @include('frontend.pages.counsellors.counseller-card')
-                    </div>
-                    <div class="swiper-slide h-auto">
-                        @include('frontend.pages.counsellors.counseller-card')
-                    </div>
-                    <div class="swiper-slide h-auto">
-                        @include('frontend.pages.counsellors.counseller-card')
-                    </div>
+                    @forelse ($counsellors ?? [] as $counsellor)
+                        <div class="swiper-slide h-auto">
+                            @include('frontend.pages.counsellors.counseller-card', [
+                                'counsellor' => $counsellor,
+                            ])
+                        </div>
+                    @empty
+                        <div class="swiper-slide h-auto">
+                            <div class="rounded-2xl border border-slate-100 bg-white p-6 text-center text-slate-500 shadow-sm">
+                                No counsellors are available right now.
+                            </div>
+                        </div>
+                    @endforelse
 
                 </div>
 

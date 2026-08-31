@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Counsellor;
 use App\Models\Course;
 
 class FrontendController extends Controller
@@ -10,7 +11,14 @@ class FrontendController extends Controller
 
     public function homePage()
     {
-        return view('frontend.pages.home.home');
+        $counsellors = Counsellor::query()
+            ->with('user')
+            ->where('is_active', true)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('frontend.pages.home.home', compact('counsellors'));
     }
 
     public function aboutPage()
