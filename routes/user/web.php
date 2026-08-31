@@ -48,9 +48,20 @@ Route::get('/course-details', [CourseController::class, 'coursesDetails'])->name
 Route::get('/providers', [ProviderController::class, 'providers'])->name('providers');
 Route::get('/provider-details', [ProviderController::class, 'providerDetails'])->name('provider-details');
 
-Route::get('/counsellors', [CounsellorController::class, 'counsellors'])->name('counsellors');
-Route::get('/counsellor-details', [CounsellorController::class, 'counsellorDetails'])->name('counsellor-details');
 
+// counsellors
+Route::get('/counsellors', [CounsellorController::class, 'counsellors'])->name('counsellors');
+Route::get('/counsellors/{counsellor}', [CounsellorController::class, 'counsellorDetails'])
+    ->name('counsellor.details');
+
+Route::get('/counsellors/{counsellor}/booking', [CounsellorController::class, 'bookingCounsellor'])
+    ->name('counsellor.booking');
+
+Route::post('/counsellors/{counsellor}/booking', [CounsellorController::class, 'storeBooking'])
+    ->name('booking-session');
+
+
+//Events
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/event-details', [EventController::class, 'eventDetails'])->name('event-details');
 

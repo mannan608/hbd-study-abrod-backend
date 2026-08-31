@@ -1,8 +1,6 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-
-
 <main class="flex flex-1 items-center justify-center p-6 sm:p-10">
     <section class="w-full max-w-xl" aria-labelledby="error-title">
       <div class="rounded-xl border border-border bg-card p-8 text-center shadow-md sm:p-12">
