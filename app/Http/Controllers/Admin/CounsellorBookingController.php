@@ -9,7 +9,7 @@ use Illuminate\View\View;
 
 class CounsellorBookingController extends Controller
 {
-    public function index(Request $request): View
+    public function index(string $role ,Request $request): View
     {
         $user = $request->user();
 
@@ -35,7 +35,7 @@ class CounsellorBookingController extends Controller
         return view('backend.pages.counsellor-bookings.index', compact('bookings'));
     }
 
-    public function show(Request $request, string $bookingId): View
+    public function show(string $role ,Request $request, string $bookingId): View
     {
         $user = $request->user();
 
@@ -59,7 +59,7 @@ class CounsellorBookingController extends Controller
         return view('backend.pages.counsellor-bookings.show', compact('booking'));
     }
 
-    public function destroy(Request $request, string $bookingId)
+    public function destroy(string $role ,Request $request, string $bookingId)
     {
         $user = $request->user();
 
@@ -77,10 +77,14 @@ class CounsellorBookingController extends Controller
 
         $booking->delete();
 
-        return redirect()->route('role.booking-sessions.index')->with('success', 'Booking deleted successfully.');
+        return redirect()
+            ->route('role.booking-sessions.index', [
+                'role' => $request->route('role'),
+            ])
+            ->with('success', 'Booking deleted successfully.');
     }
 
- public function update(Request $request, string $bookingId)
+ public function update(string $role,Request $request, string $bookingId)
 {
     $user = $request->user();
 
@@ -120,9 +124,10 @@ class CounsellorBookingController extends Controller
     $booking->update([
         'status' => $request->input('status'),
     ]);
-
-    return redirect()
-        ->route('role.booking-sessions.index')
-        ->with('success', 'Booking status updated successfully.');
+ return redirect()
+            ->route('role.booking-sessions.index', [
+                'role' => $request->route('role'),
+            ])
+            ->with('success', 'Booking status updated successfully.');
 }
 }
