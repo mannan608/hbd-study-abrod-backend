@@ -1,4 +1,4 @@
-<section class=" py-16 md:py-20 lg:py-24">
+<section class="py-16 md:py-20 lg:py-24 defer-render">
     {{-- bg-brand-100 text-white py-6 px-8 md:px-12 lg:py-10 lg:px-16 rounded-4xl --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->

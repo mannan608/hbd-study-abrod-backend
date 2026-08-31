@@ -1,4 +1,4 @@
-<section class="py-16 md:py-20 lg:py-24">
+<section class="py-16 md:py-20 lg:py-24 defer-render">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:rounded-2xl lg:rounded-4xl bg-cover bg-center bg-no-repeat p-10 md:p-16 text-center text-white shadow-2xl border border-slate-800"
         style="background-image: linear-gradient(to right, rgba(10, 22, 40, 0.92), rgba(10, 22, 40, 0.92)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200&auto=format&fit=crop');">
 

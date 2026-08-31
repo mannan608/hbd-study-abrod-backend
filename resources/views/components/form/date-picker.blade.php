@@ -11,17 +11,33 @@
 <div
     x-data="{
         fp: null,
+        loading: null,
         init() {
             this.$nextTick(() => {
-                this.fp = flatpickr(this.$refs.input, {
-                    mode: '{{ $mode }}',
-                    static: true,
-                    monthSelectorType: 'static',
-                    dateFormat: '{{ $dateFormat }}',
-                    defaultDate: @js(old($name, $defaultDate)),
-                    allowInput: true,
-                    clickOpens: true,
-                });
+                const createPicker = (flatpickr) => {
+                    this.fp = flatpickr(this.$refs.input, {
+                        mode: '{{ $mode }}',
+                        static: true,
+                        monthSelectorType: 'static',
+                        dateFormat: '{{ $dateFormat }}',
+                        defaultDate: @js(old($name, $defaultDate)),
+                        allowInput: true,
+                        clickOpens: true,
+                    });
+                };
+
+                if (window.loadFlatpickr) {
+                    this.loading = window.loadFlatpickr()
+                        .then(createPicker)
+                        .catch(() => {
+                            this.fp = null;
+                        });
+                    return;
+                }
+
+                if (window.flatpickr) {
+                    createPicker(window.flatpickr);
+                }
             });
         },
         destroy() {

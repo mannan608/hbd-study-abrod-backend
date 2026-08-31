@@ -15,7 +15,7 @@
     ];
 @endphp
 
-<section class="py-16 md:py-20 lg:py-24 overflow-hidden">
+<section class="py-16 md:py-20 lg:py-24 overflow-hidden defer-render">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 md:mb-5 lg:mb-6">
         <header
             class="mx-auto max-w-2xl px-4 lg:py-8 text-center reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">

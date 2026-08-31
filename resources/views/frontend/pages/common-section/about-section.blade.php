@@ -1,4 +1,4 @@
-<section class="relative overflow-hidden py-16 md:py-20 lg:py-24">
+<section class="relative overflow-hidden py-16 md:py-20 lg:py-24 defer-render">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             <!-- ===================================================== IMAGE ====================================================== -->
@@ -7,7 +7,7 @@
                     <!-- Main Image -->
                     <div class=" relative overflow-hidden rounded-[2rem] aspect-[4/3] bg-slate-100 shadow-2xl shadow-slate-200/60 ">
                         <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=85"
-                            alt="HBD Services Team Collaboration"
+                            alt="HBD Services Team Collaboration" loading="lazy" decoding="async" fetchpriority="low"
                             class=" w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 " />
                         <!-- Image Overlay -->
                         <div class=" absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-transparent ">
@@ -103,13 +103,13 @@
                         <div class="flex items-center gap-2">
                             <div class="flex -space-x-2">
 
-                                <img src="https://i.pravatar.cc/100?img=12" alt="Student"
+                                <img src="https://i.pravatar.cc/100?img=12" alt="Student" loading="lazy" decoding="async"
                                     class="w-7 h-7 rounded-full object-cover border-2 border-white">
 
-                                <img src="https://i.pravatar.cc/100?img=32" alt="Student"
+                                <img src="https://i.pravatar.cc/100?img=32" alt="Student" loading="lazy" decoding="async"
                                     class="w-7 h-7 rounded-full object-cover border-2 border-white">
 
-                                <img src="https://i.pravatar.cc/100?img=47" alt="Student"
+                                <img src="https://i.pravatar.cc/100?img=47" alt="Student" loading="lazy" decoding="async"
                                     class="w-7 h-7 rounded-full object-cover border-2 border-white">
 
                             </div>

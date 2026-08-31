@@ -1,4 +1,4 @@
-<section class="bg-white py-16">
+<section class="bg-white py-16 defer-render">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header
             class="mx-auto max-w-2xl px-4 py-12 text-center reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
@@ -127,17 +127,3 @@
     </div>
 
 </section>
-
-
-<script>
-    const swiper = new Swiper(".testimonialSwiper", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        breakpoints: {
-            768: {
-                slidesPerView: 2,
-                spaceBetween: 24,
-            },
-        },
-    });
-</script>

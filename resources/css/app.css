@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'prismjs/themes/prism.min.css';
-@import 'swiper/css';
-@import 'swiper/css/pagination';
-@import 'swiper/css/navigation';
 @import 'tailwindcss';
 @plugin "flowbite/plugin";
 
@@ -204,6 +201,11 @@
   .reveal-on-scroll {
     will-change: opacity, transform;
     backface-visibility: hidden;
+  }
+
+  .defer-render {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
   }
 }
 

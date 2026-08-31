@@ -152,7 +152,7 @@
         <div class="hero-slide">
 
             <img src="{{ asset('frontend-img/hero/hero-1.jpg') }}" alt="Australian university campus" width="1920"
-                height="1080" class="size-full object-cover">
+                height="1080" loading="lazy" decoding="async" fetchpriority="low" class="size-full object-cover">
 
         </div>
 
@@ -161,7 +161,7 @@
         <div class="hero-slide">
 
             <img src="{{ asset('frontend-img/hero/hero-2.jpg') }}" alt="Students studying at an Australian university"
-                width="1920" height="1080" class="size-full object-cover">
+                width="1920" height="1080" loading="lazy" decoding="async" fetchpriority="low" class="size-full object-cover">
 
         </div>
 
@@ -170,7 +170,7 @@
         <div class="hero-slide">
 
             <img src="{{ asset('frontend-img/hero/hero-3.jpg') }}" alt="Australian city and university" width="1920"
-                height="1080" class="size-full object-cover">
+                height="1080" loading="lazy" decoding="async" fetchpriority="low" class="size-full object-cover">
 
         </div>
 
@@ -179,7 +179,7 @@
         <div class="hero-slide">
 
             <img src="{{ asset('frontend-img/hero/hero-4.jpg') }}" alt="International students in Australia"
-                width="1920" height="1080" class="size-full object-cover">
+                width="1920" height="1080" loading="lazy" decoding="async" fetchpriority="low" class="size-full object-cover">
 
         </div>
 

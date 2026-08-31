@@ -1,4 +1,4 @@
-    <section class="bg-brand-100 text-white  ">
+    <section class="bg-brand-100 text-white defer-render  ">
         {{-- bg-brand-100 text-white py-6 px-8 md:px-12 lg:py-10 lg:px-16 rounded-4xl --}}
         <div class="max-w-7xl mx-auto py-8 md:py-12 px-4 sm:px-6 lg:px-8 ">
             <!-- Header -->
