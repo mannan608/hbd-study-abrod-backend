@@ -1,3 +1,20 @@
+@if (session('success'))
+    <div
+        x-data="{ show: true }"
+        x-show="show"
+        x-init="setTimeout(() => show = false, 5000)"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 -translate-y-2"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-500"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="mb-6 rounded-xl border border-success-200 bg-success-50 px-4 py-3 text-sm font-medium text-success-800"
+    >
+        {{ session('success') }}
+    </div>
+@endif
+
 <form action="{{ route('booking-session', $counsellor) }}" method="POST" class="space-y-6" x-data="bookingCalendar()"
     x-init="init()" @submit.prevent="submitForm">
     @csrf

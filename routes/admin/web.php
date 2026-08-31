@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CounsellorController;
 use App\Http\Controllers\Admin\LeadsController;
+use App\Http\Controllers\Admin\CounsellorBookingController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
@@ -80,4 +81,9 @@ Route::prefix('{role}')
         Route::get('/account-settings', [CounsellorController::class, 'accountSetting'])->name('account.settings');
 
         Route::put('/account-settings', [CounsellorController::class, 'updateAccountSetting'])->name('account.settings.update');
+
+        //booking session
+        Route::get('booking-sessions', [CounsellorBookingController::class, 'index'])->name('booking-sessions.index');
+        Route::get('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'show'])->name('booking-sessions.show');
+        Route::delete('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'destroy'])->name('booking-sessions.destroy');
     });

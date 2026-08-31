@@ -154,9 +154,9 @@ class MenuHelper
                         'permission' => 'contact.list',
                     ],
                     [
-                        'name' => 'Shortlist Analytics',
-                        'route' => 'role.subscribers.index',
-                        'permission' => 'subscriber.list',
+                        'name' => 'Counsellor Bookings',
+                        'route' => 'role.counsellor-bookings.index',
+                        'permission' => 'bookings.list',
                     ],
                 ],
             ],

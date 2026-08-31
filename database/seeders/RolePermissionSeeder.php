@@ -144,6 +144,14 @@ class RolePermissionSeeder extends Seeder
             'counsellors.edit',
             'counsellors.delete',
 
+            // bookings 
+            'bookings.list',
+            'bookings.view',
+            'bookings.delete',
+            'bookings.manage',
+
+
+
         ];
 
         foreach ($permissions as $permission) {
