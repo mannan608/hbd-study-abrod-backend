@@ -1,7 +1,7 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header
-                class="mx-auto max-w-2xl px-4 py-8 text-center font-sans reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
+                class="mx-auto max-w-2xl px-4 py-12 text-center font-sans reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
                 <div
                     class="inline-flex text-brand-500 items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -31,7 +31,7 @@
 
                 <!-- Card 1 -->
                 <article
-                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between animate-[fadeInUp_0.6s_ease-out_0.15s_both]">
+                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-100">
                     <div class="p-7 sm:p-8 space-y-5 relative z-10">
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-blue-50 text-brand-600 flex items-center justify-center border border-brand-100/50 shadow-sm group-hover:bg-gradient-to-br group-hover:from-brand-600 group-hover:to-brand-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-brand-500/25 transition-all duration-500 ease-out">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="relative h-52 sm:h-60 overflow-hidden mx-4 mb-4 rounded-xl">
                         <img src="{{ asset('frontend-img/services/course-selection.webp') }}" alt="Admission Counselling"
-                            loading="lazy"
+                            loading="lazy" decoding="async" fetchpriority="low"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out saturate-[0.85] group-hover:saturate-100" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/10 to-transparent group-hover:from-slate-900/60 transition-all duration-500">
@@ -69,7 +69,7 @@
 
                 <!-- Card 2 -->
                 <article
-                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between animate-[fadeInUp_0.6s_ease-out_0.25s_both]">
+                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-150">
                     <div class="p-7 sm:p-8 space-y-5 relative z-10">
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-blue-50 text-brand-600 flex items-center justify-center border border-brand-100/50 shadow-sm group-hover:bg-gradient-to-br group-hover:from-brand-600 group-hover:to-brand-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-brand-500/25 transition-all duration-500 ease-out">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="relative h-52 sm:h-60 overflow-hidden mx-4 mb-4 rounded-xl">
                         <img src="{{ asset('frontend-img/services/language-preparation.webp') }}"
-                            alt="English Language Preparation" loading="lazy"
+                            alt="English Language Preparation" loading="lazy" decoding="async" fetchpriority="low"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out saturate-[0.85] group-hover:saturate-100" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/10 to-transparent group-hover:from-slate-900/60 transition-all duration-500">
@@ -107,7 +107,7 @@
 
                 <!-- Card 3 -->
                 <article
-                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between animate-[fadeInUp_0.6s_ease-out_0.35s_both]">
+                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-200">
                     <div class="p-7 sm:p-8 space-y-5 relative z-10">
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-blue-50 text-brand-600 flex items-center justify-center border border-brand-100/50 shadow-sm group-hover:bg-gradient-to-br group-hover:from-brand-600 group-hover:to-brand-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-brand-500/25 transition-all duration-500 ease-out">
@@ -131,7 +131,7 @@
                     </div>
                     <div class="relative h-52 sm:h-60 overflow-hidden mx-4 mb-4 rounded-xl">
                         <img src="{{ asset('frontend-img/services/scholarship-assistance.webp') }}"
-                            alt="Scholarship & Financial Assistance" loading="lazy"
+                            alt="Scholarship & Financial Assistance" loading="lazy" decoding="async" fetchpriority="low"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out saturate-[0.85] group-hover:saturate-100" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/10 to-transparent group-hover:from-slate-900/60 transition-all duration-500">
@@ -145,7 +145,7 @@
 
                 <!-- Card 4 -->
                 <article
-                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between animate-[fadeInUp_0.6s_ease-out_0.45s_both]">
+                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-300">
                     <div class="p-7 sm:p-8 space-y-5 relative z-10">
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-blue-50 text-brand-600 flex items-center justify-center border border-brand-100/50 shadow-sm group-hover:bg-gradient-to-br group-hover:from-brand-600 group-hover:to-brand-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-brand-500/25 transition-all duration-500 ease-out">
@@ -170,7 +170,7 @@
                     </div>
                     <div class="relative h-52 sm:h-60 overflow-hidden mx-4 mb-4 rounded-xl">
                         <img src="{{ asset('frontend-img/services/health-cover.webp') }}" alt="Health Cover OSHC OVHC"
-                            loading="lazy"
+                            loading="lazy" decoding="async" fetchpriority="low"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out saturate-[0.85] group-hover:saturate-100" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/10 to-transparent group-hover:from-slate-900/60 transition-all duration-500">
@@ -184,7 +184,7 @@
 
                 <!-- Card 5 -->
                 <article
-                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between animate-[fadeInUp_0.6s_ease-out_0.55s_both]">
+                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-400">
                     <div class="p-7 sm:p-8 space-y-5 relative z-10">
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-blue-50 text-brand-600 flex items-center justify-center border border-brand-100/50 shadow-sm group-hover:bg-gradient-to-br group-hover:from-brand-600 group-hover:to-brand-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-brand-500/25 transition-all duration-500 ease-out">
@@ -210,7 +210,7 @@
                     </div>
                     <div class="relative h-52 sm:h-60 overflow-hidden mx-4 mb-4 rounded-xl">
                         <img src="{{ asset('frontend-img/services/provider-changing.webp') }}"
-                            alt="Course Provider Changing" loading="lazy"
+                            alt="Course Provider Changing" loading="lazy" decoding="async" fetchpriority="low"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out saturate-[0.85] group-hover:saturate-100" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/10 to-transparent group-hover:from-slate-900/60 transition-all duration-500">
@@ -224,7 +224,7 @@
 
                 <!-- Card 6 -->
                 <article
-                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between animate-[fadeInUp_0.6s_ease-out_0.65s_both]">
+                    class="group relative bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2 hover:border-brand-200/40 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between reveal-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out delay-500">
                     <div class="p-7 sm:p-8 space-y-5 relative z-10">
                         <div
                             class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-blue-50 text-brand-600 flex items-center justify-center border border-brand-100/50 shadow-sm group-hover:bg-gradient-to-br group-hover:from-brand-600 group-hover:to-brand-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-brand-500/25 transition-all duration-500 ease-out">
@@ -248,7 +248,7 @@
                     </div>
                     <div class="relative h-52 sm:h-60 overflow-hidden mx-4 mb-4 rounded-xl">
                         <img src="{{ asset('frontend-img/services/professional-admission.webp') }}"
-                            alt="Professional Year Admission" loading="lazy"
+                            alt="Professional Year Admission" loading="lazy" decoding="async" fetchpriority="low"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out saturate-[0.85] group-hover:saturate-100" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/10 to-transparent group-hover:from-slate-900/60 transition-all duration-500">

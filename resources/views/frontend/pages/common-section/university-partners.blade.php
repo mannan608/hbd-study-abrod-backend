@@ -15,11 +15,11 @@
     ];
 @endphp
 
-<section class="py-20 overflow-hidden">
+<section class="py-16 md:py-20 lg:py-24 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 md:mb-5 lg:mb-6">
         <header
             class="mx-auto max-w-2xl px-4 lg:py-8 text-center reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-          
+
             <div
                 class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-100 backdrop-blur-sm rounded-full border border-purple-200/50 mb-8 transition-all duration-700 delay-100">
                 <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -79,8 +79,8 @@
                     @foreach ($universities as $university)
                         <div
                             class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-neutral-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
-                            <div class=" shrink-0 flex items-center justify-center"> <img
-                                    src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
+                            <div class=" shrink-0 flex items-center justify-center">
+                                <img src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
                                     class="max-w-full max-h-9.5 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110">
                             </div>
 
@@ -108,8 +108,8 @@
                     @foreach ($universities as $university)
                         <div
                             class="flex shrink-0 items-center gap-4 px-7 py-6 bg-white rounded-2xl border border-neutral-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-brand-500/30 group">
-                            <div class=" shrink-0 flex items-center justify-center"> <img
-                                    src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
+                            <div class=" shrink-0 flex items-center justify-center">
+                                <img src="{{ $university['logo'] }}" alt="{{ $university['name'] }}"
                                     class="max-w-full max-h-9.5 w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110">
                             </div>
 
@@ -118,5 +118,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>

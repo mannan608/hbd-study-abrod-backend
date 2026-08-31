@@ -1,8 +1,8 @@
-   <section class="bg-brand-100 py-16 ">
+   <section class="bg-brand-100 py-16 md:py-20 lg:py-24">
        <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
 
            <header
-               class="mx-auto max-w-2xl px-4 py-12 text-center transition-all duration-700 reveal-on-scroll opacity-0 tranneutral-y-10 transition-all duration-1000 ease-out">
+               class="mx-auto max-w-2xl px-4 py-12 text-center transition-all duration-700 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
                <div
                    class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100">
                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -62,7 +62,7 @@
                        <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
-                           <svg class="h-3.5 w-3.5 transition-transform group-hover:tranneutral-x-1" fill="none"
+                           <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"
                                stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                                <path stroke-linecap="round" stroke-linejoin="round"
                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -102,7 +102,7 @@
                        <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
-                           <svg class="h-3.5 w-3.5 transition-transform group-hover:tranneutral-x-1" fill="none"
+                           <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"
                                stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                                <path stroke-linecap="round" stroke-linejoin="round"
                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -142,7 +142,7 @@
                        <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
-                           <svg class="h-3.5 w-3.5 transition-transform group-hover:tranneutral-x-1" fill="none"
+                           <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"
                                stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                                <path stroke-linecap="round" stroke-linejoin="round"
                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -182,7 +182,7 @@
                        <a href="{{ route('courses') }}"
                            class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#00a8ff] hover:text-[#33b8ff] transition-colors">
                            View Degrees
-                           <svg class="h-3.5 w-3.5 transition-transform group-hover:tranneutral-x-1" fill="none"
+                           <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none"
                                stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                                <path stroke-linecap="round" stroke-linejoin="round"
                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

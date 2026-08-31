@@ -73,42 +73,74 @@
             html.classList.add('scroll-smooth');
 
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReducedMotion) return;
+            const revealBaseClasses = ['opacity-0', 'translate-y-10', 'translate-x-10', '-translate-x-10',
+                'scale-95'
+            ];
+            const revealShownClasses = ['opacity-100', 'translate-y-0', 'translate-x-0', 'scale-100'];
 
-            document.addEventListener('DOMContentLoaded', function() {
+            const revealElement = (el) => {
+                el.classList.remove(...revealBaseClasses);
+                el.classList.add(...revealShownClasses);
+            };
+
+            const isElementInView = (el, offset = 0.12) => {
+                const rect = el.getBoundingClientRect();
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                return rect.top <= viewportHeight * (1 - offset) && rect.bottom >= 0;
+            };
+
+            const initRevealAnimations = () => {
                 const revealEls = document.querySelectorAll('.reveal-on-scroll');
                 if (!revealEls.length) return;
 
+                if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+                    revealEls.forEach(revealElement);
+                    return;
+                }
+
+                revealEls.forEach((el) => {
+                    if (isElementInView(el, 0.08)) {
+                        revealElement(el);
+                    }
+                });
+
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.remove('opacity-0', 'translate-y-10',
-                                'translate-x-10', '-translate-x-10', 'scale-95');
-                            entry.target.classList.add('opacity-100', 'translate-y-0',
-                                'translate-x-0', 'scale-100');
-                            observer.unobserve(entry.target);
-                        }
+                        if (!entry.isIntersecting) return;
+                        revealElement(entry.target);
+                        observer.unobserve(entry.target);
                     });
                 }, {
                     threshold: 0.12,
-                    rootMargin: '0px 0px -60px 0px'
+                    rootMargin: '0px 0px -10% 0px'
                 });
 
-                revealEls.forEach((el) => observer.observe(el));
-            });
+                revealEls.forEach((el) => {
+                    if (el.classList.contains('opacity-100')) return;
+                    observer.observe(el);
+                });
+            };
+
+            const onReady = () => {
+                html.classList.add('scroll-smooth');
+                initRevealAnimations();
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', onReady, {
+                    once: true
+                });
+            } else {
+                onReady();
+            }
 
             window.addEventListener('pageshow', function(event) {
-                if (event.persisted) {
-                    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-                        const rect = el.getBoundingClientRect();
-                        if (rect.top < window.innerHeight * 0.9) {
-                            el.classList.remove('opacity-0', 'translate-y-10', 'translate-x-10',
-                                '-translate-x-10', 'scale-95');
-                            el.classList.add('opacity-100', 'translate-y-0', 'translate-x-0',
-                                'scale-100');
-                        }
-                    });
-                }
+                if (!event.persisted) return;
+                document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+                    if (isElementInView(el, 0.1) || prefersReducedMotion) {
+                        revealElement(el);
+                    }
+                });
             });
         })();
     </script>

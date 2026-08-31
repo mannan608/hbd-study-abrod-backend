@@ -7,9 +7,9 @@
     {{-- @include('frontend.pages.home.sections.stats') --}}
     @include('frontend.pages.common-section.destination')
 
-     <section class="mt-8 md:mt-12 lg:mt-16 py-8 lg:py-12 bg-brand-50">
-           @include('frontend.pages.common-section.service-section')
-     </section>
+    <section class="py-16 md:py-20 lg:py-24 bg-brand-50">
+        @include('frontend.pages.common-section.service-section')
+    </section>
 
 
     {{-- @include('frontend.pages.home.sections.course-section') --}}
@@ -18,7 +18,7 @@
 
     @include('frontend.pages.home.sections.how-it-work')
 
-    <section class="bg-brand-50 py-8 md:py-12 lg:py-16">
+    <section class="bg-brand-50 py-16 md:py-20 lg:py-24">
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 relative overflow-hidden rounded-3xl bg-[#155b9d] shadow-xl reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
 
@@ -67,15 +67,15 @@
 
     @include('frontend.pages.home.sections.counseller-section')
 
-     @include('frontend.pages.common-section.about-section')
+    @include('frontend.pages.common-section.about-section')
 
     @include('frontend.pages.common-section.help-center')
-  
+
     @include('frontend.pages.common-section.testimonial')
 
-     @include('frontend.pages.common-section.university-partners')
+    @include('frontend.pages.common-section.university-partners')
 
-     @include('frontend.pages.common-section.cta-section')
+    @include('frontend.pages.common-section.cta-section')
 
 
 @endsection
