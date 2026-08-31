@@ -16,13 +16,13 @@ class StudentController extends Controller
 {
     public function dashboard()
     {
-
-        return view('frontend.pages.student.dashboard');
+        $student = auth()->user()->student;
+        return view('student.dashboard.index', compact('student'));
     }
 
-      public function profile()
+    public function profile()
     {
-        
-        return view('frontend.pages.student.profile');
+
+        return view('student.dashboard.index');
     }
 }

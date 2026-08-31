@@ -79,29 +79,7 @@
                 </div>
 
                 <div class="flex items-center gap-4 lg:gap-6">
-                    <!-- Right Side -->
-                    <a href="{{ route('register') }}"
-                        class="hidden md:flex text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
-                        Sign Up Free
-                    </a>
-
-                    @auth
-                        <a href="{{ auth()->user()->rolePrefix() === 'student'
-                            ? route('student.dashboard')
-                            : route('role.dashboard', ['role' => auth()->user()->rolePrefix()]) }}"
-                            class="overflow-hidden rounded-full h-11 w-11 block">
-
-                            <img src="{{ asset('images/user/owner.png') }}" alt="User"
-                                class="w-full h-full object-cover" />
-                        </a>
-                    @endauth
-
-                    @guest
-                        <a href="{{ route('login') }}"
-                            class="text-sm font-medium uppercase text-neutral-600 hover:text-brand-600">
-                            login
-                        </a>
-                    @endguest
+                    @include("student.layouts.user-dropdown")
                 </div>
             </div>
 
@@ -116,16 +94,7 @@
                 <a href="{{ route('counsellors') }}" class="{{ request()->routeIs('counsellors') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Counsellors</a>
                 <a href="{{ route('events') }}" class="{{ request()->routeIs('events') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Events</a>
                 <a href="{{ route('destinations') }}" class="{{ request()->routeIs('destinations') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Destinations</a>
-               
-
-                <div class="flex items-center justify-between mt-6">
-                    @guest
-                        <a href="{{ route('register') }}"
-                            class="text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
-                            Sign Up Free
-                        </a>
-                    @endguest
-                </div>
+                               
             </div>
         </div>
     </header>

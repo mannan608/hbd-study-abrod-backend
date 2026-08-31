@@ -119,17 +119,11 @@ class AuthController extends Controller
    public function register(Request $request)
 {
     $validatedData = $request->validate([
-        'role' => 'required|in:student',
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'phone' => 'required|string|max:255',
         'password' => 'required|string|min:8|confirmed',
     ]);
-
-    $primaryRoleId = match ($validatedData['role']) {
-        'student' => 5,
-        default => null,
-    };
 
     $user = User::create([
         'name' => $validatedData['name'],
@@ -137,14 +131,12 @@ class AuthController extends Controller
         'phone' => $validatedData['phone'],
         'password' => Hash::make($validatedData['password']),
         'status' => 'active',
-        'primary_role_id' => $primaryRoleId,
+        'primary_role_id' => 4, // student
     ]);
 
-    if ($validatedData['role'] === 'student') {
-        Student::create([
-            'user_id' => $user->id,
-        ]);
-    }
+    Student::create([
+        'user_id' => $user->id,
+    ]);
 
     return redirect()
         ->route('login')
