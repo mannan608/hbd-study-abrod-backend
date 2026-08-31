@@ -161,12 +161,23 @@
                                     @csrf
                                     @method('PUT')
 
-                                    <select name="status" :value="row.status" onchange="this.form.submit()"
-                                        class="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium capitalize text-neutral-700 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20">
-                                        <option value="pending">Pending</option>
-                                        <option value="confirmed">Confirmed</option>
-                                        <option value="completed">Completed</option>
-                                        <option value="cancelled">Cancelled</option>
+                                    <select name="status" onchange="this.form.submit()"
+                                        class="inline-flex w-fit min-w-30 rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium capitalize text-neutral-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20">
+                                        <option value="pending" :selected="row.status === 'pending'">
+                                            Pending
+                                        </option>
+
+                                        <option value="confirmed" :selected="row.status === 'confirmed'">
+                                            Confirmed
+                                        </option>
+
+                                        <option value="completed" :selected="row.status === 'completed'">
+                                            Completed
+                                        </option>
+
+                                        <option value="cancelled" :selected="row.status === 'cancelled'">
+                                            Cancelled
+                                        </option>
                                     </select>
                                 </form>
                             </td>

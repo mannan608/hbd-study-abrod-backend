@@ -12,20 +12,23 @@ class CounsellorBookingController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
+
         $canListAll = $user->can('bookings.list');
         $isCounsellor = $user->counsellor()->exists();
 
-        if (! $canListAll && ! $isCounsellor) {
+        if (!$canListAll && !$isCounsellor) {
             abort(403);
         }
 
         $bookings = CounsellorBooking::query()
             ->with(['counsellor.user'])
-            ->when($isCounsellor && ! $canListAll, function ($query) use ($user) {
+
+            ->when($user->primary_role_id == 5 || ($isCounsellor && !$canListAll), function ($query) use ($user) {
                 $query->whereHas('counsellor', function ($counsellorQuery) use ($user) {
                     $counsellorQuery->where('user_id', $user->id);
                 });
             })
+
             ->latest()
             ->paginate(10);
 
@@ -35,15 +38,22 @@ class CounsellorBookingController extends Controller
     public function show(Request $request, string $bookingId): View
     {
         $user = $request->user();
+
         $canViewAll = $user->can('bookings.view');
         $isCounsellor = $user->counsellor()->exists();
+
+        if (!$canViewAll && !$isCounsellor) {
+            abort(403);
+        }
 
         $booking = CounsellorBooking::query()
             ->with(['counsellor.user'])
             ->findOrFail($bookingId);
 
-        if (! $canViewAll && (! $isCounsellor || $booking->counsellor?->user_id !== $user->id)) {
-            abort(403);
+        if ($user->primary_role_id == 5 || ($isCounsellor && !$canViewAll)) {
+            if ($booking->counsellor?->user_id !== $user->id) {
+                abort(403);
+            }
         }
 
         return view('backend.pages.counsellor-bookings.show', compact('booking'));
@@ -51,25 +61,33 @@ class CounsellorBookingController extends Controller
 
     public function destroy(Request $request, string $bookingId)
     {
-        $request->user()->can('bookings.delete') || abort(403);
-
         $user = $request->user();
-        $booking = CounsellorBooking::query()->findOrFail($bookingId);
 
-        if ($user->counsellor()->exists() && $booking->counsellor?->user_id !== $user->id) {
-            abort(403);
+        $user->can('bookings.delete') || abort(403);
+
+        $isCounsellor = $user->counsellor()->exists();
+
+        $booking = CounsellorBooking::query()->with('counsellor')->findOrFail($bookingId);
+
+        if ($user->primary_role_id == 5 || $isCounsellor) {
+            if ($booking->counsellor?->user_id !== $user->id) {
+                abort(403);
+            }
         }
 
         $booking->delete();
 
-        return redirect()
-            ->route('role.booking-sessions.index')
-            ->with('success', 'Booking deleted successfully.');
+        return redirect()->route('role.booking-sessions.index')->with('success', 'Booking deleted successfully.');
     }
 
-public function update(Request $request, string $bookingId)
+ public function update(Request $request, string $bookingId)
 {
-    $request->user()->can('bookings.update') || abort(403);
+    $user = $request->user();
+
+    // Update permission
+    if (! $user->can('bookings.update')) {
+        abort(403);
+    }
 
     $request->validate([
         'status' => [
@@ -78,20 +96,29 @@ public function update(Request $request, string $bookingId)
         ],
     ]);
 
-    $user = $request->user();
-
     $booking = CounsellorBooking::query()
+        ->with('counsellor')
         ->findOrFail($bookingId);
 
-    if (
-        $user->counsellor()->exists() &&
-        $booking->counsellor?->user_id !== $user->id
-    ) {
-        abort(403);
+    /*
+    |--------------------------------------------------------------------------
+    | Role 5 / Counsellor access
+    |--------------------------------------------------------------------------
+    | counsellor_id = counsellors.id
+    | counsellors.user_id = users.id
+    */
+    if ($user->primary_role_id == 5) {
+        if ($booking->counsellor?->user_id != $user->id) {
+            abort(403);
+        }
+    } elseif ($user->counsellor()->exists()) {
+        if ($booking->counsellor?->user_id != $user->id) {
+            abort(403);
+        }
     }
 
     $booking->update([
-        'status' => $request->status,
+        'status' => $request->input('status'),
     ]);
 
     return redirect()
