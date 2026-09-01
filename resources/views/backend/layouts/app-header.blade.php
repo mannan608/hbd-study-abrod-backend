@@ -49,9 +49,10 @@
             </button>
 
             <!-- Logo (mobile only) -->
-            <a href="/" class="xl:hidden">
-                <img class="dark:hidden" src="/images/logo/logo.svg" alt="Logo" />
-                <img class="hidden dark:block" src="/images/logo/logo-dark.svg" alt="Logo" />
+            <a href="/" class="xl:hidden w-28 p-1.5">
+                {{-- <img class="dark:hidden" src="/images/logo/logo.svg" alt="Logo" />
+                <img class="hidden dark:block" src="/images/logo/logo-dark.svg" alt="Logo" /> --}}
+                <img src="{{ asset('logo.webp') }}" alt="logo" class="w-auto h-auto">
             </a>
 
             <!-- Application Menu Toggle (mobile only) -->
