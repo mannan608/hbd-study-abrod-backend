@@ -23,6 +23,6 @@ class StudentController extends Controller
     public function profile()
     {
 
-        return view('student.dashboard.index');
+        return view('student.profile.index');
     }
 }

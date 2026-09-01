@@ -62,11 +62,11 @@ class MenuHelper
                         'route' => 'role.counsellors.index',
                         'permission' => 'counsellors.list',
                     ],                   
-                    // [
-                    //     'name' => 'Provider',
-                    //     'route' => 'role.providers.index',
-                    //     'permission' => 'provider.list',
-                    // ],
+                    [
+                        'name' => 'Students',
+                        'route' => 'role.students.index',
+                        'permission' => 'student.list',
+                    ],
                 ],
             ],
             [
@@ -117,8 +117,8 @@ class MenuHelper
                    
                      [
                         'name' => 'Career Pathways',
-                        'route' => 'role.providers.index',
-                        'permission' => 'provider.list',
+                        'route' => 'role.career-pathways.index',
+                        'permission' => 'career-pathways.list',
                     ],
                 ],
             ],
@@ -133,8 +133,8 @@ class MenuHelper
                     ],                   
                     [
                         'name' => 'AI Usage Logs',
-                        'route' => 'role.providers.index',
-                        'permission' => 'provider.list',
+                        'route' => 'role.ai-usage-logs.index',
+                        'permission' => 'ai-usage-logs.list',
                     ],
                 ],
             ],

@@ -144,12 +144,18 @@ class RolePermissionSeeder extends Seeder
             'counsellors.edit',
             'counsellors.delete',
 
+            //students
+            'student.list',
+            'student.view',
+            'student.delete',
+            'student.manage',
+
             // bookings 
             'bookings.list',
             'bookings.view',
             'bookings.update',                        
             'bookings.delete',
-            'bookings.manage',
+            'bookings.manage'
 
 
 

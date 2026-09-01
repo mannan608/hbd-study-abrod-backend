@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CounsellorController;
 use App\Http\Controllers\Admin\LeadsController;
 use App\Http\Controllers\Admin\CounsellorBookingController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
@@ -87,4 +88,7 @@ Route::prefix('{role}')
         Route::get('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'show'])->name('booking-sessions.show');
         Route::delete('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'destroy'])->name('booking-sessions.destroy');
         Route::put('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'update'])->name('booking-sessions.update');
+        Route::get('students', [StudentController::class, 'index'])->name('students.index');
+        Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
+
     });
