@@ -550,12 +550,12 @@
                 <section class="relative overflow-hidden rounded-2xl bg-brand-700 p-5 text-white shadow-sm">
                     <div class="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-white/10"></div>
                     <div class="relative">
-                        <h2 class="text-lg font-bold">Profile almost complete</h2>
+                        <h2 class="text-lg font-bold">Ready to shortlist</h2>
                         <p class="mt-2 text-sm text-brand-100 leading-relaxed">
-                            92% ready. Complete the remaining documents and submit your application for visa processing.
+                            92% ready. Your profile is ready to match with programmes and scholarships. 
                         </p>
                         <button class="mt-4 w-full rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-brand-700 shadow-sm hover:bg-brand-50 transition">
-                            Submit for Visa Assessment
+                            Explore matching courses
                         </button>
                     </div>
                 </section>
