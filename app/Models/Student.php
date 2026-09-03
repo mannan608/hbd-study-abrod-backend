@@ -20,7 +20,6 @@ class Student extends Model
         'nationality',
         'place_of_birth',
         'marital_status',
-        'phone_number',
 
         // Passport Information
         'passport_number',

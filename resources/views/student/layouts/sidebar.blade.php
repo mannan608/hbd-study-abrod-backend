@@ -13,9 +13,9 @@
 
          <!-- Card Header -->
 
-         <div class="border-b border-neutral-100 bg-gradient-to-br from-brand-500 to-white p-6">
+         <div class="border-b border-neutral-100 bg-brand-500 p-4">
 
-             <div class="mb-4 flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-brand-500">
+             <div class="mb-4 flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl">
 
                  @if (auth()->user()->avatar)
                      <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}"
@@ -28,7 +28,7 @@
 
              </div>
 
-             <h2 class="text-lg font-bold tracking-tight text-neutral-950">
+             <h2 class="text-lg font-bold tracking-tight text-white">
                  {{ auth()->user()->name }}
              </h2>
 

@@ -2,24 +2,23 @@
 
 @section('content')
     <div class="pt-5">
+
+        {{-- Flash success --}}
         @if (session('success'))
-            <div
-                class="mb-6 flex items-center justify-between gap-3 p-4 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-800 dark:bg-emerald-950/30 dark:border-emerald-800/50 dark:text-emerald-300 shadow-2xs">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <span class="text-sm font-semibold">{{ session('success') }}</span>
-                </div>
-                <button type="button" onclick="this.parentElement.remove()"
-                    class="text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 4000)"
+                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2"
+                x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="mb-6 flex items-start gap-3 rounded-2xl border border-green-200 bg-green-50 p-4">
+                <svg class="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd" />
+                </svg>
+
+                <p class="text-sm text-green-800">
+                    {{ session('success') }}
+                </p>
             </div>
         @endif
 
@@ -219,12 +218,8 @@
 
                     <!-- Address Details Section -->
                     <div class="space-y-4" x-data="{
-                        sameAddress: @js(old('same_address', $sameAddress))
+                        sameAddress: @js((bool) old('same_address', $sameAddress))
                     }">
-
-                        <input type="checkbox" id="same_address" name="same_address" value="1"
-                            x-model="sameAddress"
-                            class="h-4 w-4 rounded-md border-neutral-300 text-brand-600 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-800">
 
                         <div
                             class="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
@@ -256,13 +251,14 @@
                                     </div>
                                     <textarea name="current_address" rows="2"
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-                                        placeholder="Street, City, Postal Code">{{ old('current_address', 'House 42, Road 11, Banani, Dhaka-1213, Bangladesh') }}</textarea>
+                                        placeholder="Street, City, Postal Code">{{ old('current_address', $currentAddress?->address) }}</textarea>
                                 </div>
                             </div>
 
                             <!-- Checkbox for Same Address -->
                             <div class="flex items-center gap-2.5">
-                                <input type="checkbox" id="same_address" name="same_address" x-model="sameAddress"
+                                <input type="checkbox" id="same_address" name="same_address" value="1"
+                                    x-model="sameAddress"
                                     class="h-4 w-4 rounded-md border-neutral-300 text-brand-600 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-800">
                                 <label for="same_address"
                                     class="text-xs font-medium text-neutral-700 dark:text-neutral-300 cursor-pointer select-none">
@@ -287,7 +283,7 @@
                                     </div>
                                     <textarea name="permanent_address" rows="2"
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-                                        placeholder="Street, City, Postal Code">{{ old('permanent_address', 'House 42, Road 11, Banani, Dhaka-1213, Bangladesh') }}</textarea>
+                                        placeholder="Street, City, Postal Code">{{ old('permanent_address', $permanentAddress?->address) }}</textarea>
                                 </div>
                             </div>
 

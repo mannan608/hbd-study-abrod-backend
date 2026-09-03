@@ -165,7 +165,11 @@ public function accountSettings(Request $request)
 
         $validated = $request->validated();
 
-        DB::transaction(function () use ($student, $validated) {
+        // Derive same_address from validated data so the closure
+        // does not depend on the $request object directly.
+        $sameAddress = (bool) ($validated['same_address'] ?? false);
+
+        DB::transaction(function () use ($student, $validated, $sameAddress) {
 
             /*
             |--------------------------------------------------------------------------
@@ -174,18 +178,15 @@ public function accountSettings(Request $request)
             */
 
             $student->update([
-                'date_of_birth' => $validated['date_of_birth'] ?? null,
-                'gender' => $validated['gender'] ?? null,
-                'nationality' => $validated['nationality'] ?? null,
-                'place_of_birth' => $validated['place_of_birth'] ?? null,
-                'marital_status' => $validated['marital_status'] ?? null,
-                'phone_number' => $validated['phone_number'] ?? null,
-
-                'passport_number' => $validated['passport_number'] ?? null,
+                'date_of_birth'       => $validated['date_of_birth']       ?? null,
+                'gender'              => $validated['gender']              ?? null,
+                'nationality'         => $validated['nationality']         ?? null,
+                'place_of_birth'      => $validated['place_of_birth']      ?? null,
+                'marital_status'      => $validated['marital_status']      ?? null,
+                'passport_number'     => $validated['passport_number']     ?? null,
                 'passport_issue_date' => $validated['passport_issue_date'] ?? null,
-                'passport_expiry_date' => $validated['passport_expiry_date'] ?? null,
+                'passport_expiry_date'=> $validated['passport_expiry_date']?? null,
             ]);
-
 
             /*
             |--------------------------------------------------------------------------
@@ -194,55 +195,41 @@ public function accountSettings(Request $request)
             */
 
             $student->addresses()->updateOrCreate(
+                ['type' => 'current'],
                 [
-                    'type' => 'current',
-                ],
-                [
-                    'address' => $validated['current_address'] ?? null,
-                    'city_id' => $validated['current_city_id'] ?? null,
+                    'address'    => $validated['current_address']    ?? null,
+                    'city_id'    => $validated['current_city_id']    ?? null,
                     'country_id' => $validated['current_country_id'] ?? null,
                 ]
             );
 
-
             /*
             |--------------------------------------------------------------------------
             | Permanent Address
+            | When "same as current" is checked, mirror the current address data.
+            | Otherwise save the dedicated permanent address fields.
             |--------------------------------------------------------------------------
             */
 
-            if ($request->boolean('same_address')) {
+            $permanentData = $sameAddress
+                ? [
+                    'address'    => $validated['current_address']    ?? null,
+                    'city_id'    => $validated['current_city_id']    ?? null,
+                    'country_id' => $validated['current_country_id'] ?? null,
+                ]
+                : [
+                    'address'    => $validated['permanent_address']    ?? null,
+                    'city_id'    => $validated['permanent_city_id']    ?? null,
+                    'country_id' => $validated['permanent_country_id'] ?? null,
+                ];
 
-                $student->addresses()->updateOrCreate(
-                    [
-                        'type' => 'permanent',
-                    ],
-                    [
-                        'address' => $validated['current_address'] ?? null,
-                        'city_id' => $validated['current_city_id'] ?? null,
-                        'country_id' => $validated['current_country_id'] ?? null,
-                    ]
-                );
-
-            } else {
-
-                $student->addresses()->updateOrCreate(
-                    [
-                        'type' => 'permanent',
-                    ],
-                    [
-                        'address' => $validated['permanent_address'] ?? null,
-                        'city_id' => $validated['permanent_city_id'] ?? null,
-                        'country_id' => $validated['permanent_country_id'] ?? null,
-                    ]
-                );
-            }
+            $student->addresses()->updateOrCreate(
+                ['type' => 'permanent'],
+                $permanentData
+            );
         });
 
-        return back()->with(
-            'success',
-            'Account settings updated successfully.'
-        );
+        return back()->with('success', 'Account settings updated successfully.');
     }
 
 }
