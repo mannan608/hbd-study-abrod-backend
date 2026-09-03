@@ -6,17 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\UpdateAccountSettingsRequest;
 use App\Models\City;
 use App\Models\Country;
-use App\Models\Student;
-use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Traits\HandlesFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -106,7 +101,7 @@ class ProfileController extends Controller
         );
     }
 
-public function accountSettings(Request $request)
+    public function accountSettings(Request $request)
     {
         $user = $request->user();
 
@@ -164,18 +159,9 @@ public function accountSettings(Request $request)
         abort_if(!$student, 404, 'Student profile not found.');
 
         $validated = $request->validated();
-
-        // Derive same_address from validated data so the closure
-        // does not depend on the $request object directly.
         $sameAddress = (bool) ($validated['same_address'] ?? false);
 
         DB::transaction(function () use ($student, $validated, $sameAddress) {
-
-            /*
-            |--------------------------------------------------------------------------
-            | Student Information
-            |--------------------------------------------------------------------------
-            */
 
             $student->update([
                 'date_of_birth'       => $validated['date_of_birth']       ?? null,
@@ -185,14 +171,8 @@ public function accountSettings(Request $request)
                 'marital_status'      => $validated['marital_status']      ?? null,
                 'passport_number'     => $validated['passport_number']     ?? null,
                 'passport_issue_date' => $validated['passport_issue_date'] ?? null,
-                'passport_expiry_date'=> $validated['passport_expiry_date']?? null,
+                'passport_expiry_date' => $validated['passport_expiry_date'] ?? null,
             ]);
-
-            /*
-            |--------------------------------------------------------------------------
-            | Current Address
-            |--------------------------------------------------------------------------
-            */
 
             $student->addresses()->updateOrCreate(
                 ['type' => 'current'],
@@ -202,14 +182,6 @@ public function accountSettings(Request $request)
                     'country_id' => $validated['current_country_id'] ?? null,
                 ]
             );
-
-            /*
-            |--------------------------------------------------------------------------
-            | Permanent Address
-            | When "same as current" is checked, mirror the current address data.
-            | Otherwise save the dedicated permanent address fields.
-            |--------------------------------------------------------------------------
-            */
 
             $permanentData = $sameAddress
                 ? [
@@ -231,5 +203,4 @@ public function accountSettings(Request $request)
 
         return back()->with('success', 'Account settings updated successfully.');
     }
-
 }

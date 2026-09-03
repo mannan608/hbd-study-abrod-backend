@@ -56,7 +56,7 @@
 
                         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
-                            <x-form.form-date id="date_of_birth" name="date_of_birth" label="Date of Birth"
+                            <x-form.form-date id="date_of_birth" name="date_of_birth" label="Date of Birth" placeholder="YYYY-MM-DD"
                                 :value="old('date_of_birth', $student->date_of_birth?->format('Y-m-d'))" required />
 
                             <!-- Gender -->
@@ -100,7 +100,7 @@
                                     </div>
                                     <input type="text" name="nationality"
                                         value="{{ old('nationality', $student->nationality) }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="Enter nationality">
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                     </div>
                                     <input type="text" name="place_of_birth"
                                         value="{{ old('place_of_birth', $student->place_of_birth) }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="City, Country">
                                 </div>
                             </div>
@@ -155,22 +155,6 @@
                                 </div>
                             </div>
 
-                            <!-- Phone Number -->
-                            {{-- <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Phone Number <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:phone" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <input type="text" name="phone" value="{{ old('phone', '+880 1712-345678') }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-                                        placeholder="+880 0000-000000">
-                                </div>
-                            </div> --}}
-
                         </div>
                     </div>
 
@@ -196,7 +180,7 @@
                                     </div>
                                     <input type="text" name="passport_number"
                                         value="{{ old('passport_number', $student->passport_number) }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium uppercase text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                                        class="w-full pl-10 pr-4 py-2.5 placeholder:text-neutral-400 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium uppercase text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="e.g. A08923411">
                                 </div>
                             </div>
@@ -250,7 +234,7 @@
                                         <iconify-icon icon="lucide:map-pin" class="text-sm"></iconify-icon>
                                     </div>
                                     <textarea name="current_address" rows="2"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                                        class="w-full pl-10 pr-4 py-2.5 placeholder:text-neutral-400 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="Street, City, Postal Code">{{ old('current_address', $currentAddress?->address) }}</textarea>
                                 </div>
                             </div>
@@ -282,7 +266,7 @@
                                         <iconify-icon icon="lucide:building-2" class="text-sm"></iconify-icon>
                                     </div>
                                     <textarea name="permanent_address" rows="2"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="Street, City, Postal Code">{{ old('permanent_address', $permanentAddress?->address) }}</textarea>
                                 </div>
                             </div>
