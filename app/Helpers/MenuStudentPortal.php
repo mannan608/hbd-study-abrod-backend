@@ -74,8 +74,8 @@ class MenuStudentPortal
             // ],
             [
                 'icon' => 'user-profile',
-                'name' => 'Profile',
-                'path' => 'student/profile',
+                'name' => 'Account settings',
+                'path' => 'student/account/settings',
             ],
             // [
             //     'name' => 'Help',

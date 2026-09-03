@@ -6,7 +6,7 @@
 
             {{-- ===================== PROFILE HEADER ===================== --}}
             <section class="overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-sm">
-                <div class="relative h-32 bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 sm:h-40">
+                <div class="relative h-20 bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 sm:h-24">
                     <div
                         class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_45%)]">
                     </div>
@@ -66,7 +66,7 @@
                     </div>
 
                     {{-- Tags + Action Buttons --}}
-                    <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                         <div class="flex flex-wrap gap-2">
                             <span
                                 class="rounded-full border border-brand-100 bg-brand-25 px-3 py-1.5 text-xs font-medium text-brand-700">
@@ -103,7 +103,6 @@
                 <div class="space-y-6 lg:col-span-8">
 
                     {{-- 1. PERSONAL INFORMATION --}}
-
                     <section class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs space-y-6">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                             <div class="flex items-center gap-2.5">
@@ -227,7 +226,6 @@
 
                         </div>
                     </section>
-
                     {{-- 2. Academic Background Card --}}
                     <section class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs space-y-6">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -345,7 +343,6 @@
                             </div>
                         </div>
                     </section>
-
                     {{-- Study Plan & University Details Section --}}
                     <section class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm space-y-6">
 
@@ -549,9 +546,6 @@
 
                         </div>
                     </section>
-
-
-
                     {{-- 4. Financial & Family Background Combined Section --}}
                     <section class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm space-y-6">
 
@@ -663,11 +657,7 @@
                         </div>
 
                     </section>
-
-
-
                     {{-- 5. WORK EXPERIENCE & EXTRACURRICULARS --}}
-
                     <section class="rounded-2xl border border-brand-100 bg-white p-5 sm:p-6 shadow-sm">
 
                         <!-- Section Header -->
@@ -748,8 +738,6 @@
 
                         </div>
                     </section>
-
-
                     {{-- Visa Refusal & Travel History Section --}}
                     <section class="rounded-2xl border border-brand-100 bg-white p-5 sm:p-6 shadow-sm space-y-5">
 
@@ -865,8 +853,6 @@
                             --}}
 
                     </section>
-
-
                     {{-- 6. Documents Checklist Section --}}
                     <section class="rounded-2xl border border-brand-100 bg-white p-5 sm:p-6 shadow-sm">
 
@@ -1041,7 +1027,6 @@
                         </div>
 
                     </section>
-
                     {{-- 7. Applications History Section --}}
                     <section class="rounded-2xl border border-brand-100 bg-white p-5 sm:p-6 shadow-sm space-y-5">
 
@@ -1205,10 +1190,8 @@
                         </div>
 
                     </section>
-
                     {{-- Post-Visa & Arrival Details Section --}}
                     <section class="rounded-2xl border border-brand-100 bg-white p-5 sm:p-6 shadow-sm space-y-5">
-
                         <!-- Header -->
                         <div class="flex flex-wrap items-center justify-between gap-4 border-b border-brand-50 pb-4">
                             <div class="flex items-center gap-3">
@@ -1217,31 +1200,26 @@
                                     <iconify-icon icon="lucide:plane-landing" class="text-xl"></iconify-icon>
                                 </div>
                                 <div>
-
                                     <h2 class="text-base font-bold text-brand-950">After Visa Information</h2>
                                     <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-emerald-600">Post-Visa
                                         & Arrival</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-2.5">
-
                                 {{-- Status --}}
                                 <span
                                     class="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
                                     <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                                     Visa Granted
                                 </span>
-
                                 {{-- Update --}}
                                 <button type="button"
                                     class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">
                                     <iconify-icon icon="lucide:refresh-cw" class="text-sm"></iconify-icon>
                                     <span>Update</span>
                                 </button>
-
                             </div>
                         </div>
-
                         <!-- Group 1: Visa & Travel Schedule -->
                         <div class="space-y-3">
                             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Visa & Travel Timeline
@@ -1279,7 +1257,6 @@
 
                             </div>
                         </div>
-
                         <hr class="border-slate-100">
 
                         <!-- Group 2: Contact, Guardian & Socials -->
@@ -1323,9 +1300,7 @@
 
                             </div>
                         </div>
-
                         <hr class="border-slate-100">
-
                         <!-- Group 3: Academic & Accommodation Details -->
                         <div class="space-y-3">
                             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Academic & Living Details
@@ -1362,7 +1337,6 @@
 
                             </div>
                         </div>
-
                     </section>
 
                 </div>
@@ -1385,16 +1359,11 @@
                                     <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-brand-600">Language
                                         Proficiency</p>
                                 </div>
-                            </div>
-                            <span
-                                class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">
-                                2 Languages
-                            </span>
+                            </div>                           
                         </div>
 
                         <!-- Language Cards Grid -->
                         <div class="mt-5 grid grid-cols-1 gap-4">
-
                             <!-- Native Language -->
                             <div
                                 class="flex items-center justify-between rounded-xl border border-brand-100/80 bg-slate-50/50 p-3.5 transition-all hover:bg-white hover:shadow-xs">
@@ -1413,7 +1382,6 @@
                                     Native
                                 </span>
                             </div>
-
                             <!-- Secondary Language -->
                             <div
                                 class="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/50 p-3.5 transition-all hover:bg-white hover:shadow-xs">
@@ -1432,8 +1400,8 @@
                                     Conversational
                                 </span>
                             </div>
-
                         </div>
+
                     </section>
 
                 </aside>

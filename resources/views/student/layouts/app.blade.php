@@ -98,23 +98,23 @@
     <main class="grow">
         <div class="pt-18 md:pt-20 pb-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                 <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+                <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
 
-                <aside class="hidden lg:col-span-3 lg:block">
+                    <aside class="hidden lg:col-span-3 lg:block">
 
-                    @include('student.layouts.sidebar')
+                        @include('student.layouts.sidebar')
 
-                </aside>
+                    </aside>
 
-                <main class="lg:col-span-9">
-                    <div class="">
-                    @yield('content')
-                    </div>
-                </main>
+                    <main class="lg:col-span-9">
+                        <div class="">
+                            @yield('content')
+                        </div>
+                    </main>
 
+                </div>
             </div>
-            </div>
-           
+
         </div>
     </main>
 

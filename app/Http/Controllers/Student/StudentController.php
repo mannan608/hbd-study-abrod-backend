@@ -20,9 +20,4 @@ class StudentController extends Controller
         return view('student.dashboard.index', compact('student'));
     }
 
-    public function profile()
-    {
-
-        return view('student.profile.index');
-    }
 }

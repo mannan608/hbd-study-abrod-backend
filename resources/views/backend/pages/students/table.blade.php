@@ -1,6 +1,8 @@
 @php
     $collection =
-        $students instanceof \Illuminate\Pagination\AbstractPaginator ? $students->getCollection() : collect($students);
+        $students instanceof \Illuminate\Pagination\AbstractPaginator
+            ? $students->getCollection()
+            : collect($students);
 
     $tableRowData = $collection
         ->map(function ($student) {
@@ -9,7 +11,9 @@
                 'name' => $student->user?->name ?? 'N/A',
                 'email' => $student->user?->email ?? 'N/A',
                 'phone' => $student->user?->phone ?? 'N/A',
-                'avatar' => $student->user?->avatar,
+                'avatar' => $student->user?->avatar
+                    ? asset($student->user->avatar)
+                    : null,
                 'status' => $student->user?->status ?? 'N/A',
             ];
         })

@@ -1,49 +1,54 @@
  @php
-    use App\Helpers\MenuStudentPortal;
+     use App\Helpers\MenuStudentPortal;
 
-    $menuGroups = MenuStudentPortal::getMenuGroups();
-@endphp
+     $menuGroups = MenuStudentPortal::getMenuGroups();
+ @endphp
  <div class="sticky top-24 space-y-5">
 
-            <!-- ================================================= -->
-            <!-- Company / User Card -->
-            <!-- ================================================= -->
+     <!-- ================================================= -->
+     <!-- User Card -->
+     <!-- ================================================= -->
 
-            <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+     <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
 
-                <!-- Card Header -->
+         <!-- Card Header -->
 
-                <div class="border-b border-neutral-100 bg-gradient-to-br from-brand-50 to-white p-6">
+         <div class="border-b border-neutral-100 bg-gradient-to-br from-brand-500 to-white p-6">
 
-                    <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl">
+             <div class="mb-4 flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-brand-500">
 
-                        <img src="{{auth()->user()->avater}}" alt="">
+                 @if (auth()->user()->avatar)
+                     <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}"
+                         class="h-full w-full object-cover">
+                 @else
+                     <span class="text-lg font-bold uppercase text-brand-700">
+                         {{ Str::substr(auth()->user()->name, 0, 1) }}
+                     </span>
+                 @endif
 
-                    </div>
+             </div>
 
-                    <h2 class="text-lg font-bold tracking-tight text-neutral-950">
-                        {{ auth()->user()->name }}
-                    </h2>
+             <h2 class="text-lg font-bold tracking-tight text-neutral-950">
+                 {{ auth()->user()->name }}
+             </h2>
 
-                </div>
+         </div>
 
 
-                <!-- ================================================= -->
-                <!-- Navigation -->
-                <!-- ================================================= -->
+         <!-- ================================================= -->
+         <!-- Navigation -->
+         <!-- ================================================= -->
 
-                <div
-                    class="p-4"
-                    x-data="{
-                        openSubmenus: {},
-
-                        init() {
-                            this.initializeActiveMenus();
-                        },
-
-                        initializeActiveMenus() {
-
-                            @foreach ($menuGroups as $groupIndex => $menuGroup)
+         <div class="p-4" x-data="{
+             openSubmenus: {},
+         
+             init() {
+                 this.initializeActiveMenus();
+             },
+         
+             initializeActiveMenus() {
+         
+                 @foreach ($menuGroups as $groupIndex => $menuGroup)
 
                                 @foreach ($menuGroup['items'] as $itemIndex => $item)
 
@@ -63,427 +68,383 @@
                                                 this.openSubmenus[
                                                     '{{ $groupIndex }}-{{ $itemIndex }}'
                                                 ] = true;
-                                            }
+                                            } @endforeach
+         
+                 @endif
+         
+                 @endforeach
+         
+                 @endforeach
+             },
+         
+             toggleSubmenu(groupIndex, itemIndex) {
+         
+                 const key = groupIndex + '-' + itemIndex;
+         
+                 const newState = !this.openSubmenus[key];
+         
+                 // Close all other submenus
+                 if (newState) {
+                     this.openSubmenus = {};
+                 }
+         
+                 this.openSubmenus[key] = newState;
+             },
+         
+             isSubmenuOpen(groupIndex, itemIndex) {
+         
+                 const key = groupIndex + '-' + itemIndex;
+         
+                 return this.openSubmenus[key] || false;
+             },
+         
+             isAnyActive(paths) {
+         
+                 return Array.isArray(paths) &&
+                     paths.some((path) => this.isActive(path));
+             },
+         
+             isActive(path) {
+         
+                 if (!path || path === '#') {
+                     return false;
+                 }
+         
+                 let normalizedPath = path;
+         
+                 // Handle absolute URLs
+                 if (path.includes('://')) {
+         
+                     try {
+                         normalizedPath = new URL(path).pathname;
+                     } catch (e) {
+                         return false;
+                     }
+                 }
+         
+                 // Normalize trailing slash
+                 normalizedPath = normalizedPath.replace(/\/+$/, '');
+         
+                 const current =
+                     window.location.pathname.replace(/\/+$/, '');
+         
+                 return current === normalizedPath ||
+                     current.startsWith(normalizedPath + '/');
+             }
+         }">
 
-                                        @endforeach
+             <nav>
 
-                                    @endif
+                 <div class="flex flex-col gap-5">
 
-                                @endforeach
+                     @foreach ($menuGroups as $groupIndex => $menuGroup)
 
-                            @endforeach
-                        },
+                         <!-- ================================================= -->
+                         <!-- Menu Group -->
+                         <!-- ================================================= -->
 
-                        toggleSubmenu(groupIndex, itemIndex) {
+                         <div>
 
-                            const key = groupIndex + '-' + itemIndex;
+                             <!-- Group Title -->
 
-                            const newState = !this.openSubmenus[key];
-
-                            // Close all other submenus
-                            if (newState) {
-                                this.openSubmenus = {};
-                            }
-
-                            this.openSubmenus[key] = newState;
-                        },
-
-                        isSubmenuOpen(groupIndex, itemIndex) {
-
-                            const key = groupIndex + '-' + itemIndex;
-
-                            return this.openSubmenus[key] || false;
-                        },
-
-                        isAnyActive(paths) {
-
-                            return Array.isArray(paths) &&
-                                paths.some((path) => this.isActive(path));
-                        },
-
-                        isActive(path) {
-
-                            if (!path || path === '#') {
-                                return false;
-                            }
-
-                            let normalizedPath = path;
-
-                            // Handle absolute URLs
-                            if (path.includes('://')) {
-
-                                try {
-                                    normalizedPath = new URL(path).pathname;
-                                } catch (e) {
-                                    return false;
-                                }
-                            }
-
-                            // Normalize trailing slash
-                            normalizedPath = normalizedPath.replace(/\/+$/, '');
-
-                            const current =
-                                window.location.pathname.replace(/\/+$/, '');
-
-                            return current === normalizedPath ||
-                                current.startsWith(normalizedPath + '/');
-                        }
-                    }">
-
-                    <nav>
-
-                        <div class="flex flex-col gap-5">
-
-                            @foreach ($menuGroups as $groupIndex => $menuGroup)
-
-                                <!-- ================================================= -->
-                                <!-- Menu Group -->
-                                <!-- ================================================= -->
-
-                                <div>
-
-                                    <!-- Group Title -->
-
-                                    <h2 class="mb-3 px-2 text-[11px] font-semibold uppercase
+                             <h2
+                                 class="mb-3 px-2 text-[11px] font-semibold uppercase
                                                leading-5 tracking-wider text-neutral-400">
 
-                                        {{ $menuGroup['title'] }}
+                                 {{ $menuGroup['title'] }}
 
-                                    </h2>
-
-
-                                    <!-- Menu Items -->
-
-                                    <ul class="flex flex-col gap-1">
-
-                                        @foreach ($menuGroup['items'] as $itemIndex => $item)
-
-                                            @php
-                                                $itemUrl = MenuStudentPortal::itemUrl($item);
-                                            @endphp
-
-                                            <li>
-
-                                                @if (isset($item['subItems']))
-
-                                                    @php
-                                                        $subItemUrls = collect($item['subItems'])
-                                                            ->map(
-                                                                fn($subItem) => MenuStudentPortal::itemUrl($subItem),
-                                                            )
-                                                            ->filter(fn($url) => $url !== '#')
-                                                            ->values()
-                                                            ->all();
-                                                    @endphp
+                             </h2>
 
 
-                                                    <!-- ================================= -->
-                                                    <!-- Parent Menu -->
-                                                    <!-- ================================= -->
+                             <!-- Menu Items -->
 
-                                                    <button
-                                                        type="button"
-                                                        @click="toggleSubmenu(
+                             <ul class="flex flex-col gap-1">
+
+                                 @foreach ($menuGroup['items'] as $itemIndex => $item)
+
+                                     @php
+                                         $itemUrl = MenuStudentPortal::itemUrl($item);
+                                     @endphp
+
+                                     <li>
+
+                                         @if (isset($item['subItems']))
+
+                                             @php
+                                                 $subItemUrls = collect($item['subItems'])
+                                                     ->map(fn($subItem) => MenuStudentPortal::itemUrl($subItem))
+                                                     ->filter(fn($url) => $url !== '#')
+                                                     ->values()
+                                                     ->all();
+                                             @endphp
+
+
+                                             <!-- ================================= -->
+                                             <!-- Parent Menu -->
+                                             <!-- ================================= -->
+
+                                             <button type="button"
+                                                 @click="toggleSubmenu(
                                                             {{ $groupIndex }},
                                                             {{ $itemIndex }}
                                                         )"
-                                                        class="menu-item group w-full"
-                                                        :class="
-                                                            isSubmenuOpen(
-                                                                {{ $groupIndex }},
-                                                                {{ $itemIndex }}
-                                                            ) ||
-                                                            isAnyActive(
-                                                                {{ \Illuminate\Support\Js::from($subItemUrls) }}
-                                                            )
-                                                                ? 'menu-item-active'
-                                                                : 'menu-item-inactive'
-                                                        ">
+                                                 class="menu-item group w-full"
+                                                 :class="isSubmenuOpen(
+                                                         {{ $groupIndex }},
+                                                         {{ $itemIndex }}
+                                                     ) ||
+                                                     isAnyActive(
+                                                         {{ \Illuminate\Support\Js::from($subItemUrls) }}
+                                                     ) ?
+                                                     'menu-item-active' :
+                                                     'menu-item-inactive'">
 
-                                                        <!-- Icon -->
+                                                 <!-- Icon -->
 
-                                                        <span
-                                                            :class="
-                                                                isSubmenuOpen(
-                                                                    {{ $groupIndex }},
-                                                                    {{ $itemIndex }}
-                                                                ) ||
-                                                                isAnyActive(
-                                                                    {{ \Illuminate\Support\Js::from($subItemUrls) }}
-                                                                )
-                                                                    ? 'menu-item-icon-active'
-                                                                    : 'menu-item-icon-inactive'
-                                                            ">
+                                                 <span
+                                                     :class="isSubmenuOpen(
+                                                             {{ $groupIndex }},
+                                                             {{ $itemIndex }}
+                                                         ) ||
+                                                         isAnyActive(
+                                                             {{ \Illuminate\Support\Js::from($subItemUrls) }}
+                                                         ) ?
+                                                         'menu-item-icon-active' :
+                                                         'menu-item-icon-inactive'">
 
-                                                            {!! MenuStudentPortal::getIconSvg($item['icon']) !!}
+                                                     {!! MenuStudentPortal::getIconSvg($item['icon']) !!}
 
-                                                        </span>
+                                                 </span>
 
 
-                                                        <!-- Name -->
+                                                 <!-- Name -->
 
-                                                        <span class="menu-item-text flex items-center gap-2">
+                                                 <span class="menu-item-text flex items-center gap-2">
 
-                                                            {{ $item['name'] }}
+                                                     {{ $item['name'] }}
 
-                                                            @if (!empty($item['new']))
+                                                     @if (!empty($item['new']))
 
-                                                                <span
-                                                                    class="ml-auto menu-dropdown-badge"
-                                                                    :class="
-                                                                        isAnyActive(
-                                                                            {{ \Illuminate\Support\Js::from($subItemUrls) }}
-                                                                        )
-                                                                            ? 'menu-dropdown-badge-active'
-                                                                            : 'menu-dropdown-badge-inactive'
-                                                                    ">
+                                                         <span class="ml-auto menu-dropdown-badge"
+                                                             :class="isAnyActive(
+                                                                     {{ \Illuminate\Support\Js::from($subItemUrls) }}
+                                                                 ) ?
+                                                                 'menu-dropdown-badge-active' :
+                                                                 'menu-dropdown-badge-inactive'">
 
-                                                                    new
+                                                             new
 
-                                                                </span>
+                                                         </span>
 
-                                                            @endif
+                                                     @endif
 
-                                                        </span>
+                                                 </span>
 
 
-                                                        <!-- Chevron -->
+                                                 <!-- Chevron -->
 
-                                                        <svg
-                                                            class="ml-auto h-5 w-5 shrink-0 transition-transform duration-200"
-                                                            :class="
-                                                                isSubmenuOpen(
-                                                                    {{ $groupIndex }},
-                                                                    {{ $itemIndex }}
-                                                                )
-                                                                    ? 'rotate-180 text-brand-500'
-                                                                    : ''
-                                                            "
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24">
+                                                 <svg class="ml-auto h-5 w-5 shrink-0 transition-transform duration-200"
+                                                     :class="isSubmenuOpen(
+                                                             {{ $groupIndex }},
+                                                             {{ $itemIndex }}
+                                                         ) ?
+                                                         'rotate-180 text-brand-500' :
+                                                         ''"
+                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
-                                                            <path
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M19 9l-7 7-7-7" />
+                                                     <path stroke-linecap="round" stroke-linejoin="round"
+                                                         stroke-width="2" d="M19 9l-7 7-7-7" />
 
-                                                        </svg>
+                                                 </svg>
 
-                                                    </button>
+                                             </button>
 
 
-                                                    <!-- ================================= -->
-                                                    <!-- Submenu -->
-                                                    <!-- ================================= -->
+                                             <!-- ================================= -->
+                                             <!-- Submenu -->
+                                             <!-- ================================= -->
 
-                                                    <div
-                                                        x-show="
+                                             <div x-show="
                                                             isSubmenuOpen(
                                                                 {{ $groupIndex }},
                                                                 {{ $itemIndex }}
                                                             )
                                                         "
-                                                        x-cloak>
+                                                 x-cloak>
 
-                                                        <ul class="mt-1 space-y-1 pl-9">
+                                                 <ul class="mt-1 space-y-1 pl-9">
 
-                                                            @foreach ($item['subItems'] as $subItem)
+                                                     @foreach ($item['subItems'] as $subItem)
 
-                                                                @php
-                                                                    $subItemUrl = MenuStudentPortal::itemUrl($subItem);
-                                                                @endphp
+                                                         @php
+                                                             $subItemUrl = MenuStudentPortal::itemUrl($subItem);
+                                                         @endphp
 
-                                                                <li>
+                                                         <li>
 
-                                                                    <a
-                                                                        href="{{ $subItemUrl }}"
-                                                                        class="menu-dropdown-item"
-                                                                        :class="
-                                                                            isActive(
-                                                                                {{ \Illuminate\Support\Js::from($subItemUrl) }}
-                                                                            )
-                                                                                ? 'menu-dropdown-item-active'
-                                                                                : 'menu-dropdown-item-inactive'
-                                                                        ">
+                                                             <a href="{{ $subItemUrl }}" class="menu-dropdown-item"
+                                                                 :class="isActive(
+                                                                         {{ \Illuminate\Support\Js::from($subItemUrl) }}
+                                                                     ) ?
+                                                                     'menu-dropdown-item-active' :
+                                                                     'menu-dropdown-item-inactive'">
 
-                                                                        {{ $subItem['name'] }}
+                                                                 {{ $subItem['name'] }}
 
 
-                                                                        <!-- Badges -->
+                                                                 <!-- Badges -->
 
-                                                                        <span class="ml-auto flex items-center gap-1">
+                                                                 <span class="ml-auto flex items-center gap-1">
 
-                                                                            @if (!empty($subItem['new']))
+                                                                     @if (!empty($subItem['new']))
 
-                                                                                <span
-                                                                                    :class="
-                                                                                        isActive(
-                                                                                            {{ \Illuminate\Support\Js::from($subItemUrl) }}
-                                                                                        )
-                                                                                            ? 'menu-dropdown-badge menu-dropdown-badge-active'
-                                                                                            : 'menu-dropdown-badge menu-dropdown-badge-inactive'
-                                                                                    ">
+                                                                         <span
+                                                                             :class="isActive(
+                                                                                     {{ \Illuminate\Support\Js::from($subItemUrl) }}
+                                                                                 ) ?
+                                                                                 'menu-dropdown-badge menu-dropdown-badge-active' :
+                                                                                 'menu-dropdown-badge menu-dropdown-badge-inactive'">
 
-                                                                                    new
+                                                                             new
 
-                                                                                </span>
+                                                                         </span>
 
-                                                                            @endif
+                                                                     @endif
 
 
-                                                                            @if (!empty($subItem['pro']))
+                                                                     @if (!empty($subItem['pro']))
 
-                                                                                <span
-                                                                                    :class="
-                                                                                        isActive(
-                                                                                            {{ \Illuminate\Support\Js::from($subItemUrl) }}
-                                                                                        )
-                                                                                            ? 'menu-dropdown-badge-pro menu-dropdown-badge-pro-active'
-                                                                                            : 'menu-dropdown-badge-pro menu-dropdown-badge-pro-inactive'
-                                                                                    ">
+                                                                         <span
+                                                                             :class="isActive(
+                                                                                     {{ \Illuminate\Support\Js::from($subItemUrl) }}
+                                                                                 ) ?
+                                                                                 'menu-dropdown-badge-pro menu-dropdown-badge-pro-active' :
+                                                                                 'menu-dropdown-badge-pro menu-dropdown-badge-pro-inactive'">
 
-                                                                                    pro
+                                                                             pro
 
-                                                                                </span>
+                                                                         </span>
 
-                                                                            @endif
+                                                                     @endif
 
-                                                                        </span>
+                                                                 </span>
 
-                                                                    </a>
+                                                             </a>
 
-                                                                </li>
+                                                         </li>
 
-                                                            @endforeach
+                                                     @endforeach
 
-                                                        </ul>
+                                                 </ul>
 
-                                                    </div>
+                                             </div>
+                                         @else
+                                             <!-- ================================= -->
+                                             <!-- Simple Menu -->
+                                             <!-- ================================= -->
 
+                                             <a href="{{ $itemUrl }}" class="menu-item group"
+                                                 :class="isActive(
+                                                         {{ \Illuminate\Support\Js::from($itemUrl) }}
+                                                     ) ?
+                                                     'menu-item-active' :
+                                                     'menu-item-inactive'">
 
-                                                @else
+                                                 <!-- Icon -->
 
-                                                    <!-- ================================= -->
-                                                    <!-- Simple Menu -->
-                                                    <!-- ================================= -->
+                                                 <span
+                                                     :class="isActive(
+                                                             {{ \Illuminate\Support\Js::from($itemUrl) }}
+                                                         ) ?
+                                                         'menu-item-icon-active' :
+                                                         'menu-item-icon-inactive'">
 
-                                                    <a
-                                                        href="{{ $itemUrl }}"
-                                                        class="menu-item group"
-                                                        :class="
-                                                            isActive(
-                                                                {{ \Illuminate\Support\Js::from($itemUrl) }}
-                                                            )
-                                                                ? 'menu-item-active'
-                                                                : 'menu-item-inactive'
-                                                        ">
+                                                     {!! MenuStudentPortal::getIconSvg($item['icon']) !!}
 
-                                                        <!-- Icon -->
-
-                                                        <span
-                                                            :class="
-                                                                isActive(
-                                                                    {{ \Illuminate\Support\Js::from($itemUrl) }}
-                                                                )
-                                                                    ? 'menu-item-icon-active'
-                                                                    : 'menu-item-icon-inactive'
-                                                            ">
-
-                                                            {!! MenuStudentPortal::getIconSvg($item['icon']) !!}
-
-                                                        </span>
+                                                 </span>
 
 
-                                                        <!-- Name -->
+                                                 <!-- Name -->
 
-                                                        <span class="menu-item-text flex items-center gap-2">
+                                                 <span class="menu-item-text flex items-center gap-2">
 
-                                                            {{ $item['name'] }}
+                                                     {{ $item['name'] }}
 
-                                                            @if (!empty($item['new']))
+                                                     @if (!empty($item['new']))
 
-                                                                <span
-                                                                    class="ml-auto inline-flex items-center rounded
+                                                         <span
+                                                             class="ml-auto inline-flex items-center rounded
                                                                            bg-brand-500 px-2 py-0.5 text-xs
                                                                            font-semibold text-white">
 
-                                                                    new
+                                                             new
 
-                                                                </span>
+                                                         </span>
 
-                                                            @endif
+                                                     @endif
 
-                                                        </span>
+                                                 </span>
 
-                                                    </a>
+                                             </a>
 
-                                                @endif
+                                         @endif
 
-                                            </li>
+                                     </li>
 
-                                        @endforeach
+                                 @endforeach
 
-                                    </ul>
+                             </ul>
 
-                                </div>
+                         </div>
 
-                            @endforeach
+                     @endforeach
 
-                        </div>
+                 </div>
 
-                    </nav>
+             </nav>
 
-                </div>
+         </div>
 
-            </div>
+     </div>
 
 
-            <!-- ========================================================= -->
-            <!-- Trust / Privacy Card -->
-            <!-- ========================================================= -->
+     <!-- ========================================================= -->
+     <!-- Trust / Privacy Card -->
+     <!-- ========================================================= -->
 
-            <div class="rounded-2xl border border-brand-100 bg-brand-50/60 p-5">
+     <div class="rounded-2xl border border-brand-100 bg-brand-50/60 p-5">
 
-                <div class="flex gap-3">
+         <div class="flex gap-3">
 
-                    <div
-                        class="flex h-9 w-9 shrink-0 items-center justify-center
+             <div
+                 class="flex h-9 w-9 shrink-0 items-center justify-center
                                rounded-lg bg-brand-100 text-brand-600">
 
-                        <svg
-                            class="h-4.5 w-4.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
+                 <svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.8"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.042-.133-2.052-.382-3.016z" />
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                         d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.042-.133-2.052-.382-3.016z" />
 
-                        </svg>
+                 </svg>
 
-                    </div>
+             </div>
 
 
-                    <div>
+             <div>
 
-                        <h3 class="text-sm font-semibold text-neutral-800">
-                            Your privacy matters
-                        </h3>
+                 <h3 class="text-sm font-semibold text-neutral-800">
+                     Your privacy matters
+                 </h3>
 
-                        <p class="mt-1 text-xs leading-5 text-neutral-500">
-                            We are committed to handling personal information
-                            responsibly and transparently.
-                        </p>
+                 <p class="mt-1 text-xs leading-5 text-neutral-500">
+                     We are committed to handling personal information
+                     responsibly and transparently.
+                 </p>
 
-                    </div>
+             </div>
 
-                </div>
+         </div>
 
-            </div>
+     </div>
 
-        </div>
+ </div>
