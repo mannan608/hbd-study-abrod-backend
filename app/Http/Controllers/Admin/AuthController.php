@@ -136,6 +136,7 @@ class AuthController extends Controller
 
     Student::create([
         'user_id' => $user->id,
+        'student_number' => 'STU-' . str_pad($user->id, 6, '0', STR_PAD_LEFT),
     ]);
 
     return redirect()

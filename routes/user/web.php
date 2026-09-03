@@ -111,4 +111,5 @@ Route::prefix('student')
         Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/account/settings', [ProfileController::class, 'accountSettings'])->name('account.settings');
+        Route::put('/account/settings', [ProfileController::class, 'updateAccountSettings'])->name('account.settings.update');
     });

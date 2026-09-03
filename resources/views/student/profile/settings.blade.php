@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <form action="#" method="POST" class="space-y-6">
+            <form action="{{ route('student.account.settings.update') }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
 
@@ -58,7 +58,7 @@
                         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
                             <x-form.form-date id="date_of_birth" name="date_of_birth" label="Date of Birth"
-                                :value="old('date_of_birth', '2002-08-14')" required />
+                                :value="old('date_of_birth', $student->date_of_birth?->format('Y-m-d'))" required />
 
                             <!-- Gender -->
                             <div>
@@ -72,9 +72,19 @@
                                     </div>
                                     <select name="gender"
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all appearance-none">
-                                        <option value="Female" selected>Female</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Other">Other</option>
+                                        <option value="">Select Gender</option>
+
+                                        <option value="Female" @selected(old('gender', $student->gender) === 'Female')>
+                                            Female
+                                        </option>
+
+                                        <option value="Male" @selected(old('gender', $student->gender) === 'Male')>
+                                            Male
+                                        </option>
+
+                                        <option value="Other" @selected(old('gender', $student->gender) === 'Other')>
+                                            Other
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -89,7 +99,8 @@
                                         class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
                                         <iconify-icon icon="lucide:globe" class="text-sm"></iconify-icon>
                                     </div>
-                                    <input type="text" name="nationality" value="{{ old('nationality', 'Bangladeshi') }}"
+                                    <input type="text" name="nationality"
+                                        value="{{ old('nationality', $student->nationality) }}"
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="Enter nationality">
                                 </div>
@@ -106,7 +117,7 @@
                                         <iconify-icon icon="lucide:map-pin" class="text-sm"></iconify-icon>
                                     </div>
                                     <input type="text" name="place_of_birth"
-                                        value="{{ old('place_of_birth', 'Dhaka, Bangladesh') }}"
+                                        value="{{ old('place_of_birth', $student->place_of_birth) }}"
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="City, Country">
                                 </div>
@@ -124,16 +135,29 @@
                                     </div>
                                     <select name="marital_status"
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all appearance-none">
-                                        <option value="Single" selected>Single</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Divorced">Divorced</option>
-                                        <option value="Widowed">Widowed</option>
+                                        <option value="">Select Marital Status</option>
+
+                                        <option value="Single" @selected(old('marital_status', $student->marital_status) === 'Single')>
+                                            Single
+                                        </option>
+
+                                        <option value="Married" @selected(old('marital_status', $student->marital_status) === 'Married')>
+                                            Married
+                                        </option>
+
+                                        <option value="Divorced" @selected(old('marital_status', $student->marital_status) === 'Divorced')>
+                                            Divorced
+                                        </option>
+
+                                        <option value="Widowed" @selected(old('marital_status', $student->marital_status) === 'Widowed')>
+                                            Widowed
+                                        </option>
                                     </select>
                                 </div>
                             </div>
 
                             <!-- Phone Number -->
-                            <div>
+                            {{-- <div>
                                 <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
                                     Phone Number <span class="text-rose-500">*</span>
                                 </label>
@@ -146,7 +170,7 @@
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="+880 0000-000000">
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -172,7 +196,7 @@
                                         <iconify-icon icon="lucide:hash" class="text-sm"></iconify-icon>
                                     </div>
                                     <input type="text" name="passport_number"
-                                        value="{{ old('passport_number', 'A08923411') }}"
+                                        value="{{ old('passport_number', $student->passport_number) }}"
                                         class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium uppercase text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                         placeholder="e.g. A08923411">
                                 </div>
@@ -180,18 +204,28 @@
 
                             <!-- Issue Date -->
 
-                            <x-form.form-date id="issue_date" name="issue_date" label="Issue Date" :value="old('issue_date', '2022-01-10')"
-                                required />
+                            <x-form.form-date id="passport_issue_date" name="passport_issue_date" label="Issue Date"
+                                :value="old('passport_issue_date', $student->passport_issue_date?->format('Y-m-d'))" required />
 
                             <!-- Expiry Date -->
-                            <x-form.form-date id="expiry_date" name="expiry_date" label="Expiry Date" :value="old('expiry_date', '2032-01-09')"
-                                required />
+                            <x-form.form-date id="passport_expiry_date" name="passport_expiry_date" label="Expiry Date"
+                                :value="old(
+                                    'passport_expiry_date',
+                                    $student->passport_expiry_date?->format('Y-m-d'),
+                                )" required />
 
                         </div>
                     </div>
 
                     <!-- Address Details Section -->
-                    <div class="space-y-4" x-data="{ sameAddress: true }">
+                    <div class="space-y-4" x-data="{
+                        sameAddress: @js(old('same_address', $sameAddress))
+                    }">
+
+                        <input type="checkbox" id="same_address" name="same_address" value="1"
+                            x-model="sameAddress"
+                            class="h-4 w-4 rounded-md border-neutral-300 text-brand-600 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-800">
+
                         <div
                             class="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
                             <div class="flex items-center gap-2">
@@ -201,7 +235,11 @@
                             </div>
                         </div>
 
-                        @include('student.profile.partial.country-select')
+                        @include('student.profile.partial.country-select', [
+                            'prefix' => 'current',
+                            'selectedCountry' => old('current_country_id', $currentAddress?->country_id),
+                            'selectedCity' => old('current_city_id', $currentAddress?->city_id),
+                        ])
 
 
                         <div class="grid grid-cols-1 gap-5">
@@ -234,7 +272,13 @@
 
                             <!-- Permanent Address (Collapsible if different) -->
                             <div x-show="!sameAddress" x-transition class="space-y-1.5">
-                                @include('student.profile.partial.country-select')
+                                @include('student.profile.partial.country-select', [
+                                    'prefix' => 'permanent',
+                                    'selectedCountry' => old(
+                                        'permanent_country_id',
+                                        $permanentAddress?->country_id),
+                                    'selectedCity' => old('permanent_city_id', $permanentAddress?->city_id),
+                                ])
 
                                 <div class="relative mt-6">
                                     <div

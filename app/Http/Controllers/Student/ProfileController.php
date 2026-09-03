@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Student\UpdateAccountSettingsRequest;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Student;
@@ -104,19 +105,143 @@ class ProfileController extends Controller
         );
     }
 
-    public function accountSettings()
-{
-    $countries = Country::query()
-        ->where('is_active', true)
-        ->orderBy('name')
-        ->get(['id', 'name']);
+public function accountSettings(Request $request)
+    {
+        $user = $request->user();
 
-    $cities = City::query()
-        ->where('is_active', true)
-        ->orderBy('name')
-        ->get(['id', 'name', 'country_id']);
+        $student = $user->student;
 
-    return view('student.profile.settings', compact('countries', 'cities'));
+        abort_if(!$student, 404, 'Student profile not found.');
+
+        $countries = Country::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
+        $cities = City::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get([
+                'id',
+                'name',
+                'country_id',
+            ]);
+
+        $currentAddress = $student->addresses()
+            ->where('type', 'current')
+            ->first();
+
+        $permanentAddress = $student->addresses()
+            ->where('type', 'permanent')
+            ->first();
+
+        $sameAddress = $currentAddress
+            && $permanentAddress
+            && $currentAddress->address === $permanentAddress->address
+            && $currentAddress->city_id === $permanentAddress->city_id
+            && $currentAddress->country_id === $permanentAddress->country_id;
+
+        return view('student.profile.settings', compact(
+            'student',
+            'countries',
+            'cities',
+            'currentAddress',
+            'permanentAddress',
+            'sameAddress'
+        ));
+    }
+
+
+    public function updateAccountSettings(
+        UpdateAccountSettingsRequest $request
+    ): RedirectResponse {
+
+        $user = $request->user();
+
+        $student = $user->student;
+
+        abort_if(!$student, 404, 'Student profile not found.');
+
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($student, $validated) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Student Information
+            |--------------------------------------------------------------------------
+            */
+
+            $student->update([
+                'date_of_birth' => $validated['date_of_birth'] ?? null,
+                'gender' => $validated['gender'] ?? null,
+                'nationality' => $validated['nationality'] ?? null,
+                'place_of_birth' => $validated['place_of_birth'] ?? null,
+                'marital_status' => $validated['marital_status'] ?? null,
+                'phone_number' => $validated['phone_number'] ?? null,
+
+                'passport_number' => $validated['passport_number'] ?? null,
+                'passport_issue_date' => $validated['passport_issue_date'] ?? null,
+                'passport_expiry_date' => $validated['passport_expiry_date'] ?? null,
+            ]);
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Current Address
+            |--------------------------------------------------------------------------
+            */
+
+            $student->addresses()->updateOrCreate(
+                [
+                    'type' => 'current',
+                ],
+                [
+                    'address' => $validated['current_address'] ?? null,
+                    'city_id' => $validated['current_city_id'] ?? null,
+                    'country_id' => $validated['current_country_id'] ?? null,
+                ]
+            );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Permanent Address
+            |--------------------------------------------------------------------------
+            */
+
+            if ($request->boolean('same_address')) {
+
+                $student->addresses()->updateOrCreate(
+                    [
+                        'type' => 'permanent',
+                    ],
+                    [
+                        'address' => $validated['current_address'] ?? null,
+                        'city_id' => $validated['current_city_id'] ?? null,
+                        'country_id' => $validated['current_country_id'] ?? null,
+                    ]
+                );
+
+            } else {
+
+                $student->addresses()->updateOrCreate(
+                    [
+                        'type' => 'permanent',
+                    ],
+                    [
+                        'address' => $validated['permanent_address'] ?? null,
+                        'city_id' => $validated['permanent_city_id'] ?? null,
+                        'country_id' => $validated['permanent_country_id'] ?? null,
+                    ]
+                );
+            }
+        });
+
+        return back()->with(
+            'success',
+            'Account settings updated successfully.'
+        );
+    }
+
 }
-}
-
