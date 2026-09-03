@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Student;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
@@ -102,10 +104,19 @@ class ProfileController extends Controller
         );
     }
 
-    public function accountSettings(Request $request)
-    {
-        return view('student.profile.settings');
-    }
+    public function accountSettings()
+{
+    $countries = Country::query()
+        ->where('is_active', true)
+        ->orderBy('name')
+        ->get(['id', 'name']);
+
+    $cities = City::query()
+        ->where('is_active', true)
+        ->orderBy('name')
+        ->get(['id', 'name', 'country_id']);
+
+    return view('student.profile.settings', compact('countries', 'cities'));
+}
 }
 
-    

@@ -45,8 +45,7 @@
                 @method('PUT')
 
                 <!-- Main Form Card -->
-                <div
-                    class="px-5 sm:px-8   dark:bg-neutral-900 space-y-8 mb-6">
+                <div class="px-5 sm:px-8   dark:bg-neutral-900 space-y-8 mb-6">
 
                     <!-- Basic Information Section -->
                     <div class="space-y-4">
@@ -58,28 +57,8 @@
 
                         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
-                            <x-form.date-picker
-                                id="date_of_birth"
-                                name="date_of_birth"
-                                label="Date of Birth"
-                                :value="old('date_of_birth', '2002-08-14')"
-                            />
-
-                            <!-- Date of Birth -->
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Date of Birth <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:calendar" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <input type="date" name="date_of_birth"
-                                        value="{{ old('date_of_birth', '2002-08-14') }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                                </div>
-                            </div>
+                            <x-form.form-date id="date_of_birth" name="date_of_birth" label="Date of Birth"
+                                :value="old('date_of_birth', '2002-08-14')" required />
 
                             <!-- Gender -->
                             <div>
@@ -200,35 +179,13 @@
                             </div>
 
                             <!-- Issue Date -->
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Issue Date <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:calendar-days" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <input type="date" name="issue_date" value="{{ old('issue_date', '2022-01-10') }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                                </div>
-                            </div>
+
+                            <x-form.form-date id="issue_date" name="issue_date" label="Issue Date" :value="old('issue_date', '2022-01-10')"
+                                required />
 
                             <!-- Expiry Date -->
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Expiry Date <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:calendar-off" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <input type="date" name="expiry_date"
-                                        value="{{ old('expiry_date', '2032-01-09') }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                                </div>
-                            </div>
+                            <x-form.form-date id="expiry_date" name="expiry_date" label="Expiry Date" :value="old('expiry_date', '2032-01-09')"
+                                required />
 
                         </div>
                     </div>
@@ -244,62 +201,8 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Country <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:users" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <select name="country_id"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all appearance-none">
-                                        <option value="Female" selected>Bangladesh</option>
-                                        <option value="Male">Malaysia</option>
-                                        <option value="Other">UK</option>
-                                        <option value="Other">Canada</option>
-                                        <option value="Other">Australia</option>
-                                        <option value="Other">New Zealand</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    City <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:users" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <select name="country_id"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all appearance-none">
-                                        <option value="Female" selected>Dhaka</option>
-                                        <option value="Male">Kuala Lumpur</option>
-                                        <option value="Other">UK</option>
-                                        <option value="Other">Canada</option>
-                                        <option value="Other">Australia</option>
-                                        <option value="Other">New Zealand</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Post Code <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:code" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <input type="text" name="post_code" value="{{ old('post_code', '1213') }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-                                        placeholder="1213">
-                                </div>
-                            </div>
-                        </div>
+                        @include('student.profile.partial.country-select')
+
 
                         <div class="grid grid-cols-1 gap-5">
 
@@ -330,65 +233,10 @@
                             </div>
 
                             <!-- Permanent Address (Collapsible if different) -->
-                            <div x-show="!sameAddress" x-transition class="space-y-1.5">                           
-                                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-4">
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Country <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:users" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <select name="country_id"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all appearance-none">
-                                        <option value="Female" selected>Bangladesh</option>
-                                        <option value="Male">Malaysia</option>
-                                        <option value="Other">UK</option>
-                                        <option value="Other">Canada</option>
-                                        <option value="Other">Australia</option>
-                                        <option value="Other">New Zealand</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    City <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:users" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <select name="country_id"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all appearance-none">
-                                        <option value="Female" selected>Dhaka</option>
-                                        <option value="Male">Kuala Lumpur</option>
-                                        <option value="Other">UK</option>
-                                        <option value="Other">Canada</option>
-                                        <option value="Other">Australia</option>
-                                        <option value="Other">New Zealand</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Post Code <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
-                                        <iconify-icon icon="lucide:code" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <input type="text" name="post_code" value="{{ old('post_code', '1213') }}"
-                                        class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-                                        placeholder="1213">
-                                </div>
-                            </div>
-                        </div>
+                            <div x-show="!sameAddress" x-transition class="space-y-1.5">
+                                @include('student.profile.partial.country-select')
 
-                                <div class="relative">
+                                <div class="relative mt-6">
                                     <div
                                         class="absolute top-3 left-0 pl-3.5 flex items-start pointer-events-none text-neutral-400">
                                         <iconify-icon icon="lucide:building-2" class="text-sm"></iconify-icon>
