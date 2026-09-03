@@ -31,8 +31,6 @@ class UpdateAccountSettingsRequest extends FormRequest
 
             'marital_status' => ['required', 'string', Rule::in(['Single', 'Married', 'Divorced', 'Widowed'])],
 
-            'phone_number' => ['required', 'string', 'max:30'],
-
             /*
             |--------------------------------------------------------------------------
             | Passport
