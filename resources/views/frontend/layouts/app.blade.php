@@ -100,8 +100,10 @@
     </main>
 
     @include('frontend.layouts.footer')
-  @auth
-    @include('frontend.layouts.mobile-navigation')
+@auth
+    @if (auth()->user()->student)
+        @include('frontend.layouts.mobile-navigation')
+    @endif
 @endauth
 
     @stack('scripts')
