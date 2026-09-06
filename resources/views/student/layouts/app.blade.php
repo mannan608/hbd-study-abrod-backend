@@ -97,7 +97,7 @@
 
     <main class="grow">
         <div class="pt-18 md:pt-20 pb-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
 
                     <aside class="hidden lg:col-span-3 lg:block">
