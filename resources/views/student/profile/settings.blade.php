@@ -46,7 +46,7 @@
     <div class="py-6 space-y-6" x-data="stepWizard({{ $activeStep }}, {{ $student->profile_step ?? 1 }})" x-init="init()" @go-to-step.window="goTo($event.detail)">
 
         {{-- ── Responsive Modern Tab Card Container ───────────────────────── --}}
-        <div class="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-sm overflow-hidden">
+        <div class="bg-white dark:bg-neutral-900 sm:rounded-2xl border-0 sm:border border-neutral-200/80 dark:border-neutral-800 shadow-sm overflow-hidden">
             
             {{-- Scroll Container with Edge Visual Indicators --}}
             <div class="relative group">
@@ -71,7 +71,7 @@
                                     x-ref="tab_{{ $num }}"
                                     @click="maxStep >= {{ $num }} && goTo({{ $num }})"
                                     :disabled="maxStep < {{ $num }}"
-                                    class="group relative flex items-center gap-2.5 px-4 py-3.5 my-1 rounded-xl text-[10px] sm:text-[13px] font-semibold whitespace-nowrap transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                                    class="group relative flex items-center gap-2.5 px-4 py-3.5 my-1 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
                                     :class="{
                                         'text-brand-600 dark:text-brand-400 bg-brand-50/70 dark:bg-brand-950/40': currentStep === {{ $num }},
                                         'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/70 dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-neutral-800/60': currentStep !== {{ $num }} && maxStep >= {{ $num }},

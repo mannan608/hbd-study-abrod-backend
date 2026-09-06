@@ -56,7 +56,7 @@
 
 
         <div
-            class="rounded-2xl border border-neutral-200/80 bg-white dark:bg-neutral-900 dark:border-neutral-800 p-5 sm:p-6 shadow-xs space-y-6">
+            class="sm:rounded-2xl sm:border border-neutral-200/80 bg-white dark:bg-neutral-900 dark:border-neutral-800 p-5 sm:p-6 shadow-xs space-y-6">
 
 
             {{-- HEADER --}}

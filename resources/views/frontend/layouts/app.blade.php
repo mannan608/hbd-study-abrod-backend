@@ -100,6 +100,9 @@
     </main>
 
     @include('frontend.layouts.footer')
+  @auth
+    @include('frontend.layouts.mobile-navigation')
+@endauth
 
     @stack('scripts')
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>

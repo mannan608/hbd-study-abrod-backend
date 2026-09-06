@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-neutral-900 rounded-2xl shadow-xs border border-neutral-200/80 dark:border-neutral-800 overflow-hidden">
+<div class="bg-white dark:bg-neutral-900 sm:rounded-2xl shadow-xs border-0 sm:border border-neutral-200/80 dark:border-neutral-800 overflow-hidden">
 
     {{-- Card Header --}}
     <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-100 dark:border-neutral-800 py-5 mb-5 px-4 sm:px-6">

@@ -9,11 +9,11 @@
      <!-- User Card -->
      <!-- ================================================= -->
 
-     <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+     <div class="overflow-hidden lg:rounded-2xl lg:border border-neutral-200 bg-white">
 
          <!-- Card Header -->
 
-         <div class="border-b border-neutral-100 bg-brand-500 p-4">
+         <div class="border-b border-neutral-100 bg-brand-500 p-4 hidden lg:block">
 
              <div class="mb-4 flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl">
 
@@ -39,7 +39,7 @@
          <!-- Navigation -->
          <!-- ================================================= -->
 
-         <div class="p-4" x-data="{
+         <div class="p-0 lg:p-4" x-data="{
              openSubmenus: {},
          
              init() {
@@ -149,7 +149,7 @@
 
                              <h2
                                  class="mb-3 px-2 text-[11px] font-semibold uppercase
-                                               leading-5 tracking-wider text-neutral-400">
+                                               leading-5 tracking-wider text-neutral-400 hidden">
 
                                  {{ $menuGroup['title'] }}
 
@@ -412,7 +412,7 @@
      <!-- Trust / Privacy Card -->
      <!-- ========================================================= -->
 
-     <div class="rounded-2xl border border-brand-100 bg-brand-50/60 p-5">
+     <div class="lg:rounded-2xl lg:border border-brand-100 lg:bg-brand-50/60 p-0 lg:p-5 border-t lg:border-t-0 mt-10 pt-4 lg:mt-0 lg:pt-0">
 
          <div class="flex gap-3">
 
