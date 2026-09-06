@@ -21,10 +21,11 @@ class UpdateAcademicInformationRequest extends FormRequest
             */
             'highest_degree'      => ['required', 'string', 'max:255'],
             'highest_institution' => ['required', 'string', 'max:255'],
-            'highest_grad_date'   => ['required', 'string', 'max:20'],
+            'highest_grad_date'   => ['required', 'date'],
             'highest_gpa'         => ['required', 'string', 'max:20'],
             'highest_max_gpa'     => ['nullable', 'string', 'max:20'],
 
+           
             /*
             |--------------------------------------------------------------------------
             | Education History (dynamic rows)
@@ -71,4 +72,6 @@ class UpdateAcademicInformationRequest extends FormRequest
             'highest_gpa'         => 'GPA score',
         ];
     }
+
+ 
 }

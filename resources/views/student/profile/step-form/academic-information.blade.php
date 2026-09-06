@@ -1,4 +1,4 @@
-{{-- Pre-populate Alpine from backend data --}}
+{{-- ── Pre-populate Alpine from backend ──────────────────────────────────── --}}
 @php
     $ai = $academicInformation;
 
@@ -27,13 +27,14 @@
             'awa'       => old('gre_awa',       $ai?->gre_awa       ?? ''),
         ],
     ];
+
 @endphp
 
 <div x-data="academicForm({{ Js::from($initialAcademic) }})"
      x-init="init()"
      class="bg-white dark:bg-neutral-900 rounded-2xl shadow-xs border border-neutral-200/80 dark:border-neutral-800 overflow-hidden">
 
-    {{-- Header --}}
+    {{-- ── Header ──────────────────────────────────────────────────────────── --}}
     <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-100 dark:border-neutral-800 py-5 mb-5 px-4 sm:px-6">
         <div class="flex items-center gap-3">
             <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-950/50 dark:text-brand-400">
@@ -46,13 +47,18 @@
         </div>
     </div>
 
-    <form action="{{ route('student.account.academic-information.update') }}" method="POST" class="space-y-6">
+    <form action="{{ route('student.account.academic-information.update') }}"
+          method="POST"
+          enctype="multipart/form-data"
+          class="space-y-6">
         @csrf
         @method('PUT')
 
         <div class="px-5 sm:px-8 space-y-8 mb-6">
 
-            {{-- ── SECTION 1: Highest Qualification ──────────────────────────── --}}
+            {{-- ══════════════════════════════════════════════════════════════
+                 SECTION 1 — Highest Qualification
+            ══════════════════════════════════════════════════════════════ --}}
             <div class="space-y-4">
                 <div class="flex items-center gap-2 border-b border-neutral-100 pb-3 dark:border-neutral-800">
                     <iconify-icon icon="lucide:award" class="text-brand-500 text-base"></iconify-icon>
@@ -70,58 +76,47 @@
                             x-model="highestQual.degree"
                             placeholder="e.g. Bachelor of Science in Computer Science"
                             class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400
-                                {{ $errors->has('highest_degree') ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700' }}
+                                {{ $errors->has('highest_degree') ? 'border-rose-400 bg-rose-50/30 dark:bg-rose-950/20' : 'border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700' }}
                                 text-xs font-medium text-neutral-800 dark:text-neutral-200
                                 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                             required>
                         @error('highest_degree')
-                            <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
+                            <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- Graduation Date --}}
-                    {{-- <div>
-                        <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                            Graduation Date <span class="text-rose-500">*</span>
-                        </label>
-                        <input type="text" name="highest_grad_date"
-                            x-model="highestQual.gradDate"
-                            placeholder="YYYY-MM"
-                            class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400
-                                {{ $errors->has('highest_grad_date') ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700' }}
-                                text-xs font-medium text-neutral-800 dark:text-neutral-200
-                                focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-                            required>
-                        @error('highest_grad_date')
-                            <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
-
+                    {{-- Graduation Date (uses form-date component — has @error built-in) --}}
                     <div>
-                        <x-form.form-date id="highest_grad_date" name="highest_grad_date" label="Graduation Date"
-                            :value="old('highest_grad_date', $student->highest_grad_date?->format('Y-m-d'))"
-                            required />                     
+                        <x-form.form-date
+                            id="highest_grad_date"
+                            name="highest_grad_date"
+                            label="Graduation Date"
+                            placeholder="YYYY-MM-DD"
+                            :defaultDate="old('highest_grad_date', $ai?->highest_grad_date ?? '')"
+                            required />
+                        {{-- Sync flatpickr value back into Alpine on change --}}
+                        {{-- (hidden input keeps server-side value; flatpickr updates it directly) --}}
                     </div>
 
-                    {{-- Institution --}}
+                    {{-- Institution & Country --}}
                     <div class="sm:col-span-2">
                         <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
                             Institution & Country <span class="text-rose-500">*</span>
                         </label>
                         <input type="text" name="highest_institution"
                             x-model="highestQual.institution"
-                            placeholder="e.g. University Name, Country"
+                            placeholder="e.g. University of Oxford, United Kingdom"
                             class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400
-                                {{ $errors->has('highest_institution') ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700' }}
+                                {{ $errors->has('highest_institution') ? 'border-rose-400 bg-rose-50/30 dark:bg-rose-950/20' : 'border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700' }}
                                 text-xs font-medium text-neutral-800 dark:text-neutral-200
                                 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                             required>
                         @error('highest_institution')
-                            <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
+                            <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- GPA --}}
+                    {{-- GPA Score + Scale --}}
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
@@ -131,12 +126,12 @@
                                 x-model="highestQual.gpa"
                                 placeholder="3.50"
                                 class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400
-                                    {{ $errors->has('highest_gpa') ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700' }}
+                                    {{ $errors->has('highest_gpa') ? 'border-rose-400 bg-rose-50/30 dark:bg-rose-950/20' : 'border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700' }}
                                     text-xs font-medium text-neutral-800 dark:text-neutral-200
                                     focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                 required>
                             @error('highest_gpa')
-                                <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
+                                <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
@@ -152,9 +147,12 @@
                     </div>
 
                 </div>
+
             </div>
 
-            {{-- ── SECTION 2: Education History ───────────────────────────────── --}}
+            {{-- ══════════════════════════════════════════════════════════════
+                 SECTION 2 — Education History
+            ══════════════════════════════════════════════════════════════ --}}
             <div class="space-y-4">
                 <div class="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
                     <div class="flex items-center gap-2">
@@ -172,7 +170,8 @@
                     <div class="rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800 p-6 text-center bg-neutral-50/50 dark:bg-neutral-800/20">
                         <iconify-icon icon="lucide:school" class="text-2xl text-neutral-400 dark:text-neutral-500 mb-1"></iconify-icon>
                         <p class="text-xs text-neutral-500 dark:text-neutral-400">No education history added yet.</p>
-                        <button type="button" @click="addEducation()" class="mt-2 text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline">
+                        <button type="button" @click="addEducation()"
+                            class="mt-2 text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline">
                             Click here to add your first entry
                         </button>
                     </div>
@@ -180,9 +179,9 @@
 
                 <div class="space-y-4" x-show="educationHistory.length > 0">
                     <template x-for="(edu, index) in educationHistory" :key="index">
-                        <div class="p-4 rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/40 dark:bg-neutral-800/30 space-y-4 relative group">
+                        <div class="p-4 rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/40 dark:bg-neutral-800/30 space-y-4 relative">
 
-                            {{-- Hidden inputs to submit array to server --}}
+                            {{-- Hidden inputs — mirror Alpine state for server POST --}}
                             <input type="hidden" :name="`education_history[${index}][degree]`"      :value="edu.degree">
                             <input type="hidden" :name="`education_history[${index}][institution]`" :value="edu.institution">
                             <input type="hidden" :name="`education_history[${index}][country]`"     :value="edu.country">
@@ -228,16 +227,22 @@
                         </div>
                     </template>
                 </div>
+
+                @error('education_history')
+                    <p class="text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+                @enderror
             </div>
 
-            {{-- ── SECTION 3: Standardized Test Scores ────────────────────────── --}}
+            {{-- ══════════════════════════════════════════════════════════════
+                 SECTION 3 — Standardized Test Scores
+            ══════════════════════════════════════════════════════════════ --}}
             <div class="space-y-4">
                 <div class="flex items-center gap-2 border-b border-neutral-100 pb-3 dark:border-neutral-800">
                     <iconify-icon icon="lucide:file-check-2" class="text-brand-500 text-base"></iconify-icon>
                     <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-wider dark:text-white">3. Standardized Test Scores</h4>
                 </div>
 
-                {{-- IELTS --}}
+                {{-- ── IELTS ───────────────────────────────────────────────── --}}
                 <div class="p-4 rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-800/20 space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-200/70 dark:border-neutral-700/70 pb-3">
                         <span class="text-xs font-bold text-neutral-900 dark:text-white">IELTS Academic</span>
@@ -245,39 +250,42 @@
                             <label class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Test Date:</label>
                             <input type="date" name="ielts_test_date"
                                 x-model="ielts.testDate"
-                                class="px-3 py-1.5 placeholder:text-neutral-400 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                                class="px-3 py-1.5 rounded-lg border
+                                    {{ $errors->has('ielts_test_date') ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 dark:border-neutral-700' }}
+                                    bg-white dark:bg-neutral-900 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            @error('ielts_test_date')
+                                <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
+
                     <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
                         <div class="col-span-2 sm:col-span-1">
                             <label class="block mb-1.5 text-xs font-bold text-brand-600 dark:text-brand-400">Overall</label>
                             <input type="text" name="ielts_overall" x-model="ielts.overall" placeholder="0.0"
-                                class="w-full px-3 py-2 rounded-lg border border-brand-200 dark:border-brand-800/80 bg-white dark:bg-neutral-900 text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                                class="w-full px-3 py-2 rounded-lg border
+                                    {{ $errors->has('ielts_overall') ? 'border-rose-400 bg-rose-50/30' : 'border-brand-200 dark:border-brand-800/80' }}
+                                    bg-white dark:bg-neutral-900 text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            @error('ielts_overall')
+                                <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+                            @enderror
                         </div>
+                        @foreach(['listening','reading','writing','speaking'] as $band)
                         <div>
-                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">Listening</label>
-                            <input type="text" name="ielts_listening" x-model="ielts.listening" placeholder="0.0"
-                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300 capitalize">{{ $band }}</label>
+                            <input type="text" name="ielts_{{ $band }}" x-model="ielts.{{ $band }}" placeholder="0.0"
+                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400
+                                    {{ $errors->has('ielts_'.$band) ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 dark:border-neutral-700' }}
+                                    bg-white dark:bg-neutral-900 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            @error('ielts_'.$band)
+                                <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div>
-                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">Reading</label>
-                            <input type="text" name="ielts_reading" x-model="ielts.reading" placeholder="0.0"
-                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                        </div>
-                        <div>
-                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">Writing</label>
-                            <input type="text" name="ielts_writing" x-model="ielts.writing" placeholder="0.0"
-                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                        </div>
-                        <div>
-                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">Speaking</label>
-                            <input type="text" name="ielts_speaking" x-model="ielts.speaking" placeholder="0.0"
-                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
-                {{-- GRE --}}
+                {{-- ── GRE ─────────────────────────────────────────────────── --}}
                 <div class="p-4 rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-800/20 space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-200/70 dark:border-neutral-700/70 pb-3">
                         <span class="text-xs font-bold text-neutral-900 dark:text-white">GRE General</span>
@@ -285,30 +293,38 @@
                             <label class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Test Date:</label>
                             <input type="date" name="gre_test_date"
                                 x-model="gre.testDate"
-                                class="px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                                class="px-3 py-1.5 rounded-lg border
+                                    {{ $errors->has('gre_test_date') ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 dark:border-neutral-700' }}
+                                    bg-white dark:bg-neutral-900 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            @error('gre_test_date')
+                                <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
+
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <div class="col-span-2 sm:col-span-1">
                             <label class="block mb-1.5 text-xs font-bold text-brand-600 dark:text-brand-400">Combined Score</label>
                             <input type="text" name="gre_combined" x-model="gre.combined" placeholder="0"
-                                class="w-full px-3 py-2 rounded-lg border border-brand-200 dark:border-brand-800/80 bg-white dark:bg-neutral-900 text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                                class="w-full px-3 py-2 rounded-lg border
+                                    {{ $errors->has('gre_combined') ? 'border-rose-400 bg-rose-50/30' : 'border-brand-200 dark:border-brand-800/80' }}
+                                    bg-white dark:bg-neutral-900 text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            @error('gre_combined')
+                                <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+                            @enderror
                         </div>
+                        @foreach(['quant' => 'Quant', 'verbal' => 'Verbal', 'awa' => 'AWA'] as $key => $label)
                         <div>
-                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">Quant</label>
-                            <input type="text" name="gre_quant" x-model="gre.quant" placeholder="0"
-                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">{{ $label }}</label>
+                            <input type="text" name="gre_{{ $key }}" x-model="gre.{{ $key }}" placeholder="0"
+                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400
+                                    {{ $errors->has('gre_'.$key) ? 'border-rose-400 bg-rose-50/30' : 'border-neutral-200 dark:border-neutral-700' }}
+                                    bg-white dark:bg-neutral-900 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
+                            @error('gre_'.$key)
+                                <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div>
-                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">Verbal</label>
-                            <input type="text" name="gre_verbal" x-model="gre.verbal" placeholder="0"
-                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                        </div>
-                        <div>
-                            <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">AWA</label>
-                            <input type="text" name="gre_awa" x-model="gre.awa" placeholder="0.0"
-                                class="w-full px-3 py-2 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -316,7 +332,7 @@
 
         </div>
 
-        {{-- Footer --}}
+        {{-- ── Footer ───────────────────────────────────────────────────────── --}}
         <div class="flex items-center justify-between gap-3 px-5 sm:px-8 py-4 bg-neutral-50/50 dark:bg-neutral-800/30 border-t border-neutral-100 dark:border-neutral-800">
             <button type="button" @click="$dispatch('go-to-step', 1)"
                 class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -351,8 +367,11 @@ function academicForm(initial) {
         init() {},
 
         addEducation() {
-            this.educationHistory.push({ degree: '', institution: '', country: '', year: '', grade: '' });
+            this.educationHistory.push({
+                degree: '', institution: '', country: '', year: '', grade: ''
+            });
         },
+
         removeEducation(index) {
             this.educationHistory.splice(index, 1);
         },
