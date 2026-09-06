@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Student\UpdateAccountSettingsRequest;
+use App\Http\Requests\Student\UpdatePersonalInformationRequest;
 use App\Models\City;
 use App\Models\Country;
 use App\Repositories\Interfaces\UserRepositoryInterface;
@@ -148,8 +148,8 @@ class ProfileController extends Controller
     }
 
 
-    public function updateAccountSettings(
-        UpdateAccountSettingsRequest $request
+    public function updatePersonalInformation(
+        UpdatePersonalInformationRequest $request
     ): RedirectResponse {
 
         $user = $request->user();
@@ -202,5 +202,16 @@ class ProfileController extends Controller
         });
 
         return back()->with('success', 'Account settings updated successfully.');
+    }
+
+    public function academicInformation(Request $request)
+    {
+        $user = $request->user();
+
+        $student = $user->student;
+
+        abort_if(!$student, 404, 'Student profile not found.');
+
+        return view('student.profile.study-plan', compact('student'));
     }
 }

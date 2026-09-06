@@ -110,6 +110,14 @@ Route::prefix('student')
             ->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        
+        // student account settings
         Route::get('/account/settings', [ProfileController::class, 'accountSettings'])->name('account.settings');
-        Route::put('/account/settings', [ProfileController::class, 'updateAccountSettings'])->name('account.settings.update');
+        Route::put('/account/personal-information', [ProfileController::class, 'updatePersonalInformation'])->name('account.personal-information.update');
+        Route::put('/account/academic-information', [ProfileController::class, 'updateAcademicInformation'])->name('account.academic-information.update');
+        Route::put('/account/study-plan', [ProfileController::class, 'updateStudyPlan'])->name('account.study-plan.update');
+        Route::put('/account/work-experience', [ProfileController::class, 'updateWorkExperience'])->name('account.work-experience.update');
+        Route::put('/account/immigration-history', [ProfileController::class, 'updateImmigrationHistory'])->name('account.immigration-history.update');
+        Route::put('/account/visa-documents-checklist', [ProfileController::class, 'updateVisaDocumentsChecklist'])->name('account.visa-documents-checklist.update');
+
     });

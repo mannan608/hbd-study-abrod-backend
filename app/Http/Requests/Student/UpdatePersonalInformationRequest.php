@@ -5,7 +5,7 @@ namespace App\Http\Requests\Student;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateAccountSettingsRequest extends FormRequest
+class UpdatePersonalInformationRequest extends FormRequest
 {
     public function authorize(): bool
     {

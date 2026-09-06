@@ -75,7 +75,7 @@ class MenuStudentPortal
             [
                 'icon' => 'user-profile',
                 'name' => 'Study Plan',
-                'path' => 'student/account/settings',
+                'path' => 'student/account/academic-information',
             ],
              [
                 'icon' => 'user-profile',
