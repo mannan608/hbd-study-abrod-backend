@@ -19,7 +19,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -358,16 +357,29 @@ class ProfileController extends Controller
         $validated = $request->validated();
 
         DB::transaction(function () use ($student, $validated, $request) {
+            // Collect existing document paths before deleting records
+            $existingPaths = $student->immigrationRefusals()
+                ->whereNotNull('document_path')
+                ->pluck('document_path');
+
             $student->immigrationRefusals()->delete();
+
+            // Delete old uploaded files
+            foreach ($existingPaths as $oldPath) {
+                $this->deleteFile($oldPath);
+            }
 
             foreach ($validated['refusals'] as $i => $refusal) {
                 $docPath = null;
                 $docName = null;
 
-                // Handle optional per-record file upload
+                // Handle optional per-record file upload via HandlesFiles trait
                 if ($request->hasFile("refusals.{$i}.document")) {
                     $file    = $request->file("refusals.{$i}.document");
-                    $docPath = $file->store("students/{$student->id}/immigration", 'public');
+                    $docPath = $this->uploadFile(
+                        $file,
+                        "students/{$student->id}/immigration"
+                    );
                     $docName = $file->getClientOriginalName();
                 }
 
@@ -406,15 +418,15 @@ class ProfileController extends Controller
                 continue;
             }
 
-            $file = $request->file("documents.{$key}");
-
-            // Delete old file from storage if one exists
+            $file     = $request->file("documents.{$key}");
             $existing = $student->documents()->where('document_key', $key)->first();
-            if ($existing && $existing->file_path) {
-                Storage::disk('public')->delete($existing->file_path);
-            }
 
-            $path = $file->store("students/{$student->id}/documents", 'public');
+            // replaceFile deletes $existing->file_path then uploads the new file
+            $path = $this->replaceFile(
+                $file,
+                $existing?->file_path,
+                "students/{$student->id}/documents"
+            );
 
             $student->documents()->updateOrCreate(
                 ['document_key' => $key],
