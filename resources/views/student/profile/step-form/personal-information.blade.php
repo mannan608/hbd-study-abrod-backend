@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('student.account.settings.update') }}" method="POST" class="space-y-6">
+            <form action="{{ route('student.account.personal-information.update') }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
 

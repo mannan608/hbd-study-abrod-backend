@@ -1,31 +1,18 @@
 <div x-data="{
-    targetDegree: 'Master\'s Degree',
-    choices: [
-        {
-            id: 1,
-            program: 'MSc in Human-Computer Interaction',
-            university: 'University of Manchester',
-            country: 'United Kingdom',
-            duration: '1 Year',
-            startDate: 'Sept 2026',
-            endDate: 'Sept 2027',
-            tuition: '£28,500 / year',
-            scholarship: '£5,000 Merit Award Applied',
-            summary: 'Seeking advanced specialization in accessible UX design and software ergonomics. Intend to complete the 1-year taught master\'s program and utilize university industry partnerships for field research before returning home to contribute to the digital technology sector.'
-        },
-        {
-            id: 2,
-            program: 'MSc in Interaction Design',
-            university: 'TU Delft',
-            country: 'Netherlands',
-            duration: '2 Years',
-            startDate: 'Sept 2026',
-            endDate: 'Sept 2028',
-            tuition: '€20,500 / year',
-            scholarship: 'None / Self-funded',
-            summary: 'Alternative option focused on human-centered hardware and software systems design in Europe.'
+    targetDegree: '',
+    choices: [],
+
+    init() {
+        if (window.initialStudyPlanData) {
+            this.targetDegree = window.initialStudyPlanData.targetDegree || '';
+            this.choices = window.initialStudyPlanData.choices || [];
         }
-    ],
+
+        // Ensure at least one empty choice is available if none exists
+        if (this.choices.length === 0) {
+            this.addChoice();
+        }
+    },
     
     addChoice() {
         this.choices.push({
@@ -46,105 +33,178 @@
         if (this.choices.length > 1) {
             this.choices.splice(index, 1);
         }
+    },
+
+    saveStudyPlan() {
+        console.log('Saving Study Plan Payload:', {
+            targetDegree: this.targetDegree,
+            choices: this.choices
+        });
     }
-}" class="max-w-5xl mx-auto p-4 sm:p-6">
+}" class="bg-white dark:bg-neutral-900 rounded-2xl shadow-xs border border-neutral-200/80 dark:border-neutral-800 overflow-hidden">
 
-    <form @submit.prevent="" class="space-y-6">
-        <div class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm space-y-6">
+    <!-- Header Card -->
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-100 dark:border-neutral-800 py-5 mb-5 px-4 sm:px-6">
+        <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-950/50 dark:text-brand-400">
+                <iconify-icon icon="lucide:graduation-cap" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Study Plan & University Details Setup</h3>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">Fill in target degree level and university preference choices.</p>
+            </div>
+        </div>
 
-            <!-- Top Header & Shared Target Degree -->
-            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-5">
-                <div class="flex items-center gap-3">
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                        <iconify-icon icon="lucide:graduation-cap" class="text-xl"></iconify-icon>
-                    </div>
-                    <div>
-                        <h2 class="text-base font-bold text-slate-900">Study Plan & University Details Setup</h2>
-                        <p class="text-xs text-slate-500">Fill in target degree and university choices</p>
-                    </div>
+        <!-- Target Degree Level Dropdown -->
+        <div class="flex items-center gap-2 rounded-xl bg-neutral-50/80 dark:bg-neutral-800/50 px-3 py-1.5 border border-neutral-200/80 dark:border-neutral-700">
+            <label for="target_degree" class="text-xs font-semibold text-neutral-600 dark:text-neutral-300 whitespace-nowrap">Target Degree:</label>
+            <select id="target_degree" 
+                    x-model="targetDegree" 
+                    class="bg-transparent text-xs font-bold text-brand-600 dark:text-brand-400 focus:outline-none border-none cursor-pointer pr-2">
+                <option value="" disabled class="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200">Select Degree</option>
+                <option value="Master's Degree" class="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200">Master's Degree</option>
+                <option value="Bachelor's Degree" class="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200">Bachelor's Degree</option>
+                <option value="PhD / Doctorate" class="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200">PhD / Doctorate</option>
+                <option value="Postgraduate Diploma" class="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200">Postgraduate Diploma</option>
+            </select>
+        </div>
+    </div>
+
+    <form @submit.prevent="saveStudyPlan()" class="space-y-6">
+
+        <!-- Form Body Container -->
+        <div class="px-5 sm:px-8 space-y-6 mb-6">
+
+            <!-- Section Header & Add Button -->
+            <div class="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
+                <div class="flex items-center gap-2">
+                    <iconify-icon icon="lucide:compass" class="text-brand-500 text-base"></iconify-icon>
+                    <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-wider dark:text-white">University / Program Choices</h4>
                 </div>
-
-                <!-- Shared Degree Level Selection -->
-                <div class="flex items-center gap-2 rounded-xl bg-slate-50 px-3 py-1.5 border border-slate-200">
-                    <label for="target_degree" class="text-xs font-medium text-slate-500 whitespace-nowrap">Target Degree:</label>
-                    <select id="target_degree" x-model="targetDegree" class="w-full pr-4 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50/30 dark:bg-neutral-800/40 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all appearance-none">
-                        <option value="Master's Degree">Master's Degree</option>
-                        <option value="Bachelor's Degree">Bachelor's Degree</option>
-                        <option value="PhD / Doctorate">PhD / Doctorate</option>
-                        <option value="Postgraduate Diploma">Postgraduate Diploma</option>
-                    </select>
-                </div>
+                <button type="button" 
+                        @click="addChoice()" 
+                        class="inline-flex items-center gap-1.5 rounded-lg bg-brand-50 dark:bg-brand-950/50 px-3 py-1.5 text-xs font-semibold text-brand-600 dark:text-brand-400 hover:bg-brand-100 dark:hover:bg-brand-900/50 transition-colors">
+                    <iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon>
+                    <span>Add Preference Choice</span>
+                </button>
             </div>
 
-            <!-- Dynamic Study Choices -->
-            <div class="space-y-6">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">University / Program Choices</h3>
-                    <button type="button" @click="addChoice()" class="inline-flex items-center gap-1.5 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-semibold text-brand-600 hover:bg-brand-100 transition-colors">
-                        <iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon>
-                        <span>Add Preference Choice</span>
-                    </button>
-                </div>
-
+            <!-- Dynamic Preference Cards -->
+            <div class="space-y-4">
                 <template x-for="(choice, index) in choices" :key="choice.id || index">
-                    <div class="p-4 sm:p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-4 relative">
+                    <div class="p-4 sm:p-5 rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/40 dark:bg-neutral-800/30 space-y-4 relative">
                         
-                        <!-- Choice Badge Header -->
-                        <div class="flex items-center justify-between border-b border-slate-200/80 pb-3">
+                        <!-- Choice Header Bar -->
+                        <div class="flex items-center justify-between border-b border-neutral-200/60 dark:border-neutral-700/60 pb-3">
                             <div class="flex items-center gap-2">
-                                <span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-100 text-brand-700 text-xs font-bold" x-text="index + 1"></span>
-                                <span class="text-xs font-bold text-slate-800" x-text="index === 0 ? 'Choice 1 (Primary)' : 'Choice ' + (index + 1)"></span>
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300 text-[11px] font-bold" x-text="index + 1"></span>
+                                <span class="text-xs font-bold text-neutral-800 dark:text-neutral-200" x-text="index === 0 ? 'Choice 1 (Primary Destination)' : 'Choice ' + (index + 1)"></span>
                             </div>
 
-                            <button type="button" x-show="choices.length > 1" @click="removeChoice(index)" class="text-xs font-medium text-rose-500 hover:text-rose-700 flex items-center gap-1">
+                            <button type="button" 
+                                    x-show="choices.length > 1" 
+                                    @click="removeChoice(index)" 
+                                    class="text-xs font-medium text-rose-500 hover:text-rose-700 dark:hover:text-rose-400 flex items-center gap-1 transition-colors">
                                 <iconify-icon icon="lucide:trash-2" class="text-sm"></iconify-icon>
                                 <span>Remove Choice</span>
                             </button>
                         </div>
 
-                        <!-- Form Input Fields Grid -->
+                        <!-- Form Input Grid -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             
-                            <!-- Intended Program -->
+                            <!-- Program Name -->
                             <div class="sm:col-span-2 lg:col-span-3">
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Intended Program <span class="text-rose-500">*</span></label>
-                                <input type="text" x-model="choice.program" placeholder="e.g. MSc in Human-Computer Interaction" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500" required>
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Intended Program <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       x-model="choice.program" 
+                                       placeholder="e.g. MSc in Human-Computer Interaction" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all" 
+                                       required>
                             </div>
 
-                            <!-- University -->
+                            <!-- University Name -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">University Name <span class="text-rose-500">*</span></label>
-                                <input type="text" x-model="choice.university" placeholder="e.g. University of Manchester" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500" required>
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    University Name <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       x-model="choice.university" 
+                                       placeholder="e.g. University of Manchester" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all" 
+                                       required>
                             </div>
 
                             <!-- Destination Country -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Destination Country <span class="text-rose-500">*</span></label>
-                                <input type="text" x-model="choice.country" placeholder="e.g. United Kingdom" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500" required>
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Destination Country <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       x-model="choice.country" 
+                                       placeholder="e.g. United Kingdom" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all" 
+                                       required>
                             </div>
 
-                            <!-- Duration & Timeline -->
+                            <!-- Duration -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Duration & Intake Period</label>
-                                <input type="text" x-model="choice.duration" placeholder="e.g. 1 Year (Sept 2026 – Sept 2027)" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Program Duration
+                                </label>
+                                <input type="text" 
+                                       x-model="choice.duration" 
+                                       placeholder="e.g. 1 Year / 24 Months" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
                             </div>
+
+                            <!-- Start Date Blade Component -->
+                            <x-form.form-date id="start_date" 
+                                              name="startDate" 
+                                              label="Intended Start Date" 
+                                              placeholder="YYYY-MM" 
+                                              x-model="choice.startDate" />
+
+                            <!-- End Date Blade Component -->
+                            <x-form.form-date id="end_date" 
+                                              name="endDate" 
+                                              label="Expected End Date" 
+                                              placeholder="YYYY-MM" 
+                                              x-model="choice.endDate" />
 
                             <!-- Tuition Fee -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Tuition Fee</label>
-                                <input type="text" x-model="choice.tuition" placeholder="e.g. £28,500 / year" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Tuition Fee
+                                </label>
+                                <input type="text" 
+                                       x-model="choice.tuition" 
+                                       placeholder="e.g. £28,500 / year" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
                             </div>
 
                             <!-- Scholarship / Funding -->
-                            <div class="sm:col-span-2">
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Scholarship / Funding</label>
-                                <input type="text" x-model="choice.scholarship" placeholder="e.g. £5,000 Merit Award Applied or Self-funded" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                            <div class="sm:col-span-2 lg:col-span-3">
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Scholarship / Funding Status
+                                </label>
+                                <input type="text" 
+                                       x-model="choice.scholarship" 
+                                       placeholder="e.g. Self-funded, Merit Award Applied, etc." 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all">
                             </div>
 
-                            <!-- Study Plan Summary -->
+                            <!-- Study Plan Summary Textarea -->
                             <div class="sm:col-span-2 lg:col-span-3">
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Study Plan Summary</label>
-                                <textarea x-model="choice.summary" rows="3" placeholder="Explain your objective, academic alignment, and post-graduation goals..." class="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-800 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"></textarea>
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Study Plan Summary & Academic Motivation
+                                </label>
+                                <textarea x-model="choice.summary" 
+                                          rows="3" 
+                                          placeholder="Explain your academic objective, alignment with career goals, and reasons for selecting this university..." 
+                                          class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all resize-y"></textarea>
                             </div>
 
                         </div>
@@ -152,17 +212,21 @@
                 </template>
             </div>
 
-            <!-- Submit Action -->
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
-                <button type="button" class="px-4 py-2 text-xs font-medium text-slate-600 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
-                    Cancel
-                </button>
-                <button type="submit" class="px-5 py-2 text-xs font-semibold text-white rounded-xl bg-brand-600 hover:bg-brand-700 transition-colors shadow-xs flex items-center gap-1.5">
-                    <iconify-icon icon="lucide:check" class="text-sm"></iconify-icon>
-                    <span>Save Study Plan</span>
-                </button>
-            </div>
-
         </div>
+
+        <!-- Action Footer Bar -->
+        <div class="flex items-center justify-end gap-3 px-5 sm:px-8 py-4 bg-neutral-50/50 dark:bg-neutral-800/30 border-t border-neutral-100 dark:border-neutral-800">
+            <button type="button" 
+                    onclick="window.location.reload()" 
+                    class="px-4 py-2.5 rounded-lg text-xs font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                Discard
+            </button>
+            <button type="submit" 
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-600 text-white text-xs font-bold shadow-xs hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 active:scale-[0.98] transition-all">
+                <iconify-icon icon="lucide:check" class="text-sm"></iconify-icon>
+                <span>Save Study Plan</span>
+            </button>
+        </div>
+
     </form>
 </div>

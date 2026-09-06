@@ -1,16 +1,16 @@
 <div x-data="{
-    refusals: [
-        {
-            id: 1,
-            country: 'Canada',
-            visaType: 'Study Permit',
-            year: '2023',
-            status: 'Refused',
-            grounds: 'Section 216(1)(b) — Officer not satisfied applicant would leave Canada at the end of period authorized for stay.',
-            fileName: 'Refusal_Letter_Canada_2023.pdf',
-            fileSize: '1.2 MB'
+    refusals: [],
+
+    init() {
+        if (window.initialImmigrationData && Array.isArray(window.initialImmigrationData.refusals)) {
+            this.refusals = window.initialImmigrationData.refusals;
         }
-    ],
+
+        // Ensure at least one empty record exists if no initial data is present
+        if (this.refusals.length === 0) {
+            this.addRefusal();
+        }
+    },
 
     addRefusal() {
         this.refusals.push({
@@ -26,7 +26,9 @@
     },
 
     removeRefusal(index) {
-        this.refusals.splice(index, 1);
+        if (this.refusals.length > 1) {
+            this.refusals.splice(index, 1);
+        }
     },
 
     handleFileUpload(event, index) {
@@ -35,124 +37,176 @@
             this.refusals[index].fileName = file.name;
             this.refusals[index].fileSize = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
         }
+    },
+
+    saveImmigrationDetails() {
+        console.log('Saving Immigration Payload:', {
+            refusals: this.refusals
+        });
     }
-}" class="max-w-5xl mx-auto p-4 sm:p-6">
+}" class="bg-white dark:bg-neutral-900 rounded-2xl shadow-xs border border-neutral-200/80 dark:border-neutral-800 overflow-hidden">
 
-    <form @submit.prevent="" class="space-y-6">
-        <div class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm space-y-6">
+    <!-- Header Card -->
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-100 dark:border-neutral-800 py-5 mb-5 px-4 sm:px-6">
+        <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400">
+                <iconify-icon icon="lucide:shield-alert" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Immigration History Setup</h3>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">Record prior visa refusals and travel record details.</p>
+            </div>
+        </div>
 
-            <!-- Section Header -->
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <div class="flex items-center gap-3">
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                        <iconify-icon icon="lucide:shield-alert" class="text-xl"></iconify-icon>
-                    </div>
-                    <div>
-                        <h2 class="text-base font-bold text-slate-900">Immigration History Setup</h2>
-                        <p class="text-xs text-slate-500">Record prior visa refusals and travel record details</p>
-                    </div>
+        <!-- Records Counter Badge -->
+        <div class="flex items-center gap-1.5 rounded-xl bg-neutral-50/80 dark:bg-neutral-800/50 px-3 py-1.5 border border-neutral-200/80 dark:border-neutral-700">
+            <iconify-icon icon="lucide:file-warning" class="text-amber-600 dark:text-amber-400 text-sm"></iconify-icon>
+            <span class="text-xs font-bold text-neutral-800 dark:text-neutral-200" x-text="refusals.length + ' Record' + (refusals.length !== 1 ? 's' : '')"></span>
+        </div>
+    </div>
+
+    <form @submit.prevent="saveImmigrationDetails()" class="space-y-6">
+
+        <!-- Form Body Container -->
+        <div class="px-5 sm:px-8 space-y-6 mb-6">
+
+            <!-- Section Header & Add Button -->
+            <div class="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
+                <div class="flex items-center gap-2">
+                    <iconify-icon icon="lucide:history" class="text-amber-500 text-base"></iconify-icon>
+                    <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-wider dark:text-white">Refusal & Travel Records</h4>
                 </div>
-               
+                <button type="button" 
+                        @click="addRefusal()" 
+                        class="inline-flex items-center gap-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/50 px-3 py-1.5 text-xs font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors">
+                    <iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon>
+                    <span>Add Refusal Record</span>
+                </button>
             </div>
 
-            <!-- Dynamic Refusal Records -->
-            <div class="space-y-6">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Refusal & Travel Records</h3>
-                    <button type="button" @click="addRefusal()" class="inline-flex items-center gap-1.5 rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700 hover:bg-amber-100 transition-colors">
-                        <iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon>
-                        <span>Add Refusal Record</span>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <template x-for="(record, index) in refusals" :key="record.id || index">
-                        <div class="p-4 sm:p-5 rounded-xl border border-amber-200/80 bg-amber-50/20 space-y-4 relative">
-                            
-                            <!-- Card Header -->
-                            <div class="flex items-center justify-between border-b border-amber-200/60 pb-3">
-                                <div class="flex items-center gap-2">
-                                    <div class="flex h-6 w-6 items-center justify-center rounded-lg bg-amber-100 text-amber-700 text-xs font-bold">
-                                        <iconify-icon icon="lucide:file-warning" class="text-sm"></iconify-icon>
-                                    </div>
-                                    <span class="text-xs font-bold text-slate-800" x-text="record.country ? record.country + ' — ' + (record.visaType || 'Visa Entry') : 'Refusal Record #' + (index + 1)"></span>
+            <!-- Dynamic Refusal Cards -->
+            <div class="space-y-4">
+                <template x-for="(record, index) in refusals" :key="record.id || index">
+                    <div class="p-4 sm:p-5 rounded-xl border border-amber-200/80 dark:border-amber-900/40 bg-amber-50/30 dark:bg-amber-950/10 space-y-4 relative">
+                        
+                        <!-- Card Header Bar -->
+                        <div class="flex items-center justify-between border-b border-amber-200/60 dark:border-amber-900/30 pb-3">
+                            <div class="flex items-center gap-2">
+                                <div class="flex h-5 w-5 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300 text-[11px] font-bold">
+                                    <iconify-icon icon="lucide:file-warning" class="text-xs"></iconify-icon>
                                 </div>
-
-                                <button type="button" @click="removeRefusal(index)" class="text-xs font-medium text-rose-500 hover:text-rose-700 flex items-center gap-1">
-                                    <iconify-icon icon="lucide:trash-2" class="text-sm"></iconify-icon>
-                                    <span>Remove Record</span>
-                                </button>
+                                <span class="text-xs font-bold text-neutral-800 dark:text-neutral-200" x-text="record.country ? record.country + ' — ' + (record.visaType || 'Visa Entry') : 'Refusal Record #' + (index + 1)"></span>
                             </div>
 
-                            <!-- Input Grid -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                
-                                <!-- Country -->
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Country <span class="text-rose-500">*</span></label>
-                                    <input type="text" x-model="record.country" placeholder="e.g. Canada" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500" required>
-                                </div>
-
-                                <!-- Visa / Application Type -->
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Visa Category / Type <span class="text-rose-500">*</span></label>
-                                    <input type="text" x-model="record.visaType" placeholder="e.g. Study Permit" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500" required>
-                                </div>
-
-                                <!-- Application Year -->
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Application Year <span class="text-rose-500">*</span></label>
-                                    <input type="number" min="1990" max="2030" x-model="record.year" placeholder="e.g. 2023" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500" required>
-                                </div>
-
-                                <!-- Grounds for Refusal -->
-                                <div class="sm:col-span-2 lg:col-span-3">
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Grounds for Refusal <span class="text-rose-500">*</span></label>
-                                    <textarea x-model="record.grounds" rows="2" placeholder="e.g. Section 216(1)(b) — Officer not satisfied applicant would leave Canada at the end of period authorized for stay." class="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-800 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500" required></textarea>
-                                </div>
-
-                                <!-- Upload Document -->
-                                <div class="sm:col-span-2 lg:col-span-3">
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Upload Refusal Letter / Document</label>
-                                    
-                                    <div class="flex items-center gap-3">
-                                        <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition">
-                                            <iconify-icon icon="lucide:upload-cloud" class="text-base text-slate-500"></iconify-icon>
-                                            <span>Choose File</span>
-                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" @change="handleFileUpload($event, index)">
-                                        </label>
-
-                                        <!-- Attached File Preview Pill -->
-                                        <template x-if="record.fileName">
-                                            <div class="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 shadow-2xs">
-                                                <iconify-icon icon="lucide:file-text" class="text-slate-400 text-sm"></iconify-icon>
-                                                <span class="font-medium text-slate-800" x-text="record.fileName"></span>
-                                                <span class="text-slate-400 text-[11px]" x-text="'(' + record.fileSize + ')'"></span>
-                                                <button type="button" @click="record.fileName = ''; record.fileSize = ''" class="text-slate-400 hover:text-rose-500 ml-1">
-                                                    <iconify-icon icon="lucide:x" class="text-xs"></iconify-icon>
-                                                </button>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <button type="button" 
+                                    x-show="refusals.length > 1" 
+                                    @click="removeRefusal(index)" 
+                                    class="text-xs font-medium text-rose-500 hover:text-rose-700 dark:hover:text-rose-400 flex items-center gap-1 transition-colors">
+                                <iconify-icon icon="lucide:trash-2" class="text-sm"></iconify-icon>
+                                <span>Remove Record</span>
+                            </button>
                         </div>
-                    </template>
-                </div>
-            </div>
 
-            <!-- Submit Action -->
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
-                <button type="button" class="px-4 py-2 text-xs font-medium text-slate-600 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
-                    Cancel
-                </button>
-                <button type="submit" class="px-5 py-2 text-xs font-semibold text-white rounded-xl bg-amber-600 hover:bg-amber-700 transition-colors shadow-xs flex items-center gap-1.5">
-                    <iconify-icon icon="lucide:check" class="text-sm"></iconify-icon>
-                    <span>Save Immigration Details</span>
-                </button>
+                        <!-- Form Input Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            
+                            <!-- Destination Country -->
+                            <div>
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Country <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       x-model="record.country" 
+                                       placeholder="e.g. Canada" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all" 
+                                       required>
+                            </div>
+
+                            <!-- Visa / Application Type -->
+                            <div>
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Visa Category / Type <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       x-model="record.visaType" 
+                                       placeholder="e.g. Study Permit" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all" 
+                                       required>
+                            </div>
+
+                            <!-- Application Year -->
+                            <div>
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Application Year <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="number" 
+                                       min="1990" 
+                                       max="2030" 
+                                       x-model="record.year" 
+                                       placeholder="e.g. 2023" 
+                                       class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all" 
+                                       required>
+                            </div>
+
+                            <!-- Grounds for Refusal -->
+                            <div class="sm:col-span-2 lg:col-span-3">
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Grounds for Refusal <span class="text-rose-500">*</span>
+                                </label>
+                                <textarea x-model="record.grounds" 
+                                          rows="3" 
+                                          placeholder="e.g. Section 216(1)(b) — Officer not satisfied applicant would leave Canada at the end of period authorized for stay." 
+                                          class="w-full px-4 py-2.5 rounded-lg border placeholder:text-neutral-400 border-neutral-200 bg-white dark:bg-neutral-900 dark:border-neutral-700 text-xs font-medium text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all resize-y" 
+                                          required></textarea>
+                            </div>
+
+                            <!-- Upload Document -->
+                            <div class="sm:col-span-2 lg:col-span-3">
+                                <label class="block mb-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                                    Upload Refusal Letter / Document
+                                </label>
+                                
+                                <div class="flex flex-wrap items-center gap-3">
+                                    <label class="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300 transition-colors">
+                                        <iconify-icon icon="lucide:upload-cloud" class="text-base text-neutral-500 dark:text-neutral-400"></iconify-icon>
+                                        <span>Choose File</span>
+                                        <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" @change="handleFileUpload($event, index)">
+                                    </label>
+
+                                    <!-- Attached File Preview Pill -->
+                                    <template x-if="record.fileName">
+                                        <div class="flex items-center gap-2 rounded-lg border border-neutral-200/80 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3 py-1.5 text-xs text-neutral-700 dark:text-neutral-300 shadow-2xs">
+                                            <iconify-icon icon="lucide:file-text" class="text-neutral-400 text-sm"></iconify-icon>
+                                            <span class="font-medium text-neutral-800 dark:text-neutral-200" x-text="record.fileName"></span>
+                                            <span class="text-neutral-400 text-[11px]" x-text="'(' + record.fileSize + ')'"></span>
+                                            <button type="button" @click="record.fileName = ''; record.fileSize = ''" class="text-neutral-400 hover:text-rose-500 dark:hover:text-rose-400 ml-1 transition-colors">
+                                                <iconify-icon icon="lucide:x" class="text-xs"></iconify-icon>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </template>
             </div>
 
         </div>
+
+        <!-- Action Footer Bar -->
+        <div class="flex items-center justify-end gap-3 px-5 sm:px-8 py-4 bg-neutral-50/50 dark:bg-neutral-800/30 border-t border-neutral-100 dark:border-neutral-800">
+            <button type="button" 
+                    onclick="window.location.reload()" 
+                    class="px-4 py-2.5 rounded-lg text-xs font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                Discard
+            </button>
+            <button type="submit" 
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-amber-600 text-white text-xs font-bold shadow-xs hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 active:scale-[0.98] transition-all">
+                <iconify-icon icon="lucide:check" class="text-sm"></iconify-icon>
+                <span>Save Immigration Details</span>
+            </button>
+        </div>
+
     </form>
 </div>

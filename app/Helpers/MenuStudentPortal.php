@@ -72,14 +72,14 @@ class MenuStudentPortal
             //         ],
             //     ],
             // ],
-            [
-                'icon' => 'user-profile',
-                'name' => 'Study Plan',
-                'path' => 'student/account/academic-information',
-            ],
+            // [
+            //     'icon' => 'user-profile',
+            //     'name' => 'Study Plan',
+            //     'path' => 'student/account/academic-information',
+            // ],
              [
                 'icon' => 'user-profile',
-                'name' => 'Personal Information',
+                'name' => 'Account Settings',
                 'path' => 'student/account/settings',
             ],
             // [

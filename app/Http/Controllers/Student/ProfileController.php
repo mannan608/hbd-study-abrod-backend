@@ -206,12 +206,6 @@ class ProfileController extends Controller
 
     public function academicInformation(Request $request)
     {
-        $user = $request->user();
-
-        $student = $user->student;
-
-        abort_if(!$student, 404, 'Student profile not found.');
-
-        return view('student.profile.study-plan', compact('student'));
+      
     }
 }

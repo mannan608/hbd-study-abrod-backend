@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedTinyInteger('profile_step')
+                ->default(1);
+
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
+
             // Student Information
             $table->string('student_number')->unique();
 
