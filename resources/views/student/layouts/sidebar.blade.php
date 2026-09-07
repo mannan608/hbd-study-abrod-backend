@@ -15,13 +15,13 @@
 
          <div class="border-b border-neutral-100 bg-brand-500 p-4 hidden lg:block">
 
-             <div class="mb-4 flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl">
+             <div class="mb-4 flex h-10 w-10 items-center  border border-neutral-500 justify-center overflow-hidden rounded-xl">
 
                  @if (auth()->user()->avatar)
                      <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}"
                          class="h-full w-full object-cover">
                  @else
-                     <span class="text-lg font-bold uppercase text-brand-700">
+                     <span class="text-lg font-bold uppercase text-white ">
                          {{ Str::substr(auth()->user()->name, 0, 1) }}
                      </span>
                  @endif
