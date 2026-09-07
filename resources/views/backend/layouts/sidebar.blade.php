@@ -5,7 +5,7 @@
 @endphp
 
 <aside id="sidebar"
-    class="fixed flex flex-col mt-0 top-0 px-5 left-0 bg-white dark:bg-neutral-900 dark:border-neutral-800 text-neutral-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-neutral-200"
+    class="pt-24 xl:pt-0 fixed flex flex-col mt-0 top-0 px-5 left-0 bg-white dark:bg-neutral-900 dark:border-neutral-800 text-neutral-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-neutral-200"
     x-data="{
         openSubmenus: {},
         init() {
@@ -70,7 +70,7 @@
     @mouseenter="if (!$store.sidebar.isExpanded) $store.sidebar.setHovered(true)"
     @mouseleave="$store.sidebar.setHovered(false)">
     <!-- Logo Section -->
-    <div class="pt-4 pb-3 flex"
+    <div class="pt-4 pb-3 hidden xl:flex"
         :class="(!$store.sidebar.isExpanded && !$store.sidebar.isHovered && !$store.sidebar.isMobileOpen) ?
         'xl:justify-center' :
         'justify-start'">

@@ -25,7 +25,7 @@
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
+  --breakpoint-xl: 1140px;
   --breakpoint-2xl: 1536px;
 
   --text-title-2xl: 72px;
@@ -1112,3 +1112,10 @@ pre[class*='language-'] {
             transform: none;
         }
     }
+
+      @media (min-width: 1140px){
+      .desktop-menu{
+        padding-top: 120px !important;
+      }
+    }
+

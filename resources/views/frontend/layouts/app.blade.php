@@ -44,7 +44,7 @@
 
             Alpine.store('sidebar', {
                 // Initialize based on screen size
-                isExpanded: window.innerWidth >= 1280, // true for desktop, false for mobile
+                isExpanded: window.innerWidth >= 1140, // true for desktop, false for mobile
                 isMobileOpen: false,
                 isHovered: false,
 
@@ -65,7 +65,7 @@
 
                 setHovered(val) {
                     // Only allow hover effects on desktop when sidebar is collapsed
-                    if (window.innerWidth >= 1280 && !this.isExpanded) {
+                    if (window.innerWidth >= 1140 && !this.isExpanded) {
                         this.isHovered = val;
                     }
                 }
