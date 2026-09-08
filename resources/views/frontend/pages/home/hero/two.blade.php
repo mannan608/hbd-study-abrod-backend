@@ -74,20 +74,20 @@
         ],
 
         [
-            'name' => 'Dubai',
+            'name' => 'Malaysia',
 
-            'badge' => 'Study in Dubai',
+            'badge' => 'Study in Malaysia',
 
-            'title' => 'Discover Your Future in Dubai.',
+            'title' => 'Discover Your Future in Malaysia.',
 
             'description' =>
-                'Explore world-class universities, flexible programs, affordable tuition and exciting career opportunities in Dubai.',
+                'Explore world-class universities, flexible programs, affordable tuition and exciting career opportunities in Malaysia.',
 
             'image' => 'frontend-img/hero/hero-4.jpg',
 
-            'alt' => 'International students in Dubai',
+            'alt' => 'International students in Malaysia',
 
-            'search_placeholder' => 'Search courses, e.g. Bachelor of Business in Dubai',
+            'search_placeholder' => 'Search courses, e.g. Bachelor of Business in Malaysia',
         ],
     ];
 @endphp
@@ -228,7 +228,7 @@
                 <img :src="'{{ asset('') }}' + destination.image" :alt="destination.alt" width="1920"
                     height="1080" :loading="index === 0 ? 'eager' : 'lazy'"
                     :fetchpriority="index === 0 ? 'high' : 'low'"
-                    class="size-full object-cover transition-transform duration-[8000ms] ease-out"
+                    class="size-full object-cover transition-transform duration-8000 ease-out"
                     :class="current === index ?
                         'scale-100' :
                         'scale-110'">
@@ -244,7 +244,7 @@
         SURFACE OVERLAY
     ========================================================== --}}
 
-    <div class="surface-hero absolute inset-0 z-[2]">
+    <div class="surface-hero absolute inset-0 z-2">
     </div>
 
 
@@ -252,7 +252,7 @@
         EXTRA DARK OVERLAY
     ========================================================== --}}
 
-    <div class="absolute inset-0 z-[3] bg-black/10">
+    <div class="absolute inset-0 z-3 bg-black/10">
     </div>
 
 
@@ -260,7 +260,7 @@
         BOTTOM GRADIENT
     ========================================================== --}}
 
-    <div class="absolute inset-x-0 bottom-0 z-[4] h-1/2 bg-gradient-to-t from-black/40 via-black/10 to-transparent">
+    <div class="absolute inset-x-0 bottom-0 z-4 h-1/2 bg-gradient-to-t from-black/40 via-black/10 to-transparent">
     </div>
 
 
@@ -296,7 +296,7 @@
                 :class="loaded
                     ?
                     'translate-y-0 opacity-100' :
-                    'translate-y-6 opacity-0'">
+                    'translate-y-6 '">
 
                 {{-- Sparkle icon --}}
 
@@ -341,7 +341,7 @@
                 :class="loaded
                     ?
                     'translate-y-0 opacity-100' :
-                    'translate-y-6 opacity-0'"
+                    'translate-y-6 '"
                 x-text="activeDestination.title">
             </h1>
 
@@ -354,7 +354,7 @@
                 :class="loaded
                     ?
                     'translate-y-0 opacity-100' :
-                    'translate-y-6 opacity-0'"
+                    'translate-y-6 '"
                 x-text="activeDestination.description">
             </p>
 
@@ -367,7 +367,7 @@
                 :class="loaded
                     ?
                     'translate-y-0 opacity-100' :
-                    'translate-y-6 opacity-0'">
+                    'translate-y-6 '">
 
 
                 {{-- Search input --}}
