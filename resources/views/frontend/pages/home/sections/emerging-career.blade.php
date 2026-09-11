@@ -1,8 +1,8 @@
-   <section class="bg-brand-100 py-16 md:py-20 lg:py-24">
+   <section class="bg-brand-100 py-12 md:py-16 lg:py-20">
        <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
 
            <header
-               class="mx-auto max-w-2xl px-4 py-12 text-center transition-all duration-700 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
+               class="mx-auto max-w-2xl px-4 pb-6 text-center  reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
                <div
                    class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100">
                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

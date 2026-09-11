@@ -7,9 +7,7 @@
     {{-- @include('frontend.pages.home.sections.stats') --}}
     @include('frontend.pages.common-section.destination')
 
-    <section class="py-16 md:py-20 lg:py-24 bg-brand-50">
-        @include('frontend.pages.common-section.service-section')
-    </section>
+ @include('frontend.pages.common-section.service-section')
 
 
     {{-- @include('frontend.pages.home.sections.course-section') --}}

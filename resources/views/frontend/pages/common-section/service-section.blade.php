@@ -1,12 +1,11 @@
-<section class="relative py-12 sm:py-16 defer-render">
+<section class="relative defer-render py-12 md:py-16 lg:py-20 bg-brand-50">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- =========================
              Section Header
         ========================== -->
-        <header
-            class="mx-auto max-w-2xl px-4 py-10 sm:py-12 text-center font-sans reveal-on-scroll">
+        <header class="pb-10 mx-auto max-w-2xl px-4 text-center font-sans reveal-on-scroll">
 
             <!-- Badge -->
             <div
