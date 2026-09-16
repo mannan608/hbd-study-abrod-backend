@@ -101,18 +101,7 @@
             <!-- EVENTS GRID CONTAINER -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                 @forelse ($events as $event)
-                    <div
-                        class="group relative flex flex-col h-full rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300">
-
-                        <!-- Event Card Component -->
-                        @include('frontend.pages.events.event-card', ['event' => $event])
-
-                        <!-- Stretched Link (Makes the entire card clickable safely without breaking inner buttons/links) -->
-                        <a href="{{ route('event-details', $event->slug) }}"
-                            class="absolute inset-0 z-10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
-                            <span class="sr-only">View details for {{ $event->title ?? 'event' }}</span>
-                        </a>
-                    </div>
+                    @include('frontend.pages.events.event-card', ['event' => $event])
                 @empty
                     <!-- MODERN EMPTY STATE -->
                     <div class="col-span-full py-16 px-4">

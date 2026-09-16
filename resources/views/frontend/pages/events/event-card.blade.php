@@ -1,6 +1,7 @@
-<!-- MODERN & PROFESSIONAL VERTICAL EVENT CARD -->
 <div
-    class="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
+    x-data
+    @click="window.location.href = '{{ route('event-details', $event->slug) }}'"
+    class="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
 >
 
     <!-- Image Header -->
@@ -13,12 +14,14 @@
         />
 
         <!-- Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none">
+        </div>
 
         <!-- Date Badge -->
         @if($event->start_datetime)
             <div
-                class="absolute right-3.5 top-3.5 flex h-16 w-16 flex-col items-center justify-center rounded-xl border border-white/40 bg-white/90 text-slate-900 shadow-lg backdrop-blur-md"
+                class="absolute right-3.5 top-3.5 flex h-16 w-16 flex-col items-center justify-center rounded-xl border border-white/40 bg-white/90 text-slate-900 shadow-lg backdrop-blur-md pointer-events-none"
             >
                 <span class="text-xs font-black uppercase tracking-wider text-brand-600">
                     {{ \Carbon\Carbon::parse($event->start_datetime)->format('M') }}
@@ -31,7 +34,9 @@
         @endif
 
         <!-- Event Type / Featured -->
-        <div class="absolute bottom-3.5 left-3.5 flex flex-wrap gap-2">
+        <div
+            class="absolute bottom-3.5 left-3.5 flex flex-wrap gap-2 pointer-events-none"
+        >
 
             @if($event->is_featured)
                 <span
@@ -119,6 +124,7 @@
 
 
                 @if($event->is_online)
+
                     <span
                         class="inline-flex items-center gap-1.5 rounded-lg bg-slate-100/80 px-2.5 py-1.5 text-slate-700"
                     >
@@ -129,13 +135,22 @@
                             viewBox="0 0 24 24"
                             stroke-width="2.5"
                         >
-                            <rect x="2" y="6" width="14" height="12" rx="2" />
+                            <rect
+                                x="2"
+                                y="6"
+                                width="14"
+                                height="12"
+                                rx="2"
+                            />
+
                             <path d="M22 8l-6 4 6 4V8z" />
                         </svg>
 
                         Online Event
                     </span>
+
                 @elseif($event->location_name)
+
                     <span
                         class="inline-flex items-center gap-1.5 rounded-lg bg-slate-100/80 px-2.5 py-1.5 text-slate-700"
                     >
@@ -151,11 +166,17 @@
                                 stroke-linejoin="round"
                                 d="M12 21s8-4.5 8-10a8 8 0 1 0-16 0c0 5.5 8 10 8 10z"
                             />
-                            <circle cx="12" cy="11" r="2.5" />
+
+                            <circle
+                                cx="12"
+                                cy="11"
+                                r="2.5"
+                            />
                         </svg>
 
                         {{ $event->location_name }}
                     </span>
+
                 @endif
 
             </div>
@@ -164,27 +185,37 @@
             <!-- Actions -->
             <div class="grid grid-cols-2 gap-2.5 pt-1">
 
+                <!-- Details -->
                 <a
                     href="{{ route('event-details', $event->slug) }}"
+                    @click.stop
                     class="flex w-full items-center justify-center rounded-xl border border-slate-200 py-2.5 text-sm font-bold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
                 >
                     Details
                 </a>
 
+
+                <!-- Register / View Event -->
                 @if($event->registration_link)
+
                     <a
                         href="{{ $event->registration_link }}"
+                        @click.stop
                         class="flex w-full items-center justify-center rounded-xl bg-[#155b9d] py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#114b82] hover:shadow-md"
                     >
                         Register
                     </a>
+
                 @else
+
                     <a
                         href="{{ route('event-details', $event->slug) }}"
+                        @click.stop
                         class="flex w-full items-center justify-center rounded-xl bg-[#155b9d] py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#114b82] hover:shadow-md"
                     >
                         View Event
                     </a>
+
                 @endif
 
             </div>

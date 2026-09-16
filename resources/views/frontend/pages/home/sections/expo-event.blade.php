@@ -38,21 +38,12 @@
 
 
             <div class="animate-marquee flex w-max gap-6 py-4">
-                {{-- @for ($i = 0; $i < 10; $i++)
-               <a href="{{ route('event-details') }}" class="w-113.5 ">
-     
-                    @include('frontend.pages.events.event-card')
-                </a>
-                @endfor --}}
-
                 @forelse ($events as $event)
-                    <a href="{{ route('event-details') }}" class="w-113.5 ">
-
-                        @include('frontend.pages.events.event-card', [
-                            'event' => $event,
-                        ])
-                    </a>
-
+                    @for ($i = 0; $i < 5; $i++)
+                        <div class="w-113.5">
+                            @include('frontend.pages.events.event-card', ['event' => $event])
+                        </div>
+                    @endfor
                 @empty
                     <div class="col-span-full py-12 text-center">
                         <p class="text-gray-500">No events found.</p>
