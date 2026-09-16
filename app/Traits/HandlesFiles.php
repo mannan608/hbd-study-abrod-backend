@@ -13,19 +13,34 @@ trait HandlesFiles
      */
     public function uploadFile(UploadedFile $file, string $directory, ?string $filename = null): string
     {
-        $extension = strtolower($file->getClientOriginalExtension());
+        if (! $file->isValid()) {
+            throw new \RuntimeException('The uploaded file is invalid.');
+        }
 
-        $name = $filename ? $filename . '.' . $extension : Str::ulid() . '.' . $extension;
+        $directory = trim(str_replace('\\', '/', $directory), '/');
 
-        $uploadPath = public_path('uploads/' . trim($directory, '/'));
+        if ($directory === '' || str_contains($directory, '..')) {
+            throw new \InvalidArgumentException('Invalid upload directory.');
+        }
 
-        if (!File::exists($uploadPath)) {
+        $extension = strtolower($file->extension() ?: $file->getClientOriginalExtension());
+
+        if ($extension === '') {
+            throw new \RuntimeException('The uploaded file has no valid extension.');
+        }
+
+        $baseName = $filename ? Str::slug(pathinfo($filename, PATHINFO_FILENAME)) : (string) Str::ulid();
+        $name = ($baseName ?: (string) Str::ulid()).'.'.$extension;
+
+        $uploadPath = public_path('uploads/'.$directory);
+
+        if (! File::exists($uploadPath)) {
             File::makeDirectory($uploadPath, 0755, true);
         }
 
         $file->move($uploadPath, $name);
 
-        return 'uploads/' . trim($directory, '/') . '/' . $name;
+        return 'uploads/'.$directory.'/'.$name;
     }
 
     /**
@@ -37,7 +52,15 @@ trait HandlesFiles
             return false;
         }
 
-        $fullPath = public_path(ltrim($path, '/'));
+        $path = str_replace('\\', '/', ltrim($path, '/'));
+
+        // This trait owns only files in public/uploads. Never allow a database
+        // value or hidden form input to delete another public file.
+        if (! str_starts_with($path, 'uploads/') || str_contains($path, '..')) {
+            return false;
+        }
+
+        $fullPath = public_path($path);
 
         if (File::exists($fullPath)) {
             return File::delete($fullPath);
@@ -51,7 +74,7 @@ trait HandlesFiles
      */
     public function replaceFile(?UploadedFile $newFile, ?string $oldPath, string $directory): ?string
     {
-        if (!$newFile) {
+        if (! $newFile) {
             return $oldPath;
         }
 
@@ -84,22 +107,22 @@ trait HandlesFiles
      */
     public function formatFileSize(?int $bytes): string
     {
-        if (!$bytes) {
+        if (! $bytes) {
             return '0 KB';
         }
 
         if ($bytes >= 1073741824) {
-            return number_format($bytes / 1073741824, 2) . ' GB';
+            return number_format($bytes / 1073741824, 2).' GB';
         }
 
         if ($bytes >= 1048576) {
-            return number_format($bytes / 1048576, 2) . ' MB';
+            return number_format($bytes / 1048576, 2).' MB';
         }
 
         if ($bytes >= 1024) {
-            return number_format($bytes / 1024, 2) . ' KB';
+            return number_format($bytes / 1024, 2).' KB';
         }
 
-        return $bytes . ' Bytes';
+        return $bytes.' Bytes';
     }
 }

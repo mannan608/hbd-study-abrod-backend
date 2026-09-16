@@ -11,15 +11,16 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::latest()->paginate(12);
-      
-return $events;
+
+        // return $events;
         return view('frontend.pages.events.index', compact('events'));
     }
+
     public function show($slug)
     {
         $event = Event::where('slug', $slug)
             ->firstOrFail();
-       
+
         // Latest events except current one
         $latestEvents = Event::where('id', '!=', $event->id)
             ->latest()

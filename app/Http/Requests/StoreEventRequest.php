@@ -83,7 +83,7 @@ class StoreEventRequest extends FormRequest
 
             'providers.*.name' => ['nullable', 'string', 'max:255'],
 
-            'providers.*.logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'providers.*.logo_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
 
             'providers.*.existing_logo' => ['nullable', 'string'],
 

@@ -386,7 +386,7 @@
                                     </div>
                                 </template>
 
-                                <input type="file" :name="`providers[${index}][logo]`"
+                                <input type="file" :name="`providers[${index}][logo_file]`" accept="image/jpeg,image/png,image/webp"
                                     class="h-11 w-full pl-4 overflow-hidden rounded-xl border border-neutral-300 bg-transparent text-sm text-neutral-500 transition file:mr-4 file:cursor-pointer file:border-0 file:border-r file:border-neutral-200 file:bg-neutral-50 file:py-3 file:pl-4 file:pr-4 file:text-sm file:font-medium file:text-neutral-700 hover:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:file:border-neutral-700 dark:file:bg-white/[0.03] dark:file:text-neutral-300" />
                             </div>
                         </div>

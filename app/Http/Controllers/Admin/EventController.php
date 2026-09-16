@@ -47,29 +47,17 @@ class EventController extends Controller
                 }
 
                 if ($request->hasFile('gallery_images')) {
-                    $data['gallery_images'] = collect($request->file('gallery_images'))->filter(fn($file) => $file instanceof UploadedFile)->map(fn($file) => $this->uploadFile($file, 'events/gallery'))->values()->all();
+                    $data['gallery_images'] = collect($request->file('gallery_images'))->filter(fn ($file) => $file instanceof UploadedFile)->map(fn ($file) => $this->uploadFile($file, 'events/gallery'))->values()->all();
                 }
 
-                if (isset($data['providers'])) {
-                    foreach ($data['providers'] as $key => &$provider) {
-                        $file = $request->file("providers.{$key}.logo");
-
-                        if ($file instanceof UploadedFile) {
-                            $provider['logo'] = $this->uploadFile($file, 'events/providers');
-                        }
-
-                        unset($provider['logo_file'], $provider['existing_logo']);
-                    }
-
-                    unset($provider);
-
-                    $data['providers'] = array_values($data['providers']);
+                if (array_key_exists('providers', $data)) {
+                    $data['providers'] = $this->prepareProviders($request, $data['providers']);
                 }
 
                 if (isset($data['tags'])) {
                     $data['tags'] = is_string($data['tags'])
                         ? collect(explode(',', $data['tags']))
-                            ->map(fn($tag) => trim($tag))
+                            ->map(fn ($tag) => trim($tag))
                             ->filter()
                             ->values()
                             ->all()
@@ -85,7 +73,7 @@ class EventController extends Controller
                 ])
                 ->with('success', 'Event created successfully.');
         } catch (\Throwable $e) {
-            if (!empty($data['banner'])) {
+            if (! empty($data['banner'])) {
                 $this->deleteFile($data['banner']);
             }
 
@@ -94,7 +82,7 @@ class EventController extends Controller
             }
 
             foreach ($data['providers'] ?? [] as $provider) {
-                if (!empty($provider['logo'])) {
+                if (! empty($provider['logo'])) {
                     $this->deleteFile($provider['logo']);
                 }
             }
@@ -160,28 +148,13 @@ class EventController extends Controller
                 /*
                  * Providers
                  */
-                if ($request->has('providers')) {
-                    foreach ($data['providers'] ?? [] as $key => &$provider) {
-                        $existingLogo = $provider['existing_logo'] ?? ($provider['logo'] ?? null);
-
-                        $file = $request->file("providers.{$key}.logo");
-
-                        if ($file instanceof UploadedFile) {
-                            $provider['logo'] = $this->uploadFile($file, 'events/providers');
-
-                            $newFiles[] = $provider['logo'];
-                        } elseif ($existingLogo) {
-                            $provider['logo'] = $existingLogo;
-                        } else {
-                            unset($provider['logo']);
-                        }
-
-                        unset($provider['logo_file'], $provider['existing_logo']);
-                    }
-
-                    unset($provider);
-
-                    $data['providers'] = array_values($data['providers']);
+                if (array_key_exists('providers', $data)) {
+                    $data['providers'] = $this->prepareProviders(
+                        $request,
+                        $data['providers'],
+                        collect($oldProviders)->pluck('logo')->filter()->all(),
+                        $newFiles,
+                    );
                 }
 
                 /*
@@ -190,7 +163,7 @@ class EventController extends Controller
                 if (isset($data['tags'])) {
                     $data['tags'] = is_string($data['tags'])
                         ? collect(explode(',', $data['tags']))
-                            ->map(fn($tag) => trim($tag))
+                            ->map(fn ($tag) => trim($tag))
                             ->filter()
                             ->values()
                             ->all()
@@ -258,7 +231,7 @@ class EventController extends Controller
                 }
 
                 foreach ($event->providers ?? [] as $provider) {
-                    if (!empty($provider['logo'])) {
+                    if (! empty($provider['logo'])) {
                         $this->deleteFile($provider['logo']);
                     }
                 }
@@ -274,5 +247,53 @@ class EventController extends Controller
         } catch (\Throwable $e) {
             return back()->with('error', $e->getMessage());
         }
+    }
+
+    /**
+     * Convert provider form rows into the JSON structure stored by Event.
+     *
+     * The file input deliberately uses `logo_file`; `logo` is reserved for the
+     * persisted relative path. Existing paths are accepted only when they
+     * belong to this event, preventing hidden-field tampering from retaining or
+     * deleting unrelated uploads.
+     *
+     * @param  array<int, array<string, mixed>>  $providers
+     * @param  array<int, string>  $allowedExistingLogos
+     * @param  array<int, string>  $newFiles
+     * @return array<int, array{name: string, logo?: string}>
+     */
+    private function prepareProviders(
+        Request $request,
+        array $providers,
+        array $allowedExistingLogos = [],
+        array &$newFiles = [],
+    ): array {
+        $normalizedProviders = [];
+
+        foreach ($providers as $key => $provider) {
+            $provider = is_array($provider) ? $provider : [];
+            $name = trim((string) ($provider['name'] ?? ''));
+            $logo = $provider['existing_logo'] ?? null;
+            $file = $request->file("providers.{$key}.logo_file");
+
+            if ($file instanceof UploadedFile) {
+                $logo = $this->uploadFile($file, 'events/providers');
+                $newFiles[] = $logo;
+            } elseif (! in_array($logo, $allowedExistingLogos, true)) {
+                $logo = null;
+            }
+
+            // Do not persist the form's blank starter row.
+            if ($name === '' && empty($logo)) {
+                continue;
+            }
+
+            $normalizedProviders[] = array_filter([
+                'name' => $name,
+                'logo' => $logo,
+            ], static fn ($value) => $value !== null && $value !== '');
+        }
+
+        return $normalizedProviders;
     }
 }
