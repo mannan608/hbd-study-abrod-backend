@@ -64,7 +64,7 @@ Route::post('/counsellors/{counsellor}/booking', [CounsellorController::class, '
 
 //Events
 Route::get('/events', [EventController::class, 'index'])->name('events');
-Route::get('/event-details', [EventController::class, 'eventDetails'])->name('event-details');
+Route::get('/events/{event}', [EventController::class, 'show'])->name('event-details');
 
 Route::get('/services', [ServicesController::class, 'index'])->name('services');
 

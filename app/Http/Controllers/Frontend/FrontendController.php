@@ -5,20 +5,18 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Counsellor;
 use App\Models\Course;
+use App\Models\Event;
 
 class FrontendController extends Controller
 {
 
     public function homePage()
     {
-        $counsellors = Counsellor::query()
-            ->with('user')
-            ->where('is_active', true)
-            ->latest()
-            ->take(4)
-            ->get();
+         $events = Event::latest()->paginate(12);
+      
+// return $events;
 
-        return view('frontend.pages.home.home', compact('counsellors'));
+        return view('frontend.pages.home.home', compact('events'));
     }
 
     public function aboutPage()

@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('title', 'Events')
+
 @section('content')
     {{-- Hero Section --}}
     <section class="relative py-8 md:py-0 min-h-60 md:min-h-70 lg:min-h-80 flex items-center overflow-hidden -mt-4">
@@ -69,7 +71,7 @@
 
                     <x-form.radio id="upcoming-events" name="event" label="Upcoming Events" value="upcoming" />
                 </div>
-                <div class="flex items-center gap-4">
+                {{-- <div class="flex items-center gap-4">
                     <div class="flex items-center gap-2 ">
                         <span class="text-sm font-medium text-neutral-400">Sort:</span>
                         <select name="category"
@@ -91,22 +93,55 @@
                             <option value="duration">Providers</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
 
             {{-- event Grid --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- EVENTS GRID CONTAINER -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                @forelse ($events as $event)
+                    <div
+                        class="group relative flex flex-col h-full rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300">
 
-                @for ($i = 0; $i < 2; $i++)
-                    <a href="{{ route('event-details') }}"
-                        class="flex shrink-0 items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
+                        <!-- Event Card Component -->
+                        @include('frontend.pages.events.event-card', ['event' => $event])
 
-                        @include('frontend.pages.events.event-card')
-                    </a>
-                @endfor
-
+                        <!-- Stretched Link (Makes the entire card clickable safely without breaking inner buttons/links) -->
+                        <a href="{{ route('event-details', $event->slug) }}"
+                            class="absolute inset-0 z-10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
+                            <span class="sr-only">View details for {{ $event->title ?? 'event' }}</span>
+                        </a>
+                    </div>
+                @empty
+                    <!-- MODERN EMPTY STATE -->
+                    <div class="col-span-full py-16 px-4">
+                        <div
+                            class="max-w-md mx-auto text-center flex flex-col items-center justify-center p-8 rounded-2xl bg-slate-50 border border-dashed border-slate-200">
+                            <div
+                                class="h-16 w-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 text-blue-600">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-bold text-slate-900 mb-1">No Events Found</h3>
+                            <p class="text-sm text-slate-500">There are currently no upcoming events available. Please check
+                                back later or modify your filters.</p>
+                        </div>
+                    </div>
+                @endforelse
             </div>
+
+            <!-- PAGINATION CONTAINER -->
+            @if ($events->hasPages())
+                <div class="mt-12 pt-6 border-t border-slate-100 flex items-center justify-center">
+                    <div class="w-full max-w-lg">
+                        {{ $events->links() }}
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

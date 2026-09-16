@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('title', $event->title)
+
 @section('content')
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <!-- Main Grid Content -->
@@ -7,42 +9,38 @@
             <!-- Left Side: Overview & Features -->
             <div class="lg:col-span-2 space-y-8">
                 <div class="">
-                    {{-- <div class="w-full aspect-video overflow-hidden rounded-2xl">
-                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
-                            alt="Study Abroad Expo 2026" class="w-full h-full object-cover rounded-2xl">
-                    </div> --}}
-<div class="group relative w-full aspect-video overflow-hidden rounded-2xl">
+                    <div class="group relative w-full aspect-video overflow-hidden rounded-2xl">
 
-    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
-        alt="Study Abroad Expo 2026"
-        class="w-full h-full object-cover rounded-2xl transition duration-500 group-hover:scale-105">
+                        <img src="{{ $event->banner ? asset($event->banner) : asset('images/default-event.jpg') }}"
+                            alt="{{ $event->title }}"
+                            class="w-full h-full object-cover rounded-2xl transition duration-500 group-hover:scale-105">
 
-    <!-- Gradient Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <!-- Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent">
+                        </div>
 
-   <div class="absolute bottom-4 left-4 right-4">
-    <div class="flex items-end justify-end gap-3">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <div class="flex items-end justify-end gap-3">
 
-        <!-- Register -->
-        <a href="#"
-            class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-brand-500 shadow-lg transition hover:bg-brand-500 hover:text-white">
-            Click to Register
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M5 12h14m-6-6 6 6-6 6" />
-            </svg>
-        </a>
+                                <!-- Register -->
+                                <a href="{{ $event->registration_link }}"
+                                    class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-brand-500 shadow-lg transition hover:bg-brand-500 hover:text-white">
+                                    Click to Register
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+                                    </svg>
+                                </a>
 
-    </div>
-</div>
+                            </div>
+                        </div>
 
-</div>
-                    
+                    </div>
+
                     <div class="relative overflow-hidden mb-8 mt-4">
                         <h1
                             class="text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold tracking-tight mb-3 leading-tight line-clamp-1">
-                            The University of Notre Dame Australia — Application Day
+                            {{ $event->title }}
                         </h1>
 
                         <div class="flex flex-wrap items-center gap-3 text-xs text-neutral-700">
@@ -52,7 +50,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                <span>Organized by <strong class="text-brand-500 font-medium">HBD Services</strong></span>
+                                <span>Organized by <strong class="text-brand-500 font-medium">{{ $event->organizer }}</strong></span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor"
@@ -63,10 +61,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                                <span class="truncate max-w-md">Waterplace, Unit B02, West Surabaya, Surabaya, Jawa Timur
-                                    60216,
-                                    Indonesia</span>
-                                <a href="#"
+                                <span class="truncate max-w-md">{{ $event->location_name }}</span>
+                                <a href="{{ $event->google_map_link }}"
                                     class="text-brand-500 hover:text-brand-900 font-semibold underline text-xs">View on
                                     map</a>
                             </div>
@@ -78,15 +74,9 @@
                 <!-- About Event Section -->
                 <div class="bg-white p-6 sm:p-8 rounded-2xl border border-neutral-200/80 ">
                     <h2 class="text-xs font-bold uppercase tracking-wider text-brand-500 mb-2">Event Details</h2>
-                    <h3 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-neutral-900 mb-4">Application Day –
-                        Surabaya: Study in Australia</h3>
+                    <h3 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-neutral-900 mb-4">{{$event->short_description}}</h3>
                     <p class="text-neutral-600 leading-relaxed text-sm">
-                        Take the first step toward your global education! Join HBD Services to meet official representatives
-                        from
-                        <strong class="text-neutral-800">The University of Notre Dame Australia</strong> and
-                        <strong class="text-neutral-800">Oxford International Education Group</strong>. Whether you are just
-                        exploring your options or are ready to apply, our experts will guide you through securing your
-                        university spot, finding scholarships, and navigating the Australian student visa process.
+                        {!! $event->description !!}
                     </p>
                 </div>
 
@@ -159,8 +149,7 @@
                         <div class="flex items-center justify-between border-b border-neutral-100 pb-3 mb-4">
                             <span class="text-sm font-bold uppercase tracking-wider text-brand-500">Physical
                                 Session</span>
-                            <span
-                                class="bg-success-100 text-success-600 text-xs px-2.5 py-1 rounded-md font-medium">Ongoing</span>
+                            <a href="#" class="bg-success-100 text-success-600 text-xs px-2.5 py-1 rounded-md font-medium">Ongoing</a>
                         </div>
 
                         <div class="space-y-3 text-sm">
@@ -174,8 +163,8 @@
                                 <span class="font-semibold text-neutral-800">20 Aug 2026</span>
                             </div>
                             <div class="flex items-center justify-between text-neutral-600">
-                                <span class="flex items-center gap-2"><svg class="w-4 h-4 text-neutral-400" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
+                                <span class="flex items-center gap-2"><svg class="w-4 h-4 text-neutral-400"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg> Time</span>
@@ -183,6 +172,7 @@
                             </div>
                         </div>
 
+                    
                         <button
                             class="mt-4 w-full text-center text-xs font-bold text-brand-600 hover:text-brand-700 bg-brand-50 hover:bg-brand-100/60 py-2 rounded-lg transition">
                             View All Locations
@@ -338,190 +328,312 @@
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <!-- Tabs & Detailed Categories Content -->
-        <div class="bg-white rounded-3xl p-8 border border-neutral-100  space-y-10 mt-12">
-            <!-- Nav Tabs -->
-            <div class="flex border-b border-neutral-100 space-x-8 text-base font-normal">
-                <button class="pb-3 border-b-2 border-brand-600 text-brand-600">Facilities </button>
-                <button class="pb-3 text-neutral-500 hover:text-neutral-600 transition">Providers</button>
-                <button class="pb-3 text-neutral-500 hover:text-neutral-600 transition">Gallery</button>
-                <button class="pb-3 text-neutral-500 hover:text-neutral-600 transition">Locations</button>
-            </div>
+    <section x-data="{ activeTab: 'facilities' }" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+     <!-- Tabs & Detailed Categories Content -->
+     <div class="bg-white rounded-3xl p-8 border border-neutral-100 space-y-10 mt-12">
 
-            <!-- Facilities Item -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="bg-brand-900 text-white p-8 rounded-2xl space-y-4">
-                    <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-brand-300">
-                        <i class="fa-solid fa-building-columns text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">Facilities</h3>
-                    <p class="text-brand-100 text-sm leading-relaxed">
-                        Graduates of this program are prepared for a range of exciting career paths across local government
-                        and private sectors. Key roles include creative directors, strategy managers, design & development
-                        managers, advisors.
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-neutral-700"><i
-                                class="fa-solid fa-check text-brand-500 mr-3"></i>
-                            Campus audio and visual requirements studio</span>
-                    </div>
-                    <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-neutral-700"><i
-                                class="fa-solid fa-check text-brand-500 mr-3"></i>
-                            Central cafeteria facilities</span>
-                    </div>
-                    <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-neutral-700"><i
-                                class="fa-solid fa-check text-brand-500 mr-3"></i>
-                            Advanced mechanics research laboratory units</span>
-                    </div>
-                    <div
-                        class="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100 text-sm font-medium hover:bg-brand-50/50 transition">
-                        <span class="flex items-center text-neutral-700"><i
-                                class="fa-solid fa-check text-brand-500 mr-3"></i>
-                            International standard student study cubicles</span>
-                    </div>
-                </div>
-            </div>
+         <!-- TAB NAVIGATION -->
+         <div class="flex overflow-x-auto border-b border-neutral-100 gap-8 text-base font-normal">
 
-            <!-- Providers -->
-            <div class="pt-6 border-t border-neutral-100">
-                <h3 class="text-lg font-bold text-neutral-900 mb-2">Providers of Accommodation</h3>
-                <p class="text-sm text-neutral-600 leading-relaxed">
-                    Students can book airport pickup service from Australia borders or regional areas back to Adelaide's
-                    buildings via booking made on the HBD Services account to join regular weekly arrival points at the
-                    Accommodation Center.
-                </p>
-                <div class="flex flex-wrap items-center gap-4 mt-4">
-                    @for ($i = 0; $i < 5; $i++)
-                        <div class="shrink-0 py-3 px-4 rounded-2xl border border-neutral-300">
-                            <img src="{{ asset('frontend-img/patner/sponsor_5.png') }}" alt="Sponsor"
-                                class="h-10 w-auto object-contain">
-                        </div>
-                    @endfor
-                </div>
+             <!-- Facilities -->
+             <button type="button" @click="activeTab = 'facilities'"
+                 :class="activeTab === 'facilities'
+                     ?
+                     'border-brand-600 text-brand-600' :
+                     'border-transparent text-neutral-500 hover:text-neutral-600'"
+                 class="shrink-0 pb-3 border-b-2 transition">
+                 Facilities
+             </button>
 
-            </div>
+             <!-- Providers -->
+             <button type="button" @click="activeTab = 'providers'"
+                 :class="activeTab === 'providers'
+                     ?
+                     'border-brand-600 text-brand-600' :
+                     'border-transparent text-neutral-500 hover:text-neutral-600'"
+                 class="shrink-0 pb-3 border-b-2 transition">
+                 Providers
+             </button>
 
-            <!-- Gallery Item -->
-            <div class="pt-6 border-t border-neutral-100 space-y-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-bold text-neutral-900">Event Gallery Images</h3>
-                        <p class="text-sm text-neutral-600 mt-1">Adelaide University provides scholarships for both
-                            domestic
-                            and international students via the Student Accommodation Center.</p>
-                    </div>
-                </div>
+             <!-- Gallery -->
+             <button type="button" @click="activeTab = 'gallery'"
+                 :class="activeTab === 'gallery'
+                     ?
+                     'border-brand-600 text-brand-600' :
+                     'border-transparent text-neutral-500 hover:text-neutral-600'"
+                 class="shrink-0 pb-3 border-b-2 transition">
+                 Gallery
+             </button>
+
+             <!-- Locations -->
+             <button type="button" @click="activeTab = 'locations'"
+                 :class="activeTab === 'locations'
+                     ?
+                     'border-brand-600 text-brand-600' :
+                     'border-transparent text-neutral-500 hover:text-neutral-600'"
+                 class="shrink-0 pb-3 border-b-2 transition">
+                 Locations
+             </button>
+
+         </div>
 
 
-               @include('frontend.pages.common-section.masonary-grid')
+         <!-- FACILITIES TAB-->
+         <div x-show="activeTab === 'facilities'" x-transition.opacity.duration.200ms x-cloak>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 
-            </div>
+                 <!-- Description -->
+                 <div class="bg-brand-900 text-white p-8 rounded-2xl space-y-4">
 
-            <!-- Campus Locations Grid -->
-            <div>
-                <h2 class="text-xl font-bold mb-4">Event Locations</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @foreach (['Albury-Wodonga', 'Bathurst', 'Canberra'] as $location)
-                        <div class="w-full max-w-sm">
-                            <div
-                                class="group relative overflow-hidden rounded-2xl
-                                    border border-slate-200 bg-white
-                                     transition-all duration-300
-                                    hover:-translate-y-1 hover:border-blue-200
-                                    hover:shadow-xl">
+                     <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-brand-300">
+                         <i class="fa-solid fa-building-columns text-xl"></i>
+                     </div>
 
-                                <div class="p-5">
+                     <h3 class="text-xl font-bold">
+                         Facilities
+                     </h3>
 
-                                    <!-- Header -->
-                                    <div class="flex items-start justify-between gap-4">
+                     <p class="text-brand-100 text-sm leading-relaxed">
+                         Graduates of this program are prepared for a range of exciting
+                         career paths across local government and private sectors.
+                         Key roles include creative directors, strategy managers,
+                         design & development managers, advisors.
+                     </p>
 
-                                        <div class="flex items-center gap-3">
+                 </div>
 
-                                            <!-- Location Icon -->
-                                            <div
-                                                class="flex h-11 w-11 items-center justify-center rounded-full bg-blue-50 text-[#1068b2]">
 
-                                                <svg class="h-5 w-5" fill="none" stroke="currentColor"
-                                                    stroke-width="1.8" viewBox="0 0 24 24">
+                 <!-- Facilities List -->
+                 <div class="space-y-3">
 
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 21s7-5.2 7-11a7 7 0 10-14 0c0 5.8 7 11 7 11z" />
+                     <div
+                         class="flex items-center justify-between p-4 rounded-xl
+                        bg-neutral-50 border border-neutral-100 text-sm font-medium
+                        hover:bg-brand-50/50 transition">
+                         <span class="flex items-center text-neutral-700">
+                             <i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                             Campus audio and visual requirements studio
+                         </span>
+                     </div>
 
-                                                    <circle cx="12" cy="10" r="2.5" />
-                                                </svg>
-                                            </div>
+                     <div
+                         class="flex items-center justify-between p-4 rounded-xl
+                        bg-neutral-50 border border-neutral-100 text-sm font-medium
+                        hover:bg-brand-50/50 transition">
+                         <span class="flex items-center text-neutral-700">
+                             <i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                             Central cafeteria facilities
+                         </span>
+                     </div>
 
-                                            <div>
-                                                <h3 class="text-base font-bold text-slate-900">
-                                                    Albury-Wodonga
-                                                </h3>
+                     <div
+                         class="flex items-center justify-between p-4 rounded-xl
+                        bg-neutral-50 border border-neutral-100 text-sm font-medium
+                        hover:bg-brand-50/50 transition">
+                         <span class="flex items-center text-neutral-700">
+                             <i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                             Advanced mechanics research laboratory units
+                         </span>
+                     </div>
 
-                                                <p class="mt-0.5 text-xs font-medium text-slate-500">
-                                                    New South Wales
-                                                </p>
-                                            </div>
+                     <div
+                         class="flex items-center justify-between p-4 rounded-xl
+                        bg-neutral-50 border border-neutral-100 text-sm font-medium
+                        hover:bg-brand-50/50 transition">
+                         <span class="flex items-center text-neutral-700">
+                             <i class="fa-solid fa-check text-brand-500 mr-3"></i>
+                             International standard student study cubicles
+                         </span>
+                     </div>
 
-                                        </div>
+                 </div>
 
-                                        <!-- Country -->
-                                        <span
-                                            class="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">
-                                            Australia
-                                        </span>
+             </div>
+         </div>
 
-                                    </div>
 
-                                    <!-- Divider -->
-                                    <div class="my-5 border-t border-slate-100"></div>
+         <!-- PROVIDERS TAB -->
+         <div x-show="activeTab === 'providers'" x-transition.opacity.duration.200ms x-cloak>
+             <div class="space-y-6">
 
-                                    <!-- Location Info -->
-                                    <div class="flex items-center gap-2 text-xs text-slate-500">
+                 <div>
+                     <h3 class="text-lg font-bold text-neutral-900 mb-2">
+                         Providers of Accommodation
+                     </h3>
 
-                                        <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor"
-                                            stroke-width="1.8" viewBox="0 0 24 24">
+                     <p class="text-sm text-neutral-600 leading-relaxed">
+                         Students can book airport pickup service from Australia borders
+                         or regional areas back to Adelaide's buildings via booking made
+                         on the HBD Services account to join regular weekly arrival points
+                         at the Accommodation Center.
+                     </p>
+                 </div>
 
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M2 12h20" />
-                                        </svg>
 
-                                        <span>
-                                            Explore this location on map
-                                        </span>
+                 <!-- Sponsors -->
+                 <div class="flex flex-wrap items-center gap-4">
 
-                                    </div>
+                     @for ($i = 0; $i < 5; $i++)
+                         <div
+                             class="shrink-0 py-3 px-4 rounded-2xl border border-neutral-300
+                            hover:border-brand-300 hover:shadow-sm transition">
+                             <img src="{{ asset('frontend-img/patner/sponsor_5.png') }}" alt="Sponsor"
+                                 class="h-10 w-auto object-contain">
+                         </div>
+                     @endfor
 
-                                    <!-- Button -->
-                                    <a href="#"
-                                        class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#1068b2]  px-4 py-3 text-sm font-semibold text-white
-                                             shadow-blue-200
-                                            transition-all duration-200
-                                            hover:bg-[#0d5795] hover:shadow-md">
+                 </div>
 
-                                        View on map
+             </div>
+         </div>
 
-                                        <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-                                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M5 12h14m-6-6 6 6-6 6" />
-                                        </svg>
+         <!-- GALLERY TAB -->
+         <div x-show="activeTab === 'gallery'" x-transition.opacity.duration.200ms x-cloak>
+             <div class="space-y-6">
 
-                                    </a>
+                 <div>
+                     <h3 class="text-lg font-bold text-neutral-900">
+                         Event Gallery Images
+                     </h3>
 
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+                     <p class="text-sm text-neutral-600 mt-1">
+                         Adelaide University provides scholarships for both domestic
+                         and international students via the Student Accommodation Center.
+                     </p>
+                 </div>
 
-        </div>
-    </section>
+
+                 <!-- Masonry Gallery -->
+                 @include('frontend.pages.common-section.masonary-grid')
+
+             </div>
+         </div>
+
+
+         <!-- LOCATIONS TAB -->
+         <div x-show="activeTab === 'locations'" x-transition.opacity.duration.200ms x-cloak>
+             <div>
+
+                 <div class="mb-5">
+                     <h2 class="text-xl font-bold text-neutral-900">
+                         Event Locations
+                     </h2>
+
+                     <p class="text-sm text-neutral-600 mt-1">
+                         Explore the available event locations and view them on the map.
+                     </p>
+                 </div>
+
+
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                     @foreach (['Albury-Wodonga', 'Bathurst', 'Canberra'] as $location)
+                         <div class="w-full">
+
+                             <div
+                                 class="group relative overflow-hidden rounded-2xl
+                                border border-slate-200 bg-white
+                                transition-all duration-300
+                                hover:-translate-y-1 hover:border-blue-200
+                                hover:shadow-xl">
+
+                                 <div class="p-5">
+
+                                     <!-- Header -->
+                                     <div class="flex items-start justify-between gap-4">
+
+                                         <div class="flex items-center gap-3">
+
+                                             <!-- Location Icon -->
+                                             <div
+                                                 class="flex h-11 w-11 shrink-0 items-center
+                                                justify-center rounded-full bg-blue-50
+                                                text-[#1068b2]">
+                                                 <svg class="h-5 w-5" fill="none" stroke="currentColor"
+                                                     stroke-width="1.8" viewBox="0 0 24 24">
+                                                     <path stroke-linecap="round" stroke-linejoin="round"
+                                                         d="M12 21s7-5.2 7-11a7 7 0 10-14 0c0 5.8 7 11 7 11z" />
+
+                                                     <circle cx="12" cy="10" r="2.5" />
+                                                 </svg>
+                                             </div>
+
+
+                                             <div>
+                                                 <h3 class="text-base font-bold text-slate-900">
+                                                     {{ $location }}
+                                                 </h3>
+
+                                                 <p class="mt-0.5 text-xs font-medium text-slate-500">
+                                                     New South Wales
+                                                 </p>
+                                             </div>
+
+                                         </div>
+
+
+                                         <!-- Country -->
+                                         <span
+                                             class="shrink-0 rounded-full bg-emerald-50
+                                            px-2.5 py-1 text-[10px] font-semibold
+                                            text-emerald-700">
+                                             Australia
+                                         </span>
+
+                                     </div>
+
+
+                                     <!-- Divider -->
+                                     <div class="my-5 border-t border-slate-100"></div>
+
+
+                                     <!-- Location Info -->
+                                     <div class="flex items-center gap-2 text-xs text-slate-500">
+
+                                         <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor"
+                                             stroke-width="1.8" viewBox="0 0 24 24">
+                                             <path stroke-linecap="round" stroke-linejoin="round"
+                                                 d="M12 2v20M2 12h20" />
+                                         </svg>
+
+                                         <span>
+                                             Explore this location on map
+                                         </span>
+
+                                     </div>
+
+
+                                     <!-- Button -->
+                                     <a href="#"
+                                         class="mt-4 flex w-full items-center justify-center
+                                        gap-2 rounded-xl bg-[#1068b2] px-4 py-3
+                                        text-sm font-semibold text-white
+                                        shadow-blue-200 transition-all duration-200
+                                        hover:bg-[#0d5795] hover:shadow-md">
+                                         View on map
+
+                                         <svg class="h-4 w-4 transition-transform duration-200
+                                            group-hover:translate-x-1"
+                                             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                             <path stroke-linecap="round" stroke-linejoin="round"
+                                                 d="M5 12h14m-6-6 6 6-6 6" />
+                                         </svg>
+
+                                     </a>
+
+                                 </div>
+
+                             </div>
+
+                         </div>
+                     @endforeach
+
+                 </div>
+
+             </div>
+         </div>
+
+     </div>
+ </section>
 @endsection

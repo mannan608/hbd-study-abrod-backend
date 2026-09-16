@@ -2,8 +2,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header
             class="mx-auto max-w-2xl px-4 pb-6 text-center font-sans reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-zap w-4 h-4 text-brand-500 transition-transform duration-500 group-hover:scale-110">
                     <path
@@ -20,7 +21,8 @@
             </h1>
 
             <!-- Subheading Description -->
-            <p class="mx-auto mt-4 max-w-2xl text-base text-neutral-600 sm:text-lg transition-all duration-700 delay-300">
+            <p
+                class="mx-auto mt-4 max-w-2xl text-base text-neutral-600 sm:text-lg transition-all duration-700 delay-300">
                 Reserve your spot in high-value webinars and virtual expos to fast-track your university planning.
             </p>
         </header>
@@ -36,12 +38,26 @@
 
 
             <div class="animate-marquee flex w-max gap-6 py-4">
-               @for ($i = 0; $i < 10; $i++)
-               <a href="{{ route('event-details') }}" class="flex w-113.5  shrink-0 items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
+                {{-- @for ($i = 0; $i < 10; $i++)
+               <a href="{{ route('event-details') }}" class="w-113.5 ">
      
                     @include('frontend.pages.events.event-card')
                 </a>
-                @endfor
+                @endfor --}}
+
+                @forelse ($events as $event)
+                    <a href="{{ route('event-details') }}" class="w-113.5 ">
+
+                        @include('frontend.pages.events.event-card', [
+                            'event' => $event,
+                        ])
+                    </a>
+
+                @empty
+                    <div class="col-span-full py-12 text-center">
+                        <p class="text-gray-500">No events found.</p>
+                    </div>
+                @endforelse
             </div>
 
         </div>
