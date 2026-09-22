@@ -28,14 +28,13 @@
         </header>
 
         <div
-            class="relative w-full overflow-hidden bg-slate-50 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200 rounded-3xl">
+            class="relative w-full overflow-hidden bg-neutral-50 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200 rounded-3xl">
             <div
-                class="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-8 md:w-28 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent">
+                class="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-8 md:w-28 bg-gradient-to-r from-neutral-50 via-neutral-50/80 to-transparent">
             </div>
             <div
-                class="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-8 md:w-28 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent">
+                class="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-8 md:w-28 bg-gradient-to-l from-neutral-50 via-neutral-50/80 to-transparent">
             </div>
-
 
             <div class="animate-marquee flex w-max gap-6 py-4">
                 @forelse ($events as $event)

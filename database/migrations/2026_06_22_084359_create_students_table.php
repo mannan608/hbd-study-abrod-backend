@@ -20,16 +20,21 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
+        
 
             // Student Information
             $table->string('student_number')->unique();
+            $table->string('first_name');
+            $table->string('last_name');
 
             $table->date('date_of_birth')->nullable();
             $table->string('gender')->nullable();
-            $table->string('nationality')->nullable();
+            $table->string('destination')->nullable();
             $table->string('place_of_birth')->nullable();
             $table->string('marital_status')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('whatsapp', 50)->nullable();
+            $table->string('alt_email')->nullable();
+            $table->string('alt_phone')->nullable();
 
             // Passport Information
             $table->string('passport_number')->nullable()->unique();

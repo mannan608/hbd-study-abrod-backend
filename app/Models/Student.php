@@ -23,7 +23,7 @@ class Student extends Model
         // Student Information
         'date_of_birth',
         'gender',
-        'nationality',
+        'destination',
         'place_of_birth',
         'marital_status',
 

@@ -231,7 +231,7 @@
                             </div>
                             <div>
                                 <p class="text-xs text-neutral-400">Name</p>
-                                <p class="font-semibold text-neutral-800">HBD Services</p>
+                                <p class="font-semibold text-neutral-800">{{ $event->organizer }}</p>
                             </div>
                         </div>
 
@@ -246,8 +246,8 @@
                             </div>
                             <div>
                                 <p class="text-xs text-neutral-400">Email</p>
-                                <a href="mailto:enquiry@hbdervices.com.au"
-                                    class="font-medium text-brand-600 hover:underline">enquiry@hbdervices.com.au</a>
+                                <a href="mailto:{{ $event->contact_email }}"
+                                    class="font-medium text-brand-600 hover:underline">{{ $event->contact_email }}</a>
                             </div>
                         </div>
 
@@ -264,11 +264,16 @@
                                 <p class="text-xs text-neutral-400">Phone</p>
                                 <div class="flex items-center gap-1.5">
                                     <span
-                                        class="inline-block w-4 h-3 rounded-sm bg-red-600 relative overflow-hidden border border-neutral-200">
-                                        <span class="absolute bottom-0 w-full h-1/2 bg-white"></span>
+                                        class="relative inline-block h-3 w-4 overflow-hidden rounded-sm bg-green-600 border border-neutral-200">
+
+                                        {{-- Bangladesh Flag --}}
+                                        <span
+                                            class="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600">
+                                        </span>
+
                                     </span>
                                     <a href="tel:+623160007888"
-                                        class="font-semibold text-neutral-800 hover:text-brand-600">+62 31 22222222</a>
+                                        class="font-semibold text-neutral-800 hover:text-brand-600">{{ $event->contact_phone }}</a>
                                 </div>
                             </div>
                         </div>
@@ -283,45 +288,61 @@
 
                     <div class="flex flex-col gap-3">
 
-                        @for ($i = 0; $i < 3; $i++)
-                            {{-- Event 1 --}}
-                            <a href="#"
+                        @forelse ($latestEvents as $latestEvent)
+                            <a href="{{ route('event-details', $latestEvent->slug) }}"
                                 class="group flex w-full gap-3 rounded-xl p-2 -m-2 transition-all duration-200 hover:bg-neutral-50">
+
                                 {{-- Image --}}
-                                <div class="w-16 h-16 sm:w-24 sm:h-18 shrink-0 overflow-hidden rounded-lg bg-neutral-100">
-                                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=300&q=80"
-                                        alt="UK Study Opportunities Seminar"
+                                <div
+                                    class="w-16 h-16 sm:w-24 sm:h-18 shrink-0 overflow-hidden rounded-lg bg-neutral-100 border border-neutral-300">
+
+                                    <img src="{{ $latestEvent->banner ? asset($latestEvent->banner) : asset('frontend/images/default-event.jpg') }}"
+                                        alt="{{ $latestEvent->title }}"
                                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                                 </div>
 
                                 {{-- Content --}}
                                 <div class="min-w-0 flex-1 flex flex-col justify-center">
+
                                     <h4
                                         class="text-sm font-semibold leading-5 text-neutral-800 line-clamp-2 transition-colors duration-200 group-hover:text-[#1068b2]">
-                                        UK Study Opportunities Seminar
+                                        {{ $latestEvent->title }}
                                     </h4>
 
                                     <div class="flex items-center gap-1.5 mt-2 text-xs text-neutral-500">
+
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                             stroke="currentColor" stroke-width="1.8" class="w-3.5 h-3.5 shrink-0">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M6.75 3v2.25M17.25 3v2.25M3.75 9h16.5M5.25 5.25h13.5A1.5 1.5 0 0 1 20.25 6.75v12A1.5 1.5 0 0 1 18.75 20.25H5.25a1.5 1.5 0 0 1-1.5-1.5v-12a1.5 1.5 0 0 1 1.5-1.5Z" />
                                         </svg>
 
-                                        <span>22 Aug, 2026</span>
+                                        <span>
+                                            {{ \Carbon\Carbon::parse($latestEvent->event_date)->format('d M, Y') }}
+                                        </span>
+
                                     </div>
                                 </div>
 
                                 {{-- Arrow --}}
                                 <div
                                     class="self-center shrink-0 text-neutral-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#1068b2]">
+
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="1.8" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
                                     </svg>
+
                                 </div>
+
                             </a>
-                        @endfor
+
+                        @empty
+                            <p class="text-sm text-neutral-500 py-3">
+                                No upcoming events available.
+                            </p>
+                        @endforelse
+
                     </div>
 
                 </div>
@@ -565,8 +586,7 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-                        @foreach (['Albury-Wodonga', 'Bathurst', 'Canberra'] as $location)
-                            <div class="w-full">
+                        <div class="w-full">
 
                                 <div
                                     class="group relative overflow-hidden rounded-2xl
@@ -599,11 +619,11 @@
 
                                                 <div>
                                                     <h3 class="text-base font-bold text-slate-900">
-                                                        {{ $location }}
+                                                        {{ $event->location_name }}
                                                     </h3>
 
                                                     <p class="mt-0.5 text-xs font-medium text-slate-500">
-                                                        New South Wales
+                                                        {{ $event->address }}
                                                     </p>
                                                 </div>
 
@@ -615,7 +635,7 @@
                                                 class="shrink-0 rounded-full bg-emerald-50
                                             px-2.5 py-1 text-[10px] font-semibold
                                             text-emerald-700">
-                                                Australia
+                                                Bangladesh
                                             </span>
 
                                         </div>
@@ -642,7 +662,7 @@
 
 
                                         <!-- Button -->
-                                        <a href="#"
+                                        <a href="{{ $event->google_map_link }}"
                                             class="mt-4 flex w-full items-center justify-center
                                         gap-2 rounded-xl bg-[#1068b2] px-4 py-3
                                         text-sm font-semibold text-white
@@ -665,7 +685,6 @@
                                 </div>
 
                             </div>
-                        @endforeach
 
                     </div>
 

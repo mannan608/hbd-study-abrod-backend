@@ -328,10 +328,9 @@
                             {{-- Phone & WhatsApp side by side --}}
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="phone" class="block text-sm font-semibold text-slate-700 mb-2">
-                                        Phone Number
-                                        <span class="font-normal text-slate-400 text-xs">(optional)</span>
-                                    </label>
+                                     <label for="phone" class="block text-sm font-semibold text-slate-700 mb-2">
+                                    Phone Number <span class="text-red-500">*</span>
+                                </label>
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor"
@@ -369,30 +368,19 @@
                                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div>
+                            </div>                          
 
-                            {{-- Interested Course --}}
                             <div>
-                                <label for="interested_course" class="block text-sm font-semibold text-slate-700 mb-2">
-                                    Interested Course
-                                    <span class="font-normal text-slate-400 text-xs">(optional)</span>
-                                </label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor"
-                                            stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                        </svg>
-                                    </div>
-                                    <input type="text" id="interested_course" name="interested_course"
-                                        value="{{ old('interested_course') }}"
-                                        placeholder="e.g. IELTS, Web Development..."
-                                        class="w-full pl-12 pr-4 py-2.5 rounded-xl border @error('interested_course') border-red-400 bg-red-50/50 @else border-slate-200 @enderror text-slate-900 placeholder-slate-400 placeholder:text-sm focus:outline-none focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all duration-200">
-                                </div>
-                                @error('interested_course')
-                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
+                                <x-form.multi-select name="destination[]" label="Interested Destination" :options="[
+                                    'Australia' => 'Australia',
+                                    'United Kingdom' => 'United Kingdom',
+                                    'Canada' => 'Canada',
+                                    'United States' => 'United States',
+                                    'New Zealand' => 'New Zealand',
+                                    'Malaysia' => 'Malaysia',
+                                    
+                                ]"
+                                    :selected="old('destination', [])" />
                             </div>
 
                             {{-- Message --}}
