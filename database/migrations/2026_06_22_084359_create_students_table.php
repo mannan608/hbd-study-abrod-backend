@@ -19,8 +19,7 @@ return new class extends Migration
 
             $table->foreignId('user_id')
                 ->constrained('users')
-                ->cascadeOnDelete();
-        
+                ->cascadeOnDelete();        
 
             // Student Information
             $table->string('student_number')->unique();
@@ -40,6 +39,9 @@ return new class extends Migration
             $table->string('passport_number')->nullable()->unique();
             $table->date('passport_issue_date')->nullable();
             $table->date('passport_expiry_date')->nullable();
+
+            // service type
+            $table->string('service_type')->nullable(); // HBD Service (hbd),Language Academic(la)
 
             $table->softDeletes();
             $table->timestamps();

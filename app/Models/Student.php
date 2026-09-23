@@ -21,16 +21,26 @@ class Student extends Model
         'profile_step',
 
         // Student Information
+        'first_name',
+        'last_name',
+
         'date_of_birth',
         'gender',
         'destination',
         'place_of_birth',
         'marital_status',
+        'whatsapp',
+        'alt_email',
+        'alt_phone',
 
         // Passport Information
         'passport_number',
         'passport_issue_date',
         'passport_expiry_date',
+
+        // service type
+        'service_type',
+
     ];
 
     protected function casts(): array
