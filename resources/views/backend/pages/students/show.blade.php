@@ -14,11 +14,9 @@
 
                         {{-- Header Background --}}
                         <div class="relative h-20 bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 sm:h-24">
-
                             <div
                                 class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_45%)]">
                             </div>
-
                         </div>
 
 
@@ -107,15 +105,15 @@
                                     </div>
 
 
-                                    <div class="text-center">
-                                        <p class="text-xl font-bold text-brand-600">
-                                            92%
+                                    {{-- <div class="text-center">
+                                        <p class="text-xl font-bold text-brand-950">
+                                           322
                                         </p>
 
                                         <p class="mt-0.5 text-xs text-slate-500">
-                                            Application Ready
+                                            GRE General
                                         </p>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 
@@ -151,13 +149,13 @@
 
                                     <button type="button"
                                         class="rounded-lg border border-brand-200 bg-white px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-50">
-                                        Preview Application
+                                         HBD Services
                                     </button>
 
 
                                     <button type="button"
                                         class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
-                                        Application for Visa
+                                        Quick Preview
                                     </button>
 
                                 </div>
@@ -319,7 +317,7 @@
 
                     {{-- 8. APPLICATIONS HISTORY --}}
                     <section id="applications-history"
-                        class="scroll-mt-28 rounded-2xl border border-indigo-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
+                        class="scroll-mt-28 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
                         @include('backend.pages.students.partial.applications-history')
                     </section>
 
@@ -333,111 +331,7 @@
 
                 {{--  RIGHT COLUMN STICKY --}}
                 <aside class="min-w-0 self-start lg:sticky lg:top-22 lg:col-span-4">
-                    <div class="space-y-6">
-                        {{-- LANGUAGE PROFILE --}}
-                        <section class="rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6">
-
-                            <div class="flex items-center justify-between border-b border-brand-50 pb-4">
-
-                                <div class="flex items-center gap-3">
-
-                                    <div
-                                        class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                                        <iconify-icon icon="lucide:languages" class="text-xl"></iconify-icon>
-                                    </div>
-
-                                    <div>
-
-                                        <h2 class="text-base font-bold text-brand-950">
-                                            Skills & Communication
-                                        </h2>
-
-                                        <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-brand-600">
-                                            Language Proficiency
-                                        </p>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            {{-- Language Cards --}}
-                            <div class="mt-5 grid grid-cols-1 gap-4">
-
-
-                                {{-- Bengali --}}
-                                <div
-                                    class="flex items-center justify-between rounded-xl border border-brand-100/80 bg-slate-50/50 p-3.5 transition-all hover:bg-white hover:shadow-xs">
-
-                                    <div class="flex items-center gap-3">
-
-                                        <div
-                                            class="flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-100 bg-emerald-50 text-emerald-600">
-                                            <iconify-icon icon="lucide:check-circle-2" class="text-base"></iconify-icon>
-                                        </div>
-
-                                        <div>
-
-                                            <h3 class="text-xs font-bold text-brand-950">
-                                                Bengali
-                                            </h3>
-
-                                            <p class="text-[11px] text-slate-500">
-                                                First Language
-                                            </p>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <span
-                                        class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700">
-                                        Native
-                                    </span>
-
-                                </div>
-
-
-                                {{-- English --}}
-                                <div
-                                    class="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/50 p-3.5 transition-all hover:bg-white hover:shadow-xs">
-
-                                    <div class="flex items-center gap-3">
-
-                                        <div
-                                            class="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-blue-600">
-                                            <iconify-icon icon="lucide:message-square" class="text-base"></iconify-icon>
-                                        </div>
-
-                                        <div>
-
-                                            <h3 class="text-xs font-bold text-slate-900">
-                                                English
-                                            </h3>
-
-                                            <p class="text-[11px] text-slate-500">
-                                                Intermediate / B2
-                                            </p>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <span
-                                        class="inline-flex items-center rounded-md border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
-                                        Conversational
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-                    </div>
+                    @include('backend.pages.students.partial.lead-activity')
                 </aside>
             </div>
         </main>
