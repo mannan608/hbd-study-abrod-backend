@@ -31,12 +31,9 @@
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Name</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Phone No
                         </th>
-                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">English
-                            Proficiency</th>
-                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Source and
-                            Initiative</th>
-                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Follow Up
-                            Date</th>
+                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">English Proficiency</th>
+                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Source and Initiative</th>
+                        <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Follow Up  Date</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
                         <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-right">
                             Action</th>

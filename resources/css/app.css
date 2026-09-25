@@ -1119,3 +1119,6 @@ pre[class*='language-'] {
       }
     }
 
+        [x-cloak] {
+            display: none !important;
+        }
