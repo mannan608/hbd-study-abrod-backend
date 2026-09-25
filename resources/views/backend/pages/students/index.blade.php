@@ -30,7 +30,7 @@
                 'priority_class' => 'bg-rose-50 text-rose-700 border-rose-200',
 
                 'outcome' => [
-                    'type' => 'Follow Up',
+                    'type' => 'File Open',
                     'date' => '12/20/2023',
                     'by' => 'mannan',
                 ],
@@ -106,7 +106,7 @@
                 'priority_class' => 'bg-slate-50 text-slate-600 border-slate-200',
 
                 'outcome' => [
-                    'type' => 'Follow Up',
+                    'type' => 'Visit Office',
                     'date' => '12/25/2023',
                     'by' => 'mannan',
                 ],
@@ -182,7 +182,7 @@
                 'priority_class' => 'bg-rose-50 text-rose-700 border-rose-200',
 
                 'outcome' => [
-                    'type' => 'Follow Up',
+                    'type' => 'Attend Session',
                     'date' => '12/23/2023',
                     'by' => 'mannan',
                 ],
@@ -220,7 +220,7 @@
                 'priority_class' => 'bg-amber-50 text-amber-700 border-amber-200',
 
                 'outcome' => [
-                    'type' => 'Follow Up',
+                    'type' => 'Master Class',
                     'date' => '12/24/2023',
                     'by' => 'mannan',
                 ],
@@ -279,33 +279,32 @@
     }" class="flex flex-col gap-4 md:gap-6">
 
         <!-- Page Header -->
-            @if (session('success'))
-                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-transition
-                    class="fixed top-3 right-5 z-[99999] w-full max-w-sm">
-                    <div class="relative">
-                        <button @click="show = false"
-                            class="absolute top-3 right-3 z-10 text-neutral-500 hover:text-neutral-700">
-                            ✕
-                        </button>
+        @if (session('success'))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-transition
+                class="fixed top-3 right-5 z-[99999] w-full max-w-sm">
+                <div class="relative">
+                    <button @click="show = false" class="absolute top-3 right-3 z-10 text-neutral-500 hover:text-neutral-700">
+                        ✕
+                    </button>
 
-                        <x-ui.alert variant="success" title="" message="{{ session('success') }}" />
-                    </div>
-                </div>
-            @endif
-
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                <div>
-                    <h3 class="text-lg font-semibold text-neutral-800 dark:text-white/90">Leads Management</h3>
-                    <p class="text-sm text-neutral-500 dark:text-neutral-400">Manage all leads.
-                    </p>
-                </div>
-                <div class="">
-                    <a href="#"
-                        class="px-4 py-2 bg-brand-600 text-white rounded-lg text-sm font-medium hover:bg-brand-600 transition-colors">
-                        + Add New Lead
-                    </a>
+                    <x-ui.alert variant="success" title="" message="{{ session('success') }}" />
                 </div>
             </div>
+        @endif
+
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+                <h3 class="text-lg font-semibold text-neutral-800 dark:text-white/90">Leads Management</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Manage all leads.
+                </p>
+            </div>
+            <div class="">
+                <a href="#"
+                    class="px-4 py-2 bg-brand-600 text-white rounded-lg text-sm font-medium hover:bg-brand-600 transition-colors">
+                    + Add New Lead
+                </a>
+            </div>
+        </div>
 
 
 
@@ -431,7 +430,7 @@
 
 
                 <button type="button" @click="filterOpen = false"
-                    class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-200 transition">
+                    class="text-slate-400 hover:text-slate-600 p-1.5 w-8 h-8 rounded-lg hover:bg-slate-200 transition">
 
                     <iconify-icon icon="lucide:x" class="text-base">
                     </iconify-icon>
@@ -1220,20 +1219,57 @@
 
                                 <!-- Outcome -->
                                 <td class="py-4 px-4 align-top">
+                                    <div class="flex flex-col space-y-1.5" x-data="{
+                                        isOverdue(dateStr) {
+                                            if (!dateStr) return false;
+                                            const date = new Date(dateStr);
+                                            const today = new Date();
+                                            today.setHours(0, 0, 0, 0);
+                                            return date < today;
+                                        }
+                                    }">
+                                        <!-- Outcome Type Badge -->
+                                        <div class="flex items-center">
+                                            <span
+                                                class="inline-flex items-center gap-1.5 rounded-md px-2 py-0.5 text-xs font-semibold ring-1 ring-inset"
+                                                :class="{
+                                                    'bg-sky-50 text-sky-700 ring-sky-600/20': row.outcome
+                                                        .type === 'Follow-up',
+                                                    'bg-emerald-50 text-emerald-700 ring-emerald-600/20': row.outcome
+                                                        .type === 'File Open',
+                                                    'bg-amber-50 text-amber-700 ring-amber-600/20': row.outcome
+                                                        .type === 'Visit Office',
+                                                    'bg-purple-50 text-purple-700 ring-purple-600/20': row.outcome
+                                                        .type === 'Attend Session',
+                                                    'bg-indigo-50 text-indigo-700 ring-indigo-600/20': row.outcome
+                                                        .type === 'Attend Expo',
+                                                    'bg-rose-50 text-rose-700 ring-rose-600/20': row.outcome
+                                                        .type === 'Master Class',
+                                                    'bg-slate-100 text-slate-700 ring-slate-600/10': !['Follow-up',
+                                                        'File Open', 'Visit Office', 'Attend Session',
+                                                        'Attend Expo', 'Master Class'
+                                                    ].includes(row.outcome.type)
+                                                }">
+                                                <span x-text="row.outcome.type"></span>
+                                            </span>
+                                        </div>
 
-                                    <div class="flex flex-col space-y-0.5">
+                                        <!-- Outcome Date (Red if overdue) -->
+                                        <div class="flex items-center">
+                                            <span
+                                                class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-mono font-medium"
+                                                :class="isOverdue(row.outcome.date) ?
+                                                    'bg-red-50 text-red-600 font-semibold ring-1 ring-inset ring-red-500/20' :
+                                                    'text-slate-500'">
+                                                <span x-text="row.outcome.date"></span>
+                                            </span>
+                                        </div>
 
-                                        <span class="font-semibold text-slate-800" x-text="row.outcome.type">
-                                        </span>
-
-                                        <span class="text-slate-500 font-mono" x-text="row.outcome.date">
-                                        </span>
-
-                                        <span class="text-slate-400" x-text="row.outcome.by">
-                                        </span>
-
+                                        <!-- Outcome By -->
+                                        <template x-if="row.outcome.by">
+                                            <span class="text-xs text-slate-400" x-text="row.outcome.by"></span>
+                                        </template>
                                     </div>
-
                                 </td>
 
 

@@ -37,4 +37,15 @@ class StudentController extends Controller
 
     return view('backend.pages.students.show', compact('student'));
 }
+
+ public function create(string $role, Request $request)
+{
+    $user = $request->user();
+
+    $user->can('student.view') || abort(403);
+
+   
+    return view('backend.pages.students.create');
+}
+
 }

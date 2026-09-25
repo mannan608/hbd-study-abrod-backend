@@ -89,6 +89,7 @@ Route::prefix('{role}')
         Route::delete('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'destroy'])->name('booking-sessions.destroy');
         Route::put('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'update'])->name('booking-sessions.update');
         Route::get('students', [StudentController::class, 'index'])->name('students.index');
+        Route::get('students/create', [StudentController::class, 'create'])->name('students.create');
         Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
 
     });

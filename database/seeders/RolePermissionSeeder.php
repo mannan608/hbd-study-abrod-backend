@@ -147,6 +147,7 @@ class RolePermissionSeeder extends Seeder
             //students
             'student.list',
             'student.view',
+            'student.create',
             'student.delete',
             'student.manage',
 
