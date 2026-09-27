@@ -90,9 +90,8 @@ Route::prefix('{role}')
         Route::put('booking-sessions/{bookingId}', [CounsellorBookingController::class, 'update'])->name('booking-sessions.update');
         Route::get('students', [StudentController::class, 'index'])->name('students.index');
         Route::get('students/create', [StudentController::class, 'create'])->name('students.create');
-        Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
-
         Route::get('students/add', [StudentController::class, 'addStudent'])->name('students.add');
         Route::get('students/bulk-import', [StudentController::class, 'bulkImport'])->name('students.import');
+        Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
 
     });

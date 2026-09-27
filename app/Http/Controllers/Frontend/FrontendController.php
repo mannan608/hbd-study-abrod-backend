@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Counsellor;
 use App\Models\Course;
 use App\Models\Event;
+use Illuminate\Support\Facades\File;
+
 
 class FrontendController extends Controller
 {
@@ -13,10 +15,14 @@ class FrontendController extends Controller
     public function homePage()
     {
          $events = Event::latest()->paginate(12);
+          $destinations = json_decode(
+            File::get(resource_path('data/destinations.json')),
+            true
+        );
       
 // return $events;
 
-        return view('frontend.pages.home.home', compact('events'));
+        return view('frontend.pages.home.home', compact('events','destinations'));
     }
 
     public function aboutPage()
@@ -41,10 +47,6 @@ class FrontendController extends Controller
     }
     public function achieve(){
         return view('frontend.pages.achieve.achieve');
-    }
-
-    public function destinations(){
-        return view('frontend.pages.destinations.index');
     }
      public function howWeWork(){
         return view('frontend.pages.how-we-works.index');

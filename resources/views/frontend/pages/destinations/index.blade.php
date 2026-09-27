@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    @include('frontend.pages.common-section.destination')
+    @include('frontend.pages.common-section.destination', ['destinations' => $destinations])
 @endsection

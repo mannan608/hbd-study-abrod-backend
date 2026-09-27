@@ -5,7 +5,7 @@
     @include('frontend.pages.home.sections.hero')
 
     {{-- @include('frontend.pages.home.sections.stats') --}}
-    @include('frontend.pages.common-section.destination')
+    @include('frontend.pages.common-section.destination', ['destinations' => $destinations])
 
  @include('frontend.pages.common-section.service-section')
 

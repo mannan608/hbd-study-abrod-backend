@@ -29,7 +29,8 @@ Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 //static pages
 Route::get('/', [FrontendController::class, 'homePage'])->name('home');
 Route::get('/destinations', [DestinationController::class, 'destinations'])->name('destinations');
-Route::get('/destination/details', [DestinationController::class, 'destinationDetails'])->name('destination-details');
+Route::get('/destination/{slug}', [DestinationController::class, 'show'])
+    ->name('destination.details');
 Route::get('/how-we-works', [FrontendController::class, 'howWeWork'])->name('how-we-works');
 Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
 Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contact');

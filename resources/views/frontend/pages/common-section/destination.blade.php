@@ -1,7 +1,7 @@
 <section class="pb-10 md:pb-16 lg:pb-20 defer-render pt-8">
-  <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
 
-    <header
+        <header
             class="mx-auto max-w-2xl px-4 py-12 text-center transition-all duration-700 reveal-on-scroll opacity-0 translate-y-10 transition-all duration-1000 ease-out">
             <div
                 class="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/10 rounded-full mb-6 transition-all duration-700 delay-100">
@@ -24,14 +24,19 @@
             <!-- Subheading Description -->
             <p
                 class="mx-auto mt-4 max-w-2xl text-base text-neutral-600 sm:text-lg transition-all duration-700 delay-300">
-                Explore top-tier universities, world-class education systems, and vibrant culture across leading global destinations.
+                Explore top-tier universities, world-class education systems, and vibrant culture across leading global
+                destinations.
             </p>
         </header>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-      
-     @include('frontend.pages.destinations.card')     
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+            @foreach ($destinations as $destination)
+                @include('frontend.pages.destinations.card', [
+                    'destination' => $destination,
+                ])
+            @endforeach
+
+        </div>
 
     </div>
-   
-  </div>
 </section>
