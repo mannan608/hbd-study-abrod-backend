@@ -1,5 +1,8 @@
 @extends('frontend.layouts.app')
 
+@section('title', $counsellor->user?->name ?? 'Counsellor')
+
+
 @section('content')
     {{-- Hero Section --}}
     <section class="relative py-8 md:py-0 min-h-60 md:min-h-70 lg:min-h-80 flex items-center overflow-hidden -mt-4">

@@ -2,6 +2,7 @@
 
 @section('content')
     <!-- Main Container -->
+@section('title', "About Us")
 
     <!-- About Us Section -->
     @include('frontend.pages.common-section.about-section')

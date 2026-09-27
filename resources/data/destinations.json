@@ -5,14 +5,16 @@
         "slug": "australia",
         "code": "AU",
         "currency": "AUD",
-        "image":"frontend-img/destinations/australia.webp",
-        
+        "image": "frontend-img/destinations/australia.webp",
 
         "hero": {
             "badge": "Study in Australia",
             "title": "Study at World-Class Australian Universities",
             "highlight": "World-Class",
-            "description": "Build your global future with internationally recognised education, practical learning opportunities and expert guidance."          
+            "description": "Build your global future with internationally recognised education, practical learning opportunities and expert guidance.",
+            "primary_button": "Book Free Consultation",
+            "secondary_button": "Explore Universities",
+            "image": "frontend-img/destinations/australia.webp"
         },
 
         "stats": [
@@ -21,23 +23,23 @@
             "Post-Study Opportunities"
         ],
 
-       "advantages": {
-    "academic": {
-        "icon": "academic",
-        "title": "Academic Excellence",
-        "description": "Australia offers internationally recognised universities and a strong focus on teaching, research and practical education."
-    },
-    "career": {
-        "icon": "briefcase",
-        "title": "Career Opportunities",
-        "description": "Students can gain valuable international experience through study and eligible work opportunities."
-    },
-    "environment": {
-        "icon": "globe",
-        "title": "Multicultural Environment",
-        "description": "Australia provides a diverse and multicultural environment for international students."
-    }
-},
+        "advantages": {
+            "academic": {
+                "icon": "academic",
+                "title": "Academic Excellence",
+                "description": "Australia offers internationally recognised universities and a strong focus on teaching, research and practical education."
+            },
+            "career": {
+                "icon": "briefcase",
+                "title": "Career Opportunities",
+                "description": "Students can gain valuable international experience through study and eligible work opportunities."
+            },
+            "environment": {
+                "icon": "globe",
+                "title": "Multicultural Environment",
+                "description": "Australia provides a diverse and multicultural environment for international students."
+            }
+        },
 
         "universities": [
             {
@@ -53,8 +55,8 @@
                 "location": "Melbourne",
                 "short_info": "Global education and research",
                 "logo": "MU",
-                  "ranking": "#801-1000",
-                "url": "https://www.unimelb.edu.au/"
+                "ranking": "#801-1000",
+                "url": "https://www.monash.edu/"
             },
             {
                 "name": "University of Sydney",
@@ -62,7 +64,7 @@
                 "short_info": "Historic and globally recognised university",
                 "logo": "US",
                 "ranking": "#801-1000",
-                "url": "https://www.unimelb.edu.au/"
+                "url": "https://www.sydney.edu.au/"
             },
             {
                 "name": "University of Queensland",
@@ -70,7 +72,7 @@
                 "short_info": "Strong research and academic programs",
                 "logo": "UQ",
                 "ranking": "#801-1000",
-                "url": "https://www.unimelb.edu.au/"
+                "url": "https://www.uq.edu.au/"
             }
         ],
 
@@ -140,23 +142,23 @@
         ]
     },
 
+
     {
         "id": 2,
         "name": "United Kingdom",
         "slug": "united-kingdom",
         "code": "UK",
         "currency": "GBP",
-        "image":"frontend-img/destinations/united-kingdom.webp",
-
+        "image": "frontend-img/destinations/united-kingdom.webp",
 
         "hero": {
-            "badge": "Premier UK Education Consultancy",
+            "badge": "Study in the United Kingdom",
             "title": "Study at World-Class UK Universities",
             "highlight": "World-Class",
             "description": "Build your global future with expert guidance, university application support and personalised study advice.",
             "primary_button": "Book Free Consultation",
             "secondary_button": "Explore Universities",
-            "image": "frontend-img/images/destinations/uk.webp"
+            "image": "frontend-img/destinations/united-kingdom.webp"
         },
 
         "stats": [
@@ -165,48 +167,56 @@
             "Fast Track Admission"
         ],
 
-        "advantages": [
-            {
+        "advantages": {
+            "academic": {
                 "icon": "academic",
                 "title": "Academic Excellence",
                 "description": "The UK is home to globally recognised universities offering a wide range of undergraduate and postgraduate programs."
             },
-            {
-                "icon": "academic",
-                "title": "Shorter Degrees",
-                "description": "Many UK undergraduate degrees can be completed in three years, while many master's programs can be completed in one year."
-            },
-            {
+            "career": {
                 "icon": "briefcase",
                 "title": "Career Opportunities",
                 "description": "International students can access eligible post-study work options subject to current immigration rules."
+            },
+            "environment": {
+                "icon": "globe",
+                "title": "Shorter Degrees",
+                "description": "Many UK undergraduate degrees can be completed in three years, while many master's programs can be completed in one year."
             }
-        ],
+        },
 
         "universities": [
             {
                 "name": "University of Greenwich",
                 "location": "London",
                 "short_info": "Career-focused education",
-                "logo": "U"
+                "logo": "U",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "Ulster University",
                 "location": "Belfast & London",
                 "short_info": "Strong employability focus",
-                "logo": "U"
+                "logo": "U",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "Coventry University",
                 "location": "Coventry",
                 "short_info": "Modern teaching and research",
-                "logo": "C"
+                "logo": "C",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "BPP University",
                 "location": "London",
                 "short_info": "Specialised law and business education",
-                "logo": "B"
+                "logo": "B",
+                "ranking": "",
+                "url": ""
             }
         ],
 
@@ -276,14 +286,14 @@
         ]
     },
 
+
     {
         "id": 3,
         "name": "United States",
         "slug": "united-states",
         "code": "US",
         "currency": "USD",
-        "image":"frontend-img/destinations/statue_liberty_usa.webp",
-
+        "image": "frontend-img/destinations/statue_liberty_usa.webp",
 
         "hero": {
             "badge": "Study in the United States",
@@ -292,7 +302,7 @@
             "description": "Explore flexible study options, innovative learning environments and internationally recognised qualifications across the United States.",
             "primary_button": "Book Free Consultation",
             "secondary_button": "Explore Universities",
-            "image": "frontend-img/images/destinations/usa.webp"
+            "image": "frontend-img/destinations/statue_liberty_usa.webp"
         },
 
         "stats": [
@@ -301,48 +311,56 @@
             "Research Opportunities"
         ],
 
-        "advantages": [
-            {
+        "advantages": {
+            "academic": {
                 "icon": "academic",
                 "title": "World-Class Education",
                 "description": "The United States offers a wide range of highly regarded universities and colleges across diverse academic fields."
             },
-            {
+            "career": {
                 "icon": "book",
                 "title": "Flexible Programs",
                 "description": "Students can choose from diverse majors, minors, specialisations and academic pathways."
             },
-            {
+            "environment": {
                 "icon": "flask",
                 "title": "Research Opportunities",
                 "description": "Many institutions provide opportunities to participate in research, innovation and practical projects."
             }
-        ],
+        },
 
         "universities": [
             {
                 "name": "Harvard University",
                 "location": "Massachusetts",
                 "short_info": "Research-intensive university",
-                "logo": "H"
+                "logo": "H",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "Stanford University",
                 "location": "California",
                 "short_info": "Innovation and research",
-                "logo": "S"
+                "logo": "S",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "University of California, Berkeley",
                 "location": "California",
                 "short_info": "Leading public research university",
-                "logo": "B"
+                "logo": "B",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "New York University",
                 "location": "New York",
                 "short_info": "Global university in New York City",
-                "logo": "N"
+                "logo": "N",
+                "ranking": "",
+                "url": ""
             }
         ],
 
@@ -412,14 +430,14 @@
         ]
     },
 
+
     {
         "id": 4,
         "name": "Canada",
         "slug": "canada",
         "code": "CA",
         "currency": "CAD",
-        "image":"frontend-img/destinations/toronto-cn-tower.webp",
-
+        "image": "frontend-img/destinations/toronto-cn-tower.webp",
 
         "hero": {
             "badge": "Study in Canada",
@@ -428,7 +446,7 @@
             "description": "Explore quality education, diverse study options and internationally recognised qualifications in Canada.",
             "primary_button": "Book Free Consultation",
             "secondary_button": "Explore Universities",
-            "image": "frontend-img/images/destinations/canada.webp"
+            "image": "frontend-img/destinations/toronto-cn-tower.webp"
         },
 
         "stats": [
@@ -437,48 +455,56 @@
             "Career-Focused Programs"
         ],
 
-        "advantages": [
-            {
+        "advantages": {
+            "academic": {
                 "icon": "academic",
                 "title": "Quality Education",
                 "description": "Canadian universities and colleges offer a broad range of recognised academic and professional programs."
             },
-            {
-                "icon": "globe",
-                "title": "Multicultural Society",
-                "description": "Canada offers a diverse and welcoming environment with students from many countries."
-            },
-            {
+            "career": {
                 "icon": "briefcase",
                 "title": "Career-Focused Learning",
                 "description": "Many Canadian programs combine academic knowledge with practical and industry-oriented learning."
+            },
+            "environment": {
+                "icon": "globe",
+                "title": "Multicultural Society",
+                "description": "Canada offers a diverse and welcoming environment with students from many countries."
             }
-        ],
+        },
 
         "universities": [
             {
                 "name": "University of Toronto",
                 "location": "Toronto",
                 "short_info": "Leading research university",
-                "logo": "T"
+                "logo": "T",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "University of British Columbia",
                 "location": "Vancouver",
                 "short_info": "Global research university",
-                "logo": "U"
+                "logo": "U",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "McGill University",
                 "location": "Montreal",
                 "short_info": "Internationally recognised university",
-                "logo": "M"
+                "logo": "M",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "University of Alberta",
                 "location": "Edmonton",
                 "short_info": "Research and innovation",
-                "logo": "A"
+                "logo": "A",
+                "ranking": "",
+                "url": ""
             }
         ],
 
@@ -548,14 +574,14 @@
         ]
     },
 
+
     {
         "id": 5,
         "name": "New Zealand",
         "slug": "new-zealand",
         "code": "NZ",
         "currency": "NZD",
-        "image":"frontend-img/destinations/new-zealand.webp",
-        
+        "image": "frontend-img/destinations/new-zealand.webp",
 
         "hero": {
             "badge": "Study in New Zealand",
@@ -564,7 +590,7 @@
             "description": "Experience quality education, practical learning and a supportive international student environment in New Zealand.",
             "primary_button": "Book Free Consultation",
             "secondary_button": "Explore Universities",
-            "image": "frontend-img/images/destinations/new-zealand.webp"
+            "image": "frontend-img/destinations/new-zealand.webp"
         },
 
         "stats": [
@@ -573,48 +599,56 @@
             "Beautiful Study Environment"
         ],
 
-        "advantages": [
-            {
+        "advantages": {
+            "academic": {
                 "icon": "academic",
                 "title": "Quality Education",
                 "description": "New Zealand provides internationally recognised education through universities, institutes and other education providers."
             },
-            {
+            "career": {
                 "icon": "briefcase",
                 "title": "Practical Learning",
                 "description": "Many programs place emphasis on practical skills, applied learning and career development."
             },
-            {
+            "environment": {
                 "icon": "globe",
                 "title": "Student-Friendly Environment",
                 "description": "International students can experience a diverse and supportive environment while studying."
             }
-        ],
+        },
 
         "universities": [
             {
                 "name": "University of Auckland",
                 "location": "Auckland",
                 "short_info": "New Zealand's major research university",
-                "logo": "A"
+                "logo": "A",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "University of Otago",
                 "location": "Dunedin",
                 "short_info": "Research-focused university",
-                "logo": "O"
+                "logo": "O",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "Victoria University of Wellington",
                 "location": "Wellington",
                 "short_info": "Strong academic and research programs",
-                "logo": "V"
+                "logo": "V",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "University of Canterbury",
                 "location": "Christchurch",
                 "short_info": "Engineering and research strengths",
-                "logo": "C"
+                "logo": "C",
+                "ranking": "",
+                "url": ""
             }
         ],
 
@@ -684,14 +718,14 @@
         ]
     },
 
+
     {
         "id": 6,
         "name": "Malaysia",
         "slug": "malaysia",
         "code": "MY",
         "currency": "MYR",
-        "image":"frontend-img/destinations/city-malaysia.webp",
-
+        "image": "frontend-img/destinations/city-malaysia.webp",
 
         "hero": {
             "badge": "Study in Malaysia",
@@ -700,7 +734,7 @@
             "description": "Discover affordable international education, diverse programs and a multicultural student environment in Malaysia.",
             "primary_button": "Book Free Consultation",
             "secondary_button": "Explore Universities",
-            "image": "frontend-img/images/destinations/malaysia.webp"
+            "image": "frontend-img/destinations/city-malaysia.webp"
         },
 
         "stats": [
@@ -709,48 +743,56 @@
             "Multicultural Environment"
         ],
 
-        "advantages": [
-            {
+        "advantages": {
+            "academic": {
                 "icon": "academic",
                 "title": "Quality Education",
                 "description": "Malaysia offers a variety of higher education programs through local and international institutions."
             },
-            {
+            "career": {
                 "icon": "currency",
                 "title": "Affordable Study Option",
                 "description": "Malaysia can provide comparatively affordable tuition and living options for international students."
             },
-            {
+            "environment": {
                 "icon": "globe",
                 "title": "Multicultural Environment",
                 "description": "Students can experience a diverse multicultural society with international communities."
             }
-        ],
+        },
 
         "universities": [
             {
                 "name": "University of Malaya",
                 "location": "Kuala Lumpur",
                 "short_info": "Leading Malaysian research university",
-                "logo": "U"
+                "logo": "U",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "Universiti Putra Malaysia",
                 "location": "Selangor",
                 "short_info": "Research and academic programs",
-                "logo": "P"
+                "logo": "P",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "Universiti Kebangsaan Malaysia",
                 "location": "Bangi",
                 "short_info": "Comprehensive public university",
-                "logo": "K"
+                "logo": "K",
+                "ranking": "",
+                "url": ""
             },
             {
                 "name": "Taylor's University",
                 "location": "Selangor",
                 "short_info": "Private university with international programs",
-                "logo": "T"
+                "logo": "T",
+                "ranking": "",
+                "url": ""
             }
         ],
 

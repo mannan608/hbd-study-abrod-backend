@@ -1,4 +1,5 @@
 @extends('frontend.layouts.app')
+@section('title', $blog->title)
 
 @php
     use Illuminate\Support\Facades\Storage;

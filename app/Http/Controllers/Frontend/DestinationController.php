@@ -27,9 +27,7 @@ class DestinationController extends Controller
     $destination = collect($destinations)
         ->firstWhere('slug', $slug);
 
-    if (!$destination) {
-        abort(404);
-    }
+    if (!$destination) { abort(404); }
 
     return view(
         'frontend.pages.destinations.details',compact('destination')
