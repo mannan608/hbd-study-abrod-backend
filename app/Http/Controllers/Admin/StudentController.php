@@ -27,25 +27,46 @@ class StudentController extends Controller
         return view('backend.pages.students.index', compact('students'));
     }
 
-   public function show(string $role, Request $request, Student $student)
-{
-    $user = $request->user();
+    public function create(Request $request, string $role)
+    {
+        $user = $request->user();
 
-    $user->can('student.view') || abort(403);
+        $user->can('student.view') || abort(403);
 
-    $student->load('user');
 
-    return view('backend.pages.students.show', compact('student'));
-}
+        return view('backend.pages.students.create');
+    }
 
- public function create(string $role, Request $request)
-{
-    $user = $request->user();
 
-    $user->can('student.view') || abort(403);
+     public function addStudent(Request $request, string $role)
+    {
+        $user = $request->user();
 
-   
-    return view('backend.pages.students.create');
-}
+        $user->can('student.view') || abort(403);
 
+
+        return view('backend.pages.students.add-student');
+    }
+
+      public function bulkImport(Request $request, string $role)
+    {
+        $user = $request->user();
+
+        $user->can('student.view') || abort(403);
+
+
+        return view('backend.pages.students.import-bulk');
+    }
+
+
+    public function show(string $role, Request $request, Student $student)
+    {
+        $user = $request->user();
+
+        $user->can('student.view') || abort(403);
+
+        $student->load('user');
+
+        return view('backend.pages.students.show', compact('student'));
+    }
 }

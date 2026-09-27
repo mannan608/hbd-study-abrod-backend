@@ -299,7 +299,7 @@
                 </p>
             </div>
             <div class="">
-                <a href="#"
+                <a href="{{ role_route('role.students.create') }}"
                     class="px-4 py-2 bg-brand-600 text-white rounded-lg text-sm font-medium hover:bg-brand-600 transition-colors">
                     + Add New Lead
                 </a>

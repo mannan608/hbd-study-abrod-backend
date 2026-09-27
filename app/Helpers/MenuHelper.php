@@ -66,12 +66,7 @@ class MenuHelper
                         'name' => 'Students',
                         'route' => 'role.students.index',
                         'permission' => 'student.list',
-                    ],
-                    [
-                        'name' => 'Create Student',
-                        'route' => 'role.students.create',
-                        'permission' => 'student.create',
-                    ],
+                    ]
                 ],
             ],
             [
@@ -176,7 +171,7 @@ class MenuHelper
                     ],
                 ],
             ],
-
+           
         ];
     }
 

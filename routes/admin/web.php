@@ -92,4 +92,7 @@ Route::prefix('{role}')
         Route::get('students/create', [StudentController::class, 'create'])->name('students.create');
         Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
 
+        Route::get('students/add', [StudentController::class, 'addStudent'])->name('students.add');
+        Route::get('students/bulk-import', [StudentController::class, 'bulkImport'])->name('students.import');
+
     });
