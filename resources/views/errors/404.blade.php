@@ -1,7 +1,8 @@
-@extends('frontend.layouts.app')
+@extends('errors.layout')
+
+@section('title', 'Page Not Found')
 
 @section('content')
-
   <main class="flex-1 flex items-center justify-center px-4 sm:px-6 py-12 z-10">
     <div class="w-full max-w-2xl text-center">
       
@@ -31,13 +32,10 @@
       <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-lg mx-auto leading-relaxed mb-8">
         The page you are looking for might have been moved, renamed, or temporarily deleted. Let's get you back on track.
       </p>
-
-  
-
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-12">
         <a 
-          href="#" 
+          href="{{ route('home')}}" 
           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40 hover:-tranneutral-y-0.5 active:tranneutral-y-0"
         >
           {{-- <i data-lucide="arrow-left" class="w-4 h-4"></i> --}}
@@ -55,5 +53,7 @@
         </button>
       </div>
     </div>
-  </main>  
+  </main> 
 @endsection
+
+

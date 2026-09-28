@@ -19,10 +19,15 @@ class FrontendController extends Controller
             File::get(resource_path('data/destinations.json')),
             true
         );
+         $counsellors = Counsellor::query()
+            ->with('user')
+            ->where('is_active', true)
+            ->latest()
+            ->paginate(12);
       
 // return $events;
 
-        return view('frontend.pages.home.home', compact('events','destinations'));
+        return view('frontend.pages.home.home', compact('events','destinations','counsellors'));
     }
 
     public function aboutPage()

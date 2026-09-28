@@ -31,6 +31,8 @@ class CounsellorController extends Controller
             ->latest()
             ->paginate(10);
 
+        // return $counsellors;
+
         return view('backend.pages.counsellors.index', compact('counsellors'));
     }
 

@@ -63,7 +63,7 @@
 
     @include('frontend.pages.home.sections.expo-event')
 
-    @include('frontend.pages.home.sections.counseller-section')
+    @include('frontend.pages.home.sections.counseller-section', ['counsellors' => $counsellors])
 
     @include('frontend.pages.common-section.about-section')
 
