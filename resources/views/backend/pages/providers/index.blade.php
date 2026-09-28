@@ -27,6 +27,6 @@
                 + Add New Providers
             </a>
         </div>
-       {{-- @include('backend.pages.providers.table', ['items' => $providers]) --}}
+       @include('backend.pages.providers.table', ['items' => $providers])
     </div>
 @endsection

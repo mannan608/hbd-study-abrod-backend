@@ -1,158 +1,127 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    <form action="{{ role_route('role.universities.update', ['university' => $university->id]) }}" method="POST"
-        enctype="multipart/form-data">
+    <form action="{{ role_route('role.providers.update', ['provider' => $provider->id]) }}" method="POST">
         @csrf
         @method('PUT')
+
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
 
-            <div class="lg:col-span-8 space-y-6">
+            <div class="space-y-6 lg:col-span-8">
 
-                {{-- University Information --}}
+                {{-- Provider Information --}}
                 <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
                     <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
-
                         <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
-                            University Information
+                            Provider Information
                         </h2>
-
                     </div>
 
-                    <div class="p-5 space-y-5">
+                    <div class="space-y-5 p-5">
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
                             {{-- Name --}}
-                            <x-form.input-text name="name" label="University Name"
-                                value="{{ old('name', $university->name) }}" placeholder="Enter university name..." />
+                            <x-form.input-text name="name" label="Provider Name"
+                                value="{{ old('name', $provider->user?->name) }}" placeholder="Enter provider name..."
+                                required />
 
                             {{-- Short Name --}}
                             <x-form.input-text name="short_name" label="Short Name"
-                                value="{{ old('short_name', $university->short_name) }}"
-                                placeholder="e.g. MIT, Harvard..." />
+                                value="{{ old('short_name', $provider->short_name) }}"
+                                placeholder="e.g. ABC Education..." />
+
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
                             {{-- Email --}}
                             <x-form.input-text name="email" label="Email Address" type="email"
-                                value="{{ old('email', $university->email) }}" placeholder="Enter contact email..." />
+                                value="{{ old('email', $provider->user?->email) }}" placeholder="Enter contact email..."
+                                required />
 
                             {{-- Phone --}}
                             <x-form.input-text name="phone" label="Phone Number"
-                                value="{{ old('phone', $university->phone) }}" placeholder="Enter contact phone..." />
+                                value="{{ old('phone', $provider->phone) }}" placeholder="Enter contact phone..." />
+
                         </div>
 
-                        {{-- Website --}}
-                        <x-form.input-text name="website" label="Website URL" type="url"
-                            value="{{ old('website', $university->website) }}" placeholder="https://..." />
-
-                        {{-- Description --}}
-                        <x-form.textarea-input name="description" label="Description" rows="5"
-                            placeholder="Enter university description..." :value="old('description', $university->description)" />
-
                     </div>
-
                 </div>
+
 
                 {{-- Location --}}
                 <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
                     <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
-
                         <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
                             Location
                         </h2>
-
                     </div>
 
-                    <div class="p-5 space-y-5">
+                    <div class="space-y-5 p-5">
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+
                             {{-- Country --}}
                             <x-form.input-text name="country" label="Country"
-                                value="{{ old('country', $university->country) }}" placeholder="Enter country..." />
+                                value="{{ old('country', $provider->country) }}" placeholder="Enter country..." />
 
                             {{-- State --}}
                             <x-form.input-text name="state" label="State/Province"
-                                value="{{ old('state', $university->state) }}" placeholder="Enter state..." />
+                                value="{{ old('state', $provider->state) }}" placeholder="Enter state..." />
 
                             {{-- City --}}
-                            <x-form.input-text name="city" label="City" value="{{ old('city', $university->city) }}"
+                            <x-form.input-text name="city" label="City" value="{{ old('city', $provider->city) }}"
                                 placeholder="Enter city..." />
+
                         </div>
 
                         {{-- Address --}}
-                        <x-form.textarea-input name="address" label="Full Address" rows="2"
-                            placeholder="Enter full address..." :value="old('address', $university->address)" />
+                        <x-form.textarea-input name="address" label="Full Address" rows="3"
+                            placeholder="Enter full address..." :value="old('address', $provider->address)" />
 
                     </div>
-
                 </div>
 
-            </div>
 
-            <div class="lg:col-span-4">
+                {{-- Password & Security --}}
+                <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class=" space-y-6">
-                    {{-- Logo --}}
-                    <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+                    <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                        <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
+                            Password & Security
+                        </h2>
+                    </div>
 
-                        <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
+                    <div class="space-y-5 p-5">
 
-                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
-                                University Logo
-                            </h2>
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+                            Leave the password fields empty if you do not want to change the current password.
+                        </p>
 
-                        </div>
+                        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
 
-                        <div class="p-5">
+                            {{-- New Password --}}
+                            <x-form.input-text name="password" label="New Password" type="password"
+                                placeholder="Enter new password..." />
 
-                            @if ($university->logo)
-                                <div class="mb-4">
-                                    <img src="{{ asset($university->logo) }}"
-                                        class="w-20 h-20 object-contain rounded border border-neutral-200" alt="logo">
-                                </div>
-                            @endif
-
-                            <x-form.dropzone name="logo" label="Upload New Logo" />
+                            {{-- Confirm Password --}}
+                            <x-form.input-text name="password_confirmation" label="Confirm New Password" type="password"
+                                placeholder="Confirm new password..." />
 
                         </div>
 
                     </div>
-
-                    {{-- Banner --}}
-                    <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
-
-                        <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
-
-                            <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
-                                University Banner
-                            </h2>
-
-                        </div>
-
-                        <div class="p-5">
-
-                            @if ($university->banner)
-                                <div class="mb-4">
-                                    <img src="{{ asset($university->banner) }}"
-                                        class="w-full h-32 object-cover rounded border border-neutral-200" alt="banner">
-                                </div>
-                            @endif
-
-                            <x-form.dropzone name="banner" label="Upload New Banner" />
-
-                        </div>
-
-                    </div>
-
                 </div>
 
-                <div class="mt-5">
+
+                {{-- Submit --}}
+                <div>
                     <button type="submit"
                         class="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-500">
-                        Update University
+                        Update Provider
                     </button>
                 </div>
 

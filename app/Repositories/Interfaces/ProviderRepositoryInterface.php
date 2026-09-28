@@ -3,13 +3,11 @@
 namespace App\Repositories\Interfaces;
 
 use App\Models\Provider;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface ProviderRepositoryInterface
 {
-    public function paginate(int $perPage = 15);
-
-    public function universities();
-    public function campuses();
+    public function paginate(int $perPage = 15): LengthAwarePaginator;
 
     public function findById(int $id): Provider;
 

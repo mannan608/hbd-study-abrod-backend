@@ -13,91 +13,99 @@ use Illuminate\View\View;
 
 class ProviderController extends Controller
 {
-    public function __construct(
-        private readonly ProviderRepositoryInterface $providers
-    ) {}
+    public function __construct(private readonly ProviderRepositoryInterface $providers) {}
 
-    public function index(Request $request): View
+    /**
+     * Display providers.
+     */
+    public function index(Request $request, string $role): View
     {
-        $request->user()->can('provider.list') || abort(403);
+        abort_unless($request->user()->can('provider.list'), 403);
 
         return view('backend.pages.providers.index', [
-            'providers' => $this->providers->paginate(),
-            'title' => 'Providers',
+            'providers' => $this->providers->paginate(15)
         ]);
     }
 
-    public function create(Request $request): View
+    /**
+     * Show create provider form.
+     */
+    public function create(Request $request, string $role): View
     {
-        $request->user()->can('provider.create') || abort(403);
+        abort_unless($request->user()->can('provider.create'), 403);
 
         return view('backend.pages.providers.create', [
-            'provider' => null,
-            'title' => 'Create Provider',
+            'provider' => null
         ]);
     }
 
-    public function store(ProviderStoreRequest $request): RedirectResponse
+    /**
+     * Store provider.
+     */
+    public function store(ProviderStoreRequest $request, string $role): RedirectResponse
     {
+       dd($request->validated());
         $this->providers->create($request->validated());
 
         return redirect()
             ->route('role.providers.index', [
-                'role' => $request->route('role')
+                'role' => $role,
             ])
             ->with('success', 'Provider created successfully.');
     }
 
-    public function show(
-        Request $request,
-        Provider $provider
-    ): View {
-        $request->user()->can('provider.view') || abort(403);
+    /**
+     * Display provider details.
+     */
+    public function show(Request $request, string $role, Provider $provider): View
+    {
+        abort_unless($request->user()->can('provider.view'), 403);
+
+        $provider = $provider->load('user');
 
         return view('backend.pages.providers.show', [
             'provider' => $provider,
-            'title' => 'Provider Details',
         ]);
     }
 
-public function edit(
-    Request $request,
-    string $role,
-    Provider $provider
-): View {
-        $request->user()->can('provider.edit') || abort(403);
+    /**
+     * Show edit provider form.
+     */
+    public function edit(Request $request, string $role, Provider $provider): View
+    {
+        abort_unless($request->user()->can('provider.edit'), 403);
 
         return view('backend.pages.providers.edit', [
             'provider' => $provider,
-            'title' => 'Edit Provider',
         ]);
     }
 
-    public function update(
-        ProviderUpdateRequest $request,
-        Provider $provider
-    ): RedirectResponse {
+    /**
+     * Update provider.
+     */
+    public function update(ProviderUpdateRequest $request, string $role, Provider $provider): RedirectResponse
+    {
         $this->providers->update($provider, $request->validated());
 
         return redirect()
             ->route('role.providers.index', [
-                'role' => $request->route('role')
+                'role' => $role,
             ])
             ->with('success', 'Provider updated successfully.');
     }
 
-    public function destroy(
-        Request $request,
-        string $role,
-        Provider $provider
-    ): RedirectResponse {
-        $request->user()->can('provider.delete') || abort(403);
+    /**
+     * Delete provider.
+     */
+    public function destroy(Request $request, string $role, Provider $provider): RedirectResponse
+    {
+        abort_unless($request->user()->can('provider.delete'), 403);
 
         $this->providers->delete($provider);
 
         return redirect()
             ->route('role.providers.index', [
-                'role' => $role
+                'role' => $role,
             ])
             ->with('success', 'Provider deleted successfully.');
     }
