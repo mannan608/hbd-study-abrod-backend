@@ -30,6 +30,8 @@ class CourseCategoryController extends Controller
                 ->paginate($request->integer('per_page', 15))
                 ->withQueryString();
 
+            // return $categories;
+
             return view('backend.pages.course-categories.index', compact('categories'));
         } catch (Throwable $e) {
             report($e);
@@ -53,10 +55,12 @@ class CourseCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->user()->can('course-categories.create') || abort(403);
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:course_categories,name'],
+            'description' => ['nullable', 'string'],
         ]);
 
         DB::beginTransaction();
@@ -64,6 +68,7 @@ class CourseCategoryController extends Controller
         try {
             CourseCategory::create([
                 'name' => $validated['name'],
+                'description' => $validated['description'],
                 'slug' => Str::slug($validated['name']),
             ]);
 
@@ -124,6 +129,7 @@ class CourseCategoryController extends Controller
                 'max:255',
                 'unique:course_categories,name,' . $courseCategory->id,
             ],
+            'description' => ['nullable', 'string'],
         ]);
 
         DB::beginTransaction();
@@ -132,6 +138,7 @@ class CourseCategoryController extends Controller
             $courseCategory->fill([
                 'name' => $validated['name'],
                 'slug' => Str::slug($validated['name']),
+                'description' => $request->description,
             ]);
 
             if ($courseCategory->isDirty()) {

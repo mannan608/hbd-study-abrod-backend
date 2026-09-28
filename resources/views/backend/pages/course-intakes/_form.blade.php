@@ -133,12 +133,12 @@
                     </div>
 
                     {{-- Dates Grid --}}
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        <x-form.input-text name="application_deadline" label="Application Deadline"
-                            type="datetime-local" value="{{ $applicationDeadline }}" />
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">                      
 
-                        <x-form.input-text name="start_date" label="Start Date" type="datetime-local"
+                        <x-form.input-text name="start_date" label="Application Start" type="datetime-local"
                             value="{{ $startDate }}" />
+                         <x-form.input-text name="application_deadline" label="Application End"
+                            type="datetime-local" value="{{ $applicationDeadline }}" />
                     </div>
 
                     {{-- Status Field --}}

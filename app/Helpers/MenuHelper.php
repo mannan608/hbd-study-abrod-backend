@@ -66,6 +66,11 @@ class MenuHelper
                         'name' => 'Students',
                         'route' => 'role.students.index',
                         'permission' => 'student.list',
+                    ],
+                    [
+                        'name' => 'Agents',
+                        'route' => 'role.providers.index',
+                        'permission' => 'provider.list',
                     ]
                 ],
             ],

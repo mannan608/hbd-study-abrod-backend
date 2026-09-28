@@ -58,7 +58,7 @@ class CourseIntakeController extends Controller
             'intake_month' => ['required', 'string', 'max:20'],
             'intake_year' => ['required', 'integer', 'min:2000', 'max:2100'],
             'application_deadline' => ['required', 'date'],
-            'start_date' => ['nullable', 'date', 'after_or_equal:application_deadline'],
+            'start_date' => ['nullable', 'date', 'before_or_equal:application_deadline'],
             'status' => ['required', Rule::in(['open', 'closed', 'upcoming'])],
         ]);
 
@@ -120,7 +120,7 @@ class CourseIntakeController extends Controller
         'start_date' => [
             'nullable',
             'date',
-            'after_or_equal:application_deadline',
+            'before_or_equal:application_deadline',
         ],
         'status' => [
             'required',

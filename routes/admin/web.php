@@ -8,12 +8,12 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CourseIntakeController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\CourseProviderController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\ScholarshipController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Admin\CounsellorController;
 use App\Http\Controllers\Admin\LeadsController;
 use App\Http\Controllers\Admin\CounsellorBookingController;
@@ -68,7 +68,7 @@ Route::prefix('{role}')
         Route::get('campuses/cities', [CampusController::class, 'cities'])
             ->name('campuses.cities');
         Route::resource('campuses', CampusController::class);
-        Route::resource('providers', CourseProviderController::class);
+        Route::resource('providers', ProviderController::class);
         Route::resource('course-categories', CourseCategoryController::class);
         Route::resource('courses', CourseController::class);
         Route::resource('contacts', ContactController::class);
@@ -98,6 +98,7 @@ Route::prefix('{role}')
         Route::get('students/bulk-import', [StudentController::class, 'bulkImport'])->name('students.import');
         Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
 
+        // agents
 
         
 

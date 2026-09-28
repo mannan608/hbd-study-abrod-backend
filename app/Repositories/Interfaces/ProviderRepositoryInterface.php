@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Models\CourseProvider;
+use App\Models\Provider;
 
 interface ProviderRepositoryInterface
 {
@@ -11,11 +11,11 @@ interface ProviderRepositoryInterface
     public function universities();
     public function campuses();
 
-    public function findById(int $id): CourseProvider;
+    public function findById(int $id): Provider;
 
-    public function create(array $data): CourseProvider;
+    public function create(array $data): Provider;
 
-    public function update(CourseProvider $provider, array $data): CourseProvider;
+    public function update(Provider $provider, array $data): Provider;
 
-    public function delete(CourseProvider $provider): bool;
+    public function delete(Provider $provider): bool;
 }

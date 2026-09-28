@@ -23,6 +23,9 @@
                         <x-form.input-text name="name" label=" Course Category Name" value="{{ old('name', $category->name) }}"
                             placeholder="Enter  Course Category Name..." />
 
+                         <x-form.textarea-input name="description" label="Category Description" value="{{ old('description', $category->description) }}"
+                            placeholder="Enter  Category Description..." />
+
                     </div>
 
                 </div>

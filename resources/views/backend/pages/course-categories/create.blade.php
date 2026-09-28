@@ -22,6 +22,10 @@
                         <x-form.input-text name="name" label=" Course Category Name" value="{{ old('name') }}"
                             placeholder="Enter  Course Category Name..." />
 
+                           {{-- Name --}}
+                        <x-form.textarea-input name="description" label="Category Description" value="{{ old('description') }}"
+                            placeholder="Enter  Category Description..." />
+
                     </div>
 
                 </div>
