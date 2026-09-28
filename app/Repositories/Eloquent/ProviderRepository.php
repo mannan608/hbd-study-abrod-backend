@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Provider;
+use App\Models\User;
 use App\Repositories\Interfaces\ProviderRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,21 @@ class ProviderRepository implements ProviderRepositoryInterface
     public function create(array $data): Provider
     {
         return DB::transaction(function () use ($data) {
-            return Provider::create($data);
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+            return Provider::create([
+                'user_id' => $user->id,
+                'short_name' => $data['short_name'] ?? null,
+                'phone' => $data['phone'] ?? null,
+                'country' => $data['country'] ?? null,
+                'state' => $data['state'] ?? null,
+                'city' => $data['city'] ?? null,
+                'address' => $data['address'] ?? null,
+            ]);
         });
     }
 

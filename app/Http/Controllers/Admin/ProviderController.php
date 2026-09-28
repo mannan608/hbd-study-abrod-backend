@@ -18,13 +18,14 @@ class ProviderController extends Controller
     /**
      * Display providers.
      */
-    public function index(Request $request, string $role): View
+    public function index(Request $request, string $role)
     {
         abort_unless($request->user()->can('provider.list'), 403);
 
-        return view('backend.pages.providers.index', [
-            'providers' => $this->providers->paginate(15)
-        ]);
+        $providers = $this->providers->paginate(15);
+        // return $providers;
+
+        return view('backend.pages.providers.index', compact('providers'));
     }
 
     /**
@@ -44,7 +45,6 @@ class ProviderController extends Controller
      */
     public function store(ProviderStoreRequest $request, string $role): RedirectResponse
     {
-       dd($request->validated());
         $this->providers->create($request->validated());
 
         return redirect()

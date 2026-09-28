@@ -14,7 +14,11 @@ class ProviderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'name' => ['required', 'string', 'max:255'],
+
+            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
 
             'short_name' => ['nullable', 'string', 'max:255'],
 
