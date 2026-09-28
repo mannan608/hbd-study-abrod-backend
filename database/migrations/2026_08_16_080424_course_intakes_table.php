@@ -21,8 +21,8 @@ return new class extends Migration {
             $table->unsignedSmallInteger('intake_year');
 
             // Dates
-            $table->dateTime('application_deadline');
             $table->dateTime('start_date')->nullable();
+            $table->dateTime('application_deadline');
 
             // Status
             $table->enum('status', ['open', 'closed', 'upcoming'])->default('open');

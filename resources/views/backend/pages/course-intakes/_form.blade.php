@@ -12,143 +12,178 @@
     );
 @endphp
 
-<div x-data="{}">
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+<div x-data="{}" class="mx-auto max-w-5xl">
+    <div class="">
 
-        {{-- LEFT --}}
-        <div class="space-y-6 lg:col-span-8">
+        {{-- LEFT MAIN SECTION --}}
+        <div class="space-y-6">
 
-            {{-- Course Intake --}}
-            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
-                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
-                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
-                        Course Intake
-                    </h2>
+            {{-- Form Section Card --}}
+            <div class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm transition-all dark:border-neutral-800 dark:bg-neutral-900">
+                
+                {{-- Card Header --}}
+                <div class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800/80 dark:bg-neutral-900/50">
+                    <div class="flex items-center space-x-3">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
+                                Course Intake Details
+                            </h2>
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                {{ $isEdit ? 'Update existing intake schedule and settings.' : 'Set up a new intake period for your course.' }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="space-y-5 p-5">
-                    <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-                        <div>
-                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                Course
-                            </label>
+                {{-- Card Body --}}
+                <div class="space-y-6 p-6">
+                    
+                    {{-- Course Field --}}
+                    <div>
+                        <label class="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
+                            Course <span class="text-red-500">*</span>
+                        </label>
 
+                        <div class="relative">
                             <select name="course_id"
-                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                <option value="">
-                                    Select Course
-                                </option>
-
+                                class="h-11 w-full appearance-none rounded-xl border border-neutral-300 bg-white px-4 pr-10 text-sm text-neutral-800 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:bg-neutral-900 dark:text-neutral-100 dark:focus:border-brand-400 dark:focus:ring-brand-400/20">
+                                <option value="">Select Course</option>
                                 @foreach ($courses as $course)
                                     <option value="{{ $course->id }}" @selected(old('course_id', $intake?->course_id) == $course->id)>
                                         {{ $course->title }}
                                     </option>
                                 @endforeach
-                            </select>
-
-                            @error('course_id')
-                                <p class="mt-1 text-sm text-red-500">
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                            </select>                          
                         </div>
 
+                        @error('course_id')
+                            <p class="mt-1.5 flex items-center text-xs font-medium text-red-500">
+                                <svg class="mr-1 h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- Intake Month & Year Grid --}}
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        
+                        {{-- Intake Month --}}
                         <div>
-                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                Intake Month
+                            <label class="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
+                                Intake Month <span class="text-red-500">*</span>
                             </label>
 
-                            <select name="intake_month"
-                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                <option value="">
-                                    Select Month
-                                </option>
-
-                                @foreach (['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $month)
-                                    <option value="{{ $month }}" @selected(old('intake_month', $intake?->intake_month) === $month)>
-                                        {{ $month }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="relative">
+                                <select name="intake_month"
+                                    class="h-11 w-full appearance-none rounded-xl border border-neutral-300 bg-white px-4 pr-10 text-sm text-neutral-800 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:bg-neutral-900 dark:text-neutral-100 dark:focus:border-brand-400 dark:focus:ring-brand-400/20">
+                                    <option value="">Select Month</option>
+                                    @foreach (['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $month)
+                                        <option value="{{ $month }}" @selected(old('intake_month', $intake?->intake_month) === $month)>
+                                            {{ $month }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             @error('intake_month')
-                                <p class="mt-1 text-sm text-red-500">
+                                <p class="mt-1.5 flex items-center text-xs font-medium text-red-500">
+                                    <svg class="mr-1 h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
+                        {{-- Intake Year --}}
                         <div>
-                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                Intake Year
+                            <label class="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
+                                Intake Year <span class="text-red-500">*</span>
                             </label>
 
-                            <select name="intake_year"
-                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                <option value="">
-                                    Select Year
-                                </option>
-
-                                @foreach (['2026', '2027', '2028', '2029'] as $year)
-                                    <option value="{{ $year }}" @selected(old('intake_year', $intake?->intake_year) == $year)>
-                                        {{ $year }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="relative">
+                                <select name="intake_year"
+                                    class="h-11 w-full appearance-none rounded-xl border border-neutral-300 bg-white px-4 pr-10 text-sm text-neutral-800 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:bg-neutral-900 dark:text-neutral-100 dark:focus:border-brand-400 dark:focus:ring-brand-400/20">
+                                    <option value="">Select Year</option>
+                                    @foreach (['2026', '2027', '2028', '2029'] as $year)
+                                        <option value="{{ $year }}" @selected(old('intake_year', $intake?->intake_year) == $year)>
+                                            {{ $year }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             @error('intake_year')
-                                <p class="mt-1 text-sm text-red-500">
+                                <p class="mt-1.5 flex items-center text-xs font-medium text-red-500">
+                                    <svg class="mr-1 h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
+                    </div>
+
+                    {{-- Dates Grid --}}
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <x-form.input-text name="application_deadline" label="Application Deadline"
                             type="datetime-local" value="{{ $applicationDeadline }}" />
 
                         <x-form.input-text name="start_date" label="Start Date" type="datetime-local"
                             value="{{ $startDate }}" />
+                    </div>
 
-                        <div>
-                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                Status
-                            </label>
+                    {{-- Status Field --}}
+                    <div>
+                        <label class="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
+                            Status <span class="text-red-500">*</span>
+                        </label>
 
+                        <div class="relative">
                             <select name="status"
-                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                <option value="">
-                                    Select Status
-                                </option>
-
+                                class="h-11 w-full appearance-none rounded-xl border border-neutral-300 bg-white px-4 pr-10 text-sm text-neutral-800 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:bg-neutral-900 dark:text-neutral-100 dark:focus:border-brand-400 dark:focus:ring-brand-400/20">
+                                <option value="">Select Status</option>
                                 @foreach (['open', 'closed', 'upcoming'] as $status)
                                     <option value="{{ $status }}" @selected(old('status', $intake?->status) === $status)>
                                         {{ ucfirst($status) }}
                                     </option>
                                 @endforeach
                             </select>
-
-                            @error('status')
-                                <p class="mt-1 text-sm text-red-500">
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                           
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        {{-- RIGHT --}}
-        <div class="space-y-6 lg:col-span-4">
-            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
-                <div class="flex justify-end p-5">
-                    <button type="submit"
-                        class="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-500">
-                        {{ $isEdit ? 'Update' : 'Create' }}
-                    </button>
+                        @error('status')
+                            <p class="mt-1.5 flex items-center text-xs font-medium text-red-500">
+                                <svg class="mr-1 h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit"
+                            class="inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/20 active:scale-[0.98]">
+                            <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            {{ $isEdit ? 'Update Intake' : 'Create Intake' }}
+                        </button>
+                    </div>
+
                 </div>
+                   
             </div>
-        </div>
+        </div>   
 
     </div>
 </div>

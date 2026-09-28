@@ -19,28 +19,29 @@ class UniversityController extends Controller
 
     public function index(Request $request): View
     {
-        abort_unless($request->user()->can('university.list'), 403);
+        abort_unless(
+            $request->user()->can('university.list'),
+            403
+        );
 
-        $filters = $request->only(['search', 'country_id', 'city_id', 'is_active', 'is_featured']);
+        $filters = $request->only(['search','country_id','city_id','is_active','is_featured']);
 
-        $universities = $this->universities->paginate($filters, 20);
+        $universities = $this->universities->paginate( $filters,20);
 
-        // return $universities;
+        $countries = Country::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get([ 'id','name']);
+
+        $cities = City::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get([ 'id', 'name','country_id']);
 
         return view('backend.pages.universities.index', [
             'universities' => $universities,
-
-            'countries' => Country::query()
-                ->where('is_active', true)
-                ->orderBy('name')
-                ->get(['id', 'name']),
-
-            'cities' => City::query()
-                ->where('is_active', true)
-                ->orderBy('name')
-                ->get(['id', 'name', 'country_id']),
-
-            'title' => 'Universities',
+            'countries' => $countries,
+            'cities' => $cities,
         ]);
     }
 
@@ -58,8 +59,6 @@ class UniversityController extends Controller
             'cities' => City::query()
                 ->orderBy('name')
                 ->get(['id', 'name', 'country_id']),
-
-            'title' => 'Create University',
         ]);
     }
 
@@ -82,7 +81,6 @@ class UniversityController extends Controller
 
         return view('backend.pages.universities.show', [
             'university' => $university,
-            'title' => 'University Details',
         ]);
     }
 
@@ -100,8 +98,6 @@ class UniversityController extends Controller
             'cities' => City::query()
                 ->orderBy('name')
                 ->get(['id', 'name', 'country_id']),
-
-            'title' => 'Edit University',
         ]);
     }
 

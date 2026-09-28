@@ -36,4 +36,9 @@ class Country extends Model
     {
         return $this->hasMany(City::class);
     }
+
+    public function universities()
+    {
+        return $this->hasMany(University::class, 'country_id');
+    }
 }

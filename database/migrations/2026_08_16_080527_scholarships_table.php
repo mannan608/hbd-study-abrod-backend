@@ -4,60 +4,39 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('scholarships', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
 
-         $table->foreignUuid('university_id')
-                ->nullable()
-                ->constrained('universities')
-                ->cascadeOnDelete();
+            $table->string('name', 191);
 
-            // Optional course-specific scholarship
-            // NULL = university-wide scholarship
-            $table->foreignUuid('course_id')
-                ->nullable()
-                ->constrained('courses')
-                ->nullOnDelete();
+            $table->enum('scope_type', ['university', 'course', 'intake']);
 
-            // Scholarship information
-            $table->string('title');
+            // Base level - always required
+            $table->foreignId('university_id')->constrained('universities')->cascadeOnDelete();
 
-            $table->string('amount_description')
-                ->nullable();
+            // Required when scope_type = course or intake
+            $table->foreignId('course_id')->nullable()->constrained('courses')->nullOnDelete();
 
-            // Partial, Full, One-time
-            $table->string('coverage_type', 50)
-                ->nullable();
+            // Required when scope_type = intake
+            $table->foreignId('intake_id')->nullable()->constrained('intakes')->nullOnDelete();
 
-            $table->text('eligibility_criteria')
-                ->nullable();
+            $table->enum('discount_type', ['percentage', 'fixed']);
 
-            $table->date('deadline')
-                ->nullable();
+            // 25.00 = 25% OR 2000.00 = $2000
+            $table->decimal('discount_value', 10, 2);
 
-            $table->boolean('is_active')
-                ->default(true);
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+
+            $table->enum('status', ['active', 'inactive'])->default('active');
 
             $table->timestamps();
-
-            $table->index([
-                'university_id',
-                'is_active',
-            ]);
-
-            $table->index([
-                'course_id',
-                'is_active',
-            ]);
-
-            $table->index('deadline');
         });
     }
 

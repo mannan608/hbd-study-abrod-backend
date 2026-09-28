@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CounsellorController;
 use App\Http\Controllers\Admin\LeadsController;
 use App\Http\Controllers\Admin\CounsellorBookingController;
+use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\SEO\Controllers\SeoController;
@@ -58,6 +59,9 @@ Route::prefix('{role}')
             ->middleware('permission:event.manage');
 
         Route::resource('roles-permissions', RolePermissionController::class);
+        //Destinations
+        Route::get('destinations', [DestinationController::class, 'index'])->name('destinations.index');
+        Route::get('destinations/{country}', [DestinationController::class, 'universityList'])->name('destination.universities');
 
         Route::resource('users', UserController::class);
         Route::resource('universities', UniversityController::class);
@@ -93,5 +97,8 @@ Route::prefix('{role}')
         Route::get('students/add', [StudentController::class, 'addStudent'])->name('students.add');
         Route::get('students/bulk-import', [StudentController::class, 'bulkImport'])->name('students.import');
         Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
+
+
+        
 
     });
