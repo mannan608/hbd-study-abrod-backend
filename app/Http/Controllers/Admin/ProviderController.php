@@ -49,7 +49,7 @@ class ProviderController extends Controller
             ->get([ 'id', 'name','country_id']);
 
         return view('backend.pages.providers.create', [
-            'providers' => null,
+            'provider' => null,
             'countries' => $countries,
             'cities' => $cities,
             'formMode' => 'create',
@@ -90,13 +90,19 @@ class ProviderController extends Controller
     public function edit(Request $request, string $role, Provider $provider): View
     {
         abort_unless($request->user()->can('provider.edit'), 403);
-           $countries = Country::query()
-            ->where('is_active', true)
+        $countries = Country::query()
+            ->where(function ($query) use ($provider) {
+                $query->where('is_active', true)
+                    ->orWhere('id', $provider->country_id);
+            })
             ->orderBy('name')
             ->get([ 'id','name']);
 
         $cities = City::query()
-            ->where('is_active', true)
+            ->where(function ($query) use ($provider) {
+                $query->where('is_active', true)
+                    ->orWhere('id', $provider->city_id);
+            })
             ->orderBy('name')
             ->get([ 'id', 'name','country_id']);
 

@@ -17,12 +17,22 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnDelete();
+
             $table->string('short_name')->nullable();
             $table->string('phone')->nullable();
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
 
+            // Location
+            $table->foreignUuid('country_id')
+                ->nullable()
+                ->constrained('countries')
+                ->nullOnDelete();
+
+            $table->foreignUuid('city_id')
+                ->nullable()
+                ->constrained('cities')
+                ->nullOnDelete();
+
+            $table->string('state')->nullable();
             $table->text('address')->nullable();
 
             $table->timestamps();

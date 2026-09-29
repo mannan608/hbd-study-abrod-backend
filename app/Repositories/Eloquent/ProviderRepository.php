@@ -39,9 +39,9 @@ class ProviderRepository implements ProviderRepositoryInterface
                 'user_id' => $user->id,
                 'short_name' => $data['short_name'] ?? null,
                 'phone' => $data['phone'] ?? null,
-                'country' => $data['country'] ?? null,
+                'country_id' => $data['country_id'] ?? null,
                 'state' => $data['state'] ?? null,
-                'city' => $data['city'] ?? null,
+                'city_id' => $data['city_id'] ?? null,
                 'address' => $data['address'] ?? null,
             ]);
         });
@@ -65,9 +65,9 @@ class ProviderRepository implements ProviderRepositoryInterface
         $provider->update([
             'short_name' => $data['short_name'] ?? null,
             'phone' => $data['phone'] ?? null,
-            'country' => $data['country'] ?? null,
+            'country_id' => $data['country_id'] ?? null,
             'state' => $data['state'] ?? null,
-            'city' => $data['city'] ?? null,
+            'city_id' => $data['city_id'] ?? null,
             'address' => $data['address'] ?? null,
         ]);
 

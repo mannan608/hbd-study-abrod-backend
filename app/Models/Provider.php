@@ -13,8 +13,10 @@ class Provider extends Model
         'user_id',
         'short_name',
         'phone',
+        'country_id',
         'country',
         'state',
+        'city_id',
         'city',
         'address',
     ];
@@ -26,4 +28,5 @@ class Provider extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }
