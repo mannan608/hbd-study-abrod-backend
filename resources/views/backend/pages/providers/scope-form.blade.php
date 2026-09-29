@@ -1,14 +1,8 @@
-{{-- @php
-    @dd($courses)
-@endphp --}}
+<div x-data="courseScopeForm()" x-init="init()" class="space-y-6">
 
-<div
-    x-data="courseScopeForm()"
-    x-init="init()"
-    class="space-y-6"
->
-
-    {{-- UNIVERSITY + COURSE / PROGRAM --}}
+    {{-- ================================================================
+        UNIVERSITY + COURSE / PROGRAM
+    ================================================================= --}}
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 
@@ -29,14 +23,9 @@
                        dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
                 required
             >
-                <option value="">
-                    Select University
-                </option>
+                <option value="">Select University</option>
 
-                <template
-                    x-for="university in universities"
-                    :key="university.id"
-                >
+                <template x-for="university in universities" :key="university.id">
                     <option
                         :value="university.id"
                         x-text="university.name"
@@ -72,14 +61,9 @@
                        dark:disabled:bg-neutral-800"
                 required
             >
-                <option value="">
-                    Select Course / Program
-                </option>
+                <option value="">Select Course / Program</option>
 
-                <template
-                    x-for="course in filteredCourses"
-                    :key="course.id"
-                >
+                <template x-for="course in filteredCourses" :key="course.id">
                     <option
                         :value="course.id"
                         x-text="course.title"
@@ -116,11 +100,8 @@
         </label>
 
 
-        {{-- Multi Select --}}
-        <div
-            x-show="courseId"
-            x-transition
-        >
+        {{-- Campus Multi Select --}}
+        <div x-show="courseId" x-transition>
 
             <x-form.multi-select
                 id="course-scope-campus"
@@ -132,12 +113,25 @@
                 required
             />
 
+            @error('campus_ids')
+                <p class="mt-1 text-xs text-red-600">
+                    {{ $message }}
+                </p>
+            @enderror
+
+            @error('campus_ids.*')
+                <p class="mt-1 text-xs text-red-600">
+                    {{ $message }}
+                </p>
+            @enderror
+
         </div>
 
 
         {{-- Course Not Selected --}}
         <div
             x-show="!courseId"
+            x-transition
             class="flex items-center gap-2 rounded-lg border border-dashed
                    border-neutral-300 px-4 py-4 text-sm text-neutral-500
                    dark:border-neutral-700 dark:text-neutral-400"
@@ -150,10 +144,29 @@
             Select a course first to see available campuses.
         </div>
 
+
+        {{-- No Campus Available --}}
+        <div
+            x-show="courseId && campuses.length === 0"
+            x-transition
+            class="mt-3 flex items-center gap-2 rounded-lg border border-dashed
+                   border-neutral-300 px-4 py-4 text-sm text-neutral-500
+                   dark:border-neutral-700 dark:text-neutral-400"
+        >
+            <iconify-icon
+                icon="lucide:info"
+                class="text-base"
+            ></iconify-icon>
+
+            No campus is available for this course.
+        </div>
+
     </div>
 
 
-    {{--  EDIT MODE --}}
+    {{-- ================================================================
+        EDIT MODE
+    ================================================================= --}}
 
     <div
         x-show="editing"
@@ -184,9 +197,9 @@
 
 
 @push('scripts')
-
 <script>
     function courseScopeForm() {
+
         return {
 
             /*
@@ -196,38 +209,58 @@
             */
 
             universityId: @js(old('university_id', '')),
+
             courseId: @js(old('course_id', '')),
 
             editing: false,
 
+            campuses: [],
+
 
             /*
             |--------------------------------------------------------------------------
-            | Real Laravel Data
+            | Universities
             |--------------------------------------------------------------------------
             */
 
             universities: @js(
-                $universities->map(fn ($university) => [
-                    'id' => $university->id,
-                    'name' => $university->name,
-                ])->values()
+                $universities
+                    ->map(fn ($university) => [
+                        'id' => $university->id,
+                        'name' => $university->name,
+                    ])
+                    ->values()
             ),
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Courses
+            |--------------------------------------------------------------------------
+            |
+            | IMPORTANT:
+            | campuses must be loaded using with('campuses:id,name')
+            | in the controller.
+            |
+            */
 
             courses: @js(
-                $courses->map(fn ($course) => [
-                    'id' => $course->id,
-                    'university_id' => $course->university_id,
-                    'title' => $course->title,
-                ])->values()
-            ),
+                $courses
+                    ->map(fn ($course) => [
+                        'id' => $course->id,
 
-            campuses: @js(
-                $campuses->map(fn ($campus) => [
-                    'id' => $campus->id,
-                    'university_id' => $campus->university_id,
-                    'name' => $campus->name,
-                ])->values()
+                        'university_id' => $course->university_id,
+
+                        'title' => $course->title,
+
+                        'campuses' => $course->campuses
+                            ->map(fn ($campus) => [
+                                'id' => $campus->id,
+                                'name' => $campus->name,
+                            ])
+                            ->values(),
+                    ])
+                    ->values()
             ),
 
 
@@ -243,11 +276,12 @@
                     return [];
                 }
 
-                return this.courses.filter(
-                    course =>
-                        String(course.university_id) ===
-                        String(this.universityId)
-                );
+                return this.courses.filter(course => {
+
+                    return String(course.university_id) ===
+                        String(this.universityId);
+
+                });
             },
 
 
@@ -279,8 +313,11 @@
                         this.courseId =
                             scope.course_id ?? '';
 
+                        const selectedCampusIds =
+                            scope.campus_ids ?? [];
+
                         this.loadCampusesForCourse(
-                            scope.campus_ids ?? []
+                            selectedCampusIds
                         );
                     }
                 );
@@ -314,8 +351,11 @@
                         @js(old('campus_ids', []))
                     );
 
-                }
+                } else {
 
+                    this.updateCampusOptions([]);
+
+                }
             },
 
 
@@ -327,10 +367,21 @@
 
             changeUniversity() {
 
+                /*
+                | Reset course
+                */
+
                 this.courseId = '';
 
-                this.updateCampusOptions([]);
 
+                /*
+                | Reset campuses
+                */
+
+                this.campuses = [];
+
+
+                this.updateCampusOptions([]);
             },
 
 
@@ -342,15 +393,25 @@
 
             changeCourse() {
 
+                /*
+                | No course selected
+                */
+
                 if (!this.courseId) {
+
+                    this.campuses = [];
 
                     this.updateCampusOptions([]);
 
                     return;
                 }
 
-                this.loadCampusesForCourse([]);
 
+                /*
+                | Load campuses belonging to selected course
+                */
+
+                this.loadCampusesForCourse([]);
             },
 
 
@@ -362,7 +423,13 @@
 
             loadCampusesForCourse(selectedIds = []) {
 
+                /*
+                | No course selected
+                */
+
                 if (!this.courseId) {
+
+                    this.campuses = [];
 
                     this.updateCampusOptions([]);
 
@@ -371,34 +438,74 @@
 
 
                 /*
-                |--------------------------------------------------------------------------
-                | Get Campuses
-                |--------------------------------------------------------------------------
+                | Find selected course
                 */
 
-                const availableCampuses = this.campuses
-                    .filter(campus => String(campus.university_id) === String(this.universityId))
-                    .map(campus => ({
-                        id: campus.id,
-                        name: campus.name
-                    }));
+                const course = this.courses.find(course => {
+
+                    return String(course.id) ===
+                        String(this.courseId) &&
+
+                        String(course.university_id) ===
+                        String(this.universityId);
+
+                });
 
 
                 /*
-                |--------------------------------------------------------------------------
-                | Keep Selected Campus IDs
-                |--------------------------------------------------------------------------
+                | Course not found
+                */
+
+                if (!course) {
+
+                    this.campuses = [];
+
+                    this.updateCampusOptions([]);
+
+                    return;
+                }
+
+
+                /*
+                | Get course campuses
+                */
+
+                const availableCampuses =
+                    Array.isArray(course.campuses)
+                        ? course.campuses
+                        : [];
+
+
+                /*
+                | Store campuses in Alpine state
+                */
+
+                this.campuses = availableCampuses;
+
+
+                /*
+                | Normalize selected campus IDs
                 */
 
                 const normalizedSelectedIds =
-                    (selectedIds || []).map(id => String(id));
+                    Array.isArray(selectedIds)
+                        ? selectedIds.map(id => String(id))
+                        : [];
 
+
+                /*
+                | Get available campus IDs
+                */
 
                 const availableIds =
                     availableCampuses.map(
                         campus => String(campus.id)
                     );
 
+
+                /*
+                | Only keep valid selected campuses
+                */
 
                 const validSelectedIds =
                     normalizedSelectedIds.filter(
@@ -407,16 +514,13 @@
 
 
                 /*
-                |--------------------------------------------------------------------------
-                | Update Existing Multi Select
-                |--------------------------------------------------------------------------
+                | Update Multi Select
                 */
 
                 this.updateCampusOptions(
                     availableCampuses,
                     validSelectedIds
                 );
-
             },
 
 
@@ -441,19 +545,18 @@
 
                                 options: options,
 
-                                selected: selected
+                                selected: selected,
 
                             }
                         }
                     )
                 );
-
             },
 
 
             /*
             |--------------------------------------------------------------------------
-            | Reset
+            | Reset Form
             |--------------------------------------------------------------------------
             */
 
@@ -465,12 +568,12 @@
 
                 this.courseId = '';
 
-                this.updateCampusOptions([]);
+                this.campuses = [];
 
+                this.updateCampusOptions([]);
             }
 
         };
     }
 </script>
-
 @endpush

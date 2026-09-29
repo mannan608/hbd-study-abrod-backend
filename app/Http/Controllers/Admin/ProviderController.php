@@ -89,16 +89,16 @@ class ProviderController extends Controller
             ->get();
 
         $courses = Course::query()
-            ->select('id', 'university_id',"campus_id", 'title')
+            ->select('id', 'university_id', 'title')
+            ->with([
+                'campuses:id,name,university_id',
+            ])
             ->orderBy('title')
             ->get();
 
-        $campuses = UniversityCampus::query()
-            // ->select('id', 'name')
-            ->orderBy('name')
-            ->get();
 
-        // return $campuses;
+
+        // return $courses;
 
         /* Load course scopes */
 
@@ -110,7 +110,7 @@ class ProviderController extends Controller
             ])
             ->get()
             ->groupBy(function ($scope) {
-                return $scope->university_id.'-'.$scope->course_id;
+                return $scope->university_id . '-' . $scope->course_id;
             })
             ->values();
 
@@ -118,7 +118,6 @@ class ProviderController extends Controller
             'provider' => $provider,
             'universities' => $universities,
             'courses' => $courses,
-            'campuses' => $campuses,
             'courseScopes' => $courseScopes,
         ]);
     }
@@ -158,6 +157,7 @@ class ProviderController extends Controller
      */
     public function update(ProviderUpdateRequest $request, string $role, Provider $provider): RedirectResponse
     {
+
         $this->providers->update($provider, $request->validated());
 
         return redirect()
@@ -196,10 +196,7 @@ class ProviderController extends Controller
         Provider $provider
     ): RedirectResponse {
 
-        abort_unless(
-            $request->user()->can('provider.scope.create'),
-            403
-        );
+        abort_unless($request->user()->can('provider.view'), 403);
 
         $validated = $request->validate([
             'university_id' => [
@@ -254,11 +251,7 @@ class ProviderController extends Controller
         ProviderCourseScope $scope
     ): RedirectResponse {
 
-        abort_unless(
-            $request->user()->can('provider.scope.update'),
-            403
-        );
-
+       abort_unless($request->user()->can('provider.view'), 403);
         /*
      * Security check:
      * Make sure this scope belongs to this provider.
