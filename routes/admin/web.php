@@ -68,7 +68,7 @@ Route::prefix('{role}')
         Route::get('campuses/cities', [CampusController::class, 'cities'])
             ->name('campuses.cities');
         Route::resource('campuses', CampusController::class);
-        Route::resource('providers', ProviderController::class);
+
         Route::resource('course-categories', CourseCategoryController::class);
         Route::resource('courses', CourseController::class);
         Route::resource('contacts', ContactController::class);
@@ -98,8 +98,14 @@ Route::prefix('{role}')
         Route::get('students/bulk-import', [StudentController::class, 'bulkImport'])->name('students.import');
         Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
 
-        // agents
+        //Providers
+        Route::resource('providers', ProviderController::class);
+        // Route::get('providers/{provider}/scopes', [ProviderController::class, 'scopeLists'])->name('providers.scopes');
+        // Route::post('providers/{provider}/scopes', [ProviderController::class, 'addNewScope'])->name('providers.scopes.add');
+        // Route::put('providers/{provider}/scopes/{scope}', [ProviderController::class, 'editScope'])->name('providers.scopes.edit');
+        // Route::delete('providers/{provider}/scopes/{scope}', [ProviderController::class, 'deleteScope'])->name('providers.scopes.delete');
 
-        
-
+        Route::post('/providers/{provider}/scopes', [ProviderController::class, 'addNewScope'])->name('providers.scopes.store');
+        Route::put('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'editScope'])->name('providers.scopes.update');
+        Route::delete('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'deleteScope'])->name('providers.scopes.delete');
     });

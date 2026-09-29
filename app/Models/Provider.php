@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Provider extends Model
 {
@@ -28,5 +29,10 @@ class Provider extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function courseScopes(): HasMany
+{
+    return $this->hasMany(ProviderCourseScope::class);
+}
 
 }

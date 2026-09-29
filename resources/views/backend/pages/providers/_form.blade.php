@@ -116,7 +116,7 @@
 
                                 <x-form.input-text
                                     name="short_name"
-                                    label="Short Name"
+                                    label="Agency Name"
                                     value="{{ $shortName }}"
                                     placeholder="e.g. ABC Education..."
                                 />

@@ -255,7 +255,7 @@
 
                                         <div class="text-xs text-neutral-500
                                                    dark:text-neutral-400"
-                                            x-text="'User ID: ' + row.user_id"></div>
+                                            x-text="row.user_name"></div>
 
                                     </div>
 
