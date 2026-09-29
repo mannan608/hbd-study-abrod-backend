@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProviderStoreRequest;
 use App\Http\Requests\ProviderUpdateRequest;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Provider;
 use App\Repositories\Interfaces\ProviderRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
@@ -23,6 +25,8 @@ class ProviderController extends Controller
         abort_unless($request->user()->can('provider.list'), 403);
 
         $providers = $this->providers->paginate(15);
+
+
         // return $providers;
 
         return view('backend.pages.providers.index', compact('providers'));
@@ -34,9 +38,21 @@ class ProviderController extends Controller
     public function create(Request $request, string $role): View
     {
         abort_unless($request->user()->can('provider.create'), 403);
+        $countries = Country::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get([ 'id','name']);
+
+        $cities = City::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get([ 'id', 'name','country_id']);
 
         return view('backend.pages.providers.create', [
-            'provider' => null
+            'providers' => null,
+            'countries' => $countries,
+            'cities' => $cities,
+            'formMode' => 'create',
         ]);
     }
 
@@ -74,9 +90,21 @@ class ProviderController extends Controller
     public function edit(Request $request, string $role, Provider $provider): View
     {
         abort_unless($request->user()->can('provider.edit'), 403);
+           $countries = Country::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get([ 'id','name']);
+
+        $cities = City::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get([ 'id', 'name','country_id']);
 
         return view('backend.pages.providers.edit', [
             'provider' => $provider,
+            'countries' => $countries,
+            'cities' => $cities,
+            'formMode' => 'edit',
         ]);
     }
 
