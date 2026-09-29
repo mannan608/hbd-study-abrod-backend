@@ -17,15 +17,15 @@ class CourseRepository implements CourseRepositoryInterface
 
     public function paginate(int $perPage = 15)
     {
-        return Course::select('id', 'title', 'slug', 'university_id', 'campus_id', 'category_id', 'degree_level', 'duration_months', 'tuition_fee', 'is_active')
-            ->with(['university:id,name', 'campus:id,name', 'category:id,name'])
+        return Course::select('id', 'title', 'slug', 'university_id', 'category_id', 'degree_level', 'duration_months', 'tuition_fee', 'is_active')
+            ->with(['university:id,name', 'campuses:id,name', 'category:id,name'])
             ->latest()
             ->paginate($perPage);
     }
 
     public function findById(string $id): Course
     {
-        return Course::with(['university', 'campus', 'category'])->findOrFail($id);
+        return Course::with(['university', 'campuses', 'category'])->findOrFail($id);
     }
 
  public function create(array $data, Request $request): Course

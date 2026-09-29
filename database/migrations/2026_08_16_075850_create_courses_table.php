@@ -54,7 +54,7 @@ return new class extends Migration
             $table->string('english_requirement_text', 255)->nullable();
 
             // Academic requirement
-            $table->decimal('gpa_requirement', 3, 2)->nullable();
+            $table->decimal('gpa_requirement', 4, 2)->nullable();
 
             // Course overview
             $table->text('overview')->nullable();

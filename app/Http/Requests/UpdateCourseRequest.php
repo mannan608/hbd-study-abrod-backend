@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCourseRequest extends FormRequest
 {
@@ -14,7 +15,14 @@ class UpdateCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'university_id' => ['nullable', 'integer', 'exists:universities,id'],
+            'university_id' => ['nullable', 'uuid', 'exists:universities,id'],
+
+            'campus_ids' => ['nullable', 'array'],
+
+            'campus_ids.*' => [
+                'uuid',
+                Rule::exists('university_campuses', 'id')->where('university_id', $this->input('university_id')),
+            ],
 
             'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
@@ -91,4 +99,5 @@ class UpdateCourseRequest extends FormRequest
     {
         return (new StoreCourseRequest())->attributes();
     }
+
 }

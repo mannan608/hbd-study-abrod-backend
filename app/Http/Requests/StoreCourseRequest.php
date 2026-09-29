@@ -19,7 +19,10 @@ class StoreCourseRequest extends FormRequest
 
             'campus_ids' => ['nullable', 'array'],
 
-            'campus_ids.*' => ['uuid', 'exists:university_campuses,id'],
+            'campus_ids.*' => [
+                'uuid',
+                Rule::exists('university_campuses', 'id')->where('university_id', $this->input('university_id')),
+            ],
 
             'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
@@ -94,8 +97,8 @@ class StoreCourseRequest extends FormRequest
             'university_id.integer' => 'Selected university is invalid.',
             'university_id.exists' => 'Selected university does not exist.',
 
-            'campus_id.uuid' => 'Selected campus is invalid.',
-            'campus_id.exists' => 'Selected campus does not exist.',
+            'campus_ids.*.uuid' => 'Selected campus is invalid.',
+            'campus_ids.*.exists' => 'Selected campus must belong to the selected university.',
 
             'category_id.uuid' => 'Selected category is invalid.',
             'category_id.integer' => 'Selected category is invalid.',
@@ -145,7 +148,7 @@ class StoreCourseRequest extends FormRequest
     {
         return [
             'university_id' => 'university',
-            'campus_id' => 'campus',
+            'campus_ids' => 'campuses',
             'category_id' => 'category',
             'title' => 'course title',
             'degree_level' => 'degree level',

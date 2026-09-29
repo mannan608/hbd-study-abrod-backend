@@ -13,7 +13,7 @@
             'slug' => $course->slug,
             'category' => $course->category->name ?? null,
             'university' => $course->university->name ?? null,
-            'campus' => $course->campus->name ?? null,
+            'campus' => $course->campuses->pluck('name')->implode(', '),
             'degree' => $course->degree_level,
             'duration' => $course->duration_months,
             'tuition' => $course->tuition_fee,

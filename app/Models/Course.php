@@ -50,13 +50,15 @@ class Course extends Model
         return $this->belongsTo(University::class);
     }
 
-  public function campuses(): BelongsToMany
-{
-    return $this->belongsToMany(
-        UniversityCampus::class,
-        'course_campus'
-    );
-}
+    public function campuses(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            UniversityCampus::class,
+            'course_campus',
+            'course_id',
+            'campus_id'
+        )->withTimestamps();
+    }
 
     public function category(): BelongsTo
     {

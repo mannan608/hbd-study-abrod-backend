@@ -79,7 +79,7 @@ class CourseController extends Controller
     {
         $request->user()->can('course.view') || abort(403);
 
-        $course->load(['university', 'campus', 'category']);
+        $course->load(['university', 'campuses', 'category']);
 
         return view('backend.pages.courses.show', [
             'course' => $course,

@@ -42,13 +42,13 @@ class UniversityCampus extends Model
     {
         return $this->belongsTo(City::class);
     }
-   public function courses(): BelongsToMany
-{
-    return $this->belongsToMany(
-        Course::class,
-        'course_campus',
-        'campus_id',
-        'course_id'
-    );
-}
+    public function courses(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Course::class,
+            'course_campus',
+            'campus_id',
+            'course_id'
+        )->withTimestamps();
+    }
 }
