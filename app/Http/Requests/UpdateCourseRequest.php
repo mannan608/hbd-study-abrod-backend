@@ -16,8 +16,6 @@ class UpdateCourseRequest extends FormRequest
         return [
             'university_id' => ['nullable', 'integer', 'exists:universities,id'],
 
-            'campus_id' => ['nullable', 'uuid', 'exists:university_campuses,id'],
-
             'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
             'title' => ['required', 'string', 'max:255'],

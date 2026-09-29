@@ -17,7 +17,7 @@ class CourseRepository implements CourseRepositoryInterface
 
     public function paginate(int $perPage = 15)
     {
-        return Course::select('id', 'title', 'slug', 'university_id', 'campus_id', 'category_id','degree_level', 'duration_months', 'tuition_fee', 'is_active')
+        return Course::select('id', 'title', 'slug', 'university_id', 'campus_id', 'category_id', 'degree_level', 'duration_months', 'tuition_fee', 'is_active')
             ->with(['university:id,name', 'campus:id,name', 'category:id,name'])
             ->latest()
             ->paginate($perPage);
@@ -28,27 +28,67 @@ class CourseRepository implements CourseRepositoryInterface
         return Course::with(['university', 'campus', 'category'])->findOrFail($id);
     }
 
-    public function create(array $data, Request $request): Course
-    {
-        return DB::transaction(function () use ($data) {
-            $data['slug'] = $this->generateUniqueSlug($data['title']);
+ public function create(array $data, Request $request): Course
+{
+    return DB::transaction(function () use ($data) {
 
-            return Course::create($data);
-        });
-    }
+        $data['slug'] = $this->generateUniqueSlug($data['title']);
 
-    public function update(Course $course, array $data, Request $request): Course
-    {
-        return DB::transaction(function () use ($course, $data) {
-            if (isset($data['title']) && $course->title !== $data['title']) {
-                $data['slug'] = $this->generateUniqueSlug($data['title'], $course->id);
-            }
+        // Get selected campuses
+        $campusIds = $data['campus_ids'] ?? [];
 
-            $course->update($data);
+        // campus_ids does not belong to courses table
+        unset($data['campus_ids']);
 
-            return $course->fresh(['university', 'campus', 'category']);
-        });
-    }
+        // Create course
+        $course = Course::create($data);
+
+        // Attach selected campuses
+        if (!empty($campusIds)) {
+            $course->campuses()->sync($campusIds);
+        }
+
+        return $course->fresh([
+            'university',
+            'campuses',
+            'category',
+        ]);
+    });
+}
+
+public function update(Course $course, array $data, Request $request): Course
+{
+    return DB::transaction(function () use ($course, $data) {
+
+        if (
+            isset($data['title']) &&
+            $course->title !== $data['title']
+        ) {
+            $data['slug'] = $this->generateUniqueSlug(
+                $data['title'],
+                $course->id
+            );
+        }
+
+        // Get selected campuses
+        $campusIds = $data['campus_ids'] ?? [];
+
+        // Remove before updating courses table
+        unset($data['campus_ids']);
+
+        // Update course
+        $course->update($data);
+
+        // Synchronize campus relationships
+        $course->campuses()->sync($campusIds);
+
+        return $course->fresh([
+            'university',
+            'campuses',
+            'category',
+        ]);
+    });
+}
 
     public function delete(Course $course): bool
     {

@@ -18,13 +18,7 @@ return new class extends Migration
             $table->foreignUuid('university_id')
                 ->nullable()
                 ->constrained('universities')
-                ->cascadeOnDelete();
-
-            // Campus
-            $table->foreignUuid('campus_id')
-                ->nullable()
-                ->constrained('university_campuses')
-                ->nullOnDelete();
+                ->cascadeOnDelete();        
 
             // Course category
           $table->foreignId('category_id')->nullable();

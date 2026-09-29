@@ -22,7 +22,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $request->user()->can('course.list') || abort(403);
-         $courses = $this->courses->paginate();
+        $courses = $this->courses->paginate();
         // return $courses;
 
         return view('backend.pages.courses.index', [
@@ -34,22 +34,31 @@ class CourseController extends Controller
     public function create(Request $request): View
     {
         $request->user()->can('course.create') || abort(403);
+        $categories = CourseCategory::query()->orderBy('name')->get();
+
+        $universities = University::query()
+            ->select(['id', 'name'])
+            ->orderBy('name')
+            ->get();
+
+        $campuses = UniversityCampus::query()
+            ->select(['id','university_id','name'])
+            ->orderBy('name')
+            ->get();
+
+        $campusOptions = $campuses->mapWithKeys(
+            fn($campus) => [
+                $campus->id => $campus->name,
+            ]
+        )->toArray();
+
 
         return view('backend.pages.courses.create', [
             'course' => null,
-            'universities' => University::query()
-                ->orderBy('name')
-                ->get(['id', 'name']),
-
-            'campuses' => UniversityCampus::query()
-                ->orderBy('name')
-                ->get(['id', 'name', 'university_id']),
-
-            'categories' => CourseCategory::query()
-                ->orderBy('name')
-                ->get(['id', 'name']),
-
-            'title' => 'Create Course',
+            'universities' => $universities,
+            'campuses' => $campuses,
+            'campusOptions' => $campusOptions,
+            'categories' => $categories,
         ]);
     }
 
@@ -82,21 +91,31 @@ class CourseController extends Controller
     {
         $request->user()->can('course.edit') || abort(403);
 
+           $categories = CourseCategory::query()->orderBy('name')->get();
+
+        $universities = University::query()
+            ->select(['id', 'name'])
+            ->orderBy('name')
+            ->get();
+
+        $campuses = UniversityCampus::query()
+            ->select(['id','university_id','name'])
+            ->orderBy('name')
+            ->get();
+
+        $campusOptions = $campuses->mapWithKeys(
+            fn($campus) => [
+                $campus->id => $campus->name,
+            ]
+        )->toArray();
+
+
         return view('backend.pages.courses.edit', [
             'course' => $course,
-
-            'universities' => University::query()
-                ->orderBy('name')
-                ->get(['id', 'name']),
-
-            'campuses' => UniversityCampus::query()
-                ->orderBy('name')
-                ->get(['id', 'name', 'university_id']),
-
-            'categories' => CourseCategory::query()
-                ->orderBy('name')
-                ->get(['id', 'name']),
-
+            'universities' => $universities,
+            'campuses' => $campuses,
+            'campusOptions' => $campusOptions,
+            'categories' => $categories,
             'title' => 'Edit Course',
         ]);
     }

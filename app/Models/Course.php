@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model
 {
@@ -12,7 +13,6 @@ class Course extends Model
 
     protected $fillable = [
         'university_id',
-        'campus_id',
         'category_id',
         'title',
         'slug',
@@ -50,13 +50,13 @@ class Course extends Model
         return $this->belongsTo(University::class);
     }
 
-    public function campus(): BelongsTo
-    {
-        return $this->belongsTo(
-            UniversityCampus::class,
-            'campus_id'
-        );
-    }
+  public function campuses(): BelongsToMany
+{
+    return $this->belongsToMany(
+        UniversityCampus::class,
+        'course_campus'
+    );
+}
 
     public function category(): BelongsTo
     {

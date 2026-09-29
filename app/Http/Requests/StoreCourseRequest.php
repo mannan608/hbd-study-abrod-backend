@@ -17,7 +17,9 @@ class StoreCourseRequest extends FormRequest
         return [
             'university_id' => ['nullable', 'uuid', 'exists:universities,id'],
 
-            'campus_id' => ['nullable', 'uuid', 'exists:university_campuses,id'],
+            'campus_ids' => ['nullable', 'array'],
+
+            'campus_ids.*' => ['uuid', 'exists:university_campuses,id'],
 
             'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
@@ -70,9 +72,9 @@ class StoreCourseRequest extends FormRequest
         }
 
         $entryRequirements = array_values(array_filter(array_map(
-            static fn ($requirement) => is_string($requirement) ? trim($requirement) : '',
+            static fn($requirement) => is_string($requirement) ? trim($requirement) : '',
             $entryRequirements
-        ), static fn ($requirement) => $requirement !== ''));
+        ), static fn($requirement) => $requirement !== ''));
 
         $this->merge([
             'currency' => strtoupper($this->currency ?: 'USD'),

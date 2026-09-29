@@ -89,12 +89,12 @@ class ProviderController extends Controller
             ->get();
 
         $courses = Course::query()
-            ->select('id', 'university_id', 'title')
+            ->select('id', 'university_id',"campus_id", 'title')
             ->orderBy('title')
             ->get();
 
         $campuses = UniversityCampus::query()
-            ->select('id', 'name')
+            // ->select('id', 'name')
             ->orderBy('name')
             ->get();
 

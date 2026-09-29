@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class UniversityCampus extends Model
 {
@@ -42,8 +42,13 @@ class UniversityCampus extends Model
     {
         return $this->belongsTo(City::class);
     }
-    public function courses(): HasMany
+   public function courses(): BelongsToMany
 {
-    return $this->hasMany(Course::class, 'campus_id');
+    return $this->belongsToMany(
+        Course::class,
+        'course_campus',
+        'campus_id',
+        'course_id'
+    );
 }
 }
