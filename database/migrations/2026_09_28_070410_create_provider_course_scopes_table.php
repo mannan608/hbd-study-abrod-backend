@@ -9,12 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('provider_course_scopes', function (Blueprint $table) {
-            
-             $table->id();
-            $table->unsignedBigInteger('provider_id')->constrained('providers')->cascadeOnDelete();
+
+            $table->id();
+            $table->foreignId('provider_id')->constrained('providers')->cascadeOnDelete();
             $table->foreignUuid('university_id')->constrained('universities')->cascadeOnDelete();
             $table->foreignUuid('course_id')->constrained('courses')->cascadeOnDelete();
-            $table->foreignUuid('campus_id')->constrained('campuses')->cascadeOnDelete();
+            $table->foreignUuid('campus_id')->constrained('university_campuses')->cascadeOnDelete();
 
             $table->timestamps();
 

@@ -218,7 +218,7 @@
                 $courses->map(fn ($course) => [
                     'id' => $course->id,
                     'university_id' => $course->university_id,
-                    'name' => $course->title,
+                    'title' => $course->title,
                 ])->values()
             ),
 
@@ -226,7 +226,6 @@
                 $campuses->map(fn ($campus) => [
                     'id' => $campus->id,
                     'university_id' => $campus->university_id,
-                    'course_id' => $campus->course_id,
                     'name' => $campus->name,
                 ])->values()
             ),
@@ -378,12 +377,7 @@
                 */
 
                 const availableCampuses = this.campuses
-                    .filter(campus => {
-
-                        return String(campus.course_id) ===
-                            String(this.courseId);
-
-                    })
+                    .filter(campus => String(campus.university_id) === String(this.universityId))
                     .map(campus => ({
                         id: campus.id,
                         name: campus.name

@@ -100,11 +100,7 @@ Route::prefix('{role}')
 
         //Providers
         Route::resource('providers', ProviderController::class);
-        // Route::get('providers/{provider}/scopes', [ProviderController::class, 'scopeLists'])->name('providers.scopes');
-        // Route::post('providers/{provider}/scopes', [ProviderController::class, 'addNewScope'])->name('providers.scopes.add');
-        // Route::put('providers/{provider}/scopes/{scope}', [ProviderController::class, 'editScope'])->name('providers.scopes.edit');
-        // Route::delete('providers/{provider}/scopes/{scope}', [ProviderController::class, 'deleteScope'])->name('providers.scopes.delete');
-
+      
         Route::post('/providers/{provider}/scopes', [ProviderController::class, 'addNewScope'])->name('providers.scopes.store');
         Route::put('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'editScope'])->name('providers.scopes.update');
         Route::delete('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'deleteScope'])->name('providers.scopes.delete');

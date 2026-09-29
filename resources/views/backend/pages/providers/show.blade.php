@@ -4,7 +4,9 @@
     $editingScope = $editingScope ?? null;
 
     $editingCampusIds = $editingScope ? $editingScope->pluck('campus_id')->values()->all() : [];
-      $role = request()->route('role');
+
+    $role = request()->route('role');
+
 @endphp
 
 @section('content')
@@ -128,7 +130,7 @@
 
 
                     {{-- Add Scope --}}
-                    <button type="button" @click="openModal()"
+                    <button type="button" @click="$refs.scopeForm.scrollIntoView({behavior: 'smooth'})"
                         class="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100">
                         <iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon>
 
@@ -139,7 +141,7 @@
 
             </div>
 
-            <div
+            <div x-ref="scopeForm"
                 class="mt-5 rounded-xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 p-5 sm:p-6">
                 <div class="mb-8">
                     <h3 class="text-base md:text-lg font-bold text-slate-900">Add Course/Program Scope</h3>
@@ -210,7 +212,7 @@
                         class="inline-flex w-fit items-center gap-1.5 rounded-md bg-neutral-100 px-2.5 py-1.5 text-xs font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
                         <iconify-icon icon="lucide:layers-2" class="text-[13px]"></iconify-icon>
 
-                        1 Scope
+                        {{ $courseScopes->count() }} {{ \Illuminate\Support\Str::plural('Scope', $courseScopes->count()) }}
                     </div>
 
                 </div>
@@ -252,193 +254,167 @@
                         </thead>
 
 
-                      <tbody class="divide-y divide-neutral-100 dark:divide-neutral-800">
+                        <tbody class="divide-y divide-neutral-100 dark:divide-neutral-800">
 
-    @forelse($courseScopes as $scopeGroup)
+                            @forelse($courseScopes as $scopeGroup)
+                                @php
+                                    $firstScope = $scopeGroup->first();
 
-        @php
-            $firstScope = $scopeGroup->first();
+                                    $scopeData = [
+                                        'id' => $firstScope->id,
 
-            $scopeData = [
-                'id' => $firstScope->id,
+                                        'university_id' => $firstScope->university_id,
+                                        'university' => $firstScope->university->name,
 
-                'university_id' => $firstScope->university_id,
-                'university' => $firstScope->university->name,
+                                        'course_id' => $firstScope->course_id,
+                                        'course' => $firstScope->course->title,
+                                        'campus' => $scopeGroup->pluck('campus.name')->filter()->implode(', '),
 
-                'course_id' => $firstScope->course_id,
-                'course' => $firstScope->course->name,
+                                        'campus_ids' => $scopeGroup->pluck('campus_id')->values()->all(),
 
-                'campus_ids' => $scopeGroup
-                    ->pluck('campus_id')
-                    ->values()
-                    ->all(),
+                                        'campuses' => $scopeGroup
+                                            ->map(function ($scope) {
+                                                return [
+                                                    'id' => $scope->campus_id,
+                                                    'name' => $scope->campus->name,
+                                                ];
+                                            })
+                                            ->values()
+                                            ->all(),
+                                    ];
+                                @endphp
 
-                'campuses' => $scopeGroup->map(function ($scope) {
-                    return [
-                        'id' => $scope->campus_id,
-                        'name' => $scope->campus->name,
-                    ];
-                })->values()->all(),
-            ];
-        @endphp
+                                <tr class="transition-colors hover:bg-neutral-50/60 dark:hover:bg-white/[0.02]">
 
-        <tr class="transition-colors hover:bg-neutral-50/60 dark:hover:bg-white/[0.02]">
+                                    {{-- University --}}
+                                    <td class="px-5 py-4">
 
-            {{-- University --}}
-            <td class="px-5 py-4">
+                                        <div class="flex items-center gap-3">
 
-                <div class="flex items-center gap-3">
-
-                    <div
-                        class="flex size-9 shrink-0 items-center justify-center
+                                            <div
+                                                class="flex size-9 shrink-0 items-center justify-center
                                rounded-lg bg-neutral-100 text-neutral-500
-                               dark:bg-neutral-800 dark:text-neutral-400"
-                    >
-                        <iconify-icon
-                            icon="lucide:building-2"
-                            class="text-sm"
-                        ></iconify-icon>
-                    </div>
+                               dark:bg-neutral-800 dark:text-neutral-400">
+                                                <iconify-icon icon="lucide:building-2" class="text-sm"></iconify-icon>
+                                            </div>
 
-                    <div>
-                        <div class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-                            {{ $firstScope->university->name }}
-                        </div>
+                                            <div>
+                                                <div class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                                                    {{ $firstScope->university->name }}
+                                                </div>
 
-                        <div class="mt-0.5 text-[11px] text-neutral-400">
-                            University
-                        </div>
-                    </div>
+                                                <div class="mt-0.5 text-[11px] text-neutral-400">
+                                                    University
+                                                </div>
+                                            </div>
 
-                </div>
+                                        </div>
 
-            </td>
+                                    </td>
 
 
-            {{-- Access --}}
-            <td class="px-5 py-4">
+                                    {{-- Access --}}
+                                    <td class="px-5 py-4">
 
-                <span
-                    class="inline-flex items-center gap-1.5 rounded-md border
+                                        <span
+                                            class="inline-flex items-center gap-1.5 rounded-md border
                            border-neutral-200 bg-neutral-50 px-2.5 py-1.5
                            text-xs font-medium text-neutral-700
                            dark:border-neutral-700 dark:bg-neutral-800
-                           dark:text-neutral-300"
-                >
-                    <iconify-icon
-                        icon="lucide:shield-check"
-                        class="text-[13px] text-neutral-400"
-                    ></iconify-icon>
+                           dark:text-neutral-300">
+                                            <iconify-icon icon="lucide:shield-check"
+                                                class="text-[13px] text-neutral-400"></iconify-icon>
 
-                    Course Access
-                </span>
+                                            Course Access
+                                        </span>
 
-            </td>
+                                    </td>
 
 
-            {{-- Campus --}}
-            <td class="px-5 py-4">
+                                    {{-- Campus --}}
+                                    <td class="px-5 py-4">
 
-                <div class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                                        <div class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300">
 
-                    <iconify-icon
-                        icon="lucide:map-pin"
-                        class="text-[14px] text-neutral-400"
-                    ></iconify-icon>
+                                            <iconify-icon icon="lucide:map-pin"
+                                                class="text-[14px] text-neutral-400"></iconify-icon>
 
-                    {{ $scopeGroup->count() }} Campus
+                                            {{ $scopeGroup->pluck('campus.name')->filter()->implode(', ') ?: '—' }}
 
-                </div>
+                                        </div>
 
-            </td>
+                                    </td>
 
 
-            {{-- Course --}}
-            <td class="px-5 py-4">
+                                    {{-- Course --}}
+                                    <td class="px-5 py-4">
 
-                <div class="text-sm text-neutral-700 dark:text-neutral-300">
-                    {{ $firstScope->course->name }}
-                </div>
+                                        <div class="text-sm text-neutral-700 dark:text-neutral-300">
+                                            {{ $firstScope->course->title }}
+                                        </div>
 
-            </td>
+                                    </td>
 
 
-            {{-- Actions --}}
-            <td class="px-5 py-4">
+                                    {{-- Actions --}}
+                                    <td class="px-5 py-4">
 
-                <div class="flex justify-end gap-1">
+                                        <div class="flex justify-end gap-1">
 
-                    {{-- Edit --}}
-                    <button
-                        type="button"
-                        title="Edit"
-                        @click='openEditScope(@json($scopeData))'
-                        class="inline-flex size-8 items-center justify-center
+                                            {{-- Edit --}}
+                                            <button type="button" title="Edit"
+                                                @click='openEditScope(@json($scopeData))'
+                                                class="inline-flex size-8 items-center justify-center
                                rounded-md text-neutral-400 transition
                                hover:bg-neutral-100 hover:text-neutral-700
                                dark:hover:bg-neutral-800
-                               dark:hover:text-neutral-200"
-                    >
-                        <iconify-icon
-                            icon="lucide:pencil"
-                            class="text-[14px]"
-                        ></iconify-icon>
-                    </button>
+                               dark:hover:text-neutral-200">
+                                                <iconify-icon icon="lucide:pencil" class="text-[14px]"></iconify-icon>
+                                            </button>
 
 
-                    {{-- Delete --}}
-                    <button
-                        type="button"
-                        title="Delete"
-                        @click='openDeleteModal(@json($scopeData))'
-                        class="inline-flex size-8 items-center justify-center
+                                            {{-- Delete --}}
+                                            <button type="button" title="Delete"
+                                                @click='openDeleteModal(@json($scopeData))'
+                                                class="inline-flex size-8 items-center justify-center
                                rounded-md text-neutral-400 transition
                                hover:bg-red-50 hover:text-red-600
                                dark:hover:bg-red-500/10
-                               dark:hover:text-red-400"
-                    >
-                        <iconify-icon
-                            icon="lucide:trash-2"
-                            class="text-[14px]"
-                        ></iconify-icon>
-                    </button>
+                               dark:hover:text-red-400">
+                                                <iconify-icon icon="lucide:trash-2" class="text-[14px]"></iconify-icon>
+                                            </button>
 
-                </div>
+                                        </div>
 
-            </td>
+                                    </td>
 
-        </tr>
+                                </tr>
 
-    @empty
+                            @empty
 
-        <tr>
-            <td colspan="5" class="px-5 py-14 text-center">
+                                <tr>
+                                    <td colspan="5" class="px-5 py-14 text-center">
 
-                <div
-                    class="mx-auto flex size-10 items-center justify-center
+                                        <div
+                                            class="mx-auto flex size-10 items-center justify-center
                            rounded-lg bg-neutral-100 text-neutral-400
-                           dark:bg-neutral-800"
-                >
-                    <iconify-icon
-                        icon="lucide:folder-open"
-                        class="text-lg"
-                    ></iconify-icon>
-                </div>
+                           dark:bg-neutral-800">
+                                            <iconify-icon icon="lucide:folder-open" class="text-lg"></iconify-icon>
+                                        </div>
 
-                <h3 class="mt-3 text-sm font-medium text-neutral-800 dark:text-neutral-200">
-                    No course scopes
-                </h3>
+                                        <h3 class="mt-3 text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                                            No course scopes
+                                        </h3>
 
-                <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-                    No course access scope has been configured.
-                </p>
+                                        <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                                            No course access scope has been configured.
+                                        </p>
 
-            </td>
-        </tr>
+                                    </td>
+                                </tr>
+                            @endforelse
 
-    @endforelse
-
-</tbody>
+                        </tbody>
 
                     </table>
 
@@ -452,9 +428,9 @@
                     <span class="text-xs text-neutral-500 dark:text-neutral-400">
                         Showing
                         <span class="font-medium text-neutral-700 dark:text-neutral-300">
-                            1
+                            {{ $courseScopes->count() }}
                         </span>
-                        scope permission
+                        {{ \Illuminate\Support\Str::plural('scope permission', $courseScopes->count()) }}
                     </span>
 
                     <span class="inline-flex items-center gap-1.5 text-[11px] text-neutral-400">
@@ -473,44 +449,102 @@
 
 
         {{-- DELETE MODAL --}}
-       <form
-    method="POST"
-    :action="
-        selectedScope
-            ? '{{ route('role.providers.scopes.delete', [$role, $provider, '__SCOPE__']) }}'
-                .replace('__SCOPE__', selectedScope.id)
-            : '#'
-    "
->
-    @csrf
-    @method('DELETE')
+        <div x-show="showDeleteModal" x-cloak x-transition.opacity class="fixed inset-0 z-[99999]">
 
-    <button
-        type="button"
-        @click="closeDeleteModal()"
-        class="rounded-lg border border-neutral-200 px-4 py-2
-               text-xs font-medium text-neutral-700 transition
-               hover:bg-neutral-50
-               dark:border-neutral-700 dark:text-neutral-300
-               dark:hover:bg-neutral-800"
-    >
-        Cancel
-    </button>
+            {{-- Overlay --}}
+            <div class="absolute inset-0 bg-neutral-950/40 backdrop-blur-[2px]" @click="closeDeleteModal()"></div>
 
-    <button
-        type="submit"
-        class="inline-flex items-center gap-1.5 rounded-lg bg-red-600
-               px-4 py-2 text-xs font-medium text-white transition
-               hover:bg-red-700"
-    >
-        <iconify-icon
-            icon="lucide:trash-2"
-            class="text-[13px]"
-        ></iconify-icon>
 
-        Delete
-    </button>
-</form>
+            {{-- Modal --}}
+            <div class="relative flex min-h-full items-center justify-center p-4">
+
+                <div x-show="showDeleteModal" x-transition:enter="transition ease-out duration-150"
+                    x-transition:enter-start="scale-95 opacity-0" x-transition:enter-end="scale-100 opacity-100"
+                    class="w-full max-w-md rounded-xl border border-neutral-200 bg-white shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
+
+                    <div class="p-5">
+
+                        <div class="flex items-start gap-3">
+
+                            <div
+                                class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                                <iconify-icon icon="lucide:trash-2" class="text-sm"></iconify-icon>
+                            </div>
+
+                            <div>
+
+                                <h3 class="text-sm font-semibold text-neutral-900 dark:text-white">
+                                    Delete Scope?
+                                </h3>
+
+                                <p class="mt-1 text-xs leading-5 text-neutral-500 dark:text-neutral-400">
+                                    This university scope permission will be permanently removed.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- Selected scope --}}
+                        <div
+                            class="mt-4 rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-800/50">
+
+                            <div class="text-sm font-medium text-neutral-800 dark:text-neutral-200"
+                                x-text="selectedScope?.university"></div>
+
+                            <div class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+
+                                <span x-text="selectedScope?.campus"></span>
+
+                                <span class="mx-1">•</span>
+
+                                <span x-text="selectedScope?.course"></span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="mt-5 flex justify-end gap-2">
+
+                            <form method="POST"
+                                :action="selectedScope
+                                    ?
+                                    '{{ route('role.providers.scopes.delete', [$role, $provider, '__SCOPE__']) }}'
+                                    .replace('__SCOPE__', selectedScope.id) :
+                                    '#'">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="button" @click="closeDeleteModal()"
+                                    class="rounded-lg border border-neutral-200 px-4 py-2
+                                        text-xs font-medium text-neutral-700 transition
+                                        hover:bg-neutral-50
+                                        dark:border-neutral-700 dark:text-neutral-300
+                                        dark:hover:bg-neutral-800">
+                                    Cancel
+                                </button>
+
+                                <button type="submit"
+                                    class="inline-flex items-center gap-1.5 rounded-lg bg-red-600
+                                            px-4 py-2 text-xs font-medium text-white transition
+                                            hover:bg-red-700">
+                                    <iconify-icon icon="lucide:trash-2" class="text-[13px]"></iconify-icon>
+
+                                    Delete
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 @endsection
