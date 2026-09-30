@@ -380,7 +380,7 @@
 
                                 <div class="flex justify-end gap-2">
 
-                                    {{-- Edit --}}
+                                    {{-- view --}}
                                  <a :href="baseUrl + '/' + row.id"
                                         class="p-2 text-neutral-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all">
                                         <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
