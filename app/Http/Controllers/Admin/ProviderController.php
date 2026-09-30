@@ -83,31 +83,21 @@ class ProviderController extends Controller
 
         $provider->load('user');
 
-        $universities = University::query()
-            ->select('id', 'name')
-            ->orderBy('name')
-            ->get();
+        $universities = University::query()->select('id', 'name')->orderBy('name')->get();
 
         $courses = Course::query()
             ->select('id', 'university_id', 'title')
-            ->with([
-                'campuses:id,name,university_id',
-            ])
+            ->with(['campuses:id,name,university_id'])
             ->orderBy('title')
             ->get();
-
-
 
         // return $courses;
 
         /* Load course scopes */
 
-        $courseScopes = $provider->courseScopes()
-            ->with([
-                'university:id,name',
-                'course:id,title',
-                'campus:id,name',
-            ])
+        $courseScopes = $provider
+            ->courseScopes()
+            ->with(['university:id,name', 'course:id,title', 'campus:id,name'])
             ->get()
             ->groupBy(function ($scope) {
                 return $scope->university_id . '-' . $scope->course_id;
@@ -130,16 +120,14 @@ class ProviderController extends Controller
         abort_unless($request->user()->can('provider.edit'), 403);
         $countries = Country::query()
             ->where(function ($query) use ($provider) {
-                $query->where('is_active', true)
-                    ->orWhere('id', $provider->country_id);
+                $query->where('is_active', true)->orWhere('id', $provider->country_id);
             })
             ->orderBy('name')
             ->get(['id', 'name']);
 
         $cities = City::query()
             ->where(function ($query) use ($provider) {
-                $query->where('is_active', true)
-                    ->orWhere('id', $provider->city_id);
+                $query->where('is_active', true)->orWhere('id', $provider->city_id);
             })
             ->orderBy('name')
             ->get(['id', 'name', 'country_id']);
@@ -157,7 +145,6 @@ class ProviderController extends Controller
      */
     public function update(ProviderUpdateRequest $request, string $role, Provider $provider): RedirectResponse
     {
-
         $this->providers->update($provider, $request->validated());
 
         return redirect()
@@ -190,46 +177,24 @@ class ProviderController extends Controller
         return redirect()->back();
     }
 
-    public function addNewScope(
-        Request $request,
-        string $role,
-        Provider $provider
-    ): RedirectResponse {
-
+    public function addNewScope(Request $request, string $role, Provider $provider): RedirectResponse
+    {
         abort_unless($request->user()->can('provider.view'), 403);
 
         $validated = $request->validate([
-            'university_id' => [
-                'required',
-                'uuid',
-                'exists:universities,id',
-            ],
+            'university_id' => ['required', 'uuid', 'exists:universities,id'],
 
-            'course_id' => [
-                'required',
-                'uuid',
-                'exists:courses,id',
-            ],
+            'course_id' => ['required', 'uuid', 'exists:courses,id'],
 
-            'campus_ids' => [
-                'required',
-                'array',
-                'min:1',
-            ],
+            'campus_ids' => ['required', 'array', 'min:1'],
 
-            'campus_ids.*' => [
-                'required',
-                'uuid',
-                'exists:university_campuses,id',
-            ],
+            'campus_ids.*' => ['required', 'uuid', 'exists:university_campuses,id'],
         ]);
 
         $this->assertScopeAssignmentsMatchUniversity($validated);
 
         DB::transaction(function () use ($validated, $provider) {
-
             foreach ($validated['campus_ids'] as $campusId) {
-
                 ProviderCourseScope::firstOrCreate([
                     'provider_id' => $provider->id,
                     'university_id' => $validated['university_id'],
@@ -239,75 +204,40 @@ class ProviderController extends Controller
             }
         });
 
-        return redirect()
-            ->back()
-            ->with('success', 'Course scope added successfully.');
+        return redirect()->back()->with('success', 'Course scope added successfully.');
     }
 
-    public function editScope(
-        Request $request,
-        string $role,
-        Provider $provider,
-        ProviderCourseScope $scope
-    ): RedirectResponse {
-
-       abort_unless($request->user()->can('provider.view'), 403);
+    public function editScope(Request $request, string $role, Provider $provider, ProviderCourseScope $scope): RedirectResponse
+    {
+        abort_unless($request->user()->can('provider.view'), 403);
         /*
-     * Security check:
-     * Make sure this scope belongs to this provider.
-     */
-        abort_unless(
-            $scope->provider_id === $provider->id,
-            404
-        );
+         * Security check:
+         * Make sure this scope belongs to this provider.
+         */
+        abort_unless($scope->provider_id === $provider->id, 404);
 
         $validated = $request->validate([
-            'university_id' => [
-                'required',
-                'uuid',
-                'exists:universities,id',
-            ],
+            'university_id' => ['required', 'uuid', 'exists:universities,id'],
 
-            'course_id' => [
-                'required',
-                'uuid',
-                'exists:courses,id',
-            ],
+            'course_id' => ['required', 'uuid', 'exists:courses,id'],
 
-            'campus_ids' => [
-                'required',
-                'array',
-                'min:1',
-            ],
+            'campus_ids' => ['required', 'array', 'min:1'],
 
-            'campus_ids.*' => [
-                'required',
-                'uuid',
-                'exists:university_campuses,id',
-            ],
+            'campus_ids.*' => ['required', 'uuid', 'exists:university_campuses,id'],
         ]);
 
         $this->assertScopeAssignmentsMatchUniversity($validated);
 
-        DB::transaction(function () use (
-            $validated,
-            $provider,
-            $scope
-        ) {
+        DB::transaction(function () use ($validated, $provider, $scope) {
+            /*
+             * Remove the existing group.
+             */
+            ProviderCourseScope::where('provider_id', $provider->id)->where('university_id', $scope->university_id)->where('course_id', $scope->course_id)->delete();
 
             /*
-         * Remove the existing group.
-         */
-            ProviderCourseScope::where('provider_id', $provider->id)
-                ->where('university_id', $scope->university_id)
-                ->where('course_id', $scope->course_id)
-                ->delete();
-
-            /*
-         * Create the new campus assignments.
-         */
+             * Create the new campus assignments.
+             */
             foreach ($validated['campus_ids'] as $campusId) {
-
                 ProviderCourseScope::create([
                     'provider_id' => $provider->id,
                     'university_id' => $validated['university_id'],
@@ -317,57 +247,26 @@ class ProviderController extends Controller
             }
         });
 
-        return redirect()
-            ->back()
-            ->with('success', 'Course scope updated successfully.');
+        return redirect()->back()->with('success', 'Course scope updated successfully.');
     }
 
     private function assertScopeAssignmentsMatchUniversity(array $validated): void
     {
-        abort_unless(
-            Course::whereKey($validated['course_id'])
-                ->where('university_id', $validated['university_id'])
-                ->exists(),
-            422,
-            'The selected course does not belong to the selected university.'
-        );
+        abort_unless(Course::whereKey($validated['course_id'])->where('university_id', $validated['university_id'])->exists(), 422, 'The selected course does not belong to the selected university.');
 
-        $campusCount = UniversityCampus::whereIn('id', $validated['campus_ids'])
-            ->where('university_id', $validated['university_id'])
-            ->distinct()
-            ->count('id');
+        $campusCount = UniversityCampus::whereIn('id', $validated['campus_ids'])->where('university_id', $validated['university_id'])->distinct()->count('id');
 
-        abort_unless(
-            $campusCount === count(array_unique($validated['campus_ids'])),
-            422,
-            'All selected campuses must belong to the selected university.'
-        );
+        abort_unless($campusCount === count(array_unique($validated['campus_ids'])), 422, 'All selected campuses must belong to the selected university.');
     }
 
-    public function deleteScope(
-        Request $request,
-        string $role,
-        Provider $provider,
-        ProviderCourseScope $scope
-    ): RedirectResponse {
+    public function deleteScope(Request $request, string $role, Provider $provider, ProviderCourseScope $scope): RedirectResponse
+    {
+        abort_unless($request->user()->can('provider.view'), 403);
 
-        abort_unless(
-            $request->user()->can('provider.scope.delete'),
-            403
-        );
+        abort_unless($scope->provider_id === $provider->id, 404);
 
-        abort_unless(
-            $scope->provider_id === $provider->id,
-            404
-        );
+        ProviderCourseScope::where('provider_id', $provider->id)->where('university_id', $scope->university_id)->where('course_id', $scope->course_id)->delete();
 
-        ProviderCourseScope::where('provider_id', $provider->id)
-            ->where('university_id', $scope->university_id)
-            ->where('course_id', $scope->course_id)
-            ->delete();
-
-        return redirect()
-            ->back()
-            ->with('success', 'Course scope deleted successfully.');
+        return redirect()->back()->with('success', 'Course scope deleted successfully.');
     }
 }

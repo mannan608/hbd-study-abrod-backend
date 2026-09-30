@@ -369,7 +369,7 @@
                                hover:bg-neutral-100 hover:text-neutral-700
                                dark:hover:bg-neutral-800
                                dark:hover:text-neutral-200">
-                                                <iconify-icon icon="lucide:pencil" class="text-[14px]"></iconify-icon>
+                                                <iconify-icon icon="lucide:edit" class="text-[14px]"></iconify-icon>
                                             </button>
 
 

@@ -89,79 +89,123 @@
 
 
     {{-- ================================================================
-        CAMPUS
-    ================================================================= --}}
+    CAMPUS
+================================================================= --}}
 
-    <div>
+<div>
 
-        <label class="mb-2 block text-sm font-medium text-neutral-800 dark:text-neutral-200">
-            Campus
-            <span class="text-red-500">*</span>
-        </label>
+    <label class="mb-2 block text-sm font-medium text-neutral-800 dark:text-neutral-200">
+        Campus
+        <span class="text-red-500">*</span>
+    </label>
 
+    {{-- Campus Selector --}}
+    <div
+        class="relative"
+        x-show="courseId"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 translate-y-1"
+        x-transition:enter-end="opacity-100 translate-y-0"
+    >
 
-        {{-- Campus Multi Select --}}
-        <div x-show="courseId" x-transition>
-
-            <x-form.multi-select
-                id="course-scope-campus"
-                name="campus_ids[]"
-                label=""
-                placeholder="Select Campus..."
-                :options="[]"
-                :selected="old('campus_ids', [])"
-                required
-            />
-
-            @error('campus_ids')
-                <p class="mt-1 text-xs text-red-600">
-                    {{ $message }}
-                </p>
-            @enderror
-
-            @error('campus_ids.*')
-                <p class="mt-1 text-xs text-red-600">
-                    {{ $message }}
-                </p>
-            @enderror
-
-        </div>
-
-
-        {{-- Course Not Selected --}}
+        {{-- Loading Overlay --}}
         <div
-            x-show="!courseId"
-            x-transition
-            class="flex items-center gap-2 rounded-lg border border-dashed
-                   border-neutral-300 px-4 py-4 text-sm text-neutral-500
-                   dark:border-neutral-700 dark:text-neutral-400"
+            x-show="loadingCampuses"
+            x-transition.opacity
+            class="absolute inset-0 z-10 flex items-center justify-center
+                   rounded-lg bg-white/70 backdrop-blur-[1px]
+                   dark:bg-neutral-900/70"
         >
-            <iconify-icon
-                icon="lucide:info"
-                class="text-base"
-            ></iconify-icon>
+            <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                <svg
+                    class="size-4 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+                    <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="3"
+                    ></circle>
 
-            Select a course first to see available campuses.
+                    <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"
+                    ></path>
+                </svg>
+
+                Loading campuses...
+            </div>
         </div>
 
 
-        {{-- No Campus Available --}}
-        <div
-            x-show="courseId && campuses.length === 0"
-            x-transition
-            class="mt-3 flex items-center gap-2 rounded-lg border border-dashed
-                   border-neutral-300 px-4 py-4 text-sm text-neutral-500
-                   dark:border-neutral-700 dark:text-neutral-400"
-        >
-            <iconify-icon
-                icon="lucide:info"
-                class="text-base"
-            ></iconify-icon>
+        {{-- Keep component mounted --}}
+        <x-form.multi-select
+            id="course-scope-campus"
+            name="campus_ids[]"
+            label=""
+            placeholder="Select Campus..."
+            :options="[]"
+            :selected="old('campus_ids', [])"
+            required
+        />
 
-            No campus is available for this course.
-        </div>
+
+        @error('campus_ids')
+            <p class="mt-1 text-xs text-red-600">
+                {{ $message }}
+            </p>
+        @enderror
+
+        @error('campus_ids.*')
+            <p class="mt-1 text-xs text-red-600">
+                {{ $message }}
+            </p>
+        @enderror
 
     </div>
+
+
+    {{-- Course Not Selected --}}
+    <div
+        x-show="!courseId"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 translate-y-1"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        class="flex items-center gap-2 rounded-lg border border-dashed
+               border-neutral-300 px-4 py-4 text-sm text-neutral-500
+               dark:border-neutral-700 dark:text-neutral-400"
+    >
+        <iconify-icon
+            icon="lucide:info"
+            class="text-base"
+        ></iconify-icon>
+
+        Select a course first to see available campuses.
+    </div>
+
+
+    {{-- No Campus Available --}}
+    <div
+        x-show="courseId && !loadingCampuses && campuses.length === 0"
+        x-transition
+        class="mt-3 flex items-center gap-2 rounded-lg border border-dashed
+               border-neutral-300 px-4 py-4 text-sm text-neutral-500
+               dark:border-neutral-700 dark:text-neutral-400"
+    >
+        <iconify-icon
+            icon="lucide:info"
+            class="text-base"
+        ></iconify-icon>
+
+        No campus is available for this course.
+    </div>
+
+</div>
 
 
     {{-- ================================================================
