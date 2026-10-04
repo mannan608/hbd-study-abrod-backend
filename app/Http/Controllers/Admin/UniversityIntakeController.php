@@ -34,17 +34,30 @@ class UniversityIntakeController extends Controller
     /**
      * Show the form for creating a new intake.
      */
-    public function create(Request $request, string $role): View
-    {
-        $request->user()->can('university-intakes.create') || abort(403);
+ public function create(Request $request, string $role): View
+{
+    $request->user()->can('university-intakes.create') || abort(403);
 
+    $university = null;
+
+    if ($request->filled('university')) {
         $university = University::findOrFail($request->university);
-
-        return view('backend.pages.university-intakes.create', [
-            'intake' => null,
-            'university' => $university,
-        ]);
     }
+
+    $universities = University::query()
+        ->select('id', 'name')
+        ->where('is_active', true)
+        ->orderBy('name')
+        ->get();
+
+    // return $universities;
+
+    return view('backend.pages.university-intakes.create', [
+        'intake' => null,
+        'university' => $university,
+        'universities' => $universities,
+    ]);
+}
 
     /**
      * Store a newly created intake.

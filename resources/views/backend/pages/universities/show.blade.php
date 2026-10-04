@@ -139,7 +139,7 @@
 
 
                 {{-- Actions --}}
-                <div class="flex flex-wrap items-center gap-2">
+                {{-- <div class="flex flex-wrap items-center gap-2">
 
                     <button type="button"
                         class="inline-flex items-center border border-brand-600 gap-2 rounded-lg bg-white
@@ -148,7 +148,7 @@
                         <iconify-icon icon="lucide:edit"></iconify-icon>
                         Edit
                     </button>
-                </div>
+                </div> --}}
 
             </div>
 
@@ -592,7 +592,7 @@
 
                         <div class="space-y-3 p-6">
 
-                            @foreach ([['February 2027', '15 December 2026', 'Open'], ['July 2027', '30 April 2027', 'Open'], ['October 2027', '15 August 2027', 'Upcoming']] as $intake)
+                            @foreach ($university->intakes as $intake)
                                 <div
                                     class="rounded-xl border border-neutral-200
                                            p-4">
@@ -601,18 +601,18 @@
 
                                         <div>
                                             <h4 class="text-sm font-bold text-neutral-900">
-                                                {{ $intake[0] }}
+                                                {{ $intake->name }} {{ $intake->year }}
                                             </h4>
 
                                             <p class="mt-1 text-xs text-neutral-500">
-                                                Deadline: {{ $intake[1] }}
+                                                {{ $intake->application_open_date?->format('d M Y') ?? 'N/A' }} To {{ $intake->application_deadline?->format('d M Y') ?? 'N/A' }}
                                             </p>
                                         </div>
 
                                         <span
-                                            class="{{ $intake[2] === 'Open' ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-blue-700' }}
-                                                rounded-full px-2.5 py-1 text-[10px] font-bold">
-                                            {{ $intake[2] }}
+                                            class="{{ $intake->status === 'Open' ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-blue-700' }}
+                                                rounded-full px-2.5 py-1 text-[10px] font-bold uppercase">
+                                            {{ $intake->status }}
                                         </span>
 
                                     </div>
