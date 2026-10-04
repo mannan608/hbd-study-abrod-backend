@@ -42,7 +42,7 @@ class CourseController extends Controller
             ->get();
 
         $campuses = UniversityCampus::query()
-            ->select(['id','university_id','name'])
+            ->select(['id', 'university_id', 'name'])
             ->orderBy('name')
             ->get();
 
@@ -75,11 +75,17 @@ class CourseController extends Controller
             ->with('success', 'Course created successfully.');
     }
 
-    public function show(Request $request, Course $course): View
+    public function show(Request $request, string $role, Course $course)
     {
         $request->user()->can('course.view') || abort(403);
 
-        $course->load(['university', 'campuses', 'category']);
+        $course->load([
+            'university:id,name',
+            'campuses:id,name',
+            'category:id,name',
+        ]);
+
+        // return $course;
 
         return view('backend.pages.courses.show', [
             'course' => $course,
@@ -91,7 +97,7 @@ class CourseController extends Controller
     {
         $request->user()->can('course.edit') || abort(403);
 
-           $categories = CourseCategory::query()->orderBy('name')->get();
+        $categories = CourseCategory::query()->orderBy('name')->get();
 
         $universities = University::query()
             ->select(['id', 'name'])
@@ -99,7 +105,7 @@ class CourseController extends Controller
             ->get();
 
         $campuses = UniversityCampus::query()
-            ->select(['id','university_id','name'])
+            ->select(['id', 'university_id', 'name'])
             ->orderBy('name')
             ->get();
 

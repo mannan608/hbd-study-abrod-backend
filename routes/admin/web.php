@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CampusController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CourseIntakeController;
+use App\Http\Controllers\Admin\UniversityIntakeController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RolePermissionController;
@@ -75,6 +76,7 @@ Route::prefix('{role}')
         Route::resource('subscribers', SubscriberController::class);
         Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::resource('university-intakes', UniversityIntakeController::class);
         Route::resource('course-intakes', CourseIntakeController::class);
         Route::resource('scholarships', ScholarshipController::class);
         Route::resource('counsellors', CounsellorController::class);

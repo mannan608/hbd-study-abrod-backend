@@ -38,9 +38,11 @@ use HandlesFiles;
             'description',
             'overview',
             'campus_facilities',
+            'is_active',
         ])->withCount([
         'campuses',
         'courses',
+        'intakes',
     ]);
 
         /*

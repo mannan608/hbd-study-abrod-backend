@@ -161,7 +161,17 @@ class RolePermissionSeeder extends Seeder
             'bookings.manage',
 
             //destinations
-            'destinations.list'
+            'destinations.list',
+
+            // University Intake permissions
+            'university-intakes.list',
+            'university-intakes.index',
+            'university-intakes.create',
+            'university-intakes.show',
+            'university-intakes.edit',
+            'university-intakes.delete',
+            'university-intakes.status.change',
+            'university-intakes.manage',
 
 
 

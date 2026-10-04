@@ -99,9 +99,9 @@ class MenuHelper
                         'permission' => 'course.list',
                     ],
                     [
-                        'name' => 'Course Intakes',
-                        'route' => 'role.course-intakes.index',
-                        'permission' => 'course-intakes.list',
+                        'name' => 'Intakes',
+                        'route' => 'role.university-intakes.index',
+                        'permission' => 'university-intakes.list',
                     ],
                     [
                         'name' => 'Scholarships',

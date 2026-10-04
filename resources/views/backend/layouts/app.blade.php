@@ -123,7 +123,7 @@
             <!-- app header start -->
             @include('backend.layouts.app-header')
             <!-- app header end -->
-            <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+            <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6 relative">
                 @yield('content')
             </div>
         </div>

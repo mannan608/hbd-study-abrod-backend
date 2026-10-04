@@ -158,4 +158,8 @@ public function courses(): HasMany
 {
     return $this->hasMany(Course::class, 'university_id');
 }
+public function intakes(): HasMany
+{
+    return $this->hasMany(UniversityIntake::class);
+}
 }

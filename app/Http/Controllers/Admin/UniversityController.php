@@ -38,6 +38,8 @@ class UniversityController extends Controller
             ->orderBy('name')
             ->get([ 'id', 'name','country_id']);
 
+        // return $universities;
+
         return view('backend.pages.universities.index', [
             'universities' => $universities,
             'countries' => $countries,
@@ -73,11 +75,13 @@ class UniversityController extends Controller
             ->with('success', 'University created successfully.');
     }
 
-    public function show(Request $request, string $role, University $university): View
+    public function show(Request $request, string $role, University $university)
     {
         abort_unless($request->user()->can('university.view'), 403);
 
-        $university->load(['country', 'city']);
+        $university->load(['country', 'city', 'campuses', 'courses', 'intakes']);
+
+        // return $university;
 
         return view('backend.pages.universities.show', [
             'university' => $university,
