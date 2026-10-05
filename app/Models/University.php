@@ -37,6 +37,7 @@ class University extends Model
         'description',
         'overview',
         'campus_facilities',
+        'google_map_link',
         'is_featured',
         'is_active',
         'sort_order',

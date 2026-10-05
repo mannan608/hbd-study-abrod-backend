@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             // Location
-                      $table->uuid('city_id')->nullable();
+            $table->uuid('city_id')->nullable();
 
 
             $table->decimal('latitude', 10, 8)->nullable();
@@ -39,6 +39,11 @@ return new class extends Migration
 
             // Description
             $table->text('description')->nullable();
+
+             // Google Maps
+            $table->text('google_map_link')->nullable();
+
+            $table->json('campus_facilities')->nullable();
 
             // Campus status
             $table->boolean('is_main_campus')

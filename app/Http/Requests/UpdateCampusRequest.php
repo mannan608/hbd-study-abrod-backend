@@ -31,6 +31,8 @@ class UpdateCampusRequest extends FormRequest
             'address' => ['nullable', 'string'],
 
             'description' => ['nullable', 'string'],
+            // Google Maps
+            'google_map_link' => ['sometimes', 'nullable', 'url', 'max:2048'],
 
             'is_main_campus' => ['nullable', 'boolean'],
 

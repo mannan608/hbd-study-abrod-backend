@@ -33,6 +33,7 @@
     $globalRanking = old('global_ranking', $university?->global_ranking);
 
     $nationalRanking = old('national_ranking', $university?->national_ranking);
+    $google_map_link = old('google_map_link', $university?->google_map_link);
 
     $isFeatured = old('is_featured', $university?->is_featured ?? false);
 
@@ -129,10 +130,7 @@
                         <x-form.input-text name="phone" label="Phone Number" value="{{ $phone }}"
                             placeholder="Enter contact phone..." />
 
-                    </div>
-
-
-                    {{-- Website --}}
+                           {{-- Website --}}
                     <x-form.input-text name="website" label="Website URL" type="url" value="{{ $website }}"
                         placeholder="https://..." />
 
@@ -141,7 +139,7 @@
                     <x-form.input-text name="accreditation" label="Accreditation" value="{{ $accreditation }}"
                         placeholder="e.g. UGC, ABET, AACSB..." />
 
-
+                    </div>  
                     {{-- Overview --}}
                     <x-form.textarea-input name="overview" label="Overview" rows="5"
                         placeholder="Enter university overview..." :value="$overview" />
@@ -241,12 +239,17 @@
 
                         </div>
 
+                         {{-- State --}}
+                    <x-form.input-text name="state" label="State / Province" value="{{ $state }}"
+                        placeholder="Enter state or province..." />
+
+                        <x-form.input-text name="google_map_link" label="Google Map Link"
+                        placeholder="https://maps.google.com/..." value="{{ $google_map_link }}" />
+
                     </div>
 
 
-                    {{-- State --}}
-                    <x-form.input-text name="state" label="State / Province" value="{{ $state }}"
-                        placeholder="Enter state or province..." />
+                   
 
 
                     {{-- Address --}}

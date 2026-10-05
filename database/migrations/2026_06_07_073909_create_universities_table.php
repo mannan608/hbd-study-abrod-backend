@@ -56,6 +56,9 @@ return new class extends Migration
             // Campus facilities
             $table->json('campus_facilities')->nullable();
 
+             // Google Maps
+            $table->text('google_map_link')->nullable();
+
             // Status
             $table->boolean('is_featured')
                 ->default(false)

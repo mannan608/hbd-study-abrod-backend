@@ -31,6 +31,7 @@ class StoreCampusRequest extends FormRequest
             'address' => ['nullable', 'string'],
 
             'description' => ['nullable', 'string'],
+            'google_map_link' => ['nullable', 'url', 'max:2048'],
 
             'is_main_campus' => ['nullable', 'boolean'],
 

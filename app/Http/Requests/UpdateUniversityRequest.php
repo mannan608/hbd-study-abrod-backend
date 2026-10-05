@@ -62,6 +62,10 @@ class UpdateUniversityRequest extends FormRequest
 
             'campus_facilities.*' => ['nullable', 'string', 'max:255'],
 
+        
+            // Google Maps
+            'google_map_link' => ['sometimes', 'nullable', 'url', 'max:2048'],
+
             // Status
             'is_featured' => ['sometimes', 'boolean'],
 

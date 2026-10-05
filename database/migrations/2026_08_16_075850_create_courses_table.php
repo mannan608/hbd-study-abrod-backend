@@ -62,6 +62,7 @@ return new class extends Migration
             $table->text('overview')->nullable();
 
             $table->json('entry_requirements')->nullable();
+            $table->json('outcomes')->nullable();
 
             // Status
             $table->boolean('is_featured')

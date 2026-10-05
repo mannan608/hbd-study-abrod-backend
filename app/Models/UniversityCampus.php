@@ -21,6 +21,7 @@ class UniversityCampus extends Model
         'address',
         'description',
         'is_main_campus',
+        'google_map_link',
         'is_active',
         'sort_order',
     ];
