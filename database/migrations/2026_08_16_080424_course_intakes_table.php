@@ -19,14 +19,14 @@ return new class extends Migration
                 ->constrained('university_campuses')
                 ->cascadeOnDelete();
 
-            $table->string('name');
+            $table->string('name', 50);
             $table->unsignedSmallInteger('year');
 
             $table->date('start_date')->nullable();
             $table->date('application_open_date')->nullable();
             $table->date('application_deadline')->nullable();
 
-            $table->string('status')->default('upcoming');
+            $table->string('status', 30)->default('upcoming');
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();

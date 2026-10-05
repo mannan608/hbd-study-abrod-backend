@@ -39,10 +39,10 @@
                 <div class="lg:col-span-8 space-y-8">
                     <div>
                         <div class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-500">
-                            <span>Charles Sturt University</span>
+                            <span>{{$course->university->name}}</span>
                         </div>
                         <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
-                            Doctor of Philosophy (Arts and Education)
+                            {{$course->title}}
                         </h1>
 
                         <!-- Meta Tags -->
@@ -55,11 +55,11 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                                 </svg>
-                                Doctorate
+                               {{$course->degree_level}}
                             </span>
                             <span
                                 class="inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-neutral-500 font-mono">
-                                CRICOS: 102019R
+                                CRICOS: {{$course->code}}
                             </span>
                             <span class="inline-flex items-center gap-1.5 text-neutral-500">
                                 <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor"
@@ -78,9 +78,7 @@
                     <div class="prose prose-neutral max-w-none">
                         <h3 class="text-lg font-bold text-neutral-900">Course Overview</h3>
                         <p class="text-sm text-neutral-600 leading-relaxed">
-                            The Doctor of Philosophy (Arts and Education) at Charles Sturt University is the platform to do
-                            just that. You'll join a renowned academic community—with connections across the country and the
-                            globe—that will support and inspire you to push boundaries in your discipline area.
+                            {{$course->overview}}
                         </p>
                         <div class="mt-4">
                             <button
@@ -147,24 +145,35 @@
                 <div class="lg:col-span-4 lg:sticky lg:top-6">
                     <div class="rounded-2xl border border-neutral-200 bg-white p-6  space-y-5">
                         <!-- Logo Header -->
-                        <div
-                            class="flex items-center justify-center p-4 bg-neutral-50 rounded-xl border border-neutral-100">
-                            <span class="font-extrabold text-neutral-800 tracking-tight text-sm">Charles Sturt
-                                University</span>
+
+                        <div class="flex items-center px-4 py-2 gap-4 bg-neutral-50 rounded-xl border border-neutral-100">
+                            <div class="flex h-12 w-12 border border-neutral-200  shrink-0 items-center justify-center rounded-lg bg-neutral-50 p-2">
+                                <img src="{{ asset($course->university->logo) }}" alt="{{ $course->university->name }}"
+                                    class="h-full w-full object-contain">
+                            </div>
+
+                            <div class="min-w-0">
+                                <p class="truncate text-sm font-bold tracking-tight text-neutral-900">
+                                    {{ $course->university->name }}
+                                </p>
+                                <p class="mt-0.5 text-xs text-neutral-500">
+                                    University
+                                </p>
+                            </div>
                         </div>
 
                         <div class="space-y-3.5 text-sm">
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Annual Fee</span>
-                                <span class="font-bold text-neutral-900">AUD $33,120.00 / year</span>
+                                <span class="font-bold text-neutral-900">USD ${{$course->tuition_fee*12}} / year</span>
                             </div>
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Estimated Total Fee</span>
-                                <span class="font-bold text-neutral-900">AUD $132,480.00</span>
+                                <span class="font-bold text-neutral-900">USD ${{$course->tuition_fee*13}}</span>
                             </div>
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Duration</span>
-                                <span class="font-bold text-neutral-900">4 Years Full-time</span>
+                                 {{ intdiv($course->duration_months, 12) }} Years Full-time
                             </div>
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Next Intake</span>
@@ -242,7 +251,7 @@
                 <div>
                     <h2 class="text-xl font-bold mb-4">Available Campus Locations</h2>
                     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        @foreach (['Albury-Wodonga', 'Bathurst', 'Canberra'] as $location)
+                        @foreach ($course->campuses as $location)
                             <div class="w-full max-w-sm">
                                 <div
                                     class="group relative overflow-hidden rounded-2xl
@@ -274,11 +283,11 @@
 
                                                 <div>
                                                     <h3 class="text-base font-bold text-slate-900">
-                                                        Albury-Wodonga
+                                                        {{$location->name}}
                                                     </h3>
 
                                                     <p class="mt-0.5 text-xs font-medium text-slate-500">
-                                                        New South Wales
+                                                       {{$location->address}}
                                                     </p>
                                                 </div>
 
@@ -287,7 +296,7 @@
                                             <!-- Country -->
                                             <span
                                                 class="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">
-                                                Australia
+                                                {{$course->university->country->name}}
                                             </span>
 
                                         </div>
@@ -350,24 +359,35 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    @foreach ([['uni' => 'Curtin University', 'title' => 'Doctor of Philosophy - Humanities', 'location' => 'Bentley, Australia'], ['uni' => 'Curtin University', 'title' => 'Doctor of Philosophy - Social Sciences', 'location' => 'Bentley, Australia'], ['uni' => 'University of Newcastle', 'title' => 'Doctor of Philosophy (Aboriginal Studies)', 'location' => 'Callaghan, Australia']] as $course)
-                        <a href="#"
+                    @foreach ($relatedCourses as $relatedcourse)
+                        <a href="{{ route('course-details', ['course' => $relatedcourse]) }}"
                             class="group rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between">
                             <div>
-                                <div
-                                    class="h-12 w-full rounded-lg bg-brand-100 flex items-center justify-center font-bold text-brand-500 text-sm mb-4">
-                                    {{ $course['uni'] }}
-                                </div>
-                                <span class="text-[10px] font-bold text-brand-500 uppercase">{{ $course['uni'] }}</span>
+                               <div class="flex items-center px-4 py-2 gap-4 bg-neutral-50 rounded-xl border border-neutral-100">
+                            <div class="flex h-12 w-12 border border-neutral-200  shrink-0 items-center justify-center rounded-lg bg-neutral-50 p-2">
+                                <img src="{{ asset($relatedcourse->university->logo) }}" alt="{{ $relatedcourse->university->name }}"
+                                    class="h-full w-full object-contain">
+                            </div>
+
+                            <div class="min-w-0">
+                                <p class="truncate text-sm font-bold tracking-tight text-neutral-900">
+                                    {{ $relatedcourse->university->name }}
+                                </p>
+                                <p class="mt-0.5 text-xs text-neutral-500">
+                                    University
+                                </p>
+                            </div>
+                        </div>
+                                <span class="text-[10px] font-bold text-brand-500 uppercase">{{$relatedcourse->category->name}}</span>
                                 <h3
                                     class="text-sm font-bold text-neutral-900 mt-1 group-hover:text-brand-500 transition-colors">
-                                    {{ $course['title'] }}
+                                    {{ $relatedcourse->title }}
                                 </h3>
-                                <p class="text-xs text-neutral-500 mt-2">Doctorate • CRICOS 041959M</p>
+                                <p class="text-xs text-neutral-500 mt-2">{{ $relatedcourse->degree_level}} • CRICOS {{$relatedcourse->code}}</p>
                             </div>
 
                             <div class="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between">
-                                <span class="text-xs text-brand-500">{{ $course['location'] }}</span>
+                                <span class="text-xs text-brand-500">{{ $relatedcourse->university->country->name }}</span>
                                 <button
                                     class="rounded-lg bg-brand-100 px-3 py-1.5 text-xs font-bold text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition">
                                     View →

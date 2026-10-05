@@ -26,6 +26,8 @@ return new class extends Migration
             // Basic information
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('code')->unique();
+            
 
             // Bachelor, Master, PhD, Diploma, etc.
             $table->string('degree_level', 50);

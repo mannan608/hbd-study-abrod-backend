@@ -139,9 +139,9 @@
 
                     <!-- Course Cards Stream Placeholder -->
                     <div class="space-y-4">
-                        @for ($i = 0; $i < 3; $i++)
-                            @include('frontend.pages.courses.course-card')
-                        @endfor
+                        @foreach ($courses as $course)
+                        @include('frontend.pages.courses.course-card', ['item' => $course])
+                        @endforeach
                     </div>
 
                 </div>

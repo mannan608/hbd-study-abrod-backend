@@ -27,7 +27,7 @@ class StoreCourseRequest extends FormRequest
             'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
             'title' => ['required', 'string', 'max:255'],
-
+           'code' => ['required', 'string', 'max:255', 'unique:courses,code'],
             'degree_level' => ['required', 'string', 'max:50'],
 
             'duration_months' => ['required', 'integer', 'min:1', 'max:1200'],
@@ -51,6 +51,7 @@ class StoreCourseRequest extends FormRequest
             'overview' => ['nullable', 'string'],
 
             'is_featured' => ['nullable', 'boolean'],
+            'is_scholarship_available' => ['nullable', 'boolean'],
 
             'is_active' => ['nullable', 'boolean'],
         ];

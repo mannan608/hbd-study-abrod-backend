@@ -16,6 +16,7 @@ class Course extends Model
         'category_id',
         'title',
         'slug',
+        'code',
         'degree_level',
         'duration_months',
         'tuition_fee',
@@ -27,6 +28,7 @@ class Course extends Model
         'entry_requirements',
         'overview',
         'is_featured',
+        'is_scholarship_available',
         'is_active',
     ];
 
@@ -41,6 +43,7 @@ class Course extends Model
             'gpa_requirement' => 'decimal:2',
             'entry_requirements' => 'array',
             'is_featured' => 'boolean',
+            'is_scholarship_available' => 'boolean',
             'is_active' => 'boolean',
         ];
     }

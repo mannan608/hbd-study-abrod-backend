@@ -3,11 +3,19 @@
 namespace App\Repositories\Interfaces;
 
 use App\Models\Course;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 interface CourseRepositoryInterface
 {
-    public function paginate(int $perPage = 15);
+    /*
+    |--------------------------------------------------------------------------
+    | Existing CRUD
+    |--------------------------------------------------------------------------
+    */
+
+    public function paginate(array $filters = [], int $perPage = 15): LengthAwarePaginator;
 
     public function findById(string $id): Course;
 
@@ -18,4 +26,15 @@ interface CourseRepositoryInterface
     public function delete(Course $course): bool;
 
     public function getAll();
+
+
+    public function getDegreeLevels(): Collection;   
+
+    /*
+    |--------------------------------------------------------------------------
+    | Related Courses
+    |--------------------------------------------------------------------------
+    */
+
+    public function relatedCourses(Course $course, int $limit = 4): Collection;
 }

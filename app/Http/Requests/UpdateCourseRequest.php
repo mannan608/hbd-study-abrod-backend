@@ -27,6 +27,7 @@ class UpdateCourseRequest extends FormRequest
             'category_id' => ['nullable', 'integer', 'exists:course_categories,id'],
 
             'title' => ['required', 'string', 'max:255'],
+            'code' => ['required','string','max:255', Rule::unique('courses', 'code')->ignore($this->course), ],
 
             'degree_level' => ['required', 'string', 'max:50'],
 
@@ -51,6 +52,7 @@ class UpdateCourseRequest extends FormRequest
             'overview' => ['nullable', 'string'],
 
             'is_featured' => ['nullable', 'boolean'],
+            'is_scholarship_available' => ['nullable', 'boolean'],
 
             'is_active' => ['nullable', 'boolean'],
         ];
@@ -75,9 +77,9 @@ class UpdateCourseRequest extends FormRequest
         }
 
         $entryRequirements = array_values(array_filter(array_map(
-            static fn ($requirement) => is_string($requirement) ? trim($requirement) : '',
+            static fn($requirement) => is_string($requirement) ? trim($requirement) : '',
             $entryRequirements
-        ), static fn ($requirement) => $requirement !== ''));
+        ), static fn($requirement) => $requirement !== ''));
 
         $this->merge([
             'currency' => strtoupper($this->currency ?: 'USD'),
@@ -99,5 +101,4 @@ class UpdateCourseRequest extends FormRequest
     {
         return (new StoreCourseRequest())->attributes();
     }
-
 }

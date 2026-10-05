@@ -44,7 +44,7 @@ Route::get('/events/{event}/register', [EventRegistrationController::class, 'cre
 Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('events.register.store');
 
 Route::get('/courses', [CourseController::class, 'courses'])->name('courses');
-Route::get('/course-details', [CourseController::class, 'coursesDetails'])->name('course-details');
+Route::get('/courses/{course:slug}', [CourseController::class, 'coursesDetails'])->name('course-details');
 
 Route::get('/providers', [ProviderController::class, 'providers'])->name('providers');
 Route::get('/provider-details', [ProviderController::class, 'providerDetails'])->name('provider-details');
