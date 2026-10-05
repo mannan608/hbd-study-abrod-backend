@@ -25,6 +25,7 @@ use HandlesFiles;
             'name',
             'slug',
             'short_name',
+            'tag',
             'logo',
             'banner',
             'email',

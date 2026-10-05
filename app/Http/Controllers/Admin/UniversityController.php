@@ -88,9 +88,11 @@ class UniversityController extends Controller
         ]);
     }
 
-    public function edit(Request $request, string $role, University $university): View
+    public function edit(Request $request, string $role, University $university)
     {
         abort_unless($request->user()->can('university.edit'), 403);
+
+    // return $university;
 
         return view('backend.pages.universities.edit', [
             'university' => $university,

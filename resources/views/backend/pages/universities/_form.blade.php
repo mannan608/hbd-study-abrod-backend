@@ -14,6 +14,7 @@
     $email = old('email', $university?->email);
     $phone = old('phone', $university?->phone);
     $website = old('website', $university?->website);
+    $tag = old('tag', $university?->tag);
 
     $accreditation = old('accreditation', $university?->accreditation);
 
@@ -287,7 +288,7 @@
                     <x-form.select-input name="tag" label="University Type" :options="[
                         'public' => 'Public',
                         'private' => 'Private',
-                    ]" />
+                    ]" :value="old('tag', $university?->tag ?? '')" />
 
 
                 </div>

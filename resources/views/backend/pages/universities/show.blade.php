@@ -2,7 +2,7 @@
 
 @section('title', $university->name)
 @section('content')
-    <div class="relative">
+    <div>
         {{-- SUCCESS MESSAGE --}}
         @if (session('success'))
             <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-transition
@@ -30,13 +30,13 @@
                     {{-- Intake --}}
                     <a href="{{ role_route('role.university-intakes.create', ['university' => $university->id]) }}"
                         class="group inline-flex shrink-0 items-center gap-2 rounded-full
-    px-4 py-2 text-xs font-semibold text-neutral-600
-    transition-all duration-200
-    hover:bg-brand-50/80 hover:text-brand-600">
+                        px-4 py-2 text-xs font-semibold text-neutral-600
+                        transition-all duration-200
+                        hover:bg-brand-50/80 hover:text-brand-600">
 
                         <iconify-icon icon="lucide:calendar-days"
                             class="text-[16px] text-neutral-400 transition-colors
-        group-hover:text-brand-600">
+                            group-hover:text-brand-600">
                         </iconify-icon>
 
                         <span>Intakes</span>
@@ -51,7 +51,7 @@
                             hover:bg-brand-50/80 hover:text-brand-600">
                         <iconify-icon icon="lucide:building-2"
                             class="text-[16px] text-neutral-400 transition-colors
-                   group-hover:text-brand-600"></iconify-icon>
+                            group-hover:text-brand-600"></iconify-icon>
 
                         <span>Campuses</span>
                     </a>
@@ -65,7 +65,7 @@
                             hover:bg-brand-50/80 hover:text-brand-600">
                         <iconify-icon icon="lucide:graduation-cap"
                             class="text-[16px] text-neutral-400 transition-colors
-                   group-hover:text-brand-600"></iconify-icon>
+                            group-hover:text-brand-600"></iconify-icon>
 
                         <span>Programs</span>
                     </a>
@@ -119,10 +119,7 @@
                         <a href="#" class="transition hover:text-brand-600">
                             Universities
                         </a>
-
                         <iconify-icon icon="lucide:chevron-right"></iconify-icon>
-
-
                         <span class="text-neutral-600">
                             University Details
                         </span>
@@ -186,8 +183,6 @@
                                     class="h-16 w-16 rounded-lg object-cover sm:h-20 sm:w-20">
 
                             </div>
-
-
                             <div class="min-w-0">
 
                                 <h2
@@ -395,235 +390,266 @@
                 <div class="space-y-6 lg:col-span-8">
 
                     {{-- Campuses --}}
-                    <section
-                        class="rounded-2xl border border-neutral-200 bg-white
+
+                    @if ($university->campuses()->exists())
+                        <section
+                            class="rounded-2xl border border-neutral-200 bg-white
                                shadow-sm">
 
-                        <div class="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
+                            <div class="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
 
-                            <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-3">
 
-                                <div
-                                    class="flex h-10 w-10 items-center justify-center
+                                    <div
+                                        class="flex h-10 w-10 items-center justify-center
                                            rounded-xl bg-blue-50 text-blue-600">
-                                    <iconify-icon icon="lucide:map" class="h-5 w-5"></iconify-icon>
+                                        <iconify-icon icon="lucide:map" class="h-5 w-5"></iconify-icon>
+                                    </div>
+
+                                    <div>
+                                        <h3 class="text-base font-bold text-neutral-950">
+                                            Campuses
+                                        </h3>
+
+                                        <p class="mt-0.5 text-xs text-neutral-500">
+                                            University locations
+                                        </p>
+                                    </div>
+
                                 </div>
 
-                                <div>
-                                    <h3 class="text-base font-bold text-neutral-950">
-                                        Campuses
-                                    </h3>
-
-                                    <p class="mt-0.5 text-xs text-neutral-500">
-                                        University locations
-                                    </p>
-                                </div>
+                                <span
+                                    class="rounded-full bg-blue-50 px-3 py-1
+                                       text-xs font-bold text-blue-700">
+                                    {{ $university->campuses()->count() }} Campuses
+                                </span>
 
                             </div>
 
-                            <span
-                                class="rounded-full bg-blue-50 px-3 py-1
-                                       text-xs font-bold text-blue-700">
-                                {{ $university->campuses()->count() }} Campuses
-                            </span>
+                            <div class="grid grid-cols-1 gap-3 p-6 sm:grid-cols-2">
 
-                        </div>
-
-
-                        <div class="grid grid-cols-1 gap-3 p-6 sm:grid-cols-2">
-
-                            @foreach ($university->campuses as $campus)
-                                <div
-                                    class="group rounded-xl border border-neutral-200
+                                @foreach ($university->campuses as $campus)
+                                    <div
+                                        class="group rounded-xl border border-neutral-200
                                            bg-white p-4 transition-all duration-300
                                            hover:border-brand-200 hover:bg-brand-50/30">
 
-                                    <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-3">
 
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center
+                                            <div
+                                                class="flex h-10 w-10 shrink-0 items-center
                                                    justify-center rounded-xl bg-neutral-100
                                                    text-neutral-600 transition
                                                    group-hover:bg-brand-100 group-hover:text-brand-600">
-                                            <iconify-icon icon="lucide:school" class="h-5 w-5"></iconify-icon>
-                                        </div>
+                                                <iconify-icon icon="lucide:school" class="h-5 w-5"></iconify-icon>
+                                            </div>
 
-                                        <div class="min-w-0">
-                                            <h4 class="text-sm font-bold text-neutral-900">
-                                                {{ $campus->name }}
-                                            </h4>
+                                            <div class="min-w-0">
+                                                <h4 class="text-sm font-bold text-neutral-900">
+                                                    {{ $campus->name }}
+                                                </h4>
 
-                                            <p class="mt-0.5 flex items-center gap-1 text-xs text-neutral-500">
-                                                <iconify-icon icon="lucide:map-pin" class="h-3 w-3"></iconify-icon>
-                                                {{ $campus->address }}
-                                            </p>
+                                                <p class="mt-0.5 flex items-center gap-1 text-xs text-neutral-500">
+                                                    <iconify-icon icon="lucide:map-pin" class="h-3 w-3"></iconify-icon>
+                                                    {{ $campus->address }}
+                                                </p>
+                                            </div>
+
                                         </div>
 
                                     </div>
-
-                                </div>
-                            @endforeach
-
-                        </div>
-
-                    </section>
-
-
-                    {{-- Popular Programs --}}
-                    <section
-                        class="rounded-2xl border border-neutral-200 bg-white
-                               shadow-sm">
-
-                        <div class="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
-
-                            <div class="flex items-center gap-3">
-
-                                <div
-                                    class="flex h-10 w-10 items-center justify-center
-                                           rounded-xl bg-purple-50 text-purple-600">
-                                    <iconify-icon icon="lucide:graduation-cap" class="h-5 w-5"></iconify-icon>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-base font-bold text-neutral-950">
-                                        Popular Programs
-                                    </h3>
-
-                                    <p class="mt-0.5 text-xs text-neutral-500">
-                                        Featured study options
-                                    </p>
-                                </div>
+                                @endforeach
 
                             </div>
 
-                            <button type="button" class="text-xs font-bold text-brand-600 hover:text-brand-700">
-                                View All
-                            </button>
-
+                        </section>
+                    @else
+                        <div
+                            class="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-6 py-10 text-center">
+                            <p class="text-sm font-medium text-neutral-700">
+                                No campuses found
+                            </p>
+                            <p class="mt-1 text-sm text-neutral-500">
+                                This university doesn't have any campuses yet.
+                            </p>
                         </div>
+                    @endif
 
+                    {{-- Popular Programs --}}
 
-                        <div class="divide-y divide-neutral-100">
+                    @if ($university->courses()->exists())
+                        <section
+                            class="rounded-2xl border border-neutral-200 bg-white
+                               shadow-sm">
 
-                            @foreach ($university->courses as $program)
-                                <div
-                                    class="group flex flex-col gap-3 px-6 py-4
-                                           transition hover:bg-neutral-50 sm:flex-row
-                                           sm:items-center sm:justify-between">
+                            <div class="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
 
-                                    <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-3">
 
-                                        <div
-                                            class="flex h-9 w-9 shrink-0 items-center
-                                                   justify-center rounded-lg bg-neutral-100
-                                                   text-neutral-500
-                                                   group-hover:bg-brand-50 group-hover:text-brand-600">
-                                            <iconify-icon icon="lucide:book-open" class="h-4 w-4"></iconify-icon>
-                                        </div>
-
-                                        <div>
-                                            <h4 class="text-sm font-semibold text-neutral-900">
-                                                {{ $program->title }}
-                                            </h4>
-
-                                            <p class="mt-0.5 text-xs text-neutral-500">
-                                                {{ $program->degree }}
-                                            </p>
-                                        </div>
-
+                                    <div
+                                        class="flex h-10 w-10 items-center justify-center
+                                           rounded-xl bg-purple-50 text-purple-600">
+                                        <iconify-icon icon="lucide:graduation-cap" class="h-5 w-5"></iconify-icon>
                                     </div>
 
+                                    <div>
+                                        <h3 class="text-base font-bold text-neutral-950">
+                                            Popular Programs
+                                        </h3>
 
-                                    <div class="flex items-center gap-4 pl-12 sm:pl-0">
-
-                                        <span
-                                            class="rounded-lg bg-neutral-100 px-2.5 py-1
-                                                   text-xs font-semibold text-neutral-600">
-                                            {{ $program->duration_months }} Months
-                                        </span>
-                                        <iconify-icon icon="lucide:chevron-right"
-                                            class="h-4 w-4 text-neutral-300 transition
-                                                   group-hover:translate-x-1 group-hover:text-brand-600"></iconify-icon>
-
-
+                                        <p class="mt-0.5 text-xs text-neutral-500">
+                                            Featured study options
+                                        </p>
                                     </div>
 
                                 </div>
-                            @endforeach
 
+                                <button type="button" class="text-xs font-bold text-brand-600 hover:text-brand-700">
+                                    View All
+                                </button>
+
+                            </div>
+
+
+                            <div class="divide-y divide-neutral-100">
+
+                                @foreach ($university->courses as $program)
+                                    <div
+                                        class="group flex flex-col gap-3 px-6 py-4
+                                           transition hover:bg-neutral-50 sm:flex-row
+                                           sm:items-center sm:justify-between">
+
+                                        <div class="flex items-center gap-3">
+
+                                            <div
+                                                class="flex h-9 w-9 shrink-0 items-center
+                                                   justify-center rounded-lg bg-neutral-100
+                                                   text-neutral-500
+                                                   group-hover:bg-brand-50 group-hover:text-brand-600">
+                                                <iconify-icon icon="lucide:book-open" class="h-4 w-4"></iconify-icon>
+                                            </div>
+
+                                            <div>
+                                                <h4 class="text-sm font-semibold text-neutral-900">
+                                                    {{ $program->title }}
+                                                </h4>
+
+                                                <p class="mt-0.5 text-xs text-neutral-500">
+                                                    {{ $program->degree }}
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="flex items-center gap-4 pl-12 sm:pl-0">
+
+                                            <span
+                                                class="rounded-lg bg-neutral-100 px-2.5 py-1
+                                                   text-xs font-semibold text-neutral-600">
+                                                {{ $program->duration_months }} Months
+                                            </span>
+                                            <iconify-icon icon="lucide:chevron-right"
+                                                class="h-4 w-4 text-neutral-300 transition
+                                                   group-hover:translate-x-1 group-hover:text-brand-600"></iconify-icon>
+
+
+                                        </div>
+
+                                    </div>
+                                @endforeach
+
+                            </div>
+
+                        </section>
+                    @else
+                        <div
+                            class="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-6 py-10 text-center">
+                            <p class="text-sm font-medium text-neutral-700">
+                                No programs found
+                            </p>
+                            <p class="mt-1 text-sm text-neutral-500">
+                                This university doesn't have any programs yet.
+                            </p>
                         </div>
-
-                    </section>
-
+                    @endif
                 </div>
 
 
                 {{-- RIGHT COLUMN --}}
                 <aside class="space-y-6 lg:col-span-4">
                     {{-- Upcoming Intakes --}}
-                    <section
-                        class="rounded-2xl border border-neutral-200 bg-white
+                    @if ($university->intakes()->exists())
+                        <section
+                            class="rounded-2xl border border-neutral-200 bg-white
                                shadow-sm">
 
-                        <div class="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
+                            <div class="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
 
-                            <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-3">
 
-                                <div
-                                    class="flex h-10 w-10 items-center justify-center
+                                    <div
+                                        class="flex h-10 w-10 items-center justify-center
                                            rounded-xl bg-emerald-50 text-emerald-600">
-                                    <iconify-icon icon="lucide:calendar-days" class="h-5 w-5"></iconify-icon>
-                                </div>
+                                        <iconify-icon icon="lucide:calendar-days" class="h-5 w-5"></iconify-icon>
+                                    </div>
 
-                                <div>
-                                    <h3 class="text-base font-bold text-neutral-950">
-                                        Upcoming Intakes
-                                    </h3>
+                                    <div>
+                                        <h3 class="text-base font-bold text-neutral-950">
+                                            Upcoming Intakes
+                                        </h3>
 
-                                    <p class="mt-0.5 text-xs text-neutral-500">
-                                        Application periods
-                                    </p>
+                                        <p class="mt-0.5 text-xs text-neutral-500">
+                                            Application periods
+                                        </p>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="space-y-3 p-6">
+
+                                @foreach ($university->intakes as $intake)
+                                    <div
+                                        class="rounded-xl border border-neutral-200
+                                           p-4">
+
+                                        <div class="flex items-center justify-between gap-3">
+
+                                            <div>
+                                                <h4 class="text-sm font-bold text-neutral-900">
+                                                    {{ $intake->name }} {{ $intake->year }}
+                                                </h4>
+
+                                                <p class="mt-1 text-xs text-neutral-500">
+                                                    {{ $intake->application_open_date?->format('d M Y') ?? 'N/A' }} To
+                                                    {{ $intake->application_deadline?->format('d M Y') ?? 'N/A' }}
+                                                </p>
+                                            </div>
+
+                                            <span
+                                                class="{{ $intake->status === 'Open' ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-blue-700' }}
+                                                rounded-full px-2.5 py-1 text-[10px] font-bold uppercase">
+                                                {{ $intake->status }}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                @endforeach
 
                             </div>
 
+                        </section>
+                    @else
+                        <div
+                            class="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-6 py-10 text-center">
+                            <p class="text-sm font-medium text-neutral-700">
+                                No upcoming intakes found
+                            </p>
+                            <p class="mt-1 text-sm text-neutral-500">
+                                This university doesn't have any upcoming intakes yet.
+                            </p>
                         </div>
-
-
-                        <div class="space-y-3 p-6">
-
-                            @foreach ($university->intakes as $intake)
-                                <div
-                                    class="rounded-xl border border-neutral-200
-                                           p-4">
-
-                                    <div class="flex items-center justify-between gap-3">
-
-                                        <div>
-                                            <h4 class="text-sm font-bold text-neutral-900">
-                                                {{ $intake->name }} {{ $intake->year }}
-                                            </h4>
-
-                                            <p class="mt-1 text-xs text-neutral-500">
-                                                {{ $intake->application_open_date?->format('d M Y') ?? 'N/A' }} To {{ $intake->application_deadline?->format('d M Y') ?? 'N/A' }}
-                                            </p>
-                                        </div>
-
-                                        <span
-                                            class="{{ $intake->status === 'Open' ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-blue-700' }}
-                                                rounded-full px-2.5 py-1 text-[10px] font-bold uppercase">
-                                            {{ $intake->status }}
-                                        </span>
-
-                                    </div>
-
-                                </div>
-                            @endforeach
-
-                        </div>
-
-                    </section>
-
+                    @endif
                     {{-- Scholarships --}}
                     <section
                         class="rounded-2xl border border-neutral-200 bg-white
@@ -704,7 +730,6 @@
                         </div>
 
                     </section>
-
 
                     {{-- Contact Card --}}
                     <section
@@ -819,12 +844,8 @@
                         </div>
 
                     </section>
-
                 </aside>
-
             </div>
-
         </div>
-
     </div>
 @endsection
