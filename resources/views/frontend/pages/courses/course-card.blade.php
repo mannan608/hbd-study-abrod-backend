@@ -18,7 +18,7 @@
 
                      <span
                          class="text-[11px] text-slate-500 transition-colors duration-300 group-hover:text-slate-700 sm:text-xs">
-                         Code MC-IT
+                         CRICOS : {{ $item->code }}
                      </span>
 
                  </div>

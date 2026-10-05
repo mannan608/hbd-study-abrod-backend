@@ -82,7 +82,11 @@
 
                 <!-- Aside Filter Sidebar -->
                 <div class="">
-                    @include('frontend.pages.courses.aside')
+                    @include('frontend.pages.courses.aside', [
+                        'providers' => $providers,
+                        'countries' => $countries,
+                        'qualifications' => $qualifications,
+                    ])
                 </div>
 
                 <!-- Listing Content Area -->
@@ -97,28 +101,33 @@
                                 class="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-neutral-900 shadow-xs transition">
                                 <span>Courses</span>
                                 <span
-                                    class="rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] font-bold text-[#005f6b]">10</span>
+                                    class="rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] font-bold text-[#005f6b]">{{$courseCount}}</span>
                             </button>
                             <button
                                 class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-neutral-500 hover:text-neutral-900 transition">
                                 <span>Providers</span>
                                 <span
-                                    class="rounded-full bg-neutral-200/60 px-2 py-0.5 text-[11px] font-medium text-neutral-600">6</span>
+                                    class="rounded-full bg-neutral-200/60 px-2 py-0.5 text-[11px] font-medium text-neutral-600">{{$providerCount}}</span>
                             </button>
                         </nav>
-
                         <!-- Sorting & View Controls -->
                         <div class="flex items-center gap-3">
-
                             <!-- Intakes-->
                             <div class="flex items-center gap-2">
-                                <span class="text-sm font-medium text-neutral-400">Sort:</span>
-                                <select
-                                    class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-medium text-neutral-800 focus:ring-0 cursor-pointer">
-                                    <option value="relevance">Intakes</option>
-                                    <option value="fee_asc">January 2027</option>
-                                    <option value="fee_desc">February 2027</option>
-                                    <option value="duration">March 2027</option>
+                                <span class="text-sm font-medium text-neutral-400">Intake:</span>
+
+                                <select name="intake"
+                                    class="cursor-pointer rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-[13px] font-medium text-neutral-800 focus:ring-0">
+
+                                    <option value="">All Intakes</option>
+
+                                    @foreach ($intakes as $intake)
+                                        <option value="{{ $intake->name }}-{{ $intake->year }}"
+                                            @selected(request('intake') === $intake->name . '-' . $intake->year)>
+                                            {{ $intake->name }} {{ $intake->year }}
+                                        </option>
+                                    @endforeach
+
                                 </select>
                             </div>
 
@@ -126,21 +135,19 @@
                             <div class="flex items-center gap-2 border-l border-neutral-200 pl-3">
                                 <span class="text-sm font-medium text-neutral-400">Sort:</span>
                                 <select
-                                    class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-medium text-neutral-800 focus:ring-0 cursor-pointer">
+                                    class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-[13px] font-medium text-neutral-800 focus:ring-0 cursor-pointer">
                                     <option value="relevance">Tution Fee</option>
                                     <option value="fee_asc">Fee: Low to High</option>
                                     <option value="fee_desc">Fee: High to Low</option>
                                 </select>
                             </div>
-
                         </div>
-
                     </div>
 
                     <!-- Course Cards Stream Placeholder -->
                     <div class="space-y-4">
                         @foreach ($courses as $course)
-                        @include('frontend.pages.courses.course-card', ['item' => $course])
+                            @include('frontend.pages.courses.course-card', ['item' => $course])
                         @endforeach
                     </div>
 

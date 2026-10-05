@@ -349,7 +349,9 @@
             </div>
 
             <!-- Section: Similar Courses -->
-            <div class="space-y-6">
+
+            @if ($relatedCourses->count() > 0)
+                <div class="space-y-6">
                 <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-bold text-neutral-900">Similar Courses</h2>
                     <button
@@ -397,6 +399,8 @@
                     @endforeach
                 </div>
             </div>
+            @endif
+            
 
         </div>
     </div>

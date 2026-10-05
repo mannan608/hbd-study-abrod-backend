@@ -55,19 +55,22 @@ class CourseController extends Controller
 
         $providers = University::query()
             ->get(['id', 'name']);
+        $providerCount = $providers->count();
 
         $countries = Country::query()
             ->get(['id', 'name']);
 
-      $intakes = UniversityIntake::query()
-    ->with('university:id,name')
-    ->get([
-        'id',
-        'university_id',
-        'name',
-        'year',
-        'status',
-    ]);
+        $intakes = UniversityIntake::query()
+            ->with('university:id,name')
+            ->get([
+                'id',
+                'university_id',
+                'name',
+                'year',
+                'status',
+            ])
+            ->unique(fn($intake) => $intake->name . '-' . $intake->year)
+            ->values();
 
         /*
         |--------------------------------------------------------------------------
@@ -103,9 +106,9 @@ class CourseController extends Controller
             'sort' => $request->input('sort', 'relevance'),
         ];
 
-        // return $intakes;
+        // return $qualifications;
 
-        return view('frontend.pages.courses.courses', compact('courses', 'qualifications', 'providers', 'countries', 'intakes', 'selectedFilters'));
+        return view('frontend.pages.courses.courses', compact('courses', 'qualifications', 'providers', 'countries', 'intakes', 'selectedFilters', 'courseCount','providerCount'));
     }
 
     /*
@@ -114,14 +117,14 @@ class CourseController extends Controller
     |--------------------------------------------------------------------------
     */
 
- public function coursesDetails(Course $course)
-{
-    $course = $this->courses->findById($course->id);
+    public function coursesDetails(Course $course)
+    {
+        $course = $this->courses->findById($course->id);
 
-    $relatedCourses = $this->courses->relatedCourses($course, 4);
+        $relatedCourses = $this->courses->relatedCourses($course, 4);
 
         // return $relatedCourses;
 
-    return view('frontend.pages.courses.course-details', compact('course', 'relatedCourses'));
-}
+        return view('frontend.pages.courses.course-details', compact('course', 'relatedCourses'));
+    }
 }

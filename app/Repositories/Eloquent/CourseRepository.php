@@ -32,7 +32,7 @@ class CourseRepository implements CourseRepositoryInterface
     public function paginate(array $filters = [], int $perPage = 15): LengthAwarePaginator
     {
         $query = Course::query()
-            ->select(['id', 'title', 'slug', 'university_id', 'category_id', 'degree_level', 'entry_requirements', 'overview', 'gpa_requirement', 'english_requirement_text', 'duration_months', 'toefl_overall', 'pte_overall', 'ielts_overall', 'tuition_fee', 'is_scholarship_available', 'is_active'])
+            ->select(['id', 'title', 'slug','code', 'university_id', 'category_id', 'degree_level', 'entry_requirements', 'overview', 'gpa_requirement', 'english_requirement_text', 'duration_months', 'toefl_overall', 'pte_overall', 'ielts_overall', 'tuition_fee', 'is_scholarship_available', 'is_active'])
             ->where('is_active', true)
             ->with(['university:id,name', 
             'university.intakes:id,university_id,name,year,application_open_date,application_deadline,status,is_active',
