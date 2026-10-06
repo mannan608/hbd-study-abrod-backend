@@ -161,7 +161,7 @@
             <div class="ml-auto">
 
                 <svg
-                    class="h-5 w-5 transition"
+                    class="h-5 w-5 transition" width="20" height="20"
                     :class="open ? 'rotate-180':''"
                     fill="none"
                     stroke="#98a2b3"
@@ -170,10 +170,10 @@
                     <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        stroke-width="2"
+                        stroke-width="1.5"
                         d="M19 9l-7 7-7-7"
                     />
-                </svg>
+                </svg>               
 
             </div>
 

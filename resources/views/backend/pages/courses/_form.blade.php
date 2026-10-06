@@ -1,4 +1,5 @@
 @php
+
     $isEdit = isset($course) && $course;
 
     /*
@@ -6,6 +7,7 @@
     | Entry Requirements
     |--------------------------------------------------------------------------
     */
+
     $entryRequirements = old('entry_requirements', $course?->entry_requirements ?? []);
 
     if (is_string($entryRequirements)) {
@@ -31,22 +33,44 @@
 
     /*
     |--------------------------------------------------------------------------
+    | Career Outcomes
+    |--------------------------------------------------------------------------
+    */
+
+    $careerOutcomes = old('outcomes', $course?->outcomes ?? []);
+
+    if (is_string($careerOutcomes)) {
+        $decodedOutcomes = json_decode($careerOutcomes, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decodedOutcomes)) {
+            $careerOutcomes = $decodedOutcomes;
+        } else {
+            $careerOutcomes = preg_split('/\r\n|\r|\n/', $careerOutcomes) ?: [];
+        }
+    }
+
+    if (!is_array($careerOutcomes)) {
+        $careerOutcomes = [];
+    }
+
+    $careerOutcomes = array_values(
+        array_filter(
+            array_map(static fn($outcome) => is_string($outcome) ? trim($outcome) : '', $careerOutcomes),
+            static fn($outcome) => $outcome !== '',
+        ),
+    );
+
+    /*
+    |--------------------------------------------------------------------------
     | Selected Campuses
     |--------------------------------------------------------------------------
-    |
-    | Create:
-    |     []
-    |
-    | Edit:
-    |     [campus-id-1, campus-id-2]
-    |
-    | After validation error:
-    |     old('campus_ids')
-    |
     */
+
     $selectedCampusIds = old('campus_ids', $course?->campuses?->pluck('id')->toArray() ?? []);
 
-    $selectedCampusIds = array_values(array_filter((array) $selectedCampusIds));
+    $selectedCampusIds = array_values(
+        array_filter((array) $selectedCampusIds, static fn($id) => $id !== null && $id !== ''),
+    );
 @endphp
 
 
@@ -59,95 +83,273 @@
 
     entryRequirements: @js($entryRequirements),
 
+    careerOutcomes: @js($careerOutcomes),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Get campuses for selected university
+    |--------------------------------------------------------------------------
+    */
+
     get filteredCampuses() {
+
         if (!this.universityId) {
             return [];
         }
 
-        return this.campuses.filter(
-            campus =>
-            String(campus.university_id) === String(this.universityId)
+        return this.campuses.filter(campus =>
+            String(campus.university_id) ===
+            String(this.universityId)
         );
     },
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Convert campuses to multiselect options
+    |--------------------------------------------------------------------------
+    */
 
     get filteredCampusOptions() {
+
         return this.filteredCampuses.map(campus => ({
             id: campus.id,
-            name: campus.name,
+            name: campus.name
         }));
+
     },
 
-    universityChanged() {
-        const allowedCampusIds = this.filteredCampuses.map(
-            campus => String(campus.id)
-        );
 
-        this.campusIds = this.campusIds.filter(
-            id => allowedCampusIds.includes(String(id))
-        );
+    /*
+    |--------------------------------------------------------------------------
+    | Update campus multiselect
+    |--------------------------------------------------------------------------
+    */
 
-        // Update the campus multi-select component
+    updateCampusMultiSelect() {
+
         window.dispatchEvent(
             new CustomEvent('multi-select:update', {
                 detail: {
+                    id: 'course-campuses',
                     name: 'campus_ids',
+
                     options: this.filteredCampusOptions,
-                    selected: this.campusIds,
+
+                    selected: this.campusIds
                 }
             })
         );
+    },
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | University Changed
+    |--------------------------------------------------------------------------
+    */
+
+    universityChanged() {
+
+        /*
+         * Keep only campuses belonging
+         * to the selected university.
+         */
+        const allowedCampusIds =
+            this.filteredCampuses.map(campus =>
+                String(campus.id)
+            );
+
+
+        this.campusIds =
+            this.campusIds.filter(id =>
+                allowedCampusIds.includes(String(id))
+            );
+
+
+        /*
+         * Update existing multiselect component.
+         */
+        this.updateCampusMultiSelect();
+    },
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Initial Load
+    |--------------------------------------------------------------------------
+    */
+
+    init() {
+
+        /*
+         * Convert IDs to strings so comparison
+         * works consistently.
+         */
+        this.campusIds =
+            this.campusIds.map(id => String(id));
+
+
+        /*
+         * Wait until the child multiselect
+         * component is initialized.
+         */
+        this.$nextTick(() => {
+
+            this.updateCampusMultiSelect();
+
+        });
+
+
+        /*
+         * Listen for changes made inside
+         * the multiselect component.
+         */
+        window.addEventListener(
+            'multi-select:change',
+            event => {
+
+                const payload =
+                    event.detail || {};
+
+
+                if (
+                    payload.id &&
+                    payload.id !== 'course-campuses'
+                ) {
+                    return;
+                }
+
+
+                if (Array.isArray(payload.selected)) {
+
+                    this.campusIds =
+                        payload.selected.map(id =>
+                            String(id)
+                        );
+                }
+
+            }
+        );
+
     }
 }">
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
 
-        {{-- LEFT --}}
-        <div class="space-y-6 lg:col-span-8">
 
-            {{-- Course Information --}}
-            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
 
-                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
-                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
-                        Course Information
-                    </h2>
-                </div>
 
-                <div class="space-y-5 p-5">
+        {{-- =========================================================
+             MAIN CONTENT
+        ========================================================== --}}
 
-                    {{-- University / Campus / Category --}}
-                    <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div class="space-y-8 lg:col-span-8">
 
-                        {{-- University --}}
-                        <div>
-                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                University
-                            </label>
 
-                            <select name="university_id" x-model="universityId" @change="universityChanged()"
-                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                <option value="">
-                                    Select University
-                                </option>
+            {{-- =====================================================
+                 COURSE INFORMATION
+            ====================================================== --}}
 
-                                @foreach ($universities as $university)
-                                    <option value="{{ $university->id }}" @selected(old('university_id', $course?->university_id) == $university->id)>
-                                        {{ $university->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+            <div
+                class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
 
-                            @error('university_id')
-                                <p class="mt-1 text-sm text-red-500">
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                <div
+                    class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4.5 dark:border-neutral-800 dark:bg-neutral-900/50">
+
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-500/10 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400">
+
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 14l9-5-9-5-9 5 9 5z" />
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                            </svg>
+
                         </div>
 
 
-                        {{-- Campus --}}
                         <div>
+
+                            <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
+                                Primary Course Details
+                            </h2>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                Specify institutional affiliation and basic course credentials.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="space-y-6 p-6">
+
+
+                    {{-- =================================================
+                         UNIVERSITY + CAMPUS
+                    ================================================== --}}
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+
+                        {{-- University --}}
+                        <div class="space-y-1.5">
+
+                            <label
+                                class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
+                                University
+
+                                <span class="text-red-500">*</span>
+                            </label>
+
+
+                            <div class="relative">
+
+                                <select name="university_id" x-model="universityId" @change="universityChanged()"
+                                    class="h-11 w-full appearance-none rounded-xl border border-neutral-200 bg-neutral-50/50 px-4 pr-10 text-sm font-medium text-neutral-800 transition-all focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:bg-neutral-800/40 dark:text-neutral-100 dark:focus:border-brand-500 dark:focus:bg-neutral-900">
+
+                                    <option value="">
+                                        Select University
+                                    </option>
+
+                                    @foreach ($universities as $university)
+                                        <option value="{{ $university->id }}">
+                                            {{ $university->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+
+
+                            @error('university_id')
+                                <p class="text-xs font-medium text-red-500">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+
+                        {{-- =================================================
+                             Campus
+                        ================================================== --}}
+
+                        <div>
+
+                            {{-- KEEP YOUR ORIGINAL MULTI SELECT --}}
                             <x-form.multi-select name="campus_ids[]" label="Campuses" :options="$campusOptions"
                                 :selected="$selectedCampusIds" placeholder="Select campuses..." id="course-campuses" />
+
 
                             @error('campus_ids')
                                 <p class="mt-1 text-sm text-red-500">
@@ -155,163 +357,316 @@
                                 </p>
                             @enderror
 
+
                             @error('campus_ids.*')
                                 <p class="mt-1 text-sm text-red-500">
                                     {{ $message }}
                                 </p>
                             @enderror
+
                         </div>
+
+                    </div>
+
+
+                    {{-- =================================================
+                         CATEGORY + DEGREE
+                    ================================================== --}}
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 
 
                         {{-- Category --}}
-                        <div>
-                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+
+                        <div class="space-y-1.5">
+
+                            <label
+                                class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
                                 Course Category
                             </label>
 
-                            <select name="category_id"
-                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                <option value="">
-                                    Select Category
-                                </option>
 
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" @selected(old('category_id', $course?->category_id) == $category->id)>
-                                        {{ $category->name }}
+                            <div class="relative">
+
+                                <select name="category_id"
+                                    class="h-11 w-full appearance-none rounded-xl border border-neutral-200 bg-neutral-50/50 px-4 pr-10 text-sm font-medium text-neutral-800 transition-all focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:bg-neutral-800/40 dark:text-neutral-100 dark:focus:border-brand-500 dark:focus:bg-neutral-900">
+
+                                    <option value="">
+                                        Select Category
                                     </option>
-                                @endforeach
-                            </select>
+
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" @selected(old('category_id', $course?->category_id) == $category->id)>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+
 
                             @error('category_id')
-                                <p class="mt-1 text-sm text-red-500">
+                                <p class="text-xs font-medium text-red-500">
                                     {{ $message }}
                                 </p>
                             @enderror
+
                         </div>
-                        {{-- Degree Level --}}
-                        <div>
-                            <label class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+
+
+                        {{-- Degree --}}
+
+                        <div class="space-y-1.5">
+
+                            <label
+                                class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
                                 Degree Level
                             </label>
 
-                            <select name="degree_level"
-                                class="h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 text-sm text-neutral-800 focus:border-brand-500 focus:ring-brand-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                <option value="">
-                                    Select Degree Level
-                                </option>
 
-                                @foreach (['Diploma', 'Certificate', 'Bachelor', 'Master', 'PhD', 'Doctorate'] as $level)
-                                    <option value="{{ $level }}" @selected(old('degree_level', $course?->degree_level) === $level)>
-                                        {{ $level }}
+                            <div class="relative">
+
+                                <select name="degree_level"
+                                    class="h-11 w-full appearance-none rounded-xl border border-neutral-200 bg-neutral-50/50 px-4 pr-10 text-sm font-medium text-neutral-800 transition-all focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:bg-neutral-800/40 dark:text-neutral-100 dark:focus:border-brand-500 dark:focus:bg-neutral-900">
+
+                                    <option value="">
+                                        Select Degree Level
                                     </option>
-                                @endforeach
-                            </select>
+
+                                    @foreach (['Diploma', 'Certificate', 'Bachelor', 'Master', 'PhD', 'Doctorate'] as $level)
+                                        <option value="{{ $level }}" @selected(old('degree_level', $course?->degree_level) === $level)>
+                                            {{ $level }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+
 
                             @error('degree_level')
-                                <p class="mt-1 text-sm text-red-500">
+                                <p class="text-xs font-medium text-red-500">
                                     {{ $message }}
                                 </p>
                             @enderror
+
                         </div>
 
                     </div>
 
-                    <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-                        {{-- Title --}}
+
+                    {{-- =================================================
+                         TITLE + CODE
+                    ================================================== --}}
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
                         <x-form.input-text name="title" label="Course Title"
-                            value="{{ old('title', $course?->title) }}" placeholder="Enter Course Title..." />
-                        {{-- Title --}}
-                        <x-form.input-text name="code" label="Course Code"
-                            value="{{ old('code', $course?->code) }}" placeholder="Enter Course Code..." />
+                            value="{{ old('title', $course?->title) }}"
+                            placeholder="e.g. Master of Computer Science" />
+
+
+                        <x-form.input-text name="code" label="Course Code" value="{{ old('code', $course?->code) }}"
+                            placeholder="e.g. CS-501" />
 
                     </div>
 
 
-                    {{-- Duration / Tuition / Currency --}}
-                    <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+                    {{-- =================================================
+                         DURATION / TUITION / CURRENCY
+                    ================================================== --}}
 
-                        <x-form.input-text name="duration_months" label="Duration (Months)"
-                            value="{{ old('duration_months', $course?->duration_months) }}" placeholder="e.g. 36" />
+                    <div
+                        class="rounded-xl border border-neutral-100 bg-neutral-50/40 p-4.5 dark:border-neutral-800/80 dark:bg-neutral-800/20">
 
-                        <x-form.input-text name="tuition_fee" label="Tuition Fee"
-                            value="{{ old('tuition_fee', $course?->tuition_fee) }}" placeholder="e.g. 25000" />
+                        <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
 
-                        <x-form.input-text name="currency" label="Currency"
-                            value="{{ old('currency', $course?->currency ?? 'USD') }}" placeholder="USD" />
+                            <x-form.input-text name="duration_months" label="Duration (Months)"
+                                value="{{ old('duration_months', $course?->duration_months) }}"
+                                placeholder="e.g. 36" />
+
+
+                            <x-form.input-text name="tuition_fee" label="Tuition Fee"
+                                value="{{ old('tuition_fee', $course?->tuition_fee) }}" placeholder="e.g. 25000" />
+
+
+                            <x-form.input-text name="currency" label="Currency"
+                                value="{{ old('currency', $course?->currency ?? 'USD') }}" placeholder="USD" />
+
+                        </div>
 
                     </div>
+
+
+                    {{-- Overview --}}
+
+                    <div>
+
+                        <x-form.textarea-input name="overview" label="Course Overview" rows="5"
+                            placeholder="Provide a detailed summary of the course curriculum and objectives..."
+                            :value="old('overview', $course?->overview)" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- =========================================================
+                 ADMISSION REQUIREMENTS
+            ========================================================== --}}
+
+            <div
+                class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
+
+                <div
+                    class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4.5 dark:border-neutral-800 dark:bg-neutral-900/50">
+
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400">
+
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+
+                        </div>
+
+
+                        <div>
+
+                            <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
+                                Admission & Proficiency Criteria
+                            </h2>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                Set academic and test prerequisites for applicants.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="space-y-6 p-6">
 
 
                     {{-- English Requirements --}}
-                    <div class="border-t border-neutral-100 pt-5 dark:border-neutral-800">
 
-                        <h3 class="mb-4 text-base font-semibold text-neutral-800 dark:text-white">
-                            English Language Requirements
+                    <div>
+
+                        <h3
+                            class="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                            English Language Proficiency
                         </h3>
+
 
                         <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
 
                             <x-form.input-text name="ielts_overall" label="IELTS Overall"
                                 value="{{ old('ielts_overall', $course?->ielts_overall) }}" placeholder="e.g. 6.5" />
 
+
                             <x-form.input-text name="toefl_overall" label="TOEFL Overall"
                                 value="{{ old('toefl_overall', $course?->toefl_overall) }}" placeholder="e.g. 80" />
+
 
                             <x-form.input-text name="pte_overall" label="PTE Overall"
                                 value="{{ old('pte_overall', $course?->pte_overall) }}" placeholder="e.g. 58" />
 
                         </div>
+
                     </div>
 
 
-                    {{-- Academic Requirement --}}
-                    <x-form.input-text name="gpa_requirement" label="GPA Requirement"
-                        value="{{ old('gpa_requirement', $course?->gpa_requirement) }}" placeholder="e.g. 3.00" />
+                    <div class="border-t border-neutral-100 dark:border-neutral-800"></div>
 
 
-                    {{-- Overview --}}
-                    <x-form.textarea-input name="overview" label="Course Overview" rows="6"
-                        placeholder="Enter course overview..." :value="old('overview', $course?->overview)" />
+                    {{-- GPA --}}
+
+                    <div>
+
+                        <x-form.input-text name="gpa_requirement" label="Minimum GPA Requirement"
+                            value="{{ old('gpa_requirement', $course?->gpa_requirement) }}"
+                            placeholder="e.g. 3.00" />
+
+                    </div>
+
+
+                    <div class="border-t border-neutral-100 dark:border-neutral-800"></div>
 
 
                     {{-- Entry Requirements --}}
-                    <div class="border-t border-neutral-100 pt-5 dark:border-neutral-800">
+
+                    <div>
 
                         <div class="mb-4 flex items-center justify-between gap-4">
 
                             <div>
-                                <h3 class="text-base font-semibold text-neutral-800 dark:text-white">
-                                    Entry Requirements
+
+                                <h3 class="text-sm font-semibold text-neutral-800 dark:text-white">
+                                    Detailed Entry Requirements
                                 </h3>
 
-                                <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-                                    Add one requirement per row. These will be stored as a list.
+                                <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                    Itemized list of general requirements for prospective students.
                                 </p>
+
                             </div>
 
+
                             <button type="button"
-                                class="rounded-lg border border-brand-500 px-3 py-2 text-sm font-semibold text-brand-600 hover:bg-brand-50 dark:border-brand-400 dark:text-brand-300 dark:hover:bg-brand-500/10"
+                                class="inline-flex items-center gap-1.5 rounded-xl border border-brand-200 bg-brand-50/50 px-3.5 py-2 text-xs font-semibold text-brand-600 transition-colors hover:bg-brand-100 dark:border-brand-500/20 dark:bg-brand-500/10 dark:text-brand-300 dark:hover:bg-brand-500/20"
                                 @click="entryRequirements.push('')">
+
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+
                                 Add Requirement
+
                             </button>
 
                         </div>
+
 
                         <div class="space-y-3">
 
                             <template x-for="(requirement, index) in entryRequirements" :key="index">
 
-                                <div class="flex gap-3">
+                                <div class="group flex items-center gap-3">
 
-                                    <input type="text" name="entry_requirements[]" x-model="entryRequirements[index]"
+                                    <span
+                                        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-neutral-100 text-xs font-bold text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400"
+                                        x-text="index + 1"></span>
+
+
+                                    <input type="text" name="entry_requirements[]"
+                                        x-model="entryRequirements[index]"
                                         placeholder="e.g. Minimum 60% in previous qualification"
-                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:ring-3 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30">
+                                        class="h-11 w-full rounded-xl border border-neutral-200 bg-transparent px-4 text-sm text-neutral-800 placeholder:text-neutral-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:text-neutral-100 dark:placeholder:text-neutral-500" />
 
-                                    <button type="button"
-                                        class="inline-flex items-center rounded-lg border border-neutral-300 px-3 py-2.5 text-sm font-medium text-neutral-600 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
-                                        @click="entryRequirements.splice(index, 1)"
-                                        x-show="entryRequirements.length > 1 || entryRequirements[index]">
-                                        Remove
+
+                                    <button type="button" @click="entryRequirements.splice(index, 1)"
+                                        x-show="
+                                            entryRequirements.length > 1 ||
+                                            entryRequirements[index]
+                                        "
+                                        class="inline-flex h-11 shrink-0 items-center justify-center rounded-xl border border-neutral-200 px-3 text-neutral-400 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-red-900/50 dark:hover:bg-red-900/20 dark:hover:text-red-400">
+
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+
                                     </button>
 
                                 </div>
@@ -320,11 +675,12 @@
 
                         </div>
 
+
                         <template x-if="entryRequirements.length === 0">
 
                             <div
-                                class="rounded-lg border border-dashed border-neutral-300 p-4 text-sm text-neutral-500 dark:border-neutral-700 dark:text-neutral-400">
-                                No entry requirements added yet.
+                                class="rounded-xl border border-dashed border-neutral-200 p-6 text-center text-xs text-neutral-400 dark:border-neutral-800">
+                                No entry requirements added yet. Click "Add Requirement" to create one.
                             </div>
 
                         </template>
@@ -332,87 +688,267 @@
                     </div>
 
                 </div>
+
             </div>
+
+
+            {{-- =========================================================
+                 CAREER OUTCOMES
+            ========================================================== --}}
+
+            <div
+                class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
+
+                <div
+                    class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4.5 dark:border-neutral-800 dark:bg-neutral-900/50">
+
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+
+                        </div>
+
+
+                        <div>
+
+                            <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
+                                Career Opportunities
+                            </h2>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                List expected roles and professional pathways for graduates.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="p-6">
+
+                    <div class="mb-4 flex items-center justify-between gap-4">
+
+                        <div>
+
+                            <h3 class="text-sm font-semibold text-neutral-800 dark:text-white">
+                                Key Outcomes
+                            </h3>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                Target career roles and industries post-completion.
+                            </p>
+
+                        </div>
+
+
+                        <button type="button" @click="careerOutcomes.push('')"
+                            class="inline-flex items-center gap-1.5 rounded-xl border border-brand-200 bg-brand-50/50 px-3.5 py-2 text-xs font-semibold text-brand-600 transition-colors hover:bg-brand-100 dark:border-brand-500/20 dark:bg-brand-500/10 dark:text-brand-300 dark:hover:bg-brand-500/20">
+
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+
+                            Add Outcome
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="space-y-3">
+
+                        <template x-for="(outcome, index) in careerOutcomes" :key="index">
+
+                            <div class="group flex items-center gap-3">
+
+                                <span
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-neutral-100 text-xs font-bold text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400"
+                                    x-text="index + 1"></span>
+
+
+                                <input type="text" name="outcomes[]" x-model="careerOutcomes[index]"
+                                    placeholder="e.g. Senior Software Engineer"
+                                    class="h-11 w-full rounded-xl border border-neutral-200 bg-transparent px-4 text-sm text-neutral-800 placeholder:text-neutral-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-neutral-700/80 dark:text-neutral-100 dark:placeholder:text-neutral-500" />
+
+
+                                <button type="button" @click="careerOutcomes.splice(index, 1)"
+                                    x-show="
+                                        careerOutcomes.length > 1 ||
+                                        careerOutcomes[index]
+                                    "
+                                    class="inline-flex h-11 shrink-0 items-center justify-center rounded-xl border border-neutral-200 px-3 text-neutral-400 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-red-900/50 dark:hover:bg-red-900/20 dark:hover:text-red-400">
+
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 01-1 1v3M4 7h16" />
+                                    </svg>
+
+                                </button>
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+
+                    <template x-if="careerOutcomes.length === 0">
+
+                        <div
+                            class="rounded-xl border border-dashed border-neutral-200 p-6 text-center text-xs text-neutral-400 dark:border-neutral-800">
+                            No career outcomes added yet. Click "Add Outcome" to create one.
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </div>
+
         </div>
 
 
-        {{-- RIGHT --}}
+
+        {{-- =========================================================
+             RIGHT SIDEBAR
+        ========================================================== --}}
+
         <div class="space-y-6 lg:col-span-4">
 
-            {{-- Status --}}
-            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
 
-                <div class="border-b border-neutral-100 p-5 dark:border-neutral-800">
-                    <h2 class="text-lg font-semibold text-neutral-800 dark:text-white">
-                        Course Status
+            {{-- Visibility --}}
+
+            <div
+                class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
+
+                <div
+                    class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-900/50">
+
+                    <h2 class="text-sm font-semibold text-neutral-900 dark:text-white">
+                        Visibility & Flags
                     </h2>
+
                 </div>
 
-                <div class="space-y-5 p-5">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {{-- Featured --}}
-                    <label class="flex cursor-pointer items-center gap-3">
 
-                        <input type="hidden" name="is_featured" value="0">
-
-                        <input type="checkbox" name="is_featured" value="1" @checked(old('is_featured', $course?->is_featured ?? false))
-                            class="h-4 w-4 rounded border-neutral-300 text-brand-600 focus:ring-brand-500">
-
-                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                            Featured Course
-                        </span>
-
-                    </label>
-                    {{-- Scholarship --}}
-                    <label class="flex cursor-pointer items-center gap-3">
-
-                        <input type="hidden" name="is_scholarship_available" value="0">
-
-                        <input type="checkbox" name="is_scholarship_available" value="1" @checked(old('is_scholarship_available', $course?->is_scholarship_available ?? false))
-                            class="h-4 w-4 rounded border-neutral-300 text-brand-600 focus:ring-brand-500">
-
-                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                           Scholarship Available
-                        </span>
-
-                    </label>
-
-                      </div>
+                <div class="space-y-3 p-6">
 
 
                     {{-- Active --}}
-                    <label class="flex cursor-pointer items-center gap-3">
+
+                    <label
+                        class="flex cursor-pointer items-start justify-between gap-3 rounded-xl border border-neutral-200/80 p-3.5 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/40">
+
+                        <div class="space-y-0.5">
+
+                            <span class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                                Active Status
+                            </span>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                Publish course on portal
+                            </p>
+
+                        </div>
+
 
                         <input type="hidden" name="is_active" value="0">
 
-                        <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $course?->is_active ?? true))
-                            class="h-4 w-4 rounded border-neutral-300 text-brand-600 focus:ring-brand-500">
 
-                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                            Active
-                        </span>
+                        <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $course?->is_active ?? true))
+                            class="h-4 w-4 rounded border-neutral-300 text-brand-600 transition focus:ring-brand-500/20 dark:border-neutral-700 dark:bg-neutral-800">
+
+                    </label>
+
+
+                    {{-- Featured --}}
+
+                    <label
+                        class="flex cursor-pointer items-start justify-between gap-3 rounded-xl border border-neutral-200/80 p-3.5 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/40">
+
+                        <div class="space-y-0.5">
+
+                            <span class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                                Featured Course
+                            </span>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                Promote on home page
+                            </p>
+
+                        </div>
+
+
+                        <input type="hidden" name="is_featured" value="0">
+
+
+                        <input type="checkbox" name="is_featured" value="1" @checked(old('is_featured', $course?->is_featured ?? false))
+                            class="h-4 w-4 rounded border-neutral-300 text-brand-600 transition focus:ring-brand-500/20 dark:border-neutral-700 dark:bg-neutral-800">
+
+                    </label>
+
+
+                    {{-- Scholarship --}}
+
+                    <label
+                        class="flex cursor-pointer items-start justify-between gap-3 rounded-xl border border-neutral-200/80 p-3.5 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/40">
+
+                        <div class="space-y-0.5">
+
+                            <span class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                                Scholarship Available
+                            </span>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                                Show financial aid tag
+                            </p>
+
+                        </div>
+
+
+                        <input type="hidden" name="is_scholarship_available" value="0">
+
+
+                        <input type="checkbox" name="is_scholarship_available" value="1"
+                            @checked(old('is_scholarship_available', $course?->is_scholarship_available ?? false))
+                            class="h-4 w-4 rounded border-neutral-300 text-brand-600 transition focus:ring-brand-500/20 dark:border-neutral-700 dark:bg-neutral-800">
 
                     </label>
 
                 </div>
+
             </div>
 
 
-            {{-- Submit --}}
-            <div class="rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
+            {{-- Save --}}
 
-                <div class="flex justify-end p-5">
+            <div
+                class="sticky top-6 overflow-hidden rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
 
-                    <button type="submit"
-                        class="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-500">
-                        {{ $isEdit ? 'Update Course' : 'Create Course' }}
-                    </button>
+                <button type="submit"
+                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-xs transition-all hover:bg-brand-700 focus:outline-none focus:ring-4 focus:ring-brand-500/20 dark:bg-brand-600 dark:hover:bg-brand-500">
 
-                </div>
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+
+                    {{ $isEdit ? 'Update Course' : 'Create Course' }}
+
+                </button>
 
             </div>
 
         </div>
 
     </div>
+
 </div>

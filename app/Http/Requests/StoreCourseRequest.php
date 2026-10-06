@@ -47,6 +47,9 @@ class StoreCourseRequest extends FormRequest
             'entry_requirements' => ['nullable', 'array'],
 
             'entry_requirements.*' => ['nullable', 'string', 'max:1000'],
+            'outcomes' => ['nullable', 'array'],
+
+            'outcomes.*' => ['nullable', 'string', 'max:1000'],
 
             'overview' => ['nullable', 'string'],
 

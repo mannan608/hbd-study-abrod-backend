@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', "Course Details")
+@section('title', 'Course Details')
 
 @section('content')
     {{-- Hero Section --}}
@@ -17,12 +17,8 @@
             <div class="max-w-2xl mx-auto">
 
                 <h1 class="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl uppercase text-center">
-                    Explore Thousands of Courses Across Australia
+                    Explore Thousands of Courses
                 </h1>
-                {{-- <button class="mt-3 inline-flex items-center gap-2 rounded-xl bg-brand-500 px-5 py-2.5 text-sm font-bold text-white  transition hover:bg-brand-600 active:scale-95">
-              <span>Check if you are eligible</span>
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </button> --}}
 
             </div>
         </div>
@@ -39,10 +35,10 @@
                 <div class="lg:col-span-8 space-y-8">
                     <div>
                         <div class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-500">
-                            <span>{{$course->university->name}}</span>
+                            <span>{{ $course->university->name }}</span>
                         </div>
                         <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
-                            {{$course->title}}
+                            {{ $course->title }}
                         </h1>
 
                         <!-- Meta Tags -->
@@ -55,11 +51,11 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                                 </svg>
-                               {{$course->degree_level}}
+                                {{ $course->degree_level }}
                             </span>
                             <span
                                 class="inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-neutral-500 font-mono">
-                                CRICOS: {{$course->code}}
+                                CRICOS: {{ $course->code }}
                             </span>
                             <span class="inline-flex items-center gap-1.5 text-neutral-500">
                                 <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor"
@@ -78,7 +74,7 @@
                     <div class="prose prose-neutral max-w-none">
                         <h3 class="text-lg font-bold text-neutral-900">Course Overview</h3>
                         <p class="text-sm text-neutral-600 leading-relaxed">
-                            {{$course->overview}}
+                            {{ $course->overview }}
                         </p>
                         <div class="mt-4">
                             <button
@@ -147,7 +143,8 @@
                         <!-- Logo Header -->
 
                         <div class="flex items-center px-4 py-2 gap-4 bg-neutral-50 rounded-xl border border-neutral-100">
-                            <div class="flex h-12 w-12 border border-neutral-200  shrink-0 items-center justify-center rounded-lg bg-neutral-50 p-2">
+                            <div
+                                class="flex h-12 w-12 border border-neutral-200  shrink-0 items-center justify-center rounded-lg bg-neutral-50 p-2">
                                 <img src="{{ asset($course->university->logo) }}" alt="{{ $course->university->name }}"
                                     class="h-full w-full object-contain">
                             </div>
@@ -165,19 +162,26 @@
                         <div class="space-y-3.5 text-sm">
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Annual Fee</span>
-                                <span class="font-bold text-neutral-900">USD ${{$course->tuition_fee*12}} / year</span>
+                                <span class="font-bold text-neutral-900">USD ${{ $course->tuition_fee * 12 }} / year</span>
                             </div>
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Estimated Total Fee</span>
-                                <span class="font-bold text-neutral-900">USD ${{$course->tuition_fee*13}}</span>
+                                <span class="font-bold text-neutral-900">USD ${{ $course->tuition_fee * 13 }}</span>
                             </div>
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Duration</span>
-                                 {{ intdiv($course->duration_months, 12) }} Years Full-time
+                                {{ intdiv($course->duration_months, 12) }} Years Full-time
                             </div>
                             <div class="flex justify-between pb-2 border-b border-neutral-100">
                                 <span class="text-neutral-500">Next Intake</span>
-                                <span class="font-bold text-brand-500">01 Mar 2027</span>
+
+                                @php
+                                    $intake = $course->university->intakes->where('status', 'upcoming')->first();
+                                @endphp
+
+                                <span class="font-bold text-brand-500">
+                                    {{ $intake ? $intake->name . ' ' . $intake->year : 'N/A' }}
+                                </span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-neutral-500">Application Fee</span>
@@ -198,55 +202,58 @@
             <div class="bg-white rounded-3xl p-8 border border-neutral-100  space-y-10 mt-12">
 
                 <!-- Entry Requirements -->
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="rounded-lg bg-brand-500 p-2 text-white">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </span>
-                        <h2 class="text-xl font-bold">Entry Requirements</h2>
+
+                @if (!empty($course->outcomes))
+                    <div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="rounded-lg bg-brand-500 p-2 text-white">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </span>
+                            <h2 class="text-xl font-bold">Entry Requirements</h2>
+                        </div>
+                        <div
+                            class="rounded-2xl  p-5 border border-brand-300  text-sm text-neutral-600 leading-relaxed space-y-3">
+                            <p>
+                                Bachelor degree with Honours Class 1 or Class 2, Division 1, or a Master's degree with a
+                                significant research component, or equivalent.
+                            </p>
+                            @foreach ($course->entry_requirements as $requirement)
+                                <p class="text-neutral-600">
+                                    {{ $requirement }}
+                                </p>
+                            @endforeach
+                        </div>
                     </div>
-                    <div
-                        class="rounded-2xl  p-5 border border-brand-300  text-sm text-neutral-600 leading-relaxed space-y-3">
-                        <p>
-                            Bachelor degree with Honours Class 1 or Class 2, Division 1, or a Master's degree with a
-                            significant research component, or equivalent.
-                        </p>
-                        <p class="text-neutral-600">
-                            <strong>English Proficiency:</strong> IELTS 6.5 overall (no band below 6.0) or equivalent.
-                            Supervisor required prior to enrolment.
-                        </p>
-                    </div>
-                </div>
+                @endif
 
                 <!-- Career Outcomes -->
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="rounded-lg bg-brand-500 p-2 text-white">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                            </svg>
-                        </span>
-                        <h2 class="text-xl font-bold">Career Outcomes</h2>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div
-                            class="flex items-center gap-2 rounded-xl bg-brand-100 px-4 py-3  text-sm font-semibold text-brand-500">
-                            <span class="h-2 w-2 rounded-full bg-brand-500"></span>
-                            Research Manager
+                @if (!empty($course->outcomes))
+                    <div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="rounded-lg bg-brand-500 p-2 text-white">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                            </span>
+                            <h2 class="text-xl font-bold">Career Outcomes</h2>
                         </div>
-                        <div
-                            class="flex items-center gap-2 rounded-xl bg-brand-100 px-4 py-3  text-sm font-semibold text-brand-500">
-                            <span class="h-2 w-2 rounded-full bg-brand-500"></span>
-                            Research Scientist
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            @foreach ($course->outcomes as $outcome)
+                                <div
+                                    class="flex items-center gap-2 rounded-xl bg-brand-100 px-4 py-3 text-sm font-semibold text-brand-500">
+                                    <span class="h-2 w-2 rounded-full bg-brand-500"></span>
+                                    {{ $outcome }}
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
-
+                @endif
                 <!-- Campus Locations Grid -->
                 <div>
                     <h2 class="text-xl font-bold mb-4">Available Campus Locations</h2>
@@ -283,11 +290,11 @@
 
                                                 <div>
                                                     <h3 class="text-base font-bold text-slate-900">
-                                                        {{$location->name}}
+                                                        {{ $location->name }}
                                                     </h3>
 
                                                     <p class="mt-0.5 text-xs font-medium text-slate-500">
-                                                       {{$location->address}}
+                                                        {{ $location->address }}
                                                     </p>
                                                 </div>
 
@@ -296,7 +303,7 @@
                                             <!-- Country -->
                                             <span
                                                 class="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">
-                                                {{$course->university->country->name}}
+                                                {{ $course->university->country->name }}
                                             </span>
 
                                         </div>
@@ -352,56 +359,60 @@
 
             @if ($relatedCourses->count() > 0)
                 <div class="space-y-6">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-neutral-900">Similar Courses</h2>
-                    <button
-                        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 transition">
-                        View All Courses
-                    </button>
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-2xl font-bold text-neutral-900">Similar Courses</h2>
+                        <button
+                            class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 transition">
+                            View All Courses
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        @foreach ($relatedCourses as $relatedcourse)
+                            <a href="{{ route('course-details', ['course' => $relatedcourse]) }}"
+                                class="group rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between">
+                                <div>
+                                    <div
+                                        class="flex items-center px-4 py-2 gap-4 bg-neutral-50 rounded-xl border border-neutral-100">
+                                        <div
+                                            class="flex h-12 w-12 border border-neutral-200  shrink-0 items-center justify-center rounded-lg bg-neutral-50 p-2">
+                                            <img src="{{ asset($relatedcourse->university->logo) }}"
+                                                alt="{{ $relatedcourse->university->name }}"
+                                                class="h-full w-full object-contain">
+                                        </div>
+
+                                        <div class="min-w-0">
+                                            <p class="truncate text-sm font-bold tracking-tight text-neutral-900">
+                                                {{ $relatedcourse->university->name }}
+                                            </p>
+                                            <p class="mt-0.5 text-xs text-neutral-500">
+                                                University
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-brand-500 uppercase">{{ $relatedcourse->category->name }}</span>
+                                    <h3
+                                        class="text-sm font-bold text-neutral-900 mt-1 group-hover:text-brand-500 transition-colors">
+                                        {{ $relatedcourse->title }}
+                                    </h3>
+                                    <p class="text-xs text-neutral-500 mt-2">{{ $relatedcourse->degree_level }} • CRICOS
+                                        {{ $relatedcourse->code }}</p>
+                                </div>
+
+                                <div class="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between">
+                                    <span
+                                        class="text-xs text-brand-500">{{ $relatedcourse->university->country->name }}</span>
+                                    <button
+                                        class="rounded-lg bg-brand-100 px-3 py-1.5 text-xs font-bold text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition">
+                                        View →
+                                    </button>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    @foreach ($relatedCourses as $relatedcourse)
-                        <a href="{{ route('course-details', ['course' => $relatedcourse]) }}"
-                            class="group rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between">
-                            <div>
-                               <div class="flex items-center px-4 py-2 gap-4 bg-neutral-50 rounded-xl border border-neutral-100">
-                            <div class="flex h-12 w-12 border border-neutral-200  shrink-0 items-center justify-center rounded-lg bg-neutral-50 p-2">
-                                <img src="{{ asset($relatedcourse->university->logo) }}" alt="{{ $relatedcourse->university->name }}"
-                                    class="h-full w-full object-contain">
-                            </div>
-
-                            <div class="min-w-0">
-                                <p class="truncate text-sm font-bold tracking-tight text-neutral-900">
-                                    {{ $relatedcourse->university->name }}
-                                </p>
-                                <p class="mt-0.5 text-xs text-neutral-500">
-                                    University
-                                </p>
-                            </div>
-                        </div>
-                                <span class="text-[10px] font-bold text-brand-500 uppercase">{{$relatedcourse->category->name}}</span>
-                                <h3
-                                    class="text-sm font-bold text-neutral-900 mt-1 group-hover:text-brand-500 transition-colors">
-                                    {{ $relatedcourse->title }}
-                                </h3>
-                                <p class="text-xs text-neutral-500 mt-2">{{ $relatedcourse->degree_level}} • CRICOS {{$relatedcourse->code}}</p>
-                            </div>
-
-                            <div class="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between">
-                                <span class="text-xs text-brand-500">{{ $relatedcourse->university->country->name }}</span>
-                                <button
-                                    class="rounded-lg bg-brand-100 px-3 py-1.5 text-xs font-bold text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition">
-                                    View →
-                                </button>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
             @endif
-            
-
         </div>
     </div>
 @endsection
