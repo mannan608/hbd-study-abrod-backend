@@ -24,7 +24,10 @@ return new class extends Migration {
             $table->foreignUuid('course_id')->nullable()->constrained('courses')->nullOnDelete();
 
             // Required when scope_type = intake
-            $table->foreignId('intake_id')->nullable()->constrained('intakes')->nullOnDelete();
+            $table->foreignId('intake_id')
+    ->nullable()
+    ->constrained('intakes')
+    ->nullOnDelete();
 
             $table->enum('discount_type', ['percentage', 'fixed']);
 
