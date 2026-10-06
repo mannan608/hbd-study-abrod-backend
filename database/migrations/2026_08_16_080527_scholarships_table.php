@@ -18,20 +18,24 @@ return new class extends Migration {
             $table->enum('scope_type', ['university', 'course', 'intake']);
 
             // Base level - always required
-             $table->foreignUuid('university_id')->constrained('universities')->cascadeOnDelete();
+            $table->foreignUuid('university_id')
+                ->constrained('universities')
+                ->cascadeOnDelete();
 
             // Required when scope_type = course or intake
-            $table->foreignUuid('course_id')->nullable()->constrained('courses')->nullOnDelete();
+            $table->foreignUuid('course_id')
+                ->nullable()
+                ->constrained('courses')
+                ->nullOnDelete();
 
             // Required when scope_type = intake
             $table->foreignId('intake_id')
-    ->nullable()
-    ->constrained('intakes')
-    ->nullOnDelete();
+                ->nullable()
+                ->constrained('course_intakes')
+                ->nullOnDelete();
 
             $table->enum('discount_type', ['percentage', 'fixed']);
 
-            // 25.00 = 25% OR 2000.00 = $2000
             $table->decimal('discount_value', 10, 2);
 
             $table->date('start_date')->nullable();
