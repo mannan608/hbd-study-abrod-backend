@@ -119,14 +119,20 @@ class AuthController extends Controller
    public function register(Request $request)
 {
     $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
+         'first_name' => 'required|string|max:100',
+        'last_name'  => 'required|string|max:100',
         'email' => 'required|email|unique:users,email',
         'phone' => 'required|string|max:255',
         'password' => 'required|string|min:8|confirmed',
     ]);
 
+      // Combine first name + last name for users.name
+    $fullName = trim(
+        $validatedData['first_name'] . ' ' . $validatedData['last_name']
+    );
+
     $user = User::create([
-        'name' => $validatedData['name'],
+        'name' => $fullName,
         'email' => $validatedData['email'],
         'phone' => $validatedData['phone'],
         'password' => Hash::make($validatedData['password']),
@@ -137,6 +143,8 @@ class AuthController extends Controller
     Student::create([
         'user_id' => $user->id,
         'student_number' => 'STU-' . str_pad($user->id, 6, '0', STR_PAD_LEFT),
+         'first_name' => $validatedData['first_name'],
+        'last_name' => $validatedData['last_name'],
     ]);
 
     return redirect()

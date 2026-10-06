@@ -2,79 +2,48 @@
 
 @section('content')
     @php
+        $tableRowData = collect([
+            [
+                'id' => 1001,
+                'name' => 'John Doe',
+                'email' => 'john.doe@example.com',
+                'phone' => '+1 (555) 234-5678',
+                'owner' => 'Md Abdul Mannan',
+                'owner_initials' => 'MM',
+
+                'counselling' => [
+                    'total' => 3,
+                    'people' => [['name' => 'Mannan', 'count' => 2], ['name' => 'Noman', 'count' => 1]],
+                ],
+
+                'exam' => [
+                    'name' => 'IELTS',
+                    'passing_year' => '2021',
+                    'overall' => '50',
+                    'score' => '40',
+                ],
+
+                'status' => 'Contacted',
+                'status_class' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+
+                'priority' => 'High',
+                'priority_class' => 'bg-rose-50 text-rose-700 border-rose-200',
+
+                'outcome' => [
+                    'type' => 'File Open',
+                    'date' => '12/20/2023',
+                    'by' => 'mannan',
+                ],
+
+                'created' => [
+                    'date' => '12/20/2023',
+                    'by' => 'mannan',
+                ],
+            ],
+        ])->values();
         $role = request()->route('role');
 
-        $tableRowData = collect($students->items())
-            ->map(function ($student) {
-                $fullName = trim(($student->first_name ?? '') . ' ' . ($student->last_name ?? ''));
-
-                return [
-                    'id' => $student->id,
-
-                    'student_number' => $student->student_number ?? '',
-
-                    'first_name' => $student->first_name ?? '',
-                    'last_name' => $student->last_name ?? '',
-                    'name' => $fullName,
-
-                    'email' => $student->user?->email ?? '',
-                    'phone' => $student->user?->phone ?? '',
-                    'avatar' => $student->user?->avatar ?? '',
-
-                    'status' => $student->user?->status ?? '',
-                    'status_class' => match ($student->user?->status) {
-                        'active' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                        'inactive' => 'bg-red-50 text-red-700 border-red-200',
-                        default => 'bg-slate-50 text-slate-700 border-slate-200',
-                    },
-
-                    /*Dummy Lead Management Data*/
-
-                    'owner' => 'Sarah Ahmed',
-
-                    'owner_initials' => 'SA',
-
-                    'counselling' => [
-                        'total' => 4,
-
-                        'people' => [
-                            [
-                                'name' => 'Sarah Ahmed',
-                                'count' => 2,
-                            ],
-                            [
-                                'name' => 'John Smith',
-                                'count' => 2,
-                            ],
-                        ],
-                    ],
-
-                    'exam' => [
-                        'name' => 'IELTS',
-                        'passing_year' => '2025',
-                        'overall' => '7.0',
-                        'score' => '7.5',
-                    ],
-
-                    'priority' => 'High',
-
-                    'priority_class' => 'bg-red-50 text-red-700 border-red-200',
-
-                    'outcome' => [
-                        'type' => 'Follow-up',
-                        'date' => '2026-10-10',
-                        'by' => 'Sarah Ahmed',
-                    ],
-
-                    'created' => [
-                        'date' => $student->created_at?->format('m/d/Y') ?? '',
-                        'by' => '',
-                    ],
-                ];
-            })
-            ->values();
     @endphp
-
 
     <div x-data="{
         tableRowData: {{ \Illuminate\Support\Js::from($tableRowData) }},
@@ -82,7 +51,9 @@
         filterOpen: false,
         assignOpen: false,
         serviceOpen: false,
+    
         selectedLeads: [],
+    
         copyMessage: '',
     
         toggleAll(event) {
@@ -94,7 +65,9 @@
         },
     
         async copyPhone(phone) {
+    
             try {
+    
                 await navigator.clipboard.writeText(phone);
     
                 this.copyMessage = 'Phone number copied';
@@ -104,11 +77,13 @@
                 }, 1800);
     
             } catch (error) {
+    
                 this.copyMessage = 'Unable to copy number';
     
                 setTimeout(() => {
                     this.copyMessage = '';
                 }, 1800);
+    
             }
         }
     }" class="flex flex-col gap-4 md:gap-6">
@@ -140,6 +115,7 @@
                 </a>
             </div>
         </div>
+
 
 
         <!-- SEARCH & FILTER BAR -->
@@ -766,6 +742,7 @@
 
         </div>
 
+
         <!-- TABLE -->
 
         <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
@@ -1165,9 +1142,12 @@
             class="fixed bottom-5 right-5 z-[100] flex items-center gap-2.5 bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs font-medium">
 
             <span class="size-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+
                 <iconify-icon icon="lucide:check" class="text-sm">
                 </iconify-icon>
+
             </span>
+
             <span x-text="copyMessage"></span>
 
         </div>

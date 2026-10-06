@@ -29,11 +29,7 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('gender')->nullable();
             $table->string('destination')->nullable();
-            $table->string('place_of_birth')->nullable();
             $table->string('marital_status')->nullable();
-            $table->string('whatsapp', 50)->nullable();
-            $table->string('alt_email')->nullable();
-            $table->string('alt_phone')->nullable();
 
             // Passport Information
             $table->string('passport_number')->nullable()->unique();

@@ -46,7 +46,7 @@
     <div class="py-6 space-y-6" x-data="stepWizard({{ $activeStep }}, {{ $student->profile_step ?? 1 }})" x-init="init()" @go-to-step.window="goTo($event.detail)">
 
         {{-- ── Responsive Modern Tab Card Container ───────────────────────── --}}
-        <div class="bg-white dark:bg-neutral-900 sm:rounded-2xl border-0 sm:border border-neutral-200/80 dark:border-neutral-800 shadow-sm overflow-hidden">
+        <div class="sticky sm:top-0 top-18 z-10 sm:static  sm:z-auto border-t sm:border-t-0  bg-white dark:bg-neutral-900 sm:rounded-2xl border-0 sm:border border-neutral-200/80 dark:border-neutral-800 shadow-sm overflow-hidden">
             
             {{-- Scroll Container with Edge Visual Indicators --}}
             <div class="relative group">

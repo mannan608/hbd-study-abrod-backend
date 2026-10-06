@@ -1,10 +1,8 @@
 @extends('backend.layouts.fullscreen-layout')
 
 @section('content')
-    <div
-        class="relative min-h-screen overflow-y-auto bg-neutral-100 bg-cover bg-center dark:bg-neutral-950"
-        style="background-image: url('{{ asset('frontend-img/reg-bg.webp') }}');"
-    >
+    <div class="relative min-h-screen overflow-y-auto bg-neutral-100 bg-cover bg-center dark:bg-neutral-950"
+        style="background-image: url('{{ asset('frontend-img/reg-bg.webp') }}');">
 
         <!-- Background Overlay -->
         <div class="absolute inset-0 z-0 bg-black/78  dark:bg-neutral-950/80"></div>
@@ -81,7 +79,12 @@
                     <div class="space-y-4">
 
                         <!-- Name -->
-                        <x-form.input-text name="name" label="Full Name" placeholder="Enter Full Name..." required />
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <x-form.input-text name="first_name" label="First Name" placeholder="Enter First Name..."
+                                required />
+                            <x-form.input-text name="last_name" label="Last Name" placeholder="Enter Last Name..."
+                                required />
+                        </div>
 
                         <!-- Email -->
                         <x-form.input-text name="email" label="Email Address" placeholder="Enter Email..." required />

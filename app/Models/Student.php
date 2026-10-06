@@ -27,11 +27,7 @@ class Student extends Model
         'date_of_birth',
         'gender',
         'destination',
-        'place_of_birth',
         'marital_status',
-        'whatsapp',
-        'alt_email',
-        'alt_phone',
 
         // Passport Information
         'passport_number',

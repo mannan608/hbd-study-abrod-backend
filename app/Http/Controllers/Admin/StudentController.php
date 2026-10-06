@@ -9,23 +9,18 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
 
-    public function index(Request $request)
-    {
-        $user = $request->user();
-        $user->can('student.list') || abort(403);
+ public function index(Request $request)
+{
+    $user = $request->user();
 
+    $user->can('student.list') || abort(403);
 
-        $user = $request->user();
+    $students = Student::with('user:id,name,email,phone,avatar,status')
+        ->latest()
+        ->paginate(10);
 
-        $user->can('student.list') || abort(403);
-
-        $students = Student::with('user:id,name,email,phone,avatar,status')
-            ->latest()
-            ->paginate(10);
-
-        // return $students;
-        return view('backend.pages.students.index', compact('students'));
-    }
+    return view('backend.pages.students.index', compact('students'));
+}
 
     public function create(Request $request, string $role)
     {
