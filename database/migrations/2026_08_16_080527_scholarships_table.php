@@ -18,10 +18,10 @@ return new class extends Migration {
             $table->enum('scope_type', ['university', 'course', 'intake']);
 
             // Base level - always required
-            $table->foreignId('university_id')->constrained('universities')->cascadeOnDelete();
+             $table->foreignUuid('university_id')->constrained('universities')->cascadeOnDelete();
 
             // Required when scope_type = course or intake
-            $table->foreignId('course_id')->nullable()->constrained('courses')->nullOnDelete();
+            $table->foreignUuid('course_id')->nullable()->constrained('courses')->nullOnDelete();
 
             // Required when scope_type = intake
             $table->foreignId('intake_id')->nullable()->constrained('intakes')->nullOnDelete();
