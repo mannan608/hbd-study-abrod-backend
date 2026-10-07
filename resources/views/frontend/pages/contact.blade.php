@@ -266,6 +266,7 @@
 
 @include('frontend.pages.google-map.google-map')
 
+    @if (config('services.google_maps.key'))
     <!-- REAL-TIME GOOGLE MAP & GLOBAL OFFICES SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
@@ -461,5 +462,10 @@
 
     <!-- Load Google Maps Script with Key -->
     <!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your actual key -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ urlencode(config('services.google_maps.key')) }}&callback=initMap" async defer></script>
+    @else
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <p class="text-sm text-slate-500">Office map is unavailable until a Google Maps API key is configured.</p>
+    </section>
+    @endif
 @endsection

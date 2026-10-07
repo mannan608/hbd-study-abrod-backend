@@ -85,6 +85,12 @@ async function initHomepageSwipers() {
 window.initHomepageSwipers = initHomepageSwipers;
 
 document.addEventListener('DOMContentLoaded', function () {
+    if (document.querySelector('#mapOne')) {
+        import('./map')
+            .then((module) => module.initMap())
+            .catch((error) => console.error('Unable to load the office map.', error));
+    }
+
     const swiperTargets = document.querySelectorAll('.myCounsellerSwiper, .testimonialSwiper');
 
     if (!swiperTargets.length) {
@@ -112,7 +118,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     swiperTargets.forEach((el) => observer.observe(el));
 
-      if (document.querySelector('#mapOne')) {
-        import('./map').then(module => module.initMap());
-    }
 });

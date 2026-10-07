@@ -3,11 +3,13 @@ import 'jsvectormap/dist/maps/world';
 import 'jsvectormap/dist/jsvectormap.min.css';
 
 export const initMap = () => {
-    const mapSelectorOne = document.querySelectorAll('#mapOne');
+    const mapElement = document.querySelector('#mapOne');
 
-    if (mapSelectorOne.length) {
-        const mapOne = new jsVectorMap({
-            selector: "#mapOne",
+    if (mapElement && mapElement.dataset.mapReady !== 'true') {
+        mapElement.dataset.mapReady = 'true';
+
+        new jsVectorMap({
+            selector: mapElement,
             map: "world",
             zoomButtons: false,
             regionStyle: {
@@ -22,16 +24,16 @@ export const initMap = () => {
             },
             markers: [
                 {
-                    name: "Egypt",
-                    coords: [26.8206, 30.8025],
+                    name: "Sydney",
+                    coords: [-33.876735, 151.209028],
                 },
                 {
-                    name: "United Kingdom",
-                    coords: [55.3781, 3.436],
+                    name: "Kuala Lumpur",
+                    coords: [3.067812, 101.660145],
                 },
                 {
-                    name: "United States",
-                    coords: [37.0902, -95.7129],
+                    name: "Dhaka",
+                    coords: [23.746142, 90.404215],
                 },
             ],
 
@@ -48,13 +50,6 @@ export const initMap = () => {
                 },
                 selected: {},
                 selectedHover: {},
-            },
-
-            onRegionTooltipShow: function (event, tooltip, code) {
-                tooltip.text(
-                    tooltip.text() + (code === "EG" ? " <b>(Hello Russia)</b>" : ""),
-                    true // This second parameter enables HTML
-                );
             },
         });
     }
