@@ -258,9 +258,5 @@
 
     </section>
 
-  <x-form.date-range-picker
-    label="Date Range"
-    start-name="start_date"
-    end-name="end_date"
-/>
+
 @endsection

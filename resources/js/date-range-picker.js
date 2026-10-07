@@ -1,4 +1,3 @@
-// resources/js/components/date-range-picker.js
 
 export default function dateRangePicker(config = {}) {
     return {
@@ -314,6 +313,10 @@ export default function dateRangePicker(config = {}) {
 
                     this.leftYear =
                         parsed.year;
+
+                    // Keep the year selector centered on the displayed range.
+                    this.yearRangeStart =
+                        parsed.year - 5;
                 }
             }
 

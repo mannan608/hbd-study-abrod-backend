@@ -1,6 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
-import dateRangePicker from 'date-range-picker';
+import dateRangePicker from './date-range-picker.js';
 
 window.Alpine = Alpine;
 Alpine.data('dateRangePicker', dateRangePicker);
