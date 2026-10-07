@@ -5,11 +5,12 @@
     <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-neutral-900 dark:text-white">Add New Single Lead</h1>
+            <h1 class="text-2xl font-bold text-neutral-900 dark:text-white">Add New Lead</h1>
             <p class="text-sm text-neutral-500 dark:text-neutral-400">Fill in the lead's details below.</p>
         </div>
-        <a href="#" class="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-white flex items-center gap-1">
-            &larr; Back to Options
+        <a href="#" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            Back to Leads List
         </a>
     </div>
 

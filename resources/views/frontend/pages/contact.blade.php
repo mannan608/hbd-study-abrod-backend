@@ -264,6 +264,8 @@
     </div>
 </section>
 
+@include('frontend.pages.google-map.google-map')
+
     <!-- REAL-TIME GOOGLE MAP & GLOBAL OFFICES SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         

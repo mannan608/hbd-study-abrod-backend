@@ -127,6 +127,76 @@
             </div>
         @endif
 
+           <div class="sticky top-19 z-99999 w-full -mt-6.5 ">
+            <div class="flex justify-center px-4 sm:px-6 lg:px-8">
+                <nav
+                    class="inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full
+                        border border-neutral-200/80 bg-white p-1.5
+                        shadow-lg shadow-neutral-900/5 backdrop-blur-xl
+                        transition-all duration-300 no-scrollbar">
+                     <a href="#"
+                        class="group inline-flex shrink-0 items-center gap-2 rounded-full
+                            px-4 py-2 text-xs font-semibold text-neutral-600
+                            transition-all duration-200
+                            hover:bg-brand-50/80 hover:text-brand-600">
+                        <iconify-icon icon="lucide:building-2"
+                            class="text-[16px] text-neutral-400 transition-colors
+                            group-hover:text-brand-600"></iconify-icon>
+
+                        <span>Today Checkin (50)</span>
+                    </a>
+                    <a href="#"
+                        class="group inline-flex shrink-0 items-center gap-2 rounded-full
+                            px-4 py-2 text-xs font-semibold text-neutral-600
+                            transition-all duration-200
+                            hover:bg-brand-50/80 hover:text-brand-600">
+                        <iconify-icon icon="lucide:graduation-cap"
+                            class="text-[16px] text-neutral-400 transition-colors
+                            group-hover:text-brand-600"></iconify-icon>
+
+                        <span>IP Called (250)</span>
+                    </a>
+                    <a href="#"
+                        class="group inline-flex shrink-0 items-center gap-2 rounded-full
+                        px-4 py-2 text-xs font-semibold text-neutral-600
+                        transition-all duration-200
+                        hover:bg-brand-50/80 hover:text-brand-600">
+                        <iconify-icon icon="lucide:badge-dollar-sign"
+                            class="text-[16px] text-neutral-400 transition-colors
+                          group-hover:text-brand-600"></iconify-icon>
+
+                        <span>Today Followup (200)</span>
+                    </a>
+                    <a href="#"
+                        class="group inline-flex shrink-0 items-center gap-2 rounded-full
+                        px-4 py-2 text-xs font-semibold text-neutral-600
+                        transition-all duration-200
+                        hover:bg-brand-50/80 hover:text-brand-600">
+                        <iconify-icon icon="lucide:users"
+                            class="text-[16px] text-neutral-400 transition-colors
+                            group-hover:text-brand-600"></iconify-icon>
+
+                        <span>Not Connected (500)</span>
+                    </a>
+                   
+                    <a href="#"
+                        class="group inline-flex shrink-0 items-center gap-2 rounded-full
+                        px-4 py-2 text-xs font-semibold text-neutral-600
+                        transition-all duration-200
+                        hover:bg-brand-50/80 hover:text-brand-600">
+
+                        <iconify-icon icon="lucide:calendar-days"
+                            class="text-[16px] text-neutral-400 transition-colors
+                            group-hover:text-brand-600">
+                        </iconify-icon>
+
+                        <span>Merged (10)</span>
+                    </a>
+
+                </nav>
+            </div>
+        </div>
+
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
                 <h3 class="text-lg font-semibold text-neutral-800 dark:text-white/90">Leads Management</h3>
@@ -145,9 +215,7 @@
         <!-- SEARCH & FILTER BAR -->
 
         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-
             <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-
                 <!-- Search UI -->
                 <div class="relative w-full lg:flex-1">
 
@@ -162,8 +230,6 @@
                         class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 focus:bg-white transition">
 
                 </div>
-
-
                 <!-- Controls -->
                 <div class="flex w-full lg:w-auto items-center gap-2">
 
@@ -202,13 +268,9 @@
                     </div>
 
                 </div>
-
             </div>
-
-
             <!-- Quick Presets -->
             <div class="flex items-center border-t border-slate-100 pt-3 mt-4 overflow-x-auto">
-
                 <div class="flex items-center gap-2 min-w-max">
 
                     <button type="button"
@@ -237,9 +299,7 @@
                     </button>
 
                 </div>
-
             </div>
-
         </div>
 
 
@@ -247,7 +307,6 @@
 
         <div x-show="filterOpen" x-cloak x-transition
             class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-
             <!-- Header -->
             <div class="px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
 
@@ -272,8 +331,6 @@
                 </button>
 
             </div>
-
-
             <!-- Filter Grid -->
             <div class="p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
 
@@ -576,8 +633,6 @@
                 </div>
 
             </div>
-
-
             <!-- Footer -->
             <div class="px-5 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
 
@@ -601,7 +656,6 @@
                 </div>
 
             </div>
-
         </div>
 
 
@@ -609,7 +663,6 @@
 
         <div x-show="selectedLeads.length > 0" x-cloak x-transition
             class="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
-
             <!-- Selected Info -->
             <div class="flex items-center gap-3 pl-1">
 
@@ -634,8 +687,6 @@
                 </button>
 
             </div>
-
-
             <!-- Bulk Actions -->
             <div class="flex items-center gap-2">
 
@@ -763,13 +814,11 @@
                 </div>
 
             </div>
-
         </div>
 
         <!-- TABLE -->
 
         <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
-
             <div class="overflow-x-auto">
 
                 <table class="w-full text-left border-collapse">
@@ -1149,13 +1198,10 @@
                 </table>
 
             </div>
-
-
             <!-- Pagination UI Only -->
             <div class="pagination">
                 <x-ui.pagination />
             </div>
-
         </div>
 
 
@@ -1163,15 +1209,12 @@
 
         <div x-show="copyMessage" x-cloak x-transition
             class="fixed bottom-5 right-5 z-[100] flex items-center gap-2.5 bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs font-medium">
-
             <span class="size-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
                 <iconify-icon icon="lucide:check" class="text-sm">
                 </iconify-icon>
             </span>
             <span x-text="copyMessage"></span>
-
         </div>
-
     </div>
 
     <style>

@@ -111,4 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     swiperTargets.forEach((el) => observer.observe(el));
+
+      if (document.querySelector('#mapOne')) {
+        import('./map').then(module => module.initMap());
+    }
 });

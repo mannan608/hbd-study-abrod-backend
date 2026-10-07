@@ -23,7 +23,7 @@
                     <iconify-icon icon="lucide:user" class="text-brand-600"></iconify-icon>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-brand-600 transition-colors">Add Single Lead</h3>
+                    <h3 class="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-brand-600 transition-colors">Add New Lead</h3>
                     <p class="text-neutral-500 dark:text-neutral-400 text-sm mt-2 leading-relaxed">
                         Manually enter detailed lead information including contact details, custom fields, assignment, and status.
                     </p>

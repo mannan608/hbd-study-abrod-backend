@@ -23,9 +23,9 @@ return new class extends Migration
                 'email',
             ]);
 
-            $table->string('value', 255);
+            $table->string('value', 191);
 
-            $table->string('normalized_value', 255);
+            $table->string('normalized_value', 191);
             // Only meaningful for phone contacts
             $table->boolean('is_whatsapp')
                 ->default(false);

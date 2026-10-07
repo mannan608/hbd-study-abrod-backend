@@ -3,24 +3,69 @@
 @section('content')
     <div class="">
         <!-- Header -->
-        <div
-            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-200 dark:border-neutral-800 pb-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 dark:border-neutral-800 mb-6">
             <div>
                 <h1 class="text-2xl font-bold text-neutral-900 dark:text-white">Bulk Lead Import</h1>
                 <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Upload multiple leads using a standard CSV or
                     Excel template.</p>
             </div>
             <a href="#"
-                class="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white">
-                &larr; Back to Selection
+                class="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-xl text-xs font-semibold transition border border-neutral-200 dark:border-neutral-700">
+                <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Sample (.CSV)
             </a>
         </div>
 
         <!-- Step 1 & 2 Instructions & Sample Download -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
+            <!-- Step 2: Drag & Drop File Upload Form -->
+            <div class="lg:col-span-2">
+                <form action="#" method="POST" enctype="multipart/form-data"
+                    class="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 sm:p-8 shadow-sm space-y-6">
+                    @csrf
+                    <div>
+                        <label class="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-2">Upload
+                            Spreadsheet</label>
+                        <div
+                            class="relative border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-brand-500 dark:hover:border-brand-500 rounded-2xl p-8 text-center bg-neutral-50/50 dark:bg-neutral-800/30 transition group cursor-pointer">
+                            <input type="file" name="file" required
+                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                            <div class="flex flex-col items-center justify-center space-y-3">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                                        <span class="text-brand-600 hover:underline">Click to upload</span> or drag and drop
+                                    </p>
+                                    <p class="text-xs text-neutral-400 mt-1">CSV, XLSX, XLS (Max 10MB)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-3">
+                        <button type="submit"
+                            class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm rounded-xl shadow-md transition flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                            Upload and Validate
+                        </button>
+                    </div>
+                </form>
+            </div>
             <!-- Instructions Panel -->
-            <div
-                class="lg:col-span-2 bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-800/50 rounded-2xl p-6">
+            <div class="flex flex-col gap-6">
+                <div class="bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-800/50 rounded-2xl p-6 h-fit">
                 <div class="flex items-center gap-3 mb-3 text-blue-900 dark:text-blue-200 font-semibold">
                     <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -36,71 +81,25 @@
                     <li>Dates should follow the format <span class="font-mono">YYYY-MM-DD</span>.</li>
                 </ul>
             </div>
-
-            <!-- Sample Download Card -->
-            <div
-                class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
-                <div>
-                    <h4 class="text-sm font-bold text-neutral-900 dark:text-white">Need the template?</h4>
-                    <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Download our formatted sample file to
-                        ensure smooth data processing.</p>
-                </div>
-                <a href="#"
-                    class="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-xl text-xs font-semibold transition border border-neutral-200 dark:border-neutral-700">
-                    <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-800/50 rounded-2xl p-6 h-fit">
+                <div class="flex items-center gap-3 mb-3 text-blue-900 dark:text-blue-200 font-semibold">
+                    <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Download Sample (.CSV)
-                </a>
+                    <span>Important Note : </span>
+                </div>
+              
+            </div>
             </div>
         </div>
 
-        <!-- Step 2: Drag & Drop File Upload Form -->
-        <form action="#" method="POST" enctype="multipart/form-data"
-            class="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 sm:p-8 shadow-sm space-y-6">
-            @csrf
-            <div>
-                <label class="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-2">Upload
-                    Spreadsheet</label>
-                <div
-                    class="relative border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-brand-500 dark:hover:border-brand-500 rounded-2xl p-8 text-center bg-neutral-50/50 dark:bg-neutral-800/30 transition group cursor-pointer">
-                    <input type="file" name="file" required
-                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                    <div class="flex flex-col items-center justify-center space-y-3">
-                        <div
-                            class="w-12 h-12 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-                                <span class="text-brand-600 hover:underline">Click to upload</span> or drag and drop
-                            </p>
-                            <p class="text-xs text-neutral-400 mt-1">CSV, XLSX, XLS (Max 10MB)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="flex justify-end gap-3">
-                <button type="submit"
-                    class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm rounded-xl shadow-md transition flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                    Upload and Validate
-                </button>
-            </div>
-        </form>
     </div>
 
     <!-- Bulk Import Viewer -->
     <div class="mt-8" x-data="bulkImportViewer()" x-init="initData()">
-
         <!-- Main Container -->
         <div
             class="bg-slate-50 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-2xl shadow-sm overflow-hidden space-y-0">
@@ -166,16 +165,6 @@
 
                 <!-- Controls (Search, Skip Switch, Actions) -->
                 <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-                    <!-- Search Input -->
-                    <div class="relative flex-1 sm:flex-initial">
-                        <svg class="w-4 h-4 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <input type="text" x-model="searchQuery" placeholder="Search row contents or errors..."
-                            class="w-full sm:w-64 pl-9 pr-3 py-1.5 bg-slate-50 dark:bg-neutral-800 text-xs rounded-lg border border-slate-200 dark:border-neutral-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-400">
-                    </div>
 
                     <!-- Checkbox Option -->
                     <label
