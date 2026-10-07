@@ -1,7 +1,9 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
+import dateRangePicker from 'date-range-picker';
 
 window.Alpine = Alpine;
+Alpine.data('dateRangePicker', dateRangePicker);
 Alpine.start();
 
 let homeSwiperLoadPromise = null;

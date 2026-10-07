@@ -11,44 +11,87 @@ export const initMap = () => {
         new jsVectorMap({
             selector: mapElement,
             map: "world",
+
             zoomButtons: false,
+
             regionStyle: {
                 initial: {
                     fontFamily: "Outfit",
-                    fill: "#D9D9D9",
-                },
-                hover: {
+                    fill: "#E5E7EB",
                     fillOpacity: 1,
-                    fill: "#465fff",
+                },
+
+                hover: {
+                    fill: "#155b9d",
+                    fillOpacity: 0.8,
+                },
+
+                selected: {
+                    fill: "#BFEFFF",
+                },
+
+                selectedHover: {
+                    fill: "#155b9d",
                 },
             },
+
+            // Highlight Australia
+            selectedRegions: ['AU'],
+
             markers: [
                 {
-                    name: "Sydney",
+                    name: "Australia - Sydney",
                     coords: [-33.876735, 151.209028],
+                    url: "/destination/australia",
                 },
                 {
-                    name: "Kuala Lumpur",
+                    name: "Malaysia - Kuala Lumpur",
                     coords: [3.067812, 101.660145],
+                    url: "/destination/malaysia",
                 },
                 {
-                    name: "Dhaka",
+                    name: "Bangladesh - Dhaka",
                     coords: [23.746142, 90.404215],
+                    url: "/destination/bangladesh",
+                },
+                {
+                    name: "United Kingdom - London",
+                    coords: [51.507351, -0.127758],
+                    url: "/destination/united-kingdom",
+                },
+                {
+                    name: "United States - New York",
+                    coords: [40.712776, -74.005974],
+                    url: "/destination/united-states",
+                },
+                {
+                    name: "Canada - Toronto",
+                    coords: [43.653226, -79.383184],
+                    url: "/destination/canada",
+                },
+                {
+                    name: "New Zealand - Auckland",
+                    coords: [-36.850109, 174.767700],
+                    url: "/destination/new-zealand",
                 },
             ],
 
             markerStyle: {
                 initial: {
                     strokeWidth: 1,
-                    fill: "#465fff",
+                    stroke: "#FFFFFF",
+                    fill: "#155b9d",
                     fillOpacity: 1,
-                    r: 4,
+                    r: 8,
                 },
+
                 hover: {
-                    fill: "#465fff",
+                    fill: "#155b9d",
                     fillOpacity: 1,
                 },
+
                 selected: {},
+
                 selectedHover: {},
             },
         });

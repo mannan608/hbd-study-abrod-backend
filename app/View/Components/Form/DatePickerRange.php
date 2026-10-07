@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CourseApplyForm extends Component
+class DatePickerRange extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class CourseApplyForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.course-apply-form');
+        return view('components.form.date-picker-range');
     }
 }
