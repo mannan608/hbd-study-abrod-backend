@@ -28,7 +28,7 @@
             <li><a href="#" class="hover:text-brand-400 transition">Book Your Appointment</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">IELTS/PTE Registration</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">Claims</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Referral Program</a></li>
+            <li><a href="{{ route('referral')}}" class="hover:text-brand-400 transition">Referral Program</a></li>
           </ul>
         </div>
 
@@ -48,7 +48,7 @@
           <ul class="space-y-2 text-[15px]">
             <li><a href="#" class="hover:text-brand-400 transition">Australian Visa Guide</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">PR Pathway Courses</a></li>
-            <li><a href="#" class="hover:text-brand-400 transition">Cost of Living Calculator</a></li>
+            <li><a href="{{ route('visa-points-calculator')}}" class="hover:text-brand-400 transition">Visa Points Calculator</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">Student Accommodation</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">Careers</a></li>
 
