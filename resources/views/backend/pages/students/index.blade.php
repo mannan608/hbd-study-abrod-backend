@@ -293,11 +293,6 @@
                         High Priority
                     </button>
 
-                    <button type="button"
-                        class="px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 border border-transparent transition">
-                        Uncontacted
-                    </button>
-
                 </div>
             </div>
         </div>
@@ -633,7 +628,7 @@
 
                 </div>
 
-                <x-form.date-picker-range label="Start to end" start-name="start_date" end-name="end_date" />
+                {{-- <x-form.date-picker-range label="Start Date to End Date" start-name="start_date" end-name="end_date" /> --}}
 
             </div>
             <!-- Footer -->
@@ -806,7 +801,7 @@
                             </span>
 
                             <span
-                                class="rounded-md bg-blue-50 px-1.5 py-0.5 text-[10px] text-blue-600 font-semibold border border-blue-100">
+                                class="rounded-md bg-brand-50 px-1.5 py-0.5 text-[10px] text-brand-600 font-semibold border border-brand-100">
                                 EDU
                             </span>
 
@@ -1050,7 +1045,7 @@
                                         </span>
 
                                         <span
-                                            class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-100 w-fit"
+                                            class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-brand-50 text-brand-700 border border-brand-100 w-fit"
                                             x-text="row.exam.name">
                                         </span>
 
@@ -1177,16 +1172,20 @@
                                 <!-- Action -->
                                 <td class="py-4 px-4 align-top text-right">
 
-                                    <div class="flex justify-end gap-1">
+                                    <div class="flex justify-end gap-3">
+                                        <button class="bg-brand-500 text-white px-3 py-1 rounded-lg" data-modal-target="quickView-modal" data-modal-toggle="quickView-modal">Quick View</button>
 
-                                        <a :href="baseUrl + '/' + row.id"
-                                            class="inline-flex items-center justify-center p-1.5 text-slate-400 hover:text-brand-600 hover:bg-slate-100 rounded-md transition-all"
-                                            title="View details">
+                                    <a :href="baseUrl + '/' + row.id"
+                                        class="bg-brand-50 p-2 text-brand-500  hover:text-white hover:bg-brand-600 dark:hover:bg-brand-500/10 rounded-lg transition-all">
+                                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
-                                            <iconify-icon icon="lucide:eye" class="text-base">
-                                            </iconify-icon>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
 
-                                        </a>
+                                            <circle cx="12" cy="12" r="3" stroke-width="2" />
+
+                                        </svg>
+                                    </a>
 
                                     </div>
 
@@ -1218,6 +1217,38 @@
             </span>
             <span x-text="copyMessage"></span>
         </div>
+
+        <div id="quickView-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
+                <h3 class="text-lg font-medium text-heading">
+                    Terms of Service
+                </h3>
+                <button type="button" class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="quickView-modal">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="space-y-4 md:space-y-6 py-4 md:py-6">
+                <p class="leading-relaxed text-body">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                </p>
+                <p class="leading-relaxed text-body">
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center border-t border-default space-x-4 pt-4 md:pt-5">
+                <button data-modal-hide="quickView-modal" type="button" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">I accept</button>
+                <button data-modal-hide="quickView-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 
     <style>
