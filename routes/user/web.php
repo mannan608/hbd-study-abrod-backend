@@ -43,6 +43,11 @@ Route::get('/ceo', [FrontendController::class, 'owner'])->name('owner');
 Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('events.register');
 Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('events.register.store');
 
+//dynami pages
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blog-details');
+
+
 Route::get('/courses', [CourseController::class, 'courses'])->name('courses');
 Route::get('/courses/{course:slug}', [CourseController::class, 'coursesDetails'])->name('course-details');
 
@@ -70,33 +75,6 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services');
 
 Route::post('/inquiry-us', [ContactController::class, 'store'])->name('contact.store');
 
-
-// Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
-// Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contact');
-// Route::get('/student-information', [FrontendController::class, 'studentInformation'])->name('student-information');
-// Route::get('/course-details', [FrontendController::class, 'courseDetails'])->name('course-details');
-
-// Route::get('/courses/{slug}', [FrontendController::class, 'singleCourse'])->name('single-course');
-// Route::get('/course/enroll/{slug}', [FrontendController::class, 'showEnrollCourse'])
-//     ->name('enroll-course');
-
-// Route::post('/course/enroll/{slug}', [FrontendController::class, 'storeEnrollCourse'])
-//     ->name('course.enroll');
-
-
-
-// Route::get('/blogs', [BlogController::class, 'index'])
-//     ->name('blogs');
-
-// Route::get('/blogs/{slug}', [BlogController::class, 'show'])
-//     ->name('blog-details');
-
-
-
-// Route::get('/events/{slug}', [EventController::class, 'show'])
-//     ->name('event-details');
-// Route::post('/inquiry-us', [ContactController::class, 'store'])
-//     ->name('contact.store');
 
 // Route::post('/subscribe', [SubscriberController::class, 'store'])
 //     ->name('subscribe.store');
