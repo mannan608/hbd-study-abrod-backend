@@ -78,12 +78,7 @@
 
                 </div>
 
-                <div class="flex items-center gap-4 lg:gap-6">
-                    <!-- Right Side -->
-                    <a href="{{ route('register') }}"
-                        class="hidden md:flex text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
-                        Sign Up Free
-                    </a>
+                <div class="flex items-center gap-4 lg:gap-6">                  
 
                     @auth
                         <a href="{{ auth()->user()->rolePrefix() === 'student'
@@ -97,6 +92,11 @@
                     @endauth
 
                     @guest
+                     <!-- Right Side -->
+                    <a href="{{ route('register') }}"
+                        class="hidden md:flex text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
+                        Sign Up Free
+                    </a>
                         <a href="{{ route('login') }}"
                             class="text-sm font-medium uppercase text-neutral-600 hover:text-brand-600">
                             login

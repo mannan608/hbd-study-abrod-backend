@@ -117,6 +117,15 @@
 
                                 </div>
 
+                                {{-- lead/student status --}}
+                                <div class="absolute top-0 -right-1">
+                                    <div class="flex gap-3">
+                                        <button class="bg-white text-brand-600 px-4 py-1 rounded-lg text-sm">Status</button>
+                                        <button
+                                            class="bg-white border border-white rounded-lg text-brand-600 px-4 py-1 text-sm">Open  File</button>
+                                    </div>
+                                </div>
+
                             </div>
 
 
@@ -344,9 +353,9 @@
         }
 
         /*
-                     * Horizontal tab scrollbar
-                     * Scroll remains available, scrollbar is hidden.
-                     */
+                         * Horizontal tab scrollbar
+                         * Scroll remains available, scrollbar is hidden.
+                         */
         .profile-tabs-scroll {
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -357,8 +366,8 @@
         }
 
         /*
-                     * Smooth page scrolling
-                     */
+                         * Smooth page scrolling
+                         */
         html {
             scroll-behavior: smooth;
         }

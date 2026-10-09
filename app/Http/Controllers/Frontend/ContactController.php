@@ -13,7 +13,6 @@ class ContactController extends Controller
 {
     public function index(Request $request): View
     {
-        $request->user()->can('contact.list') || abort(403);
 
         $contacts = Contacts::query()
             ->select([
@@ -53,7 +52,6 @@ class ContactController extends Controller
 
    public function destroy(Request $request, string $role,Contacts $contact): RedirectResponse
     {
-        $request->user()->can('contact.delete') || abort(403);
         $contact->delete();
 
         return back()->with(

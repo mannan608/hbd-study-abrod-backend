@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\Calculator;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CounsellorController;
 use App\Http\Controllers\Frontend\CourseController;
@@ -74,6 +75,7 @@ Route::get('/events/{event}', [EventController::class, 'show'])->name('event-det
 Route::get('/services', [ServicesController::class, 'index'])->name('services');
 
 Route::post('/inquiry-us', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/visa-points-calculator', [Calculator::class, 'visaPoints'])->name('visa-points-calculator');
 
 
 // Route::post('/subscribe', [SubscriberController::class, 'store'])

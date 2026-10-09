@@ -1,6 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('content')
+@include("backend.layouts.sticky-navbar")
     <div class="space-y-6">
         <!-- Page Header -->
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -19,7 +20,6 @@
                 </span>
             </div>
         </div>
-
         <!-- Section Grid / Reports -->
         <div class="space-y-6">
             @include('backend.pages.dashboard.lead-summary')
