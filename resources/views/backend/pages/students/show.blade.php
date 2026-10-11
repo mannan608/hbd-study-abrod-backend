@@ -103,9 +103,7 @@
                                             IELTS
                                         </p>
                                     </div>
-
-
-                                    {{-- <div class="text-center">
+                                    <div class="text-center">
                                         <p class="text-xl font-bold text-brand-950">
                                            322
                                         </p>
@@ -113,17 +111,15 @@
                                         <p class="mt-0.5 text-xs text-slate-500">
                                             GRE General
                                         </p>
-                                    </div> --}}
+                                    </div>
 
                                 </div>
 
                                 {{-- lead/student status --}}
                                 <div class="absolute top-0 -right-1">
-                                    <div class="flex gap-3">
-                                        <button class="bg-white text-brand-600 px-4 py-1 rounded-lg text-sm">Status</button>
-                                        <button
-                                            class="bg-white border border-white rounded-lg text-brand-600 px-4 py-1 text-sm">Open  File</button>
-                                    </div>
+                                     <button type="button" class="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brand-600 shadow-sm transition hover:bg-brand-700 hover:text-white border border-brand-600">
+                                        Quick Preview
+                                    </button>
                                 </div>
 
                             </div>
@@ -152,17 +148,13 @@
                                     </span>
 
                                 </div>
-
-
-                                <div class="flex flex-wrap gap-2">
-
-                                    <button type="button"
-                                        class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
-                                        Quick Preview
-                                    </button>
+                                <div class="flex flex-wrap gap-3">
+                                        {{-- <button class="bg-white text-brand-600 border border-brand-600 px-4 py-2 rounded-lg text-sm hover:bg-brand-500 hover:text-white">Lead Status</button> --}}
+                                        
+                                        <button class="bg-brand-500  rounded-lg text-white px-4 py-2 text-sm hover:bg-brand-600 ">File Open</button>
+                                                                    
 
                                 </div>
-
                             </div>
 
                         </div>
@@ -176,7 +168,6 @@
                         <div x-ref="tabContainer" class="profile-tabs-scroll overflow-x-auto">
 
                             <div class="flex min-w-max items-center gap-1.5 px-3 py-3 sm:px-4">
-
 
                                 {{-- PERSONAL INFORMATION --}}
                                 <button type="button" data-tab="personal-information"
@@ -193,7 +184,6 @@
                                     </span>
                                 </button>
 
-
                                 {{-- ACADEMIC --}}
                                 <button type="button" data-tab="academic-background"
                                     @click="scrollToSection('academic-background')"
@@ -209,7 +199,6 @@
                                     </span>
                                 </button>
 
-
                                 {{-- STUDY PLAN --}}
                                 <button type="button" data-tab="study-plan" @click="scrollToSection('study-plan')"
                                     :class="activeTab === 'study-plan'
@@ -223,7 +212,6 @@
                                         Study Plan
                                     </span>
                                 </button>
-
 
                                 {{-- FINANCIAL --}}
                                 <button type="button" data-tab="financial-family"
@@ -240,7 +228,6 @@
                                     </span>
                                 </button>
 
-
                                 {{-- EXPERIENCE --}}
                                 <button type="button" data-tab="experience" @click="scrollToSection('experience')"
                                     :class="activeTab === 'experience'
@@ -254,7 +241,6 @@
                                         Experience
                                     </span>
                                 </button>
-
 
                                 {{-- IMMIGRATION --}}
                                 <button type="button" data-tab="immigration-history"

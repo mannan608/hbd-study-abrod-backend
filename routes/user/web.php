@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Student\StudentController;
-use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\Calculator;
 use App\Http\Controllers\Frontend\ContactController;
@@ -13,7 +12,7 @@ use App\Http\Controllers\Frontend\ProviderController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\EventRegistrationController;
-use App\Http\Controllers\Frontend\Referral;
+use App\Http\Controllers\Frontend\ReferralController;
 use App\Http\Controllers\Frontend\ServicesController;
 use App\Http\Controllers\Student\ProfileController;
 use App\SEO\Controllers\SitemapController;
@@ -77,7 +76,7 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services');
 
 Route::post('/inquiry-us', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/visa-points-calculator', [Calculator::class, 'visaPoints'])->name('visa-points-calculator');
-Route::get('/referral', [Referral::class, 'index'])->name('referral');
+Route::get('/referral', [ReferralController::class, 'index'])->name('referral');
 
 
 // Route::post('/subscribe', [SubscriberController::class, 'store'])

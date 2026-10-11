@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -6,20 +7,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedTinyInteger('profile_step')
-                ->default(1);
+            $table->unsignedTinyInteger('profile_step')->default(1);
 
+            // Student Account
             $table->foreignId('user_id')
                 ->constrained('users')
-                ->cascadeOnDelete();        
+                ->cascadeOnDelete();
 
             // Student Information
             $table->string('student_number')->unique();
@@ -36,17 +34,31 @@ return new class extends Migration
             $table->date('passport_issue_date')->nullable();
             $table->date('passport_expiry_date')->nullable();
 
-            // service type
-            $table->string('service_type')->nullable(); // HBD Service (hbd),Language Academic(la)
+            // Service Information
+            $table->string('service_type')->nullable();
 
-            $table->softDeletes();
+            // Record Ownership & Accountability
+            $table->foreignId('created_by')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->foreignId('owner_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->foreignId('owner_team_id')
+                ->nullable()
+                ->constrained('teams')
+                ->nullOnDelete();
+
+            // Audit Timestamps
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('students');
