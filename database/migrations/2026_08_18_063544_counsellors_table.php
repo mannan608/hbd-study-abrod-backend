@@ -13,14 +13,10 @@ return new class extends Migration {
         Schema::create('counsellors', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            // Login account
-            // Nullable because admin can create counsellor profile
-            // before a user account is connected.
             $table->foreignId('user_id')->nullable()->unique()->constrained('users')->nullOnDelete();
 
             // Personal information
             $table->string('slug', 180)->unique();
-
             // Professional information
             $table->string('designation', 150)->nullable();
             $table->text('bio')->nullable();
@@ -40,8 +36,7 @@ return new class extends Migration {
             $table->unsignedInteger('experience_years')->default(0);
 
             // Status
-            $table->boolean('is_featured')->default(false)->index();
-
+        
             $table->boolean('is_verified')->default(true)->index();
 
             $table->boolean('is_active')->default(true)->index();

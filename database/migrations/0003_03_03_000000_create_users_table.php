@@ -21,7 +21,8 @@ return new class extends Migration
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-
+            $table->rememberToken();
+            
             // User status
             $table->enum('status', [
                 'active',
@@ -37,7 +38,6 @@ return new class extends Migration
                 ->constrained('roles')
                 ->nullOnDelete();
 
-            $table->rememberToken();
             $table->timestamps();
         });
 

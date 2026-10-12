@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class MenuHelper
 {
-    public static function getMainNavItems()
+    public static function getCRMItems()
     {
         return [
             [
@@ -191,13 +191,84 @@ class MenuHelper
         ];
     }
 
+    public static function getHRMItems()
+    {
+        return [
+             [
+                'icon' => 'dashboard',
+                'name' => 'Dashboard',
+                'route' => 'role.dashboard',
+                'permission' => 'dashboard.view',
+            ],
+
+           [
+                'name' => 'Organizations',
+                'icon' => 'pages',
+                'subItems' => [
+                    [
+                        'name' => 'Departments',
+                        'route' => 'role.seo.index',
+                        'permission' => 'seo.list',
+                    ],
+                    [
+                        'name' => 'Branches',
+                        'route' => 'role.blogs.index',
+                        'permission' => 'blog.list',
+                    ],
+                    [
+                        'name' => 'Teams',
+                        'route' => 'role.events.index',
+                        'permission' => 'event.list',
+                    ],
+                    [
+                        'name' => 'Designations',
+                        'route' => 'role.events.index',
+                        'permission' => 'event.list',
+                    ],
+                ],
+            ],
+            [
+                'name' => ' Employee Manage',
+                'icon' => 'pages',
+                'subItems' => [
+                    [
+                        'name' => 'Employees',
+                        'route' => 'role.seo.index',
+                        'permission' => 'seo.list',
+                    ],
+                    [
+                        'name' => 'Branches',
+                        'route' => 'role.blogs.index',
+                        'permission' => 'blog.list',
+                    ],
+                    [
+                        'name' => 'Teams',
+                        'route' => 'role.events.index',
+                        'permission' => 'event.list',
+                    ],
+                    [
+                        'name' => 'Designations',
+                        'route' => 'role.events.index',
+                        'permission' => 'event.list',
+                    ],
+                ],
+            ],
+
+           
+        ];
+    }
+
     public static function getMenuGroups()
     {
         return [
-            [
-                'title' => '',
-                'items' => self::visibleItems(self::getMainNavItems()),
+              [
+                'title' => 'HRM Menu',
+                'items' => self::visibleItems(self::getHRMItems()),
             ],
+            [
+                'title' => 'CRM',
+                'items' => self::visibleItems(self::getCRMItems()),
+            ],           
 
         ];
     }
