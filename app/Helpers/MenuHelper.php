@@ -63,7 +63,7 @@ class MenuHelper
                         'permission' => 'counsellors.list',
                     ],
                     [
-                        'name' => 'Students',
+                        'name' => 'Leads',
                         'route' => 'role.students.index',
                         'permission' => 'student.list',
                     ],

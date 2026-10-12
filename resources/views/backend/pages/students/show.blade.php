@@ -43,7 +43,7 @@
                                                 class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-200">
                                                 <iconify-icon icon="lucide:circle-check" class="text-sm"></iconify-icon>
 
-                                                Ready for Visa Submission
+                                                Contract
                                             </span>
 
                                         </div>
@@ -116,9 +116,9 @@
                                 </div>
 
                                 {{-- lead/student status --}}
-                                <div class="absolute top-0 -right-1">
+                                <div class="absolute -top-4 -right-2">
                                      <button type="button" class="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brand-600 shadow-sm transition hover:bg-brand-700 hover:text-white border border-brand-600">
-                                        Quick Preview
+                                        Lead Stage
                                     </button>
                                 </div>
 
@@ -151,7 +151,7 @@
                                 <div class="flex flex-wrap gap-3">
                                         {{-- <button class="bg-white text-brand-600 border border-brand-600 px-4 py-2 rounded-lg text-sm hover:bg-brand-500 hover:text-white">Lead Status</button> --}}
                                         
-                                        <button class="bg-brand-500  rounded-lg text-white px-4 py-2 text-sm hover:bg-brand-600 ">File Open</button>
+                                        <button class="bg-brand-500  rounded-lg text-white px-4 py-2 text-sm hover:bg-brand-600 ">View History</button>
                                                                     
 
                                 </div>
@@ -163,7 +163,7 @@
 
                     {{-- STICKY TAB NAVIGATION --}}
                     <section
-                        class="sticky top-19 z-40 overflow-hidden rounded-2xl border border-slate-200 bg-white/95 shadow-sm backdrop-blur-md">
+                        class="sticky top-19 z-5 overflow-hidden rounded-2xl border border-slate-200 bg-white/95 shadow-sm backdrop-blur-md">
                         {{--  HORIZONTAL SCROLLABLE TABS --}}
                         <div x-ref="tabContainer" class="profile-tabs-scroll overflow-x-auto">
 
@@ -319,8 +319,133 @@
                 </div>
 
                 {{--  RIGHT COLUMN STICKY --}}
-                <aside class="min-w-0 self-start lg:sticky lg:top-22 lg:col-span-4">
-                    @include('backend.pages.students.partial.lead-activity')
+                <aside class="lg:col-span-4 min-w-0 self-start ">
+                    <div x-data="{ 
+    openTransferModal: false, 
+    selectedUser: '2', 
+    users: [
+        { id: '1', name: 'Alex Morgan', role: 'Senior Consultant', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80', activeLeads: 14 },
+        { id: '2', name: 'David Chen', role: 'Lead Advisor', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80', activeLeads: 8 },
+        { id: '3', name: 'Sarah Jenkins', role: 'Student Counselor', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&auto=format&fit=crop&q=80', activeLeads: 21 },
+        { id: '4', name: 'Michael Vance', role: 'Admissions Specialist', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80', activeLeads: 5 }
+    ]
+}">
+    <!-- Lead Owner Card -->
+    <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all hover:shadow-md">
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-slate-900">Lead Ownership</h3>
+                    <p class="text-xs text-slate-500">Currently assigned team member</p>
+                </div>
+            </div>
+            
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                Active Owner
+            </span>
+        </div>
+
+        <!-- Current Owner Details -->
+        <div class="mt-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <img class="h-11 w-11 rounded-full object-cover ring-2 ring-slate-100" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Alex Morgan">
+                    <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-800">Alex Morgan</h4>
+                    <p class="text-xs text-slate-500">Senior Consultant • <span class="text-slate-400">Assigned 3 days ago</span></p>
+                </div>
+            </div>
+
+            <!-- Transfer Button Trigger -->
+            <button @click="openTransferModal = true" type="button" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-600 hover:shadow-md active:scale-95">
+                <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m-3-13.5L18 7.5m0 0L13.5 12M18 7.5H4.5" />
+                </svg>
+                Transfer Lead
+            </button>
+        </div>
+    </div>
+
+    <!-- Transfer Lead Modal / Slide-over Overlay -->
+    <div x-show="openTransferModal" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-999999999 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm" 
+         x-cloak>
+        
+        <div @click.away="openTransferModal = false" class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl transition-all">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+                <div>
+                    <h3 class="text-base font-semibold text-slate-900">Transfer Lead Ownership</h3>
+                    <p class="text-xs text-slate-500">Reassign this lead to another team member</p>
+                </div>
+                <button @click="openTransferModal = false" class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Form -->
+            <form @submit.prevent="openTransferModal = false; alert('Lead transferred successfully!')" class="p-6 space-y-4">
+                <!-- Select New Owner -->
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Select New Owner</label>
+                    <div class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                        <template x-for="user in users" :key="user.id">
+                            <label :class="selectedUser === user.id ? 'border-blue-600 bg-blue-50/50 ring-1 ring-blue-600' : 'border-slate-200 hover:border-slate-300 bg-white'"
+                                   class="flex items-center justify-between rounded-xl border p-3 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="lead_owner" :value="user.id" x-model="selectedUser" class="sr-only">
+                                    <img :src="user.avatar" :alt="user.name" class="h-9 w-9 rounded-full object-cover">
+                                    <div>
+                                        <p class="text-xs font-semibold text-slate-800" x-text="user.name"></p>
+                                        <p class="text-[11px] text-slate-500" x-text="user.role"></p>
+                                    </div>
+                                </div>
+                                <span class="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600" x-text="user.activeLeads + ' leads'"></span>
+                            </label>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Transfer Reason / Note -->
+                <div>
+                    <label for="transfer_note" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1.5">Handover Note <span class="text-slate-400 font-normal">(Optional)</span></label>
+                    <textarea id="transfer_note" rows="3" class="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Add context or instructions for the new owner..."></textarea>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="flex items-center justify-end gap-2 pt-2">
+                    <button @click="openTransferModal = false" type="button" class="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors">
+                        Confirm Transfer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="lg:sticky lg:top-22">
+ @include('backend.pages.students.partial.lead-activity')
+</div>
+                   
                 </aside>
             </div>
         </main>
