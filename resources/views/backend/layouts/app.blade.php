@@ -132,7 +132,9 @@
 
 </body>
 
-@stack('scripts')
+
  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+ <script src="{{ asset('js/section-navigation.js') }}"></script>
+ @stack('scripts')
 
 </html>

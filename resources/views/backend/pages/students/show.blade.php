@@ -324,7 +324,7 @@
                 </div>
 
                 {{--  RIGHT COLUMN STICKY --}}
-                <aside class="min-w-0 self-start lg:sticky lg:top-22 lg:col-span-4">
+                <aside class="min-w-0 self-start lg:sticky lg:top-22 lg:col-span-4 z-999991">
                     @include('backend.pages.students.partial.lead-activity')
                 </aside>
             </div>
@@ -336,37 +336,8 @@
     <section id="activity-history" class="mt-12">
         @include('backend.pages.students.partial.activity-history')
     </section>
-
     
 
-    {{--  ALPINE + STICKY TAB CSS --}}
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-
-        /*
-                                 * Horizontal tab scrollbar
-                                 * Scroll remains available, scrollbar is hidden.
-                                 */
-        .profile-tabs-scroll {
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .profile-tabs-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        /*
-                                 * Smooth page scrolling
-                                 */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
-
-    {{-- ALPINE COMPONENT --}}
     <script>
         function profileNavigation() {
 

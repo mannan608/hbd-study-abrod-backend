@@ -1122,3 +1122,16 @@ pre[class*='language-'] {
         [x-cloak] {
             display: none !important;
         }
+
+        
+        .profile-tabs-scroll {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .profile-tabs-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        html {
+            scroll-behavior: smooth;
+        }

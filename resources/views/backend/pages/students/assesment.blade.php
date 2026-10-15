@@ -1,16 +1,53 @@
-<div class=" " x-data="{
-    activeTab: 'status-assignment',
-    openTransferModal: false,
-    selectedUser: '2',
-    users: [
-        { id: '1', name: 'Alex Morgan', role: 'Senior Consultant', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80', activeLeads: 14 },
-        { id: '2', name: 'David Chen', role: 'Lead Advisor', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80', activeLeads: 8 },
-        { id: '3', name: 'Sarah Jenkins', role: 'Student Counselor', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&auto=format&fit=crop&q=80', activeLeads: 21 },
-        { id: '4', name: 'Michael Vance', role: 'Admissions Specialist', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80', activeLeads: 5 }
-    ],
+<div class="w-full min-w-0 text-slate-800" x-data="{
+    activeTab: 'lead-quality',
+    sectionIds: ['lead-quality', 'status-assignment', 'file-enroll', 'marketing-notes', 'commission-section'],
+    _scrollHandler: null,
+
+    init() {
+        // Track page and nested-container scrolling so the active tab stays in sync.
+        this._scrollHandler = () => this.updateActiveTab();
+        window.addEventListener('scroll', this._scrollHandler, { passive: true, capture: true });
+        window.addEventListener('resize', this._scrollHandler, { passive: true });
+        this.$nextTick(() => this.updateActiveTab());
+    },
+
+    destroy() {
+        if (this._scrollHandler) {
+            window.removeEventListener('scroll', this._scrollHandler, true);
+            window.removeEventListener('resize', this._scrollHandler);
+        }
+    },
+
     scrollToSection(id) {
+        const section = document.getElementById(id);
+        if (!section) return;
+
         this.activeTab = id;
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Keep the clicked tab active while smooth scrolling begins.
+        requestAnimationFrame(() => this.updateActiveTab());
+    },
+
+    updateActiveTab() {
+        const nav = this.$el.querySelector('[data-section-nav]');
+        const offset = (nav ? nav.getBoundingClientRect().bottom : 0) + 24;
+        let current = this.sectionIds[0];
+
+        for (const id of this.sectionIds) {
+            const section = document.getElementById(id);
+            if (!section) continue;
+            if (section.getBoundingClientRect().top <= offset) current = id;
+            else break;
+        }
+
+        // At the very bottom, activate the final section even if it cannot reach the top offset.
+        const scrollingElement = document.scrollingElement || document.documentElement;
+        if (scrollingElement.scrollTop + window.innerHeight >= scrollingElement.scrollHeight - 4) {
+            current = this.sectionIds[this.sectionIds.length - 1];
+        }
+
+        this.activeTab = current;
     }
 }">
 
@@ -66,6 +103,15 @@
         <nav
             class="sticky top-19 z-5 bg-white/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
             <div class="flex min-w-max items-center gap-2">
+
+                <button type="button" @click="scrollToSection('lead-quality')"
+                    :class="activeTab === 'lead-quality' ? 'bg-brand-600 text-white shadow-sm' :
+                        'bg-slate-50 text-slate-600 hover:bg-slate-100'"
+                    class="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all">
+                    <iconify-icon icon="lucide:sparkles" class="text-base"></iconify-icon>
+                    <span>Lead Quality</span>
+                </button>
+
                 <button type="button" @click="scrollToSection('status-assignment')"
                     :class="activeTab === 'status-assignment' ? 'bg-brand-600 text-white shadow-sm' :
                         'bg-slate-50 text-slate-600 hover:bg-slate-100'"
@@ -103,6 +149,165 @@
 
         <!-- MAIN FORM SECTIONS -->
         <div class="space-y-6">
+            <!-- SECTION 1: STATUS & ASSIGNMENT (Priority, Lead Status, Counselor Stages) -->
+            <section id="lead-quality" x-data="{
+                academic: { fit: true, reason: '' },
+                english: { fit: true, reason: '' },
+                financial: { fit: true, reason: '' },
+            
+                get totalFitCount() {
+                    return [this.academic.fit, this.english.fit, this.financial.fit].filter(Boolean).length;
+                }
+            }"
+                class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 md:p-8 scroll-mt-24">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                    <div class="flex items-center gap-2.5">
+                        <div
+                            class="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-50 text-brand-600 border border-brand-200/60 shadow-xs">
+                            <iconify-icon icon="lucide:target" class="text-base"></iconify-icon>
+                        </div>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                            Lead Quality Assessment
+                        </h2>
+                    </div>
+                    {{-- <span class="text-xs text-rose-500 font-medium">* Required fields</span> --}}
+                </div>
+
+                <!-- Assessment Criteria List -->
+                <div class="space-y-3">
+
+                    <!-- 1. Academically Fit -->
+                    <div class="rounded-lg border p-3.5 transition-all duration-200"
+                        :class="academic.fit ? 'border-slate-200 bg-white' : 'border-rose-200 bg-rose-50/20'">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm"
+                                    :class="academic.fit ? 'bg-blue-50 text-[#1968b2]' : 'bg-rose-100 text-rose-600'">
+                                    🎓
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-[#182F5A]">Academically Fit</h4>
+                                    <p class="text-xs text-slate-500">GPA & degree accreditation</p>
+                                </div>
+                            </div>
+
+                            <!-- Toggle Switch -->
+                            <div class="flex items-center p-0.5 bg-slate-100 rounded-lg border border-slate-200">
+                                <button type="button" @click="academic.fit = true; academic.reason = ''"
+                                    :class="academic.fit ? 'bg-emerald-600 text-white shadow-sm' :
+                                        'text-slate-600 hover:text-slate-900'"
+                                    class="px-3 py-1 text-xs font-semibold rounded-md transition-all">
+                                    Fit
+                                </button>
+                                <button type="button" @click="academic.fit = false"
+                                    :class="!academic.fit ? 'bg-rose-600 text-white shadow-sm' :
+                                        'text-slate-600 hover:text-slate-900'"
+                                    class="px-3 py-1 text-xs font-semibold rounded-md transition-all">
+                                    Unfit
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Note / Reason Input: Shows ONLY when Unfit -->
+                        <div x-show="!academic.fit" x-collapse class="mt-3 pt-3 border-t border-rose-100">
+                            <label class="block text-[11px] font-semibold text-rose-700 uppercase tracking-wider mb-1">
+                                Reason for Academic Unfitness <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" x-model="academic.reason"
+                                placeholder="e.g. GPA below minimum requirement (2.5) or non-accredited board"
+                                class="w-full text-xs px-3 py-2 rounded-md border border-rose-300 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 bg-white text-slate-700 shadow-sm focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- 2. English Proficiency Fit -->
+                    <div class="rounded-lg border p-3.5 transition-all duration-200"
+                        :class="english.fit ? 'border-slate-200 bg-white' : 'border-rose-200 bg-rose-50/20'">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm"
+                                    :class="english.fit ? 'bg-blue-50 text-[#1968b2]' : 'bg-rose-100 text-rose-600'">
+                                    🗣️
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-[#182F5A]">English Proficiency Fit</h4>
+                                    <p class="text-xs text-slate-500">IELTS, PTE, TOEFL scores</p>
+                                </div>
+                            </div>
+
+                            <!-- Toggle Switch -->
+                            <div class="flex items-center p-0.5 bg-slate-100 rounded-lg border border-slate-200">
+                                <button type="button" @click="english.fit = true; english.reason = ''"
+                                    :class="english.fit ? 'bg-emerald-600 text-white shadow-sm' :
+                                        'text-slate-600 hover:text-slate-900'"
+                                    class="px-3 py-1 text-xs font-semibold rounded-md transition-all">
+                                    Fit
+                                </button>
+                                <button type="button" @click="english.fit = false"
+                                    :class="!english.fit ? 'bg-rose-600 text-white shadow-sm' :
+                                        'text-slate-600 hover:text-slate-900'"
+                                    class="px-3 py-1 text-xs font-semibold rounded-md transition-all">
+                                    Unfit
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Note / Reason Input: Shows ONLY when Unfit -->
+                        <div x-show="!english.fit" x-collapse class="mt-3 pt-3 border-t border-rose-100">
+                            <label class="block text-[11px] font-semibold text-rose-700 uppercase tracking-wider mb-1">
+                                Reason for English Unfitness <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" x-model="english.reason"
+                                placeholder="e.g. IELTS overall 5.5 (Required 6.5) or score expired"
+                                class="w-full text-xs px-3 py-2 rounded-md border border-rose-300 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 bg-white text-slate-700 shadow-sm focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- 3. Financially Fit -->
+                    <div class="rounded-lg border p-3.5 transition-all duration-200"
+                        :class="financial.fit ? 'border-slate-200 bg-white' : 'border-rose-200 bg-rose-50/20'">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm"
+                                    :class="financial.fit ? 'bg-blue-50 text-[#1968b2]' : 'bg-rose-100 text-rose-600'">
+                                    💰
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-[#182F5A]">Financially Fit</h4>
+                                    <p class="text-xs text-slate-500">Tuition & living expense proof</p>
+                                </div>
+                            </div>
+
+                            <!-- Toggle Switch -->
+                            <div class="flex items-center p-0.5 bg-slate-100 rounded-lg border border-slate-200">
+                                <button type="button" @click="financial.fit = true; financial.reason = ''"
+                                    :class="financial.fit ? 'bg-emerald-600 text-white shadow-sm' :
+                                        'text-slate-600 hover:text-slate-900'"
+                                    class="px-3 py-1 text-xs font-semibold rounded-md transition-all">
+                                    Fit
+                                </button>
+                                <button type="button" @click="financial.fit = false"
+                                    :class="!financial.fit ? 'bg-rose-600 text-white shadow-sm' :
+                                        'text-slate-600 hover:text-slate-900'"
+                                    class="px-3 py-1 text-xs font-semibold rounded-md transition-all">
+                                    Unfit
+                                </button>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Note / Reason Input: Shows ONLY when Unfit -->
+                        <div x-show="!financial.fit" x-collapse class="mt-3 pt-3 border-t border-rose-100">
+                            <label class="block text-[11px] font-semibold text-rose-700 uppercase tracking-wider mb-1">
+                                Reason for Financial Unfitness <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" x-model="financial.reason"
+                                placeholder="e.g. Bank statement shows insufficient balance for 1st year tuition"
+                                class="w-full text-xs px-3 py-2 rounded-md border border-rose-300 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 bg-white text-slate-700 shadow-sm focus:outline-none">
+                        </div>
+                    </div>
+
+                </div>
+            </section>
 
             <!-- SECTION 1: STATUS & ASSIGNMENT (Priority, Lead Status, Counselor Stages) -->
             <section id="status-assignment"
@@ -211,7 +416,9 @@
                             <iconify-icon icon="lucide:file-badge" class="text-xl"></iconify-icon>
                         </div>
                         <div>
-                            <h2 class="text-sm font-bold text-slate-900">File Opening & Enrollment Operations</h2>
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                                File Opening & Enrollment Operations
+                            </h2>
                             <p class="text-xs text-slate-500">Record financial fee logs, enrollment stages, and
                                 attribution references</p>
                         </div>
@@ -578,76 +785,6 @@
                 </div>
             </section>
 
-        </div>
-
-
-        <!-- TRANSFER LEAD MODAL / SLIDE OVER -->
-        <div x-show="openTransferModal" x-transition.opacity
-            class="fixed inset-0 z-99999 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm"
-            x-cloak>
-            <div @click.away="openTransferModal = false"
-                class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
-
-                <div class="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-                    <div>
-                        <h3 class="text-sm font-bold text-slate-900">Transfer Lead Ownership</h3>
-                        <p class="text-xs text-slate-500">Reassign this student record to another team member</p>
-                    </div>
-                    <button @click="openTransferModal = false"
-                        class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600">
-                        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
-                    </button>
-                </div>
-
-                <form @submit.prevent="openTransferModal = false; alert('Lead transferred successfully!')"
-                    class="p-6 space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Select
-                            New Owner</label>
-                        <div class="space-y-2 max-h-56 overflow-y-auto pr-1">
-                            <template x-for="user in users" :key="user.id">
-                                <label
-                                    :class="selectedUser === user.id ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600' :
-                                        'border-slate-200 hover:border-slate-300 bg-white'"
-                                    class="flex items-center justify-between rounded-xl border p-3 cursor-pointer transition-all">
-                                    <div class="flex items-center gap-3">
-                                        <input type="radio" name="lead_owner" :value="user.id"
-                                            x-model="selectedUser" class="sr-only">
-                                        <img :src="user.avatar" :alt="user.name"
-                                            class="h-9 w-9 rounded-full object-cover">
-                                        <div>
-                                            <p class="text-xs font-semibold text-slate-800" x-text="user.name"></p>
-                                            <p class="text-[11px] text-slate-500" x-text="user.role"></p>
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600"
-                                        x-text="user.activeLeads + ' leads'"></span>
-                                </label>
-                            </template>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label
-                            class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1.5">Handover
-                            Note <span class="text-slate-400 font-normal">(Optional)</span></label>
-                        <textarea rows="3" placeholder="Add context or instructions for the new owner..."
-                            class="w-full rounded-xl border border-slate-200 p-3 text-xs text-slate-800 placeholder-slate-400 shadow-sm focus:border-brand-600 focus:outline-none"></textarea>
-                    </div>
-
-                    <div class="flex items-center justify-end gap-2 pt-2">
-                        <button @click="openTransferModal = false" type="button"
-                            class="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            Cancel
-                        </button>
-                        <button type="submit"
-                            class="rounded-xl bg-brand-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-700">
-                            Confirm Transfer
-                        </button>
-                    </div>
-                </form>
-            </div>
         </div>
 
     </div>
