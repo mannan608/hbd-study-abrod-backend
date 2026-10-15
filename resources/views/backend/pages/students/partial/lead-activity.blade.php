@@ -60,7 +60,15 @@
 
     submitForm() {
         // Keep your existing submitForm() logic here.
-    }
+    },
+     openTransferModal: false,
+    selectedUser: '2',
+    users: [
+        { id: '1', name: 'Alex Morgan', role: 'Senior Consultant', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80', activeLeads: 14 },
+        { id: '2', name: 'David Chen', role: 'Lead Advisor', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80', activeLeads: 8 },
+        { id: '3', name: 'Sarah Jenkins', role: 'Student Counselor', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&auto=format&fit=crop&q=80', activeLeads: 21 },
+        { id: '4', name: 'Michael Vance', role: 'Admissions Specialist', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80', activeLeads: 5 }
+    ],
 }" class="mx-auto w-full">
 
     <!-- =========================================================
@@ -74,8 +82,7 @@
         <!-- =====================================================
              HEADER
         ====================================================== -->
-        <div class="border-b border-slate-100 px-4 py-3.5
-                   dark:border-slate-800">
+        <div class="border-b border-slate-100 px-4 py-3.5 dark:border-slate-800 flex justify-between">
 
             <div class="flex items-center gap-3">
 
@@ -102,6 +109,12 @@
                 </div>
 
             </div>
+
+            <button @click="openTransferModal = true" type="button"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white transition-all duration-200 hover:bg-brand-600 hover:shadow-md active:scale-95">
+                <iconify-icon icon="lucide:arrow-left-right" class="text-sm"></iconify-icon>
+                Transfer Ownership
+            </button>
 
         </div>
 
@@ -642,6 +655,74 @@
 
         </form>
 
-    </div>
+    </div>   
+     <!-- TRANSFER LEAD MODAL / SLIDE OVER -->
+        <div x-show="openTransferModal" x-transition.opacity
+            class="fixed inset-0 z-999999 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm"
+            x-cloak>
+            <div @click.away="openTransferModal = false"
+                class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
+
+                <div class="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900">Transfer Lead Ownership</h3>
+                        <p class="text-xs text-slate-500">Reassign this student record to another team member</p>
+                    </div>
+                    <button @click="openTransferModal = false"
+                        class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600">
+                        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+
+                <form @submit.prevent="openTransferModal = false; alert('Lead transferred successfully!')"
+                    class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Select
+                            New Owner</label>
+                        <div class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                            <template x-for="user in users" :key="user.id">
+                                <label
+                                    :class="selectedUser === user.id ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600' :
+                                        'border-slate-200 hover:border-slate-300 bg-white'"
+                                    class="flex items-center justify-between rounded-xl border p-3 cursor-pointer transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input type="radio" name="lead_owner" :value="user.id"
+                                            x-model="selectedUser" class="sr-only">
+                                        <img :src="user.avatar" :alt="user.name"
+                                            class="h-9 w-9 rounded-full object-cover">
+                                        <div>
+                                            <p class="text-xs font-semibold text-slate-800" x-text="user.name"></p>
+                                            <p class="text-[11px] text-slate-500" x-text="user.role"></p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600"
+                                        x-text="user.activeLeads + ' leads'"></span>
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label
+                            class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1.5">Handover
+                            Note <span class="text-slate-400 font-normal">(Optional)</span></label>
+                        <textarea rows="3" placeholder="Add context or instructions for the new owner..."
+                            class="w-full rounded-xl border border-slate-200 p-3 text-xs text-slate-800 placeholder-slate-400 shadow-sm focus:border-brand-600 focus:outline-none"></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-2 pt-2">
+                        <button @click="openTransferModal = false" type="button"
+                            class="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                            Cancel
+                        </button>
+                        <button type="submit"
+                            class="rounded-xl bg-brand-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-700">
+                            Confirm Transfer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>  
 
 </div>

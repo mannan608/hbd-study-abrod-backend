@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\hrm\Employee;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -90,12 +92,37 @@ class User extends Authenticatable
         return $this->student()->exists();
     }
 
-    public function counsellor(): HasOne
+//     public function counsellor(): HasOne
+// {
+//     return $this->hasOne(Counsellor::class);
+// }
+
+// public static function createCounsellor(array $data): self
+// {
+//     $defaultRole = Role::where('name', 'default')
+//         ->where('guard_name', config('rbac.default_guard', 'web'))
+//         ->first();
+
+//     if (! $defaultRole) {
+//         throw new \RuntimeException('Default role not found.');
+//     }
+
+//     $user = self::create([
+//         ...$data,
+//         'primary_role_id' => $defaultRole->id,
+//     ]);
+
+//     // Assign default role to Spatie roles
+//     $user->syncRoles([$defaultRole]);
+
+//     return $user->load('roles', 'primaryRole');
+// }
+    public function employee(): HasOne
 {
-    return $this->hasOne(Counsellor::class);
+    return $this->hasOne(Employee::class);
 }
 
-public static function createCounsellor(array $data): self
+public static function createEmployee(array $data): self
 {
     $defaultRole = Role::where('name', 'default')
         ->where('guard_name', config('rbac.default_guard', 'web'))
