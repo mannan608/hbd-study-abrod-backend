@@ -61,7 +61,7 @@
     submitForm() {
         // Keep your existing submitForm() logic here.
     },
-     openTransferModal: false,
+    openTransferModal: false,
     selectedUser: '2',
     users: [
         { id: '1', name: 'Alex Morgan', role: 'Senior Consultant', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80', activeLeads: 14 },
@@ -655,26 +655,25 @@
 
         </form>
 
-    </div>   
-     <!-- TRANSFER LEAD MODAL / SLIDE OVER -->
-        <div x-show="openTransferModal" x-transition.opacity
-            class="fixed inset-0 z-999999 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm"
-            x-cloak>
-            <div @click.away="openTransferModal = false"
-                class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
+    </div>
+    <!-- TRANSFER LEAD MODAL / SLIDE OVER -->
+    <div x-show="openTransferModal" x-transition.opacity
+        class="fixed inset-0 z-999999 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm" x-cloak>
+        <div @click.away="openTransferModal = false"
+            class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
 
-                <div class="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-                    <div>
-                        <h3 class="text-sm font-bold text-slate-900">Transfer Lead Ownership</h3>
-                        <p class="text-xs text-slate-500">Reassign this student record to another team member</p>
-                    </div>
-                    <button @click="openTransferModal = false"
-                        class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600">
-                        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
-                    </button>
+            <div class="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900">Transfer Lead Ownership</h3>
+                    <p class="text-xs text-slate-500">Reassign this student record to another team member</p>
                 </div>
+                <button @click="openTransferModal = false"
+                    class="rounded-lg p-2 w-9 h-9 flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-600">
+                    <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+                </button>
+            </div>
 
-                <form @submit.prevent="openTransferModal = false; alert('Lead transferred successfully!')"
+            {{-- <form @submit.prevent="openTransferModal = false; alert('Lead transferred successfully!')"
                     class="p-6 space-y-4">
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Select
@@ -721,8 +720,140 @@
                             Confirm Transfer
                         </button>
                     </div>
-                </form>
+                </form> --}}
+
+            <div x-data="{
+                activeTab: 'transfer',
+                currentOwner: 'Hasan (Application Officer)',
+                selectedHistoryItem: null,
+            
+                history: [
+                    { id: 1,  name: 'Rahim', role: 'Customer Support', datetime: '10 Oct 2026, 10:00 AM', note: 'Initial lead qualification complete. Assigned for counselling.' },
+                    { id: 2,  name: 'Karim', role: 'Counsellor', datetime: '12 Oct 2026, 11:30 AM', note: 'Document collection verified and handed over for visa application processing.' },
+                    { id: 3,  name: 'Hasan', role: 'Application Officer', datetime: '15 Oct 2026, 02:00 PM', note: 'Offer letter received from university. Re-assigning back for enrollment payment.' }
+                ]
+            }"
+                class="max-w-md mx-auto rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-100 overflow-hidden">
+
+                <!-- Header & Toggle Bar -->
+                <div class="border-b border-slate-100 bg-slate-50/50 p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-bold text-[#182F5A] flex items-center gap-2">
+                            <iconify-icon icon="lucide:user-cog" class="text-brand-500 text-lg"></iconify-icon>
+                            <span>Lead Ownership</span>
+                        </h3>
+                    </div>
+
+                    <!-- Segmented Tab Switcher -->
+                    <div class="grid grid-cols-2 p-1 bg-slate-200/50 rounded-xl text-xs font-semibold text-slate-600">
+                        <button @click="activeTab = 'transfer'"
+                            :class="activeTab === 'transfer' ? 'bg-white text-brand-500 shadow-xs' : 'hover:text-slate-900'"
+                            class="py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5">
+                            <iconify-icon icon="lucide:arrow-right-left" class="text-sm"></iconify-icon>
+                            <span>Transfer</span>
+                        </button>
+                        <button @click="activeTab = 'history'"
+                            :class="activeTab === 'history' ? 'bg-white text-brand-500 shadow-xs' : 'hover:text-slate-900'"
+                            class="py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5">
+                            <iconify-icon icon="lucide:history" class="text-sm"></iconify-icon>
+                            <span>History</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB 1: TRANSFER FORM -->
+                <div x-show="activeTab === 'transfer'" class="p-5 space-y-4">
+                    <form @submit.prevent="alert('Lead transferred successfully!')" class="space-y-4">
+
+                      
+                        <div>
+                                <label
+                                    class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">From
+                                    (Current Owner)</label>
+                                <div
+                                    class="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs font-semibold text-slate-700 flex items-center gap-2">
+                                    <iconify-icon icon="lucide:user-check"
+                                        class="text-slate-400 text-sm"></iconify-icon>
+                                    <span x-text="currentOwner"></span>
+                                </div>
+                            </div>
+
+                        <!-- TO FIELD (Both Admin & Owner) -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">To
+                                (New Owner)</label>
+                            <select x-model="selectedToUser"
+                                class="w-full rounded-xl border border-slate-200 bg-white p-2.5 text-xs font-medium text-slate-800 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all">
+                                <option value="" disabled selected>Select new owner...</option>
+                                <option value="1">Rahim (Customer Support)</option>
+                                <option value="2">Karim (Counsellor)</option>
+                                <option value="3">Hasan (Application Officer)</option>
+                            </select>
+                        </div>
+
+                        <!-- HANDOVER NOTE -->
+                        <div>
+                            <label
+                                class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Handover
+                                Note</label>
+                            <textarea rows="3" placeholder="Add handover instructions or reason for transfer..."
+                                class="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-slate-800 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all resize-none"></textarea>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <div class="pt-2">
+                            <button type="submit"
+                                class="w-full rounded-xl bg-brand-500 hover:bg-brand-600 py-2.5 text-xs font-bold text-white shadow-sm transition-all flex items-center justify-center gap-1.5">
+                                <iconify-icon icon="lucide:send" class="text-xs"></iconify-icon>
+                                <span>Confirm Transfer</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- TAB 2: SIMPLE HISTORY FLOW -->
+                <div x-show="activeTab === 'history'" x-cloak class="p-5 space-y-3">
+                    <template x-for="(item, index) in history" :key="item.id">
+                        <div
+                            class="relative p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-slate-50 transition-all space-y-2">
+
+                            <!-- Owner Info & Sequence Header -->
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start gap-2.5">
+                                    <!-- Sequence Number Badge -->
+                                    <div
+                                        class="w-6 h-6 rounded-md bg-blue-50 text-[#1968b2] font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
+                                        <span x-text="index + 1"></span>
+                                    </div>
+                                    <div>                                       
+                                        <h4 class="text-xs font-bold text-[#182F5A]"
+                                            x-text="item.name + ' (' + item.role + ')'"></h4>
+                                    </div>
+                                </div>
+
+                                <!-- Timestamp -->
+                                <p class="text-[10px] text-slate-400 font-mono flex items-center gap-1 shrink-0">
+                                    <iconify-icon icon="lucide:clock" class="text-xs"></iconify-icon>
+                                    <span x-text="item.datetime"></span>
+                                </p>
+                            </div>
+
+                            <!-- Inline Handover Note -->
+                            <template x-if="item.note">
+                                <div class="pl-8">
+                                    <p
+                                        class="text-[11px] text-slate-600 bg-white border border-slate-200/70 rounded-lg p-2 leading-relaxed">
+                                        <span class="font-semibold text-slate-700">Note:</span> <span
+                                            x-text="item.note"></span>
+                                    </p>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
             </div>
-        </div>  
+        </div>
+    </div>
 
 </div>

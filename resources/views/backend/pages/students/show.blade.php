@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    <div x-data="profileNavigation()" x-init="init()" class="relative w-full">
+    <div class="relative w-full">
 
         <main class="flex-1 space-y-6">
             <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
@@ -166,161 +166,119 @@
 
                     @include('backend.pages.students.assesment')
 
-                    {{-- STICKY TAB NAVIGATION --}}
-                    <section
-                        class="sticky top-19 z-5 overflow-hidden rounded-2xl border border-slate-200 bg-white/95 shadow-sm backdrop-blur-md">
-                        {{--  HORIZONTAL SCROLLABLE TABS --}}
-                        <div x-ref="tabContainer" class="profile-tabs-scroll overflow-x-auto">
-
-                            <div class="flex min-w-max items-center gap-1.5 px-3 py-3 sm:px-4">
-
-                                {{-- PERSONAL INFORMATION --}}
-                                <button type="button" data-tab="personal-information"
-                                    @click="scrollToSection('personal-information')"
-                                    :class="activeTab === 'personal-information'
-                                        ?
-                                        'border-brand-600 bg-brand-600 text-white shadow-sm' :
-                                        'border-transparent bg-slate-50 text-slate-600 hover:border-slate-200 hover:bg-white hover:text-slate-900'"
-                                    class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-all duration-200">
-                                    <iconify-icon icon="lucide:user-round" class="text-base"></iconify-icon>
-
-                                    <span>
-                                        Personal Info
-                                    </span>
-                                </button>
-
-                                {{-- ACADEMIC --}}
-                                <button type="button" data-tab="academic-background"
-                                    @click="scrollToSection('academic-background')"
-                                    :class="activeTab === 'academic-background'
-                                        ?
-                                        'border-blue-600 bg-blue-600 text-white shadow-sm' :
-                                        'border-transparent bg-blue-50 text-blue-700 hover:border-blue-200 hover:bg-blue-100'"
-                                    class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-all duration-200">
-                                    <iconify-icon icon="lucide:graduation-cap" class="text-base"></iconify-icon>
-
-                                    <span>
-                                        Academic
-                                    </span>
-                                </button>
-
-                                {{-- STUDY PLAN --}}
-                                <button type="button" data-tab="study-plan" @click="scrollToSection('study-plan')"
-                                    :class="activeTab === 'study-plan'
-                                        ?
-                                        'border-violet-600 bg-violet-600 text-white shadow-sm' :
-                                        'border-transparent bg-violet-50 text-violet-700 hover:border-violet-200 hover:bg-violet-100'"
-                                    class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-all duration-200">
-                                    <iconify-icon icon="lucide:book-open-check" class="text-base"></iconify-icon>
-
-                                    <span>
-                                        Study Plan
-                                    </span>
-                                </button>
-
-                                {{-- FINANCIAL --}}
-                                <button type="button" data-tab="financial-family"
-                                    @click="scrollToSection('financial-family')"
-                                    :class="activeTab === 'financial-family'
-                                        ?
-                                        'border-emerald-600 bg-emerald-600 text-white shadow-sm' :
-                                        'border-transparent bg-emerald-50 text-emerald-700 hover:border-emerald-200 hover:bg-emerald-100'"
-                                    class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-all duration-200">
-                                    <iconify-icon icon="lucide:wallet-cards" class="text-base"></iconify-icon>
-
-                                    <span>
-                                        Financial
-                                    </span>
-                                </button>
-
-                                {{-- EXPERIENCE --}}
-                                <button type="button" data-tab="experience" @click="scrollToSection('experience')"
-                                    :class="activeTab === 'experience'
-                                        ?
-                                        'border-brand-600 bg-brand-600 text-white shadow-sm' :
-                                        'border-transparent bg-slate-50 text-slate-600 hover:border-slate-200 hover:bg-white hover:text-slate-900'"
-                                    class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-all duration-200">
-                                    <iconify-icon icon="lucide:briefcase-business" class="text-base"></iconify-icon>
-
-                                    <span>
-                                        Experience
-                                    </span>
-                                </button>
-
-                                {{-- IMMIGRATION --}}
-                                <button type="button" data-tab="immigration-history"
-                                    @click="scrollToSection('immigration-history')"
-                                    :class="activeTab === 'immigration-history'
-                                        ?
-                                        'border-amber-500 bg-amber-500 text-white shadow-sm' :
-                                        'border-transparent bg-amber-50 text-amber-700 hover:border-amber-200 hover:bg-amber-100'"
-                                    class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-all duration-200">
-                                    <iconify-icon icon="lucide:shield-alert" class="text-base"></iconify-icon>
-
-                                    <span>
-                                        Immigration
-                                    </span>
-                                </button>
-
+                    <div x-data="sectionNavigation({
+                        offset: 125,
+                        activationOffset: 180,
+                        tabs: [{
+                                id: 'personal-information',
+                                label: 'Personal',
+                                icon: 'lucide:user-round'
+                            },
+                            {
+                                id: 'academic-background',
+                                label: 'Academic',
+                                icon: 'lucide:graduation-cap'
+                            },
+                            {
+                                id: 'study-plan',
+                                label: 'Study Plan',
+                                icon: 'lucide:book-open'
+                            },
+                            {
+                                id: 'financial-family',
+                                label: 'Financial & Family',
+                                icon: 'lucide:wallet'
+                            },
+                            {
+                                id: 'experience',
+                                label: 'Experience',
+                                icon: 'lucide:briefcase-business'
+                            },
+                                {
+                                id: 'immigration-history',
+                                label: 'Immigration',
+                                icon: 'lucide:shield-alert'
+                            }
+                        ]
+                    })" class="space-y-6">
+                        <nav aria-label="Profile sections"
+                            class="sticky top-19 z-5 overflow-hidden rounded-2xl border border-slate-200 bg-white/95 shadow-sm backdrop-blur-md p-1.5">
+                            <div x-ref="tabContainer"
+                                class="flex min-w-0 items-center gap-2 overflow-x-auto whitespace-nowrap overscroll-x-contain">
+                                <template x-for="tab in tabs" :key="tab.id">
+                                    <button type="button" :data-tab="tab.id" @click="scrollToSection(tab.id)"
+                                        :aria-current="activeTab === tab.id ? 'location' : null"
+                                        :class="activeTab === tab.id ?
+                                            'bg-brand-600 text-white shadow-sm' :
+                                            'bg-slate-50 text-slate-600 hover:bg-slate-100'"
+                                        class="inline-flex shrink-0 items-center gap-2 rounded-xl
+                                                px-4 py-2.5 text-xs font-semibold transition-colors
+                                                duration-200 focus:outline-none focus-visible:ring-2
+                                                focus-visible:ring-brand-500 focus-visible:ring-offset-2">
+                                        <iconify-icon :icon="tab.icon" class="text-base"></iconify-icon>
+                                        <span x-text="tab.label"></span>
+                                    </button>
+                                </template>
                             </div>
+                        </nav>
+
+                        <div class="space-y-6">
+                            {{-- 1. PERSONAL INFORMATION --}}
+                            <section id="personal-information"
+                                class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-xs sm:p-6 space-y-6">
+                                @include('backend.pages.students.partial.basic')
+                            </section>
+
+                            {{--  2. ACADEMIC BACKGROUND --}}
+                            <section id="academic-background"
+                                class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-xs sm:p-6 space-y-6">
+                                @include('backend.pages.students.partial.academic')
+                            </section>
+
+                            {{--  3. STUDY PLAN --}}
+                            <section id="study-plan"
+                                class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 space-y-6">
+                                @include('backend.pages.students.partial.study-plan')
+                            </section>
+
+                            {{--  4. FINANCIAL & FAMILY --}}
+                            <section id="financial-family"
+                                class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 space-y-6">
+                                @include('backend.pages.students.partial.financial')
+                            </section>
+
+                            {{--  5. EXPERIENCE --}}
+                            <section id="experience"
+                                class="scroll-mt-28 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6">
+                                @include('backend.pages.students.partial.experience')
+                            </section>
+
+                            {{--  6. IMMIGRATION HISTORY --}}
+                            <section id="immigration-history"
+                                class="scroll-mt-28 rounded-2xl border border-amber-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
+                                @include('backend.pages.students.partial.immigration')
+                            </section>
+
+                            {{--  7. VISA DOCUMENTS --}}
+                            <section id="visa-documents"
+                                class="scroll-mt-28 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6">
+                                @include('backend.pages.students.partial.documents')
+                            </section>
+
+                            {{-- 8. APPLICATIONS HISTORY --}}
+                            <section id="applications-history"
+                                class="scroll-mt-28 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
+                                @include('backend.pages.students.partial.applications-history')
+                            </section>
+
+                            {{--  9. AFTER VISA --}}
+                            <section id="after-visa"
+                                class="scroll-mt-28 rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
+                                @include('backend.pages.students.partial.after-visa')
+                            </section>
 
                         </div>
-                    </section>
-
-                    {{-- 1. PERSONAL INFORMATION --}}
-                    <section id="personal-information"
-                        class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-xs sm:p-6 space-y-6">
-                        @include('backend.pages.students.partial.basic')
-                    </section>
-
-                    {{--  2. ACADEMIC BACKGROUND --}}
-                    <section id="academic-background"
-                        class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-xs sm:p-6 space-y-6">
-                        @include('backend.pages.students.partial.academic')
-                    </section>
-
-                    {{--  3. STUDY PLAN --}}
-                    <section id="study-plan"
-                        class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 space-y-6">
-                        @include('backend.pages.students.partial.study-plan')
-
-                    </section>
-                    {{--  4. FINANCIAL & FAMILY --}}
-                    <section id="financial-family"
-                        class="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 space-y-6">
-                        @include('backend.pages.students.partial.financial')
-                    </section>
-
-                    {{--  5. EXPERIENCE --}}
-                    <section id="experience"
-                        class="scroll-mt-28 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6">
-                        @include('backend.pages.students.partial.experience')
-                    </section>
-
-                    {{--  6. IMMIGRATION HISTORY --}}
-                    <section id="immigration-history"
-                        class="scroll-mt-28 rounded-2xl border border-amber-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
-                        @include('backend.pages.students.partial.immigration')
-                    </section>
-
-                    {{--  7. VISA DOCUMENTS --}}
-                    <section id="visa-documents"
-                        class="scroll-mt-28 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6">
-                        @include('backend.pages.students.partial.documents')
-                    </section>
-
-                    {{-- 8. APPLICATIONS HISTORY --}}
-                    <section id="applications-history"
-                        class="scroll-mt-28 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
-                        @include('backend.pages.students.partial.applications-history')
-                    </section>
-
-                    {{--  9. AFTER VISA --}}
-                    <section id="after-visa"
-                        class="scroll-mt-28 rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm sm:p-6 space-y-5">
-                        @include('backend.pages.students.partial.after-visa')
-                    </section>
-
+                    </div>
                 </div>
 
                 {{--  RIGHT COLUMN STICKY --}}
@@ -336,280 +294,4 @@
     <section id="activity-history" class="mt-12">
         @include('backend.pages.students.partial.activity-history')
     </section>
-    
-
-    <script>
-        function profileNavigation() {
-
-            return {
-
-                /*
-                 * Current active section
-                 */
-                activeTab: 'personal-information',
-
-
-                /*
-                 * All sections
-                 */
-                sections: [
-                    'personal-information',
-                    'academic-background',
-                    'study-plan',
-                    'financial-family',
-                    'experience',
-                    'immigration-history',
-                    'visa-documents',
-                    'applications-history',
-                    'after-visa'
-                ],
-
-
-                /*
-                 * Initialize
-                 */
-                init() {
-
-                    this.$nextTick(() => {
-
-                        this.setupScrollSpy();
-
-                        /*
-                         * Initial active section
-                         */
-                        this.updateActiveSection();
-
-                    });
-
-                },
-
-
-                /*
-                 * Get all actual section elements
-                 */
-                getSectionElements() {
-
-                    return this.sections
-                        .map(id => document.getElementById(id))
-                        .filter(section => section !== null);
-
-                },
-
-
-                /*
-                 * CLICK TAB
-                 *
-                 * Does NOT hide anything.
-                 * Simply scrolls to the selected section.
-                 */
-                scrollToSection(id) {
-
-                    const section = document.getElementById(id);
-
-                    if (!section) {
-                        return;
-                    }
-
-
-                    /*
-                     * Set active immediately
-                     */
-                    this.setActive(id);
-
-
-                    /*
-                     * Sticky tab position.
-                     *
-                     * We leave enough space so the section
-                     * heading doesn't go underneath the tab.
-                     */
-                    const offset = 125;
-
-
-                    const sectionTop =
-                        section.getBoundingClientRect().top +
-                        window.pageYOffset -
-                        offset;
-
-
-                    window.scrollTo({
-                        top: sectionTop,
-                        behavior: 'smooth'
-                    });
-
-                },
-
-
-                /*
-                 * Set active tab
-                 */
-                setActive(id) {
-
-                    if (!this.sections.includes(id)) {
-                        return;
-                    }
-
-
-                    this.activeTab = id;
-
-
-                    /*
-                     * Automatically move active tab
-                     * into horizontal view.
-                     */
-                    this.$nextTick(() => {
-
-                        const tab = document.querySelector(
-                            `[data-tab="${id}"]`
-                        );
-
-
-                        if (!tab) {
-                            return;
-                        }
-
-
-                        const container = this.$refs.tabContainer;
-
-
-                        if (!container) {
-                            return;
-                        }
-
-
-                        /*
-                         * Calculate position manually.
-                         *
-                         * scrollIntoView() can sometimes scroll
-                         * the whole page as well, so we avoid that.
-                         */
-                        const tabLeft = tab.offsetLeft;
-
-                        const tabRight =
-                            tabLeft + tab.offsetWidth;
-
-                        const visibleLeft =
-                            container.scrollLeft;
-
-                        const visibleRight =
-                            visibleLeft + container.clientWidth;
-
-
-                        if (tabLeft < visibleLeft) {
-
-                            container.scrollTo({
-                                left: tabLeft - 20,
-                                behavior: 'smooth'
-                            });
-
-                        } else if (tabRight > visibleRight) {
-
-                            container.scrollTo({
-                                left: tabRight -
-                                    container.clientWidth +
-                                    20,
-                                behavior: 'smooth'
-                            });
-
-                        }
-
-                    });
-
-                },
-
-
-                /*
-                 * UPDATE ACTIVE TAB WHILE SCROLLING
-                 */
-                updateActiveSection() {
-
-                    const sections =
-                        this.getSectionElements();
-
-
-                    if (!sections.length) {
-                        return;
-                    }
-
-
-                    /*
-                     * Position where we consider
-                     * a section to be active.
-                     */
-                    const activationPoint = 180;
-
-
-                    let currentSection = sections[0];
-
-
-                    sections.forEach(section => {
-
-                        const rect =
-                            section.getBoundingClientRect();
-
-
-                        /*
-                         * If section top has crossed
-                         * the activation point, it becomes
-                         * the current section.
-                         */
-                        if (rect.top <= activationPoint) {
-
-                            currentSection = section;
-
-                        }
-
-                    });
-
-
-                    if (currentSection) {
-
-                        this.setActive(
-                            currentSection.id
-                        );
-
-                    }
-
-                },
-
-
-                /*
-                 * SCROLL SPY
-                 */
-                setupScrollSpy() {
-
-                    let ticking = false;
-
-
-                    window.addEventListener(
-                        'scroll',
-                        () => {
-
-                            if (ticking) {
-                                return;
-                            }
-
-
-                            window.requestAnimationFrame(() => {
-
-                                this.updateActiveSection();
-
-                                ticking = false;
-
-                            });
-
-
-                            ticking = true;
-
-                        }, {
-                            passive: true
-                        }
-                    );
-
-                }
-
-            };
-
-        }
-    </script>
 @endsection

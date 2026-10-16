@@ -125,21 +125,21 @@
                     <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
 
                         <x-form.input-text name="email" label="Email Address" type="email"
-                            value="{{ $email }}" placeholder="Enter contact email..." />
+                            value="{{ $email }}" placeholder="Enter contact email..." />                        
 
                         <x-form.input-text name="phone" label="Phone Number" value="{{ $phone }}"
                             placeholder="Enter contact phone..." />
 
-                           {{-- Website --}}
-                    <x-form.input-text name="website" label="Website URL" type="url" value="{{ $website }}"
-                        placeholder="https://..." />
+                        {{-- Website --}}
+                        <x-form.input-text name="website" label="Website URL" type="url" value="{{ $website }}"
+                            placeholder="https://..." />
 
 
-                    {{-- Accreditation --}}
-                    <x-form.input-text name="accreditation" label="Accreditation" value="{{ $accreditation }}"
-                        placeholder="e.g. UGC, ABET, AACSB..." />
+                        {{-- Accreditation --}}
+                        <x-form.input-text name="accreditation" label="Accreditation" value="{{ $accreditation }}"
+                            placeholder="e.g. UGC, ABET, AACSB..." />
 
-                    </div>  
+                    </div>
                     {{-- Overview --}}
                     <x-form.textarea-input name="overview" label="Overview" rows="5"
                         placeholder="Enter university overview..." :value="$overview" />
@@ -239,17 +239,17 @@
 
                         </div>
 
-                         {{-- State --}}
-                    <x-form.input-text name="state" label="State / Province" value="{{ $state }}"
-                        placeholder="Enter state or province..." />
+                        {{-- State --}}
+                        <x-form.input-text name="state" label="State / Province" value="{{ $state }}"
+                            placeholder="Enter state or province..." />
 
                         <x-form.input-text name="google_map_link" label="Google Map Link"
-                        placeholder="https://maps.google.com/..." value="{{ $google_map_link }}" />
+                            placeholder="https://maps.google.com/..." value="{{ $google_map_link }}" />
 
                     </div>
 
 
-                   
+
 
 
                     {{-- Address --}}
@@ -632,6 +632,7 @@
             </div>
 
         </div>
+
 
     </div>
 

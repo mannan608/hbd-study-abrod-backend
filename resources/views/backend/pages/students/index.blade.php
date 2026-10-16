@@ -949,7 +949,7 @@
                                         </div>
 
 
-                                        <div class="flex flex-col text-slate-500 pl-0.5 space-y-0.5">
+                                        <div class="flex flex-col text-slate-500 pl-0.5 space-y-0.5 text-xs">
 
                                             <template x-for="person in row.counselling.people" :key="person.name">
 

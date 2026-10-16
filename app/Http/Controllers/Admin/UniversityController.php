@@ -68,6 +68,8 @@ class UniversityController extends Controller
     {
         $this->universities->create($request->validated(), $request);
 
+        // dd($request->all());
+
         return redirect()
             ->route('role.universities.index', [
                 'role' => $request->route('role'),
