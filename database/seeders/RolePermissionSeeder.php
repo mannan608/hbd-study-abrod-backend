@@ -173,8 +173,31 @@ class RolePermissionSeeder extends Seeder
             'university-intakes.status.change',
             'university-intakes.manage',
 
+            // HR permissions
 
+            // departments
+            'department.list',
+            'department.create',
+            'department.edit',
+            'department.delete',
+            'department.status.change',
+            'department.manage',
 
+            // designations
+            'designation.list',
+            'designation.create',
+            'designation.edit',
+            'designation.delete',
+            'designation.status.change',
+            'designation.manage',
+
+            // employees
+            'employee.list',
+            'employee.create',
+            'employee.edit',
+            'employee.delete',
+            'employee.status.change',
+            'employee.manage',
         ];
 
         foreach ($permissions as $permission) {

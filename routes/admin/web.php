@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\CounsellorBookingController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\HR\DepartmentController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
 
@@ -106,4 +107,8 @@ Route::prefix('{role}')
         Route::post('/providers/{provider}/scopes', [ProviderController::class, 'addNewScope'])->name('providers.scopes.store');
         Route::put('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'editScope'])->name('providers.scopes.update');
         Route::delete('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'deleteScope'])->name('providers.scopes.delete');
+
+        // HR Route
+        Route::resource('departments', DepartmentController::class);
+
     });

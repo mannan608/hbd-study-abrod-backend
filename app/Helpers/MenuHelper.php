@@ -242,6 +242,11 @@ class MenuHelper
                         'permission' => 'blog.list',
                     ],
                     [
+                        'name' => 'Departments',
+                        'route' => 'role.departments.index',
+                        'permission' => 'department.list',
+                    ],
+                    [
                         'name' => 'Teams',
                         'route' => 'role.events.index',
                         'permission' => 'event.list',
@@ -251,6 +256,7 @@ class MenuHelper
                         'route' => 'role.events.index',
                         'permission' => 'event.list',
                     ],
+                    
                 ],
             ],
 
@@ -265,10 +271,10 @@ class MenuHelper
                 'title' => 'HRM Menu',
                 'items' => self::visibleItems(self::getHRMItems()),
             ],
-            [
-                'title' => 'CRM',
-                'items' => self::visibleItems(self::getCRMItems()),
-            ],           
+            // [
+            //     'title' => 'CRM Menu',
+            //     'items' => self::visibleItems(self::getCRMItems()),
+            // ],           
 
         ];
     }
