@@ -45,6 +45,8 @@ return new class extends Migration
             $table->json('languages')->nullable();
             $table->json('expertise')->nullable();
 
+            $table->foreignId('designation_id')->nullable()->constrained('designations')->nullOnDelete();
+
             // Geographic references; referenced PKs must be UUIDs.
             $table->foreignUuid('city_id')
                 ->nullable()

@@ -2,6 +2,8 @@
 
 
 @section('content')
+
+
     @include('frontend.pages.home.sections.hero')
 
     {{-- @include('frontend.pages.home.sections.stats') --}}

@@ -29,4 +29,6 @@
         
         @include('backend.pages.HR.branches.table', ['items' => $branches])
     </div>
+
+    
 @endsection

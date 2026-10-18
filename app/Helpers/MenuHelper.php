@@ -207,8 +207,8 @@ class MenuHelper
                 'subItems' => [
                     [
                         'name' => 'Employees',
-                        'route' => 'role.seo.index',
-                        'permission' => 'seo.list',
+                        'route' => 'role.employees.index',
+                        'permission' => 'employee.list',
                     ],
                     [
                         'name' => 'Branches',

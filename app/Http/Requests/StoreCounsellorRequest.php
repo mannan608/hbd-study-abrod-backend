@@ -1,67 +1,73 @@
-<?php
-
-namespace App\Http\Requests;
+<?php namespace App\Http\Requests\HR;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreCounsellorRequest extends FormRequest
+class StoreEmployeeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return auth()->user()->can('counsellors.create');
+        return $this->user()?->can('employee.create') ?? false;
     }
 
     public function rules(): array
     {
         return [
             // User account
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:100'],
+
+            'last_name' => ['required', 'string', 'max:100'],
 
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
 
-            'phone' => ['nullable', 'string', 'max:20'],
+            'phone' => ['nullable', 'string', 'max:32'],
 
             'password' => ['required', 'string', 'min:8'],
 
-            'create_user' => ['boolean'],
+            // Personal information
+            'date_of_birth' => ['nullable', 'date'],
 
-            // Counsellor
-            'user_id' => ['nullable', 'exists:users,id'],
+            'gender' => ['nullable', 'string', 'max:24'],
 
-            'slug' => ['nullable', 'string', 'max:180', Rule::unique('counsellors', 'slug')],
+            'religion' => ['nullable', 'string', 'max:64'],
 
-            'photo' => ['nullable', 'image', 'max:2048'],
+            'blood_group' => ['nullable', 'string', 'max:8'],
 
-            'designation' => ['nullable', 'string', 'max:150'],
+            'national_id' => ['nullable', 'string', 'max:255'],
 
+            'address' => ['nullable', 'string'],
+
+            // Professional information
             'bio' => ['nullable', 'string'],
 
             'education' => ['nullable', 'string'],
 
-            'institution' => ['nullable', 'string', 'max:255'],
+            'institution' => ['nullable', 'string', 'max:200'],
 
-            'city_id' => ['nullable', 'exists:cities,id'],
+            'experience_years' => ['nullable', 'integer', 'min:0', 'max:65535'],
 
-            'country_id' => ['nullable', 'exists:countries,id'],
+            // Languages: multiple values
+            'languages' => ['nullable', 'array'],
 
-            'languages' => ['required', 'array', 'min:1'],
+            'languages.*' => ['nullable', 'string', 'max:100'],
 
-            'languages.*' => ['required', 'string', 'max:255'],
-
+            // Expertise: multiple values
             'expertise' => ['nullable', 'array'],
 
-            'expertise.*' => ['nullable', 'string', 'max:255'],
+            'expertise.*' => ['nullable', 'string', 'max:150'],
 
-            'experience_years' => ['nullable', 'integer', 'min:0'],
+            // Location
+            'country_id' => ['nullable', 'uuid', 'exists:countries,id'],
 
-            'is_featured' => ['boolean'],
+            'city_id' => ['nullable', 'uuid', Rule::exists('cities', 'id')->where('country_id', $this->input('country_id'))],
 
-            'is_verified' => ['boolean'],
+            // Emergency contact
+            'emergency_contact_name' => ['nullable', 'string', 'max:150'],
 
-            'is_active' => ['boolean'],
+            'emergency_contact_phone' => ['nullable', 'string', 'max:32'],
 
-            'sort_order' => ['nullable', 'integer'],
+            // Employee status
+            'is_verified' => ['sometimes', 'boolean'],
         ];
     }
 
@@ -69,6 +75,7 @@ class StoreCounsellorRequest extends FormRequest
     {
         $this->merge([
             'languages' => $this->normalizeArrayField($this->input('languages')),
+
             'expertise' => $this->normalizeArrayField($this->input('expertise'), true),
         ]);
     }
@@ -82,14 +89,11 @@ class StoreCounsellorRequest extends FormRequest
             $value = explode(',', $value);
         }
 
-        if (! is_array($value)) {
+        if (!is_array($value)) {
             return $nullable ? null : [];
         }
 
-        $value = array_values(array_filter(array_map(
-            static fn ($item) => is_string($item) ? trim($item) : $item,
-            $value
-        ), static fn ($item) => filled($item)));
+        $value = array_values(array_filter(array_map(static fn($item) => is_string($item) ? trim($item) : $item, $value), static fn($item) => filled($item)));
 
         return $nullable && empty($value) ? null : $value;
     }

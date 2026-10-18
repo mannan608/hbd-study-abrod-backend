@@ -29,6 +29,9 @@ class Employee extends Model
         'experience_years',
         'languages',
         'expertise',
+        'designation_id',
+        'emergency_contact_name',
+        'emergency_contact_phone',
         'city_id',
         'country_id',
         'is_verified',
@@ -94,5 +97,17 @@ class Employee extends Model
     {
         return trim($this->first_name . ' ' . $this->last_name);
     }
-}
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Country::class);
+    }
 
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\City::class);
+    }
+    public function designation(): BelongsTo
+    {
+        return $this->belongsTo(Designation::class);
+    }
+}
