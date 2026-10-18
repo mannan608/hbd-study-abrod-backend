@@ -245,10 +245,10 @@ class MenuHelper
                 'title' => 'HRM Menu',
                 'items' => self::visibleItems(self::getHRMItems()),
             ],
-            // [
-            //     'title' => 'CRM Menu',
-            //     'items' => self::visibleItems(self::getCRMItems()),
-            // ],           
+            [
+                'title' => 'CRM Menu',
+                'items' => self::visibleItems(self::getCRMItems()),
+            ],           
 
         ];
     }

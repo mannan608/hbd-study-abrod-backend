@@ -18,15 +18,25 @@ class UserController extends Controller
         private readonly UserRepositoryInterface $users,
     ) {}
 
+
     public function index(Request $request): View
     {
         $request->user()->can('user.list') || abort(403);
 
         return view('backend.pages.users.index', [
-            'users' => $this->users->paginate(),
+            'users' => $this->users->paginate(
+                perPage: 15,
+                search: $request->input('search'),
+                role: $request->input('role'),
+                status: $request->input('status'),
+            ),
+            'roles' => Role::query()
+                ->orderBy('name')
+                ->pluck('name', 'id'),
             'title' => 'Users',
         ]);
     }
+
 
     public function create(Request $request): View
     {

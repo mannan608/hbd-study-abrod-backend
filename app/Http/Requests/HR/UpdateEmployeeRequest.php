@@ -28,7 +28,12 @@ class UpdateEmployeeRequest extends FormRequest
 
             'last_name' => ['required', 'string', 'max:100'],
 
-            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->when($userId !== null, fn ($rule) => $rule->ignore($userId)),
+            ],
 
             'phone' => ['nullable', 'string', 'max:32'],
 

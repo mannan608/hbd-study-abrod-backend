@@ -66,6 +66,7 @@ class EmployeeController extends Controller
                 'phone' => $validated['phone'] ?? null,
                 'password' => Hash::make($validated['password']),
                 'status' => 'active',
+                 'primary_role_id' => 3,
             ]);
 
             $employeeData = $this->prepareEmployeeData($validated, $request);
@@ -102,6 +103,16 @@ class EmployeeController extends Controller
             'cities' => City::orderBy('name')->get(),
             'title' => 'Edit Employee',
         ]);
+    }
+
+    public function show(string $role, string $employee, Request $request)
+    {
+        $request->user()->can('employee.list') || abort(403);
+
+        $employee = Employee::with(['user', 'country', 'city', 'designation'])
+            ->findOrFail($employee);
+
+        return view('backend.pages.HR.employees.show', compact('employee'));
     }
 
     /**
@@ -175,7 +186,15 @@ class EmployeeController extends Controller
      */
     private function prepareEmployeeData(array $validated, Request $request): array
     {
+        // Names belong to both the login account and the employee profile.
+        $employeeNames = [
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+        ];
+
         unset($validated['first_name'], $validated['last_name'], $validated['email'], $validated['phone'], $validated['password']);
+
+        $validated = array_merge($employeeNames, $validated);
 
         $validated['experience_years'] = $validated['experience_years'] ?? 0;
 

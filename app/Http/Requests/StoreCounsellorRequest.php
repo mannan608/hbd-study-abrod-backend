@@ -1,9 +1,9 @@
-<?php namespace App\Http\Requests\HR;
+<?php namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreEmployeeRequest extends FormRequest
+class StoreCounsellorRequest extends FormRequest
 {
     public function authorize(): bool
     {
