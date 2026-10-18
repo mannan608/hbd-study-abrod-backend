@@ -59,6 +59,7 @@ class DepartmentController extends Controller
             'is_active' => ['required', 'boolean'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:65535'],
         ]);
+        // dd($validated);
 
         Department::create($validated);
 

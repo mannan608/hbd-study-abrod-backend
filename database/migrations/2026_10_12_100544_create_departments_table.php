@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('departments', function (Blueprint $table): void {
-             $table->id();
+            $table->id();
+            $table->foreignId('branch_id')
+                ->nullable()
+                ->constrained('branches')
+                ->nullOnDelete();
             $table->string('name', 191);
             $table->string('code', 191)->nullable()->default(null);
             $table->boolean('is_active')->default('1');
