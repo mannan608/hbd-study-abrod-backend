@@ -10,7 +10,7 @@
             'id' => $department->id,
             'name' => $department->name,
             'code' => $department->code ?? '—',
-            'employees_count' => $department->employees()->count(),
+            // 'employees_count' => $department->employees()->count(),
             'status' => $department->is_active ? 'active' : 'inactive',
         ];
     })->values();
@@ -81,7 +81,7 @@
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Id</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Name</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Code</th>
-                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-center">Employees</th>
+                            {{-- <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-center">Employees</th> --}}
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-right">Action</th>
                         </tr>
@@ -103,9 +103,9 @@
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400">
                                     <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 rounded font-mono text-xs" x-text="row.code"></span>
                                 </td>
-                                <td class="px-5 py-4 text-sm text-center">
+                                {{-- <td class="px-5 py-4 text-sm text-center">
                                     <span class="px-2.5 py-1 bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400 rounded-full text-xs font-semibold" x-text="row.employees_count"></span>
-                                </td>
+                                </td> --}}
                                 <td class="px-5 py-4 text-sm">
                                     <span :class="row.status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-500/10 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-400'" class="px-2 py-0.5 rounded text-xs font-medium capitalize" x-text="row.status"></span>
                                 </td>

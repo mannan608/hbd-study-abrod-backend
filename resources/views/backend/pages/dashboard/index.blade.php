@@ -21,7 +21,7 @@
             </div>
         </div>
         <!-- Section Grid / Reports -->
-        <div class="space-y-6">
+        {{-- <div class="space-y-6">
             @include('backend.pages.dashboard.lead-summary')
             <!-- Lead Summary Card -->
             <div class="rounded-2xl border border-neutral-200/80 bg-white p-5 transition-all dark:border-neutral-800 dark:bg-neutral-900 sm:p-6">
@@ -99,6 +99,6 @@
             <div class="rounded-2xl border border-neutral-200/80 bg-white p-5 transition-all dark:border-neutral-800 dark:bg-neutral-900 sm:p-6">
                 @include('backend.pages.dashboard.ipcall-report')
             </div>
-        </div>    
+        </div>     --}}
     </div>
 @endsection

@@ -200,33 +200,7 @@ class MenuHelper
                 'route' => 'role.dashboard',
                 'permission' => 'dashboard.view',
             ],
-
-           [
-                'name' => 'Organizations',
-                'icon' => 'pages',
-                'subItems' => [
-                    [
-                        'name' => 'Departments',
-                        'route' => 'role.seo.index',
-                        'permission' => 'seo.list',
-                    ],
-                    [
-                        'name' => 'Branches',
-                        'route' => 'role.blogs.index',
-                        'permission' => 'blog.list',
-                    ],
-                    [
-                        'name' => 'Teams',
-                        'route' => 'role.events.index',
-                        'permission' => 'event.list',
-                    ],
-                    [
-                        'name' => 'Designations',
-                        'route' => 'role.events.index',
-                        'permission' => 'event.list',
-                    ],
-                ],
-            ],
+           
             [
                 'name' => ' Employee Manage',
                 'icon' => 'pages',
@@ -248,13 +222,13 @@ class MenuHelper
                     ],
                     [
                         'name' => 'Teams',
-                        'route' => 'role.events.index',
-                        'permission' => 'event.list',
+                        'route' => 'role.teams.index',
+                        'permission' => 'team.list',
                     ],
                     [
                         'name' => 'Designations',
-                        'route' => 'role.events.index',
-                        'permission' => 'event.list',
+                        'route' => 'role.designations.index',
+                        'permission' => 'designation.list',
                     ],
                     
                 ],

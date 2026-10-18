@@ -36,7 +36,7 @@ class DepartmentController extends Controller
         return view('backend.pages.HR.departments.index', compact('departments'));
     }
 
-    public function create(Request $request): View
+    public function create(string $role,Request $request): View
     {
         abort_unless($request->user()?->can('department.create'), 403);
 
@@ -47,7 +47,7 @@ class DepartmentController extends Controller
         return view('backend.pages.HR.departments.create', compact('branches'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(string $role ,Request $request): RedirectResponse
     {
         abort_unless($request->user()?->can('department.create'), 403);
 
@@ -57,13 +57,10 @@ class DepartmentController extends Controller
             'code' => ['nullable', 'string', 'max:50', Rule::unique('departments', 'code')],
             'description' => ['nullable', 'string', 'max:5000'],
             'is_active' => ['required', 'boolean'],
-            'sort_order' => ['required', 'integer', 'min:0', 'max:65535'],
         ]);
-        // dd($validated);
-
         Department::create($validated);
 
-        return redirect()->route('departments.index')->with('success', 'Department created successfully.');
+        return redirect()->route('role.departments.index', ['role' => $request->route('role')])->with('success', 'Department created successfully.');
     }
 
     public function show(Request $request, Department $department): View
@@ -76,7 +73,7 @@ class DepartmentController extends Controller
         return view('backend.pages.HR.departments.show', compact('department'));
     }
 
-    public function edit(Request $request, Department $department): View
+    public function edit(string $role,Request $request, Department $department): View
     {
         abort_unless($request->user()?->can('department.edit'), 403);
 
@@ -87,7 +84,7 @@ class DepartmentController extends Controller
         return view('backend.pages.HR.departments.edit', compact('department', 'branches'));
     }
 
-    public function update(Request $request, Department $department): RedirectResponse
+    public function update(string $role,Request $request, Department $department): RedirectResponse
     {
         abort_unless($request->user()?->can('department.edit'), 403);
 
@@ -97,24 +94,23 @@ class DepartmentController extends Controller
             'code' => ['nullable', 'string', 'max:50', Rule::unique('departments', 'code')->ignore($department->id)],
             'description' => ['nullable', 'string', 'max:5000'],
             'is_active' => ['required', 'boolean'],
-            'sort_order' => ['required', 'integer', 'min:0', 'max:65535'],
         ]);
 
         $department->update($validated);
 
-        return redirect()->route('departments.index')->with('success', 'Department updated successfully.');
+        return redirect()->route('role.departments.index', ['role' => $request->route('role')])->with('success', 'Department updated successfully.');
     }
 
-    public function destroy(Request $request, Department $department): RedirectResponse
+    public function destroy(string $role,Request $request, Department $department): RedirectResponse
     {
         abort_unless($request->user()?->can('department.delete'), 403);
 
         if ($department->teams()->exists() || $department->employments()->exists()) {
-            return redirect()->route('departments.index')->with('error', 'This department cannot be deleted because it has related teams or employments.');
+            return redirect()->route('role.departments.index', ['role' => $request->route('role')])->with('error', 'This department cannot be deleted because it has related teams or employments.');
         }
 
         $department->delete();
 
-        return redirect()->route('departments.index')->with('success', 'Department deleted successfully.');
+        return redirect()->route('role.departments.index', ['role' => $request->route('role')])->with('success', 'Department deleted successfully.');
     }
 }

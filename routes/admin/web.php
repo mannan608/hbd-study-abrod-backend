@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\HR\DepartmentController;
+use App\Http\Controllers\HR\DesignationController;
+use App\Http\Controllers\HR\TeamController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
 
@@ -110,5 +112,7 @@ Route::prefix('{role}')
 
         // HR Route
         Route::resource('departments', DepartmentController::class);
+        Route::resource('designations', DesignationController::class);
+        Route::resource('teams', TeamController::class);
 
     });

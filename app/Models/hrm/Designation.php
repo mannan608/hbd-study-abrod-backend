@@ -15,7 +15,6 @@ class Designation extends Model
         'code',
         'description',
         'level',
-        'sort_order',
         'is_active',
     ];
 
@@ -23,16 +22,24 @@ class Designation extends Model
     {
         return [
             'level' => 'integer',
-            'sort_order' => 'integer',
             'is_active' => 'boolean',
         ];
     }
 
     /**
-     * Employment records associated with this designation.
+     * Employees assigned to this designation through employments.
      */
     public function employments(): HasMany
     {
         return $this->hasMany(Employment::class);
+    }
+
+    /**
+     * Teams associated with this designation.
+     * Keep this relation only if teams.designation_id exists.
+     */
+    public function teams(): HasMany
+    {
+        return $this->hasMany(Team::class);
     }
 }

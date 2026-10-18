@@ -183,6 +183,14 @@ class RolePermissionSeeder extends Seeder
             'department.status.change',
             'department.manage',
 
+            // teams
+            'team.list',
+            'team.create',
+            'team.edit',
+            'team.delete',
+            'team.status.change',
+            'team.manage',
+
             // designations
             'designation.list',
             'designation.create',
