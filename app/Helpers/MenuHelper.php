@@ -212,8 +212,8 @@ class MenuHelper
                     ],
                     [
                         'name' => 'Branches',
-                        'route' => 'role.blogs.index',
-                        'permission' => 'blog.list',
+                        'route' => 'role.branches.index',
+                        'permission' => 'branch.list',
                     ],
                     [
                         'name' => 'Departments',

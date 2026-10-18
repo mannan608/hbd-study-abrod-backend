@@ -175,6 +175,14 @@ class RolePermissionSeeder extends Seeder
 
             // HR permissions
 
+            //branches
+            'branch.list',
+            'branch.create',
+            'branch.edit',
+            'branch.delete',
+            'branch.status.change',
+            'branch.manage',
+
             // departments
             'department.list',
             'department.create',

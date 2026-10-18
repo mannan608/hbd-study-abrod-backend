@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\CounsellorBookingController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\HR\BranchController;
 use App\Http\Controllers\HR\DepartmentController;
 use App\Http\Controllers\HR\DesignationController;
 use App\Http\Controllers\HR\TeamController;
@@ -111,6 +112,7 @@ Route::prefix('{role}')
         Route::delete('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'deleteScope'])->name('providers.scopes.delete');
 
         // HR Route
+        Route::resource('branches', BranchController::class);
         Route::resource('departments', DepartmentController::class);
         Route::resource('designations', DesignationController::class);
         Route::resource('teams', TeamController::class);
