@@ -4,15 +4,14 @@
     $selectedCountryId = old('country_id', $employee?->country_id);
     $selectedCityId = old('city_id', $employee?->city_id);
 
-    // Main branch is identified by is_head_office = true.
-    $mainBranchId = $branches->first(
-        fn ($branch) => (bool) $branch->is_head_office
-    )?->id;
+    // OrganizationSeeder identifies the main branch by its stable code.
+    $mainBranchId = $branches->firstWhere('code', 'DHK-HO')?->id
+        ?? $branches->first()?->id;
 
     // Priority: validation input > saved employee branch > main branch.
     $branchId = old(
         'branch_id',
-        $isEdit ? $employee->branch_id : $mainBranchId
+        ($isEdit ? $employee->branch_id : null) ?: $mainBranchId
     );
 
     $departmentId = old('department_id', $employee?->department_id);
@@ -179,7 +178,7 @@
                         for="branch_id"
                         class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400"
                     >
-                        Branch <span class="text-red-500">*</span>
+                        Branch
                     </label>
 
                     <select
@@ -187,7 +186,6 @@
                         name="branch_id"
                         x-model="branchId"
                         @change="branchChanged()"
-                        required
                         class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
                     >
                         <option value="">Select Branch</option>
@@ -195,7 +193,7 @@
                         @foreach ($branches as $branch)
                             <option value="{{ $branch->id }}">
                                 {{ $branch->name }}
-                                @if ($branch->is_head_office)
+                                @if ($branch->code === 'DHK-HO')
                                     (Main Branch)
                                 @endif
                             </option>

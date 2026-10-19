@@ -43,44 +43,13 @@ class EmployeeController extends Controller
         return view('backend.pages.HR.employees.index', compact('employees'));
     }
 
-    // public function create(Request $request)
-    // {
-    //     $request->user()->can('employee.create') || abort(403);
-
-    //     $branches = Branch::query()->orderBy('name')->get(['id', 'name']);
-
-    //     $departments = Department::query()->orderBy('name')->get(['id', 'name']);
-
-    //     $designations = Designation::query()->orderBy('name')->get(['id', 'name']);
-
-    //     $teams = Team::query()->orderBy('name')->get(['id', 'name']);
-    //     $countries = Country::orderBy('name')->get();
-    //     $cities = City::orderBy('name')->get();
-
-    //     return view('backend.pages.HR.employees.create', [
-    //         'employee' => null,
-    //         'branches' => $branches,
-    //         'departments' => $departments,
-    //         'designations' => $designations,
-    //         'teams' => $teams,
-    //         'countries' => $countries,
-    //         'cities' => $cities,
-    //         'title' => 'Create Employee',
-    //     ]);
-    // }
-
-
+   
     public function create(Request $request)
     {
         $request->user()->can('employee.create') || abort(403);
 
-        // Branches: Main branch first
-        $branches = Branch::query() ->orderByDesc('is_head_office') ->orderBy('name') ->get([ 'id', 'name','code','is_active',]);
-
-        // IMPORTANT: branch_id is required for Alpine filtering
+        $branches = Branch::query()->orderBy('name')->get(['id', 'name', 'code', 'is_active']);
         $departments = Department::query() ->orderBy('name')->get(['id','name','branch_id', ]);
-
-        // IMPORTANT: department_id is required for Alpine filtering
         $teams = Team::query() ->orderBy('name')->get([ 'id', 'name','department_id',]);
 
         $designations = Designation::query()->orderBy('name')->get(['id', 'name',]);
@@ -149,13 +118,13 @@ class EmployeeController extends Controller
         $request->user()->can('employee.edit') || abort(403);
 
         $employee = Employee::with('user')->findOrFail($employee);
-        $branches = Branch::query()->orderBy('name')->get(['id', 'name']);
+        $branches = Branch::query()->orderBy('name')->get(['id', 'name', 'code', 'is_active']);
 
-        $departments = Department::query()->orderBy('name')->get(['id', 'name']);
+        $departments = Department::query()->orderBy('name')->get(['id', 'name', 'branch_id']);
 
         $designations = Designation::query()->orderBy('name')->get(['id', 'name']);
 
-        $teams = Team::query()->orderBy('name')->get(['id', 'name']);
+        $teams = Team::query()->orderBy('name')->get(['id', 'name', 'department_id']);
         $countries = Country::orderBy('name')->get();
         $cities = City::orderBy('name')->get();
 

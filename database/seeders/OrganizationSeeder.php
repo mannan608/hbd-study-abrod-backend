@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\hrm\Branch;
 use App\Models\hrm\Department;
 use App\Models\hrm\Designation;
+use App\Models\hrm\Team;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -24,37 +25,27 @@ class OrganizationSeeder extends Seeder
                 [
                     'code' => 'DHK-HO',
                     'name' => 'Main Branch',
-                    'is_head_office' => true,
                     'is_active' => true,
-                    'sort_order' => 1,
                 ],
                 [
                     'code' => 'DHK-02',
                     'name' => 'Dhaka Branch',
-                    'is_head_office' => false,
                     'is_active' => true,
-                    'sort_order' => 2,
                 ],
                 [
                     'code' => 'CTG-01',
                     'name' => 'Chattogram Branch',
-                    'is_head_office' => false,
                     'is_active' => true,
-                    'sort_order' => 3,
                 ],
                 [
                     'code' => 'SYL-01',
                     'name' => 'Sylhet Branch',
-                    'is_head_office' => false,
                     'is_active' => true,
-                    'sort_order' => 4,
                 ],
                 [
                     'code' => 'RAJ-01',
                     'name' => 'Rajshahi Branch',
-                    'is_head_office' => false,
                     'is_active' => true,
-                    'sort_order' => 5,
                 ],
             ];
 
@@ -118,12 +109,28 @@ class OrganizationSeeder extends Seeder
 
             foreach ($departments as $data) {
                 Department::updateOrCreate(
-                    [
-                        'branch_id' => $data['branch_id'],
-                        'code' => $data['code'],
-                    ],
+                    ['code' => $data['code']],
                     $data
                 );
+            }
+
+            // Teams are keyed by department and name because the teams table
+            // does not have a code column.
+            $teams = [
+                ['department_code' => 'HR', 'name' => 'People Operations'],
+                ['department_code' => 'IT', 'name' => 'Application Development'],
+                ['department_code' => 'FIN', 'name' => 'Accounts'],
+                ['department_code' => 'MKT', 'name' => 'Digital Marketing'],
+                ['department_code' => 'OPS', 'name' => 'Operations'],
+            ];
+
+            foreach ($teams as $data) {
+                $team = Team::withTrashed()->firstOrNew([
+                    'department_id' => Department::where('code', $data['department_code'])->value('id'),
+                    'name' => $data['name'],
+                ]);
+                $team->deleted_at = null;
+                $team->save();
             }
 
             /*
