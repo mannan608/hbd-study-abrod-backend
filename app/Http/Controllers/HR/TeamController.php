@@ -19,6 +19,7 @@ class TeamController extends Controller
             ->withCount('employments')
             ->latest()
             ->paginate(15);
+        // dd($teams);
 
         return view('backend.pages.HR.teams.index', compact('teams'));
     }

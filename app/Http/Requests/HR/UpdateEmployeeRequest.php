@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\HR;
+<?php
+
+namespace App\Http\Requests\HR;
 
 use App\Models\hrm\Employee;
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,6 +25,38 @@ class UpdateEmployeeRequest extends FormRequest
         $userId = $employeeModel->user_id;
 
         return [
+
+            'branch_id' => ['nullable', 'integer',  'exists:branches,id',],
+
+            'department_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('departments', 'id')
+                    ->where(function ($query) {
+                        if ($this->filled('branch_id')) {
+                            $query->where(
+                                'branch_id',
+                                $this->input('branch_id')
+                            );
+                        }
+                    }),
+            ],
+
+            'team_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('teams', 'id')
+                    ->where(function ($query) {
+                        if ($this->filled('department_id')) {
+                            $query->where(
+                                'department_id',
+                                $this->input('department_id')
+                            );
+                        }
+                    }),
+            ],
+
+            'designation_id' => ['nullable', 'integer', 'exists:designations,id',],
             // User account
             'first_name' => ['required', 'string', 'max:100'],
 
@@ -32,7 +66,7 @@ class UpdateEmployeeRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users', 'email')->when($userId !== null, fn ($rule) => $rule->ignore($userId)),
+                Rule::unique('users', 'email')->when($userId !== null, fn($rule) => $rule->ignore($userId)),
             ],
 
             'phone' => ['nullable', 'string', 'max:32'],

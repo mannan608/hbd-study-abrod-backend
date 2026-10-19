@@ -1,11 +1,17 @@
-<?php namespace App\Http\Controllers\HR;
+<?php
+
+namespace App\Http\Controllers\HR;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HR\StoreEmployeeRequest;
 use App\Http\Requests\HR\UpdateEmployeeRequest;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\hrm\Branch;
+use App\Models\hrm\Department;
+use App\Models\hrm\Designation;
 use App\Models\hrm\Employee;
+use App\Models\hrm\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,17 +43,64 @@ class EmployeeController extends Controller
         return view('backend.pages.HR.employees.index', compact('employees'));
     }
 
+    // public function create(Request $request)
+    // {
+    //     $request->user()->can('employee.create') || abort(403);
+
+    //     $branches = Branch::query()->orderBy('name')->get(['id', 'name']);
+
+    //     $departments = Department::query()->orderBy('name')->get(['id', 'name']);
+
+    //     $designations = Designation::query()->orderBy('name')->get(['id', 'name']);
+
+    //     $teams = Team::query()->orderBy('name')->get(['id', 'name']);
+    //     $countries = Country::orderBy('name')->get();
+    //     $cities = City::orderBy('name')->get();
+
+    //     return view('backend.pages.HR.employees.create', [
+    //         'employee' => null,
+    //         'branches' => $branches,
+    //         'departments' => $departments,
+    //         'designations' => $designations,
+    //         'teams' => $teams,
+    //         'countries' => $countries,
+    //         'cities' => $cities,
+    //         'title' => 'Create Employee',
+    //     ]);
+    // }
+
+
     public function create(Request $request)
     {
         $request->user()->can('employee.create') || abort(403);
 
+        // Branches: Main branch first
+        $branches = Branch::query() ->orderByDesc('is_head_office') ->orderBy('name') ->get([ 'id', 'name','code','is_active',]);
+
+        // IMPORTANT: branch_id is required for Alpine filtering
+        $departments = Department::query() ->orderBy('name')->get(['id','name','branch_id', ]);
+
+        // IMPORTANT: department_id is required for Alpine filtering
+        $teams = Team::query() ->orderBy('name')->get([ 'id', 'name','department_id',]);
+
+        $designations = Designation::query()->orderBy('name')->get(['id', 'name',]);
+
+        $countries = Country::query()->orderBy('name')->get();
+
+        $cities = City::query()->orderBy('name')->get();
+
         return view('backend.pages.HR.employees.create', [
             'employee' => null,
-            'countries' => Country::orderBy('name')->get(),
-            'cities' => City::orderBy('name')->get(),
+            'branches' => $branches,
+            'departments' => $departments,
+            'teams' => $teams,
+            'designations' => $designations,
+            'countries' => $countries,
+            'cities' => $cities,
             'title' => 'Create Employee',
         ]);
     }
+
 
     /**
      * Store a new employee.
@@ -66,7 +119,7 @@ class EmployeeController extends Controller
                 'phone' => $validated['phone'] ?? null,
                 'password' => Hash::make($validated['password']),
                 'status' => 'active',
-                 'primary_role_id' => 3,
+                'primary_role_id' => 3,
             ]);
 
             $employeeData = $this->prepareEmployeeData($validated, $request);
@@ -96,11 +149,24 @@ class EmployeeController extends Controller
         $request->user()->can('employee.edit') || abort(403);
 
         $employee = Employee::with('user')->findOrFail($employee);
+        $branches = Branch::query()->orderBy('name')->get(['id', 'name']);
+
+        $departments = Department::query()->orderBy('name')->get(['id', 'name']);
+
+        $designations = Designation::query()->orderBy('name')->get(['id', 'name']);
+
+        $teams = Team::query()->orderBy('name')->get(['id', 'name']);
+        $countries = Country::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
 
         return view('backend.pages.HR.employees.edit', [
             'employee' => $employee,
-            'countries' => Country::orderBy('name')->get(),
-            'cities' => City::orderBy('name')->get(),
+            'branches' => $branches,
+            'departments' => $departments,
+            'designations' => $designations,
+            'teams' => $teams,
+            'countries' => $countries,
+            'cities' => $cities,
             'title' => 'Edit Employee',
         ]);
     }

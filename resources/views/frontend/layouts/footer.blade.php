@@ -51,7 +51,6 @@
             <li><a href="{{ route('visa-points-calculator')}}" class="hover:text-brand-400 transition">Visa Points Calculator</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">Student Accommodation</a></li>
             <li><a href="#" class="hover:text-brand-400 transition">Careers</a></li>
-
           </ul>
         </div>
       </div>

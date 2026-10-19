@@ -15,6 +15,34 @@ class StoreEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // Organization
+            'branch_id' => [ 'nullable','integer', 'exists:branches,id',],
+
+            'department_id' => ['nullable','integer',
+                Rule::exists('departments', 'id')
+                    ->where(function ($query) {
+                        if ($this->filled('branch_id')) {
+                            $query->where(
+                                'branch_id',
+                                $this->input('branch_id')
+                            );
+                        }
+                    }),
+            ],
+
+            'team_id' => ['nullable','integer',
+                Rule::exists('teams', 'id')
+                    ->where(function ($query) {
+                        if ($this->filled('department_id')) {
+                            $query->where(
+                                'department_id',
+                                $this->input('department_id')
+                            );
+                        }
+                    }),
+            ],
+
+            'designation_id' => ['nullable','integer','exists:designations,id'],
             // User account
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],

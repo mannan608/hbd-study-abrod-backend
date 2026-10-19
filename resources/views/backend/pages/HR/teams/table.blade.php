@@ -1,26 +1,27 @@
-@php
-    use Illuminate\Support\Str;
 
-    $collection = $items instanceof \Illuminate\Pagination\AbstractPaginator
+@php
+    use Illuminate\Pagination\AbstractPaginator;
+
+    $collection = $items instanceof AbstractPaginator
         ? $items->getCollection()
         : collect($items);
 
-    $tableRowData = $collection->map(function ($department) {
+    $tableRowData = $collection->map(function ($team) {
         return [
-            'id' => $department->id,
-            'name' => $department->name,
-            'code' => $department->code ?? '—',
-            // 'employees_count' => $department->employees()->count(),
-            'status' => $department->is_active ? 'active' : 'inactive',
+            'id' => $team->id,
+            'name' => $team->name,
+            'department' => $team->department?->name ?? '—',
+            'team_lead' => $team->teamLead?->name ?? '—',
         ];
     })->values();
 
     $role = request()->route('role');
 @endphp
 
+
 <div x-data="{
     tableRowData: {{ \Illuminate\Support\Js::from($tableRowData) }},
-    departmentBaseUrl: {{ \Illuminate\Support\Js::from(url('/' . $role . '/departments')) }},
+    teamBaseUrl: {{ \Illuminate\Support\Js::from(url('/' . $role . '/teams')) }},
     showDeleteModal: false,
     rowToDelete: null,
 
@@ -41,7 +42,7 @@
 }" @keydown.escape.window="closeDeleteModal()">
         
         <!-- Delete Form -->
-        <form x-ref="deleteForm" :action="rowToDelete ? (departmentBaseUrl + '/' + rowToDelete.id) : '#'" method="POST" class="hidden">
+        <form x-ref="deleteForm" :action="rowToDelete ? (teamBaseUrl + '/' + rowToDelete.id) : '#'" method="POST" class="hidden">
             @csrf
             @method('DELETE')
         </form>
@@ -80,9 +81,8 @@
                         <tr>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Id</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Name</th>
-                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Code</th>
-                            {{-- <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-center">Employees</th> --}}
-                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
+                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Department</th>
+                            <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider">Team Lead</th>
                             <th class="px-5 py-4 text-xs font-medium text-neutral-500 uppercase tracking-wider text-right">Action</th>
                         </tr>
                     </thead>
@@ -101,17 +101,13 @@
                                 </td>
                                 <td class="px-5 py-4 text-sm font-medium text-neutral-800 dark:text-neutral-200" x-text="row.name"></td>
                                 <td class="px-5 py-4 text-sm text-neutral-500 dark:text-neutral-400">
-                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 rounded font-mono text-xs" x-text="row.code"></span>
+                                    <span class="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 rounded font-mono text-xs" x-text="row.department"></span>
                                 </td>
-                                {{-- <td class="px-5 py-4 text-sm text-center">
-                                    <span class="px-2.5 py-1 bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400 rounded-full text-xs font-semibold" x-text="row.employees_count"></span>
-                                </td> --}}
-                                <td class="px-5 py-4 text-sm">
-                                    <span :class="row.status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-500/10 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-400'" class="px-2 py-0.5 rounded text-xs font-medium capitalize" x-text="row.status"></span>
-                                </td>
+                                 <td class="px-5 py-4 text-sm font-medium text-neutral-800 dark:text-neutral-200" x-text="row.team_lead"></td>
+                            
                                 <td class="px-5 py-4 text-right">
                                     <div class="flex justify-end gap-2">
-                                        <a :href="departmentBaseUrl + '/' + row.id + '/edit'" class="p-2 text-neutral-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all">
+                                        <a :href="teamBaseUrl + '/' + row.id + '/edit'" class="p-2 text-neutral-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all">
                                             <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>

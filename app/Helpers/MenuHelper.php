@@ -42,12 +42,12 @@ class MenuHelper
                 'icon' => 'authentication',
                 'subItems' => [
                     [
-                        'name' => 'Role & Permission',
+                        'name' => 'Roles & Permissions',
                         'route' => 'role.roles-permissions.index',
                         'permission' => 'role.list',
                     ],
                     [
-                        'name' => 'Users',
+                        'name' => 'Users Permissions',
                         'route' => 'role.users.index',
                         'permission' => 'user.list',
                     ],

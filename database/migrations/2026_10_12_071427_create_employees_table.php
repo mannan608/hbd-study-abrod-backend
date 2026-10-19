@@ -1,24 +1,24 @@
-
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
 
-            // One login account can belong to at most one employee.
-            // Employees may exist without login accounts.
-            $table->foreignId('user_id')
-                ->nullable()
-                ->unique()
-                ->constrained('users')
-                ->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->unique()->constrained('users')->nullOnDelete();
+
+            // Organizational information
+            $table->foreignId('branch_id')->nullable()->constrained('branches')->nullOnDelete();
+
+            $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete();
+
+            $table->foreignId('team_id')->nullable()->constrained('teams')->nullOnDelete();
+
+            $table->foreignId('designation_id')->nullable()->constrained('designations')->nullOnDelete();
 
             // Personal information
             $table->string('first_name', 100);
@@ -39,24 +39,15 @@ return new class extends Migration
             $table->text('education')->nullable();
             $table->string('institution', 200)->nullable();
 
-            $table->unsignedSmallInteger('experience_years')
-                ->default(0);
+            $table->unsignedSmallInteger('experience_years')->default(0);
 
             $table->json('languages')->nullable();
             $table->json('expertise')->nullable();
 
-            $table->foreignId('designation_id')->nullable()->constrained('designations')->nullOnDelete();
-
             // Geographic references; referenced PKs must be UUIDs.
-            $table->foreignUuid('city_id')
-                ->nullable()
-                ->constrained('cities')
-                ->nullOnDelete();
+            $table->foreignUuid('city_id')->nullable()->constrained('cities')->nullOnDelete();
 
-            $table->foreignUuid('country_id')
-                ->nullable()
-                ->constrained('countries')
-                ->nullOnDelete();
+            $table->foreignUuid('country_id')->nullable()->constrained('countries')->nullOnDelete();
 
             // Emergency contact
             $table->string('emergency_contact_name', 150)->nullable();

@@ -4,6 +4,21 @@
     $selectedCountryId = old('country_id', $employee?->country_id);
     $selectedCityId = old('city_id', $employee?->city_id);
 
+    // Main branch is identified by is_head_office = true.
+    $mainBranchId = $branches->first(
+        fn ($branch) => (bool) $branch->is_head_office
+    )?->id;
+
+    // Priority: validation input > saved employee branch > main branch.
+    $branchId = old(
+        'branch_id',
+        $isEdit ? $employee->branch_id : $mainBranchId
+    );
+
+    $departmentId = old('department_id', $employee?->department_id);
+    $teamId = old('team_id', $employee?->team_id);
+    $designationId = old('designation_id', $employee?->designation_id);
+
     $normalizeArrayInput = function ($value) {
         if (is_string($value)) {
             $value = explode(',', $value);
@@ -15,52 +30,300 @@
 
         $value = array_values(
             array_filter(
-                array_map(static fn($item) => is_string($item) ? trim($item) : $item, $value),
-                static fn($item) => filled($item),
+                array_map(
+                    static fn ($item) => is_string($item)
+                        ? trim($item)
+                        : $item,
+                    $value
+                ),
+                static fn ($item) => filled($item),
             ),
         );
 
         return $value ?: [''];
     };
 
-    $languages = $normalizeArrayInput(old('languages', $employee?->languages ?? []));
-    $expertise = $normalizeArrayInput(old('expertise', $employee?->expertise ?? []));
+    $languages = $normalizeArrayInput(
+        old('languages', $employee?->languages ?? [])
+    );
+
+    $expertise = $normalizeArrayInput(
+        old('expertise', $employee?->expertise ?? [])
+    );
 @endphp
 
-<div class="space-y-8" x-data="{
-    countryId: @js((string) ($selectedCountryId ?? '')),
-    cityId: @js((string) ($selectedCityId ?? '')),
+<div
+    class="space-y-8"
+    x-data="{
+        countryId: @js((string) ($selectedCountryId ?? '')),
+        cityId: @js((string) ($selectedCityId ?? '')),
 
-    cities: @js(
-        $cities
-            ->map(
-                fn($city) => [
-                    'id' => (string) $city->id,
-                    'name' => $city->name,
-                    'country_id' => (string) $city->country_id,
-                ],
-            )
-            ->values(),
-    ),
+        branchId: @js((string) ($branchId ?? '')),
+        departmentId: @js((string) ($departmentId ?? '')),
+        teamId: @js((string) ($teamId ?? '')),
+        designationId: @js((string) ($designationId ?? '')),
 
-    get filteredCities() {
-        if (!this.countryId) return [];
-        return this.cities.filter(city => city.country_id === this.countryId);
-    },
+        cities: @js(
+            $cities->map(fn ($city) => [
+                'id' => (string) $city->id,
+                'name' => $city->name,
+                'country_id' => (string) $city->country_id,
+            ])->values()
+        ),
 
-    countryChanged() {
-        const exists = this.filteredCities.some(city => city.id === this.cityId);
-        if (!exists) this.cityId = '';
-    }
-}" x-init="countryChanged()">
+        departments: @js(
+            $departments->map(fn ($department) => [
+                'id' => (string) $department->id,
+                'name' => $department->name,
+                'branch_id' => (string) $department->branch_id,
+            ])->values()
+        ),
 
-    {{-- SECTION 1: Personal Information --}}
-    <div class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <div class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
+        teams: @js(
+            $teams->map(fn ($team) => [
+                'id' => (string) $team->id,
+                'name' => $team->name,
+                'department_id' => (string) $team->department_id,
+            ])->values()
+        ),
+
+        // Country / City
+        get filteredCities() {
+            return this.countryId
+                ? this.cities.filter(
+                    city => city.country_id === this.countryId
+                )
+                : [];
+        },
+
+        countryChanged() {
+            if (!this.filteredCities.some(
+                city => city.id === this.cityId
+            )) {
+                this.cityId = '';
+            }
+        },
+
+        // Branch / Department
+        get filteredDepartments() {
+            return this.branchId
+                ? this.departments.filter(
+                    department =>
+                        department.branch_id === this.branchId
+                )
+                : this.departments;
+        },
+
+        // Department / Team
+        get filteredTeams() {
+            return this.departmentId
+                ? this.teams.filter(
+                    team =>
+                        team.department_id === this.departmentId
+                )
+                : this.teams;
+        },
+
+        branchChanged() {
+            const validDepartment = this.filteredDepartments.some(
+                department => department.id === this.departmentId
+            );
+
+            if (this.departmentId && !validDepartment) {
+                this.departmentId = '';
+            }
+
+            this.departmentChanged();
+        },
+
+        departmentChanged() {
+            const validTeam = this.filteredTeams.some(
+                team => team.id === this.teamId
+            );
+
+            if (this.teamId && !validTeam) {
+                this.teamId = '';
+            }
+        },
+
+        init() {
+            this.countryChanged();
+            this.branchChanged();
+        }
+    }"
+>
+    {{-- Organizational Information --}}
+    <section
+        class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
+    >
+        <div
+            class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50"
+        >
+            <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
+                Organizational Information
+            </h2>
+
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                Assign the employee's branch, department, team, and designation.
+            </p>
+        </div>
+
+        <div class="space-y-6 p-6">
+
+            {{-- Branch and Department --}}
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+                {{-- Branch --}}
+                <div>
+                    <label
+                        for="branch_id"
+                        class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400"
+                    >
+                        Branch <span class="text-red-500">*</span>
+                    </label>
+
+                    <select
+                        id="branch_id"
+                        name="branch_id"
+                        x-model="branchId"
+                        @change="branchChanged()"
+                        required
+                        class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                    >
+                        <option value="">Select Branch</option>
+
+                        @foreach ($branches as $branch)
+                            <option value="{{ $branch->id }}">
+                                {{ $branch->name }}
+                                @if ($branch->is_head_office)
+                                    (Main Branch)
+                                @endif
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('branch_id')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                {{-- Department --}}
+                <div>
+                    <label
+                        for="department_id"
+                        class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400"
+                    >
+                        Department
+                    </label>
+
+                    <select
+                        id="department_id"
+                        name="department_id"
+                        x-model="departmentId"
+                        @change="departmentChanged()"
+                        class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                    >
+                        <option value="">No Department</option>
+
+                        <template
+                            x-for="department in filteredDepartments"
+                            :key="department.id"
+                        >
+                            <option
+                                :value="department.id"
+                                x-text="department.name"
+                            ></option>
+                        </template>
+                    </select>
+
+                    @error('department_id')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+            </div>
+
+            {{-- Team and Designation --}}
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+                {{-- Team --}}
+                <div>
+                    <label
+                        for="team_id"
+                        class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400"
+                    >
+                        Team
+                    </label>
+
+                    <select
+                        id="team_id"
+                        name="team_id"
+                        x-model="teamId"
+                        @change="departmentChanged()"
+                        class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                    >
+                        <option value="">No Team</option>
+
+                        <template
+                            x-for="team in filteredTeams"
+                            :key="team.id"
+                        >
+                            <option
+                                :value="team.id"
+                                x-text="team.name"
+                            ></option>
+                        </template>
+                    </select>
+
+                    @error('team_id')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                {{-- Designation --}}
+                <div>
+                    <label
+                        for="designation_id"
+                        class="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-400"
+                    >
+                        Designation <span class="text-red-500">*</span>
+                    </label>
+
+                    <select
+                        id="designation_id"
+                        name="designation_id"
+                        x-model="designationId"
+                        required
+                        class="h-11 w-full rounded-lg border border-neutral-300 bg-white px-4 text-sm text-neutral-800 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                    >
+                        <option value="">Select Designation</option>
+
+                        @foreach ($designations as $designation)
+                            <option value="{{ $designation->id }}">
+                                {{ $designation->name }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('designation_id')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {{-- Personal Information --}}
+    <div
+        class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+        <div
+            class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
             <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
                 Personal Information
             </h2>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400">Basic identification and personal contact details.</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">Basic identification and personal contact details.
+            </p>
         </div>
 
         <div class="p-6 space-y-6">
@@ -109,7 +372,8 @@
                 </div>
 
                 <div>
-                    <label for="blood_group" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    <label for="blood_group"
+                        class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                         Blood Group
                     </label>
                     <select id="blood_group" name="blood_group"
@@ -129,7 +393,8 @@
 
             <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                 <x-form.input-text name="religion" label="Religion"
-                    value="{{ old('religion', $employee?->religion) }}" placeholder="e.g. Christianity, Islam, etc." />
+                    value="{{ old('religion', $employee?->religion) }}"
+                    placeholder="e.g. Christianity, Islam, etc." />
 
                 <x-form.input-text name="national_id" label="National ID / Passport"
                     value="{{ old('national_id', $employee?->national_id) }}" placeholder="Enter NID Number" />
@@ -137,13 +402,18 @@
         </div>
     </div>
 
-    {{-- SECTION 2: Professional Background --}}
-    <div class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <div class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
+
+
+    {{-- Professional Background --}}
+    <div
+        class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+        <div
+            class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
             <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
                 Professional Background
             </h2>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400">Experience levels, education, languages, and core competencies.</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">Experience levels, education, languages, and core
+                competencies.</p>
         </div>
 
         <div class="p-6 space-y-6">
@@ -152,19 +422,20 @@
                     value="{{ old('experience_years', $employee?->experience_years ?? 0) }}" placeholder="0" />
 
                 <x-form.input-text name="institution" label="Institution / University"
-                    value="{{ old('institution', $employee?->institution) }}" placeholder="Last attended institution" />
+                    value="{{ old('institution', $employee?->institution) }}"
+                    placeholder="Last attended institution" />
             </div>
 
             <x-form.textarea-input name="education" label="Education Details" rows="2"
                 placeholder="Degrees and certifications summary..."
                 value="{{ old('education', $employee?->education) }}" />
 
-            <x-form.textarea-input name="bio" label="Professional Bio" rows="3" placeholder="Brief summary about the employee..."
-                value="{{ old('bio', $employee?->bio) }}" />
+            <x-form.textarea-input name="bio" label="Professional Bio" rows="3"
+                placeholder="Brief summary about the employee..." value="{{ old('bio', $employee?->bio) }}" />
 
             {{-- Languages & Expertise dynamic lists --}}
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 pt-2">
-                
+
                 {{-- Languages --}}
                 <div x-data="{
                     items: @js($languages),
@@ -173,9 +444,11 @@
                         if (this.items.length === 1) { this.items = ['']; return; }
                         this.items.splice(index, 1);
                     }
-                }" class="rounded-xl border border-neutral-200 p-4 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-900/50">
+                }"
+                    class="rounded-xl border border-neutral-200 p-4 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-900/50">
                     <div class="mb-3 flex items-center justify-between">
-                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Languages</label>
+                        <label
+                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Languages</label>
                         <button type="button" @click="add()"
                             class="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-2.5 py-1.5 text-xs font-semibold text-brand-700 transition hover:bg-brand-100 dark:bg-brand-500/10 dark:text-brand-300">
                             <span>+ Add Language</span>
@@ -191,14 +464,19 @@
                                 <button type="button" @click="remove(index)" title="Remove"
                                     class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-red-500 transition hover:bg-red-50 dark:border-red-900/50 dark:hover:bg-red-500/10">
                                     <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
                             </div>
                         </template>
                     </div>
-                    @error('languages') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
-                    @error('languages.*') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+                    @error('languages')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                    @error('languages.*')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Expertise --}}
@@ -209,9 +487,11 @@
                         if (this.items.length === 1) { this.items = ['']; return; }
                         this.items.splice(index, 1);
                     }
-                }" class="rounded-xl border border-neutral-200 p-4 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-900/50">
+                }"
+                    class="rounded-xl border border-neutral-200 p-4 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-900/50">
                     <div class="mb-3 flex items-center justify-between">
-                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Expertise</label>
+                        <label
+                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Expertise</label>
                         <button type="button" @click="add()"
                             class="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-2.5 py-1.5 text-xs font-semibold text-brand-700 transition hover:bg-brand-100 dark:bg-brand-500/10 dark:text-brand-300">
                             <span>+ Add Expertise</span>
@@ -227,33 +507,42 @@
                                 <button type="button" @click="remove(index)" title="Remove"
                                     class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-red-500 transition hover:bg-red-50 dark:border-red-900/50 dark:hover:bg-red-500/10">
                                     <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
                             </div>
                         </template>
                     </div>
-                    @error('expertise') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
-                    @error('expertise.*') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+                    @error('expertise')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                    @error('expertise.*')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
             </div>
         </div>
     </div>
 
-    {{-- SECTION 3: Location & Address --}}
-    <div class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <div class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
+    {{-- Location & Address --}}
+    <div
+        class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+        <div
+            class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
             <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
                 Location & Residential Address
             </h2>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400">Specify country, corresponding city, and physical address.</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">Specify country, corresponding city, and physical
+                address.</p>
         </div>
 
         <div class="p-6 space-y-6">
             <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                 <div>
-                    <label for="country_id" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    <label for="country_id"
+                        class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                         Country
                     </label>
                     <select id="country_id" name="country_id" x-model="countryId" @change="countryChanged()"
@@ -263,11 +552,14 @@
                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                         @endforeach
                     </select>
-                    @error('country_id') <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p> @enderror
+                    @error('country_id')
+                        <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
-                    <label for="city_id" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    <label for="city_id"
+                        class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                         City
                     </label>
                     <select id="city_id" name="city_id" x-model="cityId" :disabled="!countryId"
@@ -277,18 +569,23 @@
                             <option :value="city.id" x-text="city.name"></option>
                         </template>
                     </select>
-                    @error('city_id') <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p> @enderror
+                    @error('city_id')
+                        <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 
             <x-form.textarea-input name="address" label="Street Address" rows="2"
-                placeholder="Enter complete building or street address..." value="{{ old('address', $employee?->address) }}" />
+                placeholder="Enter complete building or street address..."
+                value="{{ old('address', $employee?->address) }}" />
         </div>
     </div>
 
-    {{-- SECTION 4: Employee Settings --}}
-    <div class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <div class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
+    {{-- Employee Settings --}}
+    <div
+        class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+        <div
+            class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
             <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
                 Account Settings
             </h2>
@@ -303,7 +600,8 @@
                     class="mt-0.5 h-4 w-4 rounded border-neutral-300 text-brand-600 focus:ring-brand-500">
                 <div>
                     <span class="text-sm font-medium text-neutral-900 dark:text-white">Verified Employee</span>
-                    <p class="text-xs text-neutral-500 dark:text-neutral-400">Verified status gives the profile standard clearance across platform modules.</p>
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400">Verified status gives the profile
+                        standard clearance across platform modules.</p>
                 </div>
             </label>
         </div>

@@ -15,6 +15,12 @@ class Employee extends Model
 
     protected $fillable = [
         'user_id',
+        // Organization
+        'branch_id',
+        'department_id',
+        'team_id',
+        'designation_id',
+        // Personal
         'first_name',
         'last_name',
         'date_of_birth',
@@ -52,6 +58,27 @@ class Employee extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Organizational relationships
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    public function designation(): BelongsTo
+    {
+        return $this->belongsTo(Designation::class);
     }
 
     // Employment history
@@ -106,8 +133,5 @@ class Employee extends Model
     {
         return $this->belongsTo(\App\Models\City::class);
     }
-    public function designation(): BelongsTo
-    {
-        return $this->belongsTo(Designation::class);
-    }
+
 }
