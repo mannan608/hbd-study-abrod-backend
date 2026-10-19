@@ -1,13 +1,120 @@
-<section 
+<section
     class="rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
-    x-data="employmentForm({
-        branchId: '{{ old('branch_id', $employee?->branch_id) }}',
-        departmentId: '{{ old('department_id', $employee?->department_id) }}',
-        teamId: '{{ old('team_id', $employee?->team_id) }}',
-        designationId: '{{ old('designation_id', $employee?->designation_id) }}',
-        allDepartments: @js($departments ?? []),
-        allTeams: @js($teams ?? [])
-    })"
+    x-data="{
+        branchId: @js((string) ($branchId ?? '')),
+        departmentId: @js((string) ($departmentId ?? '')),
+        teamId: @js((string) ($teamId ?? '')),
+        designationId: @js((string) ($designationId ?? '')),
+
+        departments: @js(
+            $departments->map(fn ($department) => [
+                'id' => (string) $department->id,
+                'name' => $department->name,
+                'branch_id' => (string) $department->branch_id,
+            ])->values()
+        ),
+
+        teams: @js(
+            $teams->map(fn ($team) => [
+                'id' => (string) $team->id,
+                'name' => $team->name,
+                'department_id' => (string) $team->department_id,
+            ])->values()
+        ),
+
+        get filteredDepartments() {
+            return this.branchId
+                ? this.departments.filter(
+                    department => department.branch_id === this.branchId
+                )
+                : this.departments;
+        },
+
+        get filteredTeams() {
+            return this.departmentId
+                ? this.teams.filter(
+                    team => team.department_id === this.departmentId
+                )
+                : this.teams;
+        },
+
+        branchChanged() {
+            const department = this.departments.find(
+                item => item.id === this.departmentId
+            );
+
+            if (
+                department &&
+                this.branchId &&
+                department.branch_id !== this.branchId
+            ) {
+                this.departmentId = '';
+            }
+
+            const team = this.teams.find(
+                item => item.id === this.teamId
+            );
+
+            const teamDepartment = team
+                ? this.departments.find(
+                    item => item.id === team.department_id
+                )
+                : null;
+
+            if (
+                team &&
+                (
+                    !teamDepartment ||
+                    (this.branchId &&
+                        teamDepartment.branch_id !== this.branchId) ||
+                    (this.departmentId &&
+                        team.department_id !== this.departmentId)
+                )
+            ) {
+                this.teamId = '';
+            }
+        },
+
+        departmentChanged() {
+            if (!this.departmentId) {
+                return;
+            }
+
+            const team = this.teams.find(
+                item => item.id === this.teamId
+            );
+
+            if (team && team.department_id !== this.departmentId) {
+                this.teamId = '';
+            }
+        },
+
+        teamChanged() {
+            if (!this.teamId || this.departmentId) {
+                return;
+            }
+
+            const team = this.teams.find(
+                item => item.id === this.teamId
+            );
+
+            const department = team
+                ? this.departments.find(
+                    item => item.id === team.department_id
+                )
+                : null;
+
+            if (department) {
+                this.branchId = department.branch_id;
+                this.departmentId = department.id;
+            }
+        },
+
+        init() {
+            this.branchChanged();
+            this.departmentChanged();
+        }
+    }"
 >
     <div class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
         <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
@@ -169,14 +276,14 @@
                     'resigned' => 'Resigned',
                     'terminated' => 'Terminated',
                 ]"
-                value="{{ old('employment_status', $employment?->employment_status ?? 'probation') }}" 
+                value="{{ old('employment_status', $employee?->employment_status ?? 'probation') }}" 
             />
 
             <x-form.date-picker 
                 name="joining_date" 
                 label="Joining Date" 
                 type="date"
-                value="{{ old('joining_date', $employment?->joining_date?->format('Y-m-d')) }}" 
+                value="{{ old('joining_date', $employee?->joining_date?->format('Y-m-d')) }}" 
                 placeholder="YYYY-MM-DD" 
             />
         </div>
@@ -201,37 +308,3 @@
 
     </div>
 </section>
-document.addEventListener('alpine:init', () => {
-    Alpine.data('employmentForm', (config) => ({
-        branchId: config.branchId,
-        departmentId: config.departmentId,
-        teamId: config.teamId,
-        designationId: config.designationId,
-        
-        allDepartments: config.allDepartments,
-        allTeams: config.allTeams,
-
-        get filteredDepartments() {
-            if (!this.branchId) return this.allDepartments;
-            // Assuming your department model has a branch_id column
-            return this.allDepartments.filter(dept => dept.branch_id == this.branchId);
-        },
-
-        get filteredTeams() {
-            if (!this.departmentId) return [];
-            // Assuming your team model has a department_id column
-            return this.allTeams.filter(team => team.department_id == this.departmentId);
-        },
-
-        branchChanged() {
-            // Reset department and team if branch changes
-            this.departmentId = '';
-            this.teamId = '';
-        },
-
-        departmentChanged() {
-            // Reset team if department changes
-            this.teamId = '';
-        }
-    }));
-});
