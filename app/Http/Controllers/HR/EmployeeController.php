@@ -240,7 +240,7 @@ class EmployeeController extends Controller
         return [
             'branches' => Branch::query()
                 ->orderBy('name')
-                ->get(['id', 'name', 'code', 'is_head_office', 'is_active']),
+                ->get(['id', 'name', 'code',  'is_active']),
 
             'departments' => Department::query()
                 ->orderBy('name')

@@ -4,18 +4,6 @@
     $selectedCountryId = old('country_id', $employee?->country_id);
     $selectedCityId = old('city_id', $employee?->city_id);
 
-    $mainBranchId = $branches
-        ->first(fn ($branch) => (bool) $branch->is_head_office)
-        ?->id;
-
-    $branchId = old(
-        'branch_id',
-        $isEdit ? ($employee->branch_id ?? $mainBranchId) : $mainBranchId
-    );
-
-    $departmentId = old('department_id', $employee?->department_id);
-    $teamId = old('team_id', $employee?->team_id);
-    $designationId = old('designation_id', $employee?->designation_id);
 
     $normalizeArrayInput = function ($value) {
         if (is_string($value)) {

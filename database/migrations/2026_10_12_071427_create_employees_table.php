@@ -9,16 +9,7 @@ return new class extends Migration {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->nullable()->unique()->constrained('users')->nullOnDelete();
-
-            // Organizational information
-            $table->foreignId('branch_id')->nullable()->constrained('branches')->nullOnDelete();
-
-            $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete();
-
-            $table->foreignId('team_id')->nullable()->constrained('teams')->nullOnDelete();
-
-            $table->foreignId('designation_id')->nullable()->constrained('designations')->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->unique()->constrained('users')->nullOnDelete();           
 
             // Personal information
             $table->string('first_name', 100);
