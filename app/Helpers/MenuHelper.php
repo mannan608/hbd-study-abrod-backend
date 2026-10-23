@@ -204,12 +204,7 @@ class MenuHelper
             [
                 'name' => ' Employee Manage',
                 'icon' => 'pages',
-                'subItems' => [
-                    [
-                        'name' => 'Employees',
-                        'route' => 'role.employees.index',
-                        'permission' => 'employee.list',
-                    ],
+                'subItems' => [                   
                     [
                         'name' => 'Branches',
                         'route' => 'role.branches.index',
@@ -229,6 +224,11 @@ class MenuHelper
                         'name' => 'Designations',
                         'route' => 'role.designations.index',
                         'permission' => 'designation.list',
+                    ],
+                     [
+                        'name' => 'Employees',
+                        'route' => 'role.employees.index',
+                        'permission' => 'employee.list',
                     ],
                     
                 ],

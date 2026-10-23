@@ -82,13 +82,12 @@ class EmployeeController extends Controller
         DB::beginTransaction();
 
         try {
-            $user = User::create([
+            $user = User::createEmployee([
                 'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
-                'password' => Hash::make($validated['password']),
+                'password' => $validated['password'],
                 'status' => 'active',
-                'primary_role_id' => 3,
             ]);
 
             $employeeData = $this->prepareEmployeeData($validated, $request);

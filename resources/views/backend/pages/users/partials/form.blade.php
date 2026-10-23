@@ -69,42 +69,17 @@
     </div>
 </div>
 
-
-<div
-    x-data="{
-        primaryRole: @js((string) $selectedPrimaryRole),
-        roles: @js(array_map('strval', $selectedRoles)),
-
-        syncPrimaryRole() {
-            if (this.primaryRole && !this.roles.includes(this.primaryRole)) {
-                this.roles.push(this.primaryRole);
-            }
-        }
-    }"
-    x-init="syncPrimaryRole()"
-    class="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900"
->
-    <h4 class="mb-4 text-sm font-semibold uppercase text-neutral-700 dark:text-neutral-300">
-        Assigned Roles
-    </h4>
-
+<div class="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">
+    <h4 class="mb-4 text-sm font-semibold uppercase text-neutral-700 dark:text-neutral-300">Assigned Roles</h4>
     <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         @foreach ($roles as $role)
             <label class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300">
-                <input
-                    type="checkbox"
-                    name="roles[]"
-                    value="{{ $role->id }}"
-                    x-model="roles"
-                    @change="syncPrimaryRole()"
-                    class="rounded border-neutral-300 text-brand-600 focus:ring-brand-500"
-                >
-
+                <input type="checkbox" name="roles[]" value="{{ $role->id }}" @checked(in_array((string) $role->id, array_map('strval', $selectedRoles), true))
+                    class="rounded border-neutral-300 text-brand-600 focus:ring-brand-500">
                 <span>{{ $role->name }}</span>
             </label>
         @endforeach
     </div>
-
     @error('roles')
         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
     @enderror
