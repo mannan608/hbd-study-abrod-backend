@@ -13,26 +13,35 @@ use App\Models\hrm\Designation;
 use App\Models\hrm\Employee;
 use App\Models\hrm\Team;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class EmployeeController extends Controller
 {
+    /**
+     * List employees with search and pagination.
+     */
     public function index(Request $request)
     {
         $request->user()->can('employee.list') || abort(403);
 
-        $employees = Employee::with(['user', 'country', 'city'])
-            ->when($request->filled('search'), function ($query) use ($request) {
-                $search = $request->input('search');
+        $employees = Employee::query()
+            ->with(['user', 'country', 'city', 'currentEmployment.branch', 'currentEmployment.department', 'currentEmployment.team', 'currentEmployment.designation'])
+            ->when($request->filled('search'), function (Builder $query) use ($request) {
+                $search = trim($request->input('search'));
 
-                $query->where(function ($q) use ($search) {
+                $query->where(function (Builder $q) use ($search) {
                     $q->where('first_name', 'like', "%{$search}%")
                         ->orWhere('last_name', 'like', "%{$search}%")
-                        ->orWhereHas('user', function ($userQuery) use ($search) {
+                        ->orWhereHas('user', function (Builder $userQuery) use ($search) {
                             $userQuery->where('email', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('employments', function (Builder $employmentQuery) use ($search) {
+                            $employmentQuery->where('employee_code', 'like', "%{$search}%");
                         });
                 });
             })
@@ -43,172 +52,160 @@ class EmployeeController extends Controller
         return view('backend.pages.HR.employees.index', compact('employees'));
     }
 
-   
+    /**
+     * Show the create form.
+     */
     public function create(Request $request)
     {
         $request->user()->can('employee.create') || abort(403);
 
-        $branches = Branch::query()->orderBy('name')->get(['id', 'name', 'code', 'is_active']);
-        $departments = Department::query() ->orderBy('name')->get(['id','name','branch_id', ]);
-        $teams = Team::query() ->orderBy('name')->get([ 'id', 'name','department_id',]);
-
-        $designations = Designation::query()->orderBy('name')->get(['id', 'name',]);
-
-        $countries = Country::query()->orderBy('name')->get();
-
-        $cities = City::query()->orderBy('name')->get();
-
-        return view('backend.pages.HR.employees.create', [
-            'employee' => null,
-            'branches' => $branches,
-            'departments' => $departments,
-            'teams' => $teams,
-            'designations' => $designations,
-            'countries' => $countries,
-            'cities' => $cities,
-            'title' => 'Create Employee',
-        ]);
+        return view(
+            'backend.pages.HR.employees.create',
+            array_merge($this->formOptions(), [
+                'employee' => null,
+                'title' => 'Create Employee',
+            ]),
+        );
     }
 
-
     /**
-     * Store a new employee.
+     * Store user, employee profile and first employment record.
      */
     public function store(StoreEmployeeRequest $request)
     {
-        // Authorization and validation are handled by StoreEmployeeRequest.
         $validated = $request->validated();
 
-        DB::beginTransaction();
-
         try {
-            $user = User::createEmployee([
-                'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
-                'email' => $validated['email'],
-                'phone' => $validated['phone'] ?? null,
-                'password' => $validated['password'],
-                'status' => 'active',
-            ]);
+            DB::transaction(function () use ($validated) {
+                // 1. Login account.
+                $user = User::createEmployee([
+                    'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
+                    'email' => $validated['email'],
+                    'phone' => $validated['phone'] ?? null,
+                    'password' => $validated['password'],
+                    'status' => 'active',
+                ]);
 
-            $employeeData = $this->prepareEmployeeData($validated, $request);
+                // 2. Personal employee profile.
+                $employee = Employee::create(array_merge($this->prepareEmployeeData($validated), ['user_id' => $user->id]));
 
-            $employeeData['user_id'] = $user->id;
-
-            Employee::create($employeeData);
-
-            DB::commit();
+                // 3. First employment record.
+                $employee->employments()->create($this->prepareEmploymentData($validated, true));
+            });
 
             return redirect()
                 ->route('role.employees.index', [
                     'role' => $request->route('role'),
                 ])
                 ->with('success', 'Employee created successfully.');
-        } catch (\Throwable $e) {
-            DB::rollBack();
-
+        } catch (Throwable $e) {
             report($e);
 
             return back()->withInput()->with('error', 'Unable to create employee. Please try again.');
         }
     }
 
+    /**
+     * Show the edit form.
+     */
     public function edit(string $role, string $employee, Request $request)
     {
         $request->user()->can('employee.edit') || abort(403);
 
-        $employee = Employee::with('user')->findOrFail($employee);
-        $branches = Branch::query()->orderBy('name')->get(['id', 'name', 'code', 'is_active']);
+        $employee = Employee::query()
+            ->with(['user', 'country', 'city', 'currentEmployment'])
+            ->findOrFail($employee);
 
-        $departments = Department::query()->orderBy('name')->get(['id', 'name', 'branch_id']);
-
-        $designations = Designation::query()->orderBy('name')->get(['id', 'name']);
-
-        $teams = Team::query()->orderBy('name')->get(['id', 'name', 'department_id']);
-        $countries = Country::orderBy('name')->get();
-        $cities = City::orderBy('name')->get();
-
-        return view('backend.pages.HR.employees.edit', [
-            'employee' => $employee,
-            'branches' => $branches,
-            'departments' => $departments,
-            'designations' => $designations,
-            'teams' => $teams,
-            'countries' => $countries,
-            'cities' => $cities,
-            'title' => 'Edit Employee',
-        ]);
+        return view(
+            'backend.pages.HR.employees.edit',
+            array_merge($this->formOptions(), [
+                'employee' => $employee,
+                'title' => 'Edit Employee',
+            ]),
+        );
     }
 
+    /**
+     * Show employee details.
+     */
     public function show(string $role, string $employee, Request $request)
     {
         $request->user()->can('employee.list') || abort(403);
 
-        $employee = Employee::with(['user', 'country', 'city', 'designation'])
+        $employee = Employee::query()
+            ->with(['user', 'country', 'city', 'employments.branch', 'employments.department', 'employments.team', 'employments.designation', 'currentEmployment'])
             ->findOrFail($employee);
 
         return view('backend.pages.HR.employees.show', compact('employee'));
     }
 
     /**
-     * Update an existing employee.
+     * Update user, employee profile and current employment.
      */
     public function update(UpdateEmployeeRequest $request, string $role, string $employee)
     {
-        // Authorization and validation are handled by UpdateEmployeeRequest.
         $validated = $request->validated();
 
-        $employee = Employee::with('user')->findOrFail($employee);
-
-        DB::beginTransaction();
-
         try {
-            $userData = [
-                'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
-                'email' => $validated['email'],
-                'phone' => $validated['phone'] ?? null,
-            ];
+            DB::transaction(function () use ($validated, $employee) {
+                $employee = Employee::query()->with('user')->lockForUpdate()->findOrFail($employee);
 
-            // Only change the password when a new one is supplied.
-            if (!empty($validated['password'])) {
-                $userData['password'] = Hash::make($validated['password']);
-            }
+                // 1. Update or restore the associated login account.
+                $userData = [
+                    'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
+                    'email' => $validated['email'],
+                    'phone' => $validated['phone'] ?? null,
+                ];
 
-            if ($employee->user) {
-                $employee->user->update($userData);
-            } else {
-                // A new login account needs a password.
-                if (empty($validated['password'])) {
-                    throw ValidationException::withMessages([
-                        'password' => 'A password is required to create the login account.',
-                    ]);
+                if (!empty($validated['password'])) {
+                    $userData['password'] = Hash::make($validated['password']);
                 }
 
-                $userData['password'] = Hash::make($validated['password']);
+                if ($employee->user) {
+                    $employee->user->update($userData);
+                } else {
+                    if (empty($validated['password'])) {
+                        throw ValidationException::withMessages([
+                            'password' => 'A password is required to create the login account.',
+                        ]);
+                    }
 
-                $userData['status'] = 'active';
+                    $userData['password'] = Hash::make($validated['password']);
 
-                $user = User::create($userData);
+                    $userData['status'] = 'active';
 
-                $employee->user_id = $user->id;
-            }
+                    $user = User::create($userData);
 
-            $employeeData = $this->prepareEmployeeData($validated, $request);
+                    $employee->user_id = $user->id;
+                }
 
-            $employee->fill($employeeData);
-            $employee->save();
+                // 2. Update personal profile only.
+                $employee->fill($this->prepareEmployeeData($validated));
 
-            DB::commit();
+                $employee->save();
+
+                // 3. Update the current employment, or create it if missing.
+                $employmentData = $this->prepareEmploymentData($validated, false);
+
+                if ($employmentData !== []) {
+                    $currentEmployment = $employee->employments()->where('is_current', true)->lockForUpdate()->first();
+
+                    if ($currentEmployment) {
+                        $currentEmployment->update($employmentData);
+                    } else {
+                        $employee->employments()->create(array_merge($employmentData, ['is_current' => true]));
+                    }
+                }
+            });
 
             return redirect()
-                ->route('role.employees.index', ['role' => $role])
+                ->route('role.employees.index', [
+                    'role' => $role,
+                ])
                 ->with('success', 'Employee updated successfully.');
         } catch (ValidationException $e) {
-            DB::rollBack();
-
             throw $e;
-        } catch (\Throwable $e) {
-            DB::rollBack();
-
+        } catch (Throwable $e) {
             report($e);
 
             return back()->withInput()->with('error', 'Unable to update employee. Please try again.');
@@ -216,47 +213,103 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Prepare employee fields before saving.
+     * Delete employee profile.
+     *
+     * This preserves the associated user account, as in your original code.
      */
-    private function prepareEmployeeData(array $validated, Request $request): array
-    {
-        // Names belong to both the login account and the employee profile.
-        $employeeNames = [
-            'first_name' => $validated['first_name'],
-            'last_name' => $validated['last_name'],
-        ];
-
-        unset($validated['first_name'], $validated['last_name'], $validated['email'], $validated['phone'], $validated['password']);
-
-        $validated = array_merge($employeeNames, $validated);
-
-        $validated['experience_years'] = $validated['experience_years'] ?? 0;
-
-        $validated['languages'] = $this->cleanArray($validated['languages'] ?? []);
-
-        $validated['expertise'] = $this->cleanArray($validated['expertise'] ?? []);
-
-        $validated['is_verified'] = $request->boolean('is_verified');
-
-        return $validated;
-    }
-
     public function destroy(Request $request, string $role, string $employee)
     {
         $request->user()->can('employee.delete') || abort(403);
 
         $employee = Employee::findOrFail($employee);
 
-        // Keep the associated user account.
         $employee->delete();
 
         return redirect()
-            ->route('role.employees.index', ['role' => $role])
+            ->route('role.employees.index', [
+                'role' => $role,
+            ])
             ->with('success', 'Employee deleted successfully.');
     }
 
+    /**
+     * Load shared dropdown options for create and edit forms.
+     */
+    private function formOptions(): array
+    {
+        return [
+            'branches' => Branch::query()
+                ->orderBy('name')
+                ->get(['id', 'name', 'code', 'is_head_office', 'is_active']),
+
+            'departments' => Department::query()
+                ->orderBy('name')
+                ->get(['id', 'name', 'branch_id']),
+
+            'teams' => Team::query()
+                ->orderBy('name')
+                ->get(['id', 'name', 'department_id']),
+
+            'designations' => Designation::query()
+                ->orderBy('name')
+                ->get(['id', 'name']),
+
+            'countries' => Country::query()->orderBy('name')->get(),
+
+            'cities' => City::query()->orderBy('name')->get(),
+        ];
+    }
+
+    /**
+     * Map only fields that belong to the employees table.
+     */
+    private function prepareEmployeeData(array $validated): array
+    {
+        $fields = ['first_name', 'last_name', 'date_of_birth', 'gender', 'religion', 'blood_group', 'national_id', 'address', 'bio', 'education', 'institution', 'experience_years', 'languages', 'expertise', 'emergency_contact_name', 'emergency_contact_phone', 'country_id', 'city_id', 'is_verified'];
+
+        $data = array_intersect_key($validated, array_flip($fields));
+
+        if (array_key_exists('languages', $data)) {
+            $data['languages'] = $this->cleanArray($data['languages'] ?? []);
+        }
+
+        if (array_key_exists('expertise', $data)) {
+            $data['expertise'] = $this->cleanArray($data['expertise'] ?? []);
+        }
+
+        if (array_key_exists('experience_years', $data)) {
+            $data['experience_years'] = $data['experience_years'] ?? 0;
+        }
+
+        if (array_key_exists('is_verified', $data)) {
+            $data['is_verified'] = (bool) $data['is_verified'];
+        }
+
+        return $data;
+    }
+
+    /**
+     * Map only fields that belong to the employments table.
+     */
+    private function prepareEmploymentData(array $validated, bool $creating): array
+    {
+        $fields = ['employee_code', 'branch_id', 'department_id', 'team_id', 'designation_id', 'work_type', 'employment_status', 'joining_date', 'resignation_date', 'last_working_day'];
+
+        $data = array_intersect_key($validated, array_flip($fields));
+
+        // New employees always begin with a current employment.
+        if ($creating) {
+            $data['is_current'] = true;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Trim, remove blank items and reindex array fields.
+     */
     private function cleanArray(array $items): array
     {
-        return array_values(array_filter(array_map(fn($item) => is_string($item) ? trim($item) : $item, $items), fn($item) => filled($item)));
+        return array_values(array_filter(array_map(static fn($item) => is_string($item) ? trim($item) : $item, $items), static fn($item) => filled($item)));
     }
 }

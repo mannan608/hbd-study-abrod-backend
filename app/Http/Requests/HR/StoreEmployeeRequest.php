@@ -15,34 +15,42 @@ class StoreEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Organization
-            'branch_id' => [ 'nullable','integer', 'exists:branches,id',],
+            // Employment
+            'employee_code' => ['required', 'string', 'max:50', Rule::unique('employments', 'employee_code')],
 
-            'department_id' => ['nullable','integer',
-                Rule::exists('departments', 'id')
-                    ->where(function ($query) {
-                        if ($this->filled('branch_id')) {
-                            $query->where(
-                                'branch_id',
-                                $this->input('branch_id')
-                            );
-                        }
-                    }),
+            'branch_id' => ['nullable', 'integer', 'exists:branches,id', 'required_with:department_id,team_id'],
+
+            'department_id' => [
+                'nullable',
+                'integer',
+                'required_with:team_id',
+                Rule::exists('departments', 'id')->where(function ($query) {
+                    if ($this->filled('branch_id')) {
+                        $query->where('branch_id', $this->input('branch_id'));
+                    }
+                }),
             ],
 
-            'team_id' => ['nullable','integer',
-                Rule::exists('teams', 'id')
-                    ->where(function ($query) {
-                        if ($this->filled('department_id')) {
-                            $query->where(
-                                'department_id',
-                                $this->input('department_id')
-                            );
-                        }
-                    }),
+            'team_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('teams', 'id')->where(function ($query) {
+                    if ($this->filled('department_id')) {
+                        $query->where('department_id', $this->input('department_id'));
+                    }
+                }),
             ],
 
-            'designation_id' => ['nullable','integer','exists:designations,id'],
+            'designation_id' => ['required', 'integer', 'exists:designations,id'],
+
+            'work_type' => ['required', Rule::in(['onsite', 'remote', 'hybrid'])],
+
+            'employment_status' => ['required', Rule::in(['probation', 'permanent', 'resigned', 'terminated'])],
+
+            'joining_date' => ['required', 'date'],
+            'resignation_date' => ['nullable', 'date', 'after_or_equal:joining_date'],
+            'last_working_day' => ['nullable', 'date', 'after_or_equal:joining_date'],
+
             // User account
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
@@ -51,10 +59,10 @@ class StoreEmployeeRequest extends FormRequest
             'password' => ['required', 'string', 'min:8'],
 
             // Personal information
-            'date_of_birth' => ['nullable', 'date'],
-            'gender' => ['nullable', 'string', 'max:24'],
+            'date_of_birth' => ['nullable', 'date', 'before:today'],
+            'gender' => ['nullable', Rule::in(['Male', 'Female', 'Other'])],
             'religion' => ['nullable', 'string', 'max:64'],
-            'blood_group' => ['nullable', 'string', 'max:8'],
+            'blood_group' => ['nullable', Rule::in(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])],
             'national_id' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string'],
 
@@ -64,17 +72,15 @@ class StoreEmployeeRequest extends FormRequest
             'institution' => ['nullable', 'string', 'max:200'],
             'experience_years' => ['nullable', 'integer', 'min:0', 'max:65535'],
 
-            // Languages
+            // Languages and expertise
             'languages' => ['nullable', 'array'],
-            'languages.*' => ['nullable', 'string', 'max:100'],
-
-            // Expertise
+            'languages.*' => ['string', 'max:100'],
             'expertise' => ['nullable', 'array'],
-            'expertise.*' => ['nullable', 'string', 'max:150'],
+            'expertise.*' => ['string', 'max:150'],
 
             // Location
             'country_id' => ['nullable', 'uuid', 'exists:countries,id'],
-            'city_id' => ['nullable', 'uuid', Rule::exists('cities', 'id')->where('country_id', $this->input('country_id'))],
+            'city_id' => ['nullable', 'uuid', Rule::exists('cities', 'id')->where('country_id', $this->input('country_id')), 'required_with:country_id'],
 
             // Emergency contact
             'emergency_contact_name' => ['nullable', 'string', 'max:150'],
@@ -87,22 +93,20 @@ class StoreEmployeeRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $this->merge([
-            'languages' => $this->normalizeArrayField($this->input('languages')),
-            'expertise' => $this->normalizeArrayField($this->input('expertise')),
-        ]);
-    }
+        foreach (['languages', 'expertise'] as $field) {
+            $value = $this->input($field, []);
 
-    protected function normalizeArrayField(mixed $value): array
-    {
-        if (is_string($value)) {
-            $value = explode(',', $value);
+            if (is_string($value)) {
+                $value = explode(',', $value);
+            }
+
+            if (!is_array($value)) {
+                $value = [];
+            }
+
+            $this->merge([
+                $field => array_values(array_filter(array_map(static fn($item) => is_string($item) ? trim($item) : $item, $value), static fn($item) => is_string($item) && $item !== '')),
+            ]);
         }
-
-        if (!is_array($value)) {
-            return [];
-        }
-
-        return array_values(array_filter(array_map(static fn($item) => is_string($item) ? trim($item) : $item, $value), static fn($item) => filled($item)));
     }
 }

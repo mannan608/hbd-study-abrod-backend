@@ -14,12 +14,7 @@ class Employee extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        // Organization
-        'branch_id',
-        'department_id',
-        'team_id',
-        'designation_id',
+        'user_id',   
         // Personal
         'first_name',
         'last_name',
@@ -35,7 +30,6 @@ class Employee extends Model
         'experience_years',
         'languages',
         'expertise',
-        'designation_id',
         'emergency_contact_name',
         'emergency_contact_phone',
         'city_id',
@@ -58,28 +52,7 @@ class Employee extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    // Organizational relationships
-    public function branch(): BelongsTo
-    {
-        return $this->belongsTo(Branch::class);
-    }
-
-    public function department(): BelongsTo
-    {
-        return $this->belongsTo(Department::class);
-    }
-
-    public function team(): BelongsTo
-    {
-        return $this->belongsTo(Team::class);
-    }
-
-    public function designation(): BelongsTo
-    {
-        return $this->belongsTo(Designation::class);
-    }
+    }   
 
     // Employment history
     public function employments(): HasMany
@@ -89,10 +62,11 @@ class Employee extends Model
 
     // Current employment
     public function currentEmployment(): HasOne
-    {
-        return $this->hasOne(Employment::class)
-            ->where('is_current', true);
-    }
+{
+    return $this->hasOne(Employment::class)
+        ->where('is_current', true)
+        ->latestOfMany();
+}
 
     // Salary history
     public function salaryHistories(): HasMany
