@@ -101,7 +101,7 @@
                 <x-form.input-text name="phone" label="Phone Number"
                     value="{{ old('phone', $employee?->user?->phone) }}" placeholder="+1 (555) 000-0000" />
 
-                <x-form.input-text name="password" label="Password" type="password"
+                <x-form.input-text name="password" label="Password" type="password" value="{{old('password'),$employee?->user?->password}}"
                     placeholder="{{ $isEdit ? 'Keep blank to retain current' : 'Enter secure password' }}" />
             </div>
 
@@ -236,7 +236,7 @@
                             <div class="flex items-center gap-2">
                                 <input type="text" name="languages[]" x-model="items[index]"
                                     placeholder="e.g. English, Spanish"
-                                    class="h-10 w-full rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-800 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
+                                    class="h-10 w-full placeholder:text-slate-400 rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-800 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
                                 <button type="button" @click="remove(index)" title="Remove"
                                     class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-red-500 transition hover:bg-red-50 dark:border-red-900/50 dark:hover:bg-red-500/10">
                                     <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -279,7 +279,7 @@
                             <div class="flex items-center gap-2">
                                 <input type="text" name="expertise[]" x-model="items[index]"
                                     placeholder="e.g. Project Management"
-                                    class="h-10 w-full rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-800 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
+                                    class="h-10 w-full placeholder:text-slate-400 rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-800 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
                                 <button type="button" @click="remove(index)" title="Remove"
                                     class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-red-500 transition hover:bg-red-50 dark:border-red-900/50 dark:hover:bg-red-500/10">
                                     <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -151,22 +151,33 @@ class EmployeeController extends Controller
                 $employee = Employee::query()->with('user')->lockForUpdate()->findOrFail($employee);
 
                 // 1. Update or restore the associated login account.
-                $userData = [
-                    'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
-                    'email' => $validated['email'],
-                    'phone' => $validated['phone'] ?? null,
-                ];
+                $userData = [];
+
+                if (array_key_exists('first_name', $validated) || array_key_exists('last_name', $validated)) {
+                    $userData['name'] = trim(
+                        ($validated['first_name'] ?? $employee->first_name) . ' ' .
+                        ($validated['last_name'] ?? $employee->last_name)
+                    );
+                }
+
+                foreach (['email', 'phone'] as $field) {
+                    if (array_key_exists($field, $validated)) {
+                        $userData[$field] = $validated[$field];
+                    }
+                }
 
                 if (!empty($validated['password'])) {
                     $userData['password'] = Hash::make($validated['password']);
                 }
 
                 if ($employee->user) {
-                    $employee->user->update($userData);
+                    if ($userData !== []) {
+                        $employee->user->update($userData);
+                    }
                 } else {
-                    if (empty($validated['password'])) {
+                    if (empty($validated['password']) || empty($validated['email']) || empty($validated['first_name']) || empty($validated['last_name'])) {
                         throw ValidationException::withMessages([
-                            'password' => 'A password is required to create the login account.',
+                            'email' => 'Name, email, and password are required to create the login account.',
                         ]);
                     }
 

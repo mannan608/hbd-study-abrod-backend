@@ -24,14 +24,13 @@ class UpdateEmployeeRequest extends FormRequest
 
         return [
             // Employment
-            'employee_code' => ['required', 'string', 'max:50', Rule::unique('employments', 'employee_code')->ignore($currentEmploymentId)],
+            'employee_code' => ['sometimes', 'required', 'string', 'max:50', Rule::unique('employments', 'employee_code')->ignore($currentEmploymentId)],
 
-            'branch_id' => ['nullable', 'integer', 'exists:branches,id', 'required_with:department_id,team_id'],
+            'branch_id' => ['sometimes', 'nullable', 'integer', 'exists:branches,id'],
 
             'department_id' => [
-                'nullable',
+                'sometimes', 'nullable',
                 'integer',
-                'required_with:team_id',
                 Rule::exists('departments', 'id')->where(function ($query) {
                     if ($this->filled('branch_id')) {
                         $query->where('branch_id', $this->input('branch_id'));
@@ -40,6 +39,7 @@ class UpdateEmployeeRequest extends FormRequest
             ],
 
             'team_id' => [
+                'sometimes',
                 'nullable',
                 'integer',
                 Rule::exists('teams', 'id')->where(function ($query) {
@@ -49,24 +49,24 @@ class UpdateEmployeeRequest extends FormRequest
                 }),
             ],
 
-            'designation_id' => ['required', 'integer', 'exists:designations,id'],
+            'designation_id' => ['sometimes', 'required', 'integer', 'exists:designations,id'],
 
-            'work_type' => ['required', Rule::in(['onsite', 'remote', 'hybrid'])],
+            'work_type' => ['sometimes', 'required', Rule::in(['onsite', 'remote', 'hybrid'])],
 
-            'employment_status' => ['required', Rule::in(['probation', 'permanent', 'resigned', 'terminated'])],
+            'employment_status' => ['sometimes', 'required', Rule::in(['probation', 'permanent', 'resigned', 'terminated'])],
 
-            'joining_date' => ['required', 'date'],
+            'joining_date' => ['sometimes', 'required', 'date'],
 
             'resignation_date' => ['nullable', 'date', 'after_or_equal:joining_date'],
 
             'last_working_day' => ['nullable', 'date', 'after_or_equal:joining_date'],
 
             // User account
-            'first_name' => ['required', 'string', 'max:100'],
+            'first_name' => ['sometimes', 'required', 'string', 'max:100'],
 
-            'last_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['sometimes', 'required', 'string', 'max:100'],
 
-            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
+            'email' => ['sometimes', 'required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
 
             'phone' => ['nullable', 'string', 'max:32'],
 
@@ -126,7 +126,11 @@ class UpdateEmployeeRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         foreach (['languages', 'expertise'] as $field) {
-            $value = $this->input($field, []);
+            if (! $this->exists($field)) {
+                continue;
+            }
+
+            $value = $this->input($field);
 
             if (is_string($value)) {
                 $value = explode(',', $value);
