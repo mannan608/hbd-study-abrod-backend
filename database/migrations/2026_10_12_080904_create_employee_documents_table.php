@@ -19,16 +19,11 @@ return new class extends Migration
 
             // Document information
             $table->string('document_key', 100);
-            $table->string('document_name', 200);
 
-            // Store files in private storage
-            $table->string('file_path')->nullable();
-            $table->string('original_name')->nullable();
-            $table->string('mime_type', 150)->nullable();
+            $table->string('file_path');
+            $table->string('original_name');
+            $table->string('mime_type', 100)->nullable();
             $table->unsignedBigInteger('file_size')->nullable();
-
-            // pending, uploaded, in_review, approved, rejected, expired
-            $table->string('status', 20)->default('pending');
 
             // Upload audit
             $table->foreignId('uploaded_by')
@@ -36,40 +31,13 @@ return new class extends Migration
                 ->constrained('users')
                 ->nullOnDelete();
 
-            // Review audit
-            $table->foreignId('reviewed_by')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
-            $table->timestamp('reviewed_at')->nullable();
-            $table->text('review_remarks')->nullable();
-
-            // Optional document validity
-            $table->date('issued_at')->nullable();
-            $table->date('expires_at')->nullable();
-
             $table->timestamps();
 
-            // Employee document listing and filtering
-            $table->index(
+            // One document per key — re-uploading replaces it
+            $table->unique(
                 ['employee_id', 'document_key'],
-                'employee_documents_employee_key_idx'
+                'employee_documents_unique_key'
             );
-
-            $table->index(
-                ['employee_id', 'status'],
-                'employee_documents_employee_status_idx'
-            );
-
-            // Find documents requiring review
-            $table->index(
-                ['status', 'created_at'],
-                'employee_documents_status_created_idx'
-            );
-
-            // Find documents expiring soon
-            $table->index('expires_at');
         });
     }
 

@@ -18,6 +18,7 @@ class Employment extends Model
         'team_id',
         'designation_id',
         'work_type',
+        'weekend_days',
         'employment_status',
         'joining_date',
         'resignation_date',
@@ -32,6 +33,7 @@ class Employment extends Model
             'resignation_date' => 'date',
             'last_working_day' => 'date',
             'is_current' => 'boolean',
+            'weekend_days' => 'array',
         ];
     }
 

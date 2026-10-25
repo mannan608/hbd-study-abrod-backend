@@ -181,181 +181,17 @@
  @include('backend.pages.HR.employees.partial.employeement')
 
     {{-- Professional Background --}}
-    <div
-        class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <div
-            class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
-            <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
-                Professional Background
-            </h2>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400">Experience levels, education, languages, and core
-                competencies.</p>
-        </div>
-
-        <div class="p-6 space-y-6">
-            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <x-form.input-text name="experience_years" label="Experience (Years)" type="number" min="0"
-                    value="{{ old('experience_years', $employee?->experience_years ?? 0) }}" placeholder="0" />
-
-                <x-form.input-text name="institution" label="Institution / University"
-                    value="{{ old('institution', $employee?->institution) }}"
-                    placeholder="Last attended institution" />
-            </div>
-
-            <x-form.textarea-input name="education" label="Education Details" rows="2"
-                placeholder="Degrees and certifications summary..."
-                value="{{ old('education', $employee?->education) }}" />
-
-            <x-form.textarea-input name="bio" label="Professional Bio" rows="3"
-                placeholder="Brief summary about the employee..." value="{{ old('bio', $employee?->bio) }}" />
-
-            {{-- Languages & Expertise dynamic lists --}}
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 pt-2">
-
-                {{-- Languages --}}
-                <div x-data="{
-                    items: @js($languages),
-                    add() { this.items.push(''); },
-                    remove(index) {
-                        if (this.items.length === 1) { this.items = ['']; return; }
-                        this.items.splice(index, 1);
-                    }
-                }"
-                    class="rounded-xl border border-neutral-200 p-4 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-900/50">
-                    <div class="mb-3 flex items-center justify-between">
-                        <label
-                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Languages</label>
-                        <button type="button" @click="add()"
-                            class="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-2.5 py-1.5 text-xs font-semibold text-brand-700 transition hover:bg-brand-100 dark:bg-brand-500/10 dark:text-brand-300">
-                            <span>+ Add Language</span>
-                        </button>
-                    </div>
-
-                    <div class="space-y-2.5">
-                        <template x-for="(item, index) in items" :key="index">
-                            <div class="flex items-center gap-2">
-                                <input type="text" name="languages[]" x-model="items[index]"
-                                    placeholder="e.g. English, Spanish"
-                                    class="h-10 w-full placeholder:text-slate-400 rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-800 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
-                                <button type="button" @click="remove(index)" title="Remove"
-                                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-red-500 transition hover:bg-red-50 dark:border-red-900/50 dark:hover:bg-red-500/10">
-                                    <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </template>
-                    </div>
-                    @error('languages')
-                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @enderror
-                    @error('languages.*')
-                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                {{-- Expertise --}}
-                <div x-data="{
-                    items: @js($expertise),
-                    add() { this.items.push(''); },
-                    remove(index) {
-                        if (this.items.length === 1) { this.items = ['']; return; }
-                        this.items.splice(index, 1);
-                    }
-                }"
-                    class="rounded-xl border border-neutral-200 p-4 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-900/50">
-                    <div class="mb-3 flex items-center justify-between">
-                        <label
-                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Expertise</label>
-                        <button type="button" @click="add()"
-                            class="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-2.5 py-1.5 text-xs font-semibold text-brand-700 transition hover:bg-brand-100 dark:bg-brand-500/10 dark:text-brand-300">
-                            <span>+ Add Expertise</span>
-                        </button>
-                    </div>
-
-                    <div class="space-y-2.5">
-                        <template x-for="(item, index) in items" :key="index">
-                            <div class="flex items-center gap-2">
-                                <input type="text" name="expertise[]" x-model="items[index]"
-                                    placeholder="e.g. Project Management"
-                                    class="h-10 w-full placeholder:text-slate-400 rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-800 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
-                                <button type="button" @click="remove(index)" title="Remove"
-                                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-red-200 text-red-500 transition hover:bg-red-50 dark:border-red-900/50 dark:hover:bg-red-500/10">
-                                    <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </template>
-                    </div>
-                    @error('expertise')
-                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @enderror
-                    @error('expertise.*')
-                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @enderror
-                </div>
-
-            </div>
-        </div>
-    </div>
+ @include('backend.pages.HR.employees.partial.professional')
+  
 
     {{-- Location & Address --}}
-    <div
-        class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-        <div
-            class="border-b border-neutral-100 bg-neutral-50/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/50">
-            <h2 class="text-base font-semibold text-neutral-900 dark:text-white">
-                Location & Residential Address
-            </h2>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400">Specify country, corresponding city, and physical
-                address.</p>
-        </div>
+ @include('backend.pages.HR.employees.partial.address')
+  
 
-        <div class="p-6 space-y-6">
-            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <div>
-                    <label for="country_id"
-                        class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                        Country
-                    </label>
-                    <select id="country_id" name="country_id" x-model="countryId" @change="countryChanged()"
-                        class="w-full rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm transition focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
-                        <option value="">Select Country</option>
-                        @foreach ($countries as $country)
-                            <option value="{{ $country->id }}">{{ $country->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('country_id')
-                        <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p>
-                    @enderror
-                </div>
+ @include('backend.pages.HR.employees.partial.salary')
+ @include('backend.pages.HR.employees.partial.bank_accounts')
+ @include('backend.pages.HR.employees.partial.employee_documents')
 
-                <div>
-                    <label for="city_id"
-                        class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                        City
-                    </label>
-                    <select id="city_id" name="city_id" x-model="cityId" :disabled="!countryId"
-                        class="w-full rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm transition focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 disabled:cursor-not-allowed disabled:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:disabled:bg-neutral-800/50">
-                        <option value="">Select City</option>
-                        <template x-for="city in filteredCities" :key="city.id">
-                            <option :value="city.id" x-text="city.name"></option>
-                        </template>
-                    </select>
-                    @error('city_id')
-                        <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-
-            <x-form.textarea-input name="address" label="Street Address" rows="2"
-                placeholder="Enter complete building or street address..."
-                value="{{ old('address', $employee?->address) }}" />
-        </div>
-    </div>
 
     {{-- Employee Settings --}}
     <div
@@ -395,5 +231,15 @@
             {{ $isEdit ? 'Update Employee' : 'Create Employee' }}
         </button>
     </div>
+
+    @if ($errors->any())
+    <div class="bg-red-100 p-4 rounded">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 </div>

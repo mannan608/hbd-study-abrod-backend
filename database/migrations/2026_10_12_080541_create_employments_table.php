@@ -46,6 +46,8 @@ return new class extends Migration
             $table->string('employment_status', 32)
                 ->default('probation');
 
+            $table->json('weekend_days')->nullable();
+
             $table->date('joining_date');
             $table->date('resignation_date')->nullable();
             $table->date('last_working_day')->nullable();

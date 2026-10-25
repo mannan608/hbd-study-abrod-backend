@@ -45,6 +45,21 @@ class StoreEmployeeRequest extends FormRequest
 
             'work_type' => ['required', Rule::in(['onsite', 'remote', 'hybrid'])],
 
+            'weekend_days' => ['nullable', 'array'],
+            'weekend_days.*' => [
+                'required',
+                'string',
+                Rule::in([
+                    'monday',
+                    'tuesday',
+                    'wednesday',
+                    'thursday',
+                    'friday',
+                    'saturday',
+                    'sunday',
+                ]),
+            ],
+
             'employment_status' => ['required', Rule::in(['probation', 'permanent', 'resigned', 'terminated'])],
 
             'joining_date' => ['required', 'date'],

@@ -304,7 +304,7 @@ class EmployeeController extends Controller
      */
     private function prepareEmploymentData(array $validated, bool $creating): array
     {
-        $fields = ['employee_code', 'branch_id', 'department_id', 'team_id', 'designation_id', 'work_type', 'employment_status', 'joining_date', 'resignation_date', 'last_working_day'];
+        $fields = ['employee_code', 'branch_id', 'department_id', 'team_id', 'designation_id', 'work_type','weekend_days', 'employment_status', 'joining_date', 'resignation_date', 'last_working_day'];
 
         $data = array_intersect_key($validated, array_flip($fields));
 
