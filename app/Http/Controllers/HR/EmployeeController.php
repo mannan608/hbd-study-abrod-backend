@@ -59,13 +59,7 @@ class EmployeeController extends Controller
     {
         $request->user()->can('employee.create') || abort(403);
 
-        return view(
-            'backend.pages.HR.employees.create',
-            array_merge($this->formOptions(), [
-                'employee' => null,
-                'title' => 'Create Employee',
-            ]),
-        );
+        return view('backend.pages.HR.employees.create');
     }
 
     /**

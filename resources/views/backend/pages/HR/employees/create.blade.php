@@ -66,8 +66,7 @@
                 {{-- ============================== --}}
                 {{-- Personal Information          --}}
                 {{-- ============================== --}}
-                <section
-                    class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+                <section class="overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
                     <header
                         class="flex items-center gap-4 border-b border-neutral-100 bg-neutral-50/60 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-800/40">
                         <span
