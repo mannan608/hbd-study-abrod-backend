@@ -120,20 +120,6 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Show employee details.
-     */
-    public function show(string $role, string $employee, Request $request)
-    {
-        $request->user()->can('employee.list') || abort(403);
-
-        $employee = Employee::query()
-            ->with(['user', 'country', 'city', 'employments.branch', 'employments.department', 'employments.team', 'employments.designation', 'currentEmployment'])
-            ->findOrFail($employee);
-
-        return view('backend.pages.HR.employees.show', compact('employee'));
-    }
-
-    /**
      * Update user, employee profile and current employment.
      */
     public function update(UpdateEmployeeRequest $request, string $role, string $employee)
@@ -150,7 +136,7 @@ class EmployeeController extends Controller
                 if (array_key_exists('first_name', $validated) || array_key_exists('last_name', $validated)) {
                     $userData['name'] = trim(
                         ($validated['first_name'] ?? $employee->first_name) . ' ' .
-                        ($validated['last_name'] ?? $employee->last_name)
+                            ($validated['last_name'] ?? $employee->last_name)
                     );
                 }
 
@@ -298,7 +284,7 @@ class EmployeeController extends Controller
      */
     private function prepareEmploymentData(array $validated, bool $creating): array
     {
-        $fields = ['employee_code', 'branch_id', 'department_id', 'team_id', 'designation_id', 'work_type','weekend_days', 'employment_status', 'joining_date', 'resignation_date', 'last_working_day'];
+        $fields = ['employee_code', 'branch_id', 'department_id', 'team_id', 'designation_id', 'work_type', 'weekend_days', 'employment_status', 'joining_date', 'resignation_date', 'last_working_day'];
 
         $data = array_intersect_key($validated, array_flip($fields));
 
@@ -316,5 +302,40 @@ class EmployeeController extends Controller
     private function cleanArray(array $items): array
     {
         return array_values(array_filter(array_map(static fn($item) => is_string($item) ? trim($item) : $item, $items), static fn($item) => filled($item)));
+    }
+
+    public function updateBasicInfo(Request $request, string $role, string $employee)
+    {
+        $request->user()->can('employee.update') || abort(403);
+    }
+
+    public function updateAddress(Request $request, string $role, string $employee)
+    {
+        $request->user()->can('employee.update') || abort(403);
+    }
+
+    public function updateProfessionalInfo(Request $request, string $role, string $employee)
+    {
+        $request->user()->can('employee.update') || abort(403);
+    }
+
+    public function updateEmployment(Request $request, string $role, string $employee)
+    {
+        $request->user()->can('employee.update') || abort(403);
+    }
+
+    public function updateSalary(Request $request, string $role, string $employee)
+    {
+        $request->user()->can('employee.update') || abort(403);
+    }
+
+    public function updateBank(Request $request, string $role, string $employee)
+    {
+        $request->user()->can('employee.update') || abort(403);
+    }
+
+    public function updateDocuments(Request $request, string $role, string $employee)
+    {
+        $request->user()->can('employee.update') || abort(403);
     }
 }

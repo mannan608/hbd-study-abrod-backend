@@ -107,7 +107,7 @@ Route::prefix('{role}')
 
         //Providers
         Route::resource('providers', ProviderController::class);
-      
+
         Route::post('/providers/{provider}/scopes', [ProviderController::class, 'addNewScope'])->name('providers.scopes.store');
         Route::put('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'editScope'])->name('providers.scopes.update');
         Route::delete('/providers/{provider}/scopes/{scope}', [ProviderController::class, 'deleteScope'])->name('providers.scopes.delete');
@@ -119,4 +119,31 @@ Route::prefix('{role}')
         Route::resource('teams', TeamController::class);
         Route::resource('employees', EmployeeController::class);
 
+        // Update Personal / Basic Information
+        Route::put('/basic-info', [EmployeeController::class, 'updateBasicInfo'])
+            ->name('update.basic-info');
+
+        // Update Address & Location
+        Route::put('/address', [EmployeeController::class, 'updateAddress'])
+            ->name('update.address');
+
+        // Update Professional Information
+        Route::put('/professional-info', [EmployeeController::class, 'updateProfessionalInfo'])
+            ->name('update.professional-info');
+
+        // Update Employment Details
+        Route::put('/employment', [EmployeeController::class, 'updateEmployment'])
+            ->name('update.employment');
+
+        // Update Salary Details
+        Route::put('/salary', [EmployeeController::class, 'updateSalary'])
+            ->name('update.salary');
+
+        // Update Bank Accounts
+        Route::put('/bank', [EmployeeController::class, 'updateBank'])
+            ->name('update.bank');
+
+        // Update / Upload Documents
+        Route::put('/documents', [EmployeeController::class, 'updateDocuments'])
+            ->name('update.documents');
     });
