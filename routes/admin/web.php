@@ -148,5 +148,10 @@ Route::prefix('{role}')
         Route::put('/documents', [EmployeeController::class, 'updateDocuments'])
             ->name('update.documents');
 
-         Route::resource('holidays', HolidayController::class);
+        Route::patch('holidays/{holiday}/toggle', [
+            HolidayController::class,
+            'toggle'
+        ])->name('holidays.toggle');
+
+        Route::resource('holidays', HolidayController::class);
     });

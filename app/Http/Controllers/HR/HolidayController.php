@@ -19,7 +19,7 @@ class HolidayController extends Controller
         $perPage = min(max($request->integer('per_page', 10), 1), 100);
 
         $holidays = $this->holidayQuery()
-            ->select(['id', 'name', 'date', 'end_date', 'is_active', 'is_multi_day', 'is_recurring'])
+            ->select(['id', 'name', 'description','date', 'end_date', 'is_active', 'is_multi_day', 'is_recurring'])
             ->orderByRaw(
                 'CASE
                     WHEN is_active = 0 THEN 2
@@ -104,20 +104,19 @@ class HolidayController extends Controller
     /**
      * Toggle the active status of a holiday.
      */
-    public function toggle(string $role,Request $request, Holiday $holiday): JsonResponse
-    {
-        abort_unless($request->user()?->can('holiday.update'), 403);
+public function toggle(string $role,Request $request, Holiday $holiday): JsonResponse
+{
+    abort_unless($request->user()?->can('holiday.update'), 403);
 
-        $holiday->update([
-            'is_active' => !$holiday->is_active,
-        ]);
+    $holiday->is_active = ! (bool) $holiday->is_active;
+    $holiday->save();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Holiday status updated successfully.',
-            'is_active' => $holiday->is_active,
-        ]);
-    }
+    return response()->json([
+        'success' => true,
+        'message' => 'Holiday status updated successfully.',
+        'is_active' => (bool) $holiday->fresh()->is_active,
+    ]);
+}
 
     /**
      * Build the holiday query based on the current user's role.

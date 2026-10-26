@@ -23,6 +23,44 @@
 <div x-data="{
     tableRowData: {{ \Illuminate\Support\Js::from($tableRowData) }},
     holidayBaseUrl: {{ \Illuminate\Support\Js::from(url('/' . $role . '/holidays')) }},
+    csrfToken: {{ \Illuminate\Support\Js::from(csrf_token()) }},
+
+    async toggleStatus(row) {
+        if (row.toggling) return;
+
+        row.toggling = true;
+
+        try {
+            const response = await fetch(
+                `${this.holidayBaseUrl}/${row.id}/toggle`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': this.csrfToken,
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message || 'Failed to update holiday status.'
+                );
+            }
+
+            row.status = data.is_active ? 'active' : 'inactive';
+        } catch (error) {
+            alert(
+                error instanceof Error ?
+                error.message :
+                'Something went wrong.'
+            );
+        } finally {
+            row.toggling = false;
+        }
+    },
     showDeleteModal: false,
     rowToDelete: null,
 
@@ -186,18 +224,37 @@
                                 </div>
                             </td>
 
+
                             {{-- Status --}}
                             <td class="px-5 py-4 text-sm">
-                                <span
-                                    :class="row.status === 'active' ?
-                                        'bg-green-100 text-green-700 dark:bg-green-500/10 dark:text-green-400' :
-                                        'bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-400'"
-                                    class="rounded px-2 py-0.5 text-xs font-medium capitalize"
-                                    x-text="row.status"></span>
+                                <div class="flex items-center gap-3">
+                                    <button type="button" role="switch" :aria-checked="row.status === 'active'"
+                                        :aria-label="'Toggle ' + row.name + ' status'" :disabled="row.toggling"
+                                        @click="toggleStatus(row)"
+                                        :title="row.status === 'active' ? 'Deactivate holiday' : 'Activate holiday'"
+                                        :class="row.status === 'active' ?
+                                            'bg-green-500' :
+                                            'bg-neutral-300 dark:bg-neutral-700'"
+                                        class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-50 dark:focus-visible:ring-offset-neutral-900">
+                                        <span
+                                            :class="row.status === 'active' ?
+                                                'translate-x-6' :
+                                                'translate-x-1'"
+                                            class="pointer-events-none inline-block size-4 rounded-full bg-white shadow-sm ring-0 transition-transform duration-200 ease-in-out"></span>
+                                    </button>
+
+                                    <span
+                                        :class="row.status === 'active' ?
+                                            'text-green-600 dark:text-green-400' :
+                                            'text-neutral-500 dark:text-neutral-400'"
+                                        class="min-w-14 text-xs font-medium capitalize"
+                                        x-text="row.toggling ? 'Updating...' : row.status"></span>
+                                </div>
                             </td>
 
+
                             {{-- Actions --}}
-                            <td class="px-5 py-4 text-right">                             
+                            <td class="px-5 py-4 text-right">
                                 <div class="flex justify-end gap-2">
                                     <a :href="holidayBaseUrl + '/' + row.id + '/edit'"
                                         class="p-2 text-neutral-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all">
