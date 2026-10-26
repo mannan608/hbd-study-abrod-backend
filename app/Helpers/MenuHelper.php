@@ -233,6 +233,18 @@ class MenuHelper
                     
                 ],
             ],
+            [
+                'name' => 'Announcements',
+                'icon' => 'pages',
+                'subItems' => [                   
+                    [
+                        'name' => 'Holidays',
+                        'route' => 'role.holidays.index',
+                        'permission' => 'holiday.list',
+                    ],                   
+                    
+                ],
+            ],
 
            
         ];

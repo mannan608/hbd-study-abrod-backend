@@ -31,7 +31,7 @@
                 </p>
             </div>
 
-            <form action="{{ route('role.branches.update', [
+            <form action="{{ role_route('role.branches.update', [
                 'role' => request()->route('role'),
                 'branch' => $branch->id
             ]) }}" method="POST" class="p-6">
@@ -43,7 +43,7 @@
 
                 <div class="mt-8 flex flex-col-reverse justify-end gap-3 border-t border-neutral-200 pt-5 sm:flex-row dark:border-neutral-800">
 
-                    <a href="{{ route('role.branches.index', ['role' => request()->route('role')]) }}"
+                    <a href="{{ role_route('role.branches.index', ['role' => request()->route('role')]) }}"
                         class="inline-flex h-11 items-center justify-center rounded-lg border border-neutral-300 px-5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800">
                         Cancel
                     </a>

@@ -57,7 +57,7 @@
             placeholder="{{ $placeholder ?? strtoupper($dateFormat) }}" autocomplete="off"
             {{ $attributes->merge([
                 'class' =>
-                    'h-11 w-full disabled:cursor-not-allowed disabled:bg-neutral-100  rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 pr-11 text-sm placeholder:text-xs text-neutral-800 placeholder:text-neutral-400 shadow-theme-xs focus:border-brand-300 focus:ring-1 focus:ring-brand-500/20 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800',
+                    'h-11 w-full disabled:cursor-not-allowed disabled:bg-neutral-100  rounded-lg border border-neutral-300 bg-transparent px-4 py-2.5 pr-11 text-sm placeholder:text-sm text-neutral-800 placeholder:text-neutral-400 shadow-theme-xs focus:border-brand-300 focus:ring-1 focus:ring-brand-500/20 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800',
             ]) }} />
 
         <span

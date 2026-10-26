@@ -214,6 +214,14 @@ class RolePermissionSeeder extends Seeder
             'employee.delete',
             'employee.status.change',
             'employee.manage',
+
+            // holidays
+            'holiday.list',
+            'holiday.create',
+            'holiday.edit',
+            'holiday.delete',
+            'holiday.status.change',
+            'holiday.manage',
         ];
 
         foreach ($permissions as $permission) {

@@ -25,6 +25,7 @@ use App\Http\Controllers\HR\BranchController;
 use App\Http\Controllers\HR\DepartmentController;
 use App\Http\Controllers\HR\DesignationController;
 use App\Http\Controllers\HR\EmployeeController;
+use App\Http\Controllers\HR\HolidayController;
 use App\Http\Controllers\HR\TeamController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
@@ -146,4 +147,6 @@ Route::prefix('{role}')
         // Update / Upload Documents
         Route::put('/documents', [EmployeeController::class, 'updateDocuments'])
             ->name('update.documents');
+
+         Route::resource('holidays', HolidayController::class);
     });

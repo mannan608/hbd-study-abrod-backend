@@ -25,7 +25,7 @@
     <button
         type="button"
         @click="openPicker()"
-        class="flex items-center justify-between w-full px-4 py-2.5 text-xs text-left bg-white border border-neutral-300 rounded-lg hover:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100 focus:border-brand-500"
+        class="flex items-center justify-between w-full px-4 py-2.5 text-sm text-left bg-white border border-neutral-300 rounded-lg hover:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100 focus:border-brand-500"
     >
         <div class="flex items-center min-w-0 gap-1">
 
@@ -484,7 +484,7 @@
                                     @keydown.enter.prevent="handleStartInput()"
                                     @blur="handleStartInput()"
                                     placeholder="DD / MM / YYYY"
-                                    class="w-36 px-3 py-2 text-xs text-neutral-800 bg-white border rounded-lg outline-none"
+                                    class="w-36 px-3 py-2 text-sm placeholder:text-sm text-neutral-800 bg-white border rounded-lg outline-none"
                                     :class="startError
                                         ? 'border-red-400 focus:ring-2 focus:ring-red-100'
                                         : activeField === 'start'
@@ -520,7 +520,7 @@
                                     @keydown.enter.prevent="handleEndInput()"
                                     @blur="handleEndInput()"
                                     placeholder="DD / MM / YYYY"
-                                    class="w-36 px-3 py-2 text-xs text-neutral-800 bg-white border rounded-lg outline-none"
+                                    class="w-36 px-3 py-2 text-sm placeholder:text-sm text-neutral-800 bg-white border rounded-lg outline-none"
                                     :class="endError
                                         ? 'border-red-400 focus:ring-2 focus:ring-red-100'
                                         : activeField === 'end'
