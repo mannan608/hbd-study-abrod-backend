@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers\HR;
+<?php 
+namespace App\Http\Controllers\HR;
 
 use App\Http\Controllers\Controller;
 use App\Models\hrm\Holiday;

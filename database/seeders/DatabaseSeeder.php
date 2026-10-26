@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             UserSeeder::class,
             LocationSeeder::class,
-            OrganizationSeeder::class
+            OrganizationSeeder::class,
+            LeaveTypeSeeder::class
         ]);
     }
 }

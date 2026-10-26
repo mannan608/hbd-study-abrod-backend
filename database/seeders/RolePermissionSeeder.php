@@ -222,6 +222,14 @@ class RolePermissionSeeder extends Seeder
             'holiday.delete',
             'holiday.status.change',
             'holiday.manage',
+
+            //leave types
+            'leave-type.list',
+            'leave-type.create',
+            'leave-type.edit',
+            'leave-type.delete',
+            'leave-type.status.change',
+            'leave-type.manage',
         ];
 
         foreach ($permissions as $permission) {

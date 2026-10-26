@@ -26,6 +26,7 @@ use App\Http\Controllers\HR\DepartmentController;
 use App\Http\Controllers\HR\DesignationController;
 use App\Http\Controllers\HR\EmployeeController;
 use App\Http\Controllers\HR\HolidayController;
+use App\Http\Controllers\HR\LeaveTypeController;
 use App\Http\Controllers\HR\TeamController;
 use App\SEO\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
@@ -154,4 +155,5 @@ Route::prefix('{role}')
         ])->name('holidays.toggle');
 
         Route::resource('holidays', HolidayController::class);
+        Route::resource('leave-types', LeaveTypeController::class);
     });

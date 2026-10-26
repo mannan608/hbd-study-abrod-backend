@@ -246,6 +246,19 @@ class MenuHelper
                 ],
             ],
 
+            [
+                'name' => 'Leaves',
+                'icon' => 'pages',
+                'subItems' => [ 
+                    [
+                        'name' => 'Leave Types',
+                        'route' => 'role.leave-types.index',
+                        'permission' => 'leave-type.list',
+                    ],                   
+                    
+                ],
+            ],
+
            
         ];
     }
