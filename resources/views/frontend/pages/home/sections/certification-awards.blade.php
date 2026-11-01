@@ -9,15 +9,16 @@
     'certifications' => [],
 ])
 
+
 @php
     // Default data
     $defaultCertifications = [
         [
             'id' => 1,
             'logoText' => 'ICEF',
-            'subtitle' => 'ICEF Accredited Institution',
-            'description' => 'Our institution meets internationally recognized quality standards, demonstrating our commitment to excellence in global education and student services.',
-            'verifyUrl' => 'https://www.icef.com',
+            'subtitle' => 'Accredited with ICEF Agency Status',
+            'description' => 'The global network of trusted international education agencies',
+            'verifyUrl' => 'https://www.icef.com/ias',
             'badgeNumber' => 'ICEF-123456',
             'badgeLabel' => 'ICEF Accredited',
             'status' => 'Verified Active Credential',
@@ -142,10 +143,7 @@
 
                                         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/20 text-cyan-400">
 
-                                            <iconify-icon
-                                                icon="lucide:award"
-                                                class="text-2xl"
-                                            ></iconify-icon>
+                                           <img src="{{ asset('icef.png') }}" alt="">
 
                                         </span>
 
@@ -181,7 +179,7 @@
                                         >
 
                                             <span class="truncate">
-                                                {{ $cert['verifyText'] ?? 'Verify at ' . preg_replace('/^https?:\/\//', '', $cert['verifyUrl']) }}
+                                                {{ $cert['verifyText'] ?? '' . preg_replace('/^https?:\/\//', '', $cert['verifyUrl']) }}
                                             </span>
 
                                             <iconify-icon
