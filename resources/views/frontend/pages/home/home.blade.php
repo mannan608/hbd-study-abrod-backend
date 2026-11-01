@@ -17,8 +17,6 @@
 
     @include('frontend.pages.home.sections.certification-awards')
 
-    {{-- @include('frontend.pages.common-section.about-section') --}}
-
     @include('frontend.pages.home.sections.google-reviews')
 
     @include('frontend.pages.common-section.university-partners')
