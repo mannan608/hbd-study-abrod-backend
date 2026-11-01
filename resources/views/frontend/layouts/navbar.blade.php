@@ -1,5 +1,9 @@
+     @php
+     $destinations = json_decode(file_get_contents(resource_path('data/destinations.json')), true);
+ @endphp
+    
     <header class="fixed top-0 left-0 w-full z-50 border-0 md:border-b bg-white backdrop-blur-md dark:bg-neutral-900/95">
-
+        @include('frontend.layouts.top-bar')
         <nav class="max-w-7xl mx-auto px-5 lg:px-8">
 
             <div class="flex justify-between items-center h-18 md:h-20">
@@ -40,22 +44,139 @@
                         Services
                     </a>
 
-                    {{-- Courses --}}
-                    {{-- <a href="{{ route('courses') }}"
-                        class="relative font-medium transition-all duration-300
-                        {{ request()->routeIs('courses') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
-                        after:absolute after:left-0 after:-bottom-1.5
-                        after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
-                        Courses
-                    </a> --}}
 
-                    {{-- Counsellors --}}
-                    <a href="{{ route('counsellors') }}"
+                    {{-- Destinations Dropdown --}}
+
+                    <div class="relative group">
+
+                        {{-- Dropdown Trigger --}}
+                        <a href="{{ route('destinations') }}" id="destinationsHoverButton"
+                            class="relative inline-flex items-center gap-1.5 py-2 font-medium transition-colors duration-300
+                            {{ request()->routeIs('destinations*') ? 'text-brand-600' : 'text-neutral-700 hover:text-brand-600' }}"
+                            aria-haspopup="true">
+
+                            Destinations
+
+                            <svg class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+                            </svg>
+
+                        </a>
+
+                        {{-- Dropdown Panel --}}
+                        <div id="destinationsHover"
+                            class="invisible absolute left-0 top-full z-50 w-80 translate-y-3 pt-4 opacity-0 transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+
+                            <div
+                                class="overflow-hidden rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.18)]">
+
+                                {{-- Dropdown Header --}}
+                                <div class="mb-2 rounded-xl bg-brand-50/70 px-4 py-3">
+
+                                    <p class="text-sm font-bold text-slate-800">
+                                        Explore Top Destinations
+                                    </p>
+
+                                </div>
+
+                                {{-- Menu Items --}}
+                                <ul class="space-y-0" aria-labelledby="destinationsHoverButton">
+
+                                    @foreach ($destinations as $destination)
+                                        <li>
+                                            <a href="{{ route('destinations', ['destination' => $destination['slug']]) }}"
+                                                class="group/item flex items-center gap-3 rounded-xl px-3 py-2 transition-all duration-200 hover:bg-brand-50">
+
+                                                <span
+                                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover/item:bg-brand-100">
+
+                                                    <img src={`https://flagcdn.com/w20/${$destination['code'].toLowerCase()}.png`}
+                                                        alt="{{ $destination['name'] }} flag"
+                                                        class="h-6 w-6 object-cover" loading="lazy">
+
+                                                </span>
+
+                                                <span class="min-w-0 flex-1">
+
+                                                    <span
+                                                        class="block text-sm font-semibold text-slate-700 transition-colors group-hover/item:text-brand-600">
+                                                        {{ $destination['name'] }}
+                                                    </span>
+
+                                                </span>
+
+                                                <iconify-icon icon="lucide:chevron-right"
+                                                    class="text-base text-slate-300 transition-all group-hover/item:translate-x-1 group-hover/item:text-brand-600"></iconify-icon>
+
+                                            </a>
+                                        </li>
+                                    @endforeach
+
+                                    {{-- Student Support --}}
+                                    {{-- <li>
+                                        <a href="#"
+                                            class="group/item flex items-center gap-3 rounded-xl px-3 py-3 transition-all duration-200 hover:bg-brand-50">
+
+                                            <span
+                                                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover/item:bg-blue-100">
+
+                                                <iconify-icon icon="lucide:headset" class="text-xl"></iconify-icon>
+
+                                            </span>
+
+                                            <span class="min-w-0 flex-1">
+
+                                                <span
+                                                    class="block text-sm font-semibold text-slate-700 transition-colors group-hover/item:text-brand-600">
+                                                    Student Support
+                                                </span>
+
+                                                <span class="mt-0.5 block text-xs text-slate-400">
+                                                    Get help throughout your journey
+                                                </span>
+
+                                            </span>
+
+                                            <iconify-icon icon="lucide:chevron-right"
+                                                class="text-base text-slate-300 transition-all group-hover/item:translate-x-1 group-hover/item:text-brand-600"></iconify-icon>
+
+                                        </a>
+                                    </li> --}}
+
+                                  
+
+                                </ul>
+
+                                {{-- Dropdown Footer --}}
+                                <div class="mt-2 border-t border-slate-100 px-3 pt-3">
+
+                                    <a href="{{ route('destinations') }}"
+                                        class="flex items-center justify-between rounded-lg px-2 py-2 text-xs font-bold text-brand-600 transition-colors hover:text-brand-700">
+
+                                        Explore All Destinations
+
+                                        <iconify-icon icon="lucide:arrow-up-right" class="text-base"></iconify-icon>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- Universities --}}
+                    <a href=""
                         class="relative font-medium transition-all duration-300
-                        {{ request()->routeIs('counsellors') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
+                        {{ request()->routeIs('universities') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
                         after:absolute after:left-0 after:-bottom-1.5
                         after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
-                        Counsellors
+                        Universities
                     </a>
                     {{-- Events --}}
                     <a href="{{ route('events') }}"
@@ -66,19 +187,18 @@
                         Events
                     </a>
 
-                    {{-- Destinations --}}
-                    <a href="{{ route('destinations') }}"
+                    <a href=""
                         class="relative font-medium transition-all duration-300
-                            {{ request()->routeIs('destinations') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
-                            after:absolute after:left-0 after:-bottom-1.5
-                            after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
-                        Destinations
+                        {{ request()->routeIs('news') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
+                        after:absolute after:left-0 after:-bottom-1.5
+                        after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
+                        News
                     </a>
-                    
+
 
                 </div>
 
-                <div class="flex items-center gap-4 lg:gap-6">                  
+                <div class="flex items-center gap-4 lg:gap-6">
 
                     @auth
                         <a href="{{ auth()->user()->rolePrefix() === 'student'
@@ -92,11 +212,11 @@
                     @endauth
 
                     @guest
-                     <!-- Right Side -->
-                    <a href="{{ route('register') }}"
-                        class="hidden md:flex text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
-                        Sign Up Free
-                    </a>
+                        <!-- Right Side -->
+                        <a href="{{ route('register') }}"
+                            class="hidden md:flex text-sm uppercase bg-brand-600 text-white px-4 py-2 lg:px-6 lg:py-2.5 rounded-lg font-medium hover:bg-brand-600 transition">
+                            Sign Up Free
+                        </a>
                         <a href="{{ route('login') }}"
                             class="text-sm font-medium uppercase text-neutral-600 hover:text-brand-600">
                             login
@@ -111,12 +231,18 @@
         <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-200 shadow-lg">
 
             <div class="flex flex-col px-6 py-5 space-y-3 text-base font-medium">
-                <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Services</a>
+                <a href="{{ route('services') }}"
+                    class="{{ request()->routeIs('services') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Services</a>
+                <a href="{{ route('destinations') }}"
+                    class="{{ request()->routeIs('destinations') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Destinations</a>
                 {{-- <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Courses</a> --}}
-                <a href="{{ route('counsellors') }}" class="{{ request()->routeIs('counsellors') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Counsellors</a>
-                <a href="{{ route('events') }}" class="{{ request()->routeIs('events') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Events</a>
-                <a href="{{ route('destinations') }}" class="{{ request()->routeIs('destinations') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Destinations</a>
-               
+                <a href=""
+                    class="{{ request()->routeIs('universities') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Universities</a>
+                <a href="{{ route('events') }}"
+                    class="{{ request()->routeIs('events') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Events</a>
+
+                <a href=""
+                    class="{{ request()->routeIs('news') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">News</a>
 
                 <div class="flex items-center justify-between mt-6">
                     @guest
