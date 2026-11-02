@@ -63,7 +63,7 @@
 >
     <div class="pointer-events-none absolute -right-40 top-40 h-96 w-96 rounded-full bg-brand-50 blur-[120px]"></div>
 
-    <div class="relative mx-auto w-full max-w-[1280px] px-6 lg:px-8">
+    <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
 
         {{-- Header --}}
         <div class="mx-auto max-w-3xl text-center" data-reveal>

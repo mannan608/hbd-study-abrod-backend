@@ -2,9 +2,11 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import dateRangePicker from './date-range-picker.js';
 import './section-navigation.js';
+import destinationExplorer from './components/destination-explorer';
 
 window.Alpine = Alpine;
 Alpine.data('dateRangePicker', dateRangePicker);
+Alpine.data('destinationExplorer', destinationExplorer);
 Alpine.start();
 
 let homeSwiperLoadPromise = null;

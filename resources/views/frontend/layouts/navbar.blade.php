@@ -112,7 +112,7 @@
                                              <span class="min-w-0 flex-1">
                                                  <span
                                                      class="block text-sm font-semibold text-slate-700 transition-colors group-hover/item:text-brand-600">
-                                                     HBD Language Academy
+                                                     Language Academy
                                                  </span>
                                              </span>
 

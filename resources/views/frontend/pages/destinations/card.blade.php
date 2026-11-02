@@ -15,7 +15,7 @@
             <div class="absolute left-4 top-4 flex items-center gap-2">
                 <span class="inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm">
                     <img src="https://flagcdn.com/w40/{{ strtolower($destination['flagCode'] ?? $destination['flag'] ?? 'un') }}.png"
-                        alt="{{ $destination['country'] }} flag" class="h-4 w-6 object-cover" loading="lazy">
+                        alt="{{ $destination['country'] }} flag" class="h-6 w-6 object-cover rounded-full" loading="lazy">
                 </span>
                 @if (!empty($destination['featured']))
                     <span class="inline-flex items-center gap-1 rounded-full bg-brand-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">

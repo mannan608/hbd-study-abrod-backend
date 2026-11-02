@@ -1,7 +1,7 @@
 <section class="relative overflow-hidden bg-brand-25 py-16 sm:py-20 lg:py-24">
     <div class="pointer-events-none absolute -left-32 top-24 h-80 w-80 rounded-full bg-brand-100/60 blur-[120px]"></div>
 
-    <div class="relative mx-auto w-full max-w-[1280px] px-6 text-center lg:px-8">
+    <div class="relative mx-auto w-full max-w-7xl px-6 text-center lg:px-8">
 
         {{-- Section header --}}
         <header class="mx-auto max-w-2xl" data-reveal>

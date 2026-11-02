@@ -1,5 +1,5 @@
 <section class="bg-white py-16 sm:py-20 lg:py-24">
-    <div class="mx-auto w-full max-w-[1280px] px-6 lg:px-8">
+    <div class="mx-auto w-full max-w-7xl px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl border border-brand-800 bg-cover bg-center bg-no-repeat p-10 text-center text-white shadow-2xl sm:p-14 lg:p-16"
             data-reveal
             style="background-image: linear-gradient(to right, rgba(6, 29, 52, 0.94), rgba(10, 48, 83, 0.9)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1400&auto=format&fit=crop');">

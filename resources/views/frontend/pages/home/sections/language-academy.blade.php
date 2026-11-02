@@ -68,7 +68,7 @@
 <section class="relative overflow-hidden bg-brand-25 py-16 sm:py-20 lg:py-24">
     <div class="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-brand-100/60 blur-[120px]"></div>
 
-    <div class="relative mx-auto w-full max-w-[1280px] px-6 lg:px-8">
+    <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
 
         {{-- Section header --}}
         <div class="mx-auto max-w-3xl text-center" data-reveal>

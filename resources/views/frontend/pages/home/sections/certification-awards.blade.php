@@ -28,7 +28,7 @@
     <div class="pointer-events-none absolute left-10 top-1/3 h-96 w-96 rounded-full bg-sky-light/70 blur-[120px]"></div>
     <div class="pointer-events-none absolute -right-20 bottom-10 h-96 w-96 rounded-full bg-brand-100/60 blur-[120px]"></div>
 
-    <div class="relative mx-auto w-full max-w-[1280px] px-6 lg:px-8">
+    <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
 
         {{-- Header --}}
         <div class="mx-auto max-w-2xl text-center" data-reveal>

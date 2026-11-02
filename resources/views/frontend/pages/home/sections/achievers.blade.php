@@ -89,7 +89,7 @@
     <div class="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-brand-100/50 blur-[110px]"></div>
     <div class="pointer-events-none absolute -right-40 bottom-10 h-80 w-80 rounded-full bg-accent-red-light blur-[110px]"></div>
 
-    <div class="relative mx-auto w-full max-w-[1280px] px-6 lg:px-8">
+    <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
 
         {{-- Header --}}
         <div class="mx-auto max-w-2xl text-center" data-reveal>

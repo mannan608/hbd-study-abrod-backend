@@ -1,7 +1,3 @@
-{{-- ============================================================
-    HERO DESTINATION SLIDER
-    Tailwind CSS + Alpine.js
-============================================================ --}}
 
 @php
     $destinations = [
@@ -218,7 +214,7 @@
     }
 }" x-init="init()" @mouseenter="pause()" @mouseleave="resume()"
     @keydown.right.prevent="showSlide(current + 1)" @keydown.left.prevent="showSlide(current - 1)" tabindex="0"
-    class="relative isolate flex  w-full items-center justify-center overflow-hidden">
+    class="relative isolate flex h-[70vh] w-full items-center justify-center overflow-hidden">
 
 
     {{-- =========================================================
@@ -289,14 +285,9 @@
 
     <div class="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 text-center text-white sm:py-32 lg:px-8">
 
-
-        {{-- =====================================================
-            CONTENT WRAPPER
-        ====================================================== --}}
-
         <div :key="current" x-data="{ loaded: false }" x-init="setTimeout(() => {
-            loaded = true
-        }, 100)" class="mx-auto max-w-4xl">
+                loaded = true
+            }, 100)" class="mx-auto max-w-4xl">
 
 
             {{-- =================================================
@@ -348,7 +339,7 @@
                 HEADING
             ================================================== --}}
 
-            <h1 class="mt-7 text-4xl font-bold uppercase leading-tight tracking-tight transition-all duration-700 delay-100 sm:text-6xl lg:text-7xl"
+            <h1 class="mt-7 text-3xl font-bold uppercase leading-tight tracking-tight transition-all duration-700 delay-100 sm:text-4xl lg:text-5xl"
                 :class="loaded
                     ?
                     'translate-y-0 opacity-100' :
@@ -388,6 +379,20 @@
 
 
         </div>
+
+        <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                    <a href="{{ route('register') }}"
+                        class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent-red px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-950/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-red sm:w-auto">
+                       Book an Appointment
+                        <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                    <a href="{{ route('counsellors') }}"
+                        class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-brand-800 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-50 sm:w-auto">
+                        Talk to a counsellor
+                    </a>
+                </div>
 
     </div>
 
