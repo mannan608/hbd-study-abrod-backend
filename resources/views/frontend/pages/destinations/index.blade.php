@@ -43,7 +43,7 @@
                 </p>
 
                 {{-- Search UI --}}
-                <form id="destination-search-form" action="{{ route('destinations') }}" method="GET"
+                <form id="destination-search-form" action="{{ route('destinations') }}" method="GET" @submit.prevent="applyFilters('push', true)"
                     class="mx-auto mb-10 mt-10 max-w-3xl sm:mb-6">
 
                     <div
@@ -53,7 +53,7 @@
 
                             <iconify-icon icon="lucide:search" class="shrink-0 text-xl text-brand-500"></iconify-icon>
 
-                            <input type="search" name="search" value="{{ $search }}"
+                            <input type="search" name="search" x-model="search" @input="scheduleSearch()"
                                 placeholder="Search country, city or university..." aria-label="Search destinations"
                                 class="dark:bg-dark-900 border-0 w-full h-11 bg-transparent px-4 py-2.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:ring-0 focus:outline-hidden   dark:text-white/90 dark:placeholder:text-white/30 dark:disabled:bg-neutral-800/50">
 
@@ -101,7 +101,7 @@
 
 
     {{-- ================= DESTINATIONS ================= --}}
-    <section id="destinations-list" class="relative mx-auto -mt-30 max-w-7xl scroll-mt-6 px-4 pb-20 sm:px-6 lg:px-8">
+    <section id="destinations-list" x-data="destinationExplorer({ endpoint: @js(route('destinations')), initialSearch: @js($search), initialRegion: @js($selectedRegion), initialSort: @js($sort), initialCount: @js(count($destinations)), total: @js($totalDestinations) })" @destination-reset.window="resetFilters()" class="relative mx-auto -mt-30 max-w-7xl scroll-mt-6 px-4 pb-20 sm:px-6 lg:px-8">
 
         {{-- Filter Panel UI --}}
         <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-[0_12px_40px_rgba(6,29,52,0.07)] sm:p-6">
@@ -131,21 +131,21 @@
                     </div>
 
                     {{-- Sorting UI --}}
-                    <form id="destination-sort-form" action="{{ route('destinations') }}" method="GET"
+                    <form id="destination-sort-form" action="{{ route('destinations') }}" method="GET" @submit.prevent
                         class="flex flex-wrap items-center gap-2">
                         <input type="hidden" name="search" value="{{ $search }}">
                         <input type="hidden" name="region" value="{{ $selectedRegion }}">
 
                         <label
                             class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-brand-500 bg-brand-50 px-4 py-2 text-xs font-medium text-brand-600">
-                            <input type="radio" name="sort" value="rating" @checked($sort !== 'popular')
+                            <input type="radio" name="sort" value="rating" @checked($sort !== 'popular') @change="setSort('rating')"
                                 class="h-3.5 w-3.5 accent-brand-600">
                             Top Rated
                         </label>
 
                         <label
                             class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2 text-xs font-medium text-neutral-600">
-                            <input type="radio" name="sort" value="popular" @checked($sort === 'popular')
+                            <input type="radio" name="sort" value="popular" @checked($sort === 'popular') @change="setSort('popular')"
                                 class="h-3.5 w-3.5 accent-brand-600">
                             Most Popular
                         </label>
@@ -163,14 +163,14 @@
 
                     <div class="flex gap-2 overflow-x-auto pb-1">
 
-                        <a href="{{ route('destinations', array_filter(['search' => $search, 'sort' => $sort !== 'rating' ? $sort : null])) }}"
+                        <a href="{{ route('destinations', array_filter(['search' => $search, 'sort' => $sort !== 'rating' ? $sort : null])) }}" @click.prevent="setRegion('')"
                             data-destination-region=""
                             class="shrink-0 rounded-xl {{ $selectedRegion === '' ? 'bg-brand-500 text-white' : 'border border-neutral-200 bg-white text-neutral-600' }} px-4 py-2 text-xs font-medium">
                             All Regions
                         </a>
 
                         @foreach ($regions as $region)
-                            <a href="{{ route('destinations', array_filter(['search' => $search, 'region' => $region, 'sort' => $sort !== 'rating' ? $sort : null])) }}"
+                            <a href="{{ route('destinations', array_filter(['search' => $search, 'region' => $region, 'sort' => $sort !== 'rating' ? $sort : null])) }}" @click.prevent="setRegion(@js($region))"
                                 data-destination-region="{{ $region }}"
                                 class="shrink-0 rounded-xl {{ $selectedRegion === $region ? 'border border-brand-500 bg-brand-50 text-brand-600' : 'border border-neutral-200 bg-white text-neutral-600' }} px-4 py-2 text-xs font-medium">
                                 {{ $region }}
@@ -208,9 +208,9 @@
 
             <p class="text-xs font-medium text-neutral-500">
                 Showing
-                <span id="destination-result-count" class="font-semibold text-brand-950">{{ count($destinations) }}</span>
+                <span id="destination-result-count" x-text="count" class="font-semibold text-brand-950">{{ count($destinations) }}</span>
                 of
-                <span class="font-semibold text-brand-950">{{ $totalDestinations }}</span>
+                <span class="font-semibold text-brand-950" x-text="total">{{ $totalDestinations }}</span>
                 destinations
             </p>
 
@@ -460,12 +460,6 @@
                         }
 
 
-                        // Re-observe new cards
-                        if (window.observeDestinationCards) {
-                            window.observeDestinationCards();
-                        }
-
-
                         // Smooth scroll
                         if (smoothScroll) {
 
@@ -555,90 +549,6 @@
                 }
 
             });
-
-        });
-    </script>
-
-
-    {{-- ================= INTERSECTION OBSERVER ================= --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            let observer = null;
-
-            function observeCards() {
-
-                const cards = document.querySelectorAll(
-                    '#destination-results [data-reveal]:not(.is-visible)'
-                );
-
-                if (!('IntersectionObserver' in window)) {
-
-                    cards.forEach(card => {
-                        card.classList.add('is-visible');
-                    });
-
-                    return;
-
-                }
-
-                if (!observer) {
-
-                    observer = new IntersectionObserver((entries, currentObserver) => {
-
-                        entries.forEach(entry => {
-
-                            if (entry.isIntersecting) {
-
-                                entry.target.classList.add('is-visible');
-
-                                currentObserver.unobserve(entry.target);
-
-                            }
-
-                        });
-
-                    }, {
-                        threshold: 0.08,
-                        rootMargin: '0px 0px -30px 0px'
-                    });
-
-                }
-
-                cards.forEach(card => {
-                    observer.observe(card);
-                });
-
-            }
-
-
-            // Make globally accessible for AJAX updates
-            window.observeDestinationCards = observeCards;
-
-
-            // Initial cards
-            observeCards();
-
-
-            // Detect AJAX content changes
-            const results = document.getElementById(
-                'destination-results'
-            );
-
-            if (results) {
-
-                const mutationObserver = new MutationObserver(() => {
-
-                    observeCards();
-
-                });
-
-                mutationObserver.observe(results, {
-                    childList: true,
-                    subtree: true
-                });
-
-            }
 
         });
     </script>
