@@ -224,8 +224,9 @@
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($features as $feature)
+            <div data-reveal style="--reveal-delay: {{ ($loop->index % 3) * 90 }}ms">
                 <div class="group flex flex-col rounded-2xl border border-white/10 bg-brand-900/60 p-7 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-400/50 hover:bg-brand-900/90"
-                    data-reveal style="--reveal-delay: {{ ($loop->index % 3) * 90 }}ms">
+                    >
                     <div class="mb-6 flex items-center justify-between">
                         <span class="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-500/30 bg-brand-500/15 text-brand-300 transition-all duration-300 group-hover:bg-brand-500 group-hover:text-white">
                             <iconify-icon icon="lucide:{{ $feature['icon'] }}" class="text-[22px]"></iconify-icon>
@@ -241,6 +242,7 @@
                     <p class="mt-3 text-sm leading-6 text-brand-100/70">
                         {{ $feature['description'] }}
                     </p>
+                </div>
                 </div>
             @endforeach
         </div>

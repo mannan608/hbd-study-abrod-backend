@@ -87,8 +87,8 @@
         {{-- Courses --}}
         <div class="mt-12 grid grid-cols-1 gap-6 lg:mt-14 lg:grid-cols-3">
             @foreach ($academyData['courses'] as $course)
-                <div class="group flex flex-col rounded-2xl border border-brand-100 bg-white p-7 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-theme-md"
-                    data-reveal style="--reveal-delay: {{ $loop->index * 100 }}ms">
+            <div class="" data-reveal style="--reveal-delay: {{ $loop->index * 100 }}ms">
+                <div class="group flex flex-col rounded-2xl border border-brand-100 bg-white p-7 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-theme-md">
 
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-100 bg-brand-50 text-brand-600 transition-all duration-300 group-hover:bg-brand-500 group-hover:text-white">
                         <i class="{{ $course['icon'] }} text-lg"></i>
@@ -114,6 +114,7 @@
                         @endforeach
                     </ul>
                 </div>
+            </div>
             @endforeach
         </div>
 

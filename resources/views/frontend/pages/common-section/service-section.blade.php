@@ -15,7 +15,7 @@
             'icon' => 'compass',
         ],
         [
-            'title' => 'English Language Preparation (IELTS/PTE) & NAATI CCL',
+            'title' => 'Preparation (IELTS/PTE) & NAATI CCL',
             'description' => 'Excel in English proficiency exams such as IELTS, PTE, and NAATI CCL with our tailored preparation programs.',
             'icon' => 'languages',
         ],
@@ -68,10 +68,9 @@
         {{-- Services --}}
         <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-14 lg:grid-cols-3">
             @foreach ($services as $service)
+            <div class="" data-reveal style="--reveal-delay: {{ ($loop->index % 3) * 90 }}ms">
                 <article
                     class="group relative flex flex-col rounded-2xl border border-brand-100 bg-white p-7 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-theme-md"
-                    data-reveal
-                    style="--reveal-delay: {{ ($loop->index % 3) * 90 }}ms"
                 >
                     <span class="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-100 bg-brand-50 text-brand-600 transition-all duration-300 group-hover:bg-brand-500 group-hover:text-white">
                         <iconify-icon icon="lucide:{{ $service['icon'] }}" class="text-[22px]"></iconify-icon>
@@ -80,15 +79,16 @@
                     <h3 class="mt-5 text-lg font-bold leading-7 tracking-tight text-black transition-colors duration-200 group-hover:text-brand-600">
                         {{ $service['title'] }}
                     </h3>
-                    <p class="mt-2.5 text-sm leading-6 text-black/60">
+                    <p class="mt-2.5 text-sm leading-6 text-black/60 line-clamp-2">
                         {{ $service['description'] }}
                     </p>
 
-                    <span class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                    <span class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600  transition-all duration-300 ">
                         Learn more
                         <iconify-icon icon="lucide:arrow-right" class="text-[16px] transition-transform duration-300 group-hover:translate-x-1"></iconify-icon>
                     </span>
                 </article>
+            </div>
             @endforeach
         </div>
     </div>
