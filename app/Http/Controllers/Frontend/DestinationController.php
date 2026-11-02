@@ -116,20 +116,37 @@ public function destinations(Request $request)
     );
 }
 
-   public function show($slug)
-{
-    $destinations = json_decode(
-        File::get(resource_path('data/destinations.json')),
-        true
-    );
+public function show($slug)
+    {
+        // Basic destination data
+        $destinations = json_decode(
+            File::get(resource_path('data/destinations.json')),
+            true
+        );
 
-    $destination = collect($destinations)
-        ->firstWhere('slug', $slug);
+        // Find destination
+        $destination = collect($destinations)
+            ->firstWhere('slug', $slug);
 
-    if (!$destination) { abort(404); }
+        if (!$destination) {
+            abort(404);
+        }
 
-    return view(
-        'frontend.pages.destinations.details',compact('destination')
-    );
-}
+        // Destination details data
+        $destinationDetails = json_decode(
+            File::get(resource_path('data/destination-details.json')),
+            true
+        );
+
+        // Find matching details by slug
+        $details = $destinationDetails[$slug] ?? null;
+
+        if (!$details) {
+            abort(404);
+        }
+
+        return view('frontend.pages.destinations.details',
+            compact('destination', 'details')
+        );
+    }
 }
