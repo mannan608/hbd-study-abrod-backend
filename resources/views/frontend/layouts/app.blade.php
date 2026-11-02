@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
    <x-frontend.seo-meta :page-title="trim($__env->yieldContent('title'))" />
     <x-frontend.seo-meta />
-    <link rel="stylesheet" href="{{ asset('css/front-end-custom.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/front-end-custom.css') }}"> --}}
      @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -106,8 +106,9 @@
     @endif
 @endauth
 
-    @stack('scripts')
+  
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+      @stack('scripts')
 
 </body>
 </html>

@@ -36,19 +36,29 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-YUpbOJRP.css",
+    "file": "assets/app-DBFsqihk.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-B5zyPjmg.js",
+    "file": "assets/app-BoP5uGo3.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
       "node_modules/flatpickr/dist/esm/index.js",
       "node_modules/swiper/swiper.mjs",
-      "node_modules/swiper/modules/index.mjs"
+      "node_modules/swiper/modules/index.mjs",
+      "resources/js/map.js"
+    ]
+  },
+  "resources/js/map.js": {
+    "file": "assets/map-DqQokgrZ.js",
+    "name": "map",
+    "src": "resources/js/map.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/map-DIsGouq0.css"
     ]
   }
 }

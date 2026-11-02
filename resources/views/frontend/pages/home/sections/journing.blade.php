@@ -2,124 +2,73 @@
     $features = [
         [
             'title' => 'Compare',
-            'description' => 'Courses & fees',
+            'description' => 'Compare courses, tuition fees and entry requirements across institutions.',
             'icon' => 'fa-solid fa-scale-balanced',
-            'step' => 'Step 1',
-            'accentColor' => 'from-blue-500 to-cyan-400',
+            'step' => '01',
         ],
         [
             'title' => 'Connect',
-            'description' => 'With verified experts',
+            'description' => 'Connect directly with verified counsellors who understand your goals.',
             'icon' => 'fa-solid fa-users',
-            'step' => 'Step 2',
-            'accentColor' => 'from-emerald-500 to-teal-400',
+            'step' => '02',
         ],
         [
             'title' => 'Apply',
-            'description' => 'With confidence',
+            'description' => 'Apply with confidence with expert support on every document and deadline.',
             'icon' => 'fa-solid fa-file-circle-check',
-            'step' => 'Step 3',
-            'accentColor' => 'from-amber-500 to-orange-400',
+            'step' => '03',
         ],
         [
             'title' => 'Succeed',
-            'description' => 'Your dream awaits',
+            'description' => 'Succeed from offer letter to visa approval and a smooth arrival.',
             'icon' => 'fa-solid fa-graduation-cap',
-            'step' => 'Step 4',
-            'accentColor' => 'from-brand-500 to-violet-400',
+            'step' => '04',
         ],
     ];
-
 @endphp
 
-<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-950">
+<section class="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
+    <div class="mx-auto w-full max-w-[1280px] px-6 lg:px-8">
 
-    {{-- Ambient glows --}}
-    <div class="pointer-events-none absolute -top-32 left-1/4 h-72 w-72 rounded-full bg-blue-400/10 blur-3xl"></div>
-
-    <div class="pointer-events-none absolute -bottom-32 right-1/4 h-72 w-72 rounded-full bg-brand-400/10 blur-3xl"></div>
-
-    <div class="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-
-        {{-- Header --}}
-        <div class="mx-auto mb-16 max-w-2xl text-center">
-
-            <span
-                class="inline-flex items-center gap-2 rounded-full border border-brand-200/60 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-600 shadow-sm dark:border-brand-500/20 dark:bg-slate-900 dark:text-brand-400">
-
+        {{-- Section header --}}
+        <div class="mx-auto max-w-2xl text-center" data-reveal>
+            <span class="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-600">
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
-
                 Your journey starts here
-
             </span>
-
-            <h2 class="mt-5 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-
-                Four steps to
-
-                <span class="text-brand-600">
-                    your future
-                </span>
-
+            <h2 class="mt-5 text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
+                Four steps to <span class="text-brand-500">your future</span>
             </h2>
-
+            <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-black/60">
+                A clear, guided path from first search to your first day on campus.
+            </p>
         </div>
 
-        {{-- Steps grid --}}
-        <div class="relative grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        {{-- Steps --}}
+        <div class="relative mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
 
-            {{-- Connector line (desktop only) --}}
-            <div class="pointer-events-none absolute left-0 right-0 top-10 hidden h-px lg:block">
+            {{-- Connector --}}
+            <div class="pointer-events-none absolute inset-x-16 top-[68px] hidden h-px bg-gradient-to-r from-brand-100 via-brand-200 to-brand-100 lg:block"></div>
 
-                <div
-                    class="mx-16 h-full bg-gradient-to-r from-blue-300/60 via-emerald-300/60 via-amber-300/60 to-brand-300/60 dark:from-blue-500/30 dark:via-emerald-500/30 dark:via-amber-500/30 dark:to-brand-500/30">
-                </div>
-
-            </div>
-
-            @foreach ($features as $feature)
-                <div
-                    class="group relative flex flex-col items-center rounded-3xl border border-slate-200/70 bg-white/80 p-6 text-center shadow-[0_1px_3px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-12px_rgba(99,102,241,0.2)] dark:border-slate-800 dark:bg-slate-900/70 dark:hover:border-slate-700">
-
-                    {{-- Step label --}}
-                    <span
-                        class="mb-4 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">
-
-                        {{ $feature['step'] }}
-
-                    </span>
-
-                    {{-- Icon --}}
-                    <div
-                        class="group/icon relative mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br {{ $feature['accentColor'] }} text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
-
-                        <i class="{{ $feature['icon'] }} text-2xl"></i>
-
-                        {{-- Soft glow --}}
-                        <div
-                            class="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br {{ $feature['accentColor'] }} opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-60">
+            @foreach ($features as $index => $feature)
+                <article
+                    class="group relative flex flex-col rounded-2xl border border-brand-100 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-theme-md"
+                    data-reveal
+                    style="--reveal-delay: {{ $index * 100 }}ms"
+                >
+                    <div class="flex items-center justify-between">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 transition-all duration-300 group-hover:bg-brand-500 group-hover:text-white">
+                            <i class="{{ $feature['icon'] }} text-xl"></i>
                         </div>
-
+                        <span class="text-[28px] font-bold leading-none tracking-tight text-brand-100 transition-colors duration-300 group-hover:text-brand-200">
+                            {{ $feature['step'] }}
+                        </span>
                     </div>
 
-                    {{-- Content --}}
-                    <h3 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
-
-                        {{ $feature['title'] }}
-
-                    </h3>
-
-                    <p class="mt-1.5 text-sm text-slate-500 dark:text-slate-400">
-
-                        {{ $feature['description'] }}
-
-                    </p>
-
-                </div>
+                    <h3 class="mt-6 text-lg font-bold tracking-tight text-black">{{ $feature['title'] }}</h3>
+                    <p class="mt-2 text-sm leading-6 text-black/60">{{ $feature['description'] }}</p>
+                </article>
             @endforeach
-
         </div>
-
     </div>
-
 </section>
