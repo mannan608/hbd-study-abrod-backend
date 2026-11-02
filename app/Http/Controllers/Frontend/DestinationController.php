@@ -145,6 +145,9 @@ public function show($slug)
             abort(404);
         }
 
+        // The details view reads the JSON sections from the destination array.
+        $destination = array_merge($destination, $details);
+
         return view('frontend.pages.destinations.details',
             compact('destination', 'details')
         );
