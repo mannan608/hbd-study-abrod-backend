@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\EventRegistrationController;
 use App\Http\Controllers\Frontend\ReferralController;
 use App\Http\Controllers\Frontend\ServicesController;
+use App\Http\Controllers\Frontend\UniversityController;
 use App\Http\Controllers\Student\ProfileController;
 use App\SEO\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::get('/can-achieve', [FrontendController::class, 'achieve'])->name('achiev
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-conditions', [FrontendController::class, 'termsConditions'])->name('terms-conditions');
 Route::get('/ceo', [FrontendController::class, 'owner'])->name('owner');
+Route::get('/universities', [UniversityController::class, 'index'])->name('universities');
+Route::get('/university/{slug}', [UniversityController::class, 'show'])->name('university.details');
 
 
 //dynami pages
