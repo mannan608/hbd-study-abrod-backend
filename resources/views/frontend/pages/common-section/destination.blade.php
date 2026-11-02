@@ -22,7 +22,15 @@
         {{-- Destination cards --}}
         <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
             @foreach ($destinations as $destination)
-                @include('frontend.pages.destinations.card', ['destination' => $destination])
+            <a
+    href="{{ route('destination.details', ['slug' => $destination['slug']]) }}"
+    class="group block h-full"
+    data-reveal
+    style="--reveal-delay: {{ (($destination['id'] ?? 0) % 3) * 90 }}ms"
+>
+ @include('frontend.pages.destinations.card', ['destination' => $destination])
+            </a>
+               
             @endforeach
         </div>
 
