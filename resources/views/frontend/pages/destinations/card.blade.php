@@ -1,3 +1,4 @@
+@props(['destination'])
 <a href="{{ route('destination.details', ['slug' => $destination['slug']]) }}" class="group block h-full"  data-reveal  style="--reveal-delay: {{ ($destination['id'] % 3) * 90 }}ms">
     <article
         class="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-[0_24px_48px_-24px_rgba(16,24,40,0.28)]"
