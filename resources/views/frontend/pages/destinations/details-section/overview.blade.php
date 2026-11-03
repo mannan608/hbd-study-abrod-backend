@@ -36,11 +36,11 @@
                     </p>
                 @endif
 
-                @if ($secondaryDescription)
+                {{-- @if ($secondaryDescription)
                     <p class="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg sm:leading-8">
                         {{ $secondaryDescription }}
                     </p>
-                @endif
+                @endif --}}
 
                 {{-- CTA Actions --}}
                 <div class="mt-10 flex flex-wrap items-center gap-4">
@@ -127,6 +127,126 @@
             </div>
 
         </div>
+        <div class="mt-28">
+
+            <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+
+                <div>
+
+                    <span class="text-xs font-bold tracking-[0.2em] text-[#A3843A]">
+                        EXPLORE THE DESTINATION
+                    </span>
+
+                    <h2 class="mt-4 text-3xl font-extrabold text-[#0B1D36] sm:text-4xl">
+                        Popular Student Cities in Australia
+                    </h2>
+
+                    <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-500">
+                        Discover vibrant cities offering different academic, lifestyle and cultural experiences.
+                    </p>
+
+                </div>
+
+                <a href="#contact"
+                   class="inline-flex w-fit items-center gap-2 text-sm font-bold text-[#0B1D36] hover:text-[#A3843A]">
+
+                    Find Your City
+
+                    <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+
+                </a>
+
+            </div>
+
+
+            @php
+                $cities = [
+                    [
+                        'name' => 'Sydney',
+                        'location' => 'New South Wales',
+                        'image' => 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=700&q=85',
+                        'description' => 'A vibrant harbour city with leading universities, diverse communities and an international lifestyle.',
+                    ],
+                    [
+                        'name' => 'Melbourne',
+                        'location' => 'Victoria',
+                        'image' => 'https://images.unsplash.com/photo-1514395462725-fb4566210144?w=700&q=85',
+                        'description' => 'Known for its cultural atmosphere, arts, sporting events and diverse education opportunities.',
+                    ],
+                    [
+                        'name' => 'Brisbane',
+                        'location' => 'Queensland',
+                        'image' => 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=700&q=85',
+                        'description' => 'A sunny riverside city with a relaxed lifestyle and growing education sector.',
+                    ],
+                    [
+                        'name' => 'Perth',
+                        'location' => 'Western Australia',
+                        'image' => 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=700&q=85',
+                        'description' => 'A coastal city offering beautiful surroundings and a distinctive student experience.',
+                    ],
+                ];
+            @endphp
+
+
+            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+                @foreach($cities as $city)
+
+                    <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+                        <div class="relative h-56 overflow-hidden">
+
+                            <img
+                                src="{{ $city['image'] }}"
+                                alt="{{ $city['name'] }}, Australia"
+                                loading="lazy"
+                                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            >
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0B1D36]/80 via-transparent to-transparent"></div>
+
+                            <div class="absolute bottom-5 left-5">
+
+                                <span class="text-xs font-semibold text-white/80">
+                                    {{ $city['location'] }}
+                                </span>
+
+                                <h3 class="mt-1 text-2xl font-extrabold text-white">
+                                    {{ $city['name'] }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-5">
+
+                            <p class="text-xs leading-6 text-slate-500">
+                                {{ $city['description'] }}
+                            </p>
+
+                            <a href="#contact"
+                               class="mt-5 inline-flex items-center gap-2 text-xs font-bold text-[#0B1D36] transition group-hover:text-[#A3843A]">
+
+                                Explore City
+
+                                <iconify-icon icon="lucide:arrow-up-right" class="text-base"></iconify-icon>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                @endforeach
+
+            </div>
+
+        </div>
 
     </div>
 </section>
+
+
+

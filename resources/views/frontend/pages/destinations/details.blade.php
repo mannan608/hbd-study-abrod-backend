@@ -148,18 +148,17 @@
 
     <div class="">
         @include('frontend.pages.destinations.details-section.overview')
-        @include('frontend.pages.destinations.details-section.glance')
+        @include('frontend.pages.destinations.details-section.why-uk')
         @include('frontend.pages.destinations.details-section.course-section')
         @include('frontend.pages.destinations.details-section.study-label')
         @include('frontend.pages.destinations.details-section.universities')
         @include('frontend.pages.destinations.details-section.requirements')
         @include('frontend.pages.destinations.details-section.cost-schollership')
         @include('frontend.pages.destinations.details-section.how-we-work')
-        {{-- @include('frontend.pages.destinations.details-section.common') --}}
+        @include('frontend.pages.destinations.details-section.faq')
     </div>
 </main>
 
-{{-- Alpine.js, Alpine Collapse, Alpine Intersect and Iconify --}}
 @push('scripts')
 
     <script>

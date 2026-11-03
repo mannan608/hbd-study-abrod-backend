@@ -239,47 +239,6 @@
 
         </div>
 
-
-        {{-- Bottom CTA --}}
-        <div class="relative mt-14 overflow-hidden rounded-3xl bg-[#05275e] px-7 py-10 sm:px-10 sm:py-12">
-
-            {{-- Decorative Background --}}
-            <div class="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full border-[35px] border-white/5"></div>
-
-            <div class="pointer-events-none absolute -bottom-28 right-1/3 h-64 w-64 rounded-full bg-brand-400/10 blur-3xl"></div>
-
-            <div class="relative flex flex-col justify-between gap-8 md:flex-row md:items-center">
-
-                <div class="max-w-2xl">
-
-                    <span class="text-xs font-bold tracking-[0.16em] text-brand-200">
-                        FIND YOUR UNIVERSITY
-                    </span>
-
-                    <h3 class="mt-3 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
-                        Your dream university is waiting.
-                    </h3>
-
-                    <p class="mt-4 text-sm leading-7 text-brand-100/80">
-                        Get expert guidance to discover universities and courses that match your academic profile and future goals.
-                    </p>
-
-                </div>
-
-                <a
-                    href="#contact"
-                    class="inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-extrabold text-[#05275e] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-brand-50">
-
-                    Find Your University
-
-                    <iconify-icon icon="lucide:arrow-right" class="text-lg"></iconify-icon>
-
-                </a>
-
-            </div>
-
-        </div>
-
     </div>
 
 </section>

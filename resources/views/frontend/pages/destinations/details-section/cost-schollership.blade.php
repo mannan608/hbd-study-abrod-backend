@@ -366,62 +366,6 @@
 
             </div>
 
-
-            {{-- Visa Financial Requirements --}}
-            <div class="mt-12 rounded-3xl border border-[#C9A84C]/30 bg-[#C9A84C]/10 p-7 sm:p-9">
-
-                <div class="flex flex-col gap-6 md:flex-row md:items-center">
-
-                    <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#0B1D36] text-[#C9A84C]">
-                        <iconify-icon icon="lucide:landmark" class="text-2xl"></iconify-icon>
-                    </div>
-
-                    <div class="flex-1">
-
-                        <h3 class="text-xl font-extrabold text-[#0B1D36]">
-                            UK Student Visa Financial Requirement
-                        </h3>
-
-                        <p class="mt-2 text-sm leading-7 text-slate-600">
-                            For most applicants, UKVI requires evidence of outstanding course fees plus living-cost funds for up to nine months.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="mt-7 grid gap-4 sm:grid-cols-2">
-
-                    <div class="rounded-2xl bg-white p-6">
-                        <span class="text-xs font-semibold text-slate-500">Studying in London</span>
-                        <div class="mt-2 text-3xl font-extrabold text-[#0B1D36]">£1,529</div>
-                        <p class="mt-1 text-xs text-slate-500">Per month, up to 9 months</p>
-                    </div>
-
-                    <div class="rounded-2xl bg-white p-6">
-                        <span class="text-xs font-semibold text-slate-500">Outside London</span>
-                        <div class="mt-2 text-3xl font-extrabold text-[#0B1D36]">£1,171</div>
-                        <p class="mt-1 text-xs text-slate-500">Per month, up to 9 months</p>
-                    </div>
-
-                </div>
-
-                <p class="mt-5 text-xs leading-6 text-slate-600">
-                    These are visa financial-evidence thresholds, not estimates of actual monthly spending. The funds generally need to be held for 28 consecutive days. Check the latest official UKVI rules before applying.
-                </p>
-
-                <a href="https://www.gov.uk/student-visa/money"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#0B1D36] hover:text-[#A3843A]">
-
-                    Check Official UKVI Requirements
-                    <iconify-icon icon="lucide:external-link"></iconify-icon>
-
-                </a>
-
-            </div>
-
         </div>
 
 
@@ -738,43 +682,6 @@
                         </div>
 
                     @endforeach
-
-                </div>
-
-            </div>
-
-
-            {{-- Final CTA --}}
-            <div class="relative mt-24 overflow-hidden rounded-3xl bg-[#0B1D36] px-7 py-12 sm:px-12 lg:px-16">
-
-                <div class="absolute -right-20 -top-24 h-72 w-72 rounded-full border-[40px] border-white/5"></div>
-
-                <div class="relative flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-
-                    <div class="max-w-2xl">
-
-                        <span class="text-xs font-bold tracking-[0.2em] text-[#C9A84C]">
-                            MAKE YOUR DREAM POSSIBLE
-                        </span>
-
-                        <h2 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-                            Need Help Planning Your UK Study Budget?
-                        </h2>
-
-                        <p class="mt-4 text-sm leading-7 text-blue-100/70">
-                            Get expert guidance on tuition fees, scholarships, university selection and your overall study abroad budget.
-                        </p>
-
-                    </div>
-
-                    <a href="#contact-form"
-                       class="inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-[#C9A84C] px-7 py-4 text-sm font-extrabold text-[#0B1D36] transition hover:-translate-y-1 hover:bg-[#D8B95F]">
-
-                        Get Free Consultation
-
-                        <iconify-icon icon="lucide:arrow-right" class="text-lg"></iconify-icon>
-
-                    </a>
 
                 </div>
 

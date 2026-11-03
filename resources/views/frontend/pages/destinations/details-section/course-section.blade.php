@@ -248,41 +248,5 @@
 
         </div>
 
-        {{-- BOTTOM CTA --}}
-        <div class="mt-12 overflow-hidden rounded-3xl bg-[#05275e] px-7 py-9 sm:px-10 sm:py-11">
-
-            <div class="flex flex-col justify-between gap-7 md:flex-row md:items-center">
-
-                <div class="max-w-2xl">
-
-                    <span class="text-xs font-bold tracking-[0.16em] text-blue-200">
-                        FIND YOUR PERFECT COURSE
-                    </span>
-
-                    <h3 class="mt-3 text-2xl leading-tight font-bold text-white sm:text-3xl">
-                        Not sure which course is right for you?
-                    </h3>
-
-                    <p class="mt-3 text-sm leading-7 text-blue-100/80">
-                        Let our expert counsellors help you explore suitable courses based on your academic background, interests and career goals.
-                    </p>
-
-                </div>
-
-                <a href="#contact"
-                   class="inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-bold text-[#05275e] transition hover:bg-blue-50">
-
-                    Get Expert Guidance
-
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/>
-                    </svg>
-
-                </a>
-
-            </div>
-
-        </div>
-
     </div>
 </section>

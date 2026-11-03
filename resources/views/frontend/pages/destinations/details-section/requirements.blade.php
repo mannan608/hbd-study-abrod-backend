@@ -402,74 +402,6 @@
 
         </div>
 
-
-        {{-- Application Documents --}}
-        <div class="mt-24 rounded-3xl border border-slate-200 bg-white p-7 sm:p-10 lg:p-12">
-
-            <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-
-                <div>
-
-                    <span class="text-xs font-bold tracking-[0.2em] text-[#A3843A]">
-                        APPLICATION CHECKLIST
-                    </span>
-
-                    <h2 class="mt-4 text-3xl font-extrabold text-[#0B1D36] sm:text-4xl">
-                        Documents You'll Need
-                    </h2>
-
-                    <p class="mt-4 text-sm leading-7 text-slate-500">
-                        Prepare your supporting documents before submitting your university application. Individual institutions may request additional documents.
-                    </p>
-
-                    <a href="#contact"
-                       class="mt-7 inline-flex items-center gap-3 rounded-xl bg-[#0B1D36] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#17375D]">
-
-                        Get Application Support
-
-                        <iconify-icon icon="lucide:arrow-right"></iconify-icon>
-
-                    </a>
-
-                </div>
-
-
-                <div class="grid gap-3 sm:grid-cols-2">
-
-                    @php
-                        $documents = [
-                            ['icon' => 'lucide:book-open', 'title' => 'Academic Certificates'],
-                            ['icon' => 'lucide:file-text', 'title' => 'Academic Transcripts'],
-                            ['icon' => 'lucide:passport', 'title' => 'Valid Passport'],
-                            ['icon' => 'lucide:languages', 'title' => 'English Test Result'],
-                            ['icon' => 'lucide:pen-tool', 'title' => 'Personal Statement'],
-                            ['icon' => 'lucide:users', 'title' => 'Academic References'],
-                            ['icon' => 'lucide:briefcase-business', 'title' => 'Updated CV'],
-                            ['icon' => 'lucide:folder-check', 'title' => 'Additional Documents'],
-                        ];
-                    @endphp
-
-                    @foreach($documents as $document)
-
-                        <div class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4 transition hover:border-[#C9A84C]/50 hover:bg-[#C9A84C]/5">
-
-                            <iconify-icon icon="{{ $document['icon'] }}" class="shrink-0 text-xl text-[#A3843A]"></iconify-icon>
-
-                            <span class="text-xs font-bold text-[#0B1D36]">
-                                {{ $document['title'] }}
-                            </span>
-
-                        </div>
-
-                    @endforeach
-
-                </div>
-
-            </div>
-
-        </div>
-
-
         {{-- Important Notice --}}
         <div class="mt-10 flex items-start gap-4 rounded-2xl border border-[#C9A84C]/30 bg-[#C9A84C]/10 p-6">
 
@@ -484,43 +416,6 @@
                 <p class="mt-2 text-sm leading-7 text-slate-600">
                     Entry requirements, English language scores and document requirements vary between universities and courses. Meeting the minimum requirements does not guarantee admission. Financial evidence for a UK Student visa is a separate requirement from university admission.
                 </p>
-
-            </div>
-
-        </div>
-
-
-        {{-- Final CTA --}}
-        <div id="contact" class="relative mt-20 overflow-hidden rounded-3xl bg-[#0B1D36] px-7 py-12 sm:px-12 lg:px-16">
-
-            <div class="absolute -right-20 -top-24 h-72 w-72 rounded-full border-[40px] border-white/5"></div>
-
-            <div class="relative flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-
-                <div class="max-w-2xl">
-
-                    <span class="text-xs font-bold tracking-[0.2em] text-[#C9A84C]">
-                        YOUR FUTURE STARTS HERE
-                    </span>
-
-                    <h2 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-                        Ready to Start Your UK University Journey?
-                    </h2>
-
-                    <p class="mt-4 text-sm leading-7 text-blue-100/70">
-                        Let our expert team help you understand your eligibility, choose the right university and prepare your application.
-                    </p>
-
-                </div>
-
-                <a href="#contact-form"
-                   class="inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-[#C9A84C] px-7 py-4 text-sm font-extrabold text-[#0B1D36] transition hover:-translate-y-1 hover:bg-[#D8B95F]">
-
-                    Book a Free Consultation
-
-                    <iconify-icon icon="lucide:arrow-right" class="text-lg"></iconify-icon>
-
-                </a>
 
             </div>
 

@@ -356,46 +356,6 @@
 
         </div>
 
-
-        {{-- ======================================
-             FINAL CTA
-        ======================================= --}}
-
-        <div id="contact" class="relative mt-28 overflow-hidden rounded-3xl bg-[#0B1D36] px-7 py-12 sm:px-12 lg:px-16">
-
-            <div class="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full border-[40px] border-white/5"></div>
-
-            <div class="relative flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-
-                <div class="max-w-2xl">
-
-                    <span class="text-xs font-bold tracking-[0.2em] text-[#C9A84C]">
-                        YOUR FUTURE STARTS HERE
-                    </span>
-
-                    <h2 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-                        Ready to Take the First Step?
-                    </h2>
-
-                    <p class="mt-4 text-sm leading-7 text-blue-100/70">
-                        Let our experienced team guide you through your UK university application journey. Start with a consultation and take the next step towards your future.
-                    </p>
-
-                </div>
-
-                <a href="#contact-form"
-                   class="inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-[#C9A84C] px-7 py-4 text-sm font-extrabold text-[#0B1D36] transition hover:-translate-y-1 hover:bg-[#D8B95F]">
-
-                    Book a Free Consultation
-
-                    <iconify-icon icon="lucide:arrow-right" class="text-lg"></iconify-icon>
-
-                </a>
-
-            </div>
-
-        </div>
-
     </div>
 
 </section>
