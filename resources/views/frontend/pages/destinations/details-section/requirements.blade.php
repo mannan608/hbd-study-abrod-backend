@@ -145,12 +145,12 @@
             {{-- Interactive Tab Box on Right --}}
             <div class="lg:col-span-6" data-reveal style="--reveal-delay: 150ms" x-data="{ level: 'undergraduate' }">
                 <div class="rounded-2xl border border-brand-100 bg-white p-7 shadow-theme-md sm:p-8">
-                    <div class="flex items-center justify-between border-b border-brand-100 pb-5">
+                    <div class="flex justify-between border-b border-brand-100 pb-5 flex-col sm:flex-row gap-4 sm:gap-0">
                         <div>
                             <p class="text-[11px] font-semibold uppercase tracking-wider text-brand-600">Explore Entry Route</p>
                             <h4 class="mt-1 text-xl font-bold text-black">Select Your Education Level</h4>
                         </div>
-                        <div class="flex rounded-xl border border-brand-100 bg-brand-50 p-1">
+                        <div class="flex rounded-xl w-full sm:w-fit border justify-around border-brand-100 bg-brand-50 p-1">
                             <button type="button"
                                     @click="level = 'undergraduate'"
                                     :class="level === 'undergraduate' ? 'bg-brand-500 text-white shadow-sm' : 'text-black/70 hover:text-brand-600'"

@@ -117,7 +117,7 @@
                                     <span class="text-[11px] font-semibold uppercase tracking-wider text-black/50">
                                         TYPICAL DURATION
                                     </span>
-                                    <p class="mt-2 text-2xl font-bold text-black">
+                                    <p class="mt-2 text-lg md:text-xl font-bold text-black">
                                         {{ $level['duration'] }}
                                     </p>
                                     <div class="mt-4 h-1 w-10 rounded-full bg-brand-500"></div>

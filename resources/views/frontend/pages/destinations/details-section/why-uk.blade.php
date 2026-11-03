@@ -78,19 +78,19 @@
 
                 <div class="mt-8 flex flex-wrap items-center gap-4">
                     <a href="#uk-benefits"
-                       class="inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                       class="inline-flex w-full sm:w-fit items-center justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm gap-2 rounded-xl bg-brand-500 px-6 font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
                         <span>Discover Key Benefits</span>
                         <iconify-icon icon="lucide:arrow-down" class="text-base"></iconify-icon>
                     </a>
                     <a href="#contact"
-                       class="inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-white px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-50 hover:border-brand-300">
+                       class="inline-flex w-full sm:w-fit items-center justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm gap-2 rounded-xl border border-brand-200 bg-white px-6 font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-50 hover:border-brand-300">
                         <span>Get Expert Guidance</span>
                         <iconify-icon icon="lucide:arrow-up-right" class="text-base"></iconify-icon>
                     </a>
                 </div>
 
                 {{-- Trust badges --}}
-                <div class="mt-10 flex flex-wrap items-center gap-6 border-t border-brand-200/60 pt-6">
+                <div class="mt-10 flex flex-wrap items-center gap-2 sm:gap-6 border-t border-brand-200/60 pt-6">
                     <div class="flex items-center gap-2 text-sm font-medium text-black/70">
                         <span class="flex h-5 w-5 items-center justify-center rounded-full bg-success-50 text-success-500">
                             <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
@@ -178,20 +178,20 @@
         </div>
 
         {{-- Career Opportunities Banner --}}
-        <div class="relative mt-20 overflow-hidden rounded-2xl bg-brand-900 p-8 sm:p-12 lg:p-14 text-white" data-reveal>
+        <div class="relative mt-10 sm:mt-12 md:mt-16 lg:mt-20 overflow-hidden rounded-2xl bg-brand-900 p-6 sm:p-10 lg:p-12 text-white" data-reveal>
             <div class="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-brand-800/50 blur-3xl"></div>
 
             <div class="relative grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
                 <div class="lg:col-span-7">
-                    <span class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/20 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-200">
+                    <span class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/20 px-3.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-200">
                         BUILD YOUR FUTURE
                     </span>
 
-                    <h3 class="mt-4 text-[26px] font-bold leading-[1.2] tracking-tight sm:text-[30px] lg:text-[34px]">
+                    <h3 class="mt-4 text-xl font-bold leading-[1.2] tracking-tight sm:text-2xl lg:text-3xl">
                         Turn Your Education into Lifelong Global Career Success.
                     </h3>
 
-                    <p class="mt-4 text-base leading-7 text-brand-100/80">
+                    <p class="mt-4 text-sm sm:text-base leading-6 sm:leading-7 text-brand-100/80">
                         Gain internationally respected qualifications, build a multinational professional network, and maximize your employment prospects in leading global organizations.
                     </p>
 
@@ -204,9 +204,9 @@
 
                 <div class="lg:col-span-5 grid grid-cols-2 gap-4">
                     @foreach($careerPoints as $point)
-                        <div class="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-colors hover:bg-white/10">
-                            <iconify-icon icon="{{ $point['icon'] }}" class="text-2xl text-brand-300"></iconify-icon>
-                            <h4 class="mt-3 text-sm font-bold text-white">
+                        <div class="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 md:p-5  backdrop-blur-sm transition-colors hover:bg-white/10">
+                            <iconify-icon icon="{{ $point['icon'] }}" class="text-xl sm:text-2xl text-brand-300"></iconify-icon>
+                            <h4 class="mt-3 text-xs sm:text-sm font-bold text-white">
                                 {{ $point['title'] }}
                             </h4>
                         </div>

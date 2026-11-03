@@ -108,12 +108,12 @@
                 </p>
                 <div class="mt-6 flex flex-wrap justify-center gap-4">
                     <a href="#contact"
-                       class="inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                       class="inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm gap-2 rounded-xl bg-brand-500 px-6  font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
                         <span>Book Free Consultation</span>
                         <iconify-icon icon="lucide:arrow-right" class="text-base"></iconify-icon>
                     </a>
                     <a href="tel:09617-990099"
-                       class="inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100">
+                       class="inline-flex  w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-6 font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100">
                         <iconify-icon icon="lucide:phone" class="text-base"></iconify-icon>
                         <span>Call 09617-990099</span>
                     </a>

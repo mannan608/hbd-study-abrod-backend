@@ -63,12 +63,12 @@
                 {{-- Action buttons --}}
                 <div class="mt-8 flex flex-wrap items-center gap-4">
                     <a href="#courses"
-                       class="inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                       class="inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl bg-brand-500 px-6 font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
                         <span>Explore Study Options</span>
                         <iconify-icon icon="lucide:arrow-right" class="text-base"></iconify-icon>
                     </a>
                     <a href="#contact"
-                       class="inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100 hover:border-brand-300">
+                       class="inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-6 font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100 hover:border-brand-300">
                         <span>Talk to a Counsellor</span>
                         <iconify-icon icon="lucide:headset" class="text-base"></iconify-icon>
                     </a>

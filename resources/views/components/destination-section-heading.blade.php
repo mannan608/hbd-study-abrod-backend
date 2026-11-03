@@ -17,7 +17,7 @@
         </div>
     @endif
 
-    <h2 class="text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
+    <h2 class="text-xl font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-2xl lg:text-3xl">
         {!! $title !!}
     </h2>
 
