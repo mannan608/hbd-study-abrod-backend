@@ -6,7 +6,7 @@
 
 
             <!-- Main Content -->
-            <div class="mt-6 grid grid-cols-1 gap-8 md:mt-10 lg:mt-14 lg:grid-cols-[1fr_560px] lg:gap-12">
+            <div class="mt-14 grid grid-cols-1 gap-8  lg:grid-cols-[1fr_560px] lg:gap-12">
 
                 <!-- Left Content -->
                 <div class="flex flex-col justify-center">

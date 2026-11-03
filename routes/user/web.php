@@ -32,15 +32,21 @@ Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 Route::get('/', [FrontendController::class, 'homePage'])->name('home');
 Route::get('/destinations', [DestinationController::class, 'destinations'])->name('destinations');
 Route::get('/destination/{slug}', [DestinationController::class, 'show'])->name('destination.details');
-Route::get('/how-we-works', [FrontendController::class, 'howWeWork'])->name('how-we-works');
-Route::get('/about', [FrontendController::class, 'aboutPage'])->name('about');
-Route::get('/contact', [FrontendController::class, 'contactPage'])->name('contact');
-Route::get('/can-achieve', [FrontendController::class, 'achieve'])->name('achieve');
+// Route::get('/how-we-works', [FrontendController::class, 'howWeWork'])->name('how-we-works');
+Route::get('/about-us', [FrontendController::class, 'aboutPage'])->name('about');
+Route::get('/contact-us', [FrontendController::class, 'contactPage'])->name('contact');
+
+// Route::get('/can-achieve', [FrontendController::class, 'achieve'])->name('achieve');
+
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-conditions', [FrontendController::class, 'termsConditions'])->name('terms-conditions');
 Route::get('/ceo', [FrontendController::class, 'owner'])->name('owner');
+
 Route::get('/universities', [UniversityController::class, 'index'])->name('universities');
-Route::get('/university/{slug}', [UniversityController::class, 'show'])->name('university.details');
+Route::get('/universities/{slug}', [UniversityController::class, 'show'])->name('university.details');
+
+//counselling or consultation
+Route::get('/counselling', [CounsellorController::class, 'bookingAppointment'])->name('counselling');
 
 
 //dynami pages

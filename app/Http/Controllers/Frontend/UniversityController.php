@@ -19,10 +19,7 @@ class UniversityController extends Controller
 
     public function index(Request $request): View
     {
-        abort_unless(
-            $request->user()->can('university.list'),
-            403
-        );
+       
 
         $filters = $request->only(['search','country_id','city_id','is_active','is_featured']);
 
@@ -48,17 +45,15 @@ class UniversityController extends Controller
     }
 
 
-    public function show(Request $request, string $role, University $university)
+    public function show(University $university)
     {
-        abort_unless($request->user()->can('university.view'), 403);
+        
 
         $university->load(['country', 'city', 'campuses', 'courses', 'intakes']);
 
         // return $university;
 
-        return view('frontend.pages.universities.show', [
-            'university' => $university,
-        ]);
+        return view('frontend.pages.universities.show');
     }
 
 }

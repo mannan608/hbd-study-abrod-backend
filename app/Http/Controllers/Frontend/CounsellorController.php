@@ -75,5 +75,10 @@ class CounsellorController extends Controller
             ->with('success', 'Your counselling session has been booked successfully.');
     }
 
+    public function bookingAppointment(Counsellor $counsellor)
+    {
+        return view('frontend.pages.counselling.index');
+    }
+
   
 }

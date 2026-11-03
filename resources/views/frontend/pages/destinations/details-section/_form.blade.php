@@ -175,7 +175,7 @@
        {{-- Submit --}}
        <div class="pt-2">
            <button type="submit"
-               class="group relative w-full flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-brand-600 px-6 py-4 text-white font-semibold shadow-lg shadow-brand-600/25 hover:shadow-xl hover:shadow-brand-600/30 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-brand-500/30 transition-all duration-200">
+               class="group relative w-full flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-brand-600 px-6 py-2.5 sm:py-3.5  text-white font-semibold shadow-lg shadow-brand-600/25 hover:shadow-xl hover:shadow-brand-600/30 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-brand-500/30 transition-all duration-200">
                <span
                    class="absolute inset-0 bg-gradient-to-r from-brand-600 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                <svg class="relative w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"

@@ -139,6 +139,7 @@
          ALL DESTINATION SECTIONS (Alternating Rhythm)
     ========================================================== --}}
         <div class="relative">
+           
             {{-- Section 1: Overview & Cities (bg-white) --}}
             @include('frontend.pages.destinations.details-section.overview', [
                 'destination' => $destination,
