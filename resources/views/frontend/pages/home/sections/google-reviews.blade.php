@@ -112,11 +112,11 @@
 
                 <div class="flex flex-wrap items-center gap-3 border-t border-brand-100 bg-brand-25 p-5 sm:p-6 lg:border-l lg:border-t-0">
                     <a href="{{ $reviewUrl }}" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-100">
+                        class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-5 py-2.5 sm:py-3.5 text-[13px] sm:text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-100">
                         Write a review
                         <iconify-icon icon="lucide:external-link" class="text-base"></iconify-icon>
                     </a>
-                    <span class="inline-flex items-center gap-2 rounded-xl border border-brand-100 bg-white px-4 py-3 text-sm font-medium text-black/60">
+                    <span class="inline-flex items-center gap-2 rounded-xl border border-brand-100 bg-white px-4 py-2.5 sm:py-3.5 text-[13px] sm:text-sm font-medium text-black/60">
                         <iconify-icon icon="lucide:shield-check" class="text-base text-brand-600"></iconify-icon>
                         <span>Trustindex</span>
                     </span>
@@ -170,25 +170,35 @@
         </div>
 
         {{-- Controls --}}
-        <div x-show="reviews.length > 1" class="mt-8 flex items-center justify-center gap-5">
-            <button type="button" @click="prev()" aria-label="Previous review"
-                class="group flex h-11 w-11 items-center justify-center rounded-full border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-brand-500 hover:bg-brand-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-brand-100">
-                <iconify-icon icon="lucide:chevron-left" class="text-xl transition-transform group-hover:-translate-x-0.5"></iconify-icon>
-            </button>
+        <div x-show="reviews.length > 1" class="mt-6 sm:mt-8 flex items-center justify-center gap-3 sm:gap-5">
+    <!-- Previous -->
+    <button type="button" 
+            @click="prev()" 
+            aria-label="Previous review"
+            class="group flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-brand-500 hover:bg-brand-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-brand-100">
+        <iconify-icon icon="lucide:chevron-left" class="text-lg sm:text-xl transition-transform group-hover:-translate-x-0.5"></iconify-icon>
+    </button>
 
-            <div class="flex items-center gap-2.5">
-                <template x-for="(review, index) in reviews" :key="review.id">
-                    <button type="button" @click="goTo(index)" :aria-label="`Show review ${index + 1}`"
-                        :aria-current="index === currentIndex ? 'true' : 'false'"
-                        class="h-2 rounded-full transition-all duration-300"
-                        :class="index === currentIndex ? 'w-8 bg-brand-500' : 'w-2 bg-brand-200 hover:bg-brand-300'"></button>
-                </template>
-            </div>
-
-            <button type="button" @click="next()" aria-label="Next review"
-                class="group flex h-11 w-11 items-center justify-center rounded-full border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-brand-500 hover:bg-brand-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-brand-100">
-                <iconify-icon icon="lucide:chevron-right" class="text-xl transition-transform group-hover:translate-x-0.5"></iconify-icon>
+    <!-- Dots -->
+    <div class="flex items-center gap-2 sm:gap-2.5">
+        <template x-for="(review, index) in reviews" :key="review.id">
+            <button type="button" 
+                    @click="goTo(index)" 
+                    :aria-label="`Show review ${index + 1}`"
+                    :aria-current="index === currentIndex ? 'true' : 'false'"
+                    class="h-2 rounded-full transition-all duration-300"
+                    :class="index === currentIndex ? 'w-6 sm:w-8 bg-brand-500' : 'w-2 bg-brand-200 hover:bg-brand-300'">
             </button>
-        </div>
+        </template>
+    </div>
+
+    <!-- Next -->
+    <button type="button" 
+            @click="next()" 
+            aria-label="Next review"
+            class="group flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-brand-500 hover:bg-brand-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-brand-100">
+        <iconify-icon icon="lucide:chevron-right" class="text-lg sm:text-xl transition-transform group-hover:translate-x-0.5"></iconify-icon>
+    </button>
+</div>
     </div>
 </section>

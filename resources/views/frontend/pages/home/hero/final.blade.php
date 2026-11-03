@@ -1,4 +1,3 @@
-
 @php
     $destinations = [
         [
@@ -214,7 +213,10 @@
     }
 }" x-init="init()" @mouseenter="pause()" @mouseleave="resume()"
     @keydown.right.prevent="showSlide(current + 1)" @keydown.left.prevent="showSlide(current - 1)" tabindex="0"
-    class="relative isolate flex h-[70vh] w-full items-center justify-center overflow-hidden">
+    class="relative isolate flex h-[80vh] w-full items-center justify-center overflow-hidden sm:h-[78vh] md:h-[74vh]">
+
+    {{-- =========================================================
+        BACKGROUND SLIDES
 
 
     {{-- =========================================================
@@ -286,8 +288,8 @@
     <div class="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 text-center text-white sm:py-32 lg:px-8">
 
         <div :key="current" x-data="{ loaded: false }" x-init="setTimeout(() => {
-                loaded = true
-            }, 100)" class="mx-auto max-w-4xl">
+            loaded = true
+        }, 100)" class="mx-auto max-w-4xl">
 
 
             {{-- =================================================
@@ -380,17 +382,30 @@
 
         </div>
 
+        {{-- <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a href="{{ route('register') }}"
+                class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent-red px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-950/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-red sm:w-auto">
+                Book an Appointment
+                <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+            </a>
+            <a href="{{ route('counsellors') }}"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-brand-800 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-50 sm:w-auto">
+                Talk to a counsellor
+            </a>
+        </div> --}}
         <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                    <a href="{{ route('register') }}"
-                        class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent-red px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-950/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-red sm:w-auto">
-                       Book an Appointment
-                        <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                        </svg>
+                    <a href="#courses"
+                       class="inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl bg-brand-500 px-6 font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                        <span>Book an Appointment</span>
+                        <iconify-icon icon="lucide:arrow-right" class="text-base"></iconify-icon>
                     </a>
-                    <a href="{{ route('counsellors') }}"
-                        class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-brand-800 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-50 sm:w-auto">
-                        Talk to a counsellor
+                    <a href="#contact"
+                       class="inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-6 font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100 hover:border-brand-300">
+                        <span>Talk to a Counsellor</span>
+                        <iconify-icon icon="lucide:headset" class="text-base"></iconify-icon>
                     </a>
                 </div>
 

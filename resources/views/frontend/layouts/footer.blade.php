@@ -11,7 +11,7 @@
                 </div>
           </div>
           <p class="text-[15px] text-slate-400 max-w-sm leading-relaxed mb-6">
-            Connecting international students with premier educational institutions across Australia.
+            HBD Services is one of the prominent study abroad counseling services with a remarkable visa success rate & operating across multiple destinations.
           </p>
           <div class="flex space-x-3">
             <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-brand-600 hover:text-white transition"><i class="fa-brands fa-facebook-f text-base"></i></a>
@@ -56,7 +56,7 @@
       </div>
 
       <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-[15px] text-slate-500 gap-4">
-        <p class="text-center text-xs md:text-sm">© 2024 HBD Services. All rights reserved. Registered CRICOS Advisory Partner.</p>
+        <p class="text-center text-xs md:text-sm">Copyright © 2026 HBD Services. All Rights Reserved.</p>
         <div class="flex space-x-6 text-sm">
           <a href="{{ route('privacy-policy')}}" class="hover:text-slate-300">Privacy Policy</a>
           <a href="{{ route('terms-conditions')}}" class="hover:text-slate-300">Terms of Service</a>

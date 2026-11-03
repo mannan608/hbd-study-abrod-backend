@@ -108,7 +108,7 @@
                     <ul class="mt-6 space-y-2.5 border-t border-brand-100 pt-6">
                         @foreach ($course['features'] as $feature)
                             <li class="flex items-start gap-2.5 text-sm leading-6 text-black/65">
-                                <i class="fa-solid fa-circle-check mt-0.5 shrink-0 text-sm text-accent-green"></i>
+                                <i class="fa-solid fa-circle-check mt-0.5 shrink-0 text-sm text-success-500"></i>
                                 <span>{{ $feature }}</span>
                             </li>
                         @endforeach
@@ -150,7 +150,7 @@
                     <ul class="mt-6 space-y-3.5">
                         @foreach ($academyData['studentBenefits'] as $benefit)
                             <li class="flex items-center gap-3 text-sm text-brand-100">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green/20 text-[10px] text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-[10px] text-success-500">
                                     <i class="fa-solid fa-check"></i>
                                 </span>
                                 <span>{{ $benefit }}</span>

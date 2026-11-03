@@ -82,13 +82,13 @@
                 <iconify-icon icon="lucide:sparkles" class="text-[15px]"></iconify-icon>
                 {{ $badge }}
             </span>
-            <h2 class="mt-5 text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-white sm:text-[30px] lg:text-[32px]">
+            <h2 class="mt-5 text-xl font-semibold leading-[1.2] tracking-[-0.02em]  sm:text-2xl lg:text-3xl  text-white">
                 {{ $title }}
                 <span class="bg-gradient-to-r from-brand-300 via-sky to-blue-light-400 bg-clip-text text-transparent">
                     {{ $titleHighlight }}
                 </span>
             </h2>
-            <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-brand-100/80">
+            <p class="mx-auto mt-4 max-w-2xl text-sm sm:text-base leading-6 sm:leading-7 text-brand-100/80">
                 {{ $description }}
             </p>
         </div>
@@ -136,74 +136,88 @@
 
                         <div class="flex flex-wrap items-center gap-3 pt-2">
                             <a href="{{ $primaryCta['url'] }}"
-                                class="group inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                                class="group inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl bg-brand-500 px-6  font-semibold text-white shadow-lg shadow-brand-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
                                 <span>{{ $primaryCta['label'] }}</span>
                                 <iconify-icon icon="lucide:arrow-right" class="text-[16px] transition-transform duration-300 group-hover:translate-x-1"></iconify-icon>
                             </a>
                             <a href="#{{ $secondaryCta['targetId'] }}"
-                                class="rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10">
+                                class="inline-flex items-center w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm rounded-xl border border-white/10 bg-white/5 px-6  font-semibold text-white transition-all duration-300 hover:bg-white/10">
                                 {{ $secondaryCta['label'] }}
                             </a>
                         </div>
+
+
                     </div>
 
                     {{-- Right: metrics + activity --}}
-                    <div class="rounded-2xl border border-white/10 bg-brand-950/80 p-5 lg:col-span-7">
-                        <div class="mb-4 flex items-center justify-between">
-                            <div>
-                                <p class="text-[11px] font-bold uppercase tracking-wider text-brand-300/70">Operations overview</p>
-                                <p class="text-lg font-bold text-white">Active student pipeline</p>
-                            </div>
-                            <span class="rounded-lg border border-brand-500/20 bg-brand-500/10 px-3 py-1 text-xs font-semibold text-brand-300">Real-time sync</span>
-                        </div>
+                   {{-- Right: metrics + activity --}}
+<div class="rounded-2xl border border-white/10 bg-brand-950/80 p-4 sm:p-5 lg:col-span-7">
+    <!-- Header -->
+    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-brand-300/70">Operations overview</p>
+            <p class="text-base sm:text-lg font-bold text-white">Active student pipeline</p>
+        </div>
+        <span class="w-fit rounded-lg border border-brand-500/20 bg-brand-500/10 px-3 py-1 text-xs font-semibold text-brand-300">
+            Real-time sync
+        </span>
+    </div>
 
-                        <div class="mb-5 grid grid-cols-3 gap-3">
-                            <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
-                                <p class="text-[10px] font-semibold uppercase text-brand-300/70">Total inquiries</p>
-                                <p class="mt-1 text-xl font-extrabold text-white">1,428</p>
-                                <span class="text-[10px] font-medium text-accent-green">+18% this week</span>
-                            </div>
-                            <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
-                                <p class="text-[10px] font-semibold uppercase text-brand-300/70">Offers issued</p>
-                                <p class="mt-1 text-xl font-extrabold text-white">384</p>
-                                <span class="text-[10px] font-medium text-accent-green">94% visa rate</span>
-                            </div>
-                            <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
-                                <p class="text-[10px] font-semibold uppercase text-brand-300/70">Enrolments</p>
-                                <p class="mt-1 text-xl font-extrabold text-white">215</p>
-                                <span class="text-[10px] font-medium text-accent-cyan">Target met</span>
-                            </div>
-                        </div>
+    <!-- Metrics -->
+    <div class="mb-5 grid grid-cols-1 gap-3 xs:grid-cols-3 sm:grid-cols-3">
+        <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
+            <p class="text-[10px] font-semibold uppercase text-brand-300/70">Total inquiries</p>
+            <p class="mt-1 text-xl font-extrabold text-white">1,428</p>
+            <span class="text-[10px] font-medium text-accent-green">+18% this week</span>
+        </div>
+        <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
+            <p class="text-[10px] font-semibold uppercase text-brand-300/70">Offers issued</p>
+            <p class="mt-1 text-xl font-extrabold text-white">384</p>
+            <span class="text-[10px] font-medium text-accent-green">94% visa rate</span>
+        </div>
+        <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
+            <p class="text-[10px] font-semibold uppercase text-brand-300/70">Enrolments</p>
+            <p class="mt-1 text-xl font-extrabold text-white">215</p>
+            <span class="text-[10px] font-medium text-accent-cyan">Target met</span>
+        </div>
+    </div>
 
-                        <div class="space-y-2.5">
-                            <div class="flex items-center justify-between px-1 text-xs text-brand-200/80">
-                                <span>Recent student activity</span>
-                                <span class="font-medium text-brand-300">View all boards →</span>
-                            </div>
+    <!-- Activity -->
+    <div class="space-y-2.5">
+        <div class="flex items-center justify-between px-1 text-xs text-brand-200/80">
+            <span>Recent student activity</span>
+            <span class="font-medium text-brand-300 whitespace-nowrap">View all boards →</span>
+        </div>
 
-                            <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.03] p-3">
-                                <div class="flex items-center gap-3">
-                                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500/20 text-xs font-bold text-brand-300">JS</span>
-                                    <div>
-                                        <p class="text-xs font-bold text-white">Jessica Smith • Master of IT</p>
-                                        <p class="text-[11px] text-brand-200/70">University of Melbourne • Offer letter issued</p>
-                                    </div>
-                                </div>
-                                <span class="rounded-full border border-accent-green/20 bg-accent-green/10 px-2.5 py-1 text-[10px] font-semibold text-accent-green">Offer accepted</span>
-                            </div>
+        <!-- Activity Item 1 -->
+        <div class="flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-center gap-3 min-w-0">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-500/20 text-xs font-bold text-brand-300">JS</span>
+                <div class="min-w-0">
+                    <p class="text-xs font-bold text-white truncate">Jessica Smith • Master of IT</p>
+                    <p class="text-[11px] text-brand-200/70 truncate">University of Melbourne • Offer letter issued</p>
+                </div>
+            </div>
+            <span class="w-fit shrink-0 rounded-full border border-accent-green/20 bg-accent-green/10 px-2.5 py-1 text-[10px] font-semibold text-accent-green">
+                Offer accepted
+            </span>
+        </div>
 
-                            <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.03] p-3">
-                                <div class="flex items-center gap-3">
-                                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-cyan/20 text-xs font-bold text-accent-cyan">AK</span>
-                                    <div>
-                                        <p class="text-xs font-bold text-white">Alex Kumar • MBA Global</p>
-                                        <p class="text-[11px] text-brand-200/70">University of Sydney • Visa lodgement</p>
-                                    </div>
-                                </div>
-                                <span class="rounded-full border border-brand-500/20 bg-brand-500/10 px-2.5 py-1 text-[10px] font-semibold text-brand-300">In review</span>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Activity Item 2 -->
+        <div class="flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-center gap-3 min-w-0">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-cyan/20 text-xs font-bold text-accent-cyan">AK</span>
+                <div class="min-w-0">
+                    <p class="text-xs font-bold text-white truncate">Alex Kumar • MBA Global</p>
+                    <p class="text-[11px] text-brand-200/70 truncate">University of Sydney • Visa lodgement</p>
+                </div>
+            </div>
+            <span class="w-fit shrink-0 rounded-full border border-brand-500/20 bg-brand-500/10 px-2.5 py-1 text-[10px] font-semibold text-brand-300">
+                In review
+            </span>
+        </div>
+    </div>
+</div>
                 </div>
             </div>
         </div>
