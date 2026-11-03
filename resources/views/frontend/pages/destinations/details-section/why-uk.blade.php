@@ -1,309 +1,218 @@
+@props([
+    'destination' => [],
+])
 
-<section class="relative overflow-hidden bg-[#F8FAFC] py-16 sm:py-20 lg:py-24">
+@php
+    $destName = $destination['name'] ?? 'the United Kingdom';
 
-    {{-- Background Decorations --}}
-    <div class="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-[#C9A84C]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute bottom-0 -left-40 h-96 w-96 rounded-full bg-blue-100/60 blur-3xl"></div>
+    $benefits = [
+        [
+            'number' => '01',
+            'icon' => 'lucide:graduation-cap',
+            'title' => 'World-Class Institutions',
+            'description' => 'Study at top-tier globally recognized universities known for academic rigor, groundbreaking research, and leading faculty.',
+            'details' => 'Internationally recognized degrees',
+        ],
+        [
+            'number' => '02',
+            'icon' => 'lucide:clock',
+            'title' => 'Fast-Track Degree Options',
+            'description' => 'Benefit from condensed course structures, including 1-year Master’s degrees that save considerable tuition and living expenses.',
+            'details' => 'Accelerated career entry',
+        ],
+        [
+            'number' => '03',
+            'icon' => 'lucide:briefcase-business',
+            'title' => 'Post-Study Graduate Work',
+            'description' => 'Eligible international graduates can live and work for up to 2 years (3 years for PhDs) to build international career experience.',
+            'details' => 'Valuable international resume',
+        ],
+        [
+            'number' => '04',
+            'icon' => 'lucide:badge-dollar-sign',
+            'title' => 'Part-Time Work Rights',
+            'description' => 'Balance study and lifestyle with permission to work up to 20 hours per week during term time and full-time during holidays.',
+            'details' => 'Support living expenses',
+        ],
+        [
+            'number' => '05',
+            'icon' => 'lucide:book-open',
+            'title' => 'Comprehensive Specializations',
+            'description' => 'Access thousands of interdisciplinary undergraduate and postgraduate degrees with modern industry-focused curriculums.',
+            'details' => 'Industry-aligned coursework',
+        ],
+        [
+            'number' => '06',
+            'icon' => 'lucide:users',
+            'title' => 'Global Networking',
+            'description' => 'Connect with talented students, researchers, and alumni from over 140 countries in an inclusive, multicultural student environment.',
+            'details' => 'Lifelong international connections',
+        ],
+    ];
 
+    $careerPoints = [
+        ['icon' => 'lucide:briefcase-business', 'title' => 'Global Employability'],
+        ['icon' => 'lucide:network', 'title' => 'Industry Networking'],
+        ['icon' => 'lucide:lightbulb', 'title' => 'Innovation & Research'],
+        ['icon' => 'lucide:trending-up', 'title' => 'Higher Earning Potential'],
+    ];
+@endphp
+
+<section id="why-choose" data-section class="relative overflow-hidden bg-brand-25 py-16 sm:py-20 lg:py-24">
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        {{-- ======================================
-             HERO SECTION
-        ======================================= --}}
-
+        {{-- Section Introduction --}}
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <div data-reveal>
+                <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-600">
+                    <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span>
+                    THE GLOBAL ADVANTAGE
+                </div>
 
-            <div>
+                <h2 class="text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
+                    Why Study in <span class="text-brand-500">{{ $destName }}</span>? A World of Opportunities.
+                </h2>
 
-                <span class="inline-flex items-center gap-2 rounded-full border border-[#C9A84C]/30 bg-[#C9A84C]/10 px-4 py-2 text-[11px] font-bold tracking-[0.18em] text-[#92732F]">
-
-                    <iconify-icon icon="lucide:globe-2" class="text-base"></iconify-icon>
-
-                    YOUR FUTURE, YOUR DESTINATION
-
-                </span>
-
-                <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-[#0B1D36] sm:text-5xl lg:text-[58px]">
-
-                    Why Study in
-                    <span class="text-[#C9A84C]">the UK?</span>
-
-                    A World of Opportunities.
-
-                </h1>
-
-                <p class="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
-
-                    Discover a world-class education system, globally recognised qualifications and exciting career opportunities. The United Kingdom offers an inspiring environment for international students to learn, grow and build a successful future.
-
+                <p class="mt-5 text-base leading-7 text-black/70 sm:text-lg sm:leading-8">
+                    Discover a world-leading education system with globally accredited qualifications, cutting-edge facilities, and vibrant student communities. Studying here offers an inspiring environment to develop professional expertise and open doors worldwide.
                 </p>
 
                 <div class="mt-8 flex flex-wrap items-center gap-4">
-
                     <a href="#uk-benefits"
-                       class="inline-flex items-center gap-3 rounded-xl bg-[#0B1D36] px-6 py-4 text-sm font-bold text-white shadow-lg shadow-[#0B1D36]/15 transition hover:-translate-y-1 hover:bg-[#17375D]">
-
-                        Discover the Benefits
-
-                        <iconify-icon icon="lucide:arrow-down" class="text-lg"></iconify-icon>
-
+                       class="inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                        <span>Discover Key Benefits</span>
+                        <iconify-icon icon="lucide:arrow-down" class="text-base"></iconify-icon>
                     </a>
-
                     <a href="#contact"
-                       class="inline-flex items-center gap-2 text-sm font-bold text-[#0B1D36] transition hover:text-[#C9A84C]">
-
-                        Get Expert Guidance
-
-                        <iconify-icon icon="lucide:arrow-up-right" class="text-lg"></iconify-icon>
-
+                       class="inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-white px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-50 hover:border-brand-300">
+                        <span>Get Expert Guidance</span>
+                        <iconify-icon icon="lucide:arrow-up-right" class="text-base"></iconify-icon>
                     </a>
-
                 </div>
 
-                <div class="mt-10 flex flex-wrap gap-x-7 gap-y-4 border-t border-slate-200 pt-7">
-
-                    <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:graduation-cap" class="text-xl text-[#C9A84C]"></iconify-icon>
-                        <span class="text-xs font-semibold text-slate-600">World-Class Universities</span>
+                {{-- Trust badges --}}
+                <div class="mt-10 flex flex-wrap items-center gap-6 border-t border-brand-200/60 pt-6">
+                    <div class="flex items-center gap-2 text-sm font-medium text-black/70">
+                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                            <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
+                        </span>
+                        <span>World-Class Ranking</span>
                     </div>
-
-                    <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:globe" class="text-xl text-[#C9A84C]"></iconify-icon>
-                        <span class="text-xs font-semibold text-slate-600">International Experience</span>
+                    <div class="flex items-center gap-2 text-sm font-medium text-black/70">
+                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                            <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
+                        </span>
+                        <span>High Visa Success</span>
                     </div>
-
+                    <div class="flex items-center gap-2 text-sm font-medium text-black/70">
+                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                            <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
+                        </span>
+                        <span>Post-Study Work Permit</span>
+                    </div>
                 </div>
-
             </div>
 
+            {{-- Right side: Image preview --}}
+            <div class="relative" data-reveal style="--reveal-delay: 150ms">
+                <div class="relative overflow-hidden rounded-2xl border border-brand-100 bg-white p-2 shadow-theme-md">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=1000&q=85"
+                         alt="Historic university campus in {{ $destName }}"
+                         class="h-[360px] w-full rounded-xl object-cover sm:h-[420px]">
 
-            {{-- Hero Image --}}
-            <div class="relative">
-
-                <div class="absolute -right-5 -top-5 h-32 w-32 rounded-3xl border border-[#C9A84C]/40"></div>
-
-                <div class="relative overflow-hidden rounded-3xl bg-[#0B1D36] p-2 shadow-2xl shadow-[#0B1D36]/15">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1562774053-701939374585?w=1000&q=85"
-                        alt="Historic UK university campus"
-                        class="h-[350px] w-full rounded-2xl object-cover sm:h-[430px]"
-                    >
-
-                    <div class="absolute bottom-7 left-7 right-7 rounded-2xl border border-white/20 bg-[#0B1D36]/90 p-5 backdrop-blur-xl">
-
-                        <div class="flex items-center gap-4">
-
-                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#C9A84C]">
-
-                                <iconify-icon icon="lucide:graduation-cap" class="text-2xl text-[#0B1D36]"></iconify-icon>
-
+                    <div class="absolute bottom-6 left-6 right-6 rounded-xl border border-brand-100 bg-white/95 p-4 shadow-lg backdrop-blur-md">
+                        <div class="flex items-center gap-3.5">
+                            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 border border-brand-100">
+                                <iconify-icon icon="lucide:sparkles" class="text-xl"></iconify-icon>
                             </div>
-
                             <div>
-                                <h3 class="font-bold text-white">
-                                    Learn Without Limits
-                                </h3>
-
-                                <p class="mt-1 text-xs text-blue-100">
-                                    Discover your potential in the UK.
-                                </p>
+                                <h4 class="text-sm font-bold text-black">Learn Without Limits</h4>
+                                <p class="text-xs text-black/60">Unlock premier academic institutions and global connections.</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        {{-- Benefits Grid --}}
+        <div id="uk-benefits" class="scroll-mt-24 mt-20 lg:mt-24">
+            <x-destination-section-heading
+                align="center"
+                eyebrow="STUDENT ADVANTAGES"
+                :title="'Key Advantages for International Students in <span class=\'text-brand-500\'>' . $destName . '</span>'"
+                description="Explore the top factors that make this destination one of the premier study choices for ambitious international students."
+            />
+
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                @foreach($benefits as $benefit)
+                    <article class="group relative flex h-full flex-col rounded-2xl border border-brand-100 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-theme-md sm:p-7"
+                             data-reveal style="--reveal-delay: {{ ($loop->index % 3) * 80 }}ms">
+                        <div class="flex items-center justify-between">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-100 bg-brand-50 text-brand-600 transition-all duration-300 group-hover:bg-brand-500 group-hover:text-white">
+                                <iconify-icon icon="{{ $benefit['icon'] }}" class="text-2xl"></iconify-icon>
+                            </div>
+                            <span class="text-3xl font-extrabold text-brand-100 transition-colors group-hover:text-brand-200">
+                                {{ $benefit['number'] }}
+                            </span>
                         </div>
 
-                    </div>
+                        <h3 class="mt-6 text-lg font-bold text-black transition-colors group-hover:text-brand-600">
+                            {{ $benefit['title'] }}
+                        </h3>
 
-                </div>
+                        <p class="mt-2.5 flex-1 text-sm leading-6 text-black/60">
+                            {{ $benefit['description'] }}
+                        </p>
 
-                <div class="absolute -bottom-5 -left-5 -z-10 h-32 w-32 rounded-full bg-[#C9A84C]/20 blur-2xl"></div>
-
+                        <div class="mt-6 flex items-center gap-2 border-t border-brand-100 pt-4">
+                            <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <iconify-icon icon="lucide:check" class="text-[10px]"></iconify-icon>
+                            </span>
+                            <span class="text-xs font-semibold text-black">
+                                {{ $benefit['details'] }}
+                            </span>
+                        </div>
+                    </article>
+                @endforeach
             </div>
-
         </div>
 
+        {{-- Career Opportunities Banner --}}
+        <div class="relative mt-20 overflow-hidden rounded-2xl bg-brand-900 p-8 sm:p-12 lg:p-14 text-white" data-reveal>
+            <div class="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-brand-800/50 blur-3xl"></div>
 
-        {{-- ======================================
-             BENEFITS INTRODUCTION
-        ======================================= --}}
-
-        <div id="uk-benefits" class="scroll-mt-24 mt-28 text-center">
-
-            <span class="text-xs font-bold tracking-[0.2em] text-[#A3843A]">
-                THE UK ADVANTAGE
-            </span>
-
-            <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-[#0B1D36] sm:text-4xl lg:text-5xl">
-                Why Students Choose the UK
-            </h2>
-
-            <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-500 sm:text-base">
-                From academic excellence to international exposure, discover the advantages that make the UK a popular destination for higher education.
-            </p>
-
-        </div>
-
-
-        {{-- ======================================
-             BENEFIT CARDS
-        ======================================= --}}
-
-        @php
-            $benefits = [
-                [
-                    'number' => '01',
-                    'icon' => 'lucide:graduation-cap',
-                    'title' => 'World-Class Education',
-                    'description' => 'Study at respected universities known for academic excellence, research and high-quality teaching.',
-                    'details' => 'Globally recognised qualifications',
-                ],
-                [
-                    'number' => '02',
-                    'icon' => 'lucide:clock',
-                    'title' => 'Shorter Study Duration',
-                    'description' => 'Many full-time postgraduate taught programmes can be completed in just one year.',
-                    'details' => 'Save time on your studies',
-                ],
-                [
-                    'number' => '03',
-                    'icon' => 'lucide:globe',
-                    'title' => 'Global Career Opportunities',
-                    'description' => 'Develop transferable skills, international exposure and professional networks for your future career.',
-                    'details' => 'Build a global perspective',
-                ],
-                [
-                    'number' => '04',
-                    'icon' => 'lucide:briefcase-business',
-                    'title' => 'Work Opportunities',
-                    'description' => 'Eligible international students can work part-time during term time, subject to visa conditions.',
-                    'details' => 'Gain valuable work experience',
-                ],
-                [
-                    'number' => '05',
-                    'icon' => 'lucide:book-open',
-                    'title' => 'Wide Range of Courses',
-                    'description' => 'Choose from diverse academic disciplines, specialist programmes and flexible study pathways.',
-                    'details' => 'Find your ideal course',
-                ],
-                [
-                    'number' => '06',
-                    'icon' => 'lucide:users',
-                    'title' => 'Multicultural Experience',
-                    'description' => 'Connect with people from different cultures and backgrounds in a welcoming international student environment.',
-                    'details' => 'Experience global diversity',
-                ],
-            ];
-        @endphp
-
-
-        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
-            @foreach($benefits as $benefit)
-
-                <article class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#C9A84C]/50 hover:shadow-xl hover:shadow-[#0B1D36]/5 sm:p-8">
-
-                    <span class="absolute right-6 top-5 text-5xl font-extrabold text-slate-100 transition-colors group-hover:text-[#C9A84C]/15">
-                        {{ $benefit['number'] }}
-                    </span>
-
-                    <div class="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0B1D36] text-[#C9A84C] transition-all duration-300 group-hover:bg-[#C9A84C] group-hover:text-[#0B1D36]">
-
-                        <iconify-icon icon="{{ $benefit['icon'] }}" class="text-2xl"></iconify-icon>
-
-                    </div>
-
-                    <h3 class="mt-7 text-xl font-extrabold text-[#0B1D36]">
-                        {{ $benefit['title'] }}
-                    </h3>
-
-                    <p class="mt-3 flex-1 text-sm leading-7 text-slate-500">
-                        {{ $benefit['description'] }}
-                    </p>
-
-                    <div class="mt-6 flex items-center gap-2 border-t border-slate-100 pt-5">
-
-                        <iconify-icon icon="lucide:check-circle-2" class="text-base text-[#C9A84C]"></iconify-icon>
-
-                        <span class="text-xs font-bold text-[#0B1D36]">
-                            {{ $benefit['details'] }}
-                        </span>
-
-                    </div>
-
-                </article>
-
-            @endforeach
-
-        </div>
-
-
-        {{-- ======================================
-             CAREER OPPORTUNITIES
-        ======================================= --}}
-
-        <div class="relative mt-28 overflow-hidden rounded-3xl bg-[#0B1D36] p-8 sm:p-12 lg:p-14">
-
-            <div class="absolute -right-20 -top-24 h-72 w-72 rounded-full border-[40px] border-white/5"></div>
-
-            <div class="relative grid items-center gap-10 lg:grid-cols-2">
-
-                <div>
-
-                    <span class="text-xs font-bold tracking-[0.2em] text-[#C9A84C]">
+            <div class="relative grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+                <div class="lg:col-span-7">
+                    <span class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/20 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-200">
                         BUILD YOUR FUTURE
                     </span>
 
-                    <h2 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-                        Turn Your UK Education into Global Opportunities.
-                    </h2>
+                    <h3 class="mt-4 text-[26px] font-bold leading-[1.2] tracking-tight sm:text-[30px] lg:text-[34px]">
+                        Turn Your Education into Lifelong Global Career Success.
+                    </h3>
 
-                    <p class="mt-5 text-sm leading-7 text-blue-100/70">
-                        Gain valuable knowledge, develop professional skills and explore career opportunities in an international environment.
+                    <p class="mt-4 text-base leading-7 text-brand-100/80">
+                        Gain internationally respected qualifications, build a multinational professional network, and maximize your employment prospects in leading global organizations.
                     </p>
 
                     <a href="#contact"
-                       class="mt-7 inline-flex items-center gap-3 rounded-xl bg-[#C9A84C] px-6 py-4 text-sm font-extrabold text-[#0B1D36] transition hover:-translate-y-1 hover:bg-[#D8B95F]">
-
-                        Start Your Journey
-
-                        <iconify-icon icon="lucide:arrow-right" class="text-lg"></iconify-icon>
-
+                       class="mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                        <span>Start Your Application Journey</span>
+                        <iconify-icon icon="lucide:arrow-right" class="text-base"></iconify-icon>
                     </a>
-
                 </div>
 
-
-                <div class="grid grid-cols-2 gap-4">
-
-                    @php
-                        $careerPoints = [
-                            ['icon' => 'lucide:briefcase-business', 'title' => 'Career Development'],
-                            ['icon' => 'lucide:network', 'title' => 'Global Connections'],
-                            ['icon' => 'lucide:lightbulb', 'title' => 'Innovative Thinking'],
-                            ['icon' => 'lucide:trending-up', 'title' => 'Professional Growth'],
-                        ];
-                    @endphp
-
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
                     @foreach($careerPoints as $point)
-
-                        <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10">
-
-                            <iconify-icon icon="{{ $point['icon'] }}" class="text-3xl text-[#C9A84C]"></iconify-icon>
-
-                            <h3 class="mt-5 text-sm font-bold leading-6 text-white">
+                        <div class="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-colors hover:bg-white/10">
+                            <iconify-icon icon="{{ $point['icon'] }}" class="text-2xl text-brand-300"></iconify-icon>
+                            <h4 class="mt-3 text-sm font-bold text-white">
                                 {{ $point['title'] }}
-                            </h3>
-
+                            </h4>
                         </div>
-
                     @endforeach
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>

@@ -1,20 +1,29 @@
-@props(['eyebrow', 'title', 'description' => null])
+@props([
+    'eyebrow' => null,
+    'title',
+    'description' => null,
+    'align' => 'left',
+])
 
-<div class="max-w-3xl" data-reveal>
+@php
+    $isCenter = $align === 'center';
+@endphp
+
+<header class="{{ $isCenter ? 'mx-auto max-w-2xl text-center' : 'max-w-3xl' }}" data-reveal>
     @if ($eyebrow)
-        <div class="mb-3.5 inline-flex items-center gap-2 rounded-full bg-brand-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-700">
-            <span class="h-1.5 w-1.5 rounded-full bg-brand-600"></span>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-600">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span>
             {{ $eyebrow }}
         </div>
     @endif
 
-    <h2 class="text-2xl font-extrabold tracking-tight text-[#0B1D36] sm:text-3xl lg:text-[38px] lg:leading-[1.15]">
-        {{ $title }}
+    <h2 class="text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
+        {!! $title !!}
     </h2>
 
     @if ($description)
-        <p class="mt-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
+        <p class="mt-4 text-base leading-7 text-black/60 {{ $isCenter ? 'mx-auto max-w-xl' : 'max-w-2xl' }}">
             {{ $description }}
         </p>
     @endif
-</div>
+</header>
