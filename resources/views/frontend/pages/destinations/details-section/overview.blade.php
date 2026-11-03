@@ -42,7 +42,7 @@
         {{-- Top grid: Overview Left & Highlights Right --}}
         <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             {{-- Left column --}}
-            <div class="lg:col-span-7" >
+            <div class="lg:col-span-7" data-reveal>
                 <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-600">
                     <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span>
                     Destination Overview
@@ -52,11 +52,11 @@
                     Academic Excellence in <span class="text-brand-500">{{ $destName }}</span>
                 </h2>
 
-                <p class="mt-5 text-base leading-7 text-black/70 sm:text-lg sm:leading-8">
+                <p class="mt-5 text-sm leading-7 text-black/70 sm:text-base sm:leading-8">
                     {{ $destName }} represents one of the world's most distinguished higher education systems, celebrated for centuries of academic prestige, high-impact research output, and globally portable credentials. International students enjoy access to modern laboratories, industry placements, and dedicated international career ecosystems.
                 </p>
 
-                <p class="mt-4 text-base leading-7 text-black/60">
+                <p class="mt-4 text-sm leading-7 text-black/60">
                     Beyond world-tier classrooms, students discover safe multicultural campuses, diverse communities, rich history, and post-study graduate employment pathways designed to launch competitive global careers.
                 </p>
 
@@ -76,7 +76,7 @@
             </div>
 
             {{-- Right column: 4 Equal-height Highlight cards --}}
-            <div class="lg:col-span-5"  style="--reveal-delay: 150ms">
+            <div class="lg:col-span-5" data-reveal style="--reveal-delay: 150ms">
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {{-- Card 1 --}}
                     <div class="group rounded-2xl border border-brand-100 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-theme-md">
@@ -146,7 +146,7 @@
 
             <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach($cities as $city)
-                    <article class="group overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-theme-md"  style="--reveal-delay: {{ $loop->index * 80 }}ms">
+                    <article class="group overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-theme-md" data-reveal style="--reveal-delay: {{ $loop->index * 80 }}ms">
                         <div class="relative h-52 overflow-hidden bg-brand-100">
                             <img src="{{ $city['image'] }}"
                                  alt="{{ $city['name'] }}, {{ $destName }}"

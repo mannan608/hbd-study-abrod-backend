@@ -93,7 +93,7 @@
                                         </div>
                                     </div>
 
-                                    <p class="mt-5 text-base leading-7 text-black/60">
+                                    <p class="mt-5 text-sm sm:text-base leading-7 text-black/60">
                                         {{ $level['description'] }}
                                     </p>
 

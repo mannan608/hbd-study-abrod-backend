@@ -72,7 +72,7 @@
                     Why Study in <span class="text-brand-500">{{ $destName }}</span>? A World of Opportunities.
                 </h2>
 
-                <p class="mt-5 text-base leading-7 text-black/70 sm:text-lg sm:leading-8">
+                <p class="mt-5 text-sm leading-7 text-black/70 sm:text-base sm:leading-8">
                     Discover a world-leading education system with globally accredited qualifications, cutting-edge facilities, and vibrant student communities. Studying here offers an inspiring environment to develop professional expertise and open doors worldwide.
                 </p>
 
@@ -92,19 +92,19 @@
                 {{-- Trust badges --}}
                 <div class="mt-10 flex flex-wrap items-center gap-6 border-t border-brand-200/60 pt-6">
                     <div class="flex items-center gap-2 text-sm font-medium text-black/70">
-                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-success-50 text-success-500">
                             <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                         </span>
                         <span>World-Class Ranking</span>
                     </div>
                     <div class="flex items-center gap-2 text-sm font-medium text-black/70">
-                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-success-50 text-success-500">
                             <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                         </span>
                         <span>High Visa Success</span>
                     </div>
                     <div class="flex items-center gap-2 text-sm font-medium text-black/70">
-                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-success-50 text-success-500">
                             <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                         </span>
                         <span>Post-Study Work Permit</span>
@@ -165,7 +165,7 @@
                         </p>
 
                         <div class="mt-6 flex items-center gap-2 border-t border-brand-100 pt-4">
-                            <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                            <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                 <iconify-icon icon="lucide:check" class="text-[10px]"></iconify-icon>
                             </span>
                             <span class="text-xs font-semibold text-black">

@@ -36,11 +36,12 @@
 <section id="faq" data-section class="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {{-- Section Header --}}
-        <x-destination-section-heading
-            eyebrow="FREQUENTLY ASKED QUESTIONS"
-            :title="'Questions About Studying in <span class=\'text-brand-500\'>' . $destName . '</span>'"
-            description="Find direct, verified answers to common questions regarding admissions, tests, visa rules, and living in " . $destName . "."
-        />
+      <x-destination-section-heading
+    eyebrow="FREQUENTLY ASKED QUESTIONS"
+    :title="'Questions About Studying in <span class=\'text-brand-500\'>' . e($destName) . '</span>'"
+    :description="'Find direct, verified answers to common questions regarding admissions, tests, visa rules, and living in ' . $destName . '.'"
+/>
+
 
         <div class="mt-12 grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
             {{-- Left column: Accordion List --}}

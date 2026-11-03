@@ -111,7 +111,7 @@
                         </div>
 
                         @if (!empty($university['badge']))
-                            <span class="rounded-full bg-accent-green-light px-2.5 py-1 text-[10px] font-bold tracking-wider text-accent-green">
+                            <span class="rounded-full bg-success-50 px-2.5 py-1 text-[10px] font-bold tracking-wider text-success-500">
                                 {{ $university['badge'] }}
                             </span>
                         @endif

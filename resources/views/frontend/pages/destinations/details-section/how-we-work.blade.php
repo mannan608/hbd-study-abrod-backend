@@ -86,7 +86,7 @@
                     <ul class="mt-6 space-y-2 border-t border-brand-100 pt-4">
                         @foreach ($step['checklist'] as $item)
                             <li class="flex items-center gap-2 text-xs font-medium text-black/70">
-                                <span class="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-[9px]"></iconify-icon>
                                 </span>
                                 <span>{{ $item }}</span>
@@ -112,10 +112,10 @@
                         <span>Book Free Consultation</span>
                         <iconify-icon icon="lucide:arrow-right" class="text-base"></iconify-icon>
                     </a>
-                    <a href="tel:+8801700000000"
+                    <a href="tel:09617-990099"
                        class="inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100">
                         <iconify-icon icon="lucide:phone" class="text-base"></iconify-icon>
-                        <span>Call +880 1700-000000</span>
+                        <span>Call 09617-990099</span>
                     </a>
                 </div>
             </div>

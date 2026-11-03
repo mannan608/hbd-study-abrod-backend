@@ -20,7 +20,7 @@
         [
             'icon' => 'lucide:languages',
             'number' => '02',
-            'title' => 'English Language Proficiency',
+            'title' => 'Language Proficiency',
             'description' => 'Demonstrate academic English proficiency through globally accredited testing frameworks.',
             'items' => [
                 'IELTS Academic: 6.0 – 7.0 overall',
@@ -88,7 +88,7 @@
                     <ul class="mt-6 space-y-2.5 border-t border-brand-100 pt-5">
                         @foreach($requirement['items'] as $item)
                             <li class="flex items-start gap-2 text-xs font-medium text-black/70">
-                                <span class="mt-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="mt-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-[9px]"></iconify-icon>
                                 </span>
                                 <span>{{ $item }}</span>
@@ -171,25 +171,25 @@
                         <h5 class="text-sm font-bold text-black">Undergraduate Application Checklist:</h5>
                         <ul class="space-y-3">
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>HSC (GPA 3.5+) or A-Levels (minimum 2–3 C grades)</span>
                             </li>
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>IELTS 6.0 overall (no band less than 5.5) or equivalent PTE 54</span>
                             </li>
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>Statement of Purpose detailing course motivation</span>
                             </li>
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>1 Academic recommendation letter from college principal/teacher</span>
@@ -202,25 +202,25 @@
                         <h5 class="text-sm font-bold text-black">Postgraduate Application Checklist:</h5>
                         <ul class="space-y-3">
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>4-Year Bachelor degree with CGPA 2.6 – 3.0+ (scale 4.0)</span>
                             </li>
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>IELTS 6.5 overall (no band less than 6.0) or equivalent PTE 62</span>
                             </li>
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>Focused research/academic SOP aligning with career objectives</span>
                             </li>
                             <li class="flex items-center gap-3 text-sm text-black/70">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green-light text-accent-green">
+                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
                                     <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
                                 </span>
                                 <span>2 Academic/Professional reference letters & updated CV</span>

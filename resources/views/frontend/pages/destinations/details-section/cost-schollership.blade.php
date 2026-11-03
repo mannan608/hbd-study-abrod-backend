@@ -206,7 +206,7 @@
 
                 <div class="relative grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
                     <div class="lg:col-span-8">
-                        <span class="inline-flex rounded-full bg-accent-green-light px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent-green">
+                        <span class="inline-flex rounded-full bg-success-50 px-3 py-1.5 text-[11px] text-center font-bold uppercase tracking-wider text-success-500">
                             FEATURED FUNDING OPPORTUNITY
                         </span>
 

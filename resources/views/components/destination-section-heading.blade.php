@@ -22,7 +22,7 @@
     </h2>
 
     @if ($description)
-        <p class="mt-4 text-base leading-7 text-black/60 {{ $isCenter ? 'mx-auto max-w-xl' : 'max-w-2xl' }}">
+        <p class="mt-4 text-sm sm:text-base leading-7 text-black/60 {{ $isCenter ? 'mx-auto max-w-xl' : 'max-w-2xl' }}">
             {{ $description }}
         </p>
     @endif

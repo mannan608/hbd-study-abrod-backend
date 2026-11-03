@@ -70,22 +70,9 @@
                     <span class="text-brand-300">{{ $destination['name'] }}</span>
                 </h1>
 
-                <p class="mt-6 max-w-2xl text-base leading-7 text-brand-100/80 sm:text-lg sm:leading-8">
+                <p class="mt-6 max-w-2xl text-sm leading-7 text-brand-100/80 sm:text-base sm:leading-8">
                     {{ $destination['hero']['description'] }}
                 </p>
-
-                @if (!empty($destination['hero']['features']))
-                    <div class="mt-8 grid gap-3 sm:grid-cols-2">
-                        @foreach ($destination['hero']['features'] as $feature)
-                            <div class="flex items-center gap-2.5 text-sm font-medium text-white/90">
-                                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-green/20 text-accent-green">
-                                    <iconify-icon icon="lucide:check" class="text-xs"></iconify-icon>
-                                </span>
-                                <span>{{ $feature }}</span>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
 
                 <div class="mt-10 flex flex-wrap items-center gap-4">
                     <a href="#contact"
@@ -209,6 +196,8 @@
 
         {{-- Section 9: FAQ & Help Desk (bg-white) --}}
         @include('frontend.pages.destinations.details-section.faq', ['destination' => $destination])
+
+        
     </div>
 </main>
 
@@ -221,6 +210,7 @@
             }
         </style>
     </noscript>
+
     <script>
         function destinationPage() {
             return {
@@ -228,23 +218,73 @@
                 observer: null,
                 init() {
                     const sections = document.querySelectorAll('[data-section]');
-                    if (!('IntersectionObserver' in window)) return;
-
-                    this.observer = new IntersectionObserver((entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                this.activeSection = entry.target.id;
-                            }
+                    if ('IntersectionObserver' in window) {
+                        this.observer = new IntersectionObserver((entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    this.activeSection = entry.target.id;
+                                }
+                            });
+                        }, {
+                            rootMargin: '-20% 0px -60% 0px',
+                            threshold: 0
                         });
-                    }, {
-                        rootMargin: '-20% 0px -60% 0px',
-                        threshold: 0
-                    });
 
-                    sections.forEach((section) => this.observer.observe(section));
+                        sections.forEach((section) => this.observer.observe(section));
+                    }
                 }
-            }
+            };
         }
+
+        // Conflict-free scroll reveal initialization
+        (function () {
+            function setupReveal() {
+                var nodes = document.querySelectorAll('[data-reveal]');
+                if (!nodes.length) return;
+
+                if (!('IntersectionObserver' in window)) {
+                    nodes.forEach(function (node) {
+                        node.classList.add('is-revealed', 'is-visible');
+                    });
+                    return;
+                }
+
+                var revealObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-revealed', 'is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.05,
+                    rootMargin: '0px 0px -20px 0px'
+                });
+
+                nodes.forEach(function (node) {
+                    var rect = node.getBoundingClientRect();
+                    // Reveal immediately if already in view on page load
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        node.classList.add('is-revealed', 'is-visible');
+                    } else {
+                        revealObserver.observe(node);
+                    }
+                });
+
+                // Safety fallback: ensure nothing stays invisible even on edge viewports or fast scroll
+                setTimeout(function () {
+                    nodes.forEach(function (node) {
+                        node.classList.add('is-revealed', 'is-visible');
+                    });
+                }, 1200);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupReveal);
+            } else {
+                setupReveal();
+            }
+        })();
     </script>
 @endpush
 @endsection

@@ -1226,7 +1226,8 @@ pre[class*='language-'] {
             will-change: opacity, transform;
         }
 
-        [data-reveal].is-revealed {
+        [data-reveal].is-revealed,
+        [data-reveal].is-visible {
             opacity: 1;
             transform: none;
         }
