@@ -1,6 +1,4 @@
    @php
-
-    // University basic info
 $university = [
     'name'        => 'University of Melbourne',
     'logo'        => '/patner_1.png',
@@ -204,7 +202,7 @@ $campuses = [
                         <span class="text-sm font-medium text-brand-200">AUD</span>
                     </p>
                     <a href="#enquiry"
-                       class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200 focus:ring-offset-2 focus:ring-offset-brand-950 sm:mt-5 sm:px-5 sm:py-3">
+                       class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600 focus:outline-none focus:ring-0 focus:ring-brand-200 focus:ring-offset-0 focus:ring-offset-brand-950 sm:mt-5 sm:px-5 sm:py-3">
                         Enquire about admission
                         <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
                     </a>
@@ -238,10 +236,10 @@ $campuses = [
     <section id="overview" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
         <div class="mb-6 max-w-2xl sm:mb-8">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">About the institution</p>
-            <h2 class="mt-2 text-2xl font-semibold leading-tight tracking-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+            <h2 class="mt-2 text-xl font-semibold leading-tight tracking-tight text-brand-950 sm:mt-3 sm:text-2xl lg:text-3xl">
                 Discover {{ $university['name'] }}
             </h2>
-            <p class="mt-2 text-sm leading-6 text-brand-700 sm:mt-3 sm:text-base sm:leading-7">
+            <p class="mt-2 text-sm leading-6 text-brand-700 sm:mt-3 sm:text-base ">
                 Get to know the university, its academic environment and the opportunities available to students.
             </p>
         </div>
@@ -267,7 +265,7 @@ $campuses = [
 
             {{-- Content --}}
             <div class="order-2">
-                <div class="space-y-3 text-sm leading-6 text-brand-700 sm:space-y-4 sm:text-base sm:leading-7">
+                <div class="space-y-3 text-sm leading-6 text-brand-700 sm:space-y-4 sm:text-base ">
                     <p>
                         Established in 1853, the University of Melbourne is one of Australia's leading institutions for education and research. Known for its academic excellence, innovative learning environment and global outlook, the university offers students opportunities to develop knowledge, skills and professional experience.
                     </p>
@@ -306,10 +304,10 @@ $campuses = [
         <div class="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
             <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Find your course</p>
-                <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+                <h2 class="mt-2 text-xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-2xl lg:text-3xl">
                     Popular Study Programs
                 </h2>
-                <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+                <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base ">
                     Explore some of the available academic opportunities.
                 </p>
             </div>
@@ -364,10 +362,10 @@ $campuses = [
     <section id="requirements" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
         <div class="mb-6 sm:mb-8">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Before you apply</p>
-            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+            <h2 class="mt-2 text-xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-2xl lg:text-3xl">
                 Entry Requirements
             </h2>
-            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base ">
                 Prepare the general documents needed for your application process.
             </p>
         </div>
@@ -407,10 +405,10 @@ $campuses = [
     <section id="fees" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
         <div class="mb-6 sm:mb-8">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Plan your budget</p>
-            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+            <h2 class="mt-2 text-xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-2xl lg:text-3xl">
                 Tuition Fees & Scholarships
             </h2>
-            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base ">
                 Get an overview of estimated study costs and financial support options.
             </p>
         </div>
@@ -442,7 +440,7 @@ $campuses = [
                         <iconify-icon icon="lucide:award" class="text-xl sm:text-2xl"></iconify-icon>
                     </span>
                     <h3 class="mt-5 text-lg font-semibold text-brand-950 sm:mt-6 sm:text-xl">Scholarship Opportunities</h3>
-                    <p class="mt-2.5 text-sm leading-6 text-brand-700 sm:mt-3 sm:text-base sm:leading-7">
+                    <p class="mt-2.5 text-sm leading-6 text-brand-700 sm:mt-3 sm:text-base ">
                         Explore available merit-based scholarships, financial grants, and partial fee waiver options available for eligible international students.
                     </p>
                 </div>
@@ -461,10 +459,10 @@ $campuses = [
     <section id="campus" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
         <div class="mb-6 sm:mb-8">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Student experience</p>
-            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+            <h2 class="mt-2 text-xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-2xl lg:text-3xl">
                 Campus Life & Facilities
             </h2>
-            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base ">
                 Explore the key amenities and facilities that create a supportive student environment.
             </p>
         </div>
@@ -487,10 +485,10 @@ $campuses = [
     <section id="campus-list" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
         <div class="mb-6 sm:mb-8">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Global presence</p>
-            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+            <h2 class="mt-2 text-xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-2xl lg:text-3xl">
                 Available Campus Locations
             </h2>
-            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base ">
                 Explore the university's campus locations and their surrounding regions.
             </p>
         </div>
