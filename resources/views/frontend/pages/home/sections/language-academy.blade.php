@@ -2,7 +2,7 @@
     $academyData = [
         'sectionHeader' => [
             'badge' => 'HBD Language Academy',
-            'title' => 'Pass your English and NAATI CCL exams with confidence',
+            'title' => 'Pass your english proficiency exams with confidence',
             'description' => 'Structured classes, timed mock tests, and personal feedback from trainers who know exactly what examiners look for.',
         ],
 
@@ -74,13 +74,13 @@
         <div class="mx-auto max-w-3xl text-center" data-reveal>
             <span class="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-600">
                 <i class="fa-solid fa-sparkles"></i>
-                {{ $academyData['sectionHeader']['badge'] }}
+                HBD Language Academy
             </span>
             <h2 class="mt-5 text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
-                {{ $academyData['sectionHeader']['title'] }}
+               Pass your <span class="text-red-500">english proficiency</span> exams with confidence
             </h2>
             <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-black/60">
-                {{ $academyData['sectionHeader']['description'] }}
+                Structured classes, timed mock tests, and personal feedback from trainers who know exactly what examiners look for.
             </p>
         </div>
 

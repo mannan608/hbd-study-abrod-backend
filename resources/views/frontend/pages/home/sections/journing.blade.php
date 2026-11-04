@@ -39,7 +39,7 @@
             </span>
             <h2
                 class="mt-5 text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
-                Four steps to <span class="text-brand-500">your future</span>
+                Four steps to <span class="text-red-500">your future</span>
             </h2>
             <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-black/60">
                 A clear, guided path from first search to your first day on campus.

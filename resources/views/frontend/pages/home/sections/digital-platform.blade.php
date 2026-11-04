@@ -84,8 +84,8 @@
             </span>
             <h2 class="mt-5 text-xl font-semibold leading-[1.2] tracking-[-0.02em]  sm:text-2xl lg:text-3xl  text-white">
                 {{ $title }}
-                <span class="bg-gradient-to-r from-brand-300 via-sky to-blue-light-400 bg-clip-text text-transparent">
-                    {{ $titleHighlight }}
+                <span class="text-red-500">
+                    unified platform
                 </span>
             </h2>
             <p class="mx-auto mt-4 max-w-2xl text-sm sm:text-base leading-6 sm:leading-7 text-brand-100/80">
@@ -136,7 +136,7 @@
 
                         <div class="flex flex-wrap items-center gap-3 pt-2">
                             <a href="{{ $primaryCta['url'] }}"
-                                class="group inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl bg-brand-500 px-6  font-semibold text-white shadow-lg shadow-brand-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600">
+                                class="group inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl bg-red-500 px-6  font-semibold text-white shadow-lg shadow-brand-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-600">
                                 <span>{{ $primaryCta['label'] }}</span>
                                 <iconify-icon icon="lucide:arrow-right" class="text-[16px] transition-transform duration-300 group-hover:translate-x-1"></iconify-icon>
                             </a>

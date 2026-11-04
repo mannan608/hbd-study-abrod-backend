@@ -12,7 +12,7 @@
                 Global Education
             </span>
             <h2 class="mt-5 text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
-                Choose your <span class="text-brand-500">study destination</span>
+                Choose your <span class="text-red-500">study destination</span>
             </h2>
             <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-black/60">
                 Explore top-tier universities, world-class education systems and vibrant cultures across leading global destinations.

@@ -36,23 +36,7 @@ class MenuHelper
                     //     'permission' => 'event.list',
                     // ],
                 ],
-            ],
-            [
-                'name' => 'Access Control',
-                'icon' => 'authentication',
-                'subItems' => [
-                    [
-                        'name' => 'Roles & Permissions',
-                        'route' => 'role.roles-permissions.index',
-                        'permission' => 'role.list',
-                    ],
-                    [
-                        'name' => 'Users Permissions',
-                        'route' => 'role.users.index',
-                        'permission' => 'user.list',
-                    ],
-                ],
-            ],
+            ],            
             [
                 'name' => 'People',
                 'icon' => 'user-profile',
@@ -199,6 +183,22 @@ class MenuHelper
                 'name' => 'Dashboard',
                 'route' => 'role.dashboard',
                 'permission' => 'dashboard.view',
+            ],
+            [
+                'name' => 'Access Control',
+                'icon' => 'authentication',
+                'subItems' => [
+                    [
+                        'name' => 'Roles & Permissions',
+                        'route' => 'role.roles-permissions.index',
+                        'permission' => 'role.list',
+                    ],
+                    [
+                        'name' => 'Users Permissions',
+                        'route' => 'role.users.index',
+                        'permission' => 'user.list',
+                    ],
+                ],
             ],
            
             [

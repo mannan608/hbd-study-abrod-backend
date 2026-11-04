@@ -277,9 +277,9 @@
                          Events
                      </a>
 
-                     <a href=""
+                     <a href="{{ route('blogs') }}"
                          class="relative font-medium transition-all duration-300
-                        {{ request()->routeIs('news') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
+                        {{ request()->routeIs('blogs') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
                         after:absolute after:left-0 after:-bottom-1.5
                         after:h-0.5 after:bg-brand-600 after:transition-all after:duration-300">
                          News

@@ -94,7 +94,7 @@
             </div>
 
             <div class="p-6">
-                <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
                     <x-form.input-text name="title" label="Event Title" placeholder="Enter event title"
                         :value="$asString(old('title', $event->title ?? ''))" />
 
@@ -106,6 +106,12 @@
                         'seminar' => 'Seminar',
                         'workshop' => 'Workshop',
                         'conference' => 'Conference',
+                    ]" />
+                        <x-form.select-input name="event_category" label="Event Category" :value="old('event_category', $event->event_category ?? 'application_day')" :options="[
+                        'application_day' => 'Application Day',
+                        'education_expo' => 'Education Expo',
+                        'delegate_session' => 'Delegate Session',
+                        'open_day' => 'Open Day',
                     ]" />
                     @if ($event?->exists)
                         <div x-data="{ copied: false }" class="space-y-2">
@@ -132,6 +138,7 @@
                     @endif
 
                 </div>
+
 
                 <div class="mt-5">
                     <x-form.textarea-input name="short_description" label="Short Description" rows="3"

@@ -26,7 +26,7 @@
                 Global Network
             </span>
             <h2 class="mt-4 sm:mt-5 text-[24px] sm:text-[28px] lg:text-[32px] font-semibold leading-[1.2] tracking-[-0.02em] text-black">
-                Trusted by <span class="text-brand-500">2,000+ universities</span>
+                Trusted by <span class="text-red-500">2,000+ universities</span>
             </h2>
             <p class="mx-auto mt-3 sm:mt-4 max-w-xl text-sm sm:text-base leading-6 sm:leading-7 text-black/60">
                 Partnering with the world's leading educational institutions.

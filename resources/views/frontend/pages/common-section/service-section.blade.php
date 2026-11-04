@@ -58,7 +58,7 @@
                 {{ $badge }}
             </span>
             <h2 class="mt-5 text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
-                {{ $title }}
+               Explore our study <span class="text-red-500">abroad services</span>
             </h2>
             <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-black/60">
                 {{ $description }}
