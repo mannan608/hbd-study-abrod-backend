@@ -165,7 +165,7 @@
                 <div class="rounded-2xl border border-brand-100 bg-brand-25 p-4 sm:p-5 md:p-7 shadow-sm" data-reveal style="--reveal-delay: 100ms">
                     <div class="flex items-center justify-between border-b border-brand-200/60 pb-4">
                         <div>
-                            <span class="text-[11px] font-semibold uppercase tracking-wider text-accent-green">AFFORDABLE REGIONS</span>
+                            <span class="text-[11px] font-semibold uppercase tracking-wider text-accent-one-500">AFFORDABLE REGIONS</span>
                             <h4 class="mt-0.5 text-lg sm:text-xl font-bold text-black">Outside London</h4>
                         </div>
                         <div class="text-right">
@@ -282,7 +282,7 @@
 
                         <div class="mt-6 border-t border-brand-100 pt-4">
                             <span class="text-[11px] uppercase tracking-wider text-black/50">Grant Coverage</span>
-                            <p class="mt-0.5 text-base font-bold text-accent-green">
+                            <p class="mt-0.5 text-base font-bold text-accent-one-500">
                                 {{ $scholarship['benefits'] }}
                             </p>
                             <p class="mt-1 text-xs text-brand-600 font-medium">

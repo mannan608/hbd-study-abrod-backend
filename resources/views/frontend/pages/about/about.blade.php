@@ -121,7 +121,7 @@
                     class="absolute -top-32 -right-24 sm:-top-40 sm:-right-32 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-brand-500/15 blur-3xl">
                 </div>
                 <div
-                    class="absolute -bottom-40 -left-24 sm:-bottom-48 sm:-left-32 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-accent-cyan/10 blur-3xl">
+                    class="absolute -bottom-40 -left-24 sm:-bottom-48 sm:-left-32 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-accent-two-500/10 blur-3xl">
                 </div>
                 <div class="absolute inset-0 opacity-[0.04]"
                     style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;">

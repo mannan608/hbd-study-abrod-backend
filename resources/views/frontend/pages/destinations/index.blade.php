@@ -13,7 +13,7 @@
 
         <div class="absolute -right-40 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-brand-500/25 blur-[120px]"></div>
 
-        <div class="absolute -bottom-40 -left-40 -z-10 h-[400px] w-[400px] rounded-full bg-accent-cyan/10 blur-[100px]">
+        <div class="absolute -bottom-40 -left-40 -z-10 h-[400px] w-[400px] rounded-full bg-accent-two-500/10 blur-[100px]">
         </div>
 
         <div class="mx-auto max-w-7xl px-4 pb-28 pt-16 sm:px-6 sm:pb-36 sm:pt-20 lg:px-8 lg:pb-40 lg:pt-24">
@@ -23,7 +23,7 @@
                 {{-- Eyebrow --}}
                 <div
                     class="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-md">
-                    <iconify-icon icon="lucide:sparkles" class="text-base text-accent-cyan"></iconify-icon>
+                    <iconify-icon icon="lucide:sparkles" class="text-base text-accent-two-500"></iconify-icon>
 
                     <span class="text-xs font-semibold tracking-[0.12em] text-brand-100">
                         EXPLORE YOUR FUTURE
@@ -33,7 +33,7 @@
                 {{-- Heading --}}
                 <h1 class="text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl">
                     Your Journey.
-                    <span class="text-accent-cyan">Your Destination.</span>
+                    <span class="text-accent-two-500">Your Destination.</span>
                 </h1>
 
                 {{-- Description --}}
@@ -75,21 +75,21 @@
                     class="hidden flex-wrap items-center justify-center gap-x-8 gap-y-4 text-xs font-medium text-brand-100/80 sm:flex sm:text-sm">
 
                     <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:globe-2" class="text-base text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:globe-2" class="text-base text-accent-two-500"></iconify-icon>
                         Global Study Options
                     </div>
 
                     <div class="hidden h-4 w-px bg-white/20 sm:block"></div>
 
                     <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:graduation-cap" class="text-base text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:graduation-cap" class="text-base text-accent-two-500"></iconify-icon>
                         World-Class Universities
                     </div>
 
                     <div class="hidden h-4 w-px bg-white/20 sm:block"></div>
 
                     <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:compass" class="text-base text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:compass" class="text-base text-accent-two-500"></iconify-icon>
                         Your Future Starts Here
                     </div>
 
@@ -192,7 +192,7 @@
             <div>
 
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand-600">
-                    <span class="h-2 w-2 rounded-full bg-accent-cyan"></span>
+                    <span class="h-2 w-2 rounded-full bg-accent-two-500"></span>
                     EXPLORE THE WORLD
                 </div>
 

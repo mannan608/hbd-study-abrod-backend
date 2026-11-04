@@ -83,7 +83,7 @@
                                 @endif
 
                                 <div class="flex items-center gap-2 text-sm font-medium text-brand-100/70">
-                                    <iconify-icon icon="lucide:check-circle" class="shrink-0 text-lg text-accent-green"></iconify-icon>
+                                    <iconify-icon icon="lucide:check-circle" class="shrink-0 text-lg text-accent-one-500"></iconify-icon>
                                     <span>{{ $cert['status'] ?? 'Verified credential' }}</span>
                                 </div>
                             </div>

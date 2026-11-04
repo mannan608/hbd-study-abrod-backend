@@ -384,7 +384,7 @@
 
         {{-- <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a href="{{ route('register') }}"
-                class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent-red px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-950/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-red sm:w-auto">
+                class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-950/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-500 sm:w-auto">
                 Book an Appointment
                 <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

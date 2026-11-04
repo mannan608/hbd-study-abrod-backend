@@ -72,7 +72,7 @@
     {{-- Grid + glow --}}
     <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
     <div class="pointer-events-none absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-brand-500/15 blur-[120px]"></div>
-    <div class="pointer-events-none absolute -right-20 top-1/3 h-[500px] w-[500px] rounded-full bg-accent-cyan/10 blur-[120px]"></div>
+    <div class="pointer-events-none absolute -right-20 top-1/3 h-[500px] w-[500px] rounded-full bg-accent-two-500/10 blur-[120px]"></div>
 
     <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
 
@@ -95,22 +95,22 @@
 
         {{-- Dashboard showcase --}}
         <div class="relative mx-auto mb-16 mt-12 max-w-6xl" data-reveal style="--reveal-delay: 120ms">
-            <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-500/30 via-accent-cyan/20 to-blue-light-500/20 opacity-50 blur-xl"></div>
+            <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-500/30 via-accent-two-500/20 to-blue-light-500/20 opacity-50 blur-xl"></div>
 
             <div class="relative rounded-3xl border border-white/10 bg-brand-900/90 p-4 shadow-2xl backdrop-blur-xl sm:p-6">
                 {{-- Window bar --}}
                 <div class="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
                     <div class="flex items-center gap-2">
-                        <span class="h-3 w-3 rounded-full bg-accent-red/80"></span>
+                        <span class="h-3 w-3 rounded-full bg-red-500/80"></span>
                         <span class="h-3 w-3 rounded-full bg-brand-300/70"></span>
-                        <span class="h-3 w-3 rounded-full bg-accent-green/80"></span>
+                        <span class="h-3 w-3 rounded-full bg-accent-one-500/80"></span>
                     </div>
                     <div class="hidden items-center gap-2 rounded-full border border-white/5 bg-white/5 px-4 py-1 text-xs font-medium text-brand-200 sm:flex">
                         <iconify-icon icon="lucide:shield-check" class="text-[14px] text-brand-300"></iconify-icon>
                         <span>secure.hbdservices.cloud / dashboard</span>
                     </div>
                     <div class="flex items-center gap-2 rounded-full bg-brand-500/10 px-3 py-1 text-xs font-semibold text-brand-300">
-                        <span class="h-2 w-2 animate-pulse rounded-full bg-accent-green"></span>
+                        <span class="h-2 w-2 animate-pulse rounded-full bg-accent-one-500"></span>
                         Live
                     </div>
                 </div>
@@ -168,17 +168,17 @@
         <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
             <p class="text-[10px] font-semibold uppercase text-brand-300/70">Total inquiries</p>
             <p class="mt-1 text-xl font-extrabold text-white">1,428</p>
-            <span class="text-[10px] font-medium text-accent-green">+18% this week</span>
+            <span class="text-[10px] font-medium text-accent-one-500">+18% this week</span>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
             <p class="text-[10px] font-semibold uppercase text-brand-300/70">Offers issued</p>
             <p class="mt-1 text-xl font-extrabold text-white">384</p>
-            <span class="text-[10px] font-medium text-accent-green">94% visa rate</span>
+            <span class="text-[10px] font-medium text-accent-one-500">94% visa rate</span>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
             <p class="text-[10px] font-semibold uppercase text-brand-300/70">Enrolments</p>
             <p class="mt-1 text-xl font-extrabold text-white">215</p>
-            <span class="text-[10px] font-medium text-accent-cyan">Target met</span>
+            <span class="text-[10px] font-medium text-accent-two-500">Target met</span>
         </div>
     </div>
 
@@ -198,7 +198,7 @@
                     <p class="text-[11px] text-brand-200/70 truncate">University of Melbourne • Offer letter issued</p>
                 </div>
             </div>
-            <span class="w-fit shrink-0 rounded-full border border-accent-green/20 bg-accent-green/10 px-2.5 py-1 text-[10px] font-semibold text-accent-green">
+            <span class="w-fit shrink-0 rounded-full border border-accent-one-500/20 bg-accent-one-500/10 px-2.5 py-1 text-[10px] font-semibold text-accent-one-500">
                 Offer accepted
             </span>
         </div>
@@ -206,7 +206,7 @@
         <!-- Activity Item 2 -->
         <div class="flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3 sm:flex-row sm:items-center sm:justify-between">
             <div class="flex items-center gap-3 min-w-0">
-                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-cyan/20 text-xs font-bold text-accent-cyan">AK</span>
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-two-500/20 text-xs font-bold text-accent-two-500">AK</span>
                 <div class="min-w-0">
                     <p class="text-xs font-bold text-white truncate">Alex Kumar • MBA Global</p>
                     <p class="text-[11px] text-brand-200/70 truncate">University of Sydney • Visa lodgement</p>

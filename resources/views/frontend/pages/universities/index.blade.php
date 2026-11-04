@@ -203,14 +203,14 @@
 
         <div class="absolute -right-40 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-brand-500/25 blur-[120px]"></div>
 
-        <div class="absolute -bottom-40 -left-40 -z-10 h-[400px] w-[400px] rounded-full bg-accent-cyan/10 blur-[100px]"></div>
+        <div class="absolute -bottom-40 -left-40 -z-10 h-[400px] w-[400px] rounded-full bg-accent-two-500/10 blur-[100px]"></div>
 
         <div class="mx-auto max-w-7xl px-4 pb-28 pt-16 sm:px-6 sm:pb-36 sm:pt-20 lg:px-8 lg:pb-40 lg:pt-24">
 
             <div class="mx-auto max-w-4xl text-center">
 
                 <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-md">
-                    <iconify-icon icon="lucide:graduation-cap" class="text-base text-accent-cyan"></iconify-icon>
+                    <iconify-icon icon="lucide:graduation-cap" class="text-base text-accent-two-500"></iconify-icon>
                     <span class="text-xs font-semibold tracking-[0.12em] text-brand-100">
                         DISCOVER YOUR FUTURE UNIVERSITY
                     </span>
@@ -218,7 +218,7 @@
 
                 <h1 class="text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl">
                     Find Your University.
-                    <span class="text-accent-cyan">Shape Your Future.</span>
+                    <span class="text-accent-two-500">Shape Your Future.</span>
                 </h1>
 
                 <p class="mx-auto mt-6 max-w-2xl text-sm leading-7 text-brand-100/80 sm:text-lg sm:leading-8">
@@ -254,21 +254,21 @@
                 <div class="hidden flex-wrap items-center justify-center gap-x-8 gap-y-4 text-xs font-medium text-brand-100/80 sm:flex sm:text-sm">
 
                     <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:globe-2" class="text-base text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:globe-2" class="text-base text-accent-two-500"></iconify-icon>
                         Global Universities
                     </div>
 
                     <div class="hidden h-4 w-px bg-white/20 sm:block"></div>
 
                     <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:book-open" class="text-base text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:book-open" class="text-base text-accent-two-500"></iconify-icon>
                         Diverse Study Programs
                     </div>
 
                     <div class="hidden h-4 w-px bg-white/20 sm:block"></div>
 
                     <div class="flex items-center gap-2">
-                        <iconify-icon icon="lucide:award" class="text-base text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:award" class="text-base text-accent-two-500"></iconify-icon>
                         Academic Excellence
                     </div>
 
@@ -373,7 +373,7 @@
 
             <div>
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-brand-600">
-                    <span class="h-2 w-2 rounded-full bg-accent-cyan"></span>
+                    <span class="h-2 w-2 rounded-full bg-accent-two-500"></span>
                     EXPLORE THE WORLD
                 </div>
 

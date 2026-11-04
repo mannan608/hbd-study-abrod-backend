@@ -170,15 +170,15 @@ $campuses = [
 
                 <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm text-brand-100 sm:mt-6 sm:gap-x-6 sm:gap-y-3">
                     <span class="inline-flex items-center gap-2">
-                        <iconify-icon icon="lucide:map-pin" class="text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:map-pin" class="text-accent-two-500"></iconify-icon>
                         {{ $university['city'] }}
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <iconify-icon icon="lucide:calendar-days" class="text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:calendar-days" class="text-accent-two-500"></iconify-icon>
                         Established {{ $university['established'] }}
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <iconify-icon icon="lucide:book-open" class="text-accent-cyan"></iconify-icon>
+                        <iconify-icon icon="lucide:book-open" class="text-accent-two-500"></iconify-icon>
                         Public Research University
                     </span>
                 </div>
@@ -191,7 +191,7 @@ $campuses = [
                         <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-100 sm:text-xs">
                             Key information
                         </span>
-                        <span class="rounded-full bg-accent-green-light px-2.5 py-1 text-[11px] font-semibold text-brand-800 sm:px-3 sm:text-xs">
+                        <span class="rounded-full bg-accent-one-500-light px-2.5 py-1 text-[11px] font-semibold text-brand-800 sm:px-3 sm:text-xs">
                             Admission Open
                         </span>
                     </div>
@@ -254,7 +254,7 @@ $campuses = [
                          loading="lazy">
                 </div>
                 <div class="absolute bottom-3 left-3 rounded-lg border border-white/30 bg-brand-950/80 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur sm:bottom-4 sm:left-4 sm:px-3 sm:py-2 sm:text-sm">
-                    <iconify-icon icon="lucide:map-pin" class="mr-1 text-accent-cyan"></iconify-icon>
+                    <iconify-icon icon="lucide:map-pin" class="mr-1 text-accent-two-500"></iconify-icon>
                     Parkville, Melbourne, Australia
                 </div>
                 <div class="absolute -bottom-4 -right-3 hidden min-w-[7.5rem] rounded-xl border border-brand-100 bg-white p-3 shadow-lg sm:-bottom-5 sm:-right-4 sm:block sm:min-w-32 sm:p-4">
@@ -384,7 +384,7 @@ $campuses = [
             <div class="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 sm:p-5 md:p-7">
                 @foreach ($requirements as $requirement)
                     <div class="flex items-center gap-3 rounded-xl border border-brand-100 bg-white p-3.5 sm:p-4">
-                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-accent-green-light text-brand-700 sm:h-7 sm:w-7">
+                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-accent-one-500-light text-brand-700 sm:h-7 sm:w-7">
                             <iconify-icon icon="lucide:check" class="text-sm sm:text-base"></iconify-icon>
                         </span>
                         <span class="text-sm font-medium leading-5 text-brand-800 sm:leading-6">{{ $requirement }}</span>

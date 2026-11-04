@@ -140,7 +140,7 @@
     {{-- Decoration --}}
     <div class="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-brand-100/50 blur-[110px]"></div>
     <div
-        class="pointer-events-none absolute -right-40 bottom-10 h-80 w-80 rounded-full bg-accent-red-light blur-[110px]">
+        class="pointer-events-none absolute -right-40 bottom-10 h-80 w-80 rounded-full bg-red-500-light blur-[110px]">
     </div>
 
     <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
@@ -154,7 +154,7 @@
             </span>
             <h2
                 class="mt-5 text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] text-black sm:text-[30px] lg:text-[32px]">
-                {{ $title }} <span class="text-accent-red">{{ $titleHighlight }}</span>
+                {{ $title }} <span class="text-red-500">{{ $titleHighlight }}</span>
             </h2>
             <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-black/60">{{ $description }}</p>
         </div>
@@ -226,11 +226,11 @@
             @if (count($testimonials) > 1)
                 <div class="mt-6 sm:mt-8 flex items-center justify-end gap-2.5 sm:gap-3">
                     <button type="button" @click="prev()" aria-label="Previous slide"
-                        class="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-accent-red hover:bg-accent-red hover:text-white">
+                        class="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-red-500 hover:bg-red-500 hover:text-white">
                         <iconify-icon icon="lucide:chevron-left" class="text-lg sm:text-xl"></iconify-icon>
                     </button>
                     <button type="button" @click="next()" aria-label="Next slide"
-                        class="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-accent-red hover:bg-accent-red hover:text-white">
+                        class="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-brand-200 bg-white text-brand-700 transition-all duration-200 hover:border-red-500 hover:bg-red-500 hover:text-white">
                         <iconify-icon icon="lucide:chevron-right" class="text-lg sm:text-xl"></iconify-icon>
                     </button>
                 </div>
@@ -248,7 +248,7 @@
         <div class="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl"
             @click.stop>
             <button type="button" @click="close()" aria-label="Close video player"
-                class="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur transition-all hover:bg-accent-red sm:right-4 sm:top-4">
+                class="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur transition-all hover:bg-red-500 sm:right-4 sm:top-4">
                 <iconify-icon icon="lucide:x" class="text-xl"></iconify-icon>
             </button>
             <div class="aspect-video w-full">

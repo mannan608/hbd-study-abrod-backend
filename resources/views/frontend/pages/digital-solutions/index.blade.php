@@ -4,9 +4,9 @@
 @php
     $steps = [
         ['01', 'Manage learners', 'Centralise enrolments, student records, communication and administration.', 'bg-brand-600'],
-        ['02', 'Deliver learning', 'Build engaging learning journeys and keep resources accessible online.', 'bg-accent-green'],
+        ['02', 'Deliver learning', 'Build engaging learning journeys and keep resources accessible online.', 'bg-accent-one-500'],
         ['03', 'Assess skills', 'Map competencies, record assessment outcomes and track compliance.', 'bg-brand-700'],
-        ['04', 'Capture workplace evidence', 'Connect learners, employers and assessors with real-world progress.', 'bg-accent-navy'],
+        ['04', 'Capture workplace evidence', 'Connect learners, employers and assessors with real-world progress.', 'bg-brand-500'],
     ];
 
     $products = [
@@ -25,14 +25,14 @@
 
     $testimonials = [
         ['MC', 'Melissa Carter', 'Operations Director, Health Skills Australia', 'bg-brand-600', 'We replaced four disconnected systems with HBD. Audit preparation went from three weeks to three days — the evidence is simply always there.'],
-        ['DR', 'David Reeves', 'Training Manager, Mining Academy', 'bg-accent-green', 'Our apprentices log evidence from site on their phones. Supervisors sign off the same day. The competency matrix has transformed how we plan training.'],
-        ['PN', 'Priya Nair', 'CEO, Capital College Group', 'bg-accent-navy', 'The LMS and student management connection is seamless. Enrolments flow straight into learning paths — our admin team saves over 20 hours a week.'],
+        ['DR', 'David Reeves', 'Training Manager, Mining Academy', 'bg-accent-one-500', 'Our apprentices log evidence from site on their phones. Supervisors sign off the same day. The competency matrix has transformed how we plan training.'],
+        ['PN', 'Priya Nair', 'CEO, Capital College Group', 'bg-brand-500', 'The LMS and student management connection is seamless. Enrolments flow straight into learning paths — our admin team saves over 20 hours a week.'],
     ];
 
     $solutions = [
         ['Private RTO', 'Gain complete control of your training management with a system that lets you focus on learner engagement.', '/solutions/private-rto', 'text-brand-700', 'bg-brand-50'],
-        ['TAFE', 'Deliver a better student and apprentice experience with a system that integrates with all of yours.', '/solutions/university', 'text-brand-600', 'bg-accent-green-light'],
-        ['Government', 'Improve your training outcomes with a secure platform that conforms to the needs of your agency.', '/solutions/government', 'text-accent-cyan', 'bg-accent-cyan-light'],
+        ['TAFE', 'Deliver a better student and apprentice experience with a system that integrates with all of yours.', '/solutions/university', 'text-brand-600', 'bg-accent-one-500-light'],
+        ['Government', 'Improve your training outcomes with a secure platform that conforms to the needs of your agency.', '/solutions/government', 'text-accent-two-500', 'bg-accent-two-500-light'],
         ['Enterprise', 'Give your staff the tools they need to thrive at work with a training solution that does all the heavy lifting.', '/solutions/enterprise', 'text-brand-700', 'bg-sky-light'],
     ];
 
@@ -55,7 +55,7 @@
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div data-reveal>
-                <span class="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-accent-green-light px-4 py-2 text-sm font-semibold text-brand-800">
+                <span class="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-accent-one-500-light px-4 py-2 text-sm font-semibold text-brand-800">
                     <iconify-icon icon="lucide:shield-check" class="text-base"></iconify-icon>
                     One connected training platform
                 </span>
@@ -75,18 +75,18 @@
                     </a>
                 </div>
                 <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-brand-600">
-                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-accent-green"></iconify-icon>RTO Compliant</span>
-                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-accent-green"></iconify-icon>Digital Logbooks</span>
-                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-accent-green"></iconify-icon>Live Analytics</span>
+                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-accent-one-500"></iconify-icon>RTO Compliant</span>
+                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-accent-one-500"></iconify-icon>Digital Logbooks</span>
+                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-accent-one-500"></iconify-icon>Live Analytics</span>
                 </div>
             </div>
 
             <div data-reveal>
                 <div class="overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-md transition duration-500 hover:-translate-y-2">
                     <div class="flex items-center gap-2 border-b border-brand-100 bg-brand-25 px-4 py-3">
-                        <span class="h-2.5 w-2.5 rounded-full bg-accent-red"></span>
-                        <span class="h-2.5 w-2.5 rounded-full bg-accent-cyan"></span>
-                        <span class="h-2.5 w-2.5 rounded-full bg-accent-green"></span>
+                        <span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                        <span class="h-2.5 w-2.5 rounded-full bg-accent-two-500"></span>
+                        <span class="h-2.5 w-2.5 rounded-full bg-accent-one-500"></span>
                         <span class="ml-2 text-xs text-brand-500">http://hbdservices/admin/dashboard</span>
                     </div>
                     <div class="bg-brand-25 p-3 sm:p-5">
@@ -138,7 +138,7 @@
                 <p class="text-brand-600">Specialised in building creative, high-performance websites and web applications — delivered on time and within budget.</p>
                 <div class="my-6 grid gap-3 text-sm font-medium text-brand-600 sm:grid-cols-2">
                     @foreach (['Custom web applications', 'Responsive UI design', 'Education tech solutions', 'Ongoing support'] as $feature)
-                        <span class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle-2" class="text-accent-green"></iconify-icon>{{ $feature }}</span>
+                        <span class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle-2" class="text-accent-one-500"></iconify-icon>{{ $feature }}</span>
                     @endforeach
                 </div>
                 <a href="#contact" class="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-brand-800">Discuss your project <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
@@ -149,7 +149,7 @@
                 <p class="text-brand-600">Data-driven campaigns that grow traffic, leads, and revenue — from SEO and content to PPC and social media.</p>
                 <div class="my-6 grid gap-3 text-sm font-medium text-brand-600 sm:grid-cols-2">
                     @foreach (['SEO & content marketing', 'PPC advertising', 'Email automation', 'Social media campaigns'] as $feature)
-                        <span class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle-2" class="text-accent-green"></iconify-icon>{{ $feature }}</span>
+                        <span class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle-2" class="text-accent-one-500"></iconify-icon>{{ $feature }}</span>
                     @endforeach
                 </div>
                 <a href="#contact" class="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-brand-800">Grow your reach <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
@@ -189,14 +189,14 @@
                 <h2 class="mb-5 text-[28px] font-semibold leading-tight tracking-[-0.02em] sm:text-[32px] text-black sm:text-[32px]">Compliant, scalable student management.</h2>
                 <p class="mb-7 leading-7 text-brand-600">Manage the full student lifecycle in one place, from first enquiry and enrolment through to records, reporting and completion.</p>
                 <ul class="mb-8 space-y-4 text-brand-600">
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-green"></iconify-icon><span><strong class="text-black">Student administration:</strong> Keep profiles, enrolments, courses and key documents organised.</span></li>
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-green"></iconify-icon><span><strong class="text-black">Compliance and reporting:</strong> Improve visibility of records, obligations, outcomes and audit readiness.</span></li>
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-green"></iconify-icon><span><strong class="text-black">Audit log and workflows:</strong> Track important changes and streamline repetitive administrative tasks.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-one-500"></iconify-icon><span><strong class="text-black">Student administration:</strong> Keep profiles, enrolments, courses and key documents organised.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-one-500"></iconify-icon><span><strong class="text-black">Compliance and reporting:</strong> Improve visibility of records, obligations, outcomes and audit readiness.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-one-500"></iconify-icon><span><strong class="text-black">Audit log and workflows:</strong> Track important changes and streamline repetitive administrative tasks.</span></li>
                 </ul>
                 <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-brand-200 px-5 py-3 font-semibold text-brand-700 transition hover:bg-brand-700 hover:text-white">Explore student management <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
             </div>
             <div data-reveal class="rounded-2xl bg-brand-25 p-4 shadow-md sm:p-6">
-                <div class="mb-4 flex items-center justify-between"><h3 class="font-bold text-black">Student Records Overview</h3><span class="rounded-full bg-accent-green-light px-3 py-1 text-xs font-bold text-brand-600">Compliant</span></div>
+                <div class="mb-4 flex items-center justify-between"><h3 class="font-bold text-black">Student Records Overview</h3><span class="rounded-full bg-accent-one-500-light px-3 py-1 text-xs font-bold text-brand-600">Compliant</span></div>
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85" alt="Student Analytics" class="w-full rounded-2xl shadow-md">
             </div>
         </div>
@@ -220,11 +220,11 @@
                 <h2 class="mb-5 text-[28px] font-semibold leading-tight tracking-[-0.02em] sm:text-[32px] text-black sm:text-[32px]">Engaging learning experiences, built for every learner.</h2>
                 <p class="mb-7 leading-7 text-brand-600">Create and deliver structured online learning that helps learners stay engaged and gives trainers a clear view of progress.</p>
                 <ul class="mb-8 space-y-4 text-brand-600">
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-green"></iconify-icon><span><strong class="text-black">Guided learning journeys:</strong> Organise content and activities into clear learning paths.</span></li>
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-green"></iconify-icon><span><strong class="text-black">Online assessments:</strong> Deliver assessments, capture responses and track results in one place.</span></li>
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-green"></iconify-icon><span><strong class="text-black">Progress visibility:</strong> Help learners and trainers understand completions instantly.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-one-500"></iconify-icon><span><strong class="text-black">Guided learning journeys:</strong> Organise content and activities into clear learning paths.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-one-500"></iconify-icon><span><strong class="text-black">Online assessments:</strong> Deliver assessments, capture responses and track results in one place.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-one-500"></iconify-icon><span><strong class="text-black">Progress visibility:</strong> Help learners and trainers understand completions instantly.</span></li>
                 </ul>
-                <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-brand-200 px-5 py-3 font-semibold text-brand-600 transition hover:bg-accent-green hover:text-white">Explore learning management <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
+                <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-brand-200 px-5 py-3 font-semibold text-brand-600 transition hover:bg-accent-one-500 hover:text-white">Explore learning management <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
             </div>
             <div class="rounded-2xl bg-white p-4 shadow-md sm:p-6 lg:order-1" data-reveal>
                 <h3 class="mb-4 font-bold text-black">Interactive Courses Dashboard</h3>
@@ -234,7 +234,7 @@
         <div class="mt-14 grid gap-5 md:grid-cols-3">
             @foreach ([['lucide:play-square', 'Learning content', 'Consolidate rich multimedia resources, assignments, and curriculum material seamlessly.'], ['lucide:list-checks', 'Assessment tools', 'Support consistent grading schemes, rubrics, and immediate constructive learner feedback.'], ['lucide:messages-square', 'Learner communication', 'Keep students directly connected with instructors through built-in discussion boards and notices.']] as $feature)
                 <article class="rounded-2xl border border-brand-100 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <span class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-green-light text-xl text-brand-600"><iconify-icon icon="{{ $feature[0] }}"></iconify-icon></span>
+                    <span class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-one-500-light text-xl text-brand-600"><iconify-icon icon="{{ $feature[0] }}"></iconify-icon></span>
                     <h3 class="mb-2 text-base font-semibold text-black">{{ $feature[1] }}</h3><p class="text-sm leading-6 text-brand-600">{{ $feature[2] }}</p>
                 </article>
             @endforeach
@@ -247,14 +247,14 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div data-reveal>
-                <span class="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-accent-navy">Skills-based Education</span>
+                <span class="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-brand-500">Skills-based Education</span>
                 <h2 class="mb-5 text-[28px] font-semibold leading-tight tracking-[-0.02em] sm:text-[32px] text-black sm:text-[32px]">Make competency and compliance visible.</h2>
                 <p class="mb-7 leading-7 text-brand-600">Give trainers and administrators one place to manage workforce competencies, authorisations and assessment evidence in real time.</p>
                 <ul class="mb-8 space-y-4 text-brand-600">
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-navy"></iconify-icon><span><strong class="text-black">Competency mapping:</strong> Match skills and requirements to roles and units.</span></li>
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-navy"></iconify-icon><span><strong class="text-black">Skills gap visibility:</strong> Identify gaps and plan training before operational risks occur.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-brand-500"></iconify-icon><span><strong class="text-black">Competency mapping:</strong> Match skills and requirements to roles and units.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-brand-500"></iconify-icon><span><strong class="text-black">Skills gap visibility:</strong> Identify gaps and plan training before operational risks occur.</span></li>
                 </ul>
-                <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-brand-200 px-5 py-3 font-semibold text-accent-navy transition hover:bg-accent-navy hover:text-white">Explore skills management <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
+                <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-brand-200 px-5 py-3 font-semibold text-brand-500 transition hover:bg-brand-500 hover:text-white">Explore skills management <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
             </div>
             <div data-reveal class="rounded-2xl bg-brand-25 p-4 shadow-md sm:p-6">
                 <h3 class="mb-4 font-bold text-black">Competency Matrix &amp; Status</h3>
@@ -264,7 +264,7 @@
         <div class="mt-14 grid gap-5 md:grid-cols-3">
             @foreach ([['lucide:network', 'Role-based skills', 'Define clear skill profiles and prerequisites required for every job title or project assignment.'], ['lucide:shield-check', 'Risk reduction', 'Highlight expiring credentials early to prevent compliance gaps and operational downtime.'], ['lucide:clipboard-list', 'Live visibility', 'Deliver intuitive visual dashboards so decision-makers can verify team readiness instantly.']] as $feature)
                 <article class="rounded-2xl border border-brand-100 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <span class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-xl text-accent-navy"><iconify-icon icon="{{ $feature[0] }}"></iconify-icon></span>
+                    <span class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-xl text-brand-500"><iconify-icon icon="{{ $feature[0] }}"></iconify-icon></span>
                     <h3 class="mb-2 text-base font-semibold text-black">{{ $feature[1] }}</h3><p class="text-sm leading-6 text-brand-600">{{ $feature[2] }}</p>
                 </article>
             @endforeach
@@ -277,14 +277,14 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div class="lg:order-2" data-reveal>
-                <span class="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-accent-cyan">Work-based Education</span>
+                <span class="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-accent-two-500">Work-based Education</span>
                 <h2 class="mb-5 text-[28px] font-semibold leading-tight tracking-[-0.02em] sm:text-[32px] text-black sm:text-[32px]">Capture evidence from the real world of work.</h2>
                 <p class="mb-7 leading-7 text-brand-600">Manage placements, apprenticeships and on-the-job training from setup through completion, connecting learners, assessors and employers.</p>
                 <ul class="mb-8 space-y-4 text-brand-600">
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-cyan"></iconify-icon><span><strong class="text-black">Digital logbooks:</strong> Capture workplace activity and evidence on the go via mobile.</span></li>
-                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-cyan"></iconify-icon><span><strong class="text-black">Employer collaboration:</strong> Make supervisor feedback easy to share.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-two-500"></iconify-icon><span><strong class="text-black">Digital logbooks:</strong> Capture workplace activity and evidence on the go via mobile.</span></li>
+                    <li class="flex gap-3"><iconify-icon icon="lucide:check-circle" class="mt-1 shrink-0 text-xl text-accent-two-500"></iconify-icon><span><strong class="text-black">Employer collaboration:</strong> Make supervisor feedback easy to share.</span></li>
                 </ul>
-                <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-sky px-5 py-3 font-semibold text-accent-cyan transition hover:bg-accent-cyan hover:text-white">Explore work-based education <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
+                <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-sky px-5 py-3 font-semibold text-accent-two-500 transition hover:bg-accent-two-500 hover:text-white">Explore work-based education <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
             </div>
             <div class="rounded-2xl bg-white p-4 shadow-md sm:p-6 lg:order-1" data-reveal>
                 <h3 class="mb-4 font-bold text-black">Mobile Logbook &amp; Field Evidence</h3>
@@ -294,7 +294,7 @@
         <div class="mt-14 grid gap-5 md:grid-cols-3">
             @foreach ([['lucide:smartphone', 'Capture on the go', 'Allow learners to quickly record workplace notes, photo evidence, and supervisor signatures from any mobile device.'], ['lucide:calendar-check', 'Milestones in view', 'Track total placement hours, module requirements, and pending action items effortlessly in one dashboard.'], ['lucide:users', 'Keep everyone aligned', 'Maintain an active link between learners, workplace supervisors, and educational institution coordinators.']] as $feature)
                 <article class="rounded-2xl border border-brand-100 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <span class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-cyan-light text-xl text-accent-cyan"><iconify-icon icon="{{ $feature[0] }}"></iconify-icon></span>
+                    <span class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-two-500-light text-xl text-accent-two-500"><iconify-icon icon="{{ $feature[0] }}"></iconify-icon></span>
                     <h3 class="mb-2 text-base font-semibold text-black">{{ $feature[1] }}</h3><p class="text-sm leading-6 text-brand-600">{{ $feature[2] }}</p>
                 </article>
             @endforeach
@@ -322,7 +322,7 @@
     <div class="pointer-events-none absolute -left-20 -top-32 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl"></div>
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-12 max-w-2xl text-center" data-reveal>
-            <span class="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-300"><span class="h-0.5 w-7 rounded-full bg-gradient-to-r from-accent-cyan to-brand-400"></span>Secure by design</span>
+            <span class="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-300"><span class="h-0.5 w-7 rounded-full bg-gradient-to-r from-accent-two-500 to-brand-400"></span>Secure by design</span>
             <h2 class="mb-4 text-[28px] font-semibold leading-tight tracking-[-0.02em] sm:text-[32px] text-white sm:text-[32px]">One secure foundation for every module.</h2>
             <p class="leading-7 text-brand-400">Protect your training operations with a platform designed around reliable hosting, access control and compliance-minded processes.</p>
         </div>
@@ -362,8 +362,8 @@
             <div class="absolute inset-[8%] animate-spin rounded-full border-t-2 border-brand-400/60 motion-reduce:animate-none"></div>
             <div class="relative z-10 flex h-28 w-28 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-700 to-brand-600 text-5xl text-white shadow-lg"><iconify-icon icon="lucide:network"></iconify-icon></div>
             <span class="absolute left-1/2 top-[3%] -translate-x-1/2 rounded-xl border border-brand-100 bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-md sm:text-sm"><iconify-icon icon="lucide:users" class="mr-1 text-brand-600"></iconify-icon>Student Records</span>
-            <span class="absolute right-[-1%] top-[29%] rounded-xl border border-brand-100 bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-md sm:text-sm"><iconify-icon icon="lucide:graduation-cap" class="mr-1 text-accent-green"></iconify-icon>Learning</span>
-            <span class="absolute bottom-[8%] right-[5%] rounded-xl border border-brand-100 bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-md sm:text-sm"><iconify-icon icon="lucide:award" class="mr-1 text-accent-navy"></iconify-icon>Skills &amp; Badges</span>
+            <span class="absolute right-[-1%] top-[29%] rounded-xl border border-brand-100 bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-md sm:text-sm"><iconify-icon icon="lucide:graduation-cap" class="mr-1 text-accent-one-500"></iconify-icon>Learning</span>
+            <span class="absolute bottom-[8%] right-[5%] rounded-xl border border-brand-100 bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-md sm:text-sm"><iconify-icon icon="lucide:award" class="mr-1 text-brand-500"></iconify-icon>Skills &amp; Badges</span>
             <span class="absolute bottom-[8%] left-[5%] rounded-xl border border-brand-100 bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-md sm:text-sm"><iconify-icon icon="lucide:briefcase-business" class="mr-1 text-brand-700"></iconify-icon>Workplace</span>
             <span class="absolute left-[-1%] top-[29%] rounded-xl border border-brand-100 bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-md sm:text-sm"><iconify-icon icon="lucide:plug" class="mr-1 text-brand-600"></iconify-icon>APIs &amp; Webhooks</span>
         </div>

@@ -64,20 +64,58 @@
   --color-brand-900: #0a3053;
   --color-brand-950: #061d34;
 
-  --color-accent-red: #e8202b;
+  /* --color-red-500: #e8202b;
   --color-accent-red-light: #fff1f2;
-  --color-accent-green: #75bc48;
+  --color-accent-one-500: #75bc48;
   --color-accent-green-light: #f1f9eb;
-  --color-accent-cyan: #05abe8;
+  --color-accent-two-500: #05abe8;
   --color-accent-cyan-light: #eaf9ff;
   --color-accent-navy: #193779;
 
   --color-sky: #80bde0;
-  --color-sky-light: #e0f4f8;
+  --color-sky-light: #e0f4f8; */
 
 /* --#182F5A */
 --color-secondary-500: #182F5A;
 
+--color-accent-one-25:  #f7fcf3;
+--color-accent-one-50:  #f0f9e9;
+--color-accent-one-100: #e0f1d2;
+--color-accent-one-200: #c6e5ad;
+--color-accent-one-300: #a7d77f;
+--color-accent-one-400: #89ca5c;
+--color-accent-one-500: #70bf47;
+--color-accent-one-600: #5da638;
+--color-accent-one-700: #4a842e;
+--color-accent-one-800: #3c6929;
+--color-accent-one-900: #325625;
+--color-accent-one-950: #192f10;
+
+--color-accent-two-25:  #f4fcff;
+--color-accent-two-50:  #e9f8fd;
+--color-accent-two-100: #d0f0fa;
+--color-accent-two-200: #a8e3f5;
+--color-accent-two-300: #78d3ee;
+--color-accent-two-400: #4cc2e7;
+--color-accent-two-500: #2ab2e0;
+--color-accent-two-600: #1595c2;
+--color-accent-two-700: #14799d;
+--color-accent-two-800: #176481;
+--color-accent-two-900: #19536b;
+--color-accent-two-950: #0d3548;
+
+--color-red-25:  #fff7f7;
+--color-red-50:  #fff0f0;
+--color-red-100: #ffdddd;
+--color-red-200: #ffc0c2;
+--color-red-300: #ff969a;
+--color-red-400: #f85c64;
+--color-red-500: #eb1d26;
+--color-red-600: #d9141e;
+--color-red-700: #b51019;
+--color-red-800: #95131a;
+--color-red-900: #7c171d;
+--color-red-950: #45070b;
 
 
   --color-blue-light-25: #f5fbff;

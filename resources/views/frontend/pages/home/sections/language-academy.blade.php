@@ -161,7 +161,7 @@
 
                 <div class="mt-8 border-t border-white/10 pt-6">
                     <a href="{{ $academyData['cta']['url'] }}" target="_blank" rel="noopener noreferrer"
-                        class="group flex w-full items-center justify-center gap-2 rounded-xl bg-accent-red px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent-red/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-red/90">
+                        class="group flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-500/90">
                         <span>{{ $academyData['cta']['text'] }}</span>
                         <i class="fa-solid fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                     </a>

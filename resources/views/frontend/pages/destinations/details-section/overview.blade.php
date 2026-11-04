@@ -107,10 +107,10 @@
 
                     {{-- Card 4 --}}
                     <div class="group rounded-2xl border border-brand-100 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-theme-md sm:translate-y-5">
-                        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-brand-100 bg-accent-green-light text-accent-green transition-all duration-300 group-hover:bg-accent-green group-hover:text-white">
+                        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-brand-100 bg-accent-one-500-light text-accent-one-500 transition-all duration-300 group-hover:bg-accent-one-500 group-hover:text-white">
                             <iconify-icon icon="lucide:globe" class="text-2xl"></iconify-icon>
                         </div>
-                        <h3 class="text-base font-bold text-black group-hover:text-accent-green transition-colors">Global Community</h3>
+                        <h3 class="text-base font-bold text-black group-hover:text-accent-one-500 transition-colors">Global Community</h3>
                         <p class="mt-1.5 text-sm leading-6 text-black/60">Welcoming, multicultural campuses with strong international support.</p>
                     </div>
                 </div>

@@ -152,7 +152,7 @@
                         <span
                             class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-brand-100 bg-brand-25 text-2xl font-bold">
                             <span
-                                class="bg-gradient-to-br from-brand-500 via-accent-cyan to-accent-green bg-clip-text text-transparent">G</span>
+                                class="bg-gradient-to-br from-brand-500 via-accent-two-500 to-accent-one-500 bg-clip-text text-transparent">G</span>
                         </span>
                         <div>
                             <p class="text-sm font-semibold text-black/50">Google Reviews</p>
@@ -176,7 +176,7 @@
                         <p class="mt-1 text-sm text-black/55">{{ $totalReviews }} reviews · Global education consultancy
                         </p>
                         <div class="mt-2 flex items-center gap-2 text-xs font-medium text-black/60">
-                            <span class="h-2 w-2 rounded-full bg-accent-green"></span>
+                            <span class="h-2 w-2 rounded-full bg-accent-one-500"></span>
                             <span>Building brighter futures together</span>
                         </div>
                     </div>

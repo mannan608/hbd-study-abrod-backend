@@ -5,7 +5,7 @@
             style="background-image: linear-gradient(to right, rgba(6, 29, 52, 0.94), rgba(10, 48, 83, 0.9)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1400&auto=format&fit=crop');">
 
             <div class="pointer-events-none absolute -left-16 -top-16 sm:-left-20 sm:-top-20 h-56 w-56 sm:h-72 sm:w-72 rounded-full bg-brand-500/20 blur-[80px] sm:blur-[100px]"></div>
-            <div class="pointer-events-none absolute -bottom-20 -right-12 sm:-bottom-24 sm:-right-16 h-56 w-56 sm:h-72 sm:w-72 rounded-full bg-accent-cyan/10 blur-[80px] sm:blur-[100px]"></div>
+            <div class="pointer-events-none absolute -bottom-20 -right-12 sm:-bottom-24 sm:-right-16 h-56 w-56 sm:h-72 sm:w-72 rounded-full bg-accent-two-500/10 blur-[80px] sm:blur-[100px]"></div>
 
             <div class="relative mx-auto max-w-3xl">
                 <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-100 backdrop-blur">

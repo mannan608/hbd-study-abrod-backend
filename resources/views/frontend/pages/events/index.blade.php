@@ -69,12 +69,12 @@
              style="background-image: url('https://images.unsplash.com/photo-1511578314322-37917d8a7d3?auto=format&fit=crop&w=2000&q=85')"></div>
         <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-950 via-brand-900/95 to-brand-800/90"></div>
         <div class="absolute -right-32 -top-28 -z-10 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl"></div>
-        <div class="absolute -bottom-40 -left-32 -z-10 h-96 w-96 rounded-full bg-accent-cyan/10 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-32 -z-10 h-96 w-96 rounded-full bg-accent-two-500/10 blur-3xl"></div>
 
         <div class="mx-auto max-w-7xl px-4 pb-28 pt-16 sm:px-6 sm:pb-36 sm:pt-20 lg:px-8 lg:pb-40 lg:pt-24">
             <div class="mx-auto max-w-4xl text-center">
                 <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
-                    <iconify-icon icon="lucide:calendar-days" class="text-base text-accent-cyan"></iconify-icon>
+                    <iconify-icon icon="lucide:calendar-days" class="text-base text-accent-two-500"></iconify-icon>
                     <span class="text-xs font-semibold tracking-[0.14em] text-brand-100">CONNECT • LEARN • EXPLORE</span>
                 </div>
 
@@ -107,9 +107,9 @@
                 </div>
 
                 <div class="mt-7 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm font-medium text-brand-100">
-                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:users" class="text-accent-cyan"></iconify-icon>Meet universities</span>
-                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:graduation-cap" class="text-accent-cyan"></iconify-icon>Explore opportunities</span>
-                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:calendar-check" class="text-accent-cyan"></iconify-icon>Plan your visit</span>
+                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:users" class="text-accent-two-500"></iconify-icon>Meet universities</span>
+                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:graduation-cap" class="text-accent-two-500"></iconify-icon>Explore opportunities</span>
+                    <span class="inline-flex items-center gap-2"><iconify-icon icon="lucide:calendar-check" class="text-accent-two-500"></iconify-icon>Plan your visit</span>
                 </div>
             </div>
         </div>
