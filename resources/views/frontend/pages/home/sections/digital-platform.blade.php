@@ -78,7 +78,7 @@
 
         {{-- Header --}}
         <div class="mx-auto max-w-3xl text-center" data-reveal>
-            <span class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-200 backdrop-blur">
+            <span class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-1.5 text-[10px] sm:text-[11px] lg:text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-200 backdrop-blur">
                 <iconify-icon icon="lucide:sparkles" class="text-[15px]"></iconify-icon>
                 {{ $badge }}
             </span>
@@ -224,7 +224,7 @@
 
         {{-- Features --}}
         <div id="digital-features" class="mb-10 text-center" data-reveal>
-            <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-200">
+            <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-[10px] sm:text-[11px] lg:text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-200">
                 <iconify-icon icon="lucide:zap" class="text-[14px]"></iconify-icon>
                 Modular capabilities
             </span>

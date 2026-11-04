@@ -28,7 +28,7 @@
 
                  </button>
                  <!-- Logo -->
-                 <div class="w-28 p-1.5">
+                 <div class="w-28 py-1.5">
                      <a href="/">
                          <img src="{{ asset('logo.webp') }}" alt="logo" class="w-auto h-auto">
                      </a>
@@ -42,10 +42,10 @@
                          {{-- Dropdown Trigger --}}
                          <a href="{{ route('services') }}" id="servicesHoverButton"
                              class="relative inline-flex items-center gap-1.5 py-2 font-medium transition-colors duration-300
-        {{ request()->routeIs('services*') || request()->is('digital-solutions')
-            ? 'text-brand-600'
-            : 'text-neutral-700 hover:text-brand-600' }}"
-                             aria-haspopup="true">
+                            {{ request()->routeIs('services*') || request()->is('digital-solutions')
+                                ? 'text-brand-600'
+                                : 'text-neutral-700 hover:text-brand-600' }}"
+                                                aria-haspopup="true">
 
                              Services
 
@@ -331,8 +331,8 @@
                  <a href="{{ route('events') }}"
                      class="{{ request()->routeIs('events') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">Events</a>
 
-                 <a href=""
-                     class="{{ request()->routeIs('news') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">News</a>
+                 <a href="{{ route('blogs') }}"
+                     class="{{ request()->routeIs('blogs') ? 'text-neutral-600 font-medium' : 'text-neutral-600' }}">News</a>
 
                  <div class="flex items-center justify-between mt-6">
                      @guest
