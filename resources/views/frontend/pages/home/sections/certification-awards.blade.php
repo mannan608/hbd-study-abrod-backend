@@ -65,7 +65,7 @@
                                     </span>
                                 </div>
 
-                                <h3 class="mt-5 sm:mt-6 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white">
+                                <h3 class="mt-5 sm:mt-6 text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-white">
                                     {{ $cert['subtitle'] ?? '' }}
                                 </h3>
                                 <p class="mt-3 max-w-lg text-sm sm:text-base leading-6 sm:leading-7 text-brand-100/80">

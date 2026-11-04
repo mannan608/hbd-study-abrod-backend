@@ -28,9 +28,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </a>
-                    <a href="{{ route('counsellors') }}"
-                        class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-brand-800 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-50 sm:w-auto sm:px-6">
-                        Talk to a counsellor
+                    <a href="#contact"
+                       class="inline-flex w-full sm:w-fit justify-center py-2.5 sm:py-3.5 text-[13px] sm:text-sm items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-6 font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100 hover:border-brand-300">
+                        <span>Talk to a Counsellor</span>
+                        <iconify-icon icon="lucide:headset" class="text-base"></iconify-icon>
                     </a>
                 </div>
             </div>
