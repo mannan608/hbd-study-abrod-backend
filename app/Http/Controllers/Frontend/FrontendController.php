@@ -66,4 +66,8 @@ class FrontendController extends Controller
     public function owner(){
         return view('frontend.pages.teams.owner');
     }
+
+     public function digitalSolution(){
+        return view('frontend.pages.digital-solutions.index');
+    }
 }

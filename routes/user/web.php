@@ -41,6 +41,7 @@ Route::get('/contact-us', [FrontendController::class, 'contactPage'])->name('con
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-conditions', [FrontendController::class, 'termsConditions'])->name('terms-conditions');
 Route::get('/ceo', [FrontendController::class, 'owner'])->name('owner');
+Route::get('/digital-solutions', [FrontendController::class, 'digitalSolution'])->name('digital-solution');
 
 Route::get('/universities', [UniversityController::class, 'index'])->name('universities');
 Route::get('/universities/{slug}', [UniversityController::class, 'show'])->name('university.details');
