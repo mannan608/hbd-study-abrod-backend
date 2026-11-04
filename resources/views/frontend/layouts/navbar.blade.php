@@ -261,7 +261,7 @@
 
 
                      {{-- Universities --}}
-                     <a href=""
+                     <a href="{{ route('universities') }}"
                          class="relative font-medium transition-all duration-300
                         {{ request()->routeIs('universities') ? 'text-brand-600 font-medium after:w-full' : 'text-neutral-600 hover:text-brand-600 after:w-0 hover:after:w-full' }}
                         after:absolute after:left-0 after:-bottom-1.5
