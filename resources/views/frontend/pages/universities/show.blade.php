@@ -3,7 +3,7 @@
     // University basic info
 $university = [
     'name'        => 'University of Melbourne',
-    'logo'        => 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/University_of_Melbourne_logo.svg/200px-University_of_Melbourne_logo.svg.png',
+    'logo'        => '/patner_1.png',
     'cover'       => 'https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=80',
     'city'        => 'Melbourne, Victoria',
     'established' => '1853',
@@ -53,34 +53,8 @@ $programs = [
         'fee'      => 'A$55,000 / year',
         'icon'     => 'cpu',
     ],
-    [
-        'name'     => 'Doctor of Medicine',
-        'level'    => 'Postgraduate',
-        'duration' => '4 Years',
-        'fee'      => 'A$85,000 / year',
-        'icon'     => 'stethoscope',
-    ],
-    [
-        'name'     => 'Bachelor of Commerce',
-        'level'    => 'Undergraduate',
-        'duration' => '3 Years',
-        'fee'      => 'A$46,500 / year',
-        'icon'     => 'trending-up',
-    ],
-    [
-        'name'     => 'Master of Information Technology',
-        'level'    => 'Postgraduate',
-        'duration' => '2 Years',
-        'fee'      => 'A$51,000 / year',
-        'icon'     => 'code-2',
-    ],
-    [
-        'name'     => 'Bachelor of Design',
-        'level'    => 'Undergraduate',
-        'duration' => '3 Years',
-        'fee'      => 'A$44,000 / year',
-        'icon'     => 'pen-tool',
-    ],
+ 
+   
 ];
 
 // Entry requirements checklist
@@ -138,735 +112,426 @@ $campuses = [
         'country' => 'Australia',
         'state'   => 'Victoria',
         'address' => '250 Princes Highway, Werribee, VIC 3030',
-        'image'   => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
+        'image'   => 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
     ],
 ];
     @endphp
 @extends('frontend.layouts.app')
 
 @section('content')
-    {{-- HERO SECTION --}}
+@php
+    $sectionLinks = $navigation ?? [
+        ['id' => 'overview', 'label' => 'Overview'],
+        ['id' => 'programs', 'label' => 'Programs'],
+        ['id' => 'requirements', 'label' => 'Requirements'],
+        ['id' => 'fees', 'label' => 'Tuition & Scholarships'],
+        ['id' => 'campus', 'label' => 'Campus Life'],
+        ['id' => 'campus-list', 'label' => 'Campuses'],
+    ];
+@endphp
 
-    <section class="relative isolate overflow-hidden bg-brand-950 h-80">
+<div x-data="{
+    activeSection: 'overview',
+    init() {
+        const sections = document.querySelectorAll('main section[id]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) this.activeSection = entry.target.id;
+            });
+        }, { rootMargin: '-25% 0px -60% 0px', threshold: 0 });
+        sections.forEach((section) => observer.observe(section));
+    }
+}">
+ {{-- HERO --}}
+<section class="relative isolate min-h-[320px] overflow-hidden bg-brand-950 sm:min-h-[360px]">
+    <img src="{{ $university['cover'] }}"
+         alt="{{ $university['name'] }}"
+         class="absolute inset-0 -z-20 h-full w-full object-cover opacity-25">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-brand-950 via-brand-950/95 to-brand-900/75"></div>
+    <div class="absolute -right-16 -top-24 -z-10 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl sm:-right-24 sm:-top-32 sm:h-96 sm:w-96"></div>
 
-        <div class="absolute inset-0 -z-20">
-            <img src="{{ $university['cover'] }}" alt="{{ $university['name'] }}"
-                class="h-full w-full object-cover opacity-30">
-        </div>
-
-        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-brand-950 via-brand-950/95 to-brand-900/75"></div>
-
-        <div class="absolute -right-40 -top-40 -z-10 h-[500px] w-[500px] rounded-full bg-brand-500/20 blur-[120px]"></div>
-        <div class="absolute -bottom-40 -left-40 -z-10 h-[400px] w-[400px] rounded-full bg-accent-cyan/10 blur-[100px]">
-        </div>
-
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-end h-full py-10">
-
-            <div class="grid grid-cols-1 items-end gap-10 lg:grid-cols-12">
-
-                {{-- University Information --}}
-                <div class="lg:col-span-8">
-
-                    <div class="flex gap-4 items-center">
-
-                        {{-- Logo --}}
-                        <div
-                            class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white p-1 shadow-2xl">
-
-                            <img src="{{ $university['logo'] }}" alt="{{ $university['name'] }} logo"
-                                class="h-full w-full object-contain rounded-xl">
-
-                        </div>
-
-                        <h1
-                            class="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-
+    <div class="mx-auto flex min-h-[320px] max-w-7xl items-end px-4 py-8 sm:min-h-[360px] sm:px-6 sm:py-10 lg:px-8 lg:py-14">
+        <div class="grid w-full grid-cols-1 items-end gap-6 lg:grid-cols-12 lg:gap-8">
+            {{-- Left: Logo + Title --}}
+            <div class="lg:col-span-8">
+                <div class="flex items-start gap-3 sm:items-center sm:gap-4">
+                    <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-brand-100 bg-white p-1.5 shadow-lg sm:h-16 sm:w-16 md:h-20 md:w-20">
+                        <img src="{{ $university['logo'] }}"
+                             alt="{{ $university['name'] }} logo"
+                             class="h-full w-full rounded-xl object-contain">
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-200 sm:mb-2 sm:text-xs">
+                            University profile
+                        </p>
+                        <h1 class="text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-[42px]">
                             {{ $university['name'] }}
-
                         </h1>
-
                     </div>
-                    <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-brand-100/75">
-
-                        <div class="flex items-center gap-2">
-                            <iconify-icon icon="lucide:map-pin" class="text-accent-cyan"></iconify-icon>
-                            {{ $university['city'] }}
-                        </div>
-
-                        <div class="flex items-center gap-2">
-                            <iconify-icon icon="lucide:calendar-days" class="text-accent-cyan"></iconify-icon>
-                            Established {{ $university['established'] }}
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <iconify-icon icon="lucide:book-open" class="text-accent-cyan"></iconify-icon>
-                            Public Research University
-                        </div>
-
-                    </div>
-
                 </div>
 
-
-                {{-- Hero Highlight --}}
-                <div class="lg:col-span-4">
-
-                    <div
-                        class="hidden lg:block rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-2xl backdrop-blur-xl">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-brand-100/60">Key Metric</span>
-                            <span
-                                class="rounded-full bg-success-50 px-2.5 py-0.5 text-xs font-bold text-success-600">Admission
-                                Open</span>
-                        </div>
-                        <div class="my-6 border-t border-white/10"></div>
-
-                        <div class="text-center">
-                            <p class="text-xs text-brand-100/60">Estimated Annual Tuition</p>
-                            <h3 class="mt-1 text-xl md:text-2xl font-black text-white">
-                                {{ $university['tuition'] }} (AUD)
-                            </h3>
-                        </div>
-
-                        <a href="#enquiry"
-                            class="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-500 px-5 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-brand-600 hover:shadow-lg">
-                            Enquire About Admission
-                            <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
-                        </a>
-                    </div>
-
+                <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm text-brand-100 sm:mt-6 sm:gap-x-6 sm:gap-y-3">
+                    <span class="inline-flex items-center gap-2">
+                        <iconify-icon icon="lucide:map-pin" class="text-accent-cyan"></iconify-icon>
+                        {{ $university['city'] }}
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <iconify-icon icon="lucide:calendar-days" class="text-accent-cyan"></iconify-icon>
+                        Established {{ $university['established'] }}
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <iconify-icon icon="lucide:book-open" class="text-accent-cyan"></iconify-icon>
+                        Public Research University
+                    </span>
                 </div>
-
             </div>
 
+            {{-- Right: Key Info Card --}}
+            <div class="lg:col-span-4">
+                <div class="rounded-2xl border border-brand-100/20 bg-white/10 p-4 shadow-xl backdrop-blur-md sm:p-5">
+                    <div class="flex items-center justify-between gap-3">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-100 sm:text-xs">
+                            Key information
+                        </span>
+                        <span class="rounded-full bg-accent-green-light px-2.5 py-1 text-[11px] font-semibold text-brand-800 sm:px-3 sm:text-xs">
+                            Admission Open
+                        </span>
+                    </div>
+                    <div class="my-4 border-t border-white/15 sm:my-5"></div>
+                    <p class="text-center text-sm text-brand-100">Estimated annual tuition</p>
+                    <p class="mt-1 text-center text-xl font-semibold text-white sm:text-2xl">
+                        {{ $university['tuition'] }}
+                        <span class="text-sm font-medium text-brand-200">AUD</span>
+                    </p>
+                    <a href="#enquiry"
+                       class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200 focus:ring-offset-2 focus:ring-offset-brand-950 sm:mt-5 sm:px-5 sm:py-3">
+                        Enquire about admission
+                        <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- STICKY SECTION NAVIGATION --}}
+<div class="sticky top-16 z-40 border-b border-brand-100 bg-white/95 shadow-sm backdrop-blur-md sm:top-20 lg:top-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav aria-label="University sections" class="-mb-px flex gap-5 overflow-x-auto scrollbar-hide sm:gap-7">
+            @foreach ($sectionLinks as $item)
+                <a href="#{{ $item['id'] }}"
+                   @click="activeSection = '{{ $item['id'] }}'"
+                   :class="activeSection === '{{ $item['id'] }}'
+                       ? 'border-brand-500 text-brand-600'
+                       : 'border-transparent text-brand-700 hover:border-brand-200 hover:text-brand-600'"
+                   class="shrink-0 border-b-2 py-3.5 text-sm font-semibold transition sm:py-4">
+                    {{ $item['label'] }}
+                </a>
+            @endforeach
+        </nav>
+    </div>
+</div>
+
+<main class="mx-auto max-w-7xl space-y-14 px-4 py-10 sm:space-y-16 sm:px-6 sm:py-14 lg:space-y-24 lg:px-8 lg:py-20">
+
+    {{-- OVERVIEW --}}
+    <section id="overview" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
+        <div class="mb-6 max-w-2xl sm:mb-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">About the institution</p>
+            <h2 class="mt-2 text-2xl font-semibold leading-tight tracking-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+                Discover {{ $university['name'] }}
+            </h2>
+            <p class="mt-2 text-sm leading-6 text-brand-700 sm:mt-3 sm:text-base sm:leading-7">
+                Get to know the university, its academic environment and the opportunities available to students.
+            </p>
         </div>
 
+        <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            {{-- Image --}}
+            <div class="relative order-1">
+                <div class="overflow-hidden rounded-2xl border border-brand-100 bg-brand-50">
+                    <img src="{{ asset('australia.webp') }}"
+                         alt="{{ $university['name'] }} campus"
+                         class="aspect-[4/3] h-full w-full object-cover"
+                         loading="lazy">
+                </div>
+                <div class="absolute bottom-3 left-3 rounded-lg border border-white/30 bg-brand-950/80 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur sm:bottom-4 sm:left-4 sm:px-3 sm:py-2 sm:text-sm">
+                    <iconify-icon icon="lucide:map-pin" class="mr-1 text-accent-cyan"></iconify-icon>
+                    Parkville, Melbourne, Australia
+                </div>
+                <div class="absolute -bottom-4 -right-3 hidden min-w-[7.5rem] rounded-xl border border-brand-100 bg-white p-3 shadow-lg sm:-bottom-5 sm:-right-4 sm:block sm:min-w-32 sm:p-4">
+                    <p class="text-xs font-medium text-brand-700">Ranking</p>
+                    <p class="mt-0.5 text-2xl font-semibold text-brand-950 sm:mt-1 sm:text-3xl">90</p>
+                </div>
+            </div>
+
+            {{-- Content --}}
+            <div class="order-2">
+                <div class="space-y-3 text-sm leading-6 text-brand-700 sm:space-y-4 sm:text-base sm:leading-7">
+                    <p>
+                        Established in 1853, the University of Melbourne is one of Australia's leading institutions for education and research. Known for its academic excellence, innovative learning environment and global outlook, the university offers students opportunities to develop knowledge, skills and professional experience.
+                    </p>
+                    <p>
+                        Located in Melbourne, Victoria, the university brings together a diverse academic community, internationally recognised research and a vibrant campus experience. Its main Parkville campus combines historic architecture with modern learning and research facilities.
+                    </p>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2">
+                    @php
+                        $facts = [
+                            ['icon' => 'trophy', 'label' => 'National ranking', 'value' => $university['ranking']],
+                            ['icon' => 'users', 'label' => 'Total students', 'value' => $university['students']],
+                            ['icon' => 'book-open', 'label' => 'Study programs', 'value' => $university['programs']],
+                            ['icon' => 'school', 'label' => 'Campuses', 'value' => '7 Campuses'],
+                        ];
+                    @endphp
+                    @foreach ($facts as $fact)
+                        <div class="flex items-center gap-3 rounded-xl border border-brand-100 bg-white p-3.5 transition hover:border-brand-200 hover:shadow-sm sm:p-4">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:h-11 sm:w-11">
+                                <iconify-icon icon="lucide:{{ $fact['icon'] }}" class="text-lg sm:text-xl"></iconify-icon>
+                            </span>
+                            <span class="min-w-0">
+                                <span class="block text-xs font-medium text-brand-700">{{ $fact['label'] }}</span>
+                                <span class="mt-0.5 block text-sm font-semibold text-brand-950">{{ $fact['value'] }}</span>
+                            </span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </section>
 
-
-    {{-- SECTION NAVIGATION --}}
-
-    <div class="sticky top-29 z-40 border-y border-neutral-200 bg-white/95 shadow-sm backdrop-blur-xl">
-
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-            <nav class="flex gap-7 overflow-x-auto py-4 text-sm font-semibold whitespace-nowrap">
-
-                @foreach ($navigation as $item)
-                    <a href="#{{ $item['id'] }}" class="shrink-0 text-neutral-500 transition hover:text-brand-600">
-
-                        {{ $item['label'] }}
-
-                    </a>
-                @endforeach
-
-            </nav>
-
+    {{-- STUDY PROGRAMS --}}
+    <section id="programs" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
+        <div class="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Find your course</p>
+                <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+                    Popular Study Programs
+                </h2>
+                <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+                    Explore some of the available academic opportunities.
+                </p>
+            </div>
+            <a href="#enquiry"
+               class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand-600 transition hover:text-brand-800">
+                View all programs
+                <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+            </a>
         </div>
 
-    </div>
-
-
-
-    {{-- MAIN CONTENT --}}
-
-    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-        <main class="space-y-16">
-
-            <section id="overview" class="scroll-mt-28">
-
-                {{-- Section Heading --}}
-                <div class="mb-12 max-w-3xl sm:mb-16">
-                    <span
-                        class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-bold tracking-[0.16em] text-[#1968b2]">
-                        <span class="h-2 w-2 rounded-full bg-[#1968b2]"></span>
-                        ABOUT THE INSTITUTION
-                    </span>
-
-                    <h2
-                        class="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-[#05275e] sm:text-4xl lg:text-5xl">
-                        Discover University of Melbourne
-                    </h2>
-
-                    <div class="mt-5 h-1 w-20 rounded-full bg-[#1968b2]"></div>
-                </div>
-
-                {{-- Main Content --}}
-                <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-
-                    {{-- Campus Image --}}
-                    <div class="relative">
-                        <div class="absolute -left-4 -top-4 h-28 w-28 rounded-tl-3xl border-l-2 border-t-2 border-blue-200">
-                        </div>
-
-                        <div
-                            class="group relative aspect-[4/3] overflow-hidden rounded-3xl bg-slate-100 shadow-xl shadow-blue-950/10">
-                            <img src="{{ asset('australia.webp') }}" alt="University of Melbourne campus"
-                                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                                loading="lazy">
-
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#05275e]/80 via-transparent to-transparent">
-                            </div>
-
-                            <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-                                <span
-                                    class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
-                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                        stroke-width="1.8">
-                                        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
-                                        <circle cx="12" cy="10" r="2.5" />
-                                    </svg>
-                                    Parkville, Melbourne, Australia
-                                </span>
-                            </div>
-                        </div>
-
-                        {{-- Established Badge --}}
-                        <div
-                            class="absolute -bottom-5 -right-4 hidden rounded-2xl border border-slate-100 bg-white p-5 shadow-xl sm:block">
-                            <p
-                                class="text-xs font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1">
-                                <iconify-icon icon="lucide:globe" class="text-base"></iconify-icon> Ranking
-                            </p>
-                            <p class="mt-1 text-3xl font-extrabold text-[#05275e]">
-                                90
-                            </p>
-                        </div>
-                    </div>
-
-                    {{-- Institution Details --}}
-                    <div class="lg:py-4">
-
-                        <div class="space-y-5 text-sm sm:text-base leading-6 text-slate-600">
-                            <p>
-                                Established in 1853, the University of Melbourne is one of Australia's leading
-                                institutions for
-                                education and research. Known for its academic excellence, innovative learning
-                                environment and
-                                global outlook, the university offers students opportunities to develop knowledge,
-                                skills and
-                                professional experience.
-                            </p>
-
-                            <p>
-                                Located in Melbourne, Victoria, the university brings together a diverse academic
-                                community,
-                                internationally recognised research and a vibrant campus experience. Its main Parkville
-                                campus
-                                combines historic architecture with modern learning and research facilities.
-                            </p>
-                        </div>
-
-                        {{-- Quick Facts --}}
-                        <div class="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-
-                            {{-- National Ranking --}}
-                            <div
-                                class="group flex items-center gap-3.5 rounded-xl border border-slate-200/80 bg-white px-4 py-3.5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-                                <div
-                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1968b2] transition-colors group-hover:bg-[#1968b2] group-hover:text-white">
-                                    <iconify-icon icon="lucide:trophy" class="text-lg"></iconify-icon>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">National
-                                        Ranking</span>
-                                    <span class="text-sm font-bold text-[#05275e] sm:text-base">
-                                        {{ $university['ranking'] }}
-                                    </span>
-                                </div>
-                            </div>
-
-                            {{-- Total Students --}}
-                            <div
-                                class="group flex items-center gap-3.5 rounded-xl border border-slate-200/80 bg-white px-4 py-3.5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-                                <div
-                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1968b2] transition-colors group-hover:bg-[#1968b2] group-hover:text-white">
-                                    <iconify-icon icon="lucide:users" class="text-lg"></iconify-icon>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total
-                                        Students</span>
-                                    <span class="text-sm font-bold text-[#05275e] sm:text-base">
-                                        {{ $university['students'] }}
-                                    </span>
-                                </div>
-                            </div>
-                            <div
-                                class="group flex items-center gap-3.5 rounded-xl border border-slate-200/80 bg-white px-4 py-3.5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-                                <div
-                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1968b2] transition-colors group-hover:bg-[#1968b2] group-hover:text-white">
-                                    <iconify-icon icon="lucide:book-open" class="text-lg"></iconify-icon>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Study
-                                        Programs</span>
-                                    <span class="text-sm font-bold text-[#05275e] sm:text-base">
-                                        {{ $university['programs'] }}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div
-                                class="group flex items-center justify-between gap-3.5 rounded-xl border border-slate-200/80 bg-white px-4 py-3.5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-
-                                {{-- Left: Icon & Details --}}
-                                <div class="flex items-center gap-3.5">
-                                    <div
-                                        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1968b2] transition-colors duration-300 group-hover:bg-[#1968b2] group-hover:text-white">
-                                        <iconify-icon icon="lucide:school" class="text-lg"></iconify-icon>
-                                    </div>
-
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-xs font-semibold uppercase tracking-wider text-slate-400">Campus</span>
-                                        <span class="text-sm font-bold text-[#05275e] sm:text-base">
-                                            7 Campuses
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {{-- Right: Interactive Arrow Action --}}
-                                <a href="#"
-                                    class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 hover:bg-blue-50 hover:text-[#1968b2] focus:outline-none">
-                                    <iconify-icon icon="lucide:arrow-right"
-                                        class="text-lg transition-transform duration-300 group-hover:translate-x-1"></iconify-icon>
-                                </a>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-
-
-            {{-- STUDY PROGRAMS --}}
-            <section id="programs" class="scroll-mt-28">
-
-                <div class="mb-7 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-
-                    <div>
-
-                        <span class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
-                            Find Your Course
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            @foreach ($programs as $program)
+                <article class="flex h-full flex-col rounded-2xl border border-brand-100 bg-white p-4 transition duration-200 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg sm:p-5">
+                    <div class="flex items-center justify-between gap-3">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:h-11 sm:w-11">
+                            <iconify-icon icon="lucide:{{ $program['icon'] }}" class="text-lg sm:text-xl"></iconify-icon>
                         </span>
-
-                        <h2 class="mt-2 text-2xl font-bold text-brand-950 sm:text-3xl">
-                            Popular Study Programs
-                        </h2>
-
-                        <p class="mt-2 text-sm text-neutral-500">
-                            Explore some of the available academic opportunities.
-                        </p>
-
+                        <span class="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700 sm:px-3 sm:py-1.5">
+                            {{ $program['level'] }}
+                        </span>
                     </div>
-
+                    <h3 class="mt-4 min-h-[2.75rem] text-sm font-semibold leading-5 text-brand-950 sm:mt-5 sm:min-h-12 sm:text-base sm:leading-6">
+                        {{ $program['name'] }}
+                    </h3>
+                    <div class="mt-4 space-y-2.5 border-t border-brand-100 pt-3.5 sm:mt-5 sm:space-y-3 sm:pt-4">
+                        <div class="flex items-center justify-between gap-3 text-sm">
+                            <span class="inline-flex items-center gap-2 text-brand-700">
+                                <iconify-icon icon="lucide:clock"></iconify-icon>
+                                Duration
+                            </span>
+                            <span class="font-medium text-brand-950">{{ $program['duration'] }}</span>
+                        </div>
+                        <div class="flex items-center justify-between gap-3 text-sm">
+                            <span class="inline-flex items-center gap-2 text-brand-700">
+                                <iconify-icon icon="lucide:wallet"></iconify-icon>
+                                Tuition fee
+                            </span>
+                            <span class="text-right font-semibold text-brand-600">{{ $program['fee'] }}</span>
+                        </div>
+                    </div>
                     <a href="#enquiry"
-                        class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition hover:text-brand-800">
-
-                        View All Programs
-
-                        <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
-
+                       class="mt-4 flex items-center justify-between border-t border-brand-100 pt-3.5 text-sm font-semibold text-brand-600 hover:text-brand-800 sm:mt-5 sm:pt-4">
+                        Enquire about program
+                        <iconify-icon icon="lucide:arrow-right"></iconify-icon>
                     </a>
+                </article>
+            @endforeach
+        </div>
+    </section>
 
+    {{-- ENTRY REQUIREMENTS --}}
+    <section id="requirements" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
+        <div class="mb-6 sm:mb-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Before you apply</p>
+            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+                Entry Requirements
+            </h2>
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+                Prepare the general documents needed for your application process.
+            </p>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl border border-brand-100 bg-white">
+            <div class="flex items-center gap-3 border-b border-brand-100 bg-brand-25 px-4 py-4 sm:gap-4 sm:px-5 sm:py-5 md:px-7">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600 sm:h-12 sm:w-12">
+                    <iconify-icon icon="lucide:file-check-2" class="text-xl sm:text-2xl"></iconify-icon>
+                </span>
+                <div>
+                    <h3 class="text-base font-semibold text-brand-950 sm:text-lg">Application Documents</h3>
+                    <p class="mt-0.5 text-xs text-brand-700 sm:mt-1 sm:text-sm">General admission checklist</p>
                 </div>
+            </div>
 
+            <div class="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 sm:p-5 md:p-7">
+                @foreach ($requirements as $requirement)
+                    <div class="flex items-center gap-3 rounded-xl border border-brand-100 bg-white p-3.5 sm:p-4">
+                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-accent-green-light text-brand-700 sm:h-7 sm:w-7">
+                            <iconify-icon icon="lucide:check" class="text-sm sm:text-base"></iconify-icon>
+                        </span>
+                        <span class="text-sm font-medium leading-5 text-brand-800 sm:leading-6">{{ $requirement }}</span>
+                    </div>
+                @endforeach
+            </div>
 
-                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
+            <div class="flex items-start gap-3 border-t border-brand-100 bg-brand-25 px-4 py-3.5 sm:px-5 sm:py-4 md:px-7">
+                <iconify-icon icon="lucide:info" class="mt-0.5 shrink-0 text-base text-brand-500 sm:text-lg"></iconify-icon>
+                <p class="text-xs leading-5 text-brand-700 sm:text-sm sm:leading-6">
+                    Admission requirements vary by course and applicant background. Always verify the latest specific requirements directly on the official university portal before submitting.
+                </p>
+            </div>
+        </div>
+    </section>
 
-                    @foreach ($programs as $program)
-                        <article
-                            class="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
+    {{-- TUITION & SCHOLARSHIPS --}}
+    <section id="fees" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
+        <div class="mb-6 sm:mb-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Plan your budget</p>
+            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+                Tuition Fees & Scholarships
+            </h2>
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+                Get an overview of estimated study costs and financial support options.
+            </p>
+        </div>
 
-                            <div
-                                class="absolute right-0 top-0 h-24 w-24 rounded-full bg-brand-50 opacity-0 blur-2xl transition group-hover:opacity-100">
-                            </div>
-
-                            <div class="relative">
-
-                                <div class="flex items-center justify-between">
-
-                                    <div
-                                        class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500 transition group-hover:bg-brand-500 group-hover:text-white">
-
-                                        <iconify-icon icon="lucide:{{ $program['icon'] }}"
-                                            class="text-xl"></iconify-icon>
-
-                                    </div>
-
-                                    <span
-                                        class="rounded-full bg-slate-100 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-slate-600">
-
-                                        {{ $program['level'] }}
-
-                                    </span>
-
-                                </div>
-
-
-                                <h3 class="mt-6 min-h-12 text-base font-bold leading-6 text-brand-950">
-                                    {{ $program['name'] }}
-                                </h3>
-
-
-                                <div class="mt-5 space-y-3 border-t border-neutral-100 pt-4">
-
-                                    <div class="flex items-center justify-between text-xs">
-
-                                        <span class="flex items-center gap-2 text-neutral-400">
-                                            <iconify-icon icon="lucide:clock"></iconify-icon>
-                                            Duration
-                                        </span>
-
-                                        <span class="font-semibold text-neutral-700">
-                                            {{ $program['duration'] }}
-                                        </span>
-
-                                    </div>
-
-
-                                    <div class="flex items-center justify-between gap-2 text-xs">
-
-                                        <span class="flex items-center gap-2 text-neutral-400">
-                                            <iconify-icon icon="lucide:wallet"></iconify-icon>
-                                            Tuition Fee
-                                        </span>
-
-                                        <span class="text-right font-bold text-brand-600">
-                                            {{ $program['fee'] }}
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <a href="#enquiry"
-                                    class="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 text-sm font-semibold text-brand-600">
-
-                                    Enquire About Program
-
-                                    <iconify-icon icon="lucide:arrow-right"
-                                        class="transition group-hover:translate-x-1"></iconify-icon>
-
-                                </a>
-
-                            </div>
-
-                        </article>
-                    @endforeach
-
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
+            <article class="flex min-h-[240px] flex-col justify-between rounded-2xl bg-brand-950 p-5 text-white sm:min-h-[270px] sm:p-6 md:p-8">
+                <div>
+                    <div class="flex items-center justify-between gap-3">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-brand-200 sm:h-12 sm:w-12">
+                            <iconify-icon icon="lucide:wallet" class="text-xl sm:text-2xl"></iconify-icon>
+                        </span>
+                        <span class="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-brand-100 sm:px-3 sm:py-1.5 sm:text-xs">
+                            AUD / Year
+                        </span>
+                    </div>
+                    <p class="mt-5 text-sm font-medium text-brand-200 sm:mt-7">Estimated annual tuition</p>
+                    <h3 class="mt-1.5 text-2xl font-semibold tracking-tight sm:mt-2 sm:text-3xl md:text-4xl">
+                        {{ $university['tuition'] }}
+                    </h3>
                 </div>
+                <p class="mt-5 border-t border-white/15 pt-3.5 text-sm leading-6 text-brand-100 sm:mt-7 sm:pt-4">
+                    Tuition varies depending on your selected degree program, study load, and academic intake.
+                </p>
+            </article>
 
-            </section>
-
-
-
-            {{-- ENTRY REQUIREMENTS --}}
-            <section id="requirements" class="scroll-mt-28">
-
-                {{-- Section Header --}}
-                <div class="mb-8">
-                    <span
-                        class="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-blue-50 px-3.5 py-1 text-xs font-bold tracking-wider text-[#1968b2]">
-                        <span class="h-1.5 w-1.5 rounded-full bg-[#1968b2]"></span>
-                        BEFORE YOU APPLY
+            <article class="flex min-h-[240px] flex-col justify-between rounded-2xl border border-brand-100 bg-white p-5 sm:min-h-[270px] sm:p-6 md:p-8">
+                <div>
+                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:h-12 sm:w-12">
+                        <iconify-icon icon="lucide:award" class="text-xl sm:text-2xl"></iconify-icon>
                     </span>
-
-                    <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-[#05275e] sm:text-3xl">
-                        Entry Requirements
-                    </h2>
-
-                    <p class="mt-1.5 text-sm text-slate-500 sm:text-base">
-                        Prepare the general documents needed for your application process.
+                    <h3 class="mt-5 text-lg font-semibold text-brand-950 sm:mt-6 sm:text-xl">Scholarship Opportunities</h3>
+                    <p class="mt-2.5 text-sm leading-6 text-brand-700 sm:mt-3 sm:text-base sm:leading-7">
+                        Explore available merit-based scholarships, financial grants, and partial fee waiver options available for eligible international students.
                     </p>
                 </div>
-
-                {{-- Main Container Card --}}
-                <div
-                    class="overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 ring-1 ring-slate-900/5">
-
-                    {{-- Card Header --}}
-                    <div class="flex items-center gap-4 border-b border-slate-100 bg-slate-50/50 p-6 sm:px-8">
-                        <div
-                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-[#1968b2] shadow-sm">
-                            <iconify-icon icon="lucide:file-check-2" class="text-2xl"></iconify-icon>
-                        </div>
-
-                        <div>
-                            <h3 class="text-lg font-bold text-[#05275e]">Application Documents</h3>
-                            <p class="text-xs font-medium text-slate-500">General admission checklist</p>
-                        </div>
-                    </div>
-
-                    {{-- Grid Checklist --}}
-                    <div class="grid grid-cols-1 gap-3 p-6 sm:grid-cols-2 sm:gap-4 sm:p-8">
-                        @foreach ($requirements as $requirement)
-                            <div
-                                class="group flex items-center gap-3.5 rounded-xl border border-slate-100 bg-slate-50/50 p-3.5 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
-                                <div
-                                    class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 transition-transform group-hover:scale-110">
-                                    <iconify-icon icon="lucide:check-circle-2" class="text-base"></iconify-icon>
-                                </div>
-
-                                <span class="text-sm font-medium leading-normal text-slate-700">
-                                    {{ $requirement }}
-                                </span>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    {{-- Informational Notice Banner --}}
-                    <div class="border-t border-amber-200/60 bg-amber-50/60 px-6 py-4 sm:px-8">
-                        <div class="flex items-start gap-3">
-                            <div
-                                class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700">
-                                <iconify-icon icon="lucide:info" class="text-sm"></iconify-icon>
-                            </div>
-
-                            <p class="text-xs leading-relaxed font-medium text-amber-900 sm:text-sm">
-                                Admission requirements vary by course and applicant background. Always verify the latest
-                                specific requirements directly on the official university portal before submitting.
-                            </p>
-                        </div>
-                    </div>
-
+                <div class="mt-5 sm:mt-7">
+                    <a href="#counsellor"
+                       class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600 sm:w-auto sm:px-5 sm:py-3">
+                        Find a counsellor
+                        <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+                    </a>
                 </div>
+            </article>
+        </div>
+    </section>
 
-            </section>
+    {{-- CAMPUS LIFE --}}
+    <section id="campus" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
+        <div class="mb-6 sm:mb-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Student experience</p>
+            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+                Campus Life & Facilities
+            </h2>
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+                Explore the key amenities and facilities that create a supportive student environment.
+            </p>
+        </div>
 
-
-
-            {{-- TUITION & SCHOLARSHIPS --}}
-            <section id="fees" class="scroll-mt-28">
-
-                {{-- Section Header --}}
-                <div class="mb-8">
-                    <span
-                        class="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-blue-50 px-3.5 py-1 text-xs font-bold tracking-wider text-[#1968b2]">
-                        <span class="h-1.5 w-1.5 rounded-full bg-[#1968b2]"></span>
-                        PLAN YOUR BUDGET
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            @foreach ($facilities as $facility)
+                <article class="rounded-2xl border border-brand-100 bg-white p-3.5 transition hover:border-brand-200 hover:shadow-md sm:p-4 md:p-5">
+                    <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-50 text-brand-600 sm:h-11 sm:w-11">
+                        <iconify-icon icon="lucide:{{ $facility['icon'] }}" class="text-lg sm:text-xl"></iconify-icon>
                     </span>
+                    <h3 class="mt-3 text-sm font-semibold leading-5 text-brand-950 sm:mt-4 sm:text-base sm:leading-6">
+                        {{ $facility['name'] }}
+                    </h3>
+                </article>
+            @endforeach
+        </div>
+    </section>
 
-                    <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-[#05275e] sm:text-3xl">
-                        Tuition Fees & Scholarships
-                    </h2>
+    {{-- CAMPUS LOCATIONS --}}
+    <section id="campus-list" class="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40">
+        <div class="mb-6 sm:mb-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">Global presence</p>
+            <h2 class="mt-2 text-2xl font-semibold leading-tight text-brand-950 sm:mt-3 sm:text-3xl sm:text-[32px]">
+                Available Campus Locations
+            </h2>
+            <p class="mt-1.5 text-sm leading-6 text-brand-700 sm:mt-2 sm:text-base sm:leading-7">
+                Explore the university's campus locations and their surrounding regions.
+            </p>
+        </div>
 
-                    <p class="mt-1.5 text-sm text-slate-500 sm:text-base">
-                        Get an overview of estimated study costs and financial support options.
-                    </p>
-                </div>
-
-                {{-- Cards Grid --}}
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-
-                    {{-- Tuition Card (Dark Theme Hero) --}}
-                    <div
-                        class="group relative overflow-hidden rounded-3xl bg-[#05275e] p-7 text-white shadow-xl shadow-blue-950/15 transition-all duration-300 hover:-translate-y-1 sm:p-8">
-                        {{-- Glowing Background Orbs --}}
-                        <div
-                            class="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-[#1968b2]/40 blur-3xl transition-opacity group-hover:opacity-100">
-                        </div>
-                        <div
-                            class="pointer-events-none absolute -bottom-12 -left-12 h-48 w-48 rounded-full bg-sky-400/20 blur-3xl">
-                        </div>
-
-                        <div class="relative flex h-full flex-col justify-between">
-                            <div>
-                                {{-- Header Row with Icon & Currency Badge --}}
-                                <div class="flex items-center justify-between">
-                                    <div
-                                        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-sky-300 shadow-inner backdrop-blur-md">
-                                        <iconify-icon icon="lucide:wallet" class="text-2xl"></iconify-icon>
-                                    </div>
-                                    <span
-                                        class="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-sky-200 backdrop-blur-md">
-                                        AUD / Year
-                                    </span>
-                                </div>
-
-                                <p class="mt-6 text-xs font-semibold uppercase tracking-wider text-slate-300">
-                                    Estimated Annual Tuition
-                                </p>
-
-                                <h3 class="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">
-                                    {{ $university['tuition'] }}
-                                </h3>
-                            </div>
-
-                            {{-- Footer Note --}}
-                            <div class="mt-6 border-t border-white/10 pt-4">
-                                <p class="text-xs leading-relaxed text-slate-300/90">
-                                    Tuition varies depending on your selected degree program, study load, and academic
-                                    intake.
-                                </p>
-                            </div>
-                        </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+            @foreach ($campuses as $campus)
+                <article class="overflow-hidden rounded-2xl border border-brand-100 bg-white transition hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg">
+                    <div class="relative h-40 overflow-hidden bg-brand-50 sm:h-44">
+                        <img src="{{ $campus['image'] }}"
+                             alt="{{ $campus['name'] }}"
+                             class="h-full w-full object-cover"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-950/70 to-transparent"></div>
+                        <span class="absolute bottom-2.5 left-2.5 rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold text-brand-800 sm:bottom-3 sm:left-3 sm:px-3 sm:text-xs">
+                            {{ $campus['country'] }}
+                        </span>
                     </div>
-
-                    {{-- Scholarship Card (Light Theme Accent) --}}
-                    <div
-                        class="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white p-7 shadow-xl shadow-slate-900/5 ring-1 ring-slate-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md sm:p-8">
-                        <div>
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 shadow-sm transition-colors group-hover:bg-amber-100">
-                                <iconify-icon icon="lucide:award" class="text-2xl"></iconify-icon>
-                            </div>
-
-                            <h3 class="mt-6 text-xl font-bold text-[#05275e]">
-                                Scholarship Opportunities
-                            </h3>
-
-                            <p class="mt-2 text-sm leading-relaxed text-slate-600">
-                                Explore available merit-based scholarships, financial grants, and partial fee waiver options
-                                available for eligible international students.
-                            </p>
-                        </div>
-
-                        <div class="mt-8 pt-4">
-                            <a href="#counsellor"
-                                class="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#05275e] px-7 py-3.5 text-sm font-bold tracking-wide text-white shadow-lg shadow-blue-950/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1968b2] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#1968b2] focus:ring-offset-2">
-                                <span>FIND A COUNSELLOR</span>
-                                <iconify-icon icon="lucide:arrow-right"
-                                    class="text-base transition-transform duration-300 group-hover:translate-x-1"></iconify-icon>
+                    <div class="p-4 sm:p-5">
+                        <h3 class="text-base font-semibold text-brand-950 sm:text-lg">{{ $campus['name'] }}</h3>
+                        <p class="mt-2.5 flex items-start gap-2 text-sm leading-5 text-brand-700 sm:mt-3 sm:leading-6">
+                            <iconify-icon icon="lucide:map-pin" class="mt-0.5 shrink-0 text-brand-500"></iconify-icon>
+                            <span>{{ $campus['address'] }}</span>
+                        </p>
+                        <div class="mt-4 flex items-center justify-between gap-3 border-t border-brand-100 pt-3.5 sm:mt-5 sm:pt-4">
+                            <span class="rounded-lg bg-brand-50 px-2 py-1 text-[11px] font-medium text-brand-700 sm:px-2.5 sm:text-xs">
+                                {{ $campus['state'] }}
+                            </span>
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($campus['address'] . ', ' . $campus['country']) }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 transition hover:text-brand-800">
+                                View on map
+                                <iconify-icon icon="lucide:external-link"></iconify-icon>
                             </a>
                         </div>
                     </div>
-
-                </div>
-
-            </section>
-
-
-
-
-
-
-            {{-- CAMPUS LIFE --}}
-            <section id="campus" class="scroll-mt-28">
-
-                {{-- Section Header --}}
-                <div class="mb-8">
-                    <span
-                        class="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-blue-50 px-3.5 py-1 text-xs font-bold tracking-wider text-[#1968b2]">
-                        <span class="h-1.5 w-1.5 rounded-full bg-[#1968b2]"></span>
-                        STUDENT EXPERIENCE
-                    </span>
-
-                    <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-[#05275e] sm:text-3xl">
-                        Campus Life & Facilities
-                    </h2>
-
-                    <p class="mt-1.5 text-sm text-slate-500 sm:text-base">
-                        Explore the key amenities and facilities that create a supportive student environment.
-                    </p>
-                </div>
-
-                {{-- Facilities Grid --}}
-                <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    @foreach ($facilities as $facility)
-                        <div
-                            class="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm ring-1 ring-slate-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
-
-                            <div>
-                                {{-- Icon Container --}}
-                                <div
-                                    class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[#1968b2] transition-colors duration-300 group-hover:bg-[#1968b2] group-hover:text-white">
-                                    <iconify-icon icon="lucide:{{ $facility['icon'] }}" class="text-2xl"></iconify-icon>
-                                </div>
-
-                                {{-- Facility Name --}}
-                                <h3 class="mt-4 text-sm font-bold leading-snug text-[#05275e] sm:text-base">
-                                    {{ $facility['name'] }}
-                                </h3>
-                            </div>
-
-                        </div>
-                    @endforeach
-                </div>
-
-            </section>
-
-            <section id="campus-list" class="scroll-mt-28">
-                {{-- Campus Locations Header --}}
-                <div class="mb-8 mt-16">
-                    <span
-                        class="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-blue-50 px-3.5 py-1 text-xs font-bold tracking-wider text-[#1968b2]">
-                        <span class="h-1.5 w-1.5 rounded-full bg-[#1968b2]"></span>
-                        GLOBAL PRESENCE
-                    </span>
-
-                    <h3 class="mt-3 text-2xl font-extrabold tracking-tight text-[#05275e] sm:text-3xl">
-                        Available Campus Locations
-                    </h3>
-
-                    <p class="mt-1.5 text-sm text-slate-500 sm:text-base">
-                        Explore our state-of-the-art university campus locations spread across vibrant regions.
-                    </p>
-                </div>
-
-                {{-- Campus Cards Grid --}}
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    @foreach ($campuses as $campus)
-                        <article
-                            class="group flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-950/10">
-
-                            {{-- Card Image Header --}}
-                            <div class="relative h-48 overflow-hidden bg-slate-100">
-                                <img src="{{ $campus['image'] }}" alt="{{ $campus['name'] }}"
-                                    class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                                    loading="lazy">
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-[#05275e]/80 via-[#05275e]/20 to-transparent">
-                                </div>
-
-                                {{-- Country Badge Chip --}}
-                                <span
-                                    class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-white/90 px-3.5 py-1 text-xs font-bold text-[#05275e] shadow-sm backdrop-blur-md">
-                                    {{ $campus['country'] }}
-                                </span>
-                            </div>
-
-                            {{-- Card Body Content --}}
-                            <div class="flex flex-1 flex-col justify-between p-6">
-                                <div>
-                                    <h4 class="text-lg font-bold tracking-tight text-[#05275e]">
-                                        {{ $campus['name'] }}
-                                    </h4>
-
-                                    <div
-                                        class="mt-3 flex items-start gap-2.5 text-xs font-medium text-slate-500 leading-relaxed">
-                                        <iconify-icon icon="lucide:map-pin"
-                                            class="mt-0.5 shrink-0 text-base text-[#1968b2]"></iconify-icon>
-                                        <span>{{ $campus['address'] }}</span>
-                                    </div>
-                                </div>
-
-                                {{-- Card Footer --}}
-                                <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                                    <span class="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">
-                                        {{ $campus['state'] }}
-                                    </span>
-
-                                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($campus['address'] . ', ' . $campus['country']) }}"
-                                        target="_blank" rel="noopener noreferrer"
-                                        class="group/link inline-flex items-center gap-1.5 text-xs font-bold text-[#1968b2] transition-colors hover:text-[#05275e]">
-                                        <span>View on Map</span>
-                                        <iconify-icon icon="lucide:external-link"
-                                            class="transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></iconify-icon>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </article>
-                    @endforeach
-                </div>
-            </section>
-
-
-        </main>
-    </div>
+                </article>
+            @endforeach
+        </div>
+    </section>
+</main>
+</div>
 @endsection
+
