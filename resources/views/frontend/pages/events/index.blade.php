@@ -71,56 +71,48 @@
 
                     <x-form.radio id="upcoming-events" name="event" label="Upcoming Events" value="upcoming" />
                 </div>
-                {{-- <div class="flex items-center gap-4">
-                    <div class="flex items-center gap-2 ">
-                        <span class="text-sm font-medium text-neutral-400">Sort:</span>
-                        <select name="category"
-                            class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-semibold text-neutral-800 focus:ring-0 cursor-pointer">
-                            <option value="">Category</option>
-
-                            <option value="education">Education</option>
-                            <option value="visa">Visa</option>
-                            <option value="insurance">Insurance</option>
-                            <option value="professional-year">Professional Year</option>
-                        </select>
-                    </div>
-                    <!-- Sort By Select -->
-                    <div class="flex items-center gap-2 ">
-                        <span class="text-sm font-medium text-neutral-400">Sort:</span>
-                        <select
-                            class="rounded-lg border-none bg-neutral-50 py-1.5 pl-2 pr-7 text-sm font-semibold text-neutral-800 focus:ring-0 cursor-pointer">
-                            <option value="relevance">HBD Services</option>
-                            <option value="duration">Providers</option>
-                        </select>
-                    </div>
-                </div> --}}
+               
 
             </div>
-
-            {{-- event Grid --}}
             <!-- EVENTS GRID CONTAINER -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                 @forelse ($events as $event)
                     @include('frontend.pages.events.event-card', ['event' => $event])
                 @empty
-                    <!-- MODERN EMPTY STATE -->
                     <div class="col-span-full py-16 px-4">
                         <div
-                            class="max-w-md mx-auto text-center flex flex-col items-center justify-center p-8 rounded-2xl bg-slate-50 border border-dashed border-slate-200">
+                            class="mx-auto max-w-md text-center flex flex-col items-center justify-center p-8 sm:p-10 rounded-3xl bg-slate-50/70 border border-dashed border-slate-200/80 shadow-sm">
+
+                            {{-- Icon Container with Layered Ring Effect --}}
                             <div
-                                class="h-16 w-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 text-blue-600">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    stroke-width="1.5">
+                                class="relative mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[#1968b2] ring-8 ring-blue-50/50 shadow-inner">
+                                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="1.8">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                                 </svg>
                             </div>
-                            <h3 class="text-base font-bold text-slate-900 mb-1">No Events Found</h3>
-                            <p class="text-sm text-slate-500">There are currently no upcoming events available. Please check
-                                back later or modify your filters.</p>
+
+                            {{-- Text Content --}}
+                            <h3 class="text-lg font-bold text-[#05275e]">No Events Found</h3>
+                            <p class="mt-1.5 text-sm leading-relaxed text-slate-500 max-w-xs">
+                                There are currently no upcoming events available. Please check back later or try clearing
+                                your filters.
+                            </p>
+
+                            {{-- Action Button (Optional) --}}
+                            <div class="mt-6">
+                                <button type="button"
+                                    class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-[#1968b2] shadow-sm transition-all duration-300 hover:border-blue-200 hover:bg-blue-50 hover:shadow-md focus:outline-none">
+                                    <iconify-icon icon="lucide:rotate-ccw" class="text-sm"></iconify-icon>
+                                    <span>Reset Filters</span>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 @endforelse
+
             </div>
 
             <!-- PAGINATION CONTAINER -->

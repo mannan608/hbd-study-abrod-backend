@@ -202,7 +202,7 @@ $campuses = [
                         <span class="text-sm font-medium text-brand-200">AUD</span>
                     </p>
                     <a href="#enquiry"
-                       class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600 focus:outline-none focus:ring-0 focus:ring-brand-200 focus:ring-offset-0 focus:ring-offset-brand-950 sm:mt-5 sm:px-5 sm:py-3">
+                       class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-600 focus:outline-none focus:ring-0 focus:ring-red-200 focus:ring-offset-0 focus:ring-offset-red-950 sm:mt-5 sm:px-5 sm:py-3">
                         Enquire about admission
                         <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
                     </a>
@@ -213,7 +213,7 @@ $campuses = [
 </section>
 
 {{-- STICKY SECTION NAVIGATION --}}
-<div class="sticky top-16 z-40 border-b border-brand-100 bg-white/95 shadow-sm backdrop-blur-md sm:top-20 lg:top-24">
+<div class="sticky top-29 z-40 border-b border-brand-100 bg-white/95  backdrop-blur-sm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav aria-label="University sections" class="-mb-px flex gap-5 overflow-x-auto scrollbar-hide sm:gap-7">
             @foreach ($sectionLinks as $item)
@@ -258,8 +258,8 @@ $campuses = [
                     Parkville, Melbourne, Australia
                 </div>
                 <div class="absolute -bottom-4 -right-3 hidden min-w-[7.5rem] rounded-xl border border-brand-100 bg-white p-3 shadow-lg sm:-bottom-5 sm:-right-4 sm:block sm:min-w-32 sm:p-4">
-                    <p class="text-xs font-medium text-brand-700">Ranking</p>
-                    <p class="mt-0.5 text-2xl font-semibold text-brand-950 sm:mt-1 sm:text-3xl">90</p>
+                    <p class="text-xs font-medium text-red-700 flex items-center gap-1"><iconify-icon icon="lucide:globe" class="text-base sm:text-lg"></iconify-icon> Ranking</p>
+                    <p class="mt-0.5 text-2xl font-semibold text-red-600 sm:mt-1 sm:text-3xl">90</p>
                 </div>
             </div>
 
