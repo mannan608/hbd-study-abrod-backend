@@ -834,7 +834,7 @@
                                     </p>
 
                                     <p class="mt-1 text-xs font-semibold leading-5 text-neutral-700">
-                                        {{ $university->address }} {{ $university->city->name }},
+                                        {{ $university->address }} {{ $university->city->name?? '' }},
                                         {{ $university->state }}, {{ $university->country->name }}
                                     </p>
                                 </div>

@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
    <x-frontend.seo-meta :page-title="trim($__env->yieldContent('title'))" />
     <x-frontend.seo-meta />
-    <link rel="stylesheet" href="{{ asset('css/front-end-custom.css') }}">
      @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -94,7 +93,7 @@
     @include('frontend.layouts.navbar')
 
     <main class="grow">
-       <div class="pt-18 md:pt-20 pb-12">
+       <div class="pt-27 md:pt-30.25 pb-12">
          @yield('content')
        </div>
     </main>
@@ -108,6 +107,7 @@
 
     @stack('scripts')
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    
 
 </body>
 </html>

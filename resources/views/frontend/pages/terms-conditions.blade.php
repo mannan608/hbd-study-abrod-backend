@@ -64,7 +64,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
 
             <aside class="lg:col-span-4 space-y-6">
-                <div class=" space-y-5 sticky top-24">
+                <div class=" space-y-5 sticky top-34">
                     {{-- Main Overview Card --}}
                     <div
                         class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_8px_30px_rgb(16,24,40,0.04)]">
