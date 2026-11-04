@@ -1,13 +1,6 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-
-{{-- Tailwind-only responsive page. All colors reference the global --color-* design tokens.
-     Ensure the supplied palette variables are defined in the application's global stylesheet.
-     Navigation is inherited from frontend.layouts.app; keep its active state in the shared layout.
-     data-reveal animations are handled by the application reveal script. Iconify is loaded by the parent layout. --}}
-{{-- No Bootstrap, custom CSS, or custom JavaScript animations in this view. --}}
-
 @php
     $steps = [
         ['01', 'Manage learners', 'Centralise enrolments, student records, communication and administration.', 'bg-brand-600'],
@@ -58,9 +51,7 @@
 @endphp
 
 {{-- 1. HERO --}}
-<section class="relative isolate overflow-hidden bg-gradient-to-br from-brand-25 via-white to-sky-light py-16 lg:py-20">
-    <div class="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-brand-200/40 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-accent-green/20 blur-3xl"></div>
+<section class="relative isolate overflow-hidden  py-16 lg:py-20">
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div data-reveal>
@@ -120,11 +111,13 @@
         </div>
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($steps as $step)
-                <article data-reveal class="group rounded-2xl border border-brand-100 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-lg hover:shadow-md">
+            <div class="" data-reveal>
+                <article  class="group rounded-2xl border border-brand-100 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-brand-200">
                     <span class="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl {{ $step[3] }} text-sm font-bold text-white shadow-md">{{ $step[0] }}</span>
                     <h3 class="mb-2 text-base font-semibold text-black">{{ $step[1] }}</h3>
-                    <p class="text-sm leading-6 text-brand-600">{{ $step[2] }}</p>
+                    <p class="text-sm leading-6 text-brand-600 line-clamp-2">{{ $step[2] }}</p>
                 </article>
+                </div>
             @endforeach
         </div>
     </div>
@@ -443,3 +436,47 @@
 
 
 @endsection
+
+@push('scripts')
+    <noscript>
+        <style>
+            [data-reveal] {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
+
+    <script>
+        (function () {
+            var nodes = document.querySelectorAll('[data-reveal]');
+
+            if (!nodes.length) {
+                return;
+            }
+
+            if (!('IntersectionObserver' in window)) {
+                nodes.forEach(function (node) {
+                    node.classList.add('is-revealed');
+                });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -60px 0px'
+            });
+
+            nodes.forEach(function (node) {
+                observer.observe(node);
+            });
+        })();
+    </script>
+@endpush
